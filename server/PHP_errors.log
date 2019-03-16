@@ -1,0 +1,120 @@
+[16-Mar-2019 09:51:47 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:51:48 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:53:27 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:53:28 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:53:28 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:53:28 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:53:29 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:04 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:56 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:57 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[16-Mar-2019 09:56:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "htdocs/build/index.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('htdocs/build/in...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', 'htdocs/build/in...')
+#2 /var/www/html/app/config/minify.php(4): MatthiasMullie\Minify\Minify->minify('htdocs/build/in...')
+#3 /var/www/html/htdocs/index.php(4): require('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
