@@ -1,6 +1,6 @@
 {
     "name": "nestorpons/tpv",
-    "description": "Aplicacion web de gestion de caja para pequeñas empresas",
+    "description": "Aplicacion web de gestion de caja registradora para pequeñas empresas enfocadas al sector servicios",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -14,7 +14,10 @@
     },
     "autoload": {
         "psr-4": {
-            "models\\" : "app/models"         
+            "app\\": "app/"
         }
-     }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
 }
