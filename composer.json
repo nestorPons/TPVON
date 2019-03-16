@@ -1,0 +1,16 @@
+{
+    "name": "nestorpons/tpv",
+    "description": "Aplicacion web de gestion de caja para pequeñas empresas",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nestor Pons",
+            "email": "nestorpons@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+		"psr-4": {"app\models\": "app/models/"}
+	}
+}
