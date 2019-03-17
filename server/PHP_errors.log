@@ -282,3 +282,15 @@ Stack trace:
   thrown in /var/www/html/htdocs/index.php on line 8
 [17-Mar-2019 16:32:43 UTC] PHP Warning:  require(/var/www/htmlapp/core/minify.php) [<a href='0function.require0'>function.require0</a>]: failed to open stream: No such file or directory in /var/www/html/htdocs/index.php on line 4
 [17-Mar-2019 16:32:43 UTC] PHP Fatal error:  require() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/htmlapp/core/minify.php' (include_path='.:/usr/share/php') in /var/www/html/htdocs/index.php on line 4
+[17-Mar-2019 18:02:15 UTC] PHP Fatal error:  Uncaught Error: Class 'models\main\Controller' not found in /var/www/html/htdocs/index.php:6
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/htdocs/index.php on line 6
+[17-Mar-2019 18:03:10 UTC] PHP Fatal error:  Uncaught Error: Class 'models\Controller' not found in /var/www/html/htdocs/index.php:6
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/htdocs/index.php on line 6
+[17-Mar-2019 18:03:50 UTC] PHP Fatal error:  Uncaught Error: Class 'models\Controller' not found in /var/www/html/htdocs/index.php:6
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/htdocs/index.php on line 6
