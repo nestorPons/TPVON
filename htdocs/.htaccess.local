@@ -1,5 +1,6 @@
-Options +Indexes
 
+## DEVELOP
+Options +Indexes
 # PHP error handling for development servers
 php_flag display_startup_errors on
 php_flag display_errors on
@@ -21,3 +22,12 @@ php_value log_errors_max_len 0
     Deny from all
     Satisfy All
 </Files>
+
+# PROCUCTION
+Options +FollowSymLinks -MultiViews 
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php [L,QSA]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php [L,QSA]
+RewriteRule ^([0-9a-z_-]+)/?$ index.php [R=301,L,QSA]

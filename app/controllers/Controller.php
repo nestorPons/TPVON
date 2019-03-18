@@ -1,14 +1,22 @@
-<?php namespace app\controllers; 
+<?php namespace \app\controllers;
 
-class Controller{
+class Controllers {
     protected $controller = 'login'; 
     protected $action = 'view';
-    function __construct($args = []){
-        if(isset($args['controller'])){
-            $this->controller = $args['controller']; 
-            if(isset($args['action'])) $this->action = $args['action'];
-        }
 
-        echo $this->controller .  ' ' . $this->action ; 
+    function __construct($controller, $action){
+        if($action == 'save'){
+            $this->sendModel( );
+        }else{
+            $this->sendView( $controller ); 
+        }
+    }
+
+    protected function sendView(){
+        require_once \FOLDERS\VIEW . 
+    }
+
+    protected function sendModel(){
+
     }
 }
