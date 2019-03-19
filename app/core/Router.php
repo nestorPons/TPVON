@@ -13,7 +13,7 @@ class Router{
 
     function __construct($args = []){
         // Extraemos los datos para el enrutamiento desde la url
-        $arr_rute = explode('/',trim($_SERVER['REQUEST_URI'])); 
+        $arr_rute = explode('/',rtrim($_SERVER['REQUEST_URI'])); 
 
         if (count($arr_rute) >= 3){
             $controller =  $arr_rute[2]??null;
@@ -28,7 +28,9 @@ class Router{
         $class = ucwords($this->controller); 
 
         if($class != 'Controller' && file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
-            new $class($this->controller , $this->action);
+           $nameClass = '\\app\controllers\\' . $class ; 
+            new $nameClass( $this->action );
+
         }
         
      }
