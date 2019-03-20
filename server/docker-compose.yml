@@ -5,13 +5,16 @@ services:
     container_name: lamp_tpv
     volumes:
       - ./..:/var/www/html
-      - ./apache2.conf:/etc/apache2/apache2.conf
-      - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
-      - ./error.log:/usr/local/apache2/logs/error.log
-      - ./access.log:/usr/local/apache2/logs/access.log
-      - ./php.ini:/etc/php/7.0/apache2/php.ini
+      - ./config/apache2.conf:/etc/apache2/apache2.conf
+      - ./config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./logs/error.log:/usr/local/apache2/logs/error.log
+      - ./logs/access.log:/usr/local/apache2/logs/access.log
+      - ./config/php.ini:/etc/php/7.0/apache2/php.ini
+      - mysql_data:/var/lib/mysql
       # - ./httpd.conf:/usr/local/apache2/conf/httpd.conf ### vhost config file
-      # - ./conf/apache2/vhosts/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+      # - ./conf/apache2/vhosts/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
     ports:
       - 80:80 # Expose http and https
       - 443:443

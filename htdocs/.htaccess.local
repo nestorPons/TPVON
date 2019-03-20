@@ -27,7 +27,18 @@ php_value log_errors_max_len 0
 Options +FollowSymLinks -MultiViews 
 
 RewriteEngine On
+RewriteBase / 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php [L,QSA]
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php [L,QSA]
-RewriteRule ^([0-9a-z_-]+)/?$ index.php [R=301,L,QSA]
+
+RewriteRule ^css/(.*)$ - [L]
+RewriteRule ^img/(.*)$ - [L]
+RewriteRule ^js/(.*)$ - [L]
+RewriteRule ^font/(.*)$ - [L]
+RewriteRule ^sources/(.*)$ - [L]
+RewriteRule ^dist/(.*)$ - [L]
+
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php?company=$1&controller=$2&action=$3 [R,L]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php?company=$1&controller=$2 [R,L]
+RewriteRule ^([0-9a-z_-]+)/?$ index.php?company=$1 [R=301,R,L]
+
+ErrorDocument 404 error404.php

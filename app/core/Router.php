@@ -5,35 +5,35 @@
  * Routea la url a otros controladores secundarios si existieran y 
  * si no el mismo controlara el enrutamiento. 
  */
-// http://localhost/company/controller/action
+/**
+ * ej: 
+ * http://localhost/company/controller/action
+ * 
+ * Comprueba y enruta la peticuin por url
+ */
 
 class Router{
-    protected $controller = 'login'; 
+    protected $controller = 'index'; 
     protected $action = 'view';
 
-    function __construct($args = []){
-        // Extraemos los datos para el enrutamiento desde la url
-        $arr_rute = explode('/',rtrim($_SERVER['REQUEST_URI'])); 
-
-        if (count($arr_rute) >= 3){
-            $controller =  $arr_rute[2]??null;
-            $action = $arr_rute[3]??null; 
- 
-            if ($controller){    
-                $this->controller = strtolower($controller); 
-                if ($action) $this->action = strtolower($action); 
+    function __construct($GET = []){
+        if(isset($GET['company'])){
+            $controller = $GET['controller']??'login';
+            $action = $GET['action']??'view';
+    
+            $this->controller = strtolower(trim($controller));
+            $this->action = strtolower(trim($action)??'view');        
+                    
+            $class = ucwords($this->controller); 
+    
+            if($class != 'Controller' && file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
+               $nameClass = '\\app\controllers\\' . $class ; 
+                new $nameClass( $this->action );
+    
             }
+            
+         }
         }
-        
-        $class = ucwords($this->controller); 
-
-        if($class != 'Controller' && file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
-           $nameClass = '\\app\controllers\\' . $class ; 
-            new $nameClass( $this->action );
-
-        }
-        
-     }
 
     private function testController(){
         return file_exists ( \FOLDERS\CONTROLLERS . $this->controller . 'php'); 
