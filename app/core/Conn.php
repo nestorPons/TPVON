@@ -105,8 +105,7 @@ class Conn{
      *	@param string $parametro  
      *	@param string $valor 
      */
-    public function bind($parametro, $valor)
-    {
+    public function bind($parametro, $valor){
         $this->parametros[sizeof($this->parametros)] = [":" . $parametro , $valor];
     }
     /**
@@ -115,8 +114,7 @@ class Conn{
      *	Agrega más parámetros al arreglo de parámetros
      *	@param array $parray
      */
-    public function bindMas($parray)
-    {
+    public function bindMas($parray){
         if (empty($this->parametros) && is_array($parray)) {
             $columns = array_keys($parray);
             foreach ($columns as $i => &$column) {
@@ -136,8 +134,7 @@ class Conn{
      *	@param  int    $fetchmode
      *	@return mixed
      */
-    public function query($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC)
-    {
+    public function query($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC){
         $sql = trim(str_replace("\r", " ", $sql));
         
         $this->init($sql, $params);
@@ -163,8 +160,7 @@ class Conn{
      *	@return array
      */
      
-    public function column($sql, $params = null)
-    {
+    public function column($sql, $params = null){
         $this->Init($sql, $params);
         $Columns = $this->sSQL->fetchAll(PDO::FETCH_NUM);
         
@@ -185,8 +181,7 @@ class Conn{
      *  @param  int    $fetchmode
      *	@return array
      */
-    public function row($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC)
-    {
+    public function row($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC){
         $this->Init($sql, $params);
         $result = $this->sSQL->fetch($fetchmode);
         $this->sSQL->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
@@ -199,8 +194,7 @@ class Conn{
      *	@param  array  $params
      *	@return string
      */
-    public function single($sql, $params = null)
-    {
+    public function single($sql, $params = null){
         $this->Init($sql, $params);
         $result = $this->sSQL->fetchColumn();
         $this->sSQL->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
@@ -211,8 +205,7 @@ class Conn{
      *  Devuelve el último id insertado.
      *  @return string
      */
-    public function lastInsertId()
-    {
+    public function lastInsertId(){
         return $this->pdo->lastInsertId();
     }
     
@@ -220,8 +213,7 @@ class Conn{
      * Inicia una transacción
      * @return boolean, true si la transacción fue exitosa, false si hubo algún fallo
      */
-    public function beginTransaction()
-    {
+    public function beginTransaction(){
         return $this->pdo->beginTransaction();
     }
     
@@ -229,8 +221,7 @@ class Conn{
      *  Ejecuta una transacciónn
      *  @return boolean, true si la transacción fue exitosa, false si hubo algún fallo
      */
-    public function executeTransaction()
-    {
+    public function executeTransaction(){
         return $this->pdo->commit();
     }
     
@@ -238,8 +229,7 @@ class Conn{
      *  Rollback de una transacción
      *  @return boolean, true si la transacción fue exitosa, false si hubo algún fallo
      */
-    public function rollBack()
-    {
+    public function rollBack(){
         return $this->pdo->rollBack();
     }
     
