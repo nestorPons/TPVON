@@ -3,8 +3,8 @@
  * Datos de conexión a la base de datos
  */
 return [
-    'host'  => '127.0.0.1',
-    'port'  => '80',
+    'host'  => 'db',
+    'port'  => '3306',
     'driver'=> 'mysql',
     'prefix'=> '',
     // usuarios

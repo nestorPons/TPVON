@@ -16,12 +16,14 @@ class Query extends Conn{
         $conf,
         $conn;
 
-    public function __construct($db, $table, $user = 'root') {     
+    function __construct($db, $table, $user = 'root') {     
         $this->conn = parent::__construct( $db, $table,  $user );
-        die();
      }
+    function __destruct(){
+        $this->conn = null;
+    }
     public function getConnect () {
-        return $this->conn ;
+        return $this->conn;
      }
     protected function query(string $sql = null){
         $sql = $sql??$this->sql;
