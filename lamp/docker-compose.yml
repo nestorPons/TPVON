@@ -6,7 +6,7 @@ services:
             - "80:80"
         volumes:
             - ./..:/var/www/html/
-            - ./conf/php.ini:/etc/php/7.0/apache2/php.ini
+            - ./conf/php.ini:/usr/local/etc/php/php.ini
             - ./conf/apache2.conf:/etc/apache2/apache2.conf
             - ./conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
             - ./logs/error.log:/usr/local/apache2/logs/error.log

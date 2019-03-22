@@ -1,58 +1,77 @@
-<?php namespace add\core;
+<?php namespace app\core;
 /**
- * Clase de conexión con la base de datos con PDO
+ * Clase de conexión con la base de datos con \PDO
  */
 class Conn{
     
-    private $pdo, 
+    protected $pdo, 
             $sSQL,
             $credentials,
             $isConnected = false,
-            $params;
+            $params, 
+            $user,
+            $db,
+            $table,
+            $error;
     
-    public function __construct(){
-        $this->connect();
+    public function __construct($database, $table, $user){
+        $this->db = $database;
+        $this->table = $table;
+        $this->user = $user; 
         $this->params = array();
+        return $this->connect();
     }
     
     /**
      *	Genera la conexión a a la base de datos
      */
-    private function connect($database, $table, $user){
-        include_once dirname(__DIR__) . '/app/config/vars.php';
-        $this->credentials = include_once \APP\CONFIG . 'conn.php';
-        $dsn = 'mysql:dbname=' . $this->credentials["prefix"] . $database . ';host=' . $this->credentials["host"] . '';
-        $pwd = $this->credentials[$user];
-        $usr = $user;
+    protected function connect(){
+        $this->credentials = include_once '../app/config/conn.php';
+        $dsn = 'mysql:dbname=' . $this->credentials["prefix"] . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
+
     /**
-     *	El array $options es muy importante para tener un PDO bien configurado
+     *	El array $options es muy importante para tener un \PDO bien configurado
      *	
-     *	1. PDO::ATTR_PERSISTENT => false: sirve para usar conexiones persistentes
+     *	1. \PDO::ATTR_PERSISTENT => false: sirve para usar conexiones persistentes
      *      se puede establecer a true si se quiere usar este tipo de conexión. Ver: https://es.stackoverflow.com/a/50097/29967 
      *      Aunque en la práctica, el uso de conexiones persistentes podría ser problemático
-     *	2. PDO::ATTR_EMULATE_PREPARES => false: Se usa para desactivar emulación de consultas preparadas 
+     *	2. \PDO::ATTR_EMULATE_PREPARES => false: Se usa para desactivar emulación de consultas preparadas 
      *      forzando el uso real de consultas preparadas. 
      *      Es muy importante establecerlo a false para prevenir Inyección SQL. Ver: https://es.stackoverflow.com/a/53280/29967
-     *	3. PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION También muy importante para un correcto manejo de las excepciones. 
+     *	3. \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION También muy importante para un correcto manejo de las excepciones. 
      *      Si no se usa bien, cuando hay algún error este se podría escribir en el log revelando datos como la contraseña !!!
-     *	4. PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'": establece el juego de caracteres a utf8, 
+     *	4. \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'": establece el juego de caracteres a utf8, 
      *      evitando caracteres extraños en pantalla. Ver: https://es.stackoverflow.com/a/59510/29967
      */
-        $options = array(
-            PDO::ATTR_PERSISTENT => false, 
-            PDO::ATTR_EMULATE_PREPARES => false, 
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
-        );
+
         try {
-            $this->pdo = new PDO($dsn, $usr, $pwd, $options);
+            $this->pdo = new \PDO(
+                    $dsn, 
+                    $this->user, 
+                    $this->credentials[$this->user], 
+                    [
+                        \PDO::ATTR_PERSISTENT => false, 
+                        \PDO::ATTR_EMULATE_PREPARES => false, 
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, 
+                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
+                    ]
+                );
+
             $this->isConnected = true;
+            return $this->pdo; 
         }
-        catch (PDOException $e) {         
+        catch (\PDOException $e) {         
             error_log($this->error = $e->getMessage(),0);
+            echo $dsn .'//'. $this->user; 
+            return $this->error; 
         }
     }
-    
+    function __destruct() {
+		if(!empty($this->error)){
+			echo $this->error;
+		 }
+		if($this->pdo) $this->pdo = null;
+	 }
     /**
      *	Método que será usado para enviar cualquier consulta a la BD.
      *	
@@ -76,13 +95,13 @@ class Conn{
             if (!empty($this->parametros)) {
                 foreach ($this->parametros as $param => $value) {
                     if(is_int($value[1])) {
-                        $type = PDO::PARAM_INT;
+                        $type = \PDO::PARAM_INT;
                     } else if(is_bool($value[1])) {
-                        $type = PDO::PARAM_BOOL;
+                        $type = \PDO::PARAM_BOOL;
                     } else if(is_null($value[1])) {
-                        $type = PDO::PARAM_NULL;
+                        $type = \PDO::PARAM_NULL;
                     } else {
-                        $type = PDO::PARAM_STR;
+                        $type = \PDO::PARAM_STR;
                     }
 
                     $this->sSQL->bindValue($value[0], $value[1], $type);
@@ -97,7 +116,10 @@ class Conn{
         
         $this->parametros = array();
     }
-    
+    public function db (String $arg = null) {
+        if ($arg != null) $this->__METHOD__ = $arg; 
+        return $this->__METHOD__; 
+    }
     /**
      *	@void 
      *
@@ -134,6 +156,7 @@ class Conn{
      *	@param  int    $fetchmode
      *	@return mixed
      */
+    /*
     public function query($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC){
         $sql = trim(str_replace("\r", " ", $sql));
         
@@ -152,6 +175,7 @@ class Conn{
             return NULL;
         }
     }
+    */
     /**
      *	Devuelve un arreglo que representa una columna específica del resultado 
      *
@@ -181,7 +205,7 @@ class Conn{
      *  @param  int    $fetchmode
      *	@return array
      */
-    public function row($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC){
+    public function row($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
         $this->Init($sql, $params);
         $result = $this->sSQL->fetch($fetchmode);
         $this->sSQL->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
