@@ -6,15 +6,15 @@ class Conn{
     
     protected $pdo, 
             $sSQL,
+            $sql,
             $credentials,
-            $isConnected = false,
             $params, 
             $user,
             $db,
             $table,
             $error;
     
-    public function __construct($database, $table, $user){
+    function __construct($database, $table, $user){
         $this->db = $database;
         $this->table = $table;
         $this->user = $user; 
@@ -29,71 +29,41 @@ class Conn{
         $this->credentials = include_once '../app/config/conn.php';
         $dsn = 'mysql:dbname=' . $this->credentials["prefix"] . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
 
-    /**
-     *	El array $options es muy importante para tener un \PDO bien configurado
-     *	
-     *	1. \PDO::ATTR_PERSISTENT => false: sirve para usar conexiones persistentes
-     *      se puede establecer a true si se quiere usar este tipo de conexión. Ver: https://es.stackoverflow.com/a/50097/29967 
-     *      Aunque en la práctica, el uso de conexiones persistentes podría ser problemático
-     *	2. \PDO::ATTR_EMULATE_PREPARES => false: Se usa para desactivar emulación de consultas preparadas 
-     *      forzando el uso real de consultas preparadas. 
-     *      Es muy importante establecerlo a false para prevenir Inyección SQL. Ver: https://es.stackoverflow.com/a/53280/29967
-     *	3. \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION También muy importante para un correcto manejo de las excepciones. 
-     *      Si no se usa bien, cuando hay algún error este se podría escribir en el log revelando datos como la contraseña !!!
-     *	4. \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'": establece el juego de caracteres a utf8, 
-     *      evitando caracteres extraños en pantalla. Ver: https://es.stackoverflow.com/a/59510/29967
-     */
-
         try {
             $this->pdo = new \PDO(
                     $dsn, 
                     $this->user, 
                     $this->credentials[$this->user], 
                     [
-                        \PDO::ATTR_PERSISTENT => false, 
-                        \PDO::ATTR_EMULATE_PREPARES => false, 
-                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, 
-                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"
+                        \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
+                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
+                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'" //establece el juego de caracteres a utf8 https://es.stackoverflow.com/a/59510/29967
                     ]
                 );
-
-            $this->isConnected = true;
             return $this->pdo; 
         }
-        catch (\PDOException $e) {         
+        catch (\PDOException $e){      
+
             error_log($this->error = $e->getMessage(),0);
             echo $dsn .'//'. $this->user; 
             return $this->error; 
         }
     }
-    function __destruct() {
+    function __destruct(){
 		if(!empty($this->error)){
 			echo $this->error;
 		 }
 		if($this->pdo) $this->pdo = null;
 	 }
-    /**
-     *	Método que será usado para enviar cualquier consulta a la BD.
-     *	
-     *	1. Si no hay conexión, conectar a la BD.
-     *	2. Preparar la consulta.
-     *	3. Parametrizar la consulta.
-     *	4. Ejecutar la consulta.	
-     *	5. Si ocurre una excepción: Escribirla en el archivo log junto con la consulta.
-     *	6. Resetear los parámetros.
-     */
-     
-    private function init($sql, $parametros = "")
-    {
-        if (!$this->isConnected) {
-            $this->Connect();
-        }
+
+    private function init($sql, $params = null){
         try {
             $this->sSQL = $this->pdo->prepare($sql);
-            $this->bindMas($parametros);
+            $this->bindMore($params);
 
-            if (!empty($this->parametros)) {
-                foreach ($this->parametros as $param => $value) {
+            if (!empty($this->params)) {
+                foreach ($this->params as $param => $value) {
                     if(is_int($value[1])) {
                         $type = \PDO::PARAM_INT;
                     } else if(is_bool($value[1])) {
@@ -103,22 +73,31 @@ class Conn{
                     } else {
                         $type = \PDO::PARAM_STR;
                     }
-
                     $this->sSQL->bindValue($value[0], $value[1], $type);
                 }
             }
-
+            
             $this->sSQL->execute();
         }
         catch (PDOException $e) {
             error_log($this->error = $e->getMessage(). "\nSQL: ".$sql."\n",0);
         }
         
-        $this->parametros = array();
+        $this->params = [];
     }
-    public function db (String $arg = null) {
-        if ($arg != null) $this->__METHOD__ = $arg; 
-        return $this->__METHOD__; 
+    /**
+     *	@void
+     *	
+     *	Agrega más parámetros al arreglo de parámetros
+     *	@param array $parray
+     */
+    public function bindMore($parray){
+        if (empty($this->params) && is_array($parray)) {
+            $columns = array_keys($parray);
+            foreach ($columns as $i => &$column) {
+                $this->bind($column, $parray[$column]);
+            }
+        }
     }
     /**
      *	@void 
@@ -127,28 +106,11 @@ class Conn{
      *	@param string $parametro  
      *	@param string $valor 
      */
-    public function bind($parametro, $valor){
-        $this->parametros[sizeof($this->parametros)] = [":" . $parametro , $valor];
-    }
-    /**
-     *	@void
-     *	
-     *	Agrega más parámetros al arreglo de parámetros
-     *	@param array $parray
-     */
-    public function bindMas($parray){
-        if (empty($this->parametros) && is_array($parray)) {
-            $columns = array_keys($parray);
-            foreach ($columns as $i => &$column) {
-                $this->bind($column, $parray[$column]);
-            }
-        }
+    public function bind($param, $value){
+        $this->params[sizeof($this->params)] = [":" . $param , $value];
     }
     /**
      *  Si la consulta SQL contiene un SELECT o SHOW, devolverá un arreglo conteniendo todas las filas del resultado
-     *     Nota: Si se requieren otros tipos de resultados la clase puede modificarse, 
-     *           agregandolos o se pueden crear otros métodos que devuelvan los resultados como los necesitemos
-     *           en nuesta aplicación. Para tipos de resultados ver: http://php.net/manual/es/pdostatement.fetch.php 
      *	Si la consulta SQL es un DELETE, INSERT o UPDATE, retornará el número de filas afectadas
      *
      *  @param  string $sql
@@ -156,14 +118,12 @@ class Conn{
      *	@param  int    $fetchmode
      *	@return mixed
      */
-    /*
-    public function query($sql, $params = null, $fetchmode = PDO::FETCH_ASSOC){
-        $sql = trim(str_replace("\r", " ", $sql));
-        
-        $this->init($sql, $params);
-        
-        $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $sql));
-        
+    
+    function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
+        $this->sql = trim(str_replace("\r", " ", $sql)); 
+        $this->init($this->sql, $params);
+        $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
+    
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]);
         
@@ -175,7 +135,20 @@ class Conn{
             return NULL;
         }
     }
-    */
+    /**
+     * Métodos getter setter
+     */
+    function db (String $arg = null) {
+        if ($arg != null) $this->__METHOD__ = $arg; 
+        $method  = explode('::',__METHOD__)[1];
+        return $this->$method; 
+    }
+    function table (String $arg = null) {
+        if ($arg != null) $this->__METHOD__ = $arg; 
+        $method  = explode('::',__METHOD__)[1];
+        return $this->$method; 
+    }
+    
     /**
      *	Devuelve un arreglo que representa una columna específica del resultado 
      *
@@ -186,7 +159,7 @@ class Conn{
      
     public function column($sql, $params = null){
         $this->Init($sql, $params);
-        $Columns = $this->sSQL->fetchAll(PDO::FETCH_NUM);
+        $Columns = $this->sSQL->fetchAll(\PDO::FETCH_NUM);
         
         $column = null;
         
@@ -230,7 +203,7 @@ class Conn{
      *  @return string
      */
     public function lastInsertId(){
-        return $this->pdo->lastInsertId();
+        return (int)$this->pdo->lastInsertId();
     }
     
     /**
@@ -257,4 +230,7 @@ class Conn{
         return $this->pdo->rollBack();
     }
     
+    protected function rowCount(){
+        return $this->sSQL->rowCount();
+    }
 }

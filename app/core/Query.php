@@ -5,10 +5,8 @@
 class Query extends Conn{
     public
         $type = MYSQLI_ASSOC,
-        $multi_query = false, //Si esta activada se acumulan los querys en la variable sql 
-        $table;
+        $table = 'prueba';
     private
-	    $sql = "",
         $log = false,
         $return = false,
         $logs = ['data','usuarios'],
@@ -17,184 +15,132 @@ class Query extends Conn{
         $conn;
 
     function __construct($db, $table, $user = 'root') {     
-        $this->conn = parent::__construct( $db, $table,  $user );
+        $this->conn = parent::__construct($db, $table,  $user);
+        var_dump(
+            $this->add(['campo1'=>2,'campo2'=>2])
+        );
      }
     function __destruct(){
         $this->conn = null;
+     }
+     /**
+      * Prepara el string sql para enviar a hacer la consulta 
+      * añadimos si queremos que sean ordenados de forma inversa
+      */
+    private function sendQuery(String $sql, bool $desc = false){
+        $order = $desc?'ORDER BY id DESC':'';
+        $sql = str_replace('order_by', $order, $sql); 
+        $query = $this->query($sql);
+        $len = count($query);
+        switch (true){
+            case $len > 1 : return $query; // Devolvemos array multidimensional si se encontró más de una respuesta
+            case $len == 1: return $query[0]; // Devolvemos un array con los datos solicitados si solo hay una respuesta 
+            case $len == 0: return false; // Devolvemos false si no hay respuesta
+        }
     }
-    public function getConnect () {
+    // Devolvemos la conexión
+    function getConnect() {
         return $this->conn;
      }
-    protected function query(string $sql = null){
-        $sql = $sql??$this->sql;
-        $this->sql = null;
-        $result = $this->conn->query($sql);
-        return $result;
+    // Devuelve todos los registros de una tabla
+    function getAll(string $return = '*', $desc = false){
+        return $this->sendQuery("SELECT $return FROM {$this->table} order_by;", $desc);
      }
-    public function getAll ( string $return = '*'  ) {
-        $this->sql = "SELECT $return FROM {$this->table}"; 
-        $query = $this->query($this->sql);
-        return $query->fetch_all($this->type);
+    // Devuelve datos de una peticion por id
+    function getById(int $id, string $return = '*'){
+        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
      }
-    public function getById ( int $id , string $return = '*' ) {
-        $this->sql = "SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;" ;
-        $query = $this->query($this->sql);
-        return ($query)
-            ?$query->fetch_assoc()??false
-            :false;
-     }
-    // retorna un array
-    public function getBy ( array $args , string $return = '*' ) {
-        //varios valores ponerlos en un array
+    // Devuelve datos de una peticion por algun campo del registro
+    function getBy(array $args , string $return = '*', bool $desc = false){
         $filters = '';
-        $i = 0;
         foreach($args as $column => $value){
-            $filters .= ($i!=0) ? ' AND ' : '' ;
-            $i++;
-            $value = $this->scape($value) ;
-            $filters .= (string)$column ." = '".(string)$value ."'";
+            $filters .= (string)$column ." = '".(string)$value ."' AND ";
         }
-        $this->sql = "SELECT $return FROM {$this->table} WHERE $filters ;";
-        $query = $this->query($this->sql);
-        $result = $query->fetch_all($this->type); 
-        if ($return != '*' && count(explode(',', $return)) <= 1)
-            $result = $this->converToArray($result);
-        /*/
-        }else if (count($result) == 1) {
-            $result = $result[0];
-        }
-        */
-        return $result ; 
+        $filters = trim($filters,"AND ");
+        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);   
      }
-    public function getBySQL ( string $sql ) {
-        $this->sql = "SELECT * FROM {$this->table} WHERE " . $sql;
-        $query = $this->query($this->sql);
-        $result = $query->fetch_all($this->type); 
-             
-        return $result; 
+    // Devuelve datos de una peticion por una consulta sql
+    public function getBySQL(string $sql, bool $desc = false){
+        return$this->sendQuery("SELECT * FROM {$this->table} WHERE $sql order_by", $desc); 
      }
-    public function getId () {
-        return $this->conn->insert_id();
+    // Devuelve un solo registro de una peticion por campo del registro
+    public function getOneBy(Array $params, string $return = '*',bool $desc = false){
+        $column = key($params);
+        $value = $params[$column];
+        return $this->sendQuery(
+            "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
+        );
      }
-    public function getOneBy ( $column, $value, string $return = '*', $typeNum = false, $desc = false) {
-        $order = $desc?'ORDER BY "id" DESC':'';
-        $value = $this->scape($value) ;
-        $sql = "SELECT $return FROM {$this->table} WHERE $column = '$value' $order LIMIT 1;" ;
-        $query = $this->conn->query($sql) ;
-       if ($return != '*'){
-            $result = $query->fetch_row();
-            if(!empty($result) && count($result)<=1)$result = $result[0];
-        }else{
-            $result = $typeNum? $query->fetch_row(): $query->fetch_assoc() ; 
-        }          
-        
-        return $result;
+    // Devuelve los registros con el valor entre los dos valores proporcionados de un campo
+    public function getBetween ( string $column, $val1, $val2, string $args = null, bool $desc = false){
+        return $this->sendQuery(
+            "SELECT * FROM {$this->table} WHERE $column BETWEEN '$val1' AND '$val2' $args order_by;", $desc
+        ) ;
      }
-    public function getBetween ( string $column, $val1, $val2, string $args = null ){
-        $sql = "SELECT * FROM {$this->table} WHERE $column BETWEEN '$val1' AND '$val2' $args;" ;
-        return $this->conn->all($sql) ;
-     }
+    // Cuenta los registros de la tabla
     public function count() {
-        $sql = "SELECT * FROM {$this->table};";
-        $result = $this->conn->num($sql);      
-        return (int)$result;
+        $this->query("SELECT * FROM {$this->table}");
+        return $this->rowCount();
      }
-    public function multi_query(){
-        $r = $this->conn->multi_query($this->sql);
-        $this->sql = '';
-        $this->multi_query = false;
-        return $r;
+    // Añadimos un registro devuelve el id del registro
+    public function add(Array $params){
+        unset($params['id']);
+        $strCol = '';
+        $strPre = '';
+        foreach ($params as $col => $val) {
+            $strCol .=  $col . ',' ;
+            $strPre .= ':' . $col . ',' ; 
+         }  
+        $strCol = trim($strCol , ',') ;
+        $strPre = trim($strPre , ',') ;
+        $this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params);
+        return $this->lastInsertId();
+    }
+    // Edita registro mediante su id
+    public function saveById ( int $id , Array $args = null ) {
+        $sql = $this->getSQLUpdate($args, "id=$id");
+        return $this->query($sql, $args);
      }
-    // Guarda un registro nuevo (id = -1) o edita registro (id > -1)
-    // $args == [$column => $value]
-    public function saveById ( int $id , array $args = null ) {
-        
-        $columns = null ; 
-        $values = null ;
-        if ( $id == -1) {
-            if (!is_null($args)){
-                unset($args['id']);
-                foreach ($args as $column => $value ) {
-                    $columns .=  $column . ',' ;
-                    $values .= '"' . $value . '",' ; 
-                 }    
-             }
-            $columns = trim( $columns , ',' ) ;
-            $values = trim( "'" . $values , "'," ) ;
-            $this->sql .= "INSERT INTO {$this->table} ( $columns ) VALUES ( $values );" ;
-        } else {
-            $this->sql .= $this->updateSql($args , $id);
-        }
-      if(!$this->multi_query){
-            $this->return = $this->query();
-            return $this->return;
-      }
-     }
-    public function saveBy(array $filter , array $args){
+    /**
+     * Guarda usando como filtro alguno/s de los campos de la base de datos 
+     * comprobamos si existe y si existe editamos si no creamos uno nuevo
+     * @param $filter array nombrado
+     * @param $args array nombrado
+     */
+    public function saveBy(Array $filter , Array $args){
         $columns = "";
         $values ="";
         $fName = key($filter);
         $fValue = $filter[$fName];
-        foreach ($args as $column => $value ) {
-            $columns .=  $column . ',' ;
-            $values .= '"' . $value . '",' ; 
-         } 
-        $columns = trim( $columns , ',' ) ;
-        $values = trim( "'" . $values , "'," ) ;
-        if ($id = $this->getOneBy($fName , $fValue, 'id')) 
-            $this->sql .= $this->updateSql($args , $id);
-        else 
-            $this->sql .= "INSERT INTO {$this->table} ( $columns ) VALUES ( $values );" ;
-      if(!$this->multi_query){
-            $this->return = $this->query();
-            return $this->return;
-       }
+        $sql = '';
+
+        if ($id = $this->getOneBy($filter)) 
+            $sql = $this->getSQLUpdate($args, "$fName=$fValue");
+        else {
+            foreach ($args as $column => $value ) {
+                $columns .=  $column . ',' ;
+                $values .= '"' . $value . '",' ; 
+            } 
+            $columns = trim( $columns , ',' ) ;
+            $values = trim( "'" . $values , "'," ) ;
+            $sql .= "INSERT INTO {$this->table} ($columns) VALUES ($values);" ;
+        }
+        return $this->query($sql, $args);
      }
-    public function saveAll( array $args = null ){
-        $this->sql .= $this->updateSql($args);
-      if(!$this->multi_query){
-            $this->return = $this->query();
-            return $this->return;
-       }
+    // Edita todos los campos de la tabla
+    public function saveAll(array $args = null){
+        return $this->query($this->getSQLUpdate($args) , $args);
      } 
-    // Funcion que elimina caracteres no deseados 
-    // Str valor a escapar y $discard si queremos omitir algun valor
-    private function scape (string $str, string $discard = null) {
-	
-		if(!$this->error){
-			$replace = ['=',"'",'"','/','#','*',"<",">",":","{","}","?","|","&"];
-            
-			if (!$discard) {
-                foreach ($replace as $k => $v){
-                    if ($v == $discard) {
-                        unset($replace[$k]);
-                        break; 
-                    }
-                }
-            }
-        	$str = str_replace($replace, '' , $str);
-        	$str = trim($str);        
-			return $this->conn->real_escape_string($str) ;
-		}else{
-			return false ;
-		}
-	 }
-    public function deleteById ( $id ) {
-        $this->sql .= "DELETE FROM {$this->table} WHERE id =  $id ; ";
-        if(!$this->multi_query){
-            $this->return = $this->query();
-            return $this->return;
-         }
+    // Eliminamos mediante id
+    public function deleteById(Int $id){
+        return $this->query("DELETE FROM {$this->table} WHERE id = $id;");
      }
-    public function deleteBy ( $column , $value ) {
-        $this->sql .= "DELETE FROM {$this->table} WHERE $column = $value;";
-           
-      if(!$this->multi_query){
-            $this->return = $this->query();
-            return $this->return;
-       }
+    // Eliminamos mediante un campo concreto
+    public function deleteBy(Array $params){
+        $prepared = $this->getPrepareParams($params);
+        return $this->query("DELETE FROM {$this->table} WHERE $prepared;", $params);
      }
-    public function copyTableById($new_table , $id  ){
+  /*   public function copyTableById($new_table, $id){
         $cols = '';
         $sql = "SELECT * FROM {$this->table}";    
         $query = $this->conn->query($sql) ;
@@ -223,13 +169,16 @@ class Query extends Conn{
         if(!$this->multi_query)
            return $this->query();
         
-     }
-    private function converToArray($multi){
-        $array = array();
-        foreach ($multi as $key => $value){
-            $value = array_values($value);
-            $array[] = $value[0] ;
+     } */
+    private function getSQLUpdate(Array $args, String $filter = ''){
+        $params = $this->getPrepareParams($args);
+        return "UPDATE {$this->table} SET $params WHERE $filter;";
+    }
+    private function getPrepareParams(Array $args){
+        $sql = '';
+        foreach( $args as $key => $value){
+            $sql .= $key . '= :' . $key .',';
         }
-        return $array;
-     }
+        return trim($sql,',');
+    }
 }
