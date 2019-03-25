@@ -4,15 +4,16 @@
  */
 class Conn{
     
-    protected $pdo, 
-            $sSQL,
-            $sql,
-            $credentials,
-            $params, 
-            $user,
-            $db,
-            $table,
-            $error;
+    protected 
+        $pdo, 
+        $sSQL,
+        $sql,
+        $credentials,
+        $params, 
+        $user,
+        $db,
+        $table,
+        $error;
     
     function __construct($database, $table, $user){
         $this->db = $database;

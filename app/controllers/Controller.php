@@ -6,14 +6,15 @@
  *  Método para requerir datos a los modelos (abstracto)
  *  Método para añadir/editar/borrar datos a los modelos (abstracto)
  */
-abstract class Controller {
-    protected $controller = 'login'; 
-    protected $action = 'view';
+abstract class Controller{
+    protected 
+        $conn,
+        $controller = 'login',
+        $action = 'view';
     
-    function __construct( String $action ){
-        /**
-         * Constructor alternativo básico
-         */
+    function __construct(String $controller, String $action){
+        $this->controller = $controller; 
+        // Constructor alternativo básico
         switch($this->action){
             case 'get':
                 $this->setModel();
@@ -25,7 +26,9 @@ abstract class Controller {
                 $this->getView();
         }
     }
-    
+    protected function setConnection($db){
+        return $this->Query = new \app\core\Query($db, $this->controller);
+    }
     protected function getView( Array $data = []){
         return require_once \FOLDERS\VIEWS . strtolower($this->controller) . '.phtml'; 
     }

@@ -13,29 +13,22 @@
  */
 
 class Router{
-    protected $controller = 'index'; 
-    protected $action = 'view';
 
     function __construct($GET = []){
         if(isset($GET['company'])){
+            $db = $GET['company']; 
             $controller = $GET['controller']??'login';
             $action = $GET['action']??'view';
-    
-            $this->controller = strtolower(trim($controller));
-            $this->action = strtolower(trim($action)??'view');        
+
+            $controller = strtolower(trim($controller));
+            $action = strtolower(trim($action)??'view');        
                     
-            $class = ucwords($this->controller); 
+            $class = ucwords($controller); 
     
             if($class != 'Controller' && file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
                $nameClass = '\\app\controllers\\' . $class ; 
-                new $nameClass( $this->action );
-    
-            }
-            
-         }
+                new $nameClass($db, $controller,$action);
+            }  
         }
-
-    private function testController(){
-        return file_exists ( \FOLDERS\CONTROLLERS . $this->controller . 'php'); 
-     }
+    }
 }

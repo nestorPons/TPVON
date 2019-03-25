@@ -3,10 +3,8 @@
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query extends Conn{
-    public
-        $type = MYSQLI_ASSOC,
-        $table = 'prueba';
-    private
+    protected 
+        $table,
         $log = false,
         $return = false,
         $logs = ['data','usuarios'],
@@ -14,11 +12,9 @@ class Query extends Conn{
         $conf,
         $conn;
 
-    function __construct($db, $table, $user = 'root') {     
-        $this->conn = parent::__construct($db, $table,  $user);
-        var_dump(
-            $this->add(['campo1'=>2,'campo2'=>2])
-        );
+    function __construct($db, $table, $user = 'root') {   
+        $this->table = $table;  
+        $this->conn = parent::__construct($db, $table, $user);
      }
     function __destruct(){
         $this->conn = null;
@@ -97,15 +93,13 @@ class Query extends Conn{
         return $this->lastInsertId();
     }
     // Edita registro mediante su id
-    public function saveById ( int $id , Array $args = null ) {
+    public function saveById ( Int $id , Array $args = null ) {
         $sql = $this->getSQLUpdate($args, "id=$id");
         return $this->query($sql, $args);
      }
     /**
      * Guarda usando como filtro alguno/s de los campos de la base de datos 
      * comprobamos si existe y si existe editamos si no creamos uno nuevo
-     * @param $filter array nombrado
-     * @param $args array nombrado
      */
     public function saveBy(Array $filter , Array $args){
         $columns = "";
