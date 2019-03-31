@@ -1,0 +1,10 @@
+empresa(#id, #nombre, NIF, email, web, calle, numero, cp, ciudad, pais, fecha_alta, fecha_baja)
+usarios(#id, DNI, nombre, fecha_nacimiento, calle, numero, cp, ciudad, pais,
+usuarios_administracion(#id, -id_usuario, fecha_alta, fecha_baja, password, intentos_login)
+telefonos(#id, -id_ref, numero)
+direcciones(#id, -id_ref, calle, direccion, numero, cp, poblacion, localidad, pais)
+login(#id, token, fecha, dispositivo)
+tickets(#id, fecha, dto, 
+lineas(#id, -id_ticket, dto, -id_articulo, 
+articulos(#id, #codigo, nombre, descripcion, precio, coste, -id_iva)
+historial(#id, -id_ticket, ultima_modificacion, accion)
