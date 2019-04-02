@@ -6,7 +6,7 @@ return [
     'host'  => 'db',
     'port'  => '3306',
     'driver'=> 'mysql',
-    'prefix'=> '',
+    'prefix'=> 'app_',
     // usuarios
     'root'  => 'test',
     'user'  => '0Z8AHyYDKN0hUYik',
