@@ -5,7 +5,7 @@
 
 use MatthiasMullie\Minify;
 $minifier_css = new Minify\CSS(\FOLDERS\CSS . 'main.css');
-$minifier_CSS->minify(\FOLDERS\BUILD . 'main.min.css');
+$minifier_CSS->minify(\FOLDERS\BUILD . 'css/main.min.css');
 
 $minifier_JS = new Minify\JS(\FOLDERS\JS . 'index.js');
-$minifier_JS->minify(\FOLDERS\BUILD . 'index.min.js');
+$minifier_JS->minify(\FOLDERS\BUILD . 'js/index.min.js');
