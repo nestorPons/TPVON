@@ -4,8 +4,20 @@
 // Carpeta con archivos compilados /htdocs/build
 
 use MatthiasMullie\Minify;
-$minifier_css = new Minify\CSS(\FOLDERS\CSS . 'main.css');
-$minifier_CSS->minify(\FOLDERS\BUILD . 'css/main.min.css');
 
-$minifier_JS = new Minify\JS(\FOLDERS\JS . 'index.js');
-$minifier_JS->minify(\FOLDERS\BUILD . 'js/index.min.js');
+$minifier_CSS = new Minify\CSS(\FOLDERS\CSS . 'main.css');
+$minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css');
+
+$minifier_JS = new Minify\JS();
+if ($folder = opendir(\FOLDERS\JS)) {
+    while (false !== ($file = readdir($folder))) {
+        // Comprobamos que sea un archivo js 
+        $ext = explode('.',$file);
+        if(isset($ext[1]) && $ext[1] === 'js'){
+            $minifier_JS->add(\FOLDERS\JS . $file);
+            $minifier_JS->minify(\FOLDERS\JS . "{$ext[0]}.min.js");
+        }
+
+    }
+}
+
