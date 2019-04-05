@@ -1,6 +1,899 @@
-[05-Apr-2019 10:57:42 UTC] PHP Notice:  Undefined variable: minifier_CSS in /var/www/html/app/core/minify.php on line 8
-[05-Apr-2019 10:57:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function minify() on null in /var/www/html/app/core/minify.php:8
+[03-Apr-2019 11:01:37 UTC] PHP Warning:  array_pop() expects parameter 1 to be array, null given in /var/www/html/app/config/vars.php on line 3
+[03-Apr-2019 11:01:37 UTC] PHP Warning:  require_once(/var/www/html/htdocsapp/core/minify.php) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/htdocs/index.php on line 7
+[03-Apr-2019 11:01:37 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/htdocsapp/core/minify.php' (include_path='.:/usr/local/lib/php') in /var/www/html/htdocs/index.php on line 7
+[03-Apr-2019 11:04:59 UTC] PHP Warning:  Use of undefined constant UR_ROOT - assumed 'UR_ROOT' (this will throw an Error in a future version of PHP) in /var/www/html/app/config/vars.php on line 5
+[03-Apr-2019 12:49:44 UTC] PHP Fatal error:  Uncaught Error: Class 'MatthiasMullie\Minify\CSS' not found in /var/www/html/app/core/minify.php:7
 Stack trace:
 #0 /var/www/html/htdocs/index.php(7): require_once()
 #1 {main}
-  thrown in /var/www/html/app/core/minify.php on line 8
+  thrown in /var/www/html/app/core/minify.php on line 7
+[03-Apr-2019 13:10:54 UTC] PHP Fatal error:  Uncaught Error: Class 'MatthiasMullie\Minify\CSS' not found in /var/www/html/app/core/minify.php:7
+Stack trace:
+#0 /var/www/html/htdocs/index.php(7): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/minify.php on line 7
+[03-Apr-2019 13:11:47 UTC] PHP Fatal error:  Uncaught Error: Class 'MatthiasMullie\Minify\CSS' not found in /var/www/html/app/core/minify.php:7
+Stack trace:
+#0 /var/www/html/htdocs/index.php(7): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/minify.php on line 7
+[03-Apr-2019 13:14:15 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/css/main.min.css" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(8): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(7): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[03-Apr-2019 13:35:01 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo' not found in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:38:02 UTC] PHP Fatal error:  Uncaught Error: Class 'lessphp' not found in /var/www/html/app/core/less.php:3
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 3
+[03-Apr-2019 13:40:09 UTC] PHP Warning:  require(lessc.inc.php) [<a href='0function.require0'>function.require0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:40:09 UTC] PHP Fatal error:  require() [<a href='0function.require0'>function.require0</a>]: Failed opening required 'lessc.inc.php' (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:46:29 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo\LessCompiler' not found in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:49:38 UTC] PHP Fatal error:  Uncaught Error: Class 'LessCompiler' not found in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:49:55 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo\LessCompiler' not found in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:50:13 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo\LessCompiler' not found in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:50:14 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo\LessCompiler' not found in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[03-Apr-2019 13:53:05 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo\LessCompiler' not found in /var/www/html/app/core/less.php:3
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 3
+[03-Apr-2019 13:53:37 UTC] PHP Fatal error:  Uncaught Error: Class 'leafo\LessCompiler' not found in /var/www/html/app/core/less.php:3
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 3
+[03-Apr-2019 14:06:49 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\lessc' not found in /var/www/html/app/models/LessCompiler.php:2
+Stack trace:
+#0 /var/www/html/vendor/composer/ClassLoader.php(444): include()
+#1 /var/www/html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/var/www/html/v...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('app\\models\\Less...')
+#3 /var/www/html/app/core/less.php(2): spl_autoload_call('app\\models\\Less...')
+#4 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#5 {main}
+  thrown in /var/www/html/app/models/LessCompiler.php on line 2
+[03-Apr-2019 14:14:21 UTC] PHP Warning:  readdir() expects parameter 1 to be resource, string given in /var/www/html/app/core/less.php on line 7
+[03-Apr-2019 14:15:22 UTC] PHP Warning:  readdir() expects parameter 1 to be resource, string given in /var/www/html/app/core/less.php on line 7
+[03-Apr-2019 14:15:23 UTC] PHP Warning:  readdir() expects parameter 1 to be resource, string given in /var/www/html/app/core/less.php on line 7
+[03-Apr-2019 14:16:13 UTC] PHP Warning:  readdir() expects parameter 1 to be resource, string given in /var/www/html/app/core/less.php on line 8
+[03-Apr-2019 14:22:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\LessCompiler::compiler_all() in /var/www/html/app/core/less.php:4
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 4
+[03-Apr-2019 14:27:27 UTC] PHP Parse error:  syntax error, unexpected ')' in /var/www/html/app/models/LessCompiler.php on line 42
+[03-Apr-2019 14:45:49 UTC] PHP Warning:  filemtime() [<a href='0function.filemtime0'>function.filemtime0</a>]: stat failed for main.less in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1935
+[03-Apr-2019 14:46:29 UTC] PHP Warning:  filemtime() [<a href='0function.filemtime0'>function.filemtime0</a>]: stat failed for main.less in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1935
+[03-Apr-2019 14:46:43 UTC] PHP Warning:  filemtime() [<a href='0function.filemtime0'>function.filemtime0</a>]: stat failed for main.less in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1935
+[03-Apr-2019 14:47:08 UTC] PHP Fatal error:  Uncaught Exception: main.less is undefined: failed at `main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('main.less is un...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('main.less is un...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('main.less', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[03-Apr-2019 14:47:52 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:04:56 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:05:41 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:06:22 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:07:14 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:07:17 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:08:57 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:09:26 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:12:59 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:13:15 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:13:16 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:13:42 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(16): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:14:15 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:14:36 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:15:20 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:15:38 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:17:25 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:19:17 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:19:40 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:19:41 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:21:11 UTC] PHP Parse error:  syntax error, unexpected '"AKI"' (T_CONSTANT_ENCAPSED_STRING) in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1897
+[04-Apr-2019 06:21:20 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(18): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:21:38 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:23:03 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(193): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:23:15 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:23:38 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2098): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(722): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(285): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(279): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(194): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1900): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 06:24:03 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:24:09 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:24:13 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:24:17 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:24:20 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:24:46 UTC] PHP Recoverable fatal error:  Object of class stdClass could not be converted to string in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 277
+[04-Apr-2019 06:24:59 UTC] PHP Recoverable fatal error:  Object of class stdClass could not be converted to string in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 277
+[04-Apr-2019 06:25:17 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:26:29 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:26:30 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:27:01 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(278): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:27:42 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:27:49 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:27:50 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:27:50 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3552
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(721): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(284): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3552
+[04-Apr-2019 06:28:10 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:28:28 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:28:44 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:28:45 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:29:10 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:29:24 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:29:49 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:30:05 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:30:11 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:30:25 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:30:39 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:31:13 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:31:28 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 723
+[04-Apr-2019 06:31:44 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:32:21 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main is undefined: failed at `/var/www/html/app/src/less/main` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3551
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2096): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1898): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3551
+[04-Apr-2019 06:35:13 UTC] PHP Fatal error:  Uncaught Exception: /var/www/html/app/src/less/main.less is undefined: failed at `/var/www/html/app/src/less/main.less` /var/www/html/htdocs/css/main.min.css on line 1 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('/var/www/html/a...', 0)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(720): lessc->throwError('/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#6 /var/www/html/app/core/less.php(14): lessc->compile('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 08:39:09 UTC] PHP Fatal error:  Uncaught Exception: variable @azul is undefined: failed at `background-color: @azul; ` /var/www/html/app/src/less/main.less on line 2 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3553
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2097): lessc_parser->throwError('variable @azul ...', 7)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1852): lessc->throwError('variable @azul ...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1475): lessc->get('@azul')
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(686): lessc->reduce(Array)
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(221): lessc->compileProps(Object(stdClass), Object(stdClass))
+#6 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(195): lessc->compileCSSBlock(Object(stdClass))
+#7 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(691): lessc->compileBlock(Object(stdClass))
+#8 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(283): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#9 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#10 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#11 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1899): lessc->compileBlock(Object(stdClass))
+#12 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1922): lessc->compile('html{\n backgrou...', '/var/www/html/a...')
+#13 /var/www/html/app/core/less.php(13): lessc->compileFile('/var/www/html/a...', '/var/www/html/h...')
+#14 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#15 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3553
+[04-Apr-2019 11:27:46 UTC] PHP Notice:  Undefined variable: in in /var/www/html/app/core/minify.php on line 14
+[04-Apr-2019 11:27:46 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/main.min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(15): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 11:27:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/main.min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(15): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 11:31:09 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(15): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 12:40:34 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(15): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 12:40:34 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(15): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 12:48:05 UTC] PHP Warning:  fopen(/var/www/html/htdocs/js/min/...min.js) [<a href='0function.fopen0'>function.fopen0</a>]: failed to open stream: Permission denied in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 437
+[04-Apr-2019 12:48:05 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(15): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 12:55:58 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(16): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 12:56:53 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(16): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 13:04:50 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(16): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 13:05:34 UTC] PHP Notice:  Undefined variable: file in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 437
+[04-Apr-2019 13:05:34 UTC] PHP Notice:  Undefined variable: file in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 437
+[04-Apr-2019 13:05:34 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:439
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(16): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 439
+[04-Apr-2019 13:05:45 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:439
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(16): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 439
+[04-Apr-2019 13:07:10 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('/var/www/html/h...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(18): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 13:12:45 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/core/minify.php on line 16
+[04-Apr-2019 13:12:45 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(20): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 13:13:29 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/...min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(20): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[04-Apr-2019 13:15:59 UTC] PHP Notice:  Undefined offset: 1 in /var/www/html/app/core/minify.php on line 16
+[04-Apr-2019 13:16:20 UTC] PHP Notice:  Undefined offset: 1 in /var/www/html/app/core/minify.php on line 16
+[04-Apr-2019 13:17:17 UTC] PHP Warning:  Use of undefined constant BR - assumed 'BR' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 14
+[04-Apr-2019 13:17:17 UTC] PHP Warning:  Use of undefined constant BR - assumed 'BR' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 14
+[04-Apr-2019 13:17:17 UTC] PHP Warning:  Use of undefined constant BR - assumed 'BR' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 14
+[04-Apr-2019 13:17:17 UTC] PHP Warning:  Use of undefined constant BR - assumed 'BR' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 14
+[04-Apr-2019 13:17:17 UTC] PHP Warning:  Use of undefined constant BR - assumed 'BR' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 14
+[04-Apr-2019 13:20:39 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/min/main.js.min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('var message="He...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(21): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#4 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
