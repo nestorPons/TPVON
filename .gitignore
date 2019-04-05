@@ -1,1 +1,5 @@
-/vendor/
+vendor
+node_modules
+htdocs/js
+htdocs/css
+server/PHP_errors.log

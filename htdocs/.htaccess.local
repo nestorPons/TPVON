@@ -30,12 +30,12 @@ RewriteEngine On
 RewriteBase / 
 RewriteCond %{REQUEST_FILENAME} !-f
 
-RewriteRule ^css/(.*)$ - [L]
 RewriteRule ^img/(.*)$ - [L]
 RewriteRule ^js/(.*)$ - [L]
 RewriteRule ^font/(.*)$ - [L]
 RewriteRule ^sources/(.*)$ - [L]
 RewriteRule ^dist/(.*)$ - [L]
+RewriteRule ^css/(.*)$ - [L]
 
 RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php?company=$1&controller=$2&action=$3 [R,L]
 RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php?company=$1&controller=$2 [R,L]
