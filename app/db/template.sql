@@ -21,5 +21,5 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `rtc_lebouquet`
 --
-CREATE DATABASE IF NOT EXISTS `tpv_template` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `tpv_template`;
+CREATE DATABASE IF NOT EXISTS `app_template` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `app_template`;

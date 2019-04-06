@@ -1,44 +1,18 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Servidor: localhost
--- Tiempo de generación: 20-03-2019 a las 12:19:23
--- Versión del servidor: 5.7.23-23-log
--- Versión de PHP: 7.1.25
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `aa_db`
---
-CREATE DATABASE IF NOT EXISTS `companies` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `companies`;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `admin`
---
-
-CREATE TABLE `facturation` (
+CREATE DATABASE IF NOT EXISTS `empresas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `empresas`;
+CREATE TABLE `facturacion` (
   `id` int(11) NOT NULL,
   `dni` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dir` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `province` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pc` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL
+  `ciudad` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provincia` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pais` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CP` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -47,21 +21,21 @@ CREATE TABLE `facturation` (
 -- Estructura de tabla para la tabla `empresas`
 --
 
-CREATE TABLE `company` (
+CREATE TABLE `empresa` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `web` varchar(30) NOT NULL,
   `tel` varchar(15) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `sector` tinyint(1) NOT NULL,
   `plan` tinyint(1) NOT NULL DEFAULT '1',
-  `access_last` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ultimo_acceso` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dir` varchar(50) NOT NULL,
-  `city` varchar(50) NOT NULL,
-  `province` varchar(50) NOT NULL,
-  `country` varchar(50) NOT NULL,
-  `pc` varchar(10) NOT NULL
+  `ciudad` varchar(50) NOT NULL,
+  `provincia` varchar(50) NOT NULL,
+  `continente` varchar(50) NOT NULL,
+  `CP` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -70,10 +44,10 @@ CREATE TABLE `company` (
 -- Estructura de tabla para la tabla `idiomas`
 --
 
-CREATE TABLE `languages` (
+CREATE TABLE `idiomas` (
   `id` tinyint(4) NOT NULL,
-  `name` text NOT NULL,
-  `cod` text NOT NULL,
+  `nombre` text NOT NULL,
+  `cod` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -83,40 +57,40 @@ CREATE TABLE `languages` (
 --
 -- Indices de la tabla `admin`
 --
-ALTER TABLE `facturation`
+ALTER TABLE `facturacion`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `empresas`
 --
-ALTER TABLE `companies`
+ALTER TABLE `empresas`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email`,
-  ADD UNIQUE KEY `name`;
+  ADD UNIQUE KEY `nombre`;
 
 --
 -- Indices de la tabla `idiomas`
 --
-ALTER TABLE `languages`
+ALTER TABLE `idiomas`
   ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de la tabla `admin`
 --
-ALTER TABLE `facturation`
+ALTER TABLE `facturacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
 --
-ALTER TABLE `companies`
+ALTER TABLE `empresas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
 --
-ALTER TABLE `language`
+ALTER TABLE `idiomas`
   MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
