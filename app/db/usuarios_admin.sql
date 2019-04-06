@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `usuarios_admin` (
-  `id` int(255) NOT NULL,
-  `password` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `id` SERIAL PRIMARY KEY,
+  `password` varchar COLLATE utf8_spanish2_ci NOT NULL,
   `intentos` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 COMMIT;

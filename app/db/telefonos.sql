@@ -29,32 +29,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `telefonos` (
-  `id` int(255) NOT NULL,
-  `id_usuario` int(255) NOT NULL,
-  `numero` varchar(20) COLLATE utf8_spanish2_ci NOT NULL
+  `id` SERIAL PRIMARY KEY,
+  `id_usuario` BIGINT NOT NULL,
+  `numero` varchar COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- Índices para tablas volcadas
---
-
---
 -- Indices de la tabla `telefonos`
 --
 ALTER TABLE `telefonos`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_ADM_USU` (`id_usuario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `telefonos`
---
-ALTER TABLE `telefonos`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
-
 --
 -- Restricciones para tablas volcadas
 --

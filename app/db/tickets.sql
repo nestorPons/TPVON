@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tickets` (
-  `id` int(255) NOT NULL,
-  `id_empleado` int(255) NOT NULL,
-  `id_cliente` int(255) NOT NULL,
-  `estado` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 activo, 0 eliminado'
+  `id` SERIAL PRIMARY KEY,
+  `id_empleado` BIGINT NOT NULL,
+  `id_cliente` BIGINT NOT NULL,
+  `estado` tinyint(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '1 activo, 0 eliminado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -46,16 +46,6 @@ ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `TIC_USU_FK` (`id_empleado`),
   ADD KEY `TIC_CLI_FK` (`id_cliente`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tickets`
---
-ALTER TABLE `tickets`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

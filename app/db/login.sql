@@ -29,30 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `login` (
-  `id` int(255) NOT NULL,
-  `token` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
+  `id` SERIAL,
+  `token` varchar COLLATE utf8_spanish2_ci NOT NULL UNIQUE KEY
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `token` (`token`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `login`
---
-ALTER TABLE `login`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
