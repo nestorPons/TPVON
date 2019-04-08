@@ -39,7 +39,7 @@ class Conn{
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
                         \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
                         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
-                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'" //establece el juego de caracteres a utf8 https://es.stackoverflow.com/a/59510/29967
+                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
                     ]
                 );
             return $this->pdo; 
