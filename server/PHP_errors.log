@@ -897,3 +897,4 @@ Stack trace:
 #3 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
 #4 {main}
   thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[09-Apr-2019 12:43:54 UTC] PHP Notice:  Undefined index: PMA_PMADB in /var/www/html/htdocs/app.php on line 3

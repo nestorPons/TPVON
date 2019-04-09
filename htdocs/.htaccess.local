@@ -37,8 +37,8 @@ RewriteRule ^sources/(.*)$ - [L]
 RewriteRule ^dist/(.*)$ - [L]
 RewriteRule ^css/(.*)$ - [L]
 
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php?company=$1&controller=$2&action=$3 [R,L]
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php?company=$1&controller=$2 [R,L]
-RewriteRule ^([0-9a-z_-]+)/?$ index.php?company=$1 [R=301,R,L]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ app.php?company=$1&controller=$2&action=$3 [R,L]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ app.php?company=$1&controller=$2 [R,L]
+RewriteRule ^([0-9a-z_-]+)/?$ app.php?company=$1 [R=301,R,L]
 
 ErrorDocument 404 error404.php
