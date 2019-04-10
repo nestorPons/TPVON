@@ -14,9 +14,13 @@
 
 class Router{
     function __construct($GET = []){
+        // Archivo configuración por defecto 
         $default = parse_ini_file(\FOLDERS\CONFIG . 'routes.ini');
+        // Si hemos ingresado segundo parametro en la url buscamos una empresa
         $db = $GET['company'] ?? $default['db']; 
-        $controller = $GET['controller'] ?? $default['controller'];
+        // Si queremos un controlador determinado o mandamos al login o a la web principal
+        $controller = $GET['controller'] ?? (isset($GET['company']) ? $default['app_gate'] : $default['controller']);
+        // Que queremos hacer si es una petición ajax si no por defeccto estamos buscando una vista
         $action = $GET['action'] ?? $default['action'];
 
         $controller = strtolower(trim($controller));
