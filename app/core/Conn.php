@@ -27,7 +27,7 @@ class Conn{
      *	Genera la conexión a a la base de datos
      */
     protected function connect(){
-        $this->credentials = include_once '../app/config/conn.php';
+        $this->credentials = parse_ini_file('../app/config/conn.ini');
         $dsn = 'mysql:dbname=' . $this->credentials["prefix"] . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
 
         try {
