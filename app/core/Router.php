@@ -9,26 +9,23 @@
  * ej: 
  * http://localhost/company/controller/action
  * 
- * Comprueba y enruta la peticuin por url
+ * Comprueba y enruta la peticuiOn por url
  */
 
 class Router{
-
     function __construct($GET = []){
-        if(isset($GET['company'])){
-            $db = $GET['company']; 
-            $controller = $GET['controller']??'login';
-            $action = $GET['action']??'view';
+        $default = parse_ini_file(\FOLDERS\CONFIG . 'routes.ini');
+        $db = $GET['company'] ?? $default['db']; 
+        $controller = $GET['controller'] ?? $default['controller'];
+        $action = $GET['action'] ?? $default['action'];
 
-            $controller = strtolower(trim($controller));
-            $action = strtolower(trim($action)??'view');        
-                    
-            $class = ucwords($controller); 
-    
-            if($class != 'Controller' && file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
-               $nameClass = '\\app\controllers\\' . $class ; 
-                new $nameClass($db, $controller,$action);
-            }  
-        }
+        $controller = strtolower(trim($controller));
+        $action = strtolower(trim($action)??'view');        
+                
+        $class = ucwords($controller); 
+        if($class != 'Controller' && file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
+            $nameClass = '\\app\controllers\\' . $class;
+            new $nameClass($db, $controller,$action);
+        }  
     }
 }

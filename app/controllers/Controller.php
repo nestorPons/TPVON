@@ -9,7 +9,7 @@
 abstract class Controller{
     protected 
         $conn,
-        $controller = 'login',
+        $controller = 'web',
         $action = 'view';
     
     function __construct(String $controller, String $action){
@@ -32,7 +32,9 @@ abstract class Controller{
     protected function getView( Array $data = []){
         return require_once \FOLDERS\VIEWS . strtolower($this->controller) . '.phtml'; 
     }
-
+    protected function require(String $route, Array $args = null){
+        require_once $route;  
+    }
     abstract protected function getModel();
     abstract protected function setModel();
 }
