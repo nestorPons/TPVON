@@ -5,8 +5,8 @@
 class Web extends Controller{
 
     function __construct(String $db = null, String $controller = null, String $action = null){    
-        parent::__construct($controller, $action);
-        // $this->setConnection($db); // inicializa $this->Query
+        $this->action = 'view';
+        $this->getView();
     }
     protected function getView( Array $data = []){
         return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page' => 'web.phtml']);
