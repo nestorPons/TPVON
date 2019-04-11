@@ -1,17 +1,11 @@
 <?php 
-$less = new lessc;
+$less = new \app\models\Mylessc;
 $less->setFormatter("compressed");
 
 $less->setVariables(array(
     "rojo" => "red",
+    "azul" => "blue",
     "base" => "960px"
   ));
-$files = $files = glob(\FOLDERS\LESS . '*.{less}', GLOB_BRACE);
-foreach($files as $file) {
-  $filename = explode('/', $file);
-  end($filename);
-  $filename = explode('.', pos($filename));
-  reset($filename);
-//AKI :: error al convertir less a css
-  $less->checkedCompile(\FOLDERS\LESS . "main.less", \FOLDERS\CSS . $filename[0] . ".min.css");
-}
+
+$less->compileFolder(\FOLDERS\LESS, \FOLDERS\CSS);

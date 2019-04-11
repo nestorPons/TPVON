@@ -5,9 +5,6 @@
 
 use MatthiasMullie\Minify;
 
-$minifier_CSS = new Minify\CSS(\FOLDERS\CSS . 'main.css');
-$minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css');
-
 $minifier_JS = new Minify\JS();
 if ($folder = opendir(\FOLDERS\JS)) {
     while (false !== ($file = readdir($folder))) {
@@ -17,7 +14,6 @@ if ($folder = opendir(\FOLDERS\JS)) {
             $minifier_JS->add(\FOLDERS\JS . $file);
             $minifier_JS->minify(\FOLDERS\JS . "{$ext[0]}.min.js");
         }
-
     }
 }
 
