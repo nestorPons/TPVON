@@ -1,1 +1,1 @@
-a:4:{s:4:"root";s:36:"/var/www/html/app/src/less/main.less";s:8:"compiled";s:22:"body{background:blue;}";s:5:"files";a:1:{s:36:"/var/www/html/app/src/less/main.less";i:1554971173;}s:7:"updated";i:1554971196;}
+a:4:{s:4:"root";s:36:"/var/www/html/app/src/less/main.less";s:8:"compiled";s:42:"body{display:flex;justify-content:center;}";s:5:"files";a:1:{s:36:"/var/www/html/app/src/less/main.less";i:1554984489;}s:7:"updated";i:1554984491;}

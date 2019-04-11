@@ -1,5 +1,5 @@
 var message = "Hello World this is watch mode";
-document.write(message);
+document.write();
 function mifuncion() {
     var prueba = 'prueba';
 }

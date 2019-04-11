@@ -1,11 +1,21 @@
-<?php
+<?php use MatthiasMullie\Minify;
 // Script para comprimir los ficheros css y js
 // Carpetas de trabajo /htdocs/css y /htdocs/js
 // Carpeta con archivos compilados /htdocs/build
 
-use MatthiasMullie\Minify;
+function checkedCompile($in, $out) {
+    return (!is_file($out) || filemtime($in) > filemtime($out));
+}
 
-$minifier_JS = new Minify\JS();
+if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
+    $minifier_CSS = new Minify\CSS(
+        \FOLDERS\CSS . 'mini.css',
+        \FOLDERS\CSS . 'main.css'
+    );
+    $minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css'); 
+}
+
+$minifier_JS = new Minify\JS;
 if ($folder = opendir(\FOLDERS\JS)) {
     while (false !== ($file = readdir($folder))) {
         // Comprobamos que sea un archivo js 
