@@ -1,12 +1,12 @@
 <?php
 function pr($arr){
     echo('<pre>');
-    var_dump($arr);
+    print_r($arr);
     echo('</pre>');
 }
 function prs($arr){
     echo('<pre>');
-    var_dump($arr);
+    print_r($arr);
     echo('</pre>');
     die();
 }

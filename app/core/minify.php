@@ -14,16 +14,23 @@ if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
     );
     $minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css'); 
 }
-
-if ($folder = opendir(\FOLDERS\JS)) {
-    while (false !== ($file = readdir($folder))) {
-        // Comprobamos que sea un archivo js 
-        $ext = explode('.',$file);
-        if(isset($ext[1]) && $ext[1] === 'js'){
-            if(checkedCompile(\FOLDERS\JS . $file, \FOLDERS\JS . "{$ext[0]}.min.js")){
-                $minifier_JS = new Minify\JS(\FOLDERS\JS . $file);
-                $minifier_JS->minify(\FOLDERS\JS . "{$ext[0]}.min.js");
+function listar($path){
+    if ($folder = opendir($path)) {
+        while (false !== ($file = readdir($folder))) {
+            // Filtramos directorios padres
+            if($file != '..' && $file != '.' ){
+                // Comprobamos si es un archivo
+                if(is_dir($path.$file)) listar($path.$file.'/'); 
+                // Comprobamos que sea un archivo js 
+                $ext = explode('.',$file);
+                if(isset($ext[1]) && $ext[1] === 'js'){
+                    if(checkedCompile($path . $file, $path . "{$ext[0]}.min.js")){
+                        $minifier_JS = new Minify\JS($path . $file);
+                        $minifier_JS->minify($path . "{$ext[0]}.min.js");
+                    }
+                }
             }
         }
     }
 }
+listar(\FOLDERS\JS);
