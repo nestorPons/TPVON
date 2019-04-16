@@ -4,12 +4,13 @@
  */
 class Login extends Controller{
 
-    function __construct(String $db, String $controller, String $action){    
-        parent::__construct($controller, $action);
+    function __construct(String $action = null, String $db = null){
+        $this->company = new \app\models\Company($db);      
+        parent::__construct($action);
         // $this->setConnection($db); // inicializa $this->Query
     }
     protected function getView( Array $data = []){
-        return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page' => 'login.phtml']);
+        return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page' => 'login', 'data' => $this->company]);
     }
     public function getModel(){}
     public function setModel(){}

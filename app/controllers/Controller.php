@@ -12,9 +12,9 @@ class Controller{
         $controller,
         $action;
     
-    function __construct(String $controller, String $action){
-        $this->controller = $controller; 
+    function __construct(String $action){
         $this->action = $action;
+        $this->getController(); 
 
         // Constructor alternativo básico
         switch($this->action){
@@ -45,5 +45,10 @@ class Controller{
     }
     protected function setModel(){
 
+    }
+    private function getController(){
+        $arr_controller= explode('\\',get_class($this));
+        $controller = end($arr_controller);
+        return $this->controller = strtolower($controller);
     }
 }

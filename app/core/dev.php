@@ -10,4 +10,7 @@ function prs($arr){
     echo('</pre>');
     die();
 }
+function myutils(string $name = '', array $args = []){
+    require //AKI :::  
+}
 const BR = '</br>';

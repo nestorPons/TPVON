@@ -898,3 +898,247 @@ Stack trace:
 #4 {main}
   thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
 [09-Apr-2019 12:43:54 UTC] PHP Notice:  Undefined index: PMA_PMADB in /var/www/html/htdocs/app.php on line 3
+[15-Apr-2019 08:10:31 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Error' not found in /var/www/html/app/core/Router.php:59
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 59
+[15-Apr-2019 08:11:20 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Error' not found in /var/www/html/app/core/Router.php:59
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 59
+[15-Apr-2019 08:13:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\core\toString() in /var/www/html/app/core/Router.php:59
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 59
+[15-Apr-2019 08:13:55 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'err' in /var/www/html/app/core/Error.php:84
+Stack trace:
+#0 /var/www/html/app/core/Router.php(59): app\core\Error::toString('E000')
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#2 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Error.php on line 84
+[15-Apr-2019 08:49:10 UTC] PHP Notice:  Undefined variable: class in /var/www/html/app/core/Router.php on line 66
+[15-Apr-2019 08:49:10 UTC] PHP Fatal error:  Uncaught Error: Class '\app\controllers\' not found in /var/www/html/app/core/Router.php:67
+Stack trace:
+#0 /var/www/html/app/core/Router.php(58): app\core\Router->loadController('Newcompany')
+#1 /var/www/html/app/core/Router.php(38): app\core\Router->isController('newcompany')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Router.php on line 67
+[15-Apr-2019 08:58:02 UTC] PHP Notice:  Undefined index: ar2 in /var/www/html/app/core/Router.php on line 44
+[15-Apr-2019 08:58:02 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::isController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 44 and defined in /var/www/html/app/core/Router.php:54
+Stack trace:
+#0 /var/www/html/app/core/Router.php(44): app\core\Router->isController(NULL)
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#2 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 54
+[15-Apr-2019 13:21:19 UTC] PHP Notice:  Undefined index: ar1 in /var/www/html/app/core/Router.php on line 38
+[15-Apr-2019 13:21:54 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/app/core/Router.php on line 53
+[15-Apr-2019 13:31:35 UTC] PHP Notice:  Undefined index: controller in /var/www/html/app/core/Router.php on line 29
+[15-Apr-2019 13:31:35 UTC] PHP Notice:  Undefined index: gate_index in /var/www/html/app/core/Router.php on line 52
+[15-Apr-2019 13:31:35 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::loadController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 52 and defined in /var/www/html/app/core/Router.php:66
+Stack trace:
+#0 /var/www/html/app/core/Router.php(52): app\core\Router->loadController(NULL)
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->getParams(Array)
+#2 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 66
+[15-Apr-2019 13:38:51 UTC] PHP Warning:  Use of undefined constant REQUEST_METHOD - assumed 'REQUEST_METHOD' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 28
+[15-Apr-2019 13:38:51 UTC] PHP Notice:  Undefined variable: HTTP_SERVER_VARS in /var/www/html/app/core/Router.php on line 28
+[15-Apr-2019 13:39:06 UTC] PHP Notice:  Undefined variable: HTTP_SERVER_VARS in /var/www/html/app/core/Router.php on line 28
+[16-Apr-2019 07:55:50 UTC] PHP Notice:  Undefined variable: REQ in /var/www/html/app/core/Router.php on line 39
+[16-Apr-2019 08:09:55 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/core/Router.php on line 36
+[16-Apr-2019 08:09:55 UTC] PHP Parse error:  syntax error, unexpected '}', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /var/www/html/app/controllers/Index.php on line 11
+[16-Apr-2019 08:15:19 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/core/Router.php on line 36
+[16-Apr-2019 08:15:19 UTC] PHP Parse error:  syntax error, unexpected '}', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /var/www/html/app/controllers/Index.php on line 11
+[16-Apr-2019 08:24:09 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/core/Router.php on line 36
+[16-Apr-2019 08:24:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::require() must be of the type array, string given, called in /var/www/html/app/controllers/Main.php on line 13 and defined in /var/www/html/app/controllers/Controller.php:40
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(13): app\controllers\Controller->require('/var/www/html/a...', 'login')
+#1 /var/www/html/app/controllers/Main.php(10): app\controllers\Main->getView()
+#2 /var/www/html/app/core/Router.php(88): app\controllers\Main->__construct('view', '')
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController('Main')
+#4 /var/www/html/app/core/Router.php(36): app\core\Router->getParams(NULL)
+#5 /var/www/html/app/core/Router.php(30): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 40
+[16-Apr-2019 08:28:02 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/core/Router.php on line 35
+[16-Apr-2019 08:28:02 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::loadController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 69 and defined in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(69): app\core\Router->loadController(NULL)
+#1 /var/www/html/app/core/Router.php(35): app\core\Router->getParams(NULL)
+#2 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[16-Apr-2019 08:29:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Router::existDb() in /var/www/html/app/core/Router.php:35
+Stack trace:
+#0 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#1 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 35
+[16-Apr-2019 08:30:30 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::loadController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 49 and defined in /var/www/html/app/core/Router.php:79
+Stack trace:
+#0 /var/www/html/app/core/Router.php(49): app\core\Router->loadController(NULL)
+#1 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#2 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 79
+[16-Apr-2019 08:33:15 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Main' not found in /var/www/html/app/core/Router.php:49
+Stack trace:
+#0 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#1 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 49
+[16-Apr-2019 08:33:30 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\Main' not found in /var/www/html/app/core/Router.php:49
+Stack trace:
+#0 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#1 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 49
+[16-Apr-2019 08:33:58 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::require() must be of the type array, bool given, called in /var/www/html/app/controllers/Main.php on line 13 and defined in /var/www/html/app/controllers/Controller.php:40
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(13): app\controllers\Controller->require('/var/www/html/a...', false)
+#1 /var/www/html/app/controllers/Main.php(10): app\controllers\Main->getView()
+#2 /var/www/html/app/core/Router.php(49): app\controllers\Main->__construct('main')
+#3 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 40
+[16-Apr-2019 08:34:49 UTC] PHP Warning:  include_once(/var/www/html/htdocs) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: Success in /var/www/html/app/views/index.phtml on line 21
+[16-Apr-2019 08:34:49 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 21
+[16-Apr-2019 08:35:14 UTC] PHP Warning:  include_once(/var/www/html/htdocs) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: Success in /var/www/html/app/views/index.phtml on line 21
+[16-Apr-2019 08:35:14 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 21
+[16-Apr-2019 08:35:51 UTC] PHP Warning:  include_once(phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 21
+[16-Apr-2019 08:35:51 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening 'phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 21
+[16-Apr-2019 08:37:10 UTC] PHP Warning:  include_once(phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[16-Apr-2019 08:37:10 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening 'phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[16-Apr-2019 08:37:59 UTC] PHP Warning:  include_once(mainphtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[16-Apr-2019 08:37:59 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening 'mainphtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[16-Apr-2019 08:53:14 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Newcompany::__construct() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 87 and defined in /var/www/html/app/controllers/Newcompany.php:7
+Stack trace:
+#0 /var/www/html/app/core/Router.php(87): app\controllers\Newcompany->__construct('view', NULL)
+#1 /var/www/html/app/core/Router.php(50): app\core\Router->loadController('Newcompany')
+#2 /var/www/html/app/core/Router.php(29): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Newcompany.php on line 7
+[16-Apr-2019 09:43:02 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/app/core/Router.php on line 40
+[16-Apr-2019 09:44:06 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::require() must be of the type array, string given, called in /var/www/html/app/controllers/Main.php on line 13 and defined in /var/www/html/app/controllers/Controller.php:40
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(13): app\controllers\Controller->require('/var/www/html/a...', 'main')
+#1 /var/www/html/app/controllers/Main.php(10): app\controllers\Main->getView()
+#2 /var/www/html/app/core/Router.php(94): app\controllers\Main->__construct(NULL, Array, NULL)
+#3 /var/www/html/app/core/Router.php(39): app\core\Router->loadController('Main')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 40
+[16-Apr-2019 09:47:10 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::isController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 46 and defined in /var/www/html/app/core/Router.php:91
+Stack trace:
+#0 /var/www/html/app/core/Router.php(46): app\core\Router->isController(NULL)
+#1 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#2 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 91
+[16-Apr-2019 09:55:07 UTC] PHP Warning:  include(/var/www/html/vendor/composer/../../app/core/Router.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/vendor/composer/ClassLoader.php on line 444
+[16-Apr-2019 09:55:07 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/vendor/composer/../../app/core/Router.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/vendor/composer/ClassLoader.php on line 444
+[16-Apr-2019 09:55:07 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Router' not found in /var/www/html/htdocs/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/htdocs/index.php on line 12
+[16-Apr-2019 09:55:17 UTC] PHP Warning:  include(/var/www/html/vendor/composer/../../app/core/Router.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/vendor/composer/ClassLoader.php on line 444
+[16-Apr-2019 09:55:17 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/vendor/composer/../../app/core/Router.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/vendor/composer/ClassLoader.php on line 444
+[16-Apr-2019 09:55:17 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Router' not found in /var/www/html/htdocs/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/htdocs/index.php on line 12
+[16-Apr-2019 09:56:28 UTC] PHP Warning:  include(/var/www/html/vendor/composer/../../app/core/Router.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/vendor/composer/ClassLoader.php on line 444
+[16-Apr-2019 09:56:28 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/vendor/composer/../../app/core/Router.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/vendor/composer/ClassLoader.php on line 444
+[16-Apr-2019 09:56:28 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Router' not found in /var/www/html/htdocs/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/htdocs/index.php on line 12
+[16-Apr-2019 09:58:01 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::__construct() must be of the type string, null given, called in /var/www/html/app/controllers/Newcompany.php on line 8 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/controllers/Newcompany.php(8): app\controllers\Controller->__construct(NULL, 'newcompany')
+#1 /var/www/html/app/core/Router.php(76): app\controllers\Newcompany->__construct(NULL, 'newcompany', 'view')
+#2 /var/www/html/app/core/Router.php(39): app\core\Router->loadController('Newcompany')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[16-Apr-2019 10:05:35 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::isController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 46 and defined in /var/www/html/app/core/Router.php:60
+Stack trace:
+#0 /var/www/html/app/core/Router.php(46): app\core\Router->isController(NULL)
+#1 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#2 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 60
+[16-Apr-2019 10:08:55 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Router::isController() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 45 and defined in /var/www/html/app/core/Router.php:60
+Stack trace:
+#0 /var/www/html/app/core/Router.php(45): app\core\Router->isController(NULL)
+#1 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#2 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 60
+[16-Apr-2019 10:09:10 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /var/www/html/app/core/Router.php on line 45
+[16-Apr-2019 10:10:04 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Login::__construct() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Login.php:7
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Login->__construct('empresa', 'login', NULL)
+#1 /var/www/html/app/core/Router.php(46): app\core\Router->loadController('Login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 7
+[16-Apr-2019 10:10:37 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Login::__construct() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Login.php:7
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Login->__construct('empresa', 'login', NULL)
+#1 /var/www/html/app/core/Router.php(46): app\core\Router->loadController('Login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 7
+[16-Apr-2019 10:22:55 UTC] PHP Notice:  Only variables should be passed by reference in /var/www/html/app/controllers/Controller.php on line 50
+[16-Apr-2019 10:23:09 UTC] PHP Notice:  Only variables should be passed by reference in /var/www/html/app/controllers/Controller.php on line 50
+[16-Apr-2019 10:30:23 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::__construct() must be of the type string, null given, called in /var/www/html/app/controllers/Newcompany.php on line 8 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/controllers/Newcompany.php(8): app\controllers\Controller->__construct(NULL)
+#1 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('view', NULL)
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[16-Apr-2019 10:30:23 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::__construct() must be of the type string, null given, called in /var/www/html/app/controllers/Newcompany.php on line 8 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/controllers/Newcompany.php(8): app\controllers\Controller->__construct(NULL)
+#1 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('view', NULL)
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[16-Apr-2019 10:30:25 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::__construct() must be of the type string, null given, called in /var/www/html/app/controllers/Newcompany.php on line 8 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/controllers/Newcompany.php(8): app\controllers\Controller->__construct(NULL)
+#1 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('view', NULL)
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(12): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[16-Apr-2019 10:53:30 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[16-Apr-2019 10:53:32 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[16-Apr-2019 11:17:58 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[16-Apr-2019 11:18:20 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[16-Apr-2019 13:41:55 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
