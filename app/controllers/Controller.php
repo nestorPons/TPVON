@@ -12,12 +12,21 @@ class Controller{
         $controller,
         $action;
     
-    function __construct(String $action){
+    function __construct(String $action, String $controller = null, String $data = null){
         $this->action = $action;
-        $this->getController(); 
-
+        $this->controller = $controller ?? $this->getController();  
+        
         // Constructor alternativo básico
         switch($this->action){
+            case 'new': 
+                $this->new($data);
+                break;
+            case 'del': 
+                $this->del();
+                break;
+            case 'save': 
+                $this->save();
+                break;
             case 'get':
                 $this->setModel();
                 break;
@@ -40,8 +49,17 @@ class Controller{
     protected function require(String $route, Array $data = []){
         return require_once $route;  
     }
-    protected function getModel(){
+    protected function new(String $dataJSON = ''){
+        $data = json_decode($dataJSON, true);
+ 
+        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
+        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
+        if(file_exists($fileModel)){
+            $model = new $nameModel($this->action);
+            return $model->new($data); 
+        }
 
+        return false;
     }
     protected function setModel(){
 
@@ -49,6 +67,6 @@ class Controller{
     private function getController(){
         $arr_controller= explode('\\',get_class($this));
         $controller = end($arr_controller);
-        return $this->controller = strtolower($controller);
+        return strtolower($controller);
     }
 }

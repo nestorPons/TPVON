@@ -28,7 +28,9 @@ class Conn{
      */
     protected function connect(){
         $this->credentials = parse_ini_file('../app/config/conn.ini');
-        $dsn = 'mysql:dbname=' . $this->credentials["prefix"] . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
+        if (empty($this->prefix)) $this->prefix = $this->credentials["prefix"]; 
+        
+        $dsn = 'mysql:dbname=' . $this->prefix . '_' . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
 
         try {
             $this->pdo = new \PDO(
@@ -45,7 +47,7 @@ class Conn{
             return $this->pdo; 
         }
         catch (\PDOException $e){      
-
+            echo "ERROR == ";
             error_log($this->error = $e->getMessage(),0);
             echo $dsn .'//'. $this->user; 
             return $this->error; 

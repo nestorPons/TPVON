@@ -1,0 +1,21 @@
+<?php 
+$prefix = "div";
+$id = $prefix . ($data['id']??randomid());
+?>
+<div id="<?=$id?>" class="col-sm-12 col-md-12">
+    <label>Sector</label> 
+    <select name="sector" class="collapse" required="" > 
+        <option value="" selected hidden disabled>Seleccione un sector...</option>
+        <option value="1">Peluquería</option>	
+        <option value="2">Estética</option>
+        <option value="3">Masaje</option>
+        <option value="4">Otros ...</option>	
+    </select> 
+    <script>
+        var el = document.getElementById('<?=$id?>')
+    </script>
+    <style>
+        #<?=$id?> select{
+        }
+    </style>
+</div>

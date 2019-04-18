@@ -15,6 +15,7 @@ class Query extends Conn{
     function __construct($db, $table, $user = 'root') {   
         $this->table = $table;  
         $this->conn = parent::__construct($db, $table, $user);
+        return gettype($this->conn) === 'object';
      }
     function __destruct(){
         $this->conn = null;
@@ -35,19 +36,19 @@ class Query extends Conn{
         }
     }
     // Devolvemos la conexión
-    function getConnect() {
+    public function getConnect() {
         return $this->conn;
      }
     // Devuelve todos los registros de una tabla
-    function getAll(string $return = '*', $desc = false){
+    public function getAll(string $return = '*', $desc = false){
         return $this->sendQuery("SELECT $return FROM {$this->table} order_by;", $desc);
      }
     // Devuelve datos de una peticion por id
-    function getById(int $id, string $return = '*'){
+    public function getById(int $id, string $return = '*'){
         return $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
      }
     // Devuelve datos de una peticion por algun campo del registro
-    function getBy(array $args , string $return = '*', bool $desc = false){
+    public function getBy(array $args , string $return = '*', bool $desc = false){
         $filters = '';
         foreach($args as $column => $value){
             $filters .= (string)$column ." = '".(string)$value ."' AND ";
@@ -91,7 +92,7 @@ class Query extends Conn{
         $strPre = trim($strPre , ',') ;
         $this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params);
         return $this->lastInsertId();
-    }
+     }
     // Edita registro mediante su id
     public function saveById ( Int $id , Array $args = null ) {
         $sql = $this->getSQLUpdate($args, "id=$id");

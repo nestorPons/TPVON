@@ -1,6 +1,6 @@
-//app.post({'controller':'micontrolador'})
+// Comportamientos generales de nuestros componentes de la aplicacion
 // Nuevo comportamiento de los links
-$('a').on('click', function (e) {
+$(document).on('click', 'a', function (e) {
     e.preventDefault();
     var section = $(this).attr('href');
     if ($('section#' + section).length) {
@@ -9,5 +9,13 @@ $('a').on('click', function (e) {
     app.get({
         controller: section,
         action: 'view'
+    });
+})
+    .on('submit', 'form', function (e, i) {
+    e.preventDefault();
+    app.post({
+        controller: $(this).attr('controller'),
+        action: $(this).attr('action'),
+        data: app.toJSONString(e.currentTarget)
     });
 });

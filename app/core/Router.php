@@ -21,7 +21,7 @@ class Router{
         $action;
 
     function __construct($params = []){
-        
+
         // Valores por defecto
         $this->db = $params['db'] ?? null; 
         $this->controller =  $params['controller'] ?? null; 
@@ -61,21 +61,19 @@ class Router{
 
     }
     private function isController(string $arg){
-        if(!empty($arg)){
-            $class = ucwords($arg); 
-            // Carga la clase controladora
-            if(file_exists ( \FOLDERS\CONTROLLERS . $class . '.php')){
-                return $this->loadController($class);
-            }
-        }
-        return false;
+        $class = ucwords($arg); 
+        // Carga la clase controladora
+        return (file_exists ( \FOLDERS\CONTROLLERS . $class . '.php'));
     }
-
     private function loadController(string $arg){
         $arg = ucwords($arg);
         $this->controller = strtolower(trim($arg));   
         $nameClass = '\\app\\controllers\\' . $arg;
-        new $nameClass($this->action, $this->db);
+        if($this->isController($this->controller))
+            new $nameClass($this->action, $this->db);
+        else 
+            new \app\controllers\Controller($this->action, $this->controller, $this->data);
+        
         return true; 
     }
     /**

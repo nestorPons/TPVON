@@ -1,7 +1,11 @@
+@disabled-color: #999;
+@font-color: #333;
 :root{
   
 }
-
+::placeholder, :disabled, select {
+  color: @disabled-color;
+}
 body{ 
   display: flex;
   justify-content: center;
@@ -22,5 +26,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  select{
+      &:focus{
+        color: @font-color; 
+      }
+      option{
+        color: black;
+      }
   }
 }

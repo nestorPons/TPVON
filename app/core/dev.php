@@ -1,4 +1,5 @@
 <?php
+const BR = '</br>';
 function pr($arr){
     echo('<pre>');
     print_r($arr);
@@ -10,7 +11,10 @@ function prs($arr){
     echo('</pre>');
     die();
 }
-function myutils(string $name = '', array $args = []){
-    require //AKI :::  
+function loadUtils(string $nameUtil = '', array $data = []){
+    include \FOLDERS\VIEWS . 'utils/' . $nameUtil . '.phtml';  
 }
-const BR = '</br>';
+
+function randomid(string $prefix = ''){
+    return  uniqid($prefix, true);
+}

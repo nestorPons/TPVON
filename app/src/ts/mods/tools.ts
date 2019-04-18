@@ -13,20 +13,9 @@ var $y = function($arg: string = ''): any{
 
 var app = {
      post(data: object){
-        fetch('/index.php')
-        .then(function(response: any){
-            console.log('response.ok: ', response.ok)
-            if(response.ok) {
-                response.text().then(function(txt: string){
-                console.log('muestro respuesta: ', txt)
-                });
-            } else {
-                console.log('muestor error', 'status code: ' + response.status)
-            }
-        })
-        .catch(function(){
-            console.log('muestor error', 'status code: 000')
-        })
+        $.post('index.php', data, function(html){
+
+        }, 'json')
      },
      get(data: any){
         if (typeof data.controller === 'undefined') return false
@@ -67,5 +56,23 @@ var app = {
             $('section').fadeOut()
             $('section#'+section).fadeIn()
          }
+     },
+     toJSONString( form: any ) {
+         var obj = {};
+         var elements = form.querySelectorAll( "input, select, textarea" );
+         for( var i = 0; i < elements.length; ++i ) {
+             var element = elements[i];
+             var name = element.name;
+             var value = element.value;
+             
+             if( name ) {
+                 obj[name] = value;
+             }
+         }
+    
+         return JSON.stringify( obj );
      }
+
  }
+
+

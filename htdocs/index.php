@@ -1,6 +1,5 @@
 <?php
 //phpinfo();die();
-if(isset($_POST['controller'])) die('Solicita controlador');
 
 require_once dirname(__DIR__) . '/app/config/folders.php';
 require_once dirname(__DIR__) . '/app/config/app.php';

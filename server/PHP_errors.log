@@ -1142,3 +1142,282 @@ Stack trace:
 [16-Apr-2019 11:17:58 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
 [16-Apr-2019 11:18:20 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
 [16-Apr-2019 13:41:55 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[17-Apr-2019 08:05:14 UTC] PHP Warning:  include(/var/www/html/app/views/utils/sel-sector.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/dev.php on line 15
+[17-Apr-2019 08:05:14 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/utils/sel-sector.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/dev.php on line 15
+[17-Apr-2019 08:33:53 UTC] PHP Fatal error:  Uncaught Exception: parse error: failed at `color: ;` /var/www/html/app/src/less/main.less on line 5 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3556
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2367): lessc_parser->throwError()
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse(':root{\n  \n}\n::p...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile(':root{\n  \n}\n::p...', '/var/www/html/a...')
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#4 /var/www/html/app/models/Mylessc.php(23): lessc->cachedCompile(Array)
+#5 /var/www/html/app/models/Mylessc.php(12): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/app/core/less.php(11): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(9): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3556
+[17-Apr-2019 08:57:26 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/views/utils/sel-sectors.phtml on line 3
+[17-Apr-2019 10:36:05 UTC] PHP Warning:  include(/var/www/html/app/views/utils/input-text.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/dev.php on line 15
+[17-Apr-2019 10:36:05 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/utils/input-text.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/dev.php on line 15
+[17-Apr-2019 11:05:42 UTC] PHP Fatal error:  Uncaught Error: Call to private method app\controllers\Newcompany::new() from context 'app\controllers\Controller' in /var/www/html/app/controllers/Controller.php:22
+Stack trace:
+#0 /var/www/html/app/controllers/Newcompany.php(7): app\controllers\Controller->__construct('new')
+#1 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('new', NULL)
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 22
+[17-Apr-2019 11:11:48 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_admin_empresas'
+[17-Apr-2019 11:13:13 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_admin_empresas'
+[17-Apr-2019 11:13:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:63
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(29): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(43): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Newcompany.php(11): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Newcompany->new()
+#5 /var/www/html/app/controllers/Newcompany.php(7): app\controllers\Controller->__construct('new')
+#6 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('new', NULL)
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 63
+[17-Apr-2019 11:14:42 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_admin_empresas'
+[17-Apr-2019 11:14:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:63
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(29): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(43): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Newcompany.php(11): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Newcompany->new()
+#5 /var/www/html/app/controllers/Newcompany.php(7): app\controllers\Controller->__construct('new')
+#6 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('new', NULL)
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 63
+[17-Apr-2019 11:14:58 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_admin_empresas'
+[17-Apr-2019 11:14:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:63
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(29): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(43): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Newcompany.php(11): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Newcompany->new()
+#5 /var/www/html/app/controllers/Newcompany.php(7): app\controllers\Controller->__construct('new')
+#6 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('new', NULL)
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 63
+[17-Apr-2019 11:20:56 UTC] SQLSTATE[HY000] [1049] Unknown database 'adminempresas'
+[17-Apr-2019 11:20:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:65
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(127): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(29): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(43): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Newcompany.php(11): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Newcompany->new()
+#5 /var/www/html/app/controllers/Newcompany.php(7): app\controllers\Controller->__construct('new')
+#6 /var/www/html/app/core/Router.php(78): app\controllers\Newcompany->__construct('new', NULL)
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 65
+[17-Apr-2019 12:30:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::__construct() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 81 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/core/Router.php(81): app\controllers\Controller->__construct(NULL, 'main')
+#1 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Main')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[17-Apr-2019 12:35:13 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in /var/www/html/app/core/Router.php on line 75
+[17-Apr-2019 12:40:35 UTC] PHP Fatal error:  Uncaught Error: Class '/var/www/html/app/models/Companies.php' not found in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Array)
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies')
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[17-Apr-2019 12:41:16 UTC] PHP Fatal error:  Uncaught Error: Class '/var/www/html/app/models/Companies.php' not found in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Array)
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies')
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[17-Apr-2019 13:02:06 UTC] PHP Fatal error:  Uncaught Error: Class '\app\controllers\Companies.php' not found in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Array)
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies')
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[17-Apr-2019 13:03:56 UTC] PHP Fatal error:  Uncaught Error: Class '\app\controllers\Companies.php' not found in /var/www/html/app/controllers/Controller.php:58
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Array)
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies')
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 58
+[17-Apr-2019 13:04:11 UTC] PHP Fatal error:  Uncaught Error: Class '\app\models\Companies.php' not found in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Array)
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies')
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[17-Apr-2019 13:08:48 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type array, null given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', NULL)
+#1 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[17-Apr-2019 13:08:51 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type array, null given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('view', 'newcompany', NULL)
+#1 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[17-Apr-2019 13:10:13 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type array or null, string given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', 'nombre=ds&NIF=d...')
+#1 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[17-Apr-2019 13:10:56 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type array or null, string given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', 'nombre=ds&NIF=d...')
+#1 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[17-Apr-2019 13:16:11 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::new() must be of the type string, array given, called in /var/www/html/app/controllers/Controller.php on line 22 and defined in /var/www/html/app/controllers/Controller.php:52
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Array)
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', Array)
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 52
+[17-Apr-2019 13:16:23 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type array or null, string given, called in /var/www/html/app/core/Router.php on line 75 and defined in /var/www/html/app/controllers/Controller.php:15
+Stack trace:
+#0 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', 'nombre=dsdsadsa...')
+#1 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 15
+[17-Apr-2019 13:16:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\controllers\vardump() in /var/www/html/app/controllers/Controller.php:53
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('nombre=dsdsadsa...')
+#1 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', 'nombre=dsdsadsa...')
+#2 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 53
+[17-Apr-2019 13:17:03 UTC] PHP Deprecated:  parse_str() [<a href='0function.parse-str0'>function.parse-str0</a>]: Calling parse_str() without the result argument is deprecated in /var/www/html/app/controllers/Controller.php on line 54
+[17-Apr-2019 13:17:03 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/controllers/Controller.php on line 60
+[17-Apr-2019 13:17:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 60 and defined in /var/www/html/app/models/Companies.php:17
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(60): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('nombre=dsdsadsa...')
+#2 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', 'nombre=dsdsadsa...')
+#3 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 17
+[17-Apr-2019 13:18:46 UTC] PHP Deprecated:  parse_str() [<a href='0function.parse-str0'>function.parse-str0</a>]: Calling parse_str() without the result argument is deprecated in /var/www/html/app/controllers/Controller.php on line 54
+[17-Apr-2019 13:18:46 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/controllers/Controller.php on line 60
+[17-Apr-2019 13:18:46 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 60 and defined in /var/www/html/app/models/Companies.php:17
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(60): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('"nombre=dsad&NI...')
+#2 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '"nombre=dsad&NI...')
+#3 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 17
+[17-Apr-2019 13:19:09 UTC] PHP Deprecated:  parse_str() [<a href='0function.parse-str0'>function.parse-str0</a>]: Calling parse_str() without the result argument is deprecated in /var/www/html/app/controllers/Controller.php on line 54
+[17-Apr-2019 13:19:09 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/controllers/Controller.php on line 60
+[17-Apr-2019 13:19:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 60 and defined in /var/www/html/app/models/Companies.php:17
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(60): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('[{"name":"nombr...')
+#2 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '[{"name":"nombr...')
+#3 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 17
+[17-Apr-2019 13:36:47 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be of the type array, object given, called in /var/www/html/app/controllers/Controller.php on line 59 and defined in /var/www/html/app/models/Companies.php:17
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Object(stdClass))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"dsad...')
+#2 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"dsad...')
+#3 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 17
+[17-Apr-2019 13:37:54 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be of the type array, object given, called in /var/www/html/app/controllers/Controller.php on line 58 and defined in /var/www/html/app/models/Companies.php:17
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(58): app\models\Companies->new(Object(stdClass))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"dsad...')
+#2 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"dsad...')
+#3 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 17
+[17-Apr-2019 13:40:12 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /var/www/html/app/models/Companies.php:19
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Object(stdClass))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"dsad...')
+#2 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"dsad...')
+#3 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 19
+[17-Apr-2019 13:41:39 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'NIF' in 'field list' in /var/www/html/app/core/Conn.php:65
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(65): PDO->prepare('INSERT INTO emp...')
+#1 /var/www/html/app/core/Conn.php(127): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(20): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"dsad...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"dsad...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 65
