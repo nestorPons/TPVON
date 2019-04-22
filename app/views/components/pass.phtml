@@ -1,0 +1,14 @@
+<?php $id = $data['id']??randomid('input')?>
+<div class="row" id="<?=$id?>">
+    <div class="col-sm-12 col-md-12">
+        <input 
+            type="password" 
+            id="<?='input_'.$id?>" 
+            class="collapse" 
+            placeholder="<?=ucfirst($data['placeholder']??'')?>"
+            name="<?=$data['name']?>" 
+            <?=isset($data['require'])?'required':''?> :valid/>
+            
+        <label for="<?='input_'.$id?>"><?=ucfirst($data['lavel']??$data['name'])?></label>
+    </div>
+</div>

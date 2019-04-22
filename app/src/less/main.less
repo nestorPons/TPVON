@@ -1,38 +1,70 @@
-@disabled-color: #999;
 @font-color: #333;
-:root{
-  
+@disabled-color: #999;
+*{
+  -moz-user-select: none; 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
 }
-::placeholder, :disabled, select {
-  color: @disabled-color;
+button{
+  background: transparent !important;
+  border: 1px solid var(--button-back-color) !important;
+  color: var(--button-back-color) !important;
+  &:hover{
+    background: var(--button-back-color) !important;
+    color: var(--back-color) !important;
+  }
 }
 body{ 
   display: flex;
   justify-content: center;
-  form{
-    background-color: white;
-  }
+}
+form{
+  background-color: white;
+}
+label{
+  font-size: 0.8rem;
+}
+.container{
+  padding: var(--universal-padding) ;
+}
+.collapse{
+  // añadido centrado del contenido al collapse del fraemwork
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+select{
+    &:focus{
+      color: @font-color; 
+    }
+    option{
+      color: @font-color;
+    }
+}
+.row{
+  position: relative;
   label{
-    font-size: 0.8rem;
+    z-index: 1;
+    position: absolute;
+    top: 16px;
+    left: var(--universal-margin);
+    color: @disabled-color;
   }
-  button{
-
-  }
-  .container{
-    padding: var(--universal-padding) ;
-  }
-  .collapse{
-    // añadido centrado del contenido al collapse del fraemwork
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  select{
-      &:focus{
-        color: @font-color; 
+  select, textarea, input:not([type="button"]):not([type="submit"]):not([type="reset"]){
+    z-index: 2;
+    background-color: transparent; 
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    &:focus, &:valid{
+      outline:0px;
+      & + label{
+        transition: transform 1s;
+        transform: translateY(-22px) scale(0.9);
       }
-      option{
-        color: black;
-      }
+    }
   }
 }
+

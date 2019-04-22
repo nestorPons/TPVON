@@ -3,21 +3,21 @@
 ">
     <form>
     <fieldset  class="container">
-        <legend>Login <?= NOMBRE EMPRESA ?></legend>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="username">Username</label>
-                <input type="text" class="collapse" id="Username" placeholder="Username"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Password</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
-            </div>
-        </div>
+        <legend>Login <?=$data->nombre?></legend>
+        <?php component('text', [
+                'label' => 'Email del usuario',
+                'name' => 'email',
+                'options' => 'required'
+        ])?>
+        <?php component('pass', [
+                'label' => 'Contraseña',
+                'name' => 'pass',
+                'options' => 'required'
+        ])?>
+
     </fieldset>
-    <button class="primary collapse">Primary</button>
+    <?php component('btn-success')?>
+    <?php component('btn-cancel')?>
     </form>
 </section>
 <script src="/js/login.min.js"></script>

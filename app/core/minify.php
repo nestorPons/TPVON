@@ -9,7 +9,7 @@ function checkedCompile($in, $out) {
 
 if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
     $minifier_CSS = new Minify\CSS(
-        \FOLDERS\CSS . 'mini.css',
+        \FOLDERS\CSS . 'mini.css', 
         \FOLDERS\CSS . 'main.css'
     );
     $minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css'); 

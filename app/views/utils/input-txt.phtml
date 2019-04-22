@@ -1,7 +1,0 @@
-<div class="row" id="<?=$data['id']??randomid('input')?>">
-    <div class="col-sm-12 col-md-12">
-        <label for="username"><?=ucfirst($data['lavel']??$data['name'])?></label>
-        <input type="text" class="collapse" placeholder="<?=ucfirst($data['placeholder']??'Inserte ' . $data['name'])?>" name="<?=$data['name']?>" 
-        <?=isset($data['require'])?'required':''?>/>
-    </div>
-</div>

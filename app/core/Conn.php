@@ -9,17 +9,15 @@ class Conn{
         $sSQL,
         $sql,
         $credentials,
-        $params, 
+        $params = [], 
         $user,
         $db,
         $table,
         $error;
     
-    function __construct($database, $table, $user){
+    function __construct($database, $user){
         $this->db = $database;
-        $this->table = $table;
-        $this->user = $user; 
-        $this->params = array();
+        $this->user = $user;
         return $this->connect();
     }
     
@@ -39,7 +37,7 @@ class Conn{
                     $this->credentials[$this->user], 
                     [
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
-                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
+                        \PDO::ATTR_EMULATE_PREPARES     => false, //Se usa para desactivar emulación de consultas preparadas
                         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
                         \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
                     ]
@@ -47,21 +45,20 @@ class Conn{
             return $this->pdo; 
         }
         catch (\PDOException $e){      
-            echo "ERROR == ";
-            error_log($this->error = $e->getMessage(),0);
-            echo $dsn .'//'. $this->user; 
-            return $this->error; 
+            return false; 
         }
     }
     function __destruct(){
 		if(!empty($this->error)){
 			echo $this->error;
-		 }
+         }
 		if($this->pdo) $this->pdo = null;
 	 }
 
     private function init($sql, $params = null){
+
         try {
+
             $this->sSQL = $this->pdo->prepare($sql);
             $this->bindMore($params);
 
@@ -79,11 +76,11 @@ class Conn{
                     $this->sSQL->bindValue($value[0], $value[1], $type);
                 }
             }
-            
-            $this->sSQL->execute();
+        
+           $this->sSQL->execute();
         }
         catch (PDOException $e) {
-            error_log($this->error = $e->getMessage(). "\nSQL: ".$sql."\n",0);
+            error_log('ERROR INIT => ' .$this->error = $e->getMessage(). "\nSQL: ".$sql."\n",0);
         }
         
         $this->params = [];
@@ -123,13 +120,14 @@ class Conn{
      */
     
     function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
+
         $this->sql = trim(str_replace("\r", " ", $sql)); 
         $this->init($this->sql, $params);
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
-    
+        
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]);
-        
+
         if ($statement === 'select' || $statement === 'show') {
             return $this->sSQL->fetchAll($fetchmode);
         } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {

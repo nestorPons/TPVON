@@ -7,35 +7,22 @@
  *  Método para añadir/editar/borrar datos a los modelos (abstracto)
  */
 class Controller{
-    protected 
-        $conn,
-        $controller,
-        $action;
+    protected $conn, $controller, $action, $data;
+    public $result = null;
     
-    function __construct(String $action, String $controller = null, String $data = null){
-        $this->action = $action;
-        $this->controller = $controller ?? $this->getController();  
-        
+    function __construct(String $action, String $controller = null, Object $dataJSON = null){
+        $this->action = strtolower($action);
+        $this->controller =strtolower($controller ?? $this->getController());  
+        $this->data = $dataJSON; 
+
         // Constructor alternativo básico
         switch($this->action){
-            case 'new': 
-                $this->new($data);
-                break;
-            case 'del': 
-                $this->del();
-                break;
-            case 'save': 
-                $this->save();
-                break;
-            case 'get':
-                $this->setModel();
-                break;
-            case 'set':
-                $this->getModel();
-                break;
-            case 'view':
-                $this->getView();
-                break; 
+            case 'new':  $this->result = $this->new($this->data); break;
+            case 'del':  $this->result = $this->del($this->data); break;
+            case 'save': $this->result = $this->save($this->data); break;
+            case 'get':  $this->result = $this->setModel(); break;
+            case 'set':  $this->result = $this->getModel(); break;
+            case 'view': $this->result = $this->getView(); break;
             default: 
                 die('Accion no permitida!!');
         }
@@ -44,22 +31,21 @@ class Controller{
         return $this->Query = new \app\core\Query($db, $this->controller);
     }
     protected function getView( Array $data = []){
-        return $this->require(\FOLDERS\VIEWS . strtolower($this->controller) . '.phtml', $data); 
+        return $this->require(\FOLDERS\VIEWS . $this->controller . '.phtml', $data);
     }
-    protected function require(String $route, Array $data = []){
-        return require_once $route;  
+    protected function require(String $route, $arrData = null){
+        $data = new \app\libs\Data($arrData);
+        return require_once $route;
     }
-    protected function new(String $dataJSON = ''){
-        $data = json_decode($dataJSON, true);
- 
+    protected function new(Object $dataJSON = null){
+        $return = false; 
         $nameModel = '\\app\\models\\' . ucfirst($this->controller);
         $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
         if(file_exists($fileModel)){
             $model = new $nameModel($this->action);
-            return $model->new($data); 
+            $respond = $model->new($dataJSON);
         }
-
-        return false;
+        return $respond;
     }
     protected function setModel(){
 

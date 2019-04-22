@@ -2,108 +2,100 @@
     width: 420px; 
 ">
     <form controller="companies" action="new">
-    <fieldset  class="container">
-        <legend>Registro nueva empresa</legend>
-        <?php loadUtils('input-txt', [
-            'name' => 'nombre', 
-            'placeholder' => 'Nombre de la empresa',
-            'label' => 'Nombre',
-            'require' => true
-            ])
-        ?>
-        <?php loadUtils('input-txt', [
-            'name' => 'NIF', 
-            'placeholder' => 'NIF de la empresa',
-            'label' => 'NIF',
-            'require' => true
-            ])
-        ?>
-        <?php loadUtils('sel-sectors')?>
-    </fieldset>
-<!--     <br>
-    <fieldset  class="container">
-        <legend>Administrador empresa</legend>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Nombre</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+        <fieldset  class="container">
+            <legend>Registro nueva empresa</legend>
+            <?php component('text', [
+                'name' => 'nombre', 
+                'label' => 'Nombre de la empresa',
+                'require' => true
+                ])
+            ?>
+            <?php component('text', [
+                'name' => 'NIF', 
+                'label' => 'Nif de la empresa',
+                'require' => true, 
+                'pattern' => ".{0}|.{9}",
+                ])
+            ?>
+            <?php component('select', [
+                'label' => 'Seleccione un plan',
+                'name' => 'plan',
+                'options' => 'required',
+                'data' => [
+                    1 => 'Plan inicial',
+                    2 => 'Plan secundario'
+                ]])?>
+            <?php component('select', [
+                'label' => 'Seleccione su sector',
+                'name' => 'sector',
+                'options' => 'required',
+                'data' => [
+                1 => 'Peluqueria',
+                2 => 'Estética',
+                3 => 'Masaje',
+                4 => 'Otros'
+            ]])?>
+        </fieldset>
+        <br>
+        <fieldset  class="container">
+            <legend>Administrador empresa</legend>
+        </fieldset>
+        <!--
+        <br>
+        <fieldset  class="container">
+            <legend>Direccion empresa</legend>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Calle</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Apellidos</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Numero</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Fecha nacimiento</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Piso</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Password</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Escalera</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-
-    </fieldset>
-    <br>
-    <fieldset  class="container">
-        <legend>Direccion empresa</legend>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Calle</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Población</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Numero</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">CP</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Piso</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Provincia</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Escalera</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <label for="password">Pais</label>
+                    <input type="password" class="collapse" id="password" placeholder="Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Población</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">CP</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Provincia</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <label for="password">Pais</label>
-                <input type="password" class="collapse" id="password" placeholder="Password"/>
-            </div>
-        </div>
-    </fieldset> -->
-    <?php loadUtils('btn-success')?>
-    <?php loadUtils('btn-cancel')?>
-    
+        </fieldset> -->
+        <?php component('btn-success')?>
+        <?php component('btn-cancel')?>
+        
     </form>
 </section>
 <script src="/js/newc.min.js"></script>

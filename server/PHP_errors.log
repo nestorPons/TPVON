@@ -1421,3 +1421,794 @@ Stack trace:
 #9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #10 {main}
   thrown in /var/www/html/app/core/Conn.php on line 65
+[18-Apr-2019 07:52:13 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/htdocs/js/mods/tools.min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/h...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('var echo=functi...', '/var/www/html/h...')
+#2 /var/www/html/app/core/minify.php(29): MatthiasMullie\Minify\Minify->minify('/var/www/html/h...')
+#3 /var/www/html/app/core/minify.php(23): listar('/var/www/html/h...')
+#4 /var/www/html/app/core/minify.php(36): listar('/var/www/html/h...')
+#5 /var/www/html/htdocs/index.php(9): require_once('/var/www/html/a...')
+#6 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[18-Apr-2019 08:14:15 UTC] PHP Parse error:  syntax error, unexpected ':' in /var/www/html/app/models/Companies.php on line 18
+[18-Apr-2019 09:15:48 UTC] PHP Parse error:  syntax error, unexpected ':' in /var/www/html/app/models/Companies.php on line 18
+[18-Apr-2019 10:57:07 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'NIF' in 'field list' in /var/www/html/app/core/Conn.php:65
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(65): PDO->prepare('INSERT INTO emp...')
+#1 /var/www/html/app/core/Conn.php(127): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(21): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"sdad...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"sdad...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 65
+[18-Apr-2019 11:19:20 UTC] PHP Warning:  Use of undefined constant ‘PHP_SELF’ - assumed '‘PHP_SELF’' (this will throw an Error in a future version of PHP) in /var/www/html/app/views/utils/sel.phtml on line 3
+[18-Apr-2019 11:19:20 UTC] PHP Notice:  Undefined index: ‘PHP_SELF’ in /var/www/html/app/views/utils/sel.phtml on line 3
+[18-Apr-2019 11:19:20 UTC] PHP Notice:  Undefined index: array in /var/www/html/app/views/utils/sel.phtml on line 9
+[18-Apr-2019 11:19:20 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/utils/sel.phtml on line 9
+[18-Apr-2019 11:20:18 UTC] PHP Warning:  Use of undefined constant basename - assumed 'basename' (this will throw an Error in a future version of PHP) in /var/www/html/app/views/utils/sel.phtml on line 2
+[18-Apr-2019 11:20:31 UTC] PHP Warning:  basename() expects at least 1 parameter, 0 given in /var/www/html/app/views/utils/sel.phtml on line 2
+[18-Apr-2019 11:21:47 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/utils/sel.phtml on line 2
+[18-Apr-2019 11:22:35 UTC] PHP Notice:  Undefined index: array in /var/www/html/app/views/utils/sel.phtml on line 10
+[18-Apr-2019 11:22:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/utils/sel.phtml on line 10
+[18-Apr-2019 11:48:14 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/utils/select.phtml on line 8
+[18-Apr-2019 11:48:14 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/utils/select.phtml on line 8
+[18-Apr-2019 11:48:21 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/utils/select.phtml on line 8
+[18-Apr-2019 12:16:25 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/utils/select.phtml on line 8
+[18-Apr-2019 12:16:45 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/utils/select.phtml on line 8
+[19-Apr-2019 17:32:19 UTC] PHP Warning:  include(/var/www/html/app/views/utils/Seleccione un plan.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/dev.php on line 15
+[19-Apr-2019 17:32:19 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/utils/Seleccione un plan.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/dev.php on line 15
+[19-Apr-2019 17:33:11 UTC] PHP Warning:  include(/var/www/html/app/views/utils/Seleccione un plan.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/dev.php on line 15
+[19-Apr-2019 17:33:11 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/utils/Seleccione un plan.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/dev.php on line 15
+[20-Apr-2019 07:15:59 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\COMPONENTS' in /var/www/html/app/core/dev.php:15
+Stack trace:
+#0 /var/www/html/app/views/newcompany.phtml(8): loadUtils('input-txt', Array)
+#1 /var/www/html/app/controllers/Controller.php(50): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(47): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(37): app\controllers\Controller->getView()
+#4 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('view', 'newcompany', NULL)
+#5 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#6 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/dev.php on line 15
+[20-Apr-2019 10:22:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function loadUtils() in /var/www/html/app/views/newcompany.phtml:35
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(50): require_once()
+#1 /var/www/html/app/controllers/Controller.php(47): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(37): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('view', 'newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 35
+[20-Apr-2019 10:23:33 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:23:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:66
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(128): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"sdad...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"sdad...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 66
+[20-Apr-2019 10:23:38 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:23:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:66
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(128): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"sdad...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"sdad...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 66
+[20-Apr-2019 10:24:13 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:24:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:66
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(128): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"dsad...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"dsad...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 66
+[20-Apr-2019 10:25:54 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:25:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:66
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(128): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 66
+[20-Apr-2019 10:28:28 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:30:14 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:30:57 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:31:25 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:31:25 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:66
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(129): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 66
+[20-Apr-2019 10:33:14 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:36:56 UTC] SQLSTATE[HY000] [1049] Unknown database 'app_empresas'
+[20-Apr-2019 10:38:55 UTC] PHP Notice:  Undefined variable: dns in /var/www/html/app/core/Conn.php on line 34
+[20-Apr-2019 10:40:35 UTC] SQLSTATE[HY000] [2002] No such file or directory
+[20-Apr-2019 10:40:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:67
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 67
+[20-Apr-2019 10:41:14 UTC] SQLSTATE[HY000] [2002] No such file or directory
+[20-Apr-2019 10:41:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:68
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(131): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 68
+[20-Apr-2019 10:41:48 UTC] SQLSTATE[HY000] [2002] No such file or directory
+[20-Apr-2019 10:41:48 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:67
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(17): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#5 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 67
+[20-Apr-2019 10:44:01 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\Query' not found in /var/www/html/app/models/Company.php:3
+Stack trace:
+#0 /var/www/html/vendor/composer/ClassLoader.php(444): include()
+#1 /var/www/html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/var/www/html/v...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('app\\models\\Comp...')
+#3 /var/www/html/app/models/Companies.php(20): spl_autoload_call('app\\models\\Comp...')
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/models/Company.php on line 3
+[20-Apr-2019 10:44:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Nestor' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:45:18 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\app\core\Query' not found in /var/www/html/app/models/Company.php:3
+Stack trace:
+#0 /var/www/html/vendor/composer/ClassLoader.php(444): include()
+#1 /var/www/html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/var/www/html/v...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('app\\models\\Comp...')
+#3 /var/www/html/app/models/Companies.php(20): spl_autoload_call('app\\models\\Comp...')
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/models/Company.php on line 3
+[20-Apr-2019 10:45:37 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledo' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:48:15 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledos' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:49:52 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledos' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(131): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:55:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledos' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:56:03 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledos' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:57:57 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledos' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 10:58:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Lledoss' for key 'nombre' in /var/www/html/app/core/Conn.php:85
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(85): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(130): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(18): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Lled...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Lled...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 85
+[20-Apr-2019 13:14:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::conectDB(), 0 passed in /var/www/html/app/models/Companies.php on line 12 and exactly 2 expected in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(12): app\core\Query->conectDB()
+#1 /var/www/html/app/controllers/Controller.php(58): app\models\Companies->__construct('new')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#3 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#4 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[20-Apr-2019 13:16:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::conectDB(), 0 passed in /var/www/html/app/models/Companies.php on line 12 and at least 1 expected in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(12): app\core\Query->conectDB()
+#1 /var/www/html/app/controllers/Controller.php(58): app\models\Companies->__construct('new')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#3 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#4 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[20-Apr-2019 13:16:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::conectDB(), 0 passed in /var/www/html/app/models/Companies.php on line 12 and at least 1 expected in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(12): app\core\Query->conectDB()
+#1 /var/www/html/app/controllers/Controller.php(58): app\models\Companies->__construct('new')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#3 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#4 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[20-Apr-2019 13:19:20 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\Exception' not found in /var/www/html/app/core/Conn.php:48
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(21): app\core\Conn->connect()
+#1 /var/www/html/app/core/Query.php(20): app\core\Conn->__construct('12', 'root')
+#2 /var/www/html/app/models/Company.php(6): app\core\Query->conectDB('12', 'root')
+#3 /var/www/html/app/models/Companies.php(18): app\models\Company->__construct(12)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 48
+[20-Apr-2019 13:20:52 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Nestor' for key 'nombre' in /var/www/html/app/core/Conn.php:81
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(81): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(126): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(96): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(16): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 81
+[20-Apr-2019 13:21:08 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la conexion a la base de datos in /var/www/html/app/core/Conn.php:48
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(21): app\core\Conn->connect()
+#1 /var/www/html/app/core/Query.php(20): app\core\Conn->__construct('14', 'root')
+#2 /var/www/html/app/models/Company.php(6): app\core\Query->conectDB('14', 'root')
+#3 /var/www/html/app/models/Companies.php(18): app\models\Company->__construct(14)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 48
+[20-Apr-2019 13:24:30 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Nestor1s' for key 'nombre' in /var/www/html/app/core/Conn.php:81
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(81): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(126): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(96): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(16): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(75): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(40): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 81
+[21-Apr-2019 08:33:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Router::getBy() in /var/www/html/app/core/Router.php:44
+Stack trace:
+#0 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 44
+[21-Apr-2019 08:33:26 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/core/Router.php on line 45
+[21-Apr-2019 08:33:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\core\prd() in /var/www/html/app/core/Router.php:45
+Stack trace:
+#0 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 45
+[21-Apr-2019 08:35:58 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 08:41:13 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Login::__construct() must be of the type string or null, array given, called in /var/www/html/app/core/Router.php on line 76 and defined in /var/www/html/app/controllers/Login.php:7
+Stack trace:
+#0 /var/www/html/app/core/Router.php(76): app\controllers\Login->__construct('view', Array)
+#1 /var/www/html/app/core/Router.php(51): app\core\Router->loadController('Login')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 7
+[21-Apr-2019 08:41:33 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/core/Router.php on line 46
+[21-Apr-2019 08:41:41 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Router.php on line 46
+[21-Apr-2019 08:48:36 UTC] PHP Notice:  Undefined index: controller in /var/www/html/app/core/Router.php on line 28
+[21-Apr-2019 08:48:36 UTC] PHP Notice:  Undefined index: action in /var/www/html/app/core/Router.php on line 29
+[21-Apr-2019 08:51:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\models\prd() in /var/www/html/app/models/Company.php:27
+Stack trace:
+#0 /var/www/html/app/models/Company.php(13): app\models\Company->loadData()
+#1 /var/www/html/app/controllers/Login.php(8): app\models\Company->__construct('1')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 27
+[21-Apr-2019 08:58:10 UTC] PHP Parse error:  syntax error, unexpected 'EMPRESA' (T_STRING), expecting ',' or ';' in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:03:57 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:06:23 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:06:31 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:06:32 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:11:45 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/models/Company.php on line 27
+[21-Apr-2019 09:11:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/models/Company.php on line 27
+[21-Apr-2019 09:11:45 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::getView() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/controllers/Login.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView(NULL)
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 12
+[21-Apr-2019 09:12:06 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::getView() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/controllers/Login.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView(NULL)
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 12
+[21-Apr-2019 09:13:01 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::getView() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/controllers/Login.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView(NULL)
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 12
+[21-Apr-2019 09:13:22 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::getView() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/controllers/Login.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView(NULL)
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 12
+[21-Apr-2019 09:13:44 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::getView() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/controllers/Login.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView(NULL)
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 12
+[21-Apr-2019 09:14:23 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::getView() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/controllers/Login.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView(NULL)
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 12
+[21-Apr-2019 09:14:41 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:15:19 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::require() must be an object or null, array given, called in /var/www/html/app/controllers/Login.php on line 13 and defined in /var/www/html/app/controllers/Controller.php:46
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(13): app\controllers\Controller->require('/var/www/html/a...', Array)
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView()
+#2 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#3 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#4 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 46
+[21-Apr-2019 09:16:12 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:18:42 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\Company::$data in /var/www/html/app/controllers/Login.php:13
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView()
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 13
+[21-Apr-2019 09:19:05 UTC] PHP Fatal error:  Uncaught Error: Cannot access protected property app\models\Company::$data in /var/www/html/app/controllers/Login.php:13
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView()
+#1 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(77): app\controllers\Login->__construct('view', '1')
+#3 /var/www/html/app/core/Router.php(52): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 13
+[21-Apr-2019 09:19:17 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:20:02 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 7
+[21-Apr-2019 09:23:32 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login.phtml on line 7
+[21-Apr-2019 09:26:07 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 77
+[21-Apr-2019 09:26:07 UTC] PHP Notice:  Undefined index: data in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 09:26:40 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 77
+[21-Apr-2019 09:26:46 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 09:27:21 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/views/login.phtml on line 7
+[21-Apr-2019 17:36:02 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 77
+[21-Apr-2019 17:40:45 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\libs\Data as array in /var/www/html/app/views/index.phtml:23
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(47): require_once()
+#1 /var/www/html/app/controllers/Login.php(14): app\controllers\Controller->require('/var/www/html/a...', Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(34): app\controllers\Login->getView()
+#3 /var/www/html/app/controllers/Login.php(9): app\controllers\Controller->__construct('view')
+#4 /var/www/html/app/core/Router.php(78): app\controllers\Login->__construct('view', 'Empresa')
+#5 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('Login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:41:07 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:42:37 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:43:07 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:43:38 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:44:19 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:44:29 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:44:40 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:45:05 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:45:37 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:46:23 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:48:05 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 6
+[21-Apr-2019 17:48:55 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 78
+[21-Apr-2019 17:48:55 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:48:55 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:48:55 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:09 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:09 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:09 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:23 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 78
+[21-Apr-2019 17:49:23 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:23 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:23 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:51 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 79
+[21-Apr-2019 17:49:51 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:51 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:49:51 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:50:56 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 79
+[21-Apr-2019 17:50:56 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:50:56 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:50:56 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:52:21 UTC] PHP Notice:  Undefined property: app\core\Router::$id in /var/www/html/app/core/Router.php on line 79
+[21-Apr-2019 17:52:21 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:52:21 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:52:21 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:53:17 UTC] PHP Notice:  Trying to get property 'page' of non-object in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:53:17 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[21-Apr-2019 17:53:17 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[22-Apr-2019 08:20:18 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::new() must be of the type string, null given, called in /var/www/html/app/controllers/Controller.php on line 19 and defined in /var/www/html/app/controllers/Controller.php:50
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(19): app\controllers\Controller->new(NULL)
+#1 /var/www/html/app/core/Router.php(82): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#2 /var/www/html/app/core/Router.php(42): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 50
+[22-Apr-2019 08:23:50 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::new() must be of the type string, null given, called in /var/www/html/app/controllers/Controller.php on line 19 and defined in /var/www/html/app/controllers/Controller.php:50
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(19): app\controllers\Controller->new(NULL)
+#1 /var/www/html/app/core/Router.php(82): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#2 /var/www/html/app/core/Router.php(42): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 50
+[22-Apr-2019 08:35:10 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Nestor11s2' for key 'nombre' in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(80): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(16): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(59): app\models\Companies->new(Array)
+#5 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new('{"nombre":"Nest...')
+#6 /var/www/html/app/core/Router.php(82): app\controllers\Controller->__construct('new', 'companies', '{"nombre":"Nest...')
+#7 /var/www/html/app/core/Router.php(42): app\core\Router->loadController('Companies')
+#8 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[22-Apr-2019 08:58:43 UTC] PHP Recoverable fatal error:  Object of class stdClass could not be converted to string in /var/www/html/app/core/Router.php on line 72
+[22-Apr-2019 08:59:55 UTC] PHP Recoverable fatal error:  Object of class stdClass could not be converted to string in /var/www/html/app/core/Router.php on line 72
+[22-Apr-2019 09:12:26 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type string or null, object given, called in /var/www/html/app/core/Router.php on line 90 and defined in /var/www/html/app/controllers/Controller.php:12
+Stack trace:
+#0 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#1 /var/www/html/app/core/Router.php(68): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 12
+[22-Apr-2019 09:12:46 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type string or null, object given, called in /var/www/html/app/core/Router.php on line 90 and defined in /var/www/html/app/controllers/Controller.php:12
+Stack trace:
+#0 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#1 /var/www/html/app/core/Router.php(68): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 12
+[22-Apr-2019 09:13:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 3 passed to app\controllers\Controller::__construct() must be of the type string or null, object given, called in /var/www/html/app/core/Router.php on line 91 and defined in /var/www/html/app/controllers/Controller.php:12
+Stack trace:
+#0 /var/www/html/app/core/Router.php(91): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#1 /var/www/html/app/core/Router.php(69): app\core\Router->loadController('Companies')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 12
+[22-Apr-2019 09:16:21 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::new() must be of the type string, null given, called in /var/www/html/app/controllers/Controller.php on line 20 and defined in /var/www/html/app/controllers/Controller.php:51
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(NULL)
+#1 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', NULL)
+#2 /var/www/html/app/core/Router.php(70): app\core\Router->loadController('Companies')
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 51
+[22-Apr-2019 09:16:50 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 57 and defined in /var/www/html/app/models/Companies.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(57): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(NULL)
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', NULL)
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 12
+[22-Apr-2019 09:18:04 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 57 and defined in /var/www/html/app/models/Companies.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(57): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(NULL)
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', NULL)
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 12
+[22-Apr-2019 09:19:41 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 57 and defined in /var/www/html/app/models/Companies.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(57): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(NULL)
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', NULL)
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController('Companies')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 12
+[22-Apr-2019 09:25:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Router::loadController(), 0 passed in /var/www/html/app/core/Router.php on line 70 and exactly 1 expected in /var/www/html/app/core/Router.php:85
+Stack trace:
+#0 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#2 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 85
+[22-Apr-2019 09:26:06 UTC] PHP Notice:  Undefined variable: arg in /var/www/html/app/core/Router.php on line 87
+[22-Apr-2019 09:30:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 57 and defined in /var/www/html/app/models/Companies.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(57): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(NULL)
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', NULL)
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 12
+[22-Apr-2019 09:31:12 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Companies::new() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 57 and defined in /var/www/html/app/models/Companies.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(57): app\models\Companies->new(NULL)
+#1 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(NULL)
+#2 /var/www/html/app/core/Router.php(94): app\controllers\Controller->__construct('new', 'companies', NULL)
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 12
+[22-Apr-2019 09:32:35 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /var/www/html/app/core/Router.php:89
+Stack trace:
+#0 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#2 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/core/Router.php on line 89
+[22-Apr-2019 09:43:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'sdad' for key 'nombre' in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(80): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(15): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(45): app\models\Companies->new(Object(stdClass))
+#5 /var/www/html/app/controllers/Controller.php(19): app\controllers\Controller->new(Object(stdClass))
+#6 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#7 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[22-Apr-2019 09:44:45 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Empresas' for key 'nombre' in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(80): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(15): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(45): app\models\Companies->new(Object(stdClass))
+#5 /var/www/html/app/controllers/Controller.php(19): app\controllers\Controller->new(Object(stdClass))
+#6 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#7 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[22-Apr-2019 09:47:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'sEmpresas22ss' for key 'nombre' in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(80): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(15): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(46): app\models\Companies->new(Object(stdClass))
+#5 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(Object(stdClass))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#7 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[22-Apr-2019 09:54:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\controllers\Controller::del() in /var/www/html/app/controllers/Controller.php:20
+Stack trace:
+#0 /var/www/html/app/core/Router.php(91): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#1 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 20
+[22-Apr-2019 09:55:22 UTC] PHP Notice:  Undefined property: app\controllers\Controller::$return in /var/www/html/app/core/Router.php on line 93

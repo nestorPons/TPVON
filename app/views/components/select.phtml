@@ -1,0 +1,30 @@
+<?php 
+/*
+ ARRAY DATOS = 
+[   'id' => 'id del elemento bloque' 
+    'name' => 'nombre',
+    'options' => 'opciones del bloque',
+    'data' => [
+        clave => ['valor opciones', 'opciones'],
+        clave => 'valor opciones',
+    ]
+]
+ */
+if(!(isset($data['data']))) die("Faltan datos para construir el objeto");
+$id = pathinfo(__FILE__)['filename'] . ($data['id']??randomid());
+?>
+<div id="<?=$id?>" class="row col-sm-12 col-md-12">
+        <select id="sel<?=$id?>" name="<?=$data['name']?>" class="collapse" <?=$data['options']??''?>> 
+        <option value="" selected hidden></option>
+        <?php
+            foreach($data['data'] as $key => $val):
+                $options = (is_array($val)) ? $val[1] : '';
+                $value = (is_array($val)) ? $val[0] : $val;  
+                ?>
+               <option value="<?=$key?>" <?=$options??''?>><?=$value?></option>
+               <?php
+            endforeach;
+            ?>
+    </select> 
+    <label id="lab<?=$id?>"><?=$data['label']??$data['name']?></label> 
+</div>

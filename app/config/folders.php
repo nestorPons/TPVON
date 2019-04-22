@@ -3,6 +3,7 @@ define('ROOT' ,dirname(dirname(__DIR__)) . '/');
 const APP               = ROOT . 'app/';
     const CONTROLLERS       = APP . 'controllers/';
     const VIEWS             = APP . 'views/';
+        const COMPONENTS        = VIEWS . 'components/';
     const CORE              = APP . 'core/';
     const MODELS            = APP . 'models/';
     const CONFIG            = APP . 'config/';

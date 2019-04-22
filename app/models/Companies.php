@@ -5,20 +5,18 @@ class Companies extends \app\core\Query{
     private $id, $nombre, $fecha, $sector, $plan, $ultimo_acceso;
 
     function __construct(){
-        return $this->conectDB();
+        $this->prefix = 'admin';
+        $this->table  = 'empresas';
+        return $this->conectDB('empresas');
     }
-    private function conectDB(){
-        $this->prefix = 'admin'; 
-        $db     = 'empresas'; 
-        $table  = 'empresas';
-        $user   = 'root';
-        return parent::__construct($db, $table, $user);
-    }
-    public function new(array $data){
-AKI::: 
-        if(!(isset($data['nombre']) || isset($data['sector']))) return false;
-        return $this->add($data);
+    public function new(Object $dataJSON){
+        if(!(isset($dataJSON->nombre) || isset($dataJSON->sector))) return false;
+    
+        $this->id = $this->add((array)$dataJSON);
+    
+        $this->company = new Company($this->id);
 
+        return $this->id;
     }
     // getters y setters
     public function nombre( string $arg = ''){

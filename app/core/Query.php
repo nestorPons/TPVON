@@ -4,19 +4,22 @@
  */
 class Query extends Conn{
     protected 
-        $table,
         $log = false,
         $return = false,
         $logs = ['data','usuarios'],
 	    $users,
         $conf,
-        $conn;
+        $conn,
+        $db, $table, $user;
 
+        
     function __construct($db, $table, $user = 'root') {   
         $this->table = $table;  
-        $this->conn = parent::__construct($db, $table, $user);
+    }
+    protected function conectDB(String $db, String $user = 'root'){
+        $this->conn = parent::__construct($db, $user);
         return gettype($this->conn) === 'object';
-     }
+    }
     function __destruct(){
         $this->conn = null;
      }
@@ -39,6 +42,7 @@ class Query extends Conn{
     public function getConnect() {
         return $this->conn;
      }
+
     // Devuelve todos los registros de una tabla
     public function getAll(string $return = '*', $desc = false){
         return $this->sendQuery("SELECT $return FROM {$this->table} order_by;", $desc);
