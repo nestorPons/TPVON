@@ -2212,3 +2212,1369 @@ Stack trace:
 #4 {main}
   thrown in /var/www/html/app/controllers/Controller.php on line 20
 [22-Apr-2019 09:55:22 UTC] PHP Notice:  Undefined property: app\controllers\Controller::$return in /var/www/html/app/core/Router.php on line 93
+[22-Apr-2019 11:36:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '20249503g' for key 'nif' in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(80): PDOStatement->execute()
+#1 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#2 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#3 /var/www/html/app/models/Companies.php(15): app\core\Query->add(Array)
+#4 /var/www/html/app/controllers/Controller.php(46): app\models\Companies->new(Object(stdClass))
+#5 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(Object(stdClass))
+#6 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#7 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[22-Apr-2019 11:41:01 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::conectDB() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 11 and defined in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->conectDB(NULL, 'root')
+#1 /var/www/html/app/models/Companies.php(17): app\models\Company->__construct(NULL)
+#2 /var/www/html/app/controllers/Controller.php(46): app\models\Companies->new(Object(stdClass))
+#3 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(Object(stdClass))
+#4 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#5 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[22-Apr-2019 11:42:58 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::conectDB() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 11 and defined in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->conectDB(NULL, 'root')
+#1 /var/www/html/app/models/Companies.php(17): app\models\Company->__construct(NULL)
+#2 /var/www/html/app/controllers/Controller.php(46): app\models\Companies->new(Object(stdClass))
+#3 /var/www/html/app/controllers/Controller.php(20): app\controllers\Controller->new(Object(stdClass))
+#4 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#5 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[24-Apr-2019 07:45:02 UTC] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /var/www/html/app/views/components/select.phtml on line 21
+[24-Apr-2019 07:45:02 UTC] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /var/www/html/app/views/components/select.phtml on line 21
+[25-Apr-2019 07:43:19 UTC] PHP Parse error:  syntax error, unexpected 'use' (T_USE) in /var/www/html/app/controllers/Controller.php on line 34
+[25-Apr-2019 07:43:32 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:44:22 UTC] PHP Fatal error:  Uncaught Error: Class 'app\view\components\component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:44:54 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:46:28 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:48:39 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:49:03 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:51:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 07:51:16 UTC] PHP Fatal error:  Uncaught Error: Class 'Component' not found in /var/www/html/app/views/newcompany.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(38): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(25): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 4
+[25-Apr-2019 08:00:00 UTC] PHP Warning:  include(./app/views/components/component) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 3
+[25-Apr-2019 08:00:00 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening './app/views/components/component' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 3
+[25-Apr-2019 08:00:40 UTC] PHP Warning:  include(./app/views/components/component) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:00:40 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening './app/views/components/component' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:01:02 UTC] PHP Warning:  include(./app/views/components/Component.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:01:02 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening './app/views/components/Component.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:01:40 UTC] PHP Warning:  include(/app/views/components/Component.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:01:40 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/app/views/components/Component.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:02:11 UTC] PHP Warning:  include(app/views/components/Component.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:02:11 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening 'app/views/components/Component.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:05:23 UTC] PHP Warning:  include(app/views/components/Component.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:05:23 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening 'app/views/components/Component.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/newcompany.phtml on line 2
+[25-Apr-2019 08:12:55 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'unatributo' in /var/www/html/app/views/newcompany.phtml:9
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 9
+[25-Apr-2019 08:17:51 UTC] PHP Fatal error:  Uncaught Error: Access to undeclared static property: app\views\components\Number::$unatributo in /var/www/html/app/views/newcompany.phtml:9
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 9
+[25-Apr-2019 08:18:11 UTC] PHP Recoverable fatal error:  Object of class app\views\components\Number could not be converted to string in /var/www/html/app/views/newcompany.phtml on line 9
+[25-Apr-2019 08:18:51 UTC] PHP Recoverable fatal error:  Object of class app\views\components\Number could not be converted to string in /var/www/html/app/views/newcompany.phtml on line 9
+[25-Apr-2019 08:32:27 UTC] PHP Warning:  Use of undefined constant TYPE - assumed 'TYPE' (this will throw an Error in a future version of PHP) in /var/www/html/app/views/components/Number.php on line 11
+[25-Apr-2019 08:32:27 UTC] PHP Warning:  Use of undefined constant TYPE - assumed 'TYPE' (this will throw an Error in a future version of PHP) in /var/www/html/app/views/components/Number.php on line 21
+[25-Apr-2019 09:45:51 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/views/components/Number.php on line 24
+[25-Apr-2019 09:45:51 UTC] PHP Notice:  Undefined variable: data in /var/www/html/app/views/components/Number.php on line 30
+[25-Apr-2019 09:59:01 UTC] PHP Notice:  Undefined variable: numero in /var/www/html/app/views/components/Component.php on line 34
+[25-Apr-2019 10:00:10 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /var/www/html/app/views/components/Component.php on line 34
+[25-Apr-2019 10:10:14 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\views\components\InputText::__construct() must be of the type array, string given, called in /var/www/html/app/views/newcompany.phtml on line 10 and defined in /var/www/html/app/views/components/InputText.php:8
+Stack trace:
+#0 /var/www/html/app/views/newcompany.phtml(10): app\views\components\InputText->__construct('text', Array)
+#1 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#4 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#5 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/components/InputText.php on line 8
+[25-Apr-2019 10:12:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\views\components\getnameclass() in /var/www/html/app/views/components/InputText.php:9
+Stack trace:
+#0 /var/www/html/app/views/newcompany.phtml(10): app\views\components\InputText->__construct(Array)
+#1 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#4 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#5 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/components/InputText.php on line 9
+[25-Apr-2019 10:12:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\views\components\InputText::getnameclass() in /var/www/html/app/views/components/InputText.php:9
+Stack trace:
+#0 /var/www/html/app/views/newcompany.phtml(10): app\views\components\InputText->__construct(Array)
+#1 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#4 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#5 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/components/InputText.php on line 9
+[25-Apr-2019 10:13:43 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /var/www/html/app/views/components/Component.php:21
+Stack trace:
+#0 /var/www/html/app/views/components/InputText.php(9): app\views\components\Component::getnameclass()
+#1 /var/www/html/app/views/newcompany.phtml(10): app\views\components\InputText->__construct(Array)
+#2 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#6 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/Component.php on line 21
+[25-Apr-2019 11:01:36 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\select\Component' not found in /var/www/html/app/views/components/Select.php:5
+Stack trace:
+#0 /var/www/html/vendor/composer/ClassLoader.php(444): include()
+#1 /var/www/html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/var/www/html/v...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('app\\views\\compo...')
+#3 /var/www/html/app/views/newcompany.phtml(16): spl_autoload_call('app\\views\\compo...')
+#4 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#6 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#7 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#8 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/components/Select.php on line 5
+[25-Apr-2019 11:01:54 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDER\COMPONENTHTML' in /var/www/html/app/views/components/Select.php:23
+Stack trace:
+#0 /var/www/html/app/views/components/Select.php(13): app\views\components\Select->print(Array)
+#1 /var/www/html/app/views/newcompany.phtml(17): app\views\components\Select->__construct(Array)
+#2 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#6 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/Select.php on line 23
+[25-Apr-2019 11:02:28 UTC] PHP Warning:  include(/var/www/html/app/views/components/html/select.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/components/Select.php on line 23
+[25-Apr-2019 11:02:28 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/components/html/select.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/components/Select.php on line 23
+[25-Apr-2019 11:02:28 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\InputPass' not found in /var/www/html/app/views/newcompany.phtml:55
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 55
+[25-Apr-2019 11:02:51 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\COMPONENT' in /var/www/html/app/views/components/Select.php:23
+Stack trace:
+#0 /var/www/html/app/views/components/Select.php(13): app\views\components\Select->print(Array)
+#1 /var/www/html/app/views/newcompany.phtml(17): app\views\components\Select->__construct(Array)
+#2 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#6 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/Select.php on line 23
+[25-Apr-2019 11:03:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 11:03:02 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\InputPass' not found in /var/www/html/app/views/newcompany.phtml:55
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 55
+[25-Apr-2019 11:04:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 11:04:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\views\components\component() in /var/www/html/app/views/newcompany.phtml:71
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 71
+[25-Apr-2019 11:07:49 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 11:07:49 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\buttonSuccess' not found in /var/www/html/app/views/newcompany.phtml:71
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 71
+[25-Apr-2019 11:08:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 11:12:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 11:13:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:35:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:35:57 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:37:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:38:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:39:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:39:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:40:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:40:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:41:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:41:58 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:42:31 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:42:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:43:31 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:44:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:44:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:45:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:45:57 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:46:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:47:23 UTC] PHP Fatal error:  Uncaught Exception: parse error: unclosed block in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:2368
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1887): lessc_parser->parse('@font-color: #3...')
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1922): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1994): lessc->compileFile('/var/www/html/a...')
+#3 /var/www/html/app/models/Mylessc.php(23): lessc->cachedCompile(Array)
+#4 /var/www/html/app/models/Mylessc.php(12): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#5 /var/www/html/app/core/less.php(11): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#7 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2368
+[25-Apr-2019 14:47:38 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:48:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:50:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:50:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:52:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:54:09 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:55:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 14:55:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/select.phtml on line 11
+[25-Apr-2019 15:01:56 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'TYPE' in /var/www/html/app/views/components/Component.php:26
+Stack trace:
+#0 /var/www/html/app/views/components/Component.php(10): app\views\components\Component->randomid()
+#1 /var/www/html/app/views/components/InputText.php(8): app\views\components\Component->__construct(Array)
+#2 /var/www/html/app/views/newcompany.phtml(9): app\views\components\InputText->__construct(Array)
+#3 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#6 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#7 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/components/Component.php on line 26
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printClass in /var/www/html/app/views/components/input.phtml on line 8
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printClass in /var/www/html/app/views/components/input.phtml on line 8
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printClass in /var/www/html/app/views/components/input.phtml on line 8
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printClass in /var/www/html/app/views/components/input.phtml on line 8
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printClass in /var/www/html/app/views/components/input.phtml on line 8
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:34 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:09:54 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMinlength in /var/www/html/app/views/components/input.phtml on line 11
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printMaxlength in /var/www/html/app/views/components/input.phtml on line 12
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printPattern in /var/www/html/app/views/components/input.phtml on line 13
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printRequired in /var/www/html/app/views/components/input.phtml on line 14
+[25-Apr-2019 15:11:03 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:13:12 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:13:12 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:13:12 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:13:12 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 15:13:12 UTC] PHP Notice:  Undefined variable: printLabel in /var/www/html/app/views/components/input.phtml on line 16
+[25-Apr-2019 16:49:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function component() in /var/www/html/app/views/login.phtml:7
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(23): include_once()
+#1 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(14): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(27): app\controllers\Login->getView()
+#4 /var/www/html/app/controllers/Login.php(10): app\controllers\Controller->__construct('view')
+#5 /var/www/html/app/core/Router.php(89): app\controllers\Login->__construct('view', '1')
+#6 /var/www/html/app/core/Router.php(55): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login.phtml on line 7
+[25-Apr-2019 16:52:24 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/login.phtml:8
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(23): include_once()
+#1 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(14): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(27): app\controllers\Login->getView()
+#4 /var/www/html/app/controllers/Login.php(10): app\controllers\Controller->__construct('view')
+#5 /var/www/html/app/core/Router.php(89): app\controllers\Login->__construct('view', '1')
+#6 /var/www/html/app/core/Router.php(55): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login.phtml on line 8
+[26-Apr-2019 08:10:13 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\InputText' not found in /var/www/html/app/views/newcompany.phtml:9
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 9
+[26-Apr-2019 08:18:01 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\InputText' not found in /var/www/html/app/views/newcompany.phtml:9
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): require_once()
+#1 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 9
+[26-Apr-2019 08:18:41 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\Component' not found in /var/www/html/app/views/components/controllers/InputText.php:5
+Stack trace:
+#0 /var/www/html/vendor/composer/ClassLoader.php(444): include()
+#1 /var/www/html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/var/www/html/v...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('app\\views\\compo...')
+#3 /var/www/html/app/views/newcompany.phtml(9): spl_autoload_call('app\\views\\compo...')
+#4 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#6 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#7 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#8 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/components/controllers/InputText.php on line 5
+[26-Apr-2019 08:19:49 UTC] PHP Warning:  include(/var/www/html/app/views/components/input.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/components/controllers/InputPass.php on line 24
+[26-Apr-2019 08:19:49 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/components/input.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/components/controllers/InputPass.php on line 24
+[26-Apr-2019 08:19:49 UTC] PHP Warning:  include(/var/www/html/app/views/components/input.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/components/controllers/InputPass.php on line 24
+[26-Apr-2019 08:19:49 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/components/input.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/components/controllers/InputPass.php on line 24
+[26-Apr-2019 08:38:16 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'COLLAPSE' in /var/www/html/app/views/components/controllers/Component.php:19
+Stack trace:
+#0 /var/www/html/app/views/components/controllers/InputText.php(11): app\views\components\controllers\Component->__construct(Array)
+#1 /var/www/html/app/views/newcompany.phtml(9): app\views\components\controllers\InputText->__construct(Array)
+#2 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#6 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/controllers/Component.php on line 19
+[26-Apr-2019 08:39:43 UTC] PHP Fatal error:  Uncaught Error: Cannot access parent:: when current class scope has no parent in /var/www/html/app/views/components/controllers/Component.php:19
+Stack trace:
+#0 /var/www/html/app/views/components/controllers/InputText.php(11): app\views\components\controllers\Component->__construct(Array)
+#1 /var/www/html/app/views/newcompany.phtml(9): app\views\components\controllers\InputText->__construct(Array)
+#2 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#6 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/controllers/Component.php on line 19
+[26-Apr-2019 08:40:34 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'COLLAPSE' in /var/www/html/app/views/components/controllers/Component.php:19
+Stack trace:
+#0 /var/www/html/app/views/components/controllers/InputText.php(12): app\views\components\controllers\Component->__construct(Array)
+#1 /var/www/html/app/views/newcompany.phtml(9): app\views\components\controllers\InputText->__construct(Array)
+#2 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#6 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/controllers/Component.php on line 19
+[26-Apr-2019 08:41:41 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'COLLAPSE' in /var/www/html/app/views/components/controllers/Component.php:36
+Stack trace:
+#0 /var/www/html/app/views/components/controllers/InputText.php(22): app\views\components\controllers\Component->printClass()
+#1 /var/www/html/app/views/components/controllers/InputText.php(13): app\views\components\controllers\InputText->print(Array)
+#2 /var/www/html/app/views/newcompany.phtml(9): app\views\components\controllers\InputText->__construct(Array)
+#3 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#6 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#7 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/components/controllers/Component.php on line 36
+[26-Apr-2019 08:57:05 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'COLLAPSE' in /var/www/html/app/views/components/controllers/Component.php:37
+Stack trace:
+#0 /var/www/html/app/views/components/controllers/InputPass.php(20): app\views\components\controllers\Component->printClass()
+#1 /var/www/html/app/views/components/controllers/InputPass.php(11): app\views\components\controllers\InputPass->print(Array)
+#2 /var/www/html/app/views/newcompany.phtml(21): app\views\components\controllers\InputPass->__construct(Array)
+#3 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Controller.php(36): app\controllers\Controller->require('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#6 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#7 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('newcompany')
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/components/controllers/Component.php on line 37
+[26-Apr-2019 10:04:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(15): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(stdClass))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(stdClass))
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#6 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[27-Apr-2019 07:18:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(15): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(stdClass))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(stdClass))
+#5 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#6 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[27-Apr-2019 07:27:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method stdClass::valid() in /var/www/html/app/models/Companies.php:13
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(stdClass))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(stdClass))
+#2 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#3 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 13
+[27-Apr-2019 07:28:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method stdClass::valid() in /var/www/html/app/models/Companies.php:14
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(stdClass))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(stdClass))
+#2 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#3 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 14
+[27-Apr-2019 07:29:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method stdClass::valid() in /var/www/html/app/models/Companies.php:14
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(stdClass))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(stdClass))
+#2 /var/www/html/app/core/Router.php(90): app\controllers\Controller->__construct('new', 'companies', Object(stdClass))
+#3 /var/www/html/app/core/Router.php(69): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 14
+[27-Apr-2019 07:36:06 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\libs\Data::__construct() must be of the type array, object given, called in /var/www/html/app/core/Router.php on line 67 and defined in /var/www/html/app/libs/Data.php:6
+Stack trace:
+#0 /var/www/html/app/core/Router.php(67): app\libs\Data->__construct(Object(stdClass))
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#2 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/libs/Data.php on line 6
+[27-Apr-2019 07:44:07 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/libs/Data.php on line 23
+[27-Apr-2019 07:44:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(16): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[27-Apr-2019 07:45:00 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/libs/Data.php on line 23
+[27-Apr-2019 07:46:25 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(97): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(16): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[27-Apr-2019 13:28:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(23): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[27-Apr-2019 14:39:36 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/models/Companies.php on line 30
+[27-Apr-2019 14:39:36 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::conectDB() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 11 and defined in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->conectDB(NULL, 'root')
+#1 /var/www/html/app/models/Companies.php(30): app\models\Company->__construct(NULL)
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[28-Apr-2019 07:33:05 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/app/models/Company.php on line 41
+[28-Apr-2019 07:34:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Company::__construct(), 0 passed in /var/www/html/app/models/Companies.php on line 30 and exactly 2 expected in /var/www/html/app/models/Company.php:9
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(30): app\models\Company->__construct()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Company.php on line 9
+[28-Apr-2019 07:38:13 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::conectDB() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 11 and defined in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->conectDB(NULL, 'root')
+#1 /var/www/html/app/models/Companies.php(29): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[28-Apr-2019 07:39:45 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::conectDB() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 11 and defined in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->conectDB(NULL, 'root')
+#1 /var/www/html/app/models/Companies.php(29): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[28-Apr-2019 07:49:04 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::conectDB() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 11 and defined in /var/www/html/app/core/Query.php:19
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->conectDB(NULL, 'root')
+#1 /var/www/html/app/models/Companies.php(29): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 19
+[28-Apr-2019 08:16:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:62
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(27): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 62
+[28-Apr-2019 08:19:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:62
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(27): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 62
+[28-Apr-2019 08:20:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:62
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Companies.php(27): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 62
+[28-Apr-2019 08:30:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(33): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(48): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/models/Company.php(23): app\core\Query->getAll()
+#4 /var/www/html/app/models/Company.php(13): app\models\Company->loadData()
+#5 /var/www/html/app/models/Companies.php(34): app\models\Company->__construct('AOL')
+#6 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#7 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#8 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#9 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[28-Apr-2019 08:42:28 UTC] PHP Warning:  mkdir() [<a href='0function.mkdir0'>function.mkdir0</a>]: Permission denied in /var/www/html/app/models/Companies.php on line 75
+[28-Apr-2019 08:42:28 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Companies::createIni(), 0 passed in /var/www/html/app/models/Companies.php on line 35 and at least 1 expected in /var/www/html/app/models/Companies.php:50
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(35): app\models\Companies->createIni()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 50
+[28-Apr-2019 08:46:13 UTC] PHP Warning:  mkdir() [<a href='0function.mkdir0'>function.mkdir0</a>]: Permission denied in /var/www/html/app/models/Companies.php on line 75
+[28-Apr-2019 08:46:13 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Companies::createIni(), 0 passed in /var/www/html/app/models/Companies.php on line 35 and at least 1 expected in /var/www/html/app/models/Companies.php:50
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(35): app\models\Companies->createIni()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 50
+[28-Apr-2019 08:46:53 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Companies::createIni(), 0 passed in /var/www/html/app/models/Companies.php on line 35 and at least 1 expected in /var/www/html/app/models/Companies.php:50
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(35): app\models\Companies->createIni()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 50
+[28-Apr-2019 08:47:22 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(33): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(48): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/models/Company.php(23): app\core\Query->getAll()
+#4 /var/www/html/app/models/Company.php(13): app\models\Company->loadData()
+#5 /var/www/html/app/models/Companies.php(38): app\models\Company->__construct('AOL')
+#6 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#7 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#8 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#9 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[28-Apr-2019 12:16:26 UTC] PHP Warning:  copy(/var/www/html/htdocs/companies/AOL/config.ini) [<a href='0function.copy0'>function.copy0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/Companies.php on line 75
+[28-Apr-2019 12:16:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Companies::createIni(), 0 passed in /var/www/html/app/models/Companies.php on line 35 and at least 1 expected in /var/www/html/app/models/Companies.php:50
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(35): app\models\Companies->createIni()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 50
+[28-Apr-2019 12:24:53 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Companies::createIni(), 0 passed in /var/www/html/app/models/Companies.php on line 35 and at least 1 expected in /var/www/html/app/models/Companies.php:50
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(35): app\models\Companies->createIni()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 50
+[29-Apr-2019 06:31:41 UTC] PHP Fatal error:  Uncaught Error: Class 'core\Error' not found in /var/www/html/app/models/Companies.php:34
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 34
+[29-Apr-2019 06:32:01 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:34
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 34
+[29-Apr-2019 06:33:03 UTC] PHP Warning:  Use of undefined constant E013 - assumed 'E013' (this will throw an Error in a future version of PHP) in /var/www/html/app/models/Companies.php on line 34
+[29-Apr-2019 06:33:03 UTC] PHP Fatal error:  Uncaught Error: Wrong parameters for Exception([string $message [, long $code [, Throwable $previous = NULL]]]) in /var/www/html/app/models/Companies.php:34
+Stack trace:
+#0 /var/www/html/app/models/Companies.php(34): Exception->__construct(Array)
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 34
+[29-Apr-2019 06:56:00 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:34
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 34
+[29-Apr-2019 06:56:55 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:34
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 34
+[29-Apr-2019 07:44:28 UTC] PHP Notice:  Undefined variable: cadena in /var/www/html/app/libs/Data.php on line 38
+[29-Apr-2019 07:47:58 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/app/models/Companies.php on line 52
+[29-Apr-2019 07:50:16 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:36
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 36
+[29-Apr-2019 07:52:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('USE app_unaempr...', NULL)
+#1 /var/www/html/app/models/Companies.php(69): app\core\Conn->query('USE app_unaempr...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[29-Apr-2019 07:54:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:76
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('USE app_unaempr...', NULL)
+#1 /var/www/html/app/models/Companies.php(69): app\core\Conn->query('USE app_unaempr...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 76
+[29-Apr-2019 07:54:53 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:36
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 36
+[29-Apr-2019 07:55:38 UTC] PHP Notice:  Undefined variable: fileSQL in /var/www/html/app/models/Companies.php on line 52
+[29-Apr-2019 07:55:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('SET SQL_MODE = ...', NULL)
+#1 /var/www/html/app/models/Companies.php(70): app\core\Conn->query('SET SQL_MODE = ...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 07:55:49 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:36
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 36
+[29-Apr-2019 07:56:16 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:36
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 36
+[29-Apr-2019 07:59:24 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:36
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 36
+[29-Apr-2019 08:00:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:79
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('SET SQL_MODE = ...', NULL)
+#1 /var/www/html/app/models/Companies.php(70): app\core\Conn->query('SET SQL_MODE = ...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 79
+[29-Apr-2019 08:02:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SET SQL_MODE = ...', NULL)
+#1 /var/www/html/app/models/Companies.php(70): app\core\Conn->query('SET SQL_MODE = ...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 10:14:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('CREATE TABLE `u...', NULL)
+#1 /var/www/html/app/models/Companies.php(54): app\core\Conn->query('CREATE TABLE `u...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 10:17:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('CREATE TABLE `u...', NULL)
+#1 /var/www/html/app/models/Companies.php(54): app\core\Conn->query('CREATE TABLE `u...')
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 10:21:20 UTC] PHP Notice:  Undefined variable: fileSQL in /var/www/html/app/models/Companies.php on line 69
+[29-Apr-2019 10:21:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('', NULL)
+#1 /var/www/html/app/models/Companies.php(69): app\core\Conn->query(NULL)
+#2 /var/www/html/app/models/Companies.php(38): app\models\Companies->createTables()
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 10:29:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM  ...', NULL)
+#1 /var/www/html/app/core/Query.php(33): app\core\Conn->query('SELECT * FROM  ...')
+#2 /var/www/html/app/core/Query.php(48): app\core\Query->sendQuery('SELECT * FROM  ...', false)
+#3 /var/www/html/app/models/Company.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/models/Company.php(16): app\models\Company->loadData()
+#5 /var/www/html/app/models/Companies.php(38): app\models\Company->__construct('unaempresa')
+#6 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#7 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#8 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#9 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 10:30:43 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:80
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('SELECT * FROM  ...', NULL)
+#1 /var/www/html/app/core/Query.php(33): app\core\Conn->query('SELECT * FROM  ...')
+#2 /var/www/html/app/core/Query.php(48): app\core\Query->sendQuery('SELECT * FROM  ...', false)
+#3 /var/www/html/app/models/Company.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/models/Company.php(16): app\models\Company->loadData()
+#5 /var/www/html/app/models/Companies.php(37): app\models\Company->__construct('unaempresa')
+#6 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#7 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#8 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#9 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 80
+[29-Apr-2019 10:32:58 UTC] PHP Parse error:  syntax error, unexpected 'DB' (T_STRING) in /var/www/html/app/core/Conn.php on line 133
+[29-Apr-2019 10:33:41 UTC] PHP Parse error:  syntax error, unexpected 'DB' (T_STRING) in /var/www/html/app/core/Conn.php on line 133
+[29-Apr-2019 10:34:18 UTC] PHP Parse error:  syntax error, unexpected 'DB' (T_STRING) in /var/www/html/app/core/Conn.php on line 133
+[29-Apr-2019 10:34:39 UTC] PHP Parse error:  syntax error, unexpected 'DB' (T_STRING) in /var/www/html/app/core/Conn.php on line 133
+[29-Apr-2019 10:35:56 UTC] PHP Parse error:  syntax error, unexpected 'DB' (T_STRING) in /var/www/html/app/core/Conn.php on line 133
+[29-Apr-2019 10:36:36 UTC] PHP Parse error:  syntax error, unexpected 'DB' (T_STRING) in /var/www/html/app/core/Conn.php on line 133
+[29-Apr-2019 10:41:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function beginTransaction() on null in /var/www/html/app/models/Company.php:53
+Stack trace:
+#0 /var/www/html/app/models/Company.php(37): app\models\Company->createTables()
+#1 /var/www/html/app/models/Companies.php(38): app\models\Company->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/Company.php on line 53
+[29-Apr-2019 10:42:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function beginTransaction() on null in /var/www/html/app/models/Company.php:53
+Stack trace:
+#0 /var/www/html/app/models/Company.php(37): app\models\Company->createTables()
+#1 /var/www/html/app/models/Companies.php(38): app\models\Company->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/Company.php on line 53
+[29-Apr-2019 10:42:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function beginTransaction() on null in /var/www/html/app/models/Company.php:53
+Stack trace:
+#0 /var/www/html/app/models/Company.php(37): app\models\Company->createTables()
+#1 /var/www/html/app/models/Companies.php(38): app\models\Company->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/Company.php on line 53
+[29-Apr-2019 10:44:35 UTC] PHP Notice:  Undefined variable: dns in /var/www/html/app/core/Conn.php on line 33
+[29-Apr-2019 10:44:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:63
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(126): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 63
+[29-Apr-2019 10:44:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:63
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(126): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 63
+[29-Apr-2019 10:47:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:63
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(126): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 63
+[29-Apr-2019 10:52:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:62
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 62
+[29-Apr-2019 10:53:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:62
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 62
+[29-Apr-2019 10:55:48 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:62
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(125): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 62
+[29-Apr-2019 10:57:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:61
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 61
+[29-Apr-2019 10:57:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:79
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 79
+[29-Apr-2019 11:03:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:79
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('CREATE DATABASE...', NULL)
+#1 /var/www/html/app/models/Companies.php(35): app\core\Conn->query('CREATE DATABASE...')
+#2 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 79
+[01-May-2019 07:31:25 UTC] PHP Fatal error:  Cannot redeclare app\models\Company::loadData() in /var/www/html/app/models/Company.php on line 33
+[01-May-2019 07:41:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:78
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('CREATE TABLE `d...', NULL)
+#1 /var/www/html/app/models/Company.php(55): app\core\Conn->query('CREATE TABLE `d...')
+#2 /var/www/html/app/models/Company.php(39): app\models\Company->createTables()
+#3 /var/www/html/app/models/Companies.php(39): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 78
+[01-May-2019 07:47:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:78
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('CREATE TABLE `d...', NULL)
+#1 /var/www/html/app/models/Company.php(55): app\core\Conn->query('CREATE TABLE `d...')
+#2 /var/www/html/app/models/Company.php(39): app\models\Company->createTables()
+#3 /var/www/html/app/models/Companies.php(39): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 78
+[01-May-2019 07:48:11 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:78
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('CREATE TABLE `a...', NULL)
+#1 /var/www/html/app/models/Company.php(57): app\core\Conn->query('CREATE TABLE `a...')
+#2 /var/www/html/app/models/Company.php(39): app\models\Company->createTables()
+#3 /var/www/html/app/models/Companies.php(39): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 78
+[01-May-2019 07:51:26 UTC] PHP Fatal error:  Uncaught Exception: No se pudo crear la base de datos in /var/www/html/app/models/Companies.php:40
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Companies.php on line 40
+[01-May-2019 07:51:39 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:78
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('CREATE TABLE `a...', NULL)
+#1 /var/www/html/app/models/Company.php(57): app\core\Conn->query('CREATE TABLE `a...')
+#2 /var/www/html/app/models/Company.php(39): app\models\Company->createTables()
+#3 /var/www/html/app/models/Companies.php(39): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 78
+[01-May-2019 07:55:24 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/models/Company.php on line 20
+[01-May-2019 07:55:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:74
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('INSERT INTO  (n...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO  (n...', Array)
+#2 /var/www/html/app/models/Company.php(47): app\core\Query->add(Array)
+#3 /var/www/html/app/models/Companies.php(39): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 74
+[01-May-2019 07:56:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:74
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(124): app\core\Conn->init('INSERT INTO  (n...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO  (n...', Array)
+#2 /var/www/html/app/models/Company.php(47): app\core\Query->add(Array)
+#3 /var/www/html/app/models/Companies.php(39): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Companies->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'companies', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 74

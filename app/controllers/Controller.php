@@ -1,4 +1,6 @@
-<?php namespace app\controllers;
+<?php 
+namespace app\controllers;
+
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
  * Tiene lo mínimo para la creación de una subclase: 
@@ -12,8 +14,8 @@ class Controller{
     
     function __construct(String $action, String $controller = null, Object $dataJSON = null){
         $this->action = strtolower($action);
-        $this->controller =strtolower($controller ?? $this->getController());  
-        $this->data = $dataJSON; 
+        $this->controller =strtolower($controller ?? $this->getController());
+        $this->data = $dataJSON;
 
         // Constructor alternativo básico
         switch($this->action){
@@ -46,9 +48,6 @@ class Controller{
             $respond = $model->new($dataJSON);
         }
         return $respond;
-    }
-    protected function setModel(){
-
     }
     private function getController(){
         $arr_controller= explode('\\',get_class($this));

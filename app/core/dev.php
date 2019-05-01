@@ -11,10 +11,3 @@ function prs($arr){
     echo('</pre>');
     die();
 }
-function component(string $nameUtil = '', array $data = []){
-    include \FOLDERS\COMPONENTS . $nameUtil . '.phtml';  
-}
-
-function randomid(string $prefix = ''){
-    return  uniqid($prefix, true);
-}

@@ -5,4 +5,4 @@ CREATE TABLE `historial` (
   `tabla` VARCHAR(10) NOT NULL,
   `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
   `accion` FLOAT(10) NOT NULL COMMENT '0 crear, 1 actualizar'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET utf8 COLLATE utf8_spanish2_ci;

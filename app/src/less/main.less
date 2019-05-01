@@ -1,10 +1,28 @@
 @font-color: #333;
 @disabled-color: #999;
+:root {
+  --universal-border-radius: 5px;
+}
 *{
   -moz-user-select: none; 
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none; 
+}
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid green;
+  -webkit-text-fill-color: green;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 button{
   background: transparent !important;
@@ -13,6 +31,9 @@ button{
   &:hover{
     background: var(--button-back-color) !important;
     color: var(--back-color) !important;
+  }
+  &:focus{
+    outline:0px;
   }
 }
 body{ 
@@ -51,14 +72,15 @@ select{
     left: var(--universal-margin);
     color: @disabled-color;
   }
-  select, textarea, input:not([type="button"]):not([type="submit"]):not([type="reset"]){
+  select, textarea, input:not([type="button"]):not([type="submit"]):not([type="reset"]), select:not(value){
+    position: relative;
     z-index: 2;
     background-color: transparent; 
     border-radius: 0;
     border-top: none;
     border-left: none;
     border-right: none;
-    &:focus, &:valid{
+    &:focus, &:not(:placeholder-shown):not(select), &.valid{
       outline:0px;
       & + label{
         transition: transform 1s;

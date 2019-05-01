@@ -64,11 +64,13 @@ class Router{
     }
     private function isPost($params){
         if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') { 
-            $this->data = json_decode($params['data']) ?? null;
+
+            // Pasamos los datos de json a objeto Data
+            $this->data = new \app\libs\Data((array)json_decode($params['data']) ?? null);
 
             $respond = $this->loadController(); 
 
-            //echo json_encode($respond);
+            echo json_encode($respond);
             return true; 
         } else return false;
     }

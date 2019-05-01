@@ -6,4 +6,4 @@ CREATE TABLE `lineas` (
   `cantidad` int(10) DEFAULT 1 NOT NULL, 
   `iva`float(5) NOT NULL, 
   `dto` float(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET utf8 COLLATE utf8_spanish2_ci;

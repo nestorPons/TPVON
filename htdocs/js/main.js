@@ -3,13 +3,18 @@
 $(document).on('click', 'a', function (e) {
     e.preventDefault();
     var section = $(this).attr('href');
+    // Comprueba que  la seccion existe o no 
     if ($('section#' + section).length) {
+        // Si existe oculta todas menos la solicitada
         app.sections.toggle(section);
     }
-    app.get({
-        controller: section,
-        action: 'view'
-    });
+    else {
+        // Si no manda una petición de la nueva vista
+        app.get({
+            controller: section,
+            action: 'view'
+        });
+    }
 })
     .on('submit', 'form', function (e, i) {
     e.preventDefault();
@@ -18,4 +23,11 @@ $(document).on('click', 'a', function (e) {
         action: $(this).attr('action'),
         data: app.toJSONString(e.currentTarget)
     });
+})
+    .on('change', 'select', function () {
+    var selclass = 'valid';
+    if ($(this).val() != "")
+        $(this).addClass(selclass);
+    else
+        $(this).removeClass(selclass);
 });

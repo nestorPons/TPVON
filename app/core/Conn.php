@@ -6,7 +6,7 @@ class Conn{
     
     protected 
         $pdo, 
-        $sSQL,
+        $sqlPrepare,
         $sql,
         $credentials,
         $params = [], 
@@ -28,8 +28,7 @@ class Conn{
         $this->credentials = parse_ini_file('../app/config/conn.ini');
         if (empty($this->prefix)) $this->prefix = $this->credentials["prefix"]; 
         
-        $dsn = 'mysql:dbname=' . $this->prefix . '_' . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
-
+        $dsn = 'mysql:dbname=' . $this->prefix . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
         try {
             $this->pdo = new \PDO(
                     $dsn, 
@@ -38,14 +37,14 @@ class Conn{
                     [
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
                         \PDO::ATTR_EMULATE_PREPARES     => false, //Se usa para desactivar emulación de consultas preparadas
-                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
                         \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
                     ]
                 );
             return $this->pdo; 
         }
         catch (\PDOException $e){      
-            return false; 
+            die('fallo conexion base datos');
         }
     }
     function __destruct(){
@@ -56,12 +55,11 @@ class Conn{
 	 }
 
     private function init($sql, $params = null){
-
         try {
-
-            $this->sSQL = $this->pdo->prepare($sql);
+            
+            $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
-
+            
             if (!empty($this->params)) {
                 foreach ($this->params as $param => $value) {
                     if(is_int($value[1])) {
@@ -73,14 +71,16 @@ class Conn{
                     } else {
                         $type = \PDO::PARAM_STR;
                     }
-                    $this->sSQL->bindValue($value[0], $value[1], $type);
+                    $this->sqlPrepare->bindValue($value[0], $value[1], $type);
                 }
             }
-        
-           $this->sSQL->execute();
+            
+           return $this->sqlPrepare->execute();
         }
-        catch (PDOException $e) {
-            error_log('ERROR INIT => ' .$this->error = $e->getMessage(). "\nSQL: ".$sql."\n",0);
+        catch (\PDOException $e) {
+            echo('ERROR INIT \n');
+            ech ($sql . '\n');
+            die($e->getMessage());
         }
         
         $this->params = [];
@@ -120,20 +120,19 @@ class Conn{
      */
     
     function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
-
         $this->sql = trim(str_replace("\r", " ", $sql)); 
-        $this->init($this->sql, $params);
+        $respond = $this->init($this->sql, $params);
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
         
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]);
 
         if ($statement === 'select' || $statement === 'show') {
-            return $this->sSQL->fetchAll($fetchmode);
+            return $this->sqlPrepare->fetchAll($fetchmode);
         } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
-            return $this->sSQL->rowCount();
+            return $this->sqlPrepare->rowCount();
         } else {
-            return NULL;
+            return $respond;
         }
     }
     /**
@@ -160,7 +159,7 @@ class Conn{
      
     public function column($sql, $params = null){
         $this->Init($sql, $params);
-        $Columns = $this->sSQL->fetchAll(\PDO::FETCH_NUM);
+        $Columns = $this->sqlPrepare->fetchAll(\PDO::FETCH_NUM);
         
         $column = null;
         
@@ -181,8 +180,8 @@ class Conn{
      */
     public function row($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
         $this->Init($sql, $params);
-        $result = $this->sSQL->fetch($fetchmode);
-        $this->sSQL->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
+        $result = $this->sqlPrepare->fetch($fetchmode);
+        $this->sqlPrepare->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
         return $result;
     }
     /**
@@ -194,8 +193,8 @@ class Conn{
      */
     public function single($sql, $params = null){
         $this->Init($sql, $params);
-        $result = $this->sSQL->fetchColumn();
-        $this->sSQL->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
+        $result = $this->sqlPrepare->fetchColumn();
+        $this->sqlPrepare->closeCursor(); // Libera la conexión para evitar algún conflicto con otra solicitud al servidor
         return $result;
     }
     
@@ -232,6 +231,6 @@ class Conn{
     }
     
     protected function rowCount(){
-        return $this->sSQL->rowCount();
+        return $this->sqlPrepare->rowCount();
     }
 }

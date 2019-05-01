@@ -53,8 +53,9 @@ var app = {
      },
      sections: {
          toggle(section: string){
-            $('section').fadeOut()
-            $('section#'+section).fadeIn()
+            $('section').fadeOut('fast', function(){
+                $('section#'+section).fadeIn()
+            })
          }
      },
      toJSONString( form: any ) {

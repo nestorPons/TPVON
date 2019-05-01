@@ -14,7 +14,7 @@ class Error {
     const E008 = 'No se pudo cargar la configuracion'; 
 
     // Creando empresa
-    const E011 = "Nombre ocupado" ;
+    const E011 = "Esta empresa ya existe" ;
     const E012 = "No se pudo validar los datos";
     const E013 = "No se pudo crear la base de datos";
     const E014 = "No se pudo crear las tablas";
@@ -62,9 +62,9 @@ class Error {
     }
     public static function array($err){
         if (defined ('self::'.$err))
-            return ['success'=>false , 'code' => $err , 'err' => constant('self::'.$err)] ;
+            return ['success'=>0 , 'code' => $err , 'err' => constant('self::'.$err)] ;
         else
-            return ['success'=>false , 'code' => 'E000' , 'err' => $err] ;
+            return ['success'=>0 , 'code' => 'E000' , 'err' => $err] ;
     }
     public static function set($err){
         self::$last = $err;

@@ -1,4 +1,3 @@
-empresa(#id, #nombre, NIF, email, web, -id_admin, -id_facturacion)
 usarios(#id, DNI, nombre, fecha_nacimiento, password, intentos, estado)
 telefonos(#id, -id_usuario, nombre, numero)
 direcciones(#id, -id_usuario, calle, numero, cp, poblacion, localidad, pais)
@@ -8,3 +7,4 @@ articulos(#id, #codigo, nombre, descripcion, precio, coste, -id_iva, estado, tip
 tickets(#id, -id_empleado, -id_cliente, estado) 
 lineas(#id, -id_ticket, -id_articulo, precio, cantidad, iva, dto)
 historial(#id, -id_registro, tabla, fecha, accion)
+configuracion(#id, zona_horaria, idioma, dto, esquinas, logo, color_fuente, letra1, letra2, color1, color2)

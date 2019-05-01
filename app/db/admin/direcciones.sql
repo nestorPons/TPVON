@@ -1,6 +1,6 @@
 CREATE TABLE `direcciones` (
-  `id` int(22) AUTO_INCREMENT NOT NULL UNSIGNED PRIMARY KEY,
-  `id_usuario` int(11) NOT NULL REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  `id` int(22) UNSIGNED AUTO_INCREMENT NOT NULL  PRIMARY KEY,
+  `id_empresa` INT(11) NOT NULL REFERENCES `empresas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   `calle` varchar(50) NOT NULL,
   `numero` SMALLINT NOT NULL,
   `piso` tinyint DEFAULT NULL,
@@ -9,4 +9,4 @@ CREATE TABLE `direcciones` (
   `CP` SMALLINT(5) DEFAULT NULL,
   `provincia` VARCHAR(30) DEFAULT NULL,
   `pais` VARCHAR(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET utf8 COLLATE utf8_spanish2_ci;

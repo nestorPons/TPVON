@@ -13,7 +13,7 @@ class Query extends Conn{
         $db, $table, $user;
 
         
-    function __construct($db, $table, $user = 'root') {   
+    function __construct(string $db = null, string $table = null, $user = 'root') {   
         $this->table = $table;  
     }
     protected function conectDB(String $db, String $user = 'root'){
@@ -94,6 +94,7 @@ class Query extends Conn{
          }  
         $strCol = trim($strCol , ',') ;
         $strPre = trim($strPre , ',') ;
+
         $this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params);
         return $this->lastInsertId();
      }
