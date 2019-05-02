@@ -43,8 +43,8 @@ class Router{
                 $this->loadController($this->controller); 
             } else {
                 // Si hemos ingresado segundo parametro en la url y existe buscamos la empresa
-                $Companies = new \app\models\Companies(); 
-                $company = $Companies->getBy(['nombre' => $this->db]); 
+                $Company = new \app\models\Company(); 
+                $company = $Company->getBy(['nombre' => $this->db]); 
             
                 if ( $company ){   
                     $this->id = $company['id'];
@@ -64,12 +64,13 @@ class Router{
     }
     private function isPost($params){
         if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') { 
-
+            
             // Pasamos los datos de json a objeto Data
             $this->data = new \app\libs\Data((array)json_decode($params['data']) ?? null);
-
+            
+ 
             $respond = $this->loadController(); 
-
+            if($respond === true) $respond = ['success'=> true];
             echo json_encode($respond);
             return true; 
         } else return false;

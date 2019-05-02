@@ -1,6 +1,6 @@
 <?php namespace app\core ;
 
-class Error {
+class Error extends \Exception{
     public static $last = false;
 
     const E000 = "Error inesperado";
@@ -21,6 +21,7 @@ class Error {
     const E016 = "No se pudo inicializar las tablas";
     const E017 = "No se pudo crear el archivo de la empresa";
     const E018 = 'No se pudo encontrar la empresa solicitada';
+    const E019 = "No se ha podido registrar el usuario";
 
     //login 
     const E022 = "Email ocupado."; 
@@ -48,10 +49,16 @@ class Error {
 
     //Base datos
     const E051 = "No se encontro la base de datos";
-
+    const E052 = "No se pudo conectar con la base de datos";
+    const E053 = "Error guardando los datos";
+    
+    // Clases
+    const E060 = "No se han registrado los datos corretamente";
+    
     //Mail 
     const E071 = "No se ha podido mandar el email";
 
+    
     public static function E010(){
        $Login = new \models\Login; 
        $Login->logout(); 

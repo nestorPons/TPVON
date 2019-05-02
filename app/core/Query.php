@@ -3,21 +3,14 @@
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query extends Conn{
-    protected 
-        $log = false,
-        $return = false,
-        $logs = ['data','usuarios'],
-	    $users,
-        $conf,
-        $conn,
-        $db, $table, $user;
-
+    protected $conn;
         
     function __construct(string $db = null, string $table = null, $user = 'root') {   
         $this->table = $table;  
     }
-    protected function conectDB(String $db, String $user = 'root'){
-        $this->conn = parent::__construct($db, $user);
+    public function connecTo(String $db = null, String $user = 'root'){
+        $this->db = $db??(app\libs\Data::normalize(NAME_COMPANY));
+        $this->conn = parent::__construct($this->db, $user);
         return gettype($this->conn) === 'object';
     }
     function __destruct(){
@@ -95,8 +88,10 @@ class Query extends Conn{
         $strCol = trim($strCol , ',') ;
         $strPre = trim($strPre , ',') ;
 
-        $this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params);
-        return $this->lastInsertId();
+        if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
+
+        }
+            return $this->lastInsertId();
      }
     // Edita registro mediante su id
     public function saveById ( Int $id , Array $args = null ) {

@@ -3578,3 +3578,136 @@ Stack trace:
 #9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #10 {main}
   thrown in /var/www/html/app/core/Conn.php on line 74
+[02-May-2019 08:15:35 UTC] PHP Notice:  Undefined variable: config in /var/www/html/app/models/Company.php on line 75
+[02-May-2019 10:03:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:73
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(31): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 73
+[02-May-2019 10:04:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:73
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(31): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 73
+[02-May-2019 10:05:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:73
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(31): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 73
+[02-May-2019 10:05:47 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\Query' not found in /var/www/html/app/models/User.php:3
+Stack trace:
+#0 /var/www/html/vendor/composer/ClassLoader.php(444): include()
+#1 /var/www/html/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/var/www/html/v...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('app\\models\\User')
+#3 /var/www/html/app/models/Company.php(37): spl_autoload_call('app\\models\\User')
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/models/User.php on line 3
+[02-May-2019 10:10:02 UTC] PHP Fatal error:  Access level to app\models\Usuarios::$table must be protected (as in class app\core\Query) or weaker in /var/www/html/app/models/User.php on line 31
+[02-May-2019 10:11:31 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\User' not found in /var/www/html/app/models/Company.php:37
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 37
+[02-May-2019 10:14:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function bindValue() on bool in /var/www/html/app/core/Conn.php:73
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(123): app\core\Conn->init('INSERT INTO usu...', Array)
+#1 /var/www/html/app/core/Query.php(98): app\core\Conn->query('INSERT INTO usu...', Array)
+#2 /var/www/html/app/models/User.php(15): app\core\Query->add(Array)
+#3 /var/www/html/app/models/Company.php(39): app\models\User->new(Object(app\libs\Data))
+#4 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#6 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#7 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 73
+[02-May-2019 10:43:03 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\User::$id in /var/www/html/app/models/Company.php:42
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 42
+[02-May-2019 11:00:54 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/models/User.php on line 29
+[02-May-2019 11:03:22 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\Exception' not found in /var/www/html/app/models/Company.php:49
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 49
+[02-May-2019 11:19:34 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /var/www/html/app/models/Company.php on line 90
+[02-May-2019 11:21:28 UTC] PHP Notice:  Undefined property: Exception::$Exception: E013 in /var/www/html/app/models/Company.php:70
+Stack trace:
+#0 /var/www/html/app/models/Company.php(36): app\models\Company->createDb()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(72): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main} in /var/www/html/app/models/Company.php on line 48
+[02-May-2019 11:21:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getMessage() on null in /var/www/html/app/models/Company.php:48
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(72): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 48
+[02-May-2019 12:54:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Query::conecTo() in /var/www/html/app/models/Company.php:74
+Stack trace:
+#0 /var/www/html/app/models/Company.php(36): app\models\Company->createDb()
+#1 /var/www/html/app/controllers/Controller.php(48): app\models\Company->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'company', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(72): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Company.php on line 74
+[02-May-2019 12:55:56 UTC] PHP Notice:  Undefined property: app\models\User::$email in /var/www/html/app/models/User.php on line 18

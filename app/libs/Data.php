@@ -15,6 +15,9 @@ class Data {
             }
         }
     }
+    function addOne($key, $value){
+        return $this->{$key} = $value;
+    }
     /**
      * Validador de los datos
      * $args es un array de los atributos que se quieren validar
@@ -22,7 +25,7 @@ class Data {
     function valid(array $args = [], bool $err = false){
         foreach($args as $value){
             if (!isset($this->{$value})) 
-                if ($err) \app\core\Error::die('E005'); 
+                if ($err) return \app\core\Error::array('E005'); 
                 else return false;
         }
         return true; 
@@ -30,7 +33,7 @@ class Data {
     function toArray(){
         return (array)$this; 
     }
-    function normalize($str){
+    static function normalize($str){
         $originals = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ
         ßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
         $modify = 'aaaaaaaceeeeiiiidnoooooouuuuy
@@ -41,7 +44,7 @@ class Data {
         $str = strtolower($str);
         return utf8_encode($str);
     }
-    public static function normalizeShow($name){
+    static function normalizeShow($name){
         $name = str_replace('_', ' ', trim($name));
         $name = ucwords($name);
         return $name; 
