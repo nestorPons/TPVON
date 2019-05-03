@@ -3711,3 +3711,121 @@ Stack trace:
 #7 {main}
   thrown in /var/www/html/app/models/Company.php on line 74
 [02-May-2019 12:55:56 UTC] PHP Notice:  Undefined property: app\models\User::$email in /var/www/html/app/models/User.php on line 18
+[03-May-2019 08:07:14 UTC] PHP Fatal error:  Uncaught Error: Class 'app\controllers\app\models\Company' not found in /var/www/html/app/controllers/Main.php:19
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(10): app\controllers\Main->getCompanies()
+#1 /var/www/html/app/core/Router.php(92): app\controllers\Main->__construct('', NULL)
+#2 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('main')
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Main.php on line 19
+[03-May-2019 08:09:21 UTC] PHP Parse error:  syntax error, unexpected ')' in /var/www/html/app/views/main.phtml on line 7
+[03-May-2019 08:20:39 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Main::companies() must be of the type string or null, array given, called in /var/www/html/app/controllers/Main.php on line 21 and defined in /var/www/html/app/controllers/Main.php:23
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(21): app\controllers\Main->companies(Array)
+#1 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Main->__construct('', NULL)
+#3 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('main')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Main.php on line 23
+[03-May-2019 08:29:13 UTC] PHP Notice:  Undefined property: app\libs\Data::$page in /var/www/html/app/views/index.phtml on line 23
+[03-May-2019 08:29:13 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 23
+[03-May-2019 08:29:13 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 23
+[03-May-2019 08:32:02 UTC] PHP Parse error:  syntax error, unexpected '0' (T_LNUMBER), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /var/www/html/app/views/main.phtml on line 9
+[03-May-2019 08:32:15 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\libs\Data as array in /var/www/html/app/views/main.phtml:9
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(23): include_once()
+#1 /var/www/html/app/controllers/Controller.php(40): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Main.php(16): app\controllers\Controller->require('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Main.php(12): app\controllers\Main->getView(Array)
+#4 /var/www/html/app/core/Router.php(92): app\controllers\Main->__construct('', NULL)
+#5 /var/www/html/app/core/Router.php(43): app\core\Router->loadController('main')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/main.phtml on line 9
+[03-May-2019 08:43:24 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/views/main.phtml on line 8
+[03-May-2019 08:43:24 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/views/main.phtml on line 8
+[03-May-2019 09:57:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\libs\arg_replace() in /var/www/html/app/libs/Data.php:46
+Stack trace:
+#0 /var/www/html/app/core/Router.php(47): app\libs\Data::normalize('le_coquete')
+#1 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#2 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#3 {main}
+  thrown in /var/www/html/app/libs/Data.php on line 46
+[03-May-2019 10:00:35 UTC] PHP Notice:  Undefined property: app\models\Company::$data in /var/www/html/app/controllers/Login.php on line 14
+[03-May-2019 10:00:35 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 7
+[03-May-2019 10:14:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function validate() on bool in /var/www/html/app/models/Company.php:26
+Stack trace:
+#0 /var/www/html/app/models/Company.php(17): app\models\Company->loadData(false)
+#1 /var/www/html/app/controllers/Login.php(9): app\models\Company->__construct('3')
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Login->__construct('view', '3')
+#3 /var/www/html/app/core/Router.php(55): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 26
+[03-May-2019 10:14:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function validate() on bool in /var/www/html/app/models/Company.php:29
+Stack trace:
+#0 /var/www/html/app/models/Company.php(17): app\models\Company->loadData(false)
+#1 /var/www/html/app/controllers/Login.php(9): app\models\Company->__construct('3')
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Login->__construct('view', '3')
+#3 /var/www/html/app/core/Router.php(55): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 29
+[03-May-2019 10:15:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function validate() on bool in /var/www/html/app/models/Company.php:29
+Stack trace:
+#0 /var/www/html/app/models/Company.php(17): app\models\Company->loadData(false)
+#1 /var/www/html/app/controllers/Login.php(9): app\models\Company->__construct('3')
+#2 /var/www/html/app/core/Router.php(92): app\controllers\Login->__construct('view', '3')
+#3 /var/www/html/app/core/Router.php(55): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 29
+[03-May-2019 10:28:14 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre_empresa in /var/www/html/app/models/Company.php on line 26
+[03-May-2019 10:28:14 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\libs\Data::codify() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 26 and defined in /var/www/html/app/libs/Data.php:36
+Stack trace:
+#0 /var/www/html/app/models/Company.php(26): app\libs\Data::codify(NULL)
+#1 /var/www/html/app/models/Company.php(19): app\models\Company->loadData(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(46): app\models\Company->__construct('la_coquete')
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/libs/Data.php on line 36
+[03-May-2019 10:31:31 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre_empresa in /var/www/html/app/models/Company.php on line 26
+[03-May-2019 10:31:31 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\libs\Data::codify() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 26 and defined in /var/www/html/app/libs/Data.php:36
+Stack trace:
+#0 /var/www/html/app/models/Company.php(26): app\libs\Data::codify(NULL)
+#1 /var/www/html/app/models/Company.php(19): app\models\Company->loadData(Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(46): app\models\Company->__construct('la_coquete')
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/libs/Data.php on line 36
+[03-May-2019 10:33:11 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\Company::$data in /var/www/html/app/controllers/Login.php:14
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(27): app\controllers\Login->getView()
+#1 /var/www/html/app/controllers/Login.php(10): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(91): app\controllers\Login->__construct('view', NULL)
+#3 /var/www/html/app/core/Router.php(54): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 14
+[03-May-2019 10:35:54 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\Company::$data in /var/www/html/app/controllers/Login.php:14
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(27): app\controllers\Login->getView()
+#1 /var/www/html/app/controllers/Login.php(10): app\controllers\Controller->__construct('view')
+#2 /var/www/html/app/core/Router.php(91): app\controllers\Login->__construct('view', NULL)
+#3 /var/www/html/app/core/Router.php(54): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 14
+[03-May-2019 10:38:26 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 7

@@ -3,8 +3,9 @@
     width: 420px; 
 ">
     <form>
+        <h1><?=$data->normalizeAttr('nombre')?></h1>
         <fieldset  class="container">
-            <legend>Login <?=$data->nombre?></legend>
+            <legend>Login</legend>
             <?php 
                 new InputText(['label'=>'Email del usuario', 'name'=>'email', 'required'=>false]);
                 new InputPass(['label'=>'Contraseña', 'name'=>'pass', 'required'=>true])

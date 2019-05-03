@@ -25,7 +25,7 @@ class Router{
     function __construct($params = []){
 
         // Valores por defecto
-        $this->db = strtolower($params['db'] ?? null); 
+        $this->db = $params['db'] ?? null; 
         $this->controller =  strtolower($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
 
@@ -43,12 +43,11 @@ class Router{
                 $this->loadController($this->controller); 
             } else {
                 // Si hemos ingresado segundo parametro en la url y existe buscamos la empresa
-                $Company = new \app\models\Company(); 
-                $company = $Company->getBy(['nombre' => $this->db]); 
-            
-                if ( $company ){   
-                    $this->id = $company['id'];
-                    $this->nameDb = $company['nombre'];
+                $Company = new \app\models\Company($this->db);
+ 
+                if ($Company){   
+                    $this->id = $Company->id();
+                    $this->nameDb = $Company->nombre();
                     // Si esta vacio controlador nos envia al login
                     if (empty($this->controller)) {
                         $this->action = 'view'; 
@@ -89,7 +88,7 @@ class Router{
         if(!empty($controller)) $this->controller = ucwords($controller); 
         $nameClass = '\\app\\controllers\\' . $this->controller;
         $cont = $this->isController($this->controller)
-            ? new $nameClass($this->action, $this->id)
+            ? new $nameClass($this->action, $this->db)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);
         
         return $cont->result; 

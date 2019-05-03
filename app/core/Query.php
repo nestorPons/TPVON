@@ -9,7 +9,7 @@ class Query extends Conn{
         $this->table = $table;  
     }
     public function connecTo(String $db = null, String $user = 'root'){
-        $this->db = $db??(app\libs\Data::normalize(NAME_COMPANY));
+        $this->db = $db??(NAME_COMPANY);
         $this->conn = parent::__construct($this->db, $user);
         return gettype($this->conn) === 'object';
     }
