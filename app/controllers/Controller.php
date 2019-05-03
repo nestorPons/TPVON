@@ -25,6 +25,7 @@ class Controller{
             case 'get':  $this->result = $this->setModel(); break;
             case 'set':  $this->result = $this->getModel(); break;
             case 'view': $this->result = $this->getView(); break;
+            case 'auth': $this->result = $this->auth(); break;
             default: 
                 die('Accion no permitida!!');
         }

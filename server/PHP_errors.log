@@ -3829,3 +3829,46 @@ Stack trace:
 #6 {main}
   thrown in /var/www/html/app/controllers/Login.php on line 14
 [03-May-2019 10:38:26 UTC] PHP Notice:  Undefined property: app\libs\Data::$nombre in /var/www/html/app/views/login.phtml on line 7
+[03-May-2019 10:56:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\controllers\Controller::auth() in /var/www/html/app/controllers/Controller.php:28
+Stack trace:
+#0 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('auth', 'login', Object(app\libs\Data))
+#1 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 28
+[03-May-2019 10:57:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\controllers\Controller::auth() in /var/www/html/app/controllers/Controller.php:28
+Stack trace:
+#0 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('auth', 'login', Object(app\libs\Data))
+#1 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 28
+[03-May-2019 10:58:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\controllers\Controller::auth() in /var/www/html/app/controllers/Controller.php:27
+Stack trace:
+#0 /var/www/html/app/core/Router.php(92): app\controllers\Controller->__construct('auth', 'login', Object(app\libs\Data))
+#1 /var/www/html/app/core/Router.php(71): app\core\Router->loadController()
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 27
+[03-May-2019 11:35:14 UTC] PHP Parse error:  syntax error, unexpected ')' in /var/www/html/app/core/Router.php on line 90
+[03-May-2019 11:38:21 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ')' in /var/www/html/app/core/Router.php on line 91
+[03-May-2019 12:51:20 UTC] PHP Fatal error:  Uncaught MatthiasMullie\Minify\Exceptions\IOException: The file "/var/www/html/app/src/js/mods/tools.min.js" could not be opened for writing. Check if PHP has enough permissions. in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php:438
+Stack trace:
+#0 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(198): MatthiasMullie\Minify\Minify->openFileForWriting('/var/www/html/a...')
+#1 /var/www/html/vendor/matthiasmullie/minify/src/Minify.php(115): MatthiasMullie\Minify\Minify->save('var echo=functi...', '/var/www/html/a...')
+#2 /var/www/html/app/core/minify.php(29): MatthiasMullie\Minify\Minify->minify('/var/www/html/a...')
+#3 /var/www/html/app/core/minify.php(23): listar('/var/www/html/a...')
+#4 /var/www/html/app/core/minify.php(36): listar('/var/www/html/a...')
+#5 /var/www/html/htdocs/index.php(9): require_once('/var/www/html/a...')
+#6 {main}
+  thrown in /var/www/html/vendor/matthiasmullie/minify/src/Minify.php on line 438
+[03-May-2019 12:53:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function listar(), 1 passed in /var/www/html/app/core/minify.php on line 23 and exactly 2 expected in /var/www/html/app/core/minify.php:17
+Stack trace:
+#0 /var/www/html/app/core/minify.php(23): listar('/var/www/html/a...')
+#1 /var/www/html/app/core/minify.php(36): listar('/var/www/html/a...', '/var/www/html/h...')
+#2 /var/www/html/htdocs/index.php(9): require_once('/var/www/html/a...')
+#3 {main}
+  thrown in /var/www/html/app/core/minify.php on line 17

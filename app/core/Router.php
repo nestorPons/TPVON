@@ -26,7 +26,7 @@ class Router{
 
         // Valores por defecto
         $this->db = $params['db'] ?? null; 
-        $this->controller =  strtolower($params['controller'] ?? null); 
+        $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
 
         !$this->isGet() && $this->isPost($params);
@@ -80,6 +80,7 @@ class Router{
     }
     // Comprobamos que exista la clase controladora
     private function isController(string $class){
+
         return (file_exists ( \FOLDERS\CONTROLLERS . $class . '.php'));
     }
     // Carga controladores
@@ -87,8 +88,9 @@ class Router{
     private function loadController(string $controller = null){
         if(!empty($controller)) $this->controller = ucwords($controller); 
         $nameClass = '\\app\\controllers\\' . $this->controller;
+
         $cont = $this->isController($this->controller)
-            ? new $nameClass($this->action, $this->db)
+            ? new $nameClass($this->action, $this->db, $this->data)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);
         
         return $cont->result; 
