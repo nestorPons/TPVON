@@ -27,7 +27,7 @@ class Conn{
     protected function connect(){
         $this->credentials = parse_ini_file('../app/config/conn.ini');
         if (empty($this->prefix)) $this->prefix = $this->credentials["prefix"]; 
-        $dsn = 'mysql:dbname=' . $this->prefix . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
+        $dsn = 'mysql:dbname=' . $this->prefix . strtolower($this->db) . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
         try {
             $this->pdo = new \PDO(
                     $dsn, 
@@ -42,8 +42,8 @@ class Conn{
                 );
             return $this->pdo; 
         }
-        catch (\PDOException $e){      
-            die('fallo conexion base datos');
+        catch (\PDOException $e){ 
+            die('fallo conexion base datos ' . $e->getMessage());
         }
     }
     function __destruct(){

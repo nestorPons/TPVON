@@ -4,12 +4,9 @@
  */
 class Query extends Conn{
     protected $conn;
-        
-    function __construct(string $db = null, string $table = null, $user = 'root') {   
-        $this->table = $table;  
-    }
-    public function connecTo(String $db = null, String $user = 'root'){
-        $this->db = $db??(NAME_COMPANY);
+
+    public function connecTo(String $db = NAME_COMPANY, String $user = 'root'){
+        $this->db = $db;
         $this->conn = parent::__construct($this->db, $user);
         return gettype($this->conn) === 'object';
     }

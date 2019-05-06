@@ -6,11 +6,24 @@ class Login extends Controller{
     private $company; 
 
     function __construct(String $action = null, String $db = null, $data){
+
         $this->company = new \app\models\Company($db);
-        parent::__construct($action, null, $data);
+        if($this->company->id()){
+            parent::__construct($action, null, $data);
+        }else{
+           die('Empresa no encontrada');
+        }
     }
     protected function auth(){
-        prs($this->data);
+        
+        $d = $this->data;
+        $d->isEmail('email');
+        $d->isString('password', 200);
+
+        $User = new \app\models\User($this->data->email);
+        var_dump(
+            $User->password()
+        );
     }
     protected function getView( Array $data = []){
         return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page' => 'login', 'data' => $this->company->data()] );

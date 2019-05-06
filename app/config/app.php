@@ -1,3 +1,5 @@
 <?php namespace CONFIG; 
+if(isset($_GET['db'])) $_SESSION['db'] = $_GET['db'];
+define('NAME_COMPANY', $_SESSION['db']??null);
 
-define('NAME_COMPANY', $_GET['company'] ?? null);
+define('ENV', TRUE); // Entorno de desarrollo 

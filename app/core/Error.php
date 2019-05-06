@@ -12,7 +12,8 @@ class Error extends \Exception{
     const E006 = "Error en el envio de los datos";
     const E007 = "Error de seguridad";
     const E008 = 'No se pudo cargar la configuracion'; 
-
+    const E009 = 'Error tipo de datos';
+    
     // Creando empresa
     const E011 = "Esta empresa ya existe" ;
     const E012 = "No se pudo validar los datos";
@@ -22,7 +23,7 @@ class Error extends \Exception{
     const E017 = "No se pudo crear el archivo de la empresa";
     const E018 = 'No se pudo encontrar la empresa solicitada';
     const E019 = "No se ha podido registrar el usuario";
-
+    
     //login 
     const E022 = "Email ocupado."; 
     const E023 = "Usuario desactivado <br> Consulte con el administrador. ";
@@ -67,11 +68,11 @@ class Error extends \Exception{
        return false;
        */
     }
-    public static function array($err){
+    public static function array($err, $mens = null){
         if (defined ('self::'.$err))
-            return ['success'=>0 , 'code' => $err , 'err' => constant('self::'.$err)] ;
+            return ['success'=>0 , 'code' => $err , 'err' => constant('self::'.$err), 'obs' => $mens] ;
         else
-            return ['success'=>0 , 'code' => 'E000' , 'err' => $err] ;
+            return ['success'=>0 , 'code' => 'E000' , 'err' => $err, 'obs' => $mens] ;
     }
     public static function set($err){
         self::$last = $err;
@@ -82,9 +83,10 @@ class Error extends \Exception{
         self::$last = false;
         return $err;
     }
-    public static function die($err = null){
+    // Detiene el script y devuelve un array de error
+    public static function die($err = null, $mens = null){
         $err = $err??self::getLast();
-        die(print_r(self::array($err)));
+        die(json_encode(self::array($err, $mens)));
     }
     public static function toString($err = null){
         $err = $err??self::getLast();

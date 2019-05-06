@@ -21,14 +21,30 @@ class Data {
     /**
      * Validador de los datos
      * $args es un array de los atributos que se quieren validar
+     * Si añadimos un tipo a los datos este también seré validado
      */
     function validate(array $args = [], bool $err = false){
+        function err($err){
+            if ($err) return \app\core\Error::array('E005'); 
+            else return false;   
+        }
+
         foreach($args as $value){
-            if (!isset($this->{$value})) 
-                if ($err) return \app\core\Error::array('E005'); 
-                else return false;
+            if(is_array($value)){
+                if (!isset($this->{key($value)}) || gettype($this->{key($value)}) != $value[key($value)]) return err($err);
+            } else {
+                if (!isset($this->{$value})) return err($err);
+            }
         }
         return true; 
+    }
+    function isEmail(string $arg){
+        if(!(isset($this->{$arg}) && filter_var($this->{$arg}, FILTER_VALIDATE_EMAIL))) \app\core\Error::die('E009', $this->{$arg}??null);
+        return true;
+    }
+    function isString(string $arg, int $len){
+        if(!(isset($this->{$arg}) && strlen($this->{$arg}) < $len)) \app\core\Error::die('E009', $this->{$arg}??null);
+        return true;
     }
     function toArray(){
         return (array)$this; 

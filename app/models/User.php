@@ -8,7 +8,7 @@ class User extends \app\core\Query{
         if($arg){
             if (!$this->connecTo()) throw new \Exception('E052');
             if (is_int($arg)) $this->searchById();
-            else if (strpos($arg, '@')) $this->searchByEmail();
+            else if (strpos($arg, '@')) $this->searchByEmail($arg);
         }
     }
     function new(Object $Data){
@@ -25,7 +25,8 @@ class User extends \app\core\Query{
             ]);
         } else throw new \Exception('E060');
     }
-    function loadData(Object $Data){
+    function loadData($Data){
+        if(is_array($Data)) $Data = new \app\libs\Data($Data); 
         $this->dni = $Data->dni??null;
         $this->nombre = $Data->nombre;
         $this->email = $Data->email??null;
@@ -35,5 +36,35 @@ class User extends \app\core\Query{
         $this->password = $Data->password??null;
         $this->intentos = $Data->intentos??0;
         return true;
+    }
+    function searchByEmail(string $arg){
+        $data = $this->getBy(['email' => $arg]);
+        if($data) return $this->loadData($data);
+        \app\core\Error::die('E025');
+    }
+    //getters setters
+    function id(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
+    function email(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
+    function nombre(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
+    function dni(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
+    function fecha_nacimiento(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
+    function password(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
     }
 }

@@ -30,9 +30,6 @@ class Controller{
                 die('Accion no permitida!!');
         }
     }
-    protected function setConnection($db){
-        return $this->Query = new \app\core\Query($db, $this->controller);
-    }
     protected function getView( Array $data = []){
         return $this->require(\FOLDERS\VIEWS . $this->controller . '.phtml', $data);
     }
