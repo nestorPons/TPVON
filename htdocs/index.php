@@ -1,6 +1,6 @@
 <?php
 //phpinfo();die();
-session_start();
+
 require_once dirname(__DIR__) . '/app/config/app.php';
 require_once dirname(__DIR__) . '/app/config/folders.php';
 require_once dirname(__DIR__) . '/vendor/autoload.php';  

@@ -5,7 +5,7 @@ $(document)
     e.preventDefault();
     var section = $(this).attr('href'), data = {};
     // Comprobamos si tiene parametros get 
-    // Significa que se solicita redirecciń
+    // Significa que se solicita redirección
     if(section.indexOf('?') != -1){
         let arr = section.split('?')
         let get = arr[1].split('=')

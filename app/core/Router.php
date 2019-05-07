@@ -36,28 +36,30 @@ class Router{
             
     }
     private function isGet(){
-        if(strtoupper($_SERVER['REQUEST_METHOD']) === 'GET') { 
+        if(strtoupper($_SERVER['REQUEST_METHOD']) === 'GET') {
             if(empty($this->db)){
                 // Si no encontramos la base datos vamos a la pagina principal
                 if (empty($this->controller)) $this->controller = 'main';
-                $this->loadController($this->controller); 
+                $controller = $this->controller; 
             } else {
                 // Si hemos ingresado segundo parametro en la url y existe buscamos la empresa
                 $Company = new \app\models\Company($this->db);
- 
+                
                 if ($Company){   
                     $this->id = $Company->id();
                     $this->nameDb = $Company->nombre();
                     // Si esta vacio controlador nos envia al login
                     if (empty($this->controller)) {
                         $this->action = 'view'; 
-                        $this->loadController('login');
+                        $controller = 'login';
                     }
                 } else {
                     Error::toString('E018');
                 } 
             } 
-            return true;
+
+            exit ($this->loadController($controller));
+
         } else return false;
         
     }
@@ -67,11 +69,15 @@ class Router{
             // Pasamos los datos de json a objeto Data
             $this->data = new \app\libs\Data((array)json_decode($params['data']) ?? null);
             
- 
             $respond = $this->loadController(); 
-            if($respond === true) $respond = ['success'=> true];
-            echo json_encode($respond);
-            return true; 
+
+            // Siempre devuelvo un objeto json con un success de respuesta
+            if($respond === true) $respond = ['success'=> 1];
+            if($respond === false) $respond = ['success'=> 0];
+            
+            // SALIDA 
+            exit (json_encode($respond, true));
+
         } else return false;
     }
     private function getParams($GET){
@@ -80,7 +86,6 @@ class Router{
     }
     // Comprobamos que exista la clase controladora
     private function isController(string $class){
-
         return (file_exists ( \FOLDERS\CONTROLLERS . $class . '.php'));
     }
     // Carga controladores
@@ -92,7 +97,7 @@ class Router{
         $cont = $this->isController($this->controller)
             ? new $nameClass($this->action, $this->db, $this->data)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);
-        
+       
         return $cont->result; 
     }
     /**

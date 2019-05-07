@@ -21,9 +21,13 @@ class Login extends Controller{
         $d->isString('password', 200);
 
         $User = new \app\models\User($this->data->email);
-        var_dump(
-            $User->password()
-        );
+        if($this->verify($User)){
+            return require(\FOLDERS\VIEWS . 'appadmin.phtml');
+        } else return false;
+        
+    }
+    private function verify($User){
+        return password_verify($this->data->password, $User->password());
     }
     protected function getView( Array $data = []){
         return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page' => 'login', 'data' => $this->company->data()] );

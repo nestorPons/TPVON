@@ -8,9 +8,7 @@ class Main extends Controller{
     function __construct(String $view = null){
         $this->view = $view; 
         $this->loadView['page'] = $this->view ?? 'login'; 
-        $this->getView(
-            $this->getCompanies()
-        );
+        $this->result = $this->getView($this->getCompanies());
     }
     protected function getView( Array $data = null){ 
         return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page'=>'main', 'companies' => $data]);

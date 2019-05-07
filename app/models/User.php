@@ -6,7 +6,7 @@ class User extends \app\core\Query{
 
     function __construct($arg = null){
         if($arg){
-            if (!$this->connecTo()) throw new \Exception('E052');
+            $this->connecTo() ;
             if (is_int($arg)) $this->searchById();
             else if (strpos($arg, '@')) $this->searchByEmail($arg);
         }
@@ -20,13 +20,17 @@ class User extends \app\core\Query{
                 'fecha_nacimiento' => $this->fecha_nacimiento,
                 'estado' => $this->estado,
                 'nivel' => $this->nivel, 
-                'password' => $this->password,
+                'password' => $this->password_hash(),
                 'intentos' => $this->intentos
             ]);
         } else throw new \Exception('E060');
     }
+    function password_hash(string $pass = null){
+        $pass = $pass??$this->password(); 
+        return password_hash($pass, PASSWORD_DEFAULT);
+    }
     function loadData($Data){
-        if(is_array($Data)) $Data = new \app\libs\Data($Data); 
+        if(is_array($Data)) $Data = new \app\libs\Data($Data);
         $this->dni = $Data->dni??null;
         $this->nombre = $Data->nombre;
         $this->email = $Data->email??null;

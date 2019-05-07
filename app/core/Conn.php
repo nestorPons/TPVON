@@ -14,13 +14,7 @@ class Conn{
         $db,
         $table,
         $error;
-    
-    function __construct($database, $user){
-        $this->db = $database;
-        $this->user = $user;
-        return $this->connect();
-    }
-    
+        
     /**
      *	Genera la conexión a a la base de datos
      */

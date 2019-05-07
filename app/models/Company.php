@@ -27,7 +27,7 @@ class Company extends \app\core\Query{
         $this->fecha = $Data->fecha??null;
         $this->ultimo_acceso = $Data->ultimo_acceso??null;
         $this->plan = $Data->plan??null;
-        $this->nombre = $Data->nombre;
+        $this->nombre = strtolower($Data->nombre);
         $this->nif = $Data->nif;
         $this->sector = $Data->sector;
     }

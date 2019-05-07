@@ -4095,3 +4095,210 @@ Stack trace:
 #7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #8 {main}
   thrown in /var/www/html/app/core/dev.php on line 8
+[07-May-2019 08:23:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Conn::__construct(), 0 passed in /var/www/html/app/models/Company.php on line 86 and exactly 2 expected in /var/www/html/app/core/Conn.php:18
+Stack trace:
+#0 /var/www/html/app/models/Company.php(86): app\core\Conn->__construct()
+#1 /var/www/html/app/models/Company.php(55): app\models\Company->createDb()
+#2 /var/www/html/app/controllers/Controller.php(46): app\models\Company->new(Object(app\libs\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(94): app\controllers\Controller->__construct('new', 'Company', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 18
+[07-May-2019 08:38:33 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 11
+[07-May-2019 08:38:33 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 12
+[07-May-2019 08:40:07 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\app\core\Query' not found in /var/www/html/app/models/Company.php:86
+Stack trace:
+#0 /var/www/html/app/models/Company.php(55): app\models\Company->createDb()
+#1 /var/www/html/app/controllers/Controller.php(46): app\models\Company->new(Object(app\libs\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(94): app\controllers\Controller->__construct('new', 'Company', Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Company.php on line 86
+[07-May-2019 08:55:27 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 11
+[07-May-2019 08:55:27 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 12
+[07-May-2019 08:58:43 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 11
+[07-May-2019 08:58:43 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 12
+[07-May-2019 09:00:21 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 13
+[07-May-2019 09:00:21 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/main.phtml on line 14
+[07-May-2019 09:01:35 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/main.phtml on line 11
+[07-May-2019 09:01:35 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/main.phtml on line 12
+[07-May-2019 09:01:35 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/main.phtml on line 11
+[07-May-2019 09:01:35 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/main.phtml on line 12
+[07-May-2019 09:52:47 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\User::$password in /var/www/html/app/controllers/Login.php:25
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(28): app\controllers\Login->auth()
+#1 /var/www/html/app/controllers/Login.php(12): app\controllers\Controller->__construct('auth', NULL, Object(app\libs\Data))
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'aol1', Object(app\libs\Data))
+#3 /var/www/html/app/core/Router.php(70): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 25
+[07-May-2019 10:28:42 UTC] PHP Warning:  include(/var/www/html/app/views/appadmin.phtml') [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Login.php on line 25
+[07-May-2019 10:28:42 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/appadmin.phtml'' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Login.php on line 25
+[07-May-2019 12:48:52 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ')' in /var/www/html/app/controllers/Main.php on line 15
+[07-May-2019 12:53:55 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(39): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 12:55:14 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(39): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 12:56:32 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(39): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:02:49 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:06:05 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:07:42 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:07:42 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:19:32 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /var/www/html/app/controllers/Controller.php(41) : eval()'d code on line 1
+[07-May-2019 13:19:55 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /var/www/html/app/controllers/Controller.php(41) : eval()'d code on line 1
+[07-May-2019 13:20:04 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /var/www/html/app/controllers/Controller.php(41) : eval()'d code on line 1
+[07-May-2019 13:20:25 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /var/www/html/app/controllers/Controller.php(42) : eval()'d code on line 1
+[07-May-2019 13:21:55 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:23:16 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:23:16 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:24:01 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:24:02 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:24:18 UTC] PHP Fatal error:  Uncaught Error: Class 'InputText' not found in /var/www/html/app/views/newcompany.phtml:8
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(40): include()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->require('/var/www/html/a...', Array)
+#2 /var/www/html/app/controllers/Controller.php(27): app\controllers\Controller->getView()
+#3 /var/www/html/app/core/Router.php(99): app\controllers\Controller->__construct('view', 'Newcompany', NULL)
+#4 /var/www/html/app/core/Router.php(61): app\core\Router->loadController('Newcompany')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/newcompany.phtml on line 8
+[07-May-2019 13:25:46 UTC] PHP Warning:  ob_get_contents() expects exactly 0 parameters, 1 given in /var/www/html/app/controllers/Controller.php on line 42
+[07-May-2019 13:28:22 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /var/www/html/app/controllers/Controller.php(46) : eval()'d code on line 1
+[07-May-2019 13:30:59 UTC] PHP Parse error:  syntax error, unexpected '<', expecting end of file in /var/www/html/app/controllers/Controller.php(45) : eval()'d code on line 1
+[07-May-2019 13:35:18 UTC] PHP Parse error:  syntax error, unexpected '&', expecting end of file in /var/www/html/app/controllers/Controller.php(46) : eval()'d code on line 1
+[07-May-2019 13:37:21 UTC] PHP Parse error:  syntax error, unexpected '?', expecting end of file in /var/www/html/app/controllers/Controller.php(46) : eval()'d code on line 1
+[07-May-2019 13:37:40 UTC] PHP Parse error:  syntax error, unexpected '?', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[07-May-2019 13:38:54 UTC] PHP Warning:  Unexpected character in input:  '' (ASCII=11) state=0 in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[07-May-2019 13:38:54 UTC] PHP Parse error:  syntax error, unexpected 'iews' (T_STRING), expecting '{' in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[07-May-2019 13:39:11 UTC] PHP Parse error:  syntax error, unexpected '?', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[07-May-2019 13:39:27 UTC] PHP Parse error:  syntax error, unexpected '&', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[07-May-2019 13:39:59 UTC] PHP Parse error:  syntax error, unexpected '?', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[07-May-2019 13:41:36 UTC] PHP Parse error:  syntax error, unexpected '&', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1

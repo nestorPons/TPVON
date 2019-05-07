@@ -118,10 +118,19 @@ var app = {
     },
     post: function (data) {
         if (typeof data.controller === 'undefined') return false;
-        $.post('index.php', app.getData(data), function (json) {
-            echo('RESPUESTA')
-            echo(json);
-        }, 'json');
+        $.post('index.php', app.getData(data), function (respond, status, xhr, dataType) {
+            // La respuesta puede ser json o html 
+            try {
+                // comprobamos si es json
+                data = JSON.parse(respond);
+                // es JSON
+                echo (data)
+            } catch(e) {
+                // es HTML
+                html = $(respond)
+                app.sections.load(html.attr('id'), html)
+            }
+        });
     },
     get: function (data) {
         if (typeof data.controller === 'undefined') return false;
@@ -159,11 +168,24 @@ var app = {
         document.getElementsByTagName('body')[0].appendChild(script);
     },
     sections: {
-        toggle: function (section) {
+        toggle(section, callback) {
             $('section').fadeOut('fast', function () {
                 $('section#' + section).fadeIn();
+                callback != undefined && callback()
             });
-        }
+        },
+        load(section = '', html = jQuery){
+            // Comprueba que  la seccion existe o no 
+            if($('section#' + section).length){
+               // Si existe oculta todas menos la solicitada
+               app.sections.toggle(section);
+           }else{
+               // Cargammos el codigo html
+               this.toggle(section, function(){
+                   html.appendTo('main')
+               })
+           }
+        },
     },
     toObject (form){
         var obj = {};

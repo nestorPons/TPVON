@@ -6,9 +6,14 @@ class Query extends Conn{
     protected $conn;
 
     public function connecTo(String $db = NAME_COMPANY, String $user = 'root'){
-        $this->db = $db;
-        $this->conn = parent::__construct($this->db, $user);
-        return gettype($this->conn) === 'object';
+        try{
+            $this->db = $db;
+            $this->user = $user;
+            $this->conn = $this->connect($this->db, $this->user);
+            return gettype($this->conn) === 'object';
+        } catch (\Exception $e){
+            prs($e);
+        }
     }
     function __destruct(){
         $this->conn = null;
@@ -86,9 +91,8 @@ class Query extends Conn{
         $strPre = trim($strPre , ',') ;
 
         if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
-
-        }
             return $this->lastInsertId();
+        }else return false;
      }
     // Edita registro mediante su id
     public function saveById ( Int $id , Array $args = null ) {
