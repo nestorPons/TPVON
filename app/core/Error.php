@@ -68,11 +68,11 @@ class Error extends \Exception{
        return false;
        */
     }
-    public static function array($err, $mens = null){
+    public static function array($err, $obs = null){
         if (defined ('self::'.$err))
-            return ['success'=>0 , 'code' => $err , 'err' => constant('self::'.$err), 'obs' => $mens] ;
+            return ['success'=>0 , 'code' => $err , 'mens' => constant('self::'.$err), 'obs' => $obs] ;
         else
-            return ['success'=>0 , 'code' => 'E000' , 'err' => $err, 'obs' => $mens] ;
+            return ['success'=>0 , 'code' => 'E000' , 'mens' => $err, 'obs' => $mens] ;
     }
     public static function set($err){
         self::$last = $err;

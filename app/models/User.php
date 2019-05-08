@@ -63,6 +63,10 @@ class User extends \app\core\Query{
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 
     }
+    function nivel(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
     function fecha_nacimiento(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 

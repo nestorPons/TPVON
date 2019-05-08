@@ -4302,3 +4302,38 @@ Stack trace:
 [07-May-2019 13:39:27 UTC] PHP Parse error:  syntax error, unexpected '&', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
 [07-May-2019 13:39:59 UTC] PHP Parse error:  syntax error, unexpected '?', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
 [07-May-2019 13:41:36 UTC] PHP Parse error:  syntax error, unexpected '&', expecting end of file in /var/www/html/app/controllers/Controller.php(47) : eval()'d code on line 1
+[08-May-2019 09:57:42 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /var/www/html/app/controllers/Login.php on line 26
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant LEVEL_ADMIN - assumed 'LEVEL_ADMIN' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 98
+[08-May-2019 11:21:37 UTC] PHP Warning:  Use of undefined constant LEVEL_USER - assumed 'LEVEL_USER' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 98
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant LEVEL_ADMIN - assumed 'LEVEL_ADMIN' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 98
+[08-May-2019 11:22:41 UTC] PHP Warning:  Use of undefined constant LEVEL_USER - assumed 'LEVEL_USER' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 98
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant ENV - assumed 'ENV' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/minify.php on line 29
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant LEVEL_ADMIN - assumed 'LEVEL_ADMIN' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 98
+[08-May-2019 11:22:50 UTC] PHP Warning:  Use of undefined constant LEVEL_USER - assumed 'LEVEL_USER' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Router.php on line 98
+[08-May-2019 11:25:16 UTC] PHP Notice:  Undefined property: app\controllers\Login::$user in /var/www/html/app/controllers/Login.php on line 44
+[08-May-2019 11:25:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nivel() on null in /var/www/html/app/controllers/Login.php:44
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(37): app\controllers\Login->isAdmin()
+#1 /var/www/html/app/controllers/Login.php(29): app\controllers\Login->zone()
+#2 /var/www/html/app/controllers/Controller.php(28): app\controllers\Login->auth()
+#3 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('auth', NULL, Object(app\libs\Data))
+#4 /var/www/html/app/core/Router.php(98): app\controllers\Login->__construct('auth', 'aol', Object(app\libs\Data))
+#5 /var/www/html/app/core/Router.php(72): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 44
