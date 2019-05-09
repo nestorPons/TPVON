@@ -36,11 +36,12 @@ class Router{
             
     }
     private function isGet(){
+
         if(strtoupper($_SERVER['REQUEST_METHOD']) === 'GET') {
             if(empty($this->db)){
                 // Si no encontramos la base datos vamos a la pagina principal
                 if (empty($this->controller)) $this->controller = 'main';
-                $controller = $this->controller; 
+                $this->controller = $this->controller; 
             } else {
                 // Si hemos ingresado segundo parametro en la url y existe buscamos la empresa
                 $Company = new \app\models\Company($this->db);
@@ -51,14 +52,14 @@ class Router{
                     // Si esta vacio controlador nos envia al login
                     if (empty($this->controller)) {
                         $this->action = 'view'; 
-                        $controller = 'login';
+                        $this->controller = 'login';
                     }
                 } else {
                     Error::toString('E018');
                 } 
             } 
-
-            exit ($this->loadController($controller));
+            
+            exit ($this->loadController($this->controller));
 
         } else return false;
         
@@ -67,7 +68,7 @@ class Router{
         if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') { 
             
             // Pasamos los datos de json a objeto Data
-            $this->data = new \app\libs\Data((array)json_decode($params['data']) ?? null);
+            $this->data = new \app\core\Data((array)json_decode($params['data']) ?? null);
             
             $respond = $this->loadController(); 
 
@@ -79,10 +80,6 @@ class Router{
             exit (json_encode($respond, true));
 
         } else return false;
-    }
-    private function getParams($GET){
-        // si pasamos primer parametro por url debemos comprobar que la empresa exista antes de rootear la dir 
-
     }
     // Comprobamos que exista la clase controladora
     private function isController(string $class){

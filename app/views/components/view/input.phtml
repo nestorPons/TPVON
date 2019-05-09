@@ -1,7 +1,7 @@
 <div class="row" id="<?=$id?>">
     <div class="col-sm-12 col-md-12">
         <input 
-            type = "<?=self::TYPE?>" 
+            type = "<?=$TYPE?>" 
             id = "<?=$idSel?>"
             placeholder = ' '
             class = "<?=$class?>"
@@ -11,6 +11,7 @@
             <?=$minlength?>
             <?=$maxlength?>
             <?=$pattern?>
+            <?=$for?>
             <?=$required?> 
         />
         <label for="<?=$idSel?>"><?=$label?></label>

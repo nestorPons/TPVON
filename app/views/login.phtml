@@ -3,7 +3,7 @@
     width: 420px; 
 ">
     <form controller="login" action="auth">
-        <h1><?=$data->normalizeAttr('nombre')?></h1>
+        <h1><?=$Company->nombre()?></h1>
         <fieldset  class="container">
             <legend>Login</legend>
             <?php 
@@ -13,5 +13,6 @@
         </fieldset>
         <?php new ButtonSuccess; new ButtonCancel?>
     </form>
+    <a href="loginnewuser">Nuevo usuario</a>
 </section>
 <script src="/js/login.min.js"></script>

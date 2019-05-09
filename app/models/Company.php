@@ -21,7 +21,7 @@ class Company extends \app\core\Query{
         }
     }
     function loadData($Data){
-        if(is_array($Data)) $Data = new \app\libs\Data($Data); 
+        if(is_array($Data)) $Data = new \app\core\Data($Data); 
         // Validamos los datos del formulario y el true es para que me lanze un error en caso contrario
         $this->id = $Data->id??null;
         $this->fecha = $Data->fecha??null;
@@ -108,7 +108,7 @@ class Company extends \app\core\Query{
     }
     function nombre(string $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
-        return $this->{__FUNCTION__}; 
+        return ucwords($this->{__FUNCTION__}); 
     }
     function data(array $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 

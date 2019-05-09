@@ -1,4 +1,4 @@
-<?php namespace app\libs;
+<?php namespace app\core;
 /**
  * Clase gestión de datos
  */

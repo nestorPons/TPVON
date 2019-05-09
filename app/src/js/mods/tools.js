@@ -9,8 +9,11 @@ var $y = function ($arg) {
         ? selected
         : selected[0];
 };
-var exist = function(arg = null){
-    return arg != null
+var exist = function(arg = undefined){
+    return arg != undefined
+}
+var isTrue = function(arg = null){
+    return arg === true
 }
 var sha256 = function (ascii) {
     function rightRotate(value, amount) {

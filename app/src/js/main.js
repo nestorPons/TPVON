@@ -14,7 +14,7 @@ $(document)
         // Comprueba que  la seccion existe o no 
         if($('section#' + section).length){
             // Si existe oculta todas menos la solicitada
-            app.sections.toggle(section);
+            app.sections.toggle(section)
         }else{
             // Manda una petición de la nueva vista
             data.controller = section
@@ -23,22 +23,32 @@ $(document)
         }
     }
 })
+// FORMULARIOS
+// Verificamos los campos de verificacion con clase verify y atributo for=[id del elemento a verificar]
+.on('keyup', '.verify', function(){
+    app.form.verify($(this))
+})
+.on('change', 'form', function (e, i) {
+    app.form.verify($(this))
+})
 .on('submit', 'form', function (e, i) {
-    e.preventDefault();
+    e.preventDefault()
     let data = app.toObject(e.currentTarget);
     if(exist(data.password)){ 
         data.password = sha256(data.password)
     }
+
     app.post({
         controller: $(this).attr('controller'),
         action: $(this).attr('action'),
         data: JSON.stringify(data)
-    });
+    })   
 })
+// FIN DE FORMULARIOS
 .on('change', 'select', function () {
     var selclass = 'valid';
     if ($(this).val() != "")
-        $(this).addClass(selclass);
+        $(this).addClass(selclass)
     else
-        $(this).removeClass(selclass);
+        $(this).removeClass(selclass)
 });

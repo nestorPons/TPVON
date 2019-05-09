@@ -69,9 +69,9 @@ var app = {
     sections: {
         toggle(section, callback) {
             $('section').fadeOut('fast', function () {
-                $('section#' + section).fadeIn();
+                $('section#' + section).fadeIn()
                 callback != undefined && callback()
-            });
+            })
         },
         load(section = '', html = jQuery){
             // Comprueba que  la seccion existe o no 
@@ -85,6 +85,35 @@ var app = {
                })
            }
         },
+    },
+    form: {
+        verify($this){
+            var $this = $this
+            let type  = $this.get(0).tagName, 
+                _verify = function($this){
+                    let mens = '', r = true
+                    if($('#' + $this.attr('for')).val() != $this.val()){
+                       mens = $this.attr('tile-error') || "¡Los campos no coinciden!"
+                       r = false
+                    } 
+
+                    $this.get(0).setCustomValidity(mens)
+                    return r
+                }
+            switch(type){
+                case 'INPUT': return _verify($this)
+                case 'FORM': 
+                    // Vrerificamos si es un formulario
+                    let success = true
+                    $this.find('.verify').each(function(){
+                        if(!_verify($(this))){
+                            $(this).get(0).reportValidity()
+                            success = false
+                        } 
+                    })
+                    return success
+            }
+        }
     },
     toObject (form){
         var obj = {};

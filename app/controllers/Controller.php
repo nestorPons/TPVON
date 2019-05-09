@@ -34,7 +34,8 @@ class Controller{
         return $this->require(\FOLDERS\VIEWS . $this->controller . '.phtml', $data);
     }
     protected function require(String $route, $arrData = null){
-        $data = new \app\libs\Data($arrData);
+        if(isset($_GET['db'])) $Company = new \app\models\Company($_GET['db']);
+        $data = new \app\core\Data($arrData);
         return require_once $route;
     }
     protected function new(Object $dataJSON = null){
