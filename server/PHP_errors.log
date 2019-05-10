@@ -4791,3 +4791,316 @@ Stack trace:
 #8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #9 {main}
   thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[10-May-2019 07:56:54 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (to):  in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1004
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(934): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', '', '')
+#1 /var/www/html/app/models/User.php(42): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL, NULL)
+#2 /var/www/html/app/models/User.php(15): app\models\User->sendMail()
+#3 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[10-May-2019 07:58:36 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(49): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(16): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:03:20 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(49): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(16): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:05:05 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(49): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(16): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:07:05 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(49): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(16): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:08:30 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(49): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(16): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:34:34 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(52): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(19): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:36:49 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(52): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(19): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:38:40 UTC] PHP Notice:  Undefined variable: mail in /var/www/html/app/config/mail.php on line 14
+[10-May-2019 08:38:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function SetFrom() on null in /var/www/html/app/config/mail.php:14
+Stack trace:
+#0 /var/www/html/app/models/User.php(42): include_once()
+#1 /var/www/html/app/models/User.php(19): app\models\User->sendMail()
+#2 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/config/mail.php on line 14
+[10-May-2019 08:38:54 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Could not instantiate mail function. in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1720
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1518): PHPMailer\PHPMailer\PHPMailer->mailSend('Date: Fri, 10 M...', 'This is a multi...')
+#1 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1352): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 /var/www/html/app/models/User.php(52): PHPMailer\PHPMailer\PHPMailer->send()
+#3 /var/www/html/app/models/User.php(19): app\models\User->sendMail()
+#4 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1720
+[10-May-2019 08:44:06 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Message body empty in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1443
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1348): PHPMailer\PHPMailer\PHPMailer->preSend()
+#1 /var/www/html/app/models/User.php(52): PHPMailer\PHPMailer\PHPMailer->send()
+#2 /var/www/html/app/models/User.php(19): app\models\User->sendMail()
+#3 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1443
+[10-May-2019 08:48:27 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Message body empty in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1443
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(1348): PHPMailer\PHPMailer\PHPMailer->preSend()
+#1 /var/www/html/app/models/User.php(53): PHPMailer\PHPMailer\PHPMailer->send()
+#2 /var/www/html/app/models/User.php(19): app\models\User->sendMail()
+#3 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1443
+[10-May-2019 08:57:29 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/models/User.php on line 41
+[10-May-2019 08:58:38 UTC] PHP Notice:  Undefined index: db in /var/www/html/app/models/User.php on line 41
+[10-May-2019 09:02:46 UTC] PHP Parse error:  syntax error, unexpected ';' in /var/www/html/app/models/User.php on line 50
+[10-May-2019 09:13:24 UTC] PHP Warning:  file_get_contents(mailNewUser.phtml) [<a href='0function.file-get-contents0'>function.file-get-contents0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 53
+[10-May-2019 09:13:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEW' in /var/www/html/app/models/User.php:53
+Stack trace:
+#0 /var/www/html/app/models/User.php(21): app\models\User->sendMail()
+#1 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/User.php on line 53
+[10-May-2019 09:13:49 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEW' in /var/www/html/app/models/User.php:53
+Stack trace:
+#0 /var/www/html/app/models/User.php(21): app\models\User->sendMail()
+#1 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/User.php on line 53
+[10-May-2019 10:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$token in /var/www/html/app/views/mailNewUser.phtml on line 4
+[10-May-2019 10:40:04 UTC] PHP Notice:  Undefined property: app\models\User::$token in /var/www/html/app/views/mailNewUser.phtml on line 4
+[10-May-2019 10:46:26 UTC] PHP Fatal error:  Uncaught Firebase\JWT\SignatureInvalidException: Signature verification failed in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:112
+Stack trace:
+#0 /var/www/html/app/models/User.php(128): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'SOY OTRO KEY', Array)
+#1 /var/www/html/app/models/User.php(57): app\models\User->getToken()
+#2 /var/www/html/app/models/User.php(22): app\models\User->sendMail()
+#3 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 112
+[10-May-2019 10:54:35 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::view() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 23 and defined in /var/www/html/app/controllers/Controller.php:39
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(23): app\controllers\Controller->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 39
+[10-May-2019 10:54:55 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::view() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 23 and defined in /var/www/html/app/controllers/Controller.php:39
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(23): app\controllers\Controller->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 39
+[10-May-2019 10:55:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::view() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 23 and defined in /var/www/html/app/controllers/Controller.php:39
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(23): app\controllers\Controller->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 39
+[10-May-2019 10:57:14 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Controller::view() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 22 and defined in /var/www/html/app/controllers/Controller.php:38
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 38
+[10-May-2019 10:57:58 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Data::__construct() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 43 and defined in /var/www/html/app/core/Data.php:7
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(43): app\core\Data->__construct(NULL)
+#1 /var/www/html/app/controllers/Controller.php(39): app\controllers\Controller->require('/var/www/html/a...', NULL)
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->view(NULL)
+#3 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('view', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Data.php on line 7
+[10-May-2019 11:29:33 UTC] PHP Warning:  Declaration of app\controllers\Login::view(array $data = Array) should be compatible with app\controllers\Controller::view($data = NULL) in /var/www/html/app/controllers/Login.php on line 5
+[10-May-2019 11:29:33 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::view() must be of the type array, null given, called in /var/www/html/app/controllers/Controller.php on line 22 and defined in /var/www/html/app/controllers/Login.php:50
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(16): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 50
+[10-May-2019 11:33:17 UTC] PHP Notice:  Trying to get property 'name' of non-object in /var/www/html/app/views/mailNewUser.phtml on line 4
+[10-May-2019 12:46:57 UTC] PHP Fatal error:  Uncaught Firebase\JWT\SignatureInvalidException: Signature verification failed in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:112
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(24): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->confirmation(NULL)
+#2 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('confirmation', NULL, NULL)
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('confirmation', 'aol', NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 112
+[10-May-2019 12:48:01 UTC] PHP Fatal error:  Uncaught Firebase\JWT\SignatureInvalidException: Signature verification failed in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:112
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(24): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->confirmation(NULL)
+#2 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('confirmation', NULL, NULL)
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('confirmation', 'aol', NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 112
+[10-May-2019 12:48:40 UTC] PHP Fatal error:  Uncaught Firebase\JWT\SignatureInvalidException: Signature verification failed in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:112
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(25): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->confirmation(NULL)
+#2 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('confirmation', NULL, NULL)
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('confirmation', 'aol', NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 112
+[10-May-2019 12:56:24 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /var/www/html/app/controllers/Login.php:26
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->confirmation(NULL)
+#1 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('confirmation', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('confirmation', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 26
+[10-May-2019 13:07:29 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /var/www/html/app/models/Tokens.php on line 8

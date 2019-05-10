@@ -1,10 +1,16 @@
 <?php namespace app\models;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+
 class User extends \app\core\Query{
-    private $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos;
+    private $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token;
     protected $table = 'usuarios'; 
 
     function __construct($arg = null){
+        $this->company = ucwords(NAME_COMPANY)??null; 
+
         if($arg){
             $this->connecTo();
             if (is_int($arg)) $this->searchById();
@@ -12,16 +18,16 @@ class User extends \app\core\Query{
         }
     }
     function new(Object $Data){
-        $this->sendMail();
-        /*
         if ($this->loadData($Data)){
+            $this->sendMail();
+            /*
             if(!
                 $this->add([
                     'dni' =>  $this->dni,
                     'nombre' => $this->nombre,
                     'email' => $this->email,
                     'fecha_nacimiento' => $this->fecha_nacimiento??null,
-                    'estado' => $this->estado??null,
+                    'estado' => $this->estado??0,
                     'nivel' => $this->nivel??1, 
                     'password' => $this->password_hash(),
                     'intentos' => $this->intentos??0
@@ -30,23 +36,39 @@ class User extends \app\core\Query{
             else {
                 return true;
             }
+            */
         } else throw new \Exception('E060');
-        */
     }
     private function sendMail(){
 
+        $Mail = new PHPMailer(true);
+        // Configuración para mandar emails
+        include_once \FOLDERS\CONFIG . 'mail.php';
+        $Mail->IsHTML(true);
+        $Mail->isSMTP();
+        //definimos el destinatario (dirección y, opcionalmente, nombre)
+        $Mail->AddAddress($this->email, $this->nombre);
+        //Definimos el tema del email
+        $Mail->Subject = 'Activacion de la cuenta en ' . $this->company;
+        $Mail->Body = 'esto es el cuerpo de la prueba';
+        //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
 
-        $Mail = new Mail($this);
+        
+        $Token = new Tokens; 
+        $token = $Token->create($this); 
+// AKI ::: 
+        ob_start(); # apertura de bufer
+        include( \FOLDERS\VIEWS . 'mailNewUser.phtml' );
+        $htmlStrig = ob_get_contents();
+        ob_end_clean(); # cierre de bufer
 
-        $Mail->Subject = "Activar nuevo usuario";
-        $Mail->addAddress($this->email, $this->nombre);   
-
-        $Mail->Body = "Mensaje de nuevo usuario";//URL_EMAILS . 'mailactivate.php';
-        //$Mail->Body    = \core\Tools::get_content($Mail->url_menssage, $User->getToken());
-        $Mail->AltBody = 'Activar usuario: ' ;//.  $User->token;
-        $Mail->Subject =  "Activar cuenta";
-
-        return $Mail->send(); 
+        prs(
+            $Mail->MsgHTML($htmlStrig, dirname(\FOLDERS\VIEWS))
+        );
+        //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
+        $Mail->AltBody = 'This is a plain-text message body';
+        return $Mail->Send();
+         
 /*
         try {
             //Server settings
@@ -84,6 +106,7 @@ class User extends \app\core\Query{
         }
 */
     }
+
     function password_hash(string $pass = null){
         $pass = $pass??$this->password(); 
         return password_hash($pass, PASSWORD_DEFAULT);

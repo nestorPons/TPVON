@@ -12,13 +12,17 @@ class Controller{
     protected $conn, $controller, $action, $data;
     public $result = null;
     
-    function __construct(String $action, String $controller = null, Object $dataJSON = null){
+    function __construct(String $action, String $controller = null, Object $data = null){
         $this->action = strtolower($action);
         $this->controller =strtolower($controller ?? $this->getController());
-        $this->data = $dataJSON;
 
         // Constructor alternativo básico
-        switch($this->action){
+        if(method_exists($this, $this->action)){
+            $this->result = $this->{$this->action}($data);
+        } else {
+            die('Accion no permitida!!');
+        }
+/*         switch($this->action){
             case 'new':  $this->result = $this->new($this->data); break;
             case 'del':  $this->result = $this->del($this->data); break;
             case 'save': $this->result = $this->save($this->data); break;
@@ -28,14 +32,15 @@ class Controller{
             case 'auth': $this->result = $this->auth(); break;
             default: 
                 die('Accion no permitida!!');
-        }
+        } */
     }
-    protected function getView( Array $data = []){
+    protected function view($data = null){
         return $this->require(\FOLDERS\VIEWS . $this->controller . '.phtml', $data);
     }
-    protected function require(String $route, $arrData = null){
+    protected function require(String $route, $data = null){
         if(isset($_GET['db'])) $Company = new \app\models\Company($_GET['db']);
-        $data = new \app\core\Data($arrData);
+        if (is_array($data))
+            $data = new \app\core\Data($data);
         return require_once $route;
     }
     protected function new(Object $dataJSON = null){

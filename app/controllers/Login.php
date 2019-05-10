@@ -1,4 +1,5 @@
-<?php namespace app\controllers; 
+<?php namespace app\controllers;
+use \app\models\Tokens; 
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
@@ -7,7 +8,7 @@ class Login extends Controller{
         $company, $zone,  
         $folders = \FOLDERS\VIEWS, 
         $level_admin = LEVEL_ADMIN, 
-        $level_user = LEVEL_USER; 
+        $level_user = LEVEL_USER;
 
     function __construct(String $action = null, String $db = null, $data){
 
@@ -17,6 +18,15 @@ class Login extends Controller{
         }else{
            die('Empresa no encontrada');
         }
+    }
+    function confirmation(){
+    
+        if(isset($_GET['args'])){
+
+            $data = Tokens::decode(_GET['args']);
+
+        } else die('token obligatorio');
+    
     }
     protected function auth(){
         
@@ -47,9 +57,7 @@ class Login extends Controller{
     private function isUser(){
         return $this->User->nivel() >= $this->level_user; 
     }
-    protected function getView( Array $data = []){
+    protected function view( $data = null){
         return $this->require($this->folders . 'index.phtml', ['page' => 'login', 'data' => $this->company->data()] );
     }
-    public function getModel(){}
-    public function setModel(){}
 }
