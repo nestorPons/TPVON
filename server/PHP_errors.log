@@ -5104,3 +5104,271 @@ Stack trace:
 #6 {main}
   thrown in /var/www/html/app/controllers/Login.php on line 26
 [10-May-2019 13:07:29 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /var/www/html/app/models/Tokens.php on line 8
+[13-May-2019 10:04:40 UTC] PHP Notice:  Undefined index: db in /var/www/html/app/config/app.php on line 6
+[13-May-2019 10:04:40 UTC] PHP Notice:  Undefined variable: _SESSION in /var/www/html/app/config/app.php on line 7
+[13-May-2019 10:06:15 UTC] PHP Deprecated:  define(): Declaration of case-insensitive constants is deprecated in /var/www/html/app/config/app.php on line 6
+[13-May-2019 10:06:37 UTC] PHP Deprecated:  define(): Declaration of case-insensitive constants is deprecated in /var/www/html/app/config/app.php on line 6
+[13-May-2019 10:07:27 UTC] PHP Deprecated:  define(): Declaration of case-insensitive constants is deprecated in /var/www/html/app/config/app.php on line 7
+[13-May-2019 10:11:59 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\User::$id in /var/www/html/app/models/Tokens.php:24
+Stack trace:
+#0 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#1 /var/www/html/app/models/User.php(22): app\models\User->sendMail()
+#2 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 24
+[13-May-2019 10:12:53 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\User::$id in /var/www/html/app/models/Tokens.php:28
+Stack trace:
+#0 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#1 /var/www/html/app/models/User.php(22): app\models\User->sendMail()
+#2 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 28
+[13-May-2019 10:13:44 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:53
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(22): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 53
+[13-May-2019 10:15:40 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ']' in /var/www/html/app/models/Tokens.php on line 24
+[13-May-2019 10:18:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:53
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(29): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(22): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 53
+[13-May-2019 10:25:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:53
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 53
+[13-May-2019 10:26:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:53
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 53
+[13-May-2019 10:27:43 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:55
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(119): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 55
+[13-May-2019 10:29:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:53
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 53
+[13-May-2019 10:33:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:52
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(92): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 52
+[13-May-2019 10:34:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:55
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(119): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(92): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(58): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 55
+[13-May-2019 10:43:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:52
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(59): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 52
+[13-May-2019 10:44:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:52
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('INSERT INTO tok...', Array)
+#1 /var/www/html/app/core/Query.php(93): app\core\Conn->query('INSERT INTO tok...', Array)
+#2 /var/www/html/app/models/Tokens.php(28): app\core\Query->add(Array)
+#3 /var/www/html/app/models/User.php(59): app\models\Tokens->create(Object(app\models\User))
+#4 /var/www/html/app/models/User.php(35): app\models\User->sendMail()
+#5 /var/www/html/app/controllers/Controller.php(52): app\models\User->new(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'User', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 52
+[13-May-2019 11:07:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Company::connec() in /var/www/html/app/models/Company.php:13
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(19): app\models\Company->__construct()
+#1 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 13
+[13-May-2019 11:09:32 UTC] PHP Notice:  Undefined index:  in /var/www/html/app/core/Conn.php on line 27
+[13-May-2019 11:10:41 UTC] PHP Notice:  Undefined index:  in /var/www/html/app/core/Conn.php on line 28
+[13-May-2019 11:35:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::__construct(), 2 passed in /var/www/html/app/models/Company.php on line 11 and exactly 3 expected in /var/www/html/app/core/Query.php:8
+Stack trace:
+#0 /var/www/html/app/models/Company.php(11): app\core\Query->__construct('admin_empresas', 'empresa')
+#1 /var/www/html/app/controllers/Main.php(19): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 8
+[13-May-2019 11:36:25 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:68
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(114): app\core\Conn->init('SELECT nombre F...', NULL)
+#1 /var/www/html/app/core/Query.php(35): app\core\Conn->query('SELECT nombre F...')
+#2 /var/www/html/app/core/Query.php(50): app\core\Query->sendQuery('SELECT nombre F...', false)
+#3 /var/www/html/app/controllers/Main.php(20): app\core\Query->getAll('nombre')
+#4 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#5 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#6 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 68
+[13-May-2019 11:37:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:70
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT nombre F...', NULL)
+#1 /var/www/html/app/core/Query.php(35): app\core\Conn->query('SELECT nombre F...')
+#2 /var/www/html/app/core/Query.php(50): app\core\Query->sendQuery('SELECT nombre F...', false)
+#3 /var/www/html/app/controllers/Main.php(20): app\core\Query->getAll('nombre')
+#4 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#5 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#6 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 70
+[13-May-2019 11:43:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:70
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('CREATE TABLE `u...', NULL)
+#1 /var/www/html/app/models/Company.php(86): app\core\Conn->query('CREATE TABLE `u...')
+#2 /var/www/html/app/models/Company.php(54): app\models\Company->createDb()
+#3 /var/www/html/app/controllers/Controller.php(52): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'Company', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 70
+[13-May-2019 11:46:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:69
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('CREATE TABLE `u...', NULL)
+#1 /var/www/html/app/models/Company.php(86): app\core\Conn->query('CREATE TABLE `u...')
+#2 /var/www/html/app/models/Company.php(54): app\models\Company->createDb()
+#3 /var/www/html/app/controllers/Controller.php(52): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'Company', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 69
+[13-May-2019 11:46:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:70
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('CREATE TABLE `u...', NULL)
+#1 /var/www/html/app/models/Company.php(86): app\core\Conn->query('CREATE TABLE `u...')
+#2 /var/www/html/app/models/Company.php(54): app\models\Company->createDb()
+#3 /var/www/html/app/controllers/Controller.php(52): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('new', 'Company', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 70
