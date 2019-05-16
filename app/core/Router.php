@@ -29,7 +29,7 @@ class Router{
         $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
 
-        !$this->isGet() && $this->isPost($params);
+        !$this->isPost($params) && $this->isGet();
 
         //$this->getParams($GET);       
         //$this->isView(); 
@@ -73,8 +73,8 @@ class Router{
             $respond = $this->loadController(); 
 
             // Siempre devuelvo un objeto json con un success de respuesta
-            if($respond === true) $respond = ['success'=> 1];
-            if($respond === false) $respond = ['success'=> 0];
+            if($respond === true || $respond === 1) $respond = ['success'=> 1];
+            if($respond === false || $respond === 0) $respond = ['success'=> 0];
             
             // SALIDA 
             exit (json_encode($respond, true));

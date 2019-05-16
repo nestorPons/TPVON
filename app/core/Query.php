@@ -3,17 +3,29 @@
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query extends Conn{
-    protected $conn;
+    protected $conn, $table;
 
-    public function connecTo(String $db = NAME_COMPANY, String $user = 'root'){
+    function __construct(string $table = null, string $db = null, string $user = null){
+        // Parametros predeterminados para la conexión
+
+        $this->loadCredentials();
+        if($table) $this->table = $table;
+
+        $this->db = $db?strtolower($db):$this->credentials['prefix'] . CODE_COMPANY;
+        $this->user = $user??'root';  
         try{
-            $this->db = $db;
-            $this->user = $user;
-            $this->conn = $this->connect($this->db, $this->user);
-            return gettype($this->conn) === 'object';
+
+            if($this->db != $this->credentials['prefix']){
+                $this->conn = $this->connect();
+                return gettype($this->conn) === 'object';
+            } else return false;
         } catch (\Exception $e){
             prs($e);
         }
+    }
+
+    function loadCredentials(){
+        return $this->credentials = parse_ini_file('../app/config/conn.ini');
     }
     function __destruct(){
         $this->conn = null;
@@ -25,13 +37,7 @@ class Query extends Conn{
     private function sendQuery(String $sql, bool $desc = false){
         $order = $desc?'ORDER BY id DESC':'';
         $sql = str_replace('order_by', $order, $sql); 
-        $query = $this->query($sql);
-        $len = count($query);
-        switch (true){
-            case $len > 1 : return $query; // Devolvemos array multidimensional si se encontró más de una respuesta
-            case $len == 1: return $query[0]; // Devolvemos un array con los datos solicitados si solo hay una respuesta 
-            case $len == 0: return false; // Devolvemos false si no hay respuesta
-        }
+        return $this->query($sql);
     }
     // Devolvemos la conexión
     public function getConnect() {
@@ -44,7 +50,7 @@ class Query extends Conn{
      }
     // Devuelve datos de una peticion por id
     public function getById(int $id, string $return = '*'){
-        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
+        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;")[0];
      }
     // Devuelve datos de una peticion por algun campo del registro
     public function getBy(array $args , string $return = '*', bool $desc = false){
@@ -53,6 +59,7 @@ class Query extends Conn{
             $filters .= (string)$column ." = '".(string)$value ."' AND ";
         }
         $filters = trim($filters,"AND ");
+
         return $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);   
      }
     // Devuelve datos de una peticion por una consulta sql
@@ -90,13 +97,13 @@ class Query extends Conn{
         $strCol = trim($strCol , ',') ;
         $strPre = trim($strPre , ',') ;
 
-        if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
+        if ($r = $this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
             return $this->lastInsertId();
-        }else return false;
+        }else return $r;
      }
     // Edita registro mediante su id
-    public function saveById ( Int $id , Array $args = null ) {
-        $sql = $this->getSQLUpdate($args, "id=$id");
+    public function saveById (Array $args = null) {
+        $sql = $this->getSQLUpdate($args, "id=". $this->id());
         return $this->query($sql, $args);
      }
     /**
@@ -177,4 +184,33 @@ class Query extends Conn{
         }
         return trim($sql,',');
     }
+    //getters setters
+    function db(string $arg = null){
+        if($arg) {
+            $this->loadCredentials();
+            $this->{__FUNCTION__} = $this->credentials['prefix'] . $arg;   
+        }
+        return $this->{__FUNCTION__}; 
+    }
+    //getters setters
+    function table(string $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
+    // setter genérico para la inserción de datos en los atributos de la clase hija
+    function loadData($data){
+
+        if(!$data) return false;
+        // Normalización de los datos para direfentes casos de uso
+        if(is_object($data)) $data = (array)$data;
+        if(isset($data[0])) $data = $data[0];
+        // Agregacion de los datos a los atributos de clase
+        foreach($data as $key => $val){        
+            if (property_exists($this, $key)){
+                $this->{$key} = $val??null; 
+            }
+        }
+        return true;
+    }
+
 }

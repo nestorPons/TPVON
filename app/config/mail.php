@@ -5,7 +5,7 @@
 // 0 = off (producción)
 // 1 = client messages
 // 2 = client and server messages
-$Mail->SMTPDebug  = 2;
+$Mail->SMTPDebug  = 0;
 //Ahora definimos gmail como servidor que aloja nuestro SMTP
 $Mail->Host       = 'smtp.gmail.com';
 //El puerto será el 587 ya que usamos encriptación TLS

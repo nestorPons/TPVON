@@ -1,18 +1,21 @@
 <?php namespace app\controllers;
-use \app\models\Tokens; 
+use \app\models\Tokens;
+use \app\models\User; 
+use \app\models\Company;
+use \app\core\Error;
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Login extends Controller{
     private 
-        $company, $zone,  
+        $company, $zone, $password, $email,  
         $folders = \FOLDERS\VIEWS, 
         $level_admin = LEVEL_ADMIN, 
         $level_user = LEVEL_USER;
 
     function __construct(String $action = null, String $db = null, $data){
 
-        $this->company = new \app\models\Company($db);
+        $this->company = new Company($db);
         if($this->company->id()){
             parent::__construct($action, null, $data);
         }else{
@@ -23,33 +26,61 @@ class Login extends Controller{
     
         if(isset($_GET['args'])){
 
-            $data = Tokens::decode(_GET['args']);
+            $data = Tokens::decode($_GET['args']);
 
+            $User = new User($data->id); 
+            $User->activate();
+            $this->view(['page' => 'useractivate', 'name_company' => $this->company->nombre()]); 
+            
         } else die('token obligatorio');
     
     }
-    protected function auth(){
-        
-        $d = $this->data;
-        $d->isEmail('email');
-        $d->isString('password', 200);
+    protected function reset(Object $Data){
+        $User = new User($Data->email);
+        if($User->resetPassword()){
+            return $this->require(\FOLDERS\VIEWS . 'newuseraccount.phtml');
+        }
+    }
+    /**
+     * Devuelve la vista de reseteo de contraseña
+     * Obligado que obtenga un token pasado por get 
+    */
+    protected function activatePassword($Data){
+        $this->controller = 'user'; 
+        if($this->update($Data)){
+            return $this->require($this->folders . 'passwordactivate.phtml', ['name_company' => $this->company->nombre()] );
+        } else return false;
+    }
+    protected function newpassword(){
+        $Data =Tokens::decode($_GET['args']); 
+        $this->view(['page' => 'resetpassword', 'name_company' => $this->company->nombre(), 'idUser'=> $Data->id]); 
+    }
+    protected function auth(Object $Data){
 
-        $User = new \app\models\User($this->data->email);
-        if($this->verify($User)){
+        if($Data->isEmail('email')){
+            $this->email = $Data->email; 
+        }
+        if ($Data->isString('password', 250)){
+            $this->password = $Data->password;
+        };
+
+        $this->User = new User($Data->email);
+
+        if($this->verify($this->User->password())){
             return require($this->folders . $this->zone() . '.phtml');
-        } else return \app\core\Error::array('E026');
+        } else return Error::array('E026');
         
     }
-    private function verify($User){
-        $this->User = $User; 
-        return password_verify($this->data->password, $User->password());
+    protected function newuser($Data){
+        $User = new User; 
+        $User->new($Data); 
+        return $this->require(\FOLDERS\VIEWS . 'newuseraccount.phtml');
+    }
+    private function verify($save_password){
+        return password_verify($this->password, $save_password);
     }
     private function zone(){
-        if($this->isAdmin()){
-            return $this->zone = 'appadmin';
-        }else if($this->isUser()){
-            return $this->zone = 'appuser'; 
-        }
+        return $this->zone = ($this->isAdmin())?'appadmin':'appuser';
     }
     private function isAdmin(){
         return $this->User->nivel() >= $this->level_admin; 
@@ -58,6 +89,8 @@ class Login extends Controller{
         return $this->User->nivel() >= $this->level_user; 
     }
     protected function view( $data = null){
-        return $this->require($this->folders . 'index.phtml', ['page' => 'login', 'data' => $this->company->data()] );
+        // VAlor predeterminado de la vista
+        if (!$data) $data = ['page' => 'login', 'data' => $this->company->data()];
+        return $this->require($this->folders . 'index.phtml', $data );
     }
 }

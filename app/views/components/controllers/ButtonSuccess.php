@@ -12,6 +12,7 @@ class ButtonSuccess extends Component{
         $this->print($data);
     }
     private function print(){
+        $spinner = true;
         include \FOLDERS\COMPONENTS . 'view/btn.phtml';
     }
 }

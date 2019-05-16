@@ -6327,3 +6327,405 @@ Stack trace:
   thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 134
 [15-May-2019 13:26:28 UTC] PHP Warning:  require_once(/var/www/html/app/views/newusercount.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 34
 [15-May-2019 13:26:28 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/newusercount.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 34
+[16-May-2019 08:04:15 UTC] PHP Fatal error:  Uncaught Error: Call to private method app\controllers\Login::reset() from context 'app\controllers\Controller' in /var/www/html/app/controllers/Controller.php:21
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('reset', NULL, Object(app\core\Data))
+#1 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('reset', 'aol', Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 21
+[16-May-2019 08:28:22 UTC] PHP Warning:  include_once(resetpassword.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 25
+[16-May-2019 08:28:22 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening 'resetpassword.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 25
+[16-May-2019 08:30:44 UTC] PHP Notice:  Undefined property: app\controllers\Login::$id in /var/www/html/app/controllers/Login.php on line 43
+[16-May-2019 08:33:30 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::newpassword() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 21 and defined in /var/www/html/app/controllers/Login.php:42
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(NULL)
+#1 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 42
+[16-May-2019 08:34:07 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::newpassword() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 21 and defined in /var/www/html/app/controllers/Login.php:42
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(NULL)
+#1 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 42
+[16-May-2019 08:37:32 UTC] PHP Notice:  Undefined variable: Data in /var/www/html/app/views/resetpassword.phtml on line 10
+[16-May-2019 08:37:32 UTC] PHP Notice:  Trying to get property 'idUser' of non-object in /var/www/html/app/views/resetpassword.phtml on line 10
+[16-May-2019 08:40:59 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\InputHidden' not found in /var/www/html/app/views/resetpassword.phtml:10
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(25): include_once()
+#1 /var/www/html/app/controllers/Controller.php(34): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(82): app\controllers\Controller->require('/var/www/html/a...', Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(44): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(NULL)
+#5 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, NULL)
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', NULL)
+#7 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/resetpassword.phtml on line 10
+[16-May-2019 08:41:30 UTC] PHP Notice:  Undefined property: app\core\Data::$id in /var/www/html/app/views/resetpassword.phtml on line 10
+[16-May-2019 08:48:02 UTC] PHP Notice:  Undefined property: app\core\Data::$id in /var/www/html/app/views/resetpassword.phtml on line 10
+[16-May-2019 08:57:25 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 43
+[16-May-2019 08:57:25 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 43 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(43): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 08:58:42 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 43
+[16-May-2019 08:58:42 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 43 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(43): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:00:01 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 43
+[16-May-2019 09:00:01 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 43 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(43): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:01:00 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 43
+[16-May-2019 09:01:00 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 43 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(43): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:42:07 UTC] PHP Fatal error:  Uncaught Firebase\JWT\ExpiredException: Expired token in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:134
+Stack trace:
+#0 /var/www/html/app/models/Tokens.php(33): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode('eyJ0eXAiOiJKV1Q...')
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(NULL)
+#3 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 134
+[16-May-2019 09:42:15 UTC] PHP Warning:  Declaration of app\models\User::saveById($Data) should be compatible with app\core\Query::saveById(?array $args = NULL) in /var/www/html/app/models/User.php on line 169
+[16-May-2019 09:43:02 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:43:02 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:44:34 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:44:34 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:45:14 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:45:14 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:45:33 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:45:33 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:45:51 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:45:51 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:46:33 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:46:33 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:47:08 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:47:08 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:47:36 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:47:36 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 09:47:59 UTC] PHP Notice:  Undefined index: args in /var/www/html/app/controllers/Login.php on line 47
+[16-May-2019 09:47:59 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\models\Tokens::decode() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 47 and defined in /var/www/html/app/models/Tokens.php:32
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\models\Tokens::decode(NULL)
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->newpassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 32
+[16-May-2019 10:09:50 UTC] PHP Warning:  Use of undefined constant NAME_COMPANY - assumed 'NAME_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/models/User.php on line 18
+[16-May-2019 10:09:50 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Query.php on line 14
+[16-May-2019 10:12:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::getById(), 0 passed in /var/www/html/app/core/Query.php on line 207 and exactly 1 expected in /var/www/html/app/core/Query.php:54
+Stack trace:
+#0 /var/www/html/app/core/Query.php(207): app\core\Query->getById()
+#1 /var/www/html/app/controllers/Controller.php(33): app\core\Query->id(5)
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->push(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('push', 'User', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 54
+[16-May-2019 10:14:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::saveById() must be of the type array or null, object given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/core/Query.php:109
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\core\Query->saveById(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->push(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('push', 'User', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/core/Query.php on line 109
+[16-May-2019 10:20:56 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:20:56 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:20:56 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:20:56 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:20:56 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:20:56 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:02 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:03 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:03 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:03 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:03 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:03 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:03 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:06 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:06 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:06 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:06 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:06 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:06 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:52 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:52 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:52 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:21:52 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 30
+[16-May-2019 10:21:52 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:21:52 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:22:59 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:22:59 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 33
+[16-May-2019 10:22:59 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 34
+[16-May-2019 10:25:13 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/models/Company.php on line 31
+[16-May-2019 10:25:13 UTC] PHP Notice:  Trying to get property 'nif' of non-object in /var/www/html/app/models/Company.php on line 32
+[16-May-2019 10:25:13 UTC] PHP Notice:  Trying to get property 'sector' of non-object in /var/www/html/app/models/Company.php on line 33
+[16-May-2019 10:28:05 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/core/Query.php on line 214
+[16-May-2019 10:28:57 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/core/Query.php on line 214
+[16-May-2019 10:33:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/core/Query.php on line 206
+[16-May-2019 10:39:51 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/models/Company.php on line 21
+[16-May-2019 10:40:16 UTC] PHP Fatal error:  Uncaught Error: Cannot access private property app\models\Company::$id in /var/www/html/app/core/Query.php:210
+Stack trace:
+#0 /var/www/html/app/models/Company.php(21): app\core\Query->loadData(Array)
+#1 /var/www/html/app/controllers/Login.php(18): app\models\Company->__construct('aol')
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('reset', 'aol', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/core/Query.php on line 210
+[16-May-2019 10:41:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\User::id() in /var/www/html/app/models/Tokens.php:25
+Stack trace:
+#0 /var/www/html/app/models/User.php(87): app\models\Tokens->create(Object(app\models\User))
+#1 /var/www/html/app/models/User.php(69): app\models\User->sendMail('mailresetpasswo...', 'Aol nueva contr...')
+#2 /var/www/html/app/controllers/Login.php(41): app\models\User->resetPassword()
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->reset(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('reset', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('reset', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/models/Tokens.php on line 25
+[16-May-2019 10:46:08 UTC] PHP Parse error:  syntax error, unexpected ')', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /var/www/html/app/controllers/Controller.php on line 35
+[16-May-2019 10:59:24 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /var/www/html/app/models/User.php on line 20
+[16-May-2019 11:06:04 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::loadData(), 0 passed in /var/www/html/app/controllers/Controller.php on line 33 and exactly 1 expected in /var/www/html/app/core/Query.php:201
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(33): app\core\Query->loadData()
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->update(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('update', 'User', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/core/Query.php on line 201
+[16-May-2019 11:13:20 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::saveById() must be of the type array or null, object given, called in /var/www/html/app/controllers/Controller.php on line 34 and defined in /var/www/html/app/core/Query.php:105
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(34): app\core\Query->saveById(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->update(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('update', 'User', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/core/Query.php on line 105
+[16-May-2019 11:14:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Data::unset() in /var/www/html/app/controllers/Controller.php:34
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->update(Object(app\core\Data))
+#1 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('update', 'User', Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 34
+[16-May-2019 11:14:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Data::unset() in /var/www/html/app/controllers/Controller.php:34
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->update(Object(app\core\Data))
+#1 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('update', 'User', Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#3 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 34
+[16-May-2019 11:33:59 UTC] PHP Notice:  Undefined property: app\models\User::$Model in /var/www/html/app/models/User.php on line 71
+[16-May-2019 11:33:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function saveById() on null in /var/www/html/app/models/User.php:71
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(35): app\models\User->save(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->update(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(96): app\controllers\Controller->__construct('update', 'User', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/User.php on line 71
+[16-May-2019 11:44:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function loadData() on bool in /var/www/html/app/controllers/Controller.php:33
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(47): app\controllers\Controller->update(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->activatePassword(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('activatepasswor...', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('activatepasswor...', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 33
+[16-May-2019 11:48:12 UTC] PHP Notice:  Undefined property: app\core\Data::$name_company in /var/www/html/app/views/passwordactivate.phtml on line 5
+[16-May-2019 12:53:20 UTC] PHP Fatal error:  Uncaught Firebase\JWT\ExpiredException: Expired token in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:134
+Stack trace:
+#0 /var/www/html/app/models/Tokens.php(33): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Login.php(55): app\models\Tokens::decode('eyJ0eXAiOiJKV1Q...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->newpassword(NULL)
+#3 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 134
+[16-May-2019 12:53:31 UTC] PHP Fatal error:  Uncaught Firebase\JWT\ExpiredException: Expired token in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:134
+Stack trace:
+#0 /var/www/html/app/models/Tokens.php(33): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Login.php(55): app\models\Tokens::decode('eyJ0eXAiOiJKV1Q...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->newpassword(NULL)
+#3 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('newpassword', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('newpassword', 'aol', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 134
+[16-May-2019 12:53:44 UTC] PHP Warning:  require_once(/var/www/html/app/views/newpassword.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 45
+[16-May-2019 12:53:44 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/newpassword.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 45
+[16-May-2019 12:55:08 UTC] PHP Warning:  require_once(/var/www/html/app/views/newpassword.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 45
+[16-May-2019 12:55:08 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/newpassword.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 45

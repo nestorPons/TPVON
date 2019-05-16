@@ -19,9 +19,7 @@ class Conn{
      *	Genera la conexión a a la base de datos
      */
     protected function connect(){
-        $this->credentials = parse_ini_file('../app/config/conn.ini');
-        if (empty($this->prefix)) $this->prefix = $this->credentials["prefix"]; 
-        $dsn = 'mysql:dbname=' . $this->prefix . strtolower($this->db) . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
+        $dsn = 'mysql:dbname=' . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
         try {
             $this->pdo = new \PDO(
                     $dsn, 
@@ -34,7 +32,7 @@ class Conn{
                         \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
                     ]
                 );
-            return $this->pdo; 
+           return $this->pdo; 
         }
         catch (\PDOException $e){ 
             die('fallo conexion base datos ' . $e->getMessage());
@@ -48,8 +46,11 @@ class Conn{
 	 }
 
     private function init($sql, $params = null){
+/*   echo $sql; 
+pr(
+    $params
+);   */
         try {
-            
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
             
@@ -72,7 +73,8 @@ class Conn{
         }
         catch (\PDOException $e) {
             echo('ERROR INIT \n');
-            ech ($sql . '\n');
+            echo($sql);
+            pr($params);
             die($e->getMessage());
         }
         
@@ -113,13 +115,13 @@ class Conn{
      */
     
     function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
+
         $this->sql = trim(str_replace("\r", " ", $sql)); 
         $respond = $this->init($this->sql, $params);
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
-        
+
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]);
-
         if ($statement === 'select' || $statement === 'show') {
             return $this->sqlPrepare->fetchAll($fetchmode);
         } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
@@ -128,19 +130,7 @@ class Conn{
             return $respond;
         }
     }
-    /**
-     * Métodos getter setter
-     */
-    function db (String $arg = null) {
-        if ($arg != null) $this->__METHOD__ = $arg; 
-        $method  = explode('::',__METHOD__)[1];
-        return $this->$method; 
-    }
-    function table (String $arg = null) {
-        if ($arg != null) $this->__METHOD__ = $arg; 
-        $method  = explode('::',__METHOD__)[1];
-        return $this->$method; 
-    }
+
     
     /**
      *	Devuelve un arreglo que representa una columna específica del resultado 

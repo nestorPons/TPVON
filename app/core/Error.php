@@ -19,6 +19,7 @@ class Error extends \Exception{
     const E012 = "No se pudo validar los datos";
     const E013 = "No se pudo crear la base de datos";
     const E014 = "No se pudo crear las tablas";
+    const E015 = "No se ha podido crear la empresa";
     const E016 = "No se pudo inicializar las tablas";
     const E017 = "No se pudo crear el archivo de la empresa";
     const E018 = 'No se pudo encontrar la empresa solicitada';

@@ -1,1 +1,6 @@
-<button type="<?=self::TYPE?>" class="<?=self::STYLE?> collapse"><?=self::CAPTION?></button>
+<button type="<?=self::TYPE?>" class="<?=self::STYLE?> collapse ">
+    <?php if(isset($spinner)):?>
+        <i class="spinner hidden"></i>
+    <?php endif ?>
+        <span class="caption"><?=self::CAPTION?></span>
+</button>

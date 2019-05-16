@@ -33,16 +33,28 @@ $(document)
 })
 .on('submit', 'form', function (e, i) {
     e.preventDefault()
+    let get = app.getData(); 
+    $this = $(this)
+    // Filtro bloqueo reenvio 
+    if($(this).hasClass('sending')) return false 
+    // Mostramos spinner
+    $(this).addClass('sending').find('.spinner').hide().removeClass('hidden').fadeIn()
     let data = app.toObject(e.currentTarget);
     if(exist(data.password)){ 
         data.password = sha256(data.password)
     }
-
+    // Envio de datos
     app.post({
-        controller: $(this).attr('controller'),
-        action: $(this).attr('action'),
+        db: get['db'],
+        controller: $this.attr('controller'),
+        action: $this.attr('action'),
         data: JSON.stringify(data)
-    })   
+    },
+        function(){
+            // Ocultamos spinner
+            $this.removeClass('sending').find('.spinner').fadeOut()
+        }
+    )
 })
 // FIN DE FORMULARIOS
 .on('change', 'select', function () {

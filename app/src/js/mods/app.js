@@ -7,24 +7,27 @@ var app = {
         }
         return data
     },
-    post: function (data) {
+    post: function (data, callback) {
         if (typeof data.controller === 'undefined') return false;
-        $.post('index.php', app.getData(data), function (respond, status, xhr, dataType) {
+        var jqxhr = $.post('index.php', data, function (respond, status, xhr, dataType) {
             // La respuesta puede ser json o html 
             try {
                 // comprobamos si es json
                 data = JSON.parse(respond);
-                // es JSON
+                // la respuesta es JSON
                 echo (data)
                 // Imprimimos mensaje de error si lo hay 
                 if(data.success == false && exist(data.mens)) app.mens.error(data.mens)
                 
             } catch(e) {
-                // es HTML
+                // la respuesta es HTML
                 html = $(respond)
                 app.sections.load(html.attr('id'), html)
+
+            } finally {
+                typeof callback == "function" && callback()
             }
-        });
+        })
     },
     get: function (data) {
         if (typeof data.controller === 'undefined') return false;

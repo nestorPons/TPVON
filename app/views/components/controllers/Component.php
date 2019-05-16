@@ -9,17 +9,19 @@ class Component{
         $this->id = $this->randomid();
         $this->name = $data['name']??'';
         $this->label = ucfirst($data['label']??$this->name);
-        $this->class = $data['class']??'';
+        $this->class = $data['class']??null;
         $this->required = isset($data['required']);
         $this->pattern = $data['pattern']??null; 
         $this->title = $data['title']??null; 
         $this->minlength = $data['minlength']??null; 
         $this->maxlength = $data['maxlength']??null;
         $this->for = $data['for']??null;
+        $this->value = $data['value']??null;
     }
     protected function printInput(){
         $TYPE = $this->TYPE;
         $id = $this->id; 
+        $hidden = ($TYPE == 'hidden')?'hidden':'';
         $idSel = 'input_' .$this->id; 
         $name = $this->printName(); 
         $title = $this->printTitle();
@@ -30,6 +32,7 @@ class Component{
         $maxlength = $this->printMaxlength($this->MAXLENGTH);
         $pattern = $this->printPattern();
         $for = $this->printFor();
+        $value = $this->printValue();
         include \FOLDERS\COMPONENTS . 'view/input.phtml';
     }
     protected function getnameclass(){
@@ -54,6 +57,9 @@ class Component{
     }
     protected function printClass(){
         return  (empty($this->class))? '' : "class='{$this->class}'";
+    }
+    protected function printValue(){
+        return  (empty($this->value))? '' : "value='{$this->value}'";
     }
     protected function printName(){
         return  (empty($this->name))? '' : "name='{$this->name}'";

@@ -2,18 +2,19 @@
 use \Firebase\JWT\JWT;
 
 class Tokens extends \app\core\Query{
-    private $id, $idUsuario, $token;
+    protected $id, $idUsuario, $token;
     protected $table = 'tokens';
+    
     function __construct($args = null){
+        parent::__construct();
         if($args){
-            $this->connecTo();
             if (is_int($args)) $this->searchById($args);
         }
     }
     private function searchById(Object $data){
         
     }
-    function create(Object $data){
+    function create(Object $User){
 
         $time = time();
         
@@ -21,14 +22,14 @@ class Tokens extends \app\core\Query{
             'iat' => $time, // Tiempo que inició el token
             'exp' => $time + (60*60), // Tiempo que expirará el token (+1 hora)
             'data' => [ // información del usuario
-                'id' => $data->id
+                'id' => $User->id()
             ]
         );
         $token = JWT::encode($arr, KEY_JWT);
-        $this->id = $this->add(['id_usuario'=>$data->id, 'token' => $token]);
+        $this->id = $this->add(['id_usuario'=>$User->id(), 'token' => $token]);
         return $token;
     }
-    function decode(String $token){
+    static function decode(String $token){
         return JWT::decode($token, KEY_JWT, array('HS256'))->data;
     }
 }
