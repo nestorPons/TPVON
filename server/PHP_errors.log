@@ -6729,3 +6729,221 @@ Stack trace:
 [16-May-2019 12:53:44 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/newpassword.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 45
 [16-May-2019 12:55:08 UTC] PHP Warning:  require_once(/var/www/html/app/views/newpassword.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 45
 [16-May-2019 12:55:08 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/newpassword.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 45
+[17-May-2019 08:06:03 UTC] PHP Warning:  require_once(/var/www/html/app/views/index.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 52
+[17-May-2019 08:06:03 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/index.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 52
+[17-May-2019 08:07:05 UTC] PHP Warning:  include_once(main.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 25
+[17-May-2019 08:07:05 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening 'main.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 25
+[17-May-2019 08:07:32 UTC] PHP Notice:  Undefined property: app\core\Data::$page in /var/www/html/app/core/Data.php on line 71
+[17-May-2019 08:07:32 UTC] PHP Warning:  include_once(.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 26
+[17-May-2019 08:07:32 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 26
+[17-May-2019 08:10:32 UTC] PHP Warning:  include_once(main.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 25
+[17-May-2019 08:10:32 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening 'main.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 25
+[17-May-2019 08:11:24 UTC] PHP Notice:  Undefined property: app\models\Company::$nif in /var/www/html/app/models/Company.php on line 56
+[17-May-2019 08:11:38 UTC] PHP Notice:  Undefined property: app\models\Company::$nif in /var/www/html/app/models/Company.php on line 56
+[17-May-2019 08:13:27 UTC] PHP Notice:  Undefined property: app\models\Company::$nif in /var/www/html/app/models/Company.php on line 51
+[17-May-2019 08:46:55 UTC] PHP Notice:  Undefined property: app\models\Company::$nif in /var/www/html/app/models/Company.php on line 47
+[17-May-2019 09:09:52 UTC] PHP Warning:  include(/var/www/html/app/config/config.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/folders.php on line 22
+[17-May-2019 09:09:52 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/config/config.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/config/folders.php on line 22
+[17-May-2019 09:09:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILES\CONN' in /var/www/html/app/core/Query.php:26
+Stack trace:
+#0 /var/www/html/app/core/Query.php(10): app\core\Query->loadCredentials()
+#1 /var/www/html/app/models/Company.php(14): app\core\Query->__construct('empresas', 'admin_empresas')
+#2 /var/www/html/app/controllers/Main.php(19): app\models\Company->__construct()
+#3 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 26
+[17-May-2019 09:10:24 UTC] PHP Warning:  include(/var/www/html/app/config/config.php) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/folders.php on line 22
+[17-May-2019 09:10:24 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/config/config.php' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/config/folders.php on line 22
+[17-May-2019 09:10:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILES\CONN' in /var/www/html/app/core/Query.php:26
+Stack trace:
+#0 /var/www/html/app/core/Query.php(10): app\core\Query->loadCredentials()
+#1 /var/www/html/app/models/Company.php(14): app\core\Query->__construct('empresas', 'admin_empresas')
+#2 /var/www/html/app/controllers/Main.php(19): app\models\Company->__construct()
+#3 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getCompanies()
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Query.php on line 26
+[17-May-2019 09:15:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Exception() in /var/www/html/app/models/Company.php:91
+Stack trace:
+#0 /var/www/html/app/models/Company.php(56): app\models\Company->createDb()
+#1 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Company.php on line 91
+[17-May-2019 09:44:27 UTC] PHP Fatal error:  Uncaught Exception: E013 in /var/www/html/app/models/Company.php:89
+Stack trace:
+#0 /var/www/html/app/models/Company.php(54): app\models\Company->createDb()
+#1 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Company.php on line 89
+[17-May-2019 09:48:37 UTC] PHP Notice:  Undefined variable: mens in /var/www/html/app/core/Error.php on line 78
+[17-May-2019 10:06:55 UTC] PHP Warning:  Use of undefined constant NAME_COMPANY - assumed 'NAME_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/models/User.php on line 18
+[17-May-2019 10:06:55 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Query.php on line 14
+[17-May-2019 10:08:49 UTC] PHP Notice:  Undefined property: app\models\Company::$name in /var/www/html/app/models/Company.php on line 41
+[17-May-2019 10:08:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(120): app\core\Conn->init('INSERT INTO usu...', Array)
+#1 /var/www/html/app/core/Query.php(100): app\core\Conn->query('INSERT INTO usu...', Array)
+#2 /var/www/html/app/models/User.php(38): app\core\Query->add(Array)
+#3 /var/www/html/app/models/Company.php(45): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[17-May-2019 10:09:46 UTC] PHP Warning:  include(/var/www/html/app/views/mailNewUser.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 95
+[17-May-2019 10:09:46 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/mailNewUser.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/models/User.php on line 95
+[17-May-2019 10:30:22 UTC] PHP Notice:  Undefined variable: HOST in /var/www/html/app/models/User.php on line 92
+[17-May-2019 10:30:22 UTC] PHP Notice:  Undefined variable: CODE_COMPANY in /var/www/html/app/models/User.php on line 92
+[17-May-2019 10:30:22 UTC] PHP Warning:  include(/var/www/html/app/views/mailNewUser.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:30:22 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/mailNewUser.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:32:50 UTC] PHP Warning:  include(/var/www/html/app/views/mailNewUser.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:32:50 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/mailNewUser.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:35:26 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (to):  in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1004
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(934): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', '', '')
+#1 /var/www/html/app/models/User.php(86): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL, NULL)
+#2 /var/www/html/app/models/User.php(27): app\models\User->sendMail('mailNewUser.pht...', 'Activacion de l...')
+#3 /var/www/html/app/models/Company.php(46): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[17-May-2019 10:36:13 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (to):  in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1004
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(934): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', '', '')
+#1 /var/www/html/app/models/User.php(85): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL, NULL)
+#2 /var/www/html/app/models/User.php(26): app\models\User->sendMail('mailNewUser.pht...', 'Activacion de l...')
+#3 /var/www/html/app/models/Company.php(46): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[17-May-2019 10:38:34 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (to):  in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1004
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(934): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', '', '')
+#1 /var/www/html/app/models/User.php(85): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL, NULL)
+#2 /var/www/html/app/models/User.php(26): app\models\User->sendMail('mailNewUser.pht...', 'Activacion de l...')
+#3 /var/www/html/app/models/Company.php(46): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[17-May-2019 10:39:00 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'app\models\FILES\MAIL' in /var/www/html/app/models/User.php:81
+Stack trace:
+#0 /var/www/html/app/models/User.php(26): app\models\User->sendMail('mailNewUser.pht...', 'Activacion de l...')
+#1 /var/www/html/app/models/Company.php(46): app\models\User->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/User.php on line 81
+[17-May-2019 10:39:22 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (to):  in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1004
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(934): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', '', '')
+#1 /var/www/html/app/models/User.php(85): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL, NULL)
+#2 /var/www/html/app/models/User.php(26): app\models\User->sendMail('mailNewUser.pht...', 'Activacion de l...')
+#3 /var/www/html/app/models/Company.php(46): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[17-May-2019 10:41:44 UTC] PHP Warning:  include(/var/www/html/app/views/mailNewUser.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:41:44 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/mailNewUser.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:43:05 UTC] PHP Warning:  include(mailNewUser.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:43:05 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening 'mailNewUser.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:43:33 UTC] PHP Warning:  include(mailNewUser.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:43:33 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening 'mailNewUser.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/models/User.php on line 94
+[17-May-2019 10:45:55 UTC] PHP Notice:  Undefined variable: HOST in /var/www/html/app/models/User.php on line 92
+[17-May-2019 10:46:38 UTC] PHP Notice:  Undefined variable: localhost in /var/www/html/app/models/User.php on line 92
+[17-May-2019 10:47:06 UTC] PHP Notice:  Undefined variable: localhost in /var/www/html/app/models/User.php on line 92
+[17-May-2019 10:47:06 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/models/User.php on line 92
+[17-May-2019 10:58:27 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\Data' not found in /var/www/html/app/models/User.php:29
+Stack trace:
+#0 /var/www/html/app/models/Company.php(46): app\models\User->new(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Controller->__construct('new', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/User.php on line 29
+[17-May-2019 11:01:55 UTC] PHP Warning:  require_once(/var/www/html/app/views/login/index.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 52
+[17-May-2019 11:01:55 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/login/index.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 52
+[17-May-2019 12:47:15 UTC] PHP Fatal error:  Uncaught Firebase\JWT\ExpiredException: Expired token in /var/www/html/vendor/firebase/php-jwt/src/JWT.php:134
+Stack trace:
+#0 /var/www/html/app/models/Tokens.php(33): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', 'elahs93uojeqkjp...', Array)
+#1 /var/www/html/app/controllers/Login.php(29): app\models\Tokens::decode('eyJ0eXAiOiJKV1Q...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->confirmation(NULL)
+#3 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('confirmation', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('confirmation', '12343', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/vendor/firebase/php-jwt/src/JWT.php on line 134
+[17-May-2019 12:47:45 UTC] PHP Warning:  require_once(/var/www/html/app/views/login/index.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 52
+[17-May-2019 12:47:45 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/login/index.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 52
+[17-May-2019 13:09:11 UTC] PHP Warning:  require(/var/www/html/app/views/login/appadmin.phtml) [<a href='0function.require0'>function.require0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Login.php on line 71
+[17-May-2019 13:09:11 UTC] PHP Fatal error:  require() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/login/appadmin.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Login.php on line 71
+[17-May-2019 13:09:27 UTC] PHP Warning:  require(/var/www/html/app/views/login/appadmin.phtml) [<a href='0function.require0'>function.require0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Login.php on line 71
+[17-May-2019 13:09:27 UTC] PHP Fatal error:  require() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/login/appadmin.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Login.php on line 71
+[17-May-2019 13:20:27 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::reset() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 22 and defined in /var/www/html/app/controllers/Login.php:38
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->reset(NULL)
+#1 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('reset', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('reset', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 38
+[17-May-2019 13:21:11 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\controllers\Login::reset() must be an object, null given, called in /var/www/html/app/controllers/Controller.php on line 22 and defined in /var/www/html/app/controllers/Login.php:38
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->reset(NULL)
+#1 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('reset', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('reset', 'aol', NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 38

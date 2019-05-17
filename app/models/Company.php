@@ -1,11 +1,12 @@
 <?php namespace app\models;
 use \app\core\Error;
+use \app\core\Query;
 use \app\core\Data; 
 
-class Company extends \app\core\Query{
+class Company extends Query{
 
     protected 
-        $id, $nombre, $fecha, $sector, $plan, $ultimo_acceso,
+        $id, $nombre, $fecha, $sector, $plan, $ultimo_acceso, $nif,
         $data = null;
 
     function __construct($arg = null){
@@ -21,17 +22,7 @@ class Company extends \app\core\Query{
             if($this->data) $this->loadData($this->data);
         }
     }
-/*     function loadData($Data){
-        if(is_array($Data)) $Data = new Data($Data); 
-        // Validamos los datos del formulario y el true es para que me lanze un error en caso contrario
-        $this->id = $Data->id??null;
-        $this->fecha = $Data->fecha??null;
-        $this->ultimo_acceso = $Data->ultimo_acceso??null;
-        $this->plan = $Data->plan??null;
-        $this->nombre = strtolower($Data->nombre);
-        $this->nif = $Data->nif;
-        $this->sector = $Data->sector;
-    } */
+
     /**
      * Crea una nueva aplicación
      * Dividimos los datos de las dos tablas la de empresas y la base datos de la app
@@ -41,11 +32,13 @@ class Company extends \app\core\Query{
      */
     public function new(Object $Data){
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
-        $Data->nombre = $Data->nombre_empresa; 
+        $Data->codifyAttr('nombre_empresa');
+        $Data->nombre = $Data->nombre_empresa;
         $this->loadData($Data);
-        $this->config = parse_ini_file(\FOLDERS\CONFIG . 'conn.ini');
+        $this->config = parse_ini_file(\FILES\CONN);
+        $this->db = $this->config["prefix"]  . $this->nombre; 
+        
         // Definimos la base de datos por defecto
-
         define('CODE_COMPANY', $this->nombre);
         define('NAME_COMPANY', ucwords(CODE_COMPANY));
 
@@ -58,18 +51,20 @@ class Company extends \app\core\Query{
              ])
         ){
             // Creamos la base de datos
+            
             try{
                 $this->createDb();
+                $this->createTables();
                 //Añadimos el usuario administrador
                 $Data->addOne('nombre', $Data->nombre_usuario); 
                 $Data->addOne('nivel', 2); 
-    
+                
                 $User = new User;
                 if (!$User->new($Data)) throw new \Exception('E019'); 
                 // Creamos carpeta con configuración y archivos
-                if (!$this->createFolder()) throw new \Exception('E017');
+                $this->createFolder();
                 return true; 
-    
+            
             } catch( \Exception $e){
                 return Error::array($e->getMessage());
             }
@@ -79,20 +74,21 @@ class Company extends \app\core\Query{
     }
 
     private function createFolder(){
-        $folder = \FOLDERS\COMPANIES . $this->nombre;
+        $folder = \FOLDERS\COMPANIES . $this->db;
         if (!file_exists($folder)){
             mkdir($folder, 0750);
-            copy(\FOLDERS\CONFIG . 'template.ini', \FOLDERS\COMPANIES . $this->nombre . '/config.ini');
-            return true;
+            copy(\FOLDERS\CONFIG . 'template.ini', \FOLDERS\COMPANIES . $this->db . '/config.ini');
+        } else{
+            throw new Error('E017');
         }
-        return false;
     }
     // Extraemos el prefijo por defecto para las bbdd de la aplicación
     // Creamos la base de datos con el nombre correspondiente
     private function createDb(){
-                
-        if(!$this->query('CREATE DATABASE '. $this->config["prefix"]  . $this->nombre . ' COLLATE utf8_spanish2_ci;')) throw new \Exception('E013');
-        $newConn = new \app\core\Query(null, $this->config["prefix"]  . $this->nombre);
+        if(!$this->query('CREATE DATABASE '. $this->db . ' COLLATE utf8_spanish2_ci;')) throw new Error('E013');  
+    }
+    private function createTables(){
+        $newConn = new Query(null, $this->db);
         $newConn->pdo->beginTransaction();
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/usuarios.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/direcciones.sql'));
@@ -105,8 +101,7 @@ class Company extends \app\core\Query{
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/historial.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tokens.sql'));
         
-        if(!$newConn->pdo->commit()) throw new \Exception('E014');
-        return true;
+        if(!$newConn->pdo->commit()) throw new Error('E014');
     }
 
     // getters y setters

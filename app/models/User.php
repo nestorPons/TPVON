@@ -1,9 +1,9 @@
 <?php namespace app\models;
 
 use \app\core\Query;
+use \app\core\Data;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use \app\core\Data; 
 use \app\core\Error;
 
 class User extends Query{
@@ -24,8 +24,7 @@ class User extends Query{
     }
     function new(Object $Data){
 
-        if ($this->id = $this->loadData($Data)){
-            
+        if ($this->id = $this->loadData($Data)){           
             if(
             $this->id = $this->add([
                 'dni' =>  $this->dni??null,
@@ -37,9 +36,11 @@ class User extends Query{
                 'password' => $this->password_hash(),
                 'intentos' => $this->intentos??0
             ])) {
-                $this->sendMail('mailNewUser.phtml', 'Activacion de la cuenta en '. $this->company);
-
-                return true;
+              
+                $Token = new Tokens();
+                $url = HOST . '/'. CODE_COMPANY. "/login/confirmation/{$Token->create($this)}";
+                $body = $this->getFile(\FOLDERS\LOGIN . 'mailNewUser.phtml', new Data(['url'=>$url]));
+                return $this->sendMail($body, $this->company . 'Activacion de la cuenta en '. $this->company);
             }
             else return Error::array('E022');
             
@@ -71,15 +72,16 @@ class User extends Query{
         return $this->saveById($data);
     }
     function resetPassword(){
-        return $this->sendMail('mailresetpassword.phtml', $this->company . ' nueva contraseña');
+        $Token = new Tokens();
+        $url = HOST . '/'. CODE_COMPANY. "/login/newpassword/{$Token->create($this)}";
+        $body = $this->getFile(\FOLDERS\LOGIN . 'mailresetpassword.phtml', new Data(['url'=>$url]));
+        return $this->sendMail($body, $this->company . ' nueva contraseña');
     }
-    private function sendMail(string $page, string $subject){
+    private function sendMail($body, string $subject){
 
-        
-        try {
-            $Mail = new PHPMailer(true);
-            // Configuración para mandar emails
-            include_once \FOLDERS\CONFIG . 'mail.php';
+        $Mail = new PHPMailer(true);
+        // Configuración para mandar emails
+            include_once \FILES\MAIL;
             $Mail->IsHTML(true);
             $Mail->isSMTP();
             //definimos el destinatario (dirección y, opcionalmente, nombre)
@@ -88,25 +90,26 @@ class User extends Query{
             $Mail->Subject = $subject ;
             $Mail->Body = 'esto es el cuerpo de la prueba';
             //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
+                     
+        $Mail->MsgHTML($body, dirname(\FOLDERS\VIEWS));
     
-            
-            $Token = new Tokens(); 
-            $token = $Token->create($this);
-            ob_start(); # apertura de bufer
-            include( \FOLDERS\VIEWS . $page );
-            $htmlStrig = ob_get_contents();
-            ob_end_clean(); # cierre de bufer
     
-            $Mail->MsgHTML($htmlStrig, dirname(\FOLDERS\VIEWS));
-    
-            //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
-            $Mail->AltBody = 'This is a plain-text message body';
+    //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
+            $Mail->AltBody =  $body;
             return $Mail->Send();
+        try {
            
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
 
+    }
+    private function getFile(String $file, Object $Data = null){
+        ob_start(); # apertura de bufer
+        include($file);
+        $htmlStrig = ob_get_contents();
+        ob_end_clean(); # cierre de bufer
+        return $htmlStrig; 
     }
     //getters setters
 

@@ -24,9 +24,16 @@ class Controller{
             die('Accion no permitida!!');
         }
     }
-
     protected function view($data = null){
-        return $this->require(\FOLDERS\VIEWS . $this->controller . '.phtml', $data);
+        $file = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
+        if(!file_exists($file))
+            $file = \FOLDERS\LOGIN . $this->controller . '.phtml';
+        else if(!file_exists($file))
+            $file = \FOLDERS\ADMIN . $this->controller . '.phtml';
+        else if(!file_exists($file))
+            $file = \FOLDERS\USER . $this->controller . '.phtml';
+        else return false; 
+        return $this->require($file, $data);
     }
     protected function update(Object $Data){
         $this->Model = $this->getModel(intval($Data->id));

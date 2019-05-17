@@ -60,7 +60,12 @@ class Error extends \Exception{
     //Mail 
     const E071 = "No se ha podido mandar el email";
 
-    
+    function __construct(string $code = null, string $message = '', Exception $previous = null){   
+        if($code) {
+            $this->array($code);
+            parent::__construct(constant('self::'.$code), intval($code), $previous);
+        }
+    }
     public static function E010(){
        $Login = new \models\Login; 
        $Login->logout(); 
@@ -73,7 +78,7 @@ class Error extends \Exception{
         if (defined ('self::'.$err))
             return ['success'=>0 , 'code' => $err , 'mens' => constant('self::'.$err), 'obs' => $obs] ;
         else
-            return ['success'=>0 , 'code' => 'E000' , 'mens' => $err, 'obs' => $mens] ;
+            return ['success'=>0 , 'code' => 'E000' , 'mens' => $err, 'obs' => $obs] ;
     }
     public static function set($err){
         self::$last = $err;

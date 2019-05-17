@@ -3,13 +3,14 @@ use \app\models\Tokens;
 use \app\models\User; 
 use \app\models\Company;
 use \app\core\Error;
+use \app\core\Data;
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Login extends Controller{
     private 
         $company, $zone, $password, $email,  
-        $folders = \FOLDERS\VIEWS, 
+        $folders = \FOLDERS\LOGIN, 
         $level_admin = LEVEL_ADMIN, 
         $level_user = LEVEL_USER;
 
@@ -27,10 +28,9 @@ class Login extends Controller{
         if(isset($_GET['args'])){
 
             $data = Tokens::decode($_GET['args']);
-
             $User = new User($data->id); 
             $User->activate();
-            $this->view(['page' => 'useractivate', 'name_company' => $this->company->nombre()]); 
+            $this->view(['page' => 'useractivate', 'name_company' =>$this->company->nombre()]); 
             
         } else die('token obligatorio');
     
@@ -38,7 +38,7 @@ class Login extends Controller{
     protected function reset(Object $Data){
         $User = new User($Data->email);
         if($User->resetPassword()){
-            return $this->require(\FOLDERS\VIEWS . 'newuseraccount.phtml');
+            return $this->require($this->folders . 'newuseraccount.phtml');
         }
     }
     /**
@@ -67,20 +67,21 @@ class Login extends Controller{
         $this->User = new User($Data->email);
 
         if($this->verify($this->User->password())){
-            return require($this->folders . $this->zone() . '.phtml');
+            return require($this->zone());
         } else return Error::array('E026');
         
     }
     protected function newuser($Data){
         $User = new User; 
         $User->new($Data); 
-        return $this->require(\FOLDERS\VIEWS . 'newuseraccount.phtml');
+        return $this->require($this->folders . 'newuseraccount.phtml');
     }
     private function verify($save_password){
         return password_verify($this->password, $save_password);
     }
     private function zone(){
-        return $this->zone = ($this->isAdmin())?'appadmin':'appuser';
+        $folder = ($this->isAdmin())?\FOLDERS\ADMIN : \FOLDERS\USER;
+        return $this->zone = $folder . 'main.phtml'; 
     }
     private function isAdmin(){
         return $this->User->nivel() >= $this->level_admin; 
@@ -91,6 +92,6 @@ class Login extends Controller{
     protected function view( $data = null){
         // VAlor predeterminado de la vista
         if (!$data) $data = ['page' => 'login', 'data' => $this->company->data()];
-        return $this->require($this->folders . 'index.phtml', $data );
+        return $this->require( \FOLDERS\VIEWS. 'index.phtml', $data );
     }
 }

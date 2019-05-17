@@ -1,4 +1,5 @@
 <?php namespace app\core;
+use app\core\Data;
 /**
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
@@ -7,14 +8,13 @@ class Query extends Conn{
 
     function __construct(string $table = null, string $db = null, string $user = null){
         // Parametros predeterminados para la conexión
-
         $this->loadCredentials();
         if($table) $this->table = $table;
 
-        $this->db = $db?strtolower($db):$this->credentials['prefix'] . CODE_COMPANY;
-        $this->user = $user??'root';  
+        $this->db = $db?$db:$this->credentials['prefix'] . CODE_COMPANY;
+        $this->db = Data::codify($this->db);
+        $this->user = $user??'root';
         try{
-
             if($this->db != $this->credentials['prefix']){
                 $this->conn = $this->connect();
                 return gettype($this->conn) === 'object';
@@ -25,7 +25,7 @@ class Query extends Conn{
     }
 
     function loadCredentials(){
-        return $this->credentials = parse_ini_file('../app/config/conn.ini');
+        return $this->credentials = parse_ini_file(\FILES\CONN);
     }
     function __destruct(){
         $this->conn = null;
