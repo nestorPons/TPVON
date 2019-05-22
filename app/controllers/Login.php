@@ -81,7 +81,7 @@ class Login extends Controller{
     }
     private function zone(){
         $folder = ($this->isAdmin())?\FOLDERS\ADMIN : \FOLDERS\USER;
-        return $this->zone = $folder . 'main.phtml'; 
+        return $this->zone = $folder . 'index.phtml'; 
     }
     private function isAdmin(){
         return $this->User->nivel() >= $this->level_admin; 

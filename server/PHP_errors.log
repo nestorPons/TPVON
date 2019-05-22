@@ -6947,3 +6947,180 @@ Stack trace:
 #5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #6 {main}
   thrown in /var/www/html/app/controllers/Login.php on line 38
+[20-May-2019 08:06:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEW' in /var/www/html/app/views/admin/index.phtml:7
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(70): require()
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/admin/index.phtml on line 7
+[21-May-2019 10:05:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:5
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:06:31 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:06:31 UTC] PHP Fatal error:  Uncaught Exception: parse error: failed at `--nav-font-color: ` /var/www/html/app/src/less/main.less on line 8 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3556
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2367): lessc_parser->throwError()
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse('@font-color: #3...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#4 /var/www/html/app/models/Mylessc.php(30): lessc->cachedCompile(Array)
+#5 /var/www/html/app/models/Mylessc.php(19): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/app/core/less.php(7): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3556
+[21-May-2019 10:07:30 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/aol/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:07:30 UTC] PHP Fatal error:  Uncaught Exception: parse error: failed at `--nav-font-color: ` /var/www/html/app/src/less/main.less on line 8 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3556
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2367): lessc_parser->throwError()
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse('@font-color: #3...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#4 /var/www/html/app/models/Mylessc.php(30): lessc->cachedCompile(Array)
+#5 /var/www/html/app/models/Mylessc.php(19): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/app/core/less.php(7): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3556
+[21-May-2019 10:10:45 UTC] PHP Fatal error:  Uncaught Exception: parse error: failed at `--nav-font-color: ` /var/www/html/app/src/less/main.less on line 8 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3556
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2367): lessc_parser->throwError()
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse('@font-color: #3...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#4 /var/www/html/app/models/Mylessc.php(30): lessc->cachedCompile(Array)
+#5 /var/www/html/app/models/Mylessc.php(19): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/app/core/less.php(7): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#7 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#8 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3556
+[21-May-2019 10:15:45 UTC] PHP Notice:  Array to string conversion in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1865
+[21-May-2019 10:15:45 UTC] PHP Fatal error:  Uncaught Exception: variable @main-color is undefined: failed at `--main-color: @main-color; ` /var/www/html/app/src/less/main.less on line 7 in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:3556
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(2100): lessc_parser->throwError('variable @main-...', 90)
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1855): lessc->throwError('variable @main-...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1478): lessc->get('@main-color')
+#3 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(689): lessc->reduce(Array)
+#4 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(285): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#5 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(221): lessc->compileProps(Object(stdClass), Object(stdClass))
+#6 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(195): lessc->compileCSSBlock(Object(stdClass))
+#7 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(694): lessc->compileBlock(Object(stdClass))
+#8 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(285): lessc->compileProp(Array, Object(stdClass), Object(stdClass))
+#9 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(277): lessc->compileProps(Object(stdClass), Object(stdClass))
+#10 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(192): lessc->compileRoot(Object(stdClass))
+#11 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1902): lessc->compileBlock(Object(stdClass))
+#12 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#13 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#14 /var/www/html/app/models/Mylessc.php(23): lessc->cachedCompile(Array)
+#15 /var/www/html/app/models/Mylessc.php(12): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#16 /var/www/html/app/core/less.php(7): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#17 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#18 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 3556
+[21-May-2019 10:21:07 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[21-May-2019 10:21:07 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[21-May-2019 10:21:07 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[21-May-2019 10:37:53 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/config/files.php on line 5
+[21-May-2019 10:37:53 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/CODE_COMPANY/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:37:53 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[21-May-2019 10:38:05 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/config/files.php on line 5
+[21-May-2019 10:38:05 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/CODE_COMPANY/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:38:05 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[21-May-2019 10:38:42 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/config/files.php on line 5
+[21-May-2019 10:38:42 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/CODE_COMPANY/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:38:42 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[21-May-2019 10:40:23 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/config/files.php on line 5
+[21-May-2019 10:40:52 UTC] PHP Warning:  Use of undefined constant CODE_COMPANY - assumed 'CODE_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/config/files.php on line 5
+[21-May-2019 10:46:05 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[21-May-2019 10:46:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[21-May-2019 10:46:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:2
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 2
+[21-May-2019 10:47:31 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:5
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:48:07 UTC] PHP Warning:  Use of undefined constant CONFIG_COMPANY - assumed 'CONFIG_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/less.php on line 5
+[21-May-2019 10:48:31 UTC] PHP Warning:  Use of undefined constant CONFIG_COMPANY - assumed 'CONFIG_COMPANY' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/less.php on line 4
+[21-May-2019 10:49:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:4
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 4
+[21-May-2019 10:49:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:4
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 4
+[21-May-2019 10:50:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function FILE\prs() in /var/www/html/app/config/files.php:6
+Stack trace:
+#0 /var/www/html/app/config/folders.php(23): include()
+#1 /var/www/html/htdocs/index.php(5): require_once('/var/www/html/a...')
+#2 {main}
+  thrown in /var/www/html/app/config/files.php on line 6
+[21-May-2019 10:50:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function FILE\prs() in /var/www/html/app/config/files.php:6
+Stack trace:
+#0 /var/www/html/app/config/folders.php(23): include()
+#1 /var/www/html/htdocs/index.php(5): require_once('/var/www/html/a...')
+#2 {main}
+  thrown in /var/www/html/app/config/files.php on line 6
+[21-May-2019 10:50:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function FILE\prs() in /var/www/html/app/config/files.php:6
+Stack trace:
+#0 /var/www/html/app/config/folders.php(23): include()
+#1 /var/www/html/htdocs/index.php(5): require_once('/var/www/html/a...')
+#2 {main}
+  thrown in /var/www/html/app/config/files.php on line 6
+[21-May-2019 10:51:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\CONFIG_COMPANY' in /var/www/html/app/core/less.php:6
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 6
+[22-May-2019 08:04:42 UTC] PHP Notice:  Undefined variable: minifier_JS in /var/www/html/app/core/minify.php on line 53
+[22-May-2019 08:04:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function minify() on null in /var/www/html/app/core/minify.php:53
+Stack trace:
+#0 /var/www/html/htdocs/index.php(9): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/minify.php on line 53
+[22-May-2019 08:13:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function prs(), 0 passed in /var/www/html/app/core/minify.php on line 56 and exactly 1 expected in /var/www/html/app/core/dev.php:8
+Stack trace:
+#0 /var/www/html/app/core/minify.php(56): prs()
+#1 /var/www/html/htdocs/index.php(9): require_once('/var/www/html/a...')
+#2 {main}
+  thrown in /var/www/html/app/core/dev.php on line 8
+[22-May-2019 08:40:04 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 08:55:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 08:55:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 08:56:13 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 08:56:13 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 08:56:44 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 08:56:44 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 08:56:44 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 08:58:26 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 08:58:26 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 08:58:26 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 08:59:08 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 08:59:08 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 08:59:45 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 2
+[22-May-2019 08:59:45 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 09:46:19 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/node_modules/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[22-May-2019 09:46:19 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[22-May-2019 09:46:19 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/node_modules/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[22-May-2019 09:46:19 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071

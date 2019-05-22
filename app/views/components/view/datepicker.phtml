@@ -1,0 +1,22 @@
+<input id="<?=$this->id?>" type="text" class="date">
+<script>
+    $('#<?=$this->id?>').val(app.currentDate.toLocaleDateString())
+    app.datepicker = datepicker('#<?=$this->id?>',{
+        startDay: 1, 
+        customDays: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        formatter: function(el, date, instance) {
+            // This will display the date as `1/1/2019`.
+            el.value = date.toLocaleDateString();
+            app.currentDate = date
+        },
+    })
+</script>
+<style>
+    #<?=$this->id?>{
+        text-align: center;
+    }
+    .Do{
+        color: red;
+    }
+</style>

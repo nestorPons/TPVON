@@ -1,6 +1,6 @@
-
 var app = {
     GET: $_GET, 
+    currentDate: new Date, 
     getData(data = {}){
         for (let i in app.GET){
             data[i] =  app.GET[i]
@@ -32,9 +32,12 @@ var app = {
     get: function (data) {
         if (typeof data.controller === 'undefined') return false;
         $.get('index.php', app.getData(data), function (html) {
-            $('main')
+            // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
+            $container = ($('main').length != 0) ? $('main') : $('body')
+            $container
                 .find('section').hide().end()
                 .append(html);
+            
         }, 'html');
     },
     loadSync: function (name, callback) {
@@ -84,7 +87,7 @@ var app = {
            }else{
                // Cargammos el codigo html
                this.toggle(section, function(){
-                   html.appendTo('main')
+                   html.appendTo('body')
                })
            }
         },

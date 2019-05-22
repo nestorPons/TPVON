@@ -1,0 +1,36 @@
+<?php use app\views\components\controllers\DatePicker;?>
+<header id="bartools">
+    <div>
+        zona herramienta
+    </div>
+    <div>
+        <?php new DatePicker?>
+    </div>  
+    <div>
+        zona opciones generales
+    </div>
+</header>
+<script>
+
+</script>
+<style>
+    #bartools{
+        background-color: var(--main-color);
+        color: var(--nav-font-color);
+        padding: 0 10px 0 60px;
+        display: flex;
+        align-items: center;
+        overflow-x: visible;
+        overflow-y: visible;
+    
+    }
+    #bartools div{
+        flex-grow: 1;
+    }
+    #bartools div:nth-child(2){
+        text-align: center;
+    }
+    #bartools div:last-child{
+        text-align: right;
+    }
+</style>

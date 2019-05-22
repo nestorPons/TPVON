@@ -1,6 +1,6 @@
 <?php namespace app\models;
 class Mylessc extends \lessc{
-  
+    
     public function compileFolder($inputDir, $outputDir){
         $files = $files = glob($inputDir . '*.{less}', GLOB_BRACE);
         foreach($files as $file) {
@@ -27,4 +27,5 @@ class Mylessc extends \lessc{
           file_put_contents($outputFile, $newCache['compiled']);
         }
       }
+    
 }

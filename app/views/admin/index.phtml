@@ -1,0 +1,35 @@
+<?php 
+namespace app\views\components\controllers;
+?>
+<section id="appadmin">
+<?php include(\FOLDERS\VIEWS . 'admin/barTools.phtml')?>
+<?php include(\FOLDERS\VIEWS . 'admin/navBar.phtml')?>
+<?php include(\FOLDERS\VIEWS . 'admin/main.phtml')?>
+<?php include(\FOLDERS\VIEWS . 'admin/footer.phtml')?>
+</section>
+<style>
+    #appadmin{
+        display: grid;
+        grid-template-areas:
+            'header header '
+            'menu main '
+            'menu footer ';
+        grid-template-rows: 60px 1fr 60px;
+        grid-template-columns: min-content 1fr;  
+        background-color: #2196F3;
+        width: 100%; 
+        height: 100vh;
+    }
+    #appadmin header{
+        grid-area: header;
+    }    
+    #appadmin main{
+        grid-area: main;
+    }
+    #appadmin nav{
+        grid-area: menu;
+    }
+    #appadmin footer{
+        grid-area: footer;
+    }
+</style>

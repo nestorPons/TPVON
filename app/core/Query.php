@@ -25,7 +25,7 @@ class Query extends Conn{
     }
 
     function loadCredentials(){
-        return $this->credentials = parse_ini_file(\FILES\CONN);
+        return $this->credentials = parse_ini_file(\FILE\CONN);
     }
     function __destruct(){
         $this->conn = null;

@@ -35,7 +35,7 @@ class Company extends Query{
         $Data->codifyAttr('nombre_empresa');
         $Data->nombre = $Data->nombre_empresa;
         $this->loadData($Data);
-        $this->config = parse_ini_file(\FILES\CONN);
+        $this->config = parse_ini_file(\FILE\CONN);
         $this->db = $this->config["prefix"]  . $this->nombre; 
         
         // Definimos la base de datos por defecto
@@ -74,10 +74,10 @@ class Company extends Query{
     }
 
     private function createFolder(){
-        $folder = \FOLDERS\COMPANIES . $this->db;
+        $folder = \FOLDERS\COMPANIES . $this->nombre;
         if (!file_exists($folder)){
             mkdir($folder, 0750);
-            copy(\FOLDERS\CONFIG . 'template.ini', \FOLDERS\COMPANIES . $this->db . '/config.ini');
+            copy(\FOLDERS\TEMPLATE . 'config.ini', \FILE\CONFIG_COMPANY);
         } else{
             throw new Error('E017');
         }

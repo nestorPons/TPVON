@@ -81,7 +81,7 @@ class User extends Query{
 
         $Mail = new PHPMailer(true);
         // Configuración para mandar emails
-            include_once \FILES\MAIL;
+            include_once \FILE\MAIL;
             $Mail->IsHTML(true);
             $Mail->isSMTP();
             //definimos el destinatario (dirección y, opcionalmente, nombre)

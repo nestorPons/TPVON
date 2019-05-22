@@ -2,10 +2,7 @@
 $less = new \app\models\Mylessc;
 $less->setFormatter("compressed");
 
-$less->setVariables(array(
-    "rojo" => "red",
-    "azul" => "blue",
-    "base" => "960px"
-  ));
-
+// Carga de la configuración de cada empresa
+if(defined('\FILE\CONFIG_COMPANY')) $less->setVariables(array(parse_ini_file(\FILE\CONFIG_COMPANY))[0]);
+    
 $less->compileFolder(\FOLDERS\LESS, \FOLDERS\CSS);

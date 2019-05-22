@@ -3,10 +3,14 @@
 // Carpetas de trabajo /htdocs/css y /htdocs/js
 // Carpeta con archivos compilados /htdocs/build
 
+$icons = 'https://cdn.linearicons.com/free/1.0.0/icon-font.min.css';
+
+//Funcion que comprueba la fecha de la ultima compilación si es mas nueva que el archivo compilado
 function checkedCompile($in, $out) {
     return (!is_file($out) || filemtime($in) > filemtime($out));
 }
 
+// Compilación del os css
 if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
     $minifier_CSS = new Minify\CSS(
         \FOLDERS\CSS . 'mini.css', 
@@ -14,6 +18,7 @@ if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
     );
     $minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css'); 
 }
+
 function listar($path, $exit_path = \FOLDERS\JSMIN){
     // Desarrollo no minificar
     if ($folder = opendir($path)) {
