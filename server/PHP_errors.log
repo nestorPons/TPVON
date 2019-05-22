@@ -7124,3 +7124,279 @@ Stack trace:
 [22-May-2019 09:46:19 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
 [22-May-2019 09:46:19 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/node_modules/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
 [22-May-2019 09:46:19 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[22-May-2019 10:59:58 UTC] PHP Parse error:  syntax error, unexpected end of file in /var/www/html/app/views/components/controllers/Component.php on line 99
+[22-May-2019 11:00:10 UTC] PHP Parse error:  syntax error, unexpected end of file in /var/www/html/app/views/components/controllers/Component.php on line 99
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 2
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 7
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 18
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 20
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 22
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 27
+[22-May-2019 11:02:24 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 33
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:04:21 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:05:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: title in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: for in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: value in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:09:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: title in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: for in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: value in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:11:12 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:11:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable:  in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: title in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: for in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: value in /var/www/html/app/views/components/controllers/Component.php on line 89
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:11:57 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:12:38 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:13:34 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:13:58 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:14:19 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:14:42 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:15:06 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:20:43 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 1
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 3
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 4
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 5
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 8
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 9
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 19
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 21
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 23
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 28
+[22-May-2019 11:25:40 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/components/view/datepicker.phtml on line 34
+[22-May-2019 11:45:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:45:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:45:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:46:08 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:46:08 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:46:08 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:46:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:46:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:46:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:47:34 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:47:34 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 11:47:34 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 13:08:24 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[22-May-2019 13:08:24 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[22-May-2019 13:08:34 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[22-May-2019 13:08:34 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[22-May-2019 13:09:08 UTC] PHP Fatal error:  Uncaught Error: Class 'IconClose' not found in /var/www/html/app/views/admin/barTools.phtml:10
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Login.php(70): require('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 10
+[22-May-2019 13:09:42 UTC] PHP Fatal error:  Uncaught Error: Class 'Icon' not found in /var/www/html/app/views/admin/barTools.phtml:10
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Login.php(70): require('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 10
+[22-May-2019 13:10:17 UTC] PHP Fatal error:  Uncaught Error: Class 'Icon' not found in /var/www/html/app/views/admin/barTools.phtml:10
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Login.php(70): require('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 10
+[22-May-2019 13:10:31 UTC] PHP Fatal error:  Uncaught Error: Class 'Icon' not found in /var/www/html/app/views/admin/barTools.phtml:10
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Login.php(70): require('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 10
+[22-May-2019 13:38:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 13:38:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[22-May-2019 13:38:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279

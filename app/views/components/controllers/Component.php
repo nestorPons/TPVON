@@ -84,6 +84,16 @@ class Component{
         if($max) $this->maxlength = $max; 
         return  (empty($this->maxlength))? '' : "maxlength='{$this->maxlength}'";
     }
+    protected function printView($file){
+        foreach((array)$this as $key => $val){
+            if(strpos($key, '*')){
+                $key = substr($key, 3);
+            }
+            ${$key} = $val;
+        }
+
+        include \FOLDERS\COMPONENTS . "view/$file.phtml";
+    }
     // getters y setters
     function id(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 

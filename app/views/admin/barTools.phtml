@@ -1,4 +1,4 @@
-<?php use app\views\components\controllers\DatePicker;?>
+<?php namespace app\views\components\controllers;?>
 <header id="bartools">
     <div>
         zona herramienta
@@ -7,7 +7,7 @@
         <?php new DatePicker?>
     </div>  
     <div>
-        zona opciones generales
+        <?php new Icon('power-switch')?>
     </div>
 </header>
 <script>
@@ -22,6 +22,7 @@
         align-items: center;
         overflow-x: visible;
         overflow-y: visible;
+        height: auto;
     
     }
     #bartools div{
@@ -32,5 +33,14 @@
     }
     #bartools div:last-child{
         text-align: right;
+    }
+
+    #bartools .lnr{
+        display: inline-block;
+        font-size: 1.4rem;
+        cursor: pointer; 
+    }
+    #bartools .lnr:hover{
+        transform: var(--effect-transform-hover);
     }
 </style>

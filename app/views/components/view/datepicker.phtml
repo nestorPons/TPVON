@@ -1,22 +1,54 @@
-<input id="<?=$this->id?>" type="text" class="date">
+<div id="container_<?=$id?>">
+
+    <span id="arrow-previous_<?=$id?>" class="arrow lnr lnr-chevron-left"></span>
+    <input id="<?=$id?>" type="text" class="datepicker">
+    <span id="arrow-next_<?=$id?>" class="arrow lnr lnr-chevron-right"></span>
+</div>
 <script>
-    $('#<?=$this->id?>').val(app.currentDate.toLocaleDateString())
-    app.datepicker = datepicker('#<?=$this->id?>',{
+    $datepicker = $('#<?=$id?>')
+    $datepicker.val(app.Date.toLocaleDateString())
+    app.datepicker = datepicker('#<?=$id?>',{
+        position: 'bl',
         startDay: 1, 
         customDays: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
         customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         formatter: function(el, date, instance) {
             // This will display the date as `1/1/2019`.
-            el.value = date.toLocaleDateString();
-            app.currentDate = date
+            el.value = date.toLocaleDateString()
+            app.date(date)
         },
+    })
+    $('#arrow-previous_<?=$id?>').click(function(){
+        app.Date.setDate(app.Date.getDate() - 1)
+        $datepicker.val(app.Date.toLocaleDateString())
+        app.datepicker.setDate(app.Date)
+    })
+    $('#arrow-next_<?=$id?>').click(function(){
+        app.Date.setDate(app.Date.getDate() + 1)
+        $datepicker.val(app.Date.toLocaleDateString())
+        app.datepicker.setDate(app.Date)
     })
 </script>
 <style>
-    #<?=$this->id?>{
+    #<?=$id?>{
         text-align: center;
     }
     .Do{
         color: red;
+    }
+    #container_<?=$id?>{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .arrow{
+        cursor: pointer; 
+    }
+    .arrow:hover{
+        transform: var(--effect-transform-hover);
+    }
+    .qs-datepicker{
+
+        font-family: inherit;
     }
 </style>

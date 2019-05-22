@@ -6,9 +6,6 @@ class DatePicker extends Component{
     function __construct(Array $data = []){
         $this->prefix = 'dt'; 
         parent::__construct($data);
-        $this->print($data);
-    }
-    private function print(){
-        include \FOLDERS\COMPONENTS . 'view/datepicker.phtml';
+        $this->printView('datepicker');
     }
 }
