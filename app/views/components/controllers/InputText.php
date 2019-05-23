@@ -4,9 +4,9 @@
  */
 class InputText extends Component{
 
-    function __construct(Array $data = []){
+    function __construct(Array $data = [],  bool $collapse = true){
         $this->TYPE = 'text';
-        $this->COLLAPSE = true;
+        $this->COLLAPSE = $collapse;
         $this->MINLENGTH = null;
         $this->MAXLENGTH = null;
 

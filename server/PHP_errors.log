@@ -7400,3 +7400,513 @@ Stack trace:
 [22-May-2019 13:38:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
 [22-May-2019 13:38:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
 [22-May-2019 13:38:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[23-May-2019 08:46:23 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\ButtonCloseApp' not found in /var/www/html/app/views/admin/barTools.phtml:10
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Login.php(70): require('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 10
+[23-May-2019 08:47:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\views\components\controllers\ButtonCloseApp::__construct(), 0 passed in /var/www/html/app/views/admin/barTools.phtml on line 10 and exactly 1 expected in /var/www/html/app/views/components/controllers/ButtonCloseApp.php:8
+Stack trace:
+#0 /var/www/html/app/views/admin/barTools.phtml(10): app\views\components\controllers\ButtonCloseApp->__construct()
+#1 /var/www/html/app/views/admin/index.phtml(5): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(70): require('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/components/controllers/ButtonCloseApp.php on line 8
+[23-May-2019 08:48:04 UTC] PHP Warning:  include(/var/www/html/app/views/components/views/icon.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/components/view/closeapp.phtml on line 2
+[23-May-2019 08:48:04 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/components/views/icon.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/components/view/closeapp.phtml on line 2
+[23-May-2019 09:35:55 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[23-May-2019 09:35:55 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[23-May-2019 09:36:32 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[23-May-2019 09:36:32 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[23-May-2019 09:41:43 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[23-May-2019 09:41:43 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[23-May-2019 09:41:43 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[23-May-2019 10:04:47 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[23-May-2019 10:04:47 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[23-May-2019 10:04:52 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[23-May-2019 10:04:52 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[23-May-2019 10:09:25 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[23-May-2019 10:09:25 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[23-May-2019 10:10:39 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[23-May-2019 10:10:39 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[23-May-2019 10:11:51 UTC] PHP Notice:  Undefined variable: NESTOR in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 10:12:53 UTC] PHP Notice:  Undefined variable: NESTOR in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 10:47:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:72
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(120): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...')
+#3 /var/www/html/app/models/ZoneAdmin.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\ZoneAdmin->__construct(Object(app\models\User))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 72
+[23-May-2019 10:48:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:72
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(120): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', false)
+#3 /var/www/html/app/models/ZoneAdmin.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\ZoneAdmin->__construct(Object(app\models\User))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 72
+[23-May-2019 10:51:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:72
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(120): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(41): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(79): app\core\Query->sendQuery('SELECT TOP 1 * ...', false)
+#3 /var/www/html/app/models/ZoneAdmin.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\ZoneAdmin->__construct(Object(app\models\User))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 72
+[23-May-2019 10:53:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:72
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(120): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', false)
+#3 /var/www/html/app/models/ZoneAdmin.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\ZoneAdmin->__construct(Object(app\models\User))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 72
+[23-May-2019 10:55:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:72
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(120): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', false)
+#3 /var/www/html/app/models/ZoneAdmin.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\ZoneAdmin->__construct(Object(app\models\User))
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 72
+[23-May-2019 11:04:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', false)
+#3 /var/www/html/app/models/User.php(18): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(67): app\models\User->__construct('nestorpons@gmai...')
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 11:04:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:69
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', false)
+#3 /var/www/html/app/models/User.php(20): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(67): app\models\User->__construct('nestorpons@gmai...')
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 69
+[23-May-2019 11:18:26 UTC] PHP Notice:  Undefined variable: NOMBRE in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 11:19:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:69
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', true)
+#3 /var/www/html/app/models/User.php(20): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(67): app\models\User->__construct('nestorpons@gmai...')
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 69
+[23-May-2019 11:20:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:69
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', true)
+#3 /var/www/html/app/models/User.php(20): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(67): app\models\User->__construct('nestorpons@gmai...')
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 69
+[23-May-2019 11:21:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function execute() on bool in /var/www/html/app/core/Conn.php:68
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT TOP 1 * ...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT TOP 1 * ...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT TOP 1 * ...', true)
+#3 /var/www/html/app/models/User.php(20): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(67): app\models\User->__construct('nestorpons@gmai...')
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 68
+[23-May-2019 11:33:25 UTC] PHP Parse error:  syntax error, unexpected '\' (T_NS_SEPARATOR), expecting '}' in /var/www/html/app/controllers/Login.php on line 2
+[23-May-2019 12:17:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:17:43 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:18:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:21:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:22:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:23:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:24:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:24:48 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM u...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM u...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM u...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:26:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM t...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM t...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM t...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:26:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM t...', NULL)
+#1 /var/www/html/app/core/Query.php(40): app\core\Conn->query('SELECT * FROM t...')
+#2 /var/www/html/app/core/Query.php(78): app\core\Query->sendQuery('SELECT * FROM t...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:26:40 UTC] PHP Fatal error:  Uncaught Error: Cannot access protected property app\models\Tickets::$id in /var/www/html/app/views/admin/sections/tpv.phtml:2
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(76): require('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 12:27:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:51
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(116): app\core\Conn->init('SELECT * FROM t...', NULL)
+#1 /var/www/html/app/core/Query.php(41): app\core\Conn->query('SELECT * FROM t...')
+#2 /var/www/html/app/core/Query.php(79): app\core\Query->sendQuery('SELECT * FROM t...', true)
+#3 /var/www/html/app/models/Tickets.php(8): app\core\Query->getLast()
+#4 /var/www/html/app/controllers/Login.php(71): app\models\Tickets->__construct()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 51
+[23-May-2019 12:29:51 UTC] PHP Fatal error:  Uncaught Error: Cannot access protected property app\models\Tickets::$id in /var/www/html/app/views/admin/sections/tpv.phtml:2
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(76): require('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 12:30:48 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 12:42:42 UTC] PHP Fatal error:  Access level to app\models\Tickets::$table must be protected (as in class app\core\Query) or weaker in /var/www/html/app/models/Tickets.php on line 11
+[23-May-2019 12:49:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function use() on null in /var/www/html/app/views/index.phtml:22
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(57): require_once()
+#1 /var/www/html/app/controllers/Login.php(103): app\controllers\Controller->require('/var/www/html/a...', NULL)
+#2 /var/www/html/app/controllers/Controller.php(23): app\controllers\Login->view(Array)
+#3 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('view', NULL, NULL)
+#4 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('view', 'aol', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('login')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:28 UTC] PHP Notice:  Undefined variable: page in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:28 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:28 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:36 UTC] PHP Notice:  Undefined variable: page in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:36 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:36 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:53:39 UTC] PHP Warning:  require_once(/var/www/html/app/views/login/0function.include-once0.phtml) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/controllers/Controller.php on line 57
+[23-May-2019 12:53:39 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/views/login/0function.include-once0.phtml' (include_path='.:/usr/local/lib/php') in /var/www/html/app/controllers/Controller.php on line 57
+[23-May-2019 12:58:01 UTC] PHP Notice:  Undefined variable: page in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:58:01 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:58:01 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:58:53 UTC] PHP Notice:  Undefined variable: page in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:58:53 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:58:53 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:59:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function app\controllers\ps() in /var/www/html/app/controllers/Controller.php:50
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(14): app\controllers\Controller->require('/var/www/html/a...', Array)
+#1 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getView(Array)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 50
+[23-May-2019 12:59:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ps() in /var/www/html/app/controllers/Controller.php:50
+Stack trace:
+#0 /var/www/html/app/controllers/Main.php(14): app\controllers\Controller->require('/var/www/html/a...', Array)
+#1 /var/www/html/app/controllers/Main.php(11): app\controllers\Main->getView(Array)
+#2 /var/www/html/app/core/Router.php(95): app\controllers\Main->__construct('', NULL, NULL)
+#3 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('main')
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 50
+[23-May-2019 12:59:37 UTC] PHP Notice:  Undefined variable: page in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:59:37 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 12:59:37 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 22
+[23-May-2019 13:00:14 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:00:14 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:00:14 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:00:14 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:00:23 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:00:23 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:00:23 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:00:23 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:00:57 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /var/www/html/app/controllers/Controller.php on line 55
+[23-May-2019 13:01:14 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/controllers/Controller.php on line 54
+[23-May-2019 13:01:14 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/controllers/Controller.php on line 54
+[23-May-2019 13:01:14 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:01:14 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:01:14 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:01:14 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:01:31 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/controllers/Controller.php on line 54
+[23-May-2019 13:01:31 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:01:31 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:01:31 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:01:31 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:03:03 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/controllers/Controller.php on line 55
+[23-May-2019 13:03:03 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:03:03 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:03:03 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:03:03 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:03:32 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:03:32 UTC] PHP Warning:  Illegal string offset 'nombre' in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:03:32 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 10
+[23-May-2019 13:03:32 UTC] PHP Notice:  Undefined index: nombre in /var/www/html/app/views/login/main.phtml on line 11
+[23-May-2019 13:04:29 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:04:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/controllers/Controller.php on line 51
+[23-May-2019 13:05:15 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/controllers/Controller.php on line 52
+[23-May-2019 13:06:01 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:10:47 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:11:17 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/controllers/Controller.php on line 58
+[23-May-2019 13:11:17 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:11:30 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/controllers/Controller.php on line 58
+[23-May-2019 13:11:30 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:12:50 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/controllers/Controller.php on line 59
+[23-May-2019 13:12:50 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:13:30 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/controllers/Controller.php on line 60
+[23-May-2019 13:13:30 UTC] PHP Notice:  Undefined variable: id in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:16:01 UTC] PHP Notice:  Undefined variable: id_usuario in /var/www/html/app/views/admin/sections/tpv.phtml on line 2
+[23-May-2019 13:24:11 UTC] PHP Notice:  Undefined variable: val in /var/www/html/app/views/components/controllers/InputText.php on line 12
+[23-May-2019 13:35:21 UTC] PHP Fatal error:  Uncaught Error: Class 'Select' not found in /var/www/html/app/views/admin/sections/tpv.phtml:5
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(59): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Login.php(78): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(23): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 5
+[23-May-2019 13:36:39 UTC] PHP Fatal error:  Uncaught Error: Class 'Select' not found in /var/www/html/app/views/admin/sections/tpv.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(59): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Login.php(78): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Controller.php(23): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 6

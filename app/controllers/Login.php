@@ -1,9 +1,6 @@
 <?php namespace app\controllers;
-use \app\models\Tokens;
-use \app\models\User; 
-use \app\models\Company;
+use \app\models\{Tokens, User, Company, ZoneAdmin, ZoneUser, Tickets};
 use \app\core\Error;
-use \app\core\Data;
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
@@ -26,19 +23,17 @@ class Login extends Controller{
     function confirmation(){
     
         if(isset($_GET['args'])){
-
             $data = Tokens::decode($_GET['args']);
             $User = new User($data->id); 
             $User->activate();
             $this->view(['page' => 'useractivate', 'name_company' =>$this->company->nombre()]); 
-            
         } else die('token obligatorio');
     
     }
     protected function reset(Object $Data){
         $User = new User($Data->email);
         if($User->resetPassword()){
-            return $this->require($this->folders . 'newuseraccount.phtml');
+            return $this->printView($this->folders . 'newuseraccount.phtml');
         }
     }
     /**
@@ -48,13 +43,18 @@ class Login extends Controller{
     protected function activatePassword($Data){
         $this->controller = 'user'; 
         if($this->update($Data)){
-            return $this->require($this->folders . 'passwordactivate.phtml', ['name_company' => $this->company->nombre()] );
+            return $this->printView($this->folders . 'passwordactivate.phtml', ['name_company' => $this->company->nombre()] );
         } else return false;
     }
     protected function newpassword(){
         $Data =Tokens::decode($_GET['args']); 
         $this->view(['page' => 'resetpassword', 'name_company' => $this->company->nombre(), 'idUser'=> $Data->id]); 
     }
+    /**
+     * Autentifica el usuario
+     * Carga de controlador adecuado
+     * Devuelve la vista
+     */
     protected function auth(Object $Data){
 
         if($Data->isEmail('email')){
@@ -67,20 +67,28 @@ class Login extends Controller{
         $this->User = new User($Data->email);
 
         if($this->verify($this->User->password())){
-            return require($this->zone());
+            if ($this->isAdmin()){
+                $Ticket = new Tickets;
+                $data = $Ticket->toArray();
+                $isAdmin = true; 
+            } else if ($this->isUser()){
+                $data = []; 
+                $isAdmin = false;
+            }
+            return $this->printView($this->zone($isAdmin), $data);
         } else return Error::array('E026');
         
     }
     protected function newuser($Data){
         $User = new User; 
         $User->new($Data); 
-        return $this->require($this->folders . 'newuseraccount.phtml');
+        return $this->printView($this->folders . 'newuseraccount.phtml');
     }
     private function verify($save_password){
         return password_verify($this->password, $save_password);
     }
-    private function zone(){
-        $folder = ($this->isAdmin())?\FOLDERS\ADMIN : \FOLDERS\USER;
+    private function zone(bool $admin){
+        $folder = ($admin)?\FOLDERS\ADMIN : \FOLDERS\USER;
         return $this->zone = $folder . 'index.phtml'; 
     }
     private function isAdmin(){
@@ -92,6 +100,6 @@ class Login extends Controller{
     protected function view( $data = null){
         // VAlor predeterminado de la vista
         if (!$data) $data = ['page' => 'login', 'data' => $this->company->data()];
-        return $this->require( \FOLDERS\VIEWS. 'index.phtml', $data );
+        return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
 }

@@ -1,6 +1,7 @@
 <?php 
 namespace app\controllers;
-
+use \app\core\Data;
+use \app\models\Company;
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
  * Tiene lo mínimo para la creación de una subclase: 
@@ -33,7 +34,7 @@ class Controller{
         else if(!file_exists($file))
             $file = \FOLDERS\USER . $this->controller . '.phtml';
         else return false; 
-        return $this->require($file, $data);
+        return $this->printView($file, $data);
     }
     protected function update(Object $Data){
         $this->Model = $this->getModel(intval($Data->id));
@@ -45,10 +46,16 @@ class Controller{
         $data = $Data->toArray();
         $this->Model->saveById($data);
     }
-    protected function require(String $route, $data = null){
-        if(isset($_GET['db'])) $Company = new \app\models\Company($_GET['db']);
-        if (is_array($data))
-            $data = new \app\core\Data($data);
+    protected function printView(String $route, array $data = null){  
+        if(isset($_GET['db'])) $Company = new Company($_GET['db']);
+        if($data){
+            foreach($data as $key => $val){
+                if(strpos($key, '*')){
+                    $key = substr($key, 3);
+                }
+                ${$key} = $val;
+            }
+        }
         return require_once $route;
     }
     /**

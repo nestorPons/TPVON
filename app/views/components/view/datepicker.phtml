@@ -1,32 +1,43 @@
 <div id="container_<?=$id?>">
-
     <span id="arrow-previous_<?=$id?>" class="arrow lnr lnr-chevron-left"></span>
     <input id="<?=$id?>" type="text" class="datepicker">
     <span id="arrow-next_<?=$id?>" class="arrow lnr lnr-chevron-right"></span>
 </div>
 <script>
-    $datepicker = $('#<?=$id?>')
-    $datepicker.val(app.Date.toLocaleDateString())
-    app.datepicker = datepicker('#<?=$id?>',{
+    // Comprobamos que este creado en el objeto global app
+    if(isset(app.Date)){
+
+        app.Date = new Date
+        app.datepickers = {}
+        app.loadDate = function(n){
+            app.Date.setDate(n)
+            for (let i in app.datepickers) {
+                app.datepickers[i].setDate(app.Date)
+            }
+            if($('.datepicker').length){
+                $('.datepicker').val(app.Date.toLocaleDateString())
+            }
+        }
+    }
+    // Cargamos fecha al iniciar el componente
+    app.loadDate(app.Date.getDate())
+    // Creamos un componente en el objeto global
+    app.datepickers.<?=$id?> = datepicker('#<?=$id?>',{
         position: 'bl',
         startDay: 1, 
         customDays: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
         customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        formatter: function(el, date, instance) {
-            // This will display the date as `1/1/2019`.
-            el.value = date.toLocaleDateString()
-            app.date(date)
-        },
+        onSelect: function(el, date) {
+            app.loadDate(date.getDate())
+        }
     })
+
+    // Añadimos funcionalidad a los botones auxiliares
     $('#arrow-previous_<?=$id?>').click(function(){
-        app.Date.setDate(app.Date.getDate() - 1)
-        $datepicker.val(app.Date.toLocaleDateString())
-        app.datepicker.setDate(app.Date)
+        app.loadDate(app.Date.getDate() - 1)    
     })
     $('#arrow-next_<?=$id?>').click(function(){
-        app.Date.setDate(app.Date.getDate() + 1)
-        $datepicker.val(app.Date.toLocaleDateString())
-        app.datepicker.setDate(app.Date)
+        app.loadDate(app.Date.getDate() + 1)
     })
 </script>
 <style>

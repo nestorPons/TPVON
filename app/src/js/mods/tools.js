@@ -12,6 +12,9 @@ var $y = function ($arg) {
 var exist = function(arg = undefined){
     return arg != undefined
 }
+var isset = function(arg = undefined){
+    return typeof arg == undefined || arg == null || arg == false || arg == 0
+}
 var isTrue = function(arg = null){
     return arg === true
 }

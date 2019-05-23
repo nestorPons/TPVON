@@ -1,3 +1,22 @@
+Select<?php use app\views\components\controllers\{InputText, Select};?>
 <section id="tpv">
-    Esto será el tpv
+     <?php new InputText(['value'=>$id, 'label'=>'Id del ticket'],  false);?>
+     <div class="row">
+         <?php 
+            new Select(['label'=>'Seleccione su sector', 'name'=>'sector', 'required' => true,
+                        'options' => [
+                            1 => 'Peluqueria',
+                            2 => 'Estética',
+                            3 => 'Masaje',
+                            4 => 'Otros'
+                            ]]);
+                new InputText(['label'=>'Servicios/Artículos'],  false);?>
+    </div>
 </section>
+<style>
+    #tpv{
+        display: grid; 
+        grid-template-rows: 6;    
+        grid-template-columns: 4; 
+    }
+</style>

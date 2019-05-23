@@ -46,10 +46,7 @@ class Conn{
 	 }
 
     private function init($sql, $params = null){
-/*   echo $sql; 
-pr(
-    $params
-);   */
+/* echo $sql;pr($params);   */ 
         try {
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
@@ -68,7 +65,6 @@ pr(
                     $this->sqlPrepare->bindValue($value[0], $value[1], $type);
                 }
             }
-            
            return $this->sqlPrepare->execute();
         }
         catch (\PDOException $e) {

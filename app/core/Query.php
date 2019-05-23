@@ -37,6 +37,7 @@ class Query extends Conn{
     private function sendQuery(String $sql, bool $desc = false){
         $order = $desc?'ORDER BY id DESC':'';
         $sql = str_replace('order_by', $order, $sql); 
+
         return $this->query($sql);
     }
     // Devolvemos la conexión
@@ -74,6 +75,9 @@ class Query extends Conn{
             "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
         );
      }
+    protected function getLast(){
+        return $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true); 
+    }
     // Devuelve los registros con el valor entre los dos valores proporcionados de un campo
     public function getBetween ( string $column, $val1, $val2, string $args = null, bool $desc = false){
         return $this->sendQuery(
@@ -212,5 +216,14 @@ class Query extends Conn{
         }
         return true;
     }
-
+    function toArray(){
+        $arr = [];
+        foreach((array)$this as $key => $val){
+            //if(strpos($key, '*')){
+                //$key  = str_replace('*','',$key);
+                $arr[$key] = $val; 
+            //}
+        }
+        return $arr;
+    }
 }

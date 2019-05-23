@@ -1,10 +1,5 @@
 var app = {
     GET: $_GET, 
-    Date: new Date, 
-    date(Date){
-        if(Date != undefined) this.Date  = Date
-        return this.Date
-    }, 
     getData(data = {}){
         for (let i in app.GET){
             data[i] =  app.GET[i]

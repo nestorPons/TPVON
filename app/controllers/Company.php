@@ -9,7 +9,7 @@ class Company extends Controller{
     protected function new(Object $Data = null){
         $Model = new CompanyModel; 
         if($Model->new($Data)){
-            return $this->require(\FOLDERS\LOGIN . 'newcompanycreated.phtml');
+            return $this->printView(\FOLDERS\LOGIN . 'newcompanycreated.phtml');
         } else Error::array('');
 
     }

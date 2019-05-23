@@ -7,7 +7,7 @@
         <?php new DatePicker?>
     </div>  
     <div>
-        <?php new Icon('power-switch')?>
+        <?php new ButtonCloseApp?>
     </div>
 </header>
 <script>
@@ -24,6 +24,9 @@
         overflow-y: visible;
         height: auto;
     
+    }
+    #bartools a, #bartools a:hover, #bartools a:link, #bartools a:visited{
+        color: var(--nav-font-color);
     }
     #bartools div{
         flex-grow: 1;
