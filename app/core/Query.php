@@ -203,7 +203,6 @@ class Query extends Conn{
     }
     // setter genérico para la inserción de datos en los atributos de la clase hija
     function loadData($data){
-
         if(!$data) return false;
         // Normalización de los datos para direfentes casos de uso
         if(is_object($data)) $data = (array)$data;
@@ -216,13 +215,14 @@ class Query extends Conn{
         }
         return true;
     }
-    function toArray(){
+    function toArray(bool $nameSpace = false){ 
+        $prefix = ($nameSpace)?$this->table . '_' : '';
         $arr = [];
         foreach((array)$this as $key => $val){
-            //if(strpos($key, '*')){
-                //$key  = str_replace('*','',$key);
-                $arr[$key] = $val; 
-            //}
+            // No pasamos a array los objetos 
+            if(!strpos($key, '*')){
+                $arr[$prefix . $key] = $val;
+            }
         }
         return $arr;
     }

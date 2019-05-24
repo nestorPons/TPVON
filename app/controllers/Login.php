@@ -68,16 +68,18 @@ class Login extends Controller{
 
         if($this->verify($this->User->password())){
             if ($this->isAdmin()){
-                $Ticket = new Tickets;
-                $data = $Ticket->toArray();
-                $isAdmin = true; 
+                $Admin = new Admin; 
+                return $Admin->loadView();
             } else if ($this->isUser()){
-                $data = []; 
-                $isAdmin = false;
+                $Clients = new Clients; 
+                return $Clients->loadView();
             }
-            return $this->printView($this->zone($isAdmin), $data);
         } else return Error::array('E026');
         
+    }
+    private function zone(bool $admin){
+        $folder = ($admin)?\FOLDERS\ADMIN : \FOLDERS\USER;
+        return $this->zone = $folder . 'index.phtml'; 
     }
     protected function newuser($Data){
         $User = new User; 
@@ -86,10 +88,6 @@ class Login extends Controller{
     }
     private function verify($save_password){
         return password_verify($this->password, $save_password);
-    }
-    private function zone(bool $admin){
-        $folder = ($admin)?\FOLDERS\ADMIN : \FOLDERS\USER;
-        return $this->zone = $folder . 'index.phtml'; 
     }
     private function isAdmin(){
         return $this->User->nivel() >= $this->level_admin; 

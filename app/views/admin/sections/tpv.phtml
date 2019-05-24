@@ -1,22 +1,56 @@
-Select<?php use app\views\components\controllers\{InputText, Select};?>
+<?php use app\views\components\controllers\{InputText, InputSearch};?>
 <section id="tpv">
-     <?php new InputText(['value'=>$id, 'label'=>'Id del ticket'],  false);?>
-     <div class="row">
-         <?php 
-            new Select(['label'=>'Seleccione su sector', 'name'=>'sector', 'required' => true,
-                        'options' => [
-                            1 => 'Peluqueria',
-                            2 => 'Estética',
-                            3 => 'Masaje',
-                            4 => 'Otros'
-                            ]]);
-                new InputText(['label'=>'Servicios/Artículos'],  false);?>
-    </div>
+    <form action="">
+        <?php 
+        new InputText(['id'=>'id', 'value'=>$tickets_id, 'label'=>'Id del ticket'],  false);
+        new InputText(['id'=>'hour', 'value'=>$tickets_hora, 'label'=>'Hora'],  false);
+        new InputSearch(['id'=>'code', 'label'=>'Codigo servicio', 'name'=>'servicio', 'required' => true, 'options' => $selectServicios], false);
+        new InputText(['id'=>'description', 'label'=>'Desctipcion del servicio'],  false);
+        new InputSearch(['id'=>'user', 'label'=>'Operador', 'required' => true, 'options' => $workers], false);
+        new InputText(['id'=>'customer', 'label'=>'Cliente'], false);
+        new InputText(['id'=>'quantity', 'label'=>'Cantidad'], false);
+        new InputText(['id'=>'price', 'label'=>'Precio'], false);
+        new InputText(['id'=>'dto', 'label'=>'Dto'], false);
+        new InputText(['id'=>'amount', 'label'=>'Importe'], false);
+        ?>
+    </form>
+
 </section>
 <style>
     #tpv{
         display: grid; 
-        grid-template-rows: 6;    
-        grid-template-columns: 4; 
+        grid-template-rows: repeat(4, 1fr);    
+        grid-template-columns: repeat(9, 1fr); 
+
+    }
+    #tpv #id{
+        grid-area: 1/1; 
+    }
+    #tpv #hour{
+        grid-area: 1/4;
+    }
+    #tpv #code{
+        grid-area: 3/1;
+    }
+    #tpv #description{
+        grid-area: 3/2;
+    }
+    #tpv #user{
+        grid-area: 3/3;
+    }
+    #tpv #customer{
+        grid-area: 3/4;
+    }
+    #tpv #quantity{
+        grid-area: 3/5;
+    }
+    #tpv #price{
+        grid-area: 3/6;
+    }
+    #tpv #dto{
+        grid-area: 3/7;
+    }
+    #tpv #amount{
+        grid-area: 3/8;
     }
 </style>

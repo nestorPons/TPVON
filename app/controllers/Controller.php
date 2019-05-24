@@ -1,6 +1,5 @@
 <?php 
 namespace app\controllers;
-use \app\core\Data;
 use \app\models\Company;
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
@@ -50,12 +49,10 @@ class Controller{
         if(isset($_GET['db'])) $Company = new Company($_GET['db']);
         if($data){
             foreach($data as $key => $val){
-                if(strpos($key, '*')){
-                    $key = substr($key, 3);
-                }
                 ${$key} = $val;
             }
         }
+        
         return require_once $route;
     }
     /**

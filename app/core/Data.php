@@ -7,12 +7,11 @@ class Data {
     function __construct(Array $data){
         foreach($data as $key => $value){
             if(is_array($value)){
-                foreach($value as $k => $v){
-                    $this->{$k} = $v;
+                foreach($value as $ke => $val){
+                    if(is_array($val)) foreach($val as $k => $v) $this->{$k} = $v;
+                    else $this->{$ke} = $val;
                 }
-            } else {
-                $this->{$key} = $value;  
-            }
+            } else $this->{$key} = $value;  
         }
     }
     function addOne($key, $value){

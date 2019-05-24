@@ -6,17 +6,11 @@ class Component{
     protected $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix;
         
     function __construct(Array $data = []){
-        $this->id = $this->randomid();
-        $this->name = $data['name']??'';
-        $this->label = ucfirst($data['label']??$this->name);
-        $this->class = $data['class']??null;
-        $this->required = isset($data['required']);
-        $this->pattern = $data['pattern']??null; 
-        $this->title = $data['title']??null; 
-        $this->minlength = $data['minlength']??null; 
-        $this->maxlength = $data['maxlength']??null;
-        $this->for = $data['for']??null;
-        $this->value = $data['value']??null;
+        foreach($data as $key => $val){
+            $this->{$key} = $val??null;
+        }
+        $this->id = ($this->id)??$this->randomid();
+
     }
     protected function printInput(){
         $TYPE = $this->TYPE;
@@ -33,6 +27,7 @@ class Component{
         $pattern = $this->printPattern();
         $for = $this->printFor();
         $value = $this->printValue();
+        $list = $this->printList();
         include \FOLDERS\COMPONENTS . 'view/input.phtml';
     }
     protected function getnameclass(){
@@ -75,6 +70,9 @@ class Component{
     }
     protected function printFor(){
         return  (empty($this->for))? '' : "for='{$this->for}'";
+    }
+    protected function printList(){
+        return  (empty($this->list))? '' : "list='{$this->list}'";
     }
     protected function printMinlength(string $min = null){
         if($min) $this->minlength = $min; 
