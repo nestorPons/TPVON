@@ -5,12 +5,12 @@
 class Number extends Component{
 
     function __construct(Array $data = []){
-        $this->TYPE = 'number';
+        $this->type = 'number';
         $this->COLLAPSE = false;
         $this->MINLENGTH = null;
         $this->MAXLENGTH = null;
 
         parent::__construct($data);
-        $this->printInput($data);
+        $this->print('input');
     }
 }

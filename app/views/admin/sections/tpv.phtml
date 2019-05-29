@@ -1,56 +1,115 @@
-<?php use app\views\components\controllers\{InputText, InputSearch};?>
+<?php use app\views\components\controllers \ {
+    InputText,
+    InputSearch,
+    ButtonSuccess,
+    Table
+}; ?>
 <section id="tpv">
-    <form action="">
-        <?php 
-        new InputText(['id'=>'id', 'value'=>$tickets_id, 'label'=>'Id del ticket'],  false);
-        new InputText(['id'=>'hour', 'value'=>$tickets_hora, 'label'=>'Hora'],  false);
-        new InputSearch(['id'=>'code', 'label'=>'Codigo servicio', 'name'=>'servicio', 'required' => true, 'options' => $selectServicios], false);
-        new InputText(['id'=>'description', 'label'=>'Desctipcion del servicio'],  false);
-        new InputSearch(['id'=>'user', 'label'=>'Operador', 'required' => true, 'options' => $workers], false);
-        new InputText(['id'=>'customer', 'label'=>'Cliente'], false);
-        new InputText(['id'=>'quantity', 'label'=>'Cantidad'], false);
-        new InputText(['id'=>'price', 'label'=>'Precio'], false);
-        new InputText(['id'=>'dto', 'label'=>'Dto'], false);
-        new InputText(['id'=>'amount', 'label'=>'Importe'], false);
-        ?>
-    </form>
 
-</section>
+        <?php
+        $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe']]);
+        $id = new InputText(['value' => $tickets_id, 'label' => 'Id'],  false);
+        $hour = new InputText(['value' => $tickets_hora, 'label' => 'Hora'],  false);
+        $code = new InputSearch(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'options' => $Services->get('codigo'), 'tabindex'=>1], false);
+        $des = new InputText(['label' => 'Desctipcion','tabindex'=>2],  false);
+        $emp = new InputSearch(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre')], false);
+        $cli = new InputSearch(['label' => 'Cliente', 'options' => $Users->get('nombre')], false);
+        $quan = new InputText(['label' => 'Cantidad', 'tabindex'=>3], false);
+        $pric = new InputText(['label' => 'Precio', 'tabindex'=>4], false);
+        $dto = new InputText(['label' => 'Dto', 'tabindex'=>5], false);
+        $amo = new InputText(['id' => 'amount', 'label' => 'Importe', 'disabled' => true], false);
+        $add = new ButtonSuccess(['tabindex'=>6]);
+        ?> 
+</section> 
 <style>
     #tpv{
-        display: grid; 
-        grid-template-rows: repeat(4, 1fr);    
-        grid-template-columns: repeat(9, 1fr); 
-
+        align-items: flex-start;
+        display: grid;
+        grid-template-rows: auto [table] 400px auto auto;
+        grid-template-columns: 10rem 1fr 1fr 4rem 6rem 4rem  [last] 6rem;
     }
-    #tpv #id{
-        grid-area: 1/1; 
+    #tpv table:not(.horizontal) thead{
+        height: 60px;
     }
-    #tpv #hour{
-        grid-area: 1/4;
+    #tpv * {
+        font-size: 0.8rem;
     }
-    #tpv #code{
+    #tpv table{
+        grid-row: table;
+        grid-column: 1/-1;
+    }
+    #tpv #<?= $id->id() ?>{
+        grid-area: 1/1;
+    }
+    #tpv #<?= $add->id() ?>{
+        grid-row: 4;
+        grid-column: last;
+    }
+    #tpv #<?= $hour->id() ?>{
+        grid-row: 1;
+        grid-column: last;
+    }
+    #tpv #<?= $code->id() ?>{
         grid-area: 3/1;
     }
-    #tpv #description{
-        grid-area: 3/2;
+    #tpv #<?= $des->id() ?>{
+        grid-row: 3;
+        grid-column: 2 / span 2;
     }
-    #tpv #user{
-        grid-area: 3/3;
+    #tpv #<?= $emp->id() ?>{
+        grid-area: 1/2;
     }
-    #tpv #customer{
+    #tpv #<?= $cli->id() ?>{
+        grid-area: 1/3;
+    }
+    #tpv #<?= $quan->id() ?>{
         grid-area: 3/4;
     }
-    #tpv #quantity{
+    #tpv #<?= $pric->id() ?>{
         grid-area: 3/5;
     }
-    #tpv #price{
+    #tpv #<?= $dto->id() ?>{
         grid-area: 3/6;
     }
-    #tpv #dto{
-        grid-area: 3/7;
+    #tpv #<?= $amo->id() ?>{
+        grid-row: 3;
+        grid-column: last;
     }
-    #tpv #amount{
-        grid-area: 3/8;
+    #tpv .Importe{
+        text-align: right;
     }
 </style>
+<script src="js/Line.min.js"></script>
+<script src="js/Ticket.min.js"></script>
+<script>
+var ticket = new Ticket(); 
+
+$('#<?=$add->id()?>').click(function(){
+
+    const 
+        $template = $( $('#template_<?=$table->id()?>')[0].innerHTML ),
+        $table = $('#<?=$table->id()?>'), 
+        $code =  $('#input_<?=$code->id()?>'),
+        $des = $('#input_<?=$des->id()?>'),
+        $emp = $('#input_<?=$emp->id()?>'),
+        $quan = $('#input_<?=$quan->id()?>'),
+        $price = $('#input_<?=$pric->id()?>'),
+        $dto = $('#input_<?=$dto->id()?>')
+
+    var line = ticket.addLine($code.val(), $des.val(), $quan.val(), $price.val(), $dto.val(), $quan.val())
+    if(line.success){
+        $template
+            .attr('id', line.id)
+            .find('.Código').html(line.cod).end()
+            .find('.Descripción').html(line.des).end()
+            .find('.Cantidad').html(line.qua).end()
+            .find('.Precio').html(line.pri).end()
+            .find('.Dto').html(line.dto).end()
+            .find('.Importe').html(line.amount()).end()
+    
+        $table.append($template) 
+    }
+
+})
+
+</script>

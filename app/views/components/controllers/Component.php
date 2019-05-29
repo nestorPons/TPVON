@@ -3,19 +3,22 @@
  * Clase de madre de los componentes html
  */
 class Component{
-    protected $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix;
+    protected $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix,
+    $COLLAPSE = false,
+    $MINLENGTH = 1, 
+    $MAXLENGTH = 255;
         
     function __construct(Array $data = []){
         foreach($data as $key => $val){
             $this->{$key} = $val??null;
         }
-        $this->id = ($this->id)??$this->randomid();
-
+        $this->id = ($this->id)??$this->type . $this->randomid();
     }
-    protected function printInput(){
-        $TYPE = $this->TYPE;
+    protected function print(string $file = 'input'){
+        $type= $this->type??null;
         $id = $this->id; 
-        $hidden = ($TYPE == 'hidden')?'hidden':'';
+        $hidden = ($type == 'hidden')?'hidden':'';
+        $disabled = (isset($this->disabled))?'disabled':'';
         $idSel = 'input_' .$this->id; 
         $name = $this->printName(); 
         $title = $this->printTitle();
@@ -28,7 +31,12 @@ class Component{
         $for = $this->printFor();
         $value = $this->printValue();
         $list = $this->printList();
-        include \FOLDERS\COMPONENTS . 'view/input.phtml';
+        $spinner = $this->spinner??null;
+        $caption = $this->caption??null;
+        $columns = $this->columns??null;
+        $tabindex = isset($this->tabindex)?'tabindex='.$this->tabindex:''; 
+        
+        include \FOLDERS\COMPONENTS . "view/$file.phtml";
     }
     protected function getnameclass(){
         $arr_controller= explode('\\',get_class($this));
@@ -74,11 +82,11 @@ class Component{
     protected function printList(){
         return  (empty($this->list))? '' : "list='{$this->list}'";
     }
-    protected function printMinlength(string $min = null){
+    protected function printMinlength($min = null){
         if($min) $this->minlength = $min; 
         return  (empty($this->minlength))? '' : "minlength='{$this->minlength}'";
     }
-    protected function printMaxlength(string $max = null){
+    protected function printMaxlength($max = null){
         if($max) $this->maxlength = $max; 
         return  (empty($this->maxlength))? '' : "maxlength='{$this->maxlength}'";
     }

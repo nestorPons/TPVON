@@ -2,11 +2,11 @@
 /**
  * Clase de input de tipo numero
  */
-class ButtonSuccess extends Component{
+class ButtonAccept extends Component{
     protected 
         $spinner = true,
         $class = 'tertiary',
-        $type = 'submit',
+        $type = 'button',
         $caption = 'Aceptar';
     
     function __construct(Array $data = []){

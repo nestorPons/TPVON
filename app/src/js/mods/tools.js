@@ -15,6 +15,9 @@ var exist = function(arg = undefined){
 var isset = function(arg = undefined){
     return typeof arg == undefined || arg == null || arg == false || arg == 0
 }
+var isEmpty = function(arg = undefined){
+    return typeof arg == undefined || arg == null || arg == false || arg == 0 || arg == ''
+}
 var isTrue = function(arg = null){
     return arg === true
 }

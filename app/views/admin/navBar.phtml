@@ -9,6 +9,7 @@
 <style>
     :root{
         --nav-initial-width: 46px;
+        --nav-max-width: 145px;
     }
     nav#navBar{
         margin: 0;
@@ -63,7 +64,7 @@
      }
      nav#navBar.menu-max{
          max-width: min-content;
-         width: inherit;
+         width: var(--nav-max-width);
      }
      nav#navBar.menu-initial{
         width: var(--nav-initial-width);

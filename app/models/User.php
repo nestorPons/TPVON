@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 use \app\core\Error;
 
 class User extends Query{
-    protected $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token;
+    public $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token;
     protected $table = 'usuarios';
     /**
      * $arg puede ser un string email para buscar por email
@@ -18,9 +18,19 @@ class User extends Query{
         $this->company = NAME_COMPANY??null;
         if($conn) parent::__construct();
         if($arg){
-            if (is_int($arg)) $this->searchById($arg);
+            if (is_array($arg)) $this->loadData($arg);
+            else if (is_int($arg)) $this->searchById($arg);
             else if (strpos($arg, '@')) $this->searchByEmail($arg);
         }
+    }
+
+    function allEmployees(){
+        $Data = new Data; 
+        $data = $this->getBy(['nivel' => 1, 'nivel' => 2]);
+        foreach($data as $key => $value){
+            $Data->addItem($key, new User($value));
+        }
+        return $Data;
     }
     function new(Object $Data){
 

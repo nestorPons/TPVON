@@ -5,11 +5,11 @@
 class InputPass extends Component{
 
     function __construct(Array $data = []){
-        $this->TYPE = 'password';
+        $this->type = 'password';
         $this->COLLAPSE = true;
         $this->MINLENGTH = 6;
         $this->MAXLENGTH = null; 
         parent::__construct($data);
-        $this->printInput($data);
+        $this->print('input');
     }
 }

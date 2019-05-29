@@ -4,18 +4,34 @@
  */
 class Data {
     // Creamos los atributos en el constructor
-    function __construct(Array $data){
-        foreach($data as $key => $value){
-            if(is_array($value)){
-                foreach($value as $ke => $val){
-                    if(is_array($val)) foreach($val as $k => $v) $this->{$k} = $v;
-                    else $this->{$ke} = $val;
-                }
-            } else $this->{$key} = $value;  
+    private $data = null; 
+
+    function __construct(Array $data = null){
+        if($data){
+            foreach($data as $key => $value){
+                if(is_array($value)){
+                    foreach($value as $ke => $val){
+                        if(is_array($val)) foreach($val as $k => $v) $this->{$k} = $v;
+                        else $this->{$ke} = $val;
+                    }
+                } else $this->{$key} = $value;  
+            }
         }
     }
-    function addOne($key, $value){
-        return $this->{$key} = $value;
+    function addItem($key, $value){
+        // Si vamos a pasar un array numerado creamos todos los métodos para extraer los atributos
+        if(is_object($value) || is_array($value)){
+           @$this->data->{$key} = $value;
+        } else return $this->{$key} = $value;
+    }
+    function get($attr = null){
+        if($this->data){
+            $arr = []; 
+            foreach($this->data as $obj){
+                $arr[$obj->id] = $obj->{$attr}; 
+            }
+            return $arr;
+        }
     }
     /**
      * Validador de los datos

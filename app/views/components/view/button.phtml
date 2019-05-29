@@ -1,0 +1,11 @@
+<button 
+    type="<?=$type?>" 
+    class="<?=$class?> collapse " 
+    id = "<?=$id?>"
+    <?=$tabindex?>
+    >
+    <?php if($spinner):?>
+        <i class="spinner hidden"></i>
+    <?php endif ?>
+        <span class="caption"><?=$caption?></span>
+</button>

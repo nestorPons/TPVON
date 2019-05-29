@@ -5,7 +5,7 @@
 class InputSearch extends Component{
 
     function __construct(Array $data = [],  bool $collapse = true){
-        $this->TYPE = 'search';
+        $this->type = 'search';
         $this->COLLAPSE = $collapse;
         $this->MINLENGTH = null;
         $this->MAXLENGTH = null;
@@ -13,11 +13,11 @@ class InputSearch extends Component{
         parent::__construct($data);
         $this->list = 'datalist_' . $this->id; 
         
-        $this->printInput();
+        $this->print('input');
         $this->printDatalist();
     }
     protected function printDatalist(){
-        $TYPE = $this->TYPE;
+        $type= $this->type;
         $id = $this->list; 
         $options = $this->options??null;
 

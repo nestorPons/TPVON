@@ -226,4 +226,13 @@ class Query extends Conn{
         }
         return $arr;
     }
+    // Descarga todos los dados y retorna objetos data
+    function allData(Object $Obj){
+        $Data = new Data; 
+        $data = $this->getAll();
+        foreach($data as $key => $value){
+            $Data->addItem($key, new $Obj($value));
+        }
+        return $Data;
+    }
 }

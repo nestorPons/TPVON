@@ -5,12 +5,12 @@
 class InputText extends Component{
 
     function __construct(Array $data = [],  bool $collapse = true){
-        $this->TYPE = 'text';
+        $this->type = 'text';
         $this->COLLAPSE = $collapse;
         $this->MINLENGTH = null;
         $this->MAXLENGTH = null;
 
         parent::__construct($data);
-        $this->printInput();
+        $this->print('input');
     }
 }

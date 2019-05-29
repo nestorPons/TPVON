@@ -2,10 +2,12 @@
 use \app\core\{Query, Data};
 
 class Items extends Query{
-    protected $id, $codigo,	$nombre, $descripcion, $precio, $coste, $id_iva, $tipo, $valor, $estado,
-    $table = 'articulos';
-    function __construct(int $id = null){
+    public $id, $codigo,	$nombre, $descripcion, $precio, $coste, $id_iva, $tipo, $valor, $estado;
+    protected $table = 'articulos';
+
+    function __construct($arg = null){
         parent::__construct();
-        if($id) $this->loadData($this->getById($id));
+        if (is_array($arg)) $this->loadData($arg);
+        else if (is_int($arg)) $this->loadData($this->getById($arg));
     }
 }
