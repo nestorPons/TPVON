@@ -3,25 +3,22 @@
  * Clase de madre de los componentes html
  */
 class Component{
-    protected $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix;
+    protected $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix,
+    $COLLAPSE = false,
+    $MINLENGTH = 1, 
+    $MAXLENGTH = 255;
         
     function __construct(Array $data = []){
-        $this->id = $this->randomid();
-        $this->name = $data['name']??'';
-        $this->label = ucfirst($data['label']??$this->name);
-        $this->class = $data['class']??null;
-        $this->required = isset($data['required']);
-        $this->pattern = $data['pattern']??null; 
-        $this->title = $data['title']??null; 
-        $this->minlength = $data['minlength']??null; 
-        $this->maxlength = $data['maxlength']??null;
-        $this->for = $data['for']??null;
-        $this->value = $data['value']??null;
+        foreach($data as $key => $val){
+            $this->{$key} = $val??null;
+        }
+        $this->id = ($this->id)??$this->type . $this->randomid();
     }
-    protected function printInput(){
-        $TYPE = $this->TYPE;
+    protected function print(string $file = 'input'){
+        $type= $this->type??null;
         $id = $this->id; 
-        $hidden = ($TYPE == 'hidden')?'hidden':'';
+        $hidden = ($type == 'hidden')?'hidden':'';
+        $disabled = (isset($this->disabled))?'disabled':'';
         $idSel = 'input_' .$this->id; 
         $name = $this->printName(); 
         $title = $this->printTitle();
@@ -33,7 +30,17 @@ class Component{
         $pattern = $this->printPattern();
         $for = $this->printFor();
         $value = $this->printValue();
-        include \FOLDERS\COMPONENTS . 'view/input.phtml';
+        $list = $this->printList();
+        $spinner = $this->spinner??null;
+        $caption = $this->caption??null;
+        $columns = $this->columns??null;
+        $tabindex = isset($this->tabindex)?'tabindex='.$this->tabindex:''; 
+        $onclick = isset($this->onclick)?'onclick='.$this->onclick:'';
+        $onblur = isset($this->onblur)?'onblur='.$this->onblur:'';
+        $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:'';
+        $icon = isset($this->icon)?$this->icon:false;
+        
+        include \FOLDERS\COMPONENTS . "view/$file.phtml";
     }
     protected function getnameclass(){
         $arr_controller= explode('\\',get_class($this));
@@ -59,7 +66,7 @@ class Component{
         return  (empty($this->class))? '' : "class='{$this->class}'";
     }
     protected function printValue(){
-        return  (empty($this->value))? '' : "value='{$this->value}'";
+        return  (!isset($this->value) || is_null($this->value))? '' : "value='{$this->value}'";
     }
     protected function printName(){
         return  (empty($this->name))? '' : "name='{$this->name}'";
@@ -76,13 +83,26 @@ class Component{
     protected function printFor(){
         return  (empty($this->for))? '' : "for='{$this->for}'";
     }
-    protected function printMinlength(string $min = null){
+    protected function printList(){
+        return  (empty($this->list))? '' : "list='{$this->list}'";
+    }
+    protected function printMinlength($min = null){
         if($min) $this->minlength = $min; 
         return  (empty($this->minlength))? '' : "minlength='{$this->minlength}'";
     }
-    protected function printMaxlength(string $max = null){
+    protected function printMaxlength($max = null){
         if($max) $this->maxlength = $max; 
         return  (empty($this->maxlength))? '' : "maxlength='{$this->maxlength}'";
+    }
+    protected function printView($file){
+        foreach((array)$this as $key => $val){
+            if(strpos($key, '*')){
+                $key = substr($key, 3);
+            }
+            ${$key} = $val;
+        }
+
+        include \FOLDERS\COMPONENTS . "view/$file.phtml";
     }
     // getters y setters
     function id(int $arg = null){

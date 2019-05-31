@@ -1,0 +1,181 @@
+<?php use app\views\components\controllers \ {
+    InputText,
+    InputSearch,
+    ButtonSuccess,
+    ButtonCancel,
+    Table
+}; ?>
+<section id="tpv">
+
+        <?php
+        $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe']]);
+        $id = new InputText(['value' => $tickets_id, 'label' => 'Id'],  false);
+        $hour = new InputText(['value' => $tickets_hora, 'label' => 'Hora'],  false);
+        $emp = new InputSearch(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre')], false);
+        $cli = new InputSearch(['label' => 'Cliente', 'options' => $Users->get('nombre')], false);
+        
+        // Linea
+        $code = new InputSearch(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 
+            'options' => $Services->get('codigo'), 'tabindex'=>1, 'onblur'=>'tpv.loadLine()'], false);
+        $des = new InputText(['label' => 'Desctipcion','tabindex'=>2],  false);
+        $quan = new InputText(['label' => 'Cantidad', 'tabindex'=>3, 'value'=>'1', 'onblur'=>'tpv.calculate()'], false);
+        $pric = new InputText(['label' => 'Precio', 'tabindex'=>4, 'value'=>'0', 'onblur'=>'tpv.calculate()'], false);
+        $dto = new InputText(['label' => 'Dto %', 'tabindex'=>5,'value'=>'0', 'onblur'=>'tpv.calculate()'], false);
+        $amo = new InputText(['id' => 'amount', 'label' => 'Importe', 'disabled' => true, 'value'=>'0'], false);
+        $btnOk = new ButtonSuccess(['tabindex'=>6, 'onclick'=>'tpv.addLine()']);
+        $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
+
+        $txtTotal = new InputText(['value' => 0, 'label' => 'Total', 'disabled' => true], false);
+        $btnTicket = new ButtonSuccess(['onclick'=>'tpv.createTicket()', 'caption'=>'Ticket']);
+        ?> 
+</section> 
+<style>
+    #tpv{
+        align-items: flex-start;
+        display: grid;
+        grid-template-rows: auto [table] 400px auto auto auto;
+        grid-template-columns: [first] 10rem 1fr 1fr 4rem 6rem [prelast] 4rem  [last] 6rem;
+        grid-row-gap: 5px;
+    }
+    #tpv table:not(.horizontal) thead{
+        height: 60px;
+    }
+    #tpv * {
+        font-size: 0.8rem;
+    }
+    #tpv table{
+        grid-row: table;
+        grid-column: 1/-1;
+    }
+    #tpv #<?= $id->id() ?>{
+        grid-area: 1/1;
+    }
+    #tpv #<?= $hour->id() ?>{
+        grid-row: 1;
+        grid-column: last;
+    }
+    #tpv #<?= $code->id() ?>{
+        grid-area: 3/1;
+    }
+    #tpv #<?= $des->id() ?>{
+        grid-row: 3;
+        grid-column: 2 / span 2;
+    }
+    #tpv #<?= $emp->id() ?>{
+        grid-area: 1/2;
+    }
+    #tpv #<?= $cli->id() ?>{
+        grid-area: 1/3;
+    }
+    #tpv #<?= $quan->id() ?>{
+        grid-area: 3/4;
+    }
+    #tpv #<?= $pric->id() ?>{
+        grid-area: 3/5;
+    }
+    #tpv #<?= $dto->id() ?>{
+        grid-area: 3/6;
+    }
+    #tpv #<?= $amo->id() ?>{
+        grid-row: 3;
+        grid-column: last;
+    }
+    /* TXT TOTAL */
+    #tpv #<?= $txtTotal->id() ?>{
+        grid-row: 5;
+        grid-column: first;
+        transform: translateY(-15px);
+    }
+    #tpv #<?= $txtTotal->id()?> input{
+        font-size: 1.2rem;
+        transform: translateY(15px);
+        font-weight: 900; 
+    }
+    #tpv #<?= $txtTotal->id()?> label{
+        font-size: 1.2rem;
+        color: var(--fore-color);   
+    }
+    
+    #tpv #<?= $btnTicket->id() ?>{
+        grid-row: 5;
+        grid-column: prelast / span 2 ;
+    }
+
+    #tpv .Importe{
+        text-align: right;
+    }
+    #tpv #<?= $btnOk->id() ?>{
+        grid-row: 4;
+        grid-column: last;
+    }
+    #tpv #<?= $btnClear->id() ?>{
+        grid-row: 4;
+        grid-column: prelast;
+    }
+</style>
+<script src="js/Line.min.js"></script>
+<script src="js/Ticket.min.js"></script>
+<script>
+    const tpv = {
+        currentLine: null, 
+        ticket : new Ticket(),
+        $table : $('#<?=$table->id()?>'), 
+        $code :  $('#input_<?=$code->id()?>'),
+        $description : $('#input_<?=$des->id()?>'),
+        $employees : $('#input_<?=$emp->id()?>'),
+        $hour : $('#input_<?=$hour->id()?>'),
+        $client : $('#input_<?=$cli->id()?>'),
+        $quantity : $('#input_<?=$quan->id()?>'),
+        $price : $('#input_<?=$pric->id()?>'),
+        $dto : $('#input_<?=$dto->id()?>'),
+        $amount : $('#input_<?=$amo->id()?>'),
+        $btnOk : $('#<?=$btnOk->id()?>'),
+        $btnClear : $('#<?=$btnClear->id()?>'),
+        $total : $('#input_<?=$txtTotal->id()?>'),
+        calculate(){
+            let amount = this.$quantity.val() * this.$price.val(), 
+                dto = this.$dto.val() * amount / 100, 
+                total = amount - dto
+            this.$amount.val(total)
+        },
+        totalizer(){
+            let t = this.ticket.total()
+            this.$total.val(t)
+        },
+        clearLine(){
+            this.$code.val('')
+            this.$description.val('')
+            this.$quantity.val(0)
+            this.$price.val(0)
+            this.$dto.val(0)
+            this.$amount.val(0)
+        },
+        addLine(){
+            const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
+            var line = this.ticket.addLine(this.$code.val(), this.$description.val(), this.$quantity.val(), this.$price.val(), this.$dto.val(), this.$amount.val())
+            // Scroll al final
+            this.$table.animate({ scrollTop: this.$table.height() }, 100);
+    
+            // Validamos los datos
+            if(line.success){
+                $template
+                    .attr('id', line.id)
+                    .find('.Código').html(line.cod).end()
+                    .find('.Descripción').html(line.des).end()
+                    .find('.Cantidad').html(line.qua).end()
+                    .find('.Precio').html(line.pri).end()
+                    .find('.Dto').html(line.dto).end()
+                    .find('.Importe').html(line.amo).end()
+            
+                this.$table.append($template) 
+                this.clearLine()
+                this.$code.focus()
+                this.totalizer()
+            }
+        },
+        loadLine(){
+            this.$description.val(app.services[this.$code.val()]['descripcion'])
+            this.$description.val(app.services[this.$code.val()]['descripcion'])
+        }
+    }
+</script>

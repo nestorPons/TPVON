@@ -4,19 +4,41 @@
  */
 class Data {
     // Creamos los atributos en el constructor
-    function __construct(Array $data){
-        foreach($data as $key => $value){
-            if(is_array($value)){
-                foreach($value as $k => $v){
-                    $this->{$k} = $v;
-                }
-            } else {
-                $this->{$key} = $value;  
+    public $data = []; 
+
+    function __construct(Array $data = null){
+        if($data){
+            foreach($data as $key => $value){
+                if(is_array($value)){
+                    foreach($value as $ke => $val){
+                        if(is_array($val)) foreach($val as $k => $v) $this->addItem($v, $k);
+                        else $this->addItem($val, $ke);
+                    }
+                } else $this->addItem($value, $key);  
             }
         }
     }
-    function addOne($key, $value){
-        return $this->{$key} = $value;
+    function addItem($value, $key = null){
+        
+        // Si vamos a pasar un array numerado creamos todos los métodos para extraer los atributos
+        if($key) {
+            // creeamos el método para la extraccion de datos 
+            
+            return $this->data[$key] = $value;
+        }
+        else return $this->data[] = $value;
+    }
+    function get($attr){
+        if(is_object(reset($this->data))){
+            $arr = []; 
+            foreach($this->data as $obj){
+                $arr[$obj->id] = $obj->{$attr}; 
+            }
+            return $arr;
+        }else return $this->data[$attr];
+    }
+    function getAll(){
+        return $this->toArray();
     }
     /**
      * Validador de los datos
@@ -39,15 +61,20 @@ class Data {
         return true; 
     }
     function isEmail(string $arg){
-        if(!(isset($this->{$arg}) && filter_var($this->{$arg}, FILTER_VALIDATE_EMAIL))) \app\core\Error::die('E009', $this->{$arg}??null);
+        if(!(isset($this->data[$arg]) && filter_var($this->data[$arg], FILTER_VALIDATE_EMAIL))) \app\core\Error::die('E009', $this->data[$arg]??null);
         return true;
     }
     function isString(string $arg, int $len){
-        if(!(isset($this->{$arg}) && strlen($this->{$arg}) < $len)) \app\core\Error::die('E009', $this->{$arg}??null);
+        if(!(isset($this->data[$arg]) && strlen($this->data[$arg]) < $len)) \app\core\Error::die('E009', $this->data[$arg]??null);
         return true;
     }
-    function toArray(){
-        return (array)$this; 
+ 
+    function toArray(){ 
+        return $this->data;
+    }
+    
+    function toJSON(){
+        return json_encode($this->toArray());
     }
     static function codify(string $arg){
         $originals = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
@@ -64,11 +91,11 @@ class Data {
         return $arg; 
      }
     function delete(string $arg){ 
-        unset($this->{$arg});
+        unset($this->data[$arg]);
     }
     // Usa un atributo y lo destruye 
     function use(string $arg){
-        $attr =  $this->{$arg};
+        $attr =  $this->data[$arg];
         $this->delete($arg);
         return $attr;
     }

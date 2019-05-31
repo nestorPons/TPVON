@@ -8,24 +8,20 @@ class Query extends Conn{
 
     function __construct(string $table = null, string $db = null, string $user = null){
         // Parametros predeterminados para la conexión
-        $this->loadCredentials();
+        $credentials = parse_ini_file(\FILE\CONN);
         if($table) $this->table = $table;
 
-        $this->db = $db?$db:$this->credentials['prefix'] . CODE_COMPANY;
+        $this->db = $db?$db:$credentials['prefix'] . CODE_COMPANY;
         $this->db = Data::codify($this->db);
         $this->user = $user??'root';
         try{
-            if($this->db != $this->credentials['prefix']){
-                $this->conn = $this->connect();
+            if($this->db != $credentials['prefix']){
+                $this->conn = $this->connect($credentials);
                 return gettype($this->conn) === 'object';
             } else return false;
         } catch (\Exception $e){
             prs($e);
         }
-    }
-
-    function loadCredentials(){
-        return $this->credentials = parse_ini_file(\FILES\CONN);
     }
     function __destruct(){
         $this->conn = null;
@@ -37,6 +33,7 @@ class Query extends Conn{
     private function sendQuery(String $sql, bool $desc = false){
         $order = $desc?'ORDER BY id DESC':'';
         $sql = str_replace('order_by', $order, $sql); 
+
         return $this->query($sql);
     }
     // Devolvemos la conexión
@@ -74,6 +71,9 @@ class Query extends Conn{
             "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
         );
      }
+    protected function getLast(){
+        return $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true); 
+    }
     // Devuelve los registros con el valor entre los dos valores proporcionados de un campo
     public function getBetween ( string $column, $val1, $val2, string $args = null, bool $desc = false){
         return $this->sendQuery(
@@ -199,7 +199,6 @@ class Query extends Conn{
     }
     // setter genérico para la inserción de datos en los atributos de la clase hija
     function loadData($data){
-
         if(!$data) return false;
         // Normalización de los datos para direfentes casos de uso
         if(is_object($data)) $data = (array)$data;
@@ -212,5 +211,25 @@ class Query extends Conn{
         }
         return true;
     }
-
+    function toArray(bool $nameSpace = false){ 
+        $prefix = ($nameSpace)?$this->table . '_' : '';
+        $arr = [];
+        foreach((array)$this as $key => $val){
+            // No pasamos a array los objetos 
+            if(!strpos($key, '*')){
+                $arr[$prefix . $key] = $val;
+            }
+        }
+        return $arr;
+    }
+    // Descarga todos los dados y retorna objetos data
+    function allData(Object $Obj, String $key = null){
+        $Data = new Data; 
+        $data = $this->getAll();
+        $k = $key??'id'; 
+        foreach($data as $value){
+            $Data->addItem(new $Obj($value), $value[$k]);
+        }
+        return $Data;
+    }
 }

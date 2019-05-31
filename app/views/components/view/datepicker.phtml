@@ -1,0 +1,65 @@
+<div id="container_<?=$id?>">
+    <span id="arrow-previous_<?=$id?>" class="arrow lnr lnr-chevron-left"></span>
+    <input id="<?=$id?>" type="text" class="datepicker">
+    <span id="arrow-next_<?=$id?>" class="arrow lnr lnr-chevron-right"></span>
+</div>
+<script>
+    // Comprobamos que este creado en el objeto global app
+    if(isset(app.Date)){
+
+        app.Date = new Date
+        app.datepickers = {}
+        app.loadDate = function(n){
+            app.Date.setDate(n)
+            for (let i in app.datepickers) {
+                app.datepickers[i].setDate(app.Date)
+            }
+            if($('.datepicker').length){
+                $('.datepicker').val(app.Date.toLocaleDateString())
+            }
+        }
+    }
+    // Cargamos fecha al iniciar el componente
+    app.loadDate(app.Date.getDate())
+    // Creamos un componente en el objeto global
+    app.datepickers.<?=$id?> = datepicker('#<?=$id?>',{
+        position: 'bl',
+        startDay: 1, 
+        customDays: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+        customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        onSelect: function(el, date) {
+            app.loadDate(date.getDate())
+        }
+    })
+
+    // Añadimos funcionalidad a los botones auxiliares
+    $('#arrow-previous_<?=$id?>').click(function(){
+        app.loadDate(app.Date.getDate() - 1)    
+    })
+    $('#arrow-next_<?=$id?>').click(function(){
+        app.loadDate(app.Date.getDate() + 1)
+    })
+</script>
+<style>
+    #<?=$id?>{
+        text-align: center;
+    }
+    .Do{
+        color: red;
+    }
+    #container_<?=$id?>{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .arrow{
+        cursor: pointer; 
+    }
+    .arrow:hover{
+        transform: var(--effect-transform-hover);
+    }
+    .qs-datepicker{
+
+        font-family: inherit;
+    }
+</style>

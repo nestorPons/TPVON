@@ -3,16 +3,14 @@
  * Clase de input de tipo numero
  */
 class ButtonSuccess extends Component{
-    const STYLE = 'tertiary';
-    const TYPE = 'submit';
-    const CAPTION = 'Aceptar';
+    protected 
+        $spinner = true,
+        $class = 'tertiary',
+        $type = 'submit',
+        $caption = 'Aceptar';
     
     function __construct(Array $data = []){
         parent::__construct($data);
-        $this->print($data);
-    }
-    private function print(){
-        $spinner = true;
-        include \FOLDERS\COMPONENTS . 'view/btn.phtml';
+        $this->print('button');
     }
 }

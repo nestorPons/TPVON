@@ -5,11 +5,11 @@
 class InputHidden extends Component{
 
     function __construct(Array $data = []){
-        $this->TYPE = 'hidden';
+        $this->type = 'hidden';
         $this->COLLAPSE = false;
         $this->MINLENGTH = null;
         $this->MAXLENGTH = null; 
         parent::__construct($data);
-        $this->printInput($data);
+        $this->print('input');
     }
 }

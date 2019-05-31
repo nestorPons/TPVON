@@ -7,8 +7,8 @@
         <fieldset  class="container">
             <legend>Login</legend>
             <?php 
-                new InputText(['label'=>'Email del usuario', 'name'=>'email', 'required'=>false]);
-                new InputPass(['label'=>'Contraseña', 'name'=>'password', 'required'=>true])
+                new InputText(['label'=>'Email del usuario', 'name'=>'email', 'required'=>false, 'value'=>'nestorpons@gmail.com']);
+                new InputPass(['label'=>'Contraseña', 'name'=>'password', 'required'=>true, 'value'=>'123123'])
             ?>
         </fieldset>
         <?php new ButtonSuccess; new ButtonCancel?>
@@ -16,4 +16,8 @@
     <a href="loginnewuser">Nuevo usuario</a>
     <a href="loginrememberpassword" class="float-right">Recordar contraseña</a>
 </section>
-<script src="/js/login.min.js"></script>
+<style>
+#login{
+    margin:auto;
+}
+</style>

@@ -4,12 +4,21 @@
 :root {
   /* --spinner-fore-color: inherit; */
   --universal-border-radius: 5px;
+  --main-color: @main-color; 
+  --nav-font-color: contrast(@main-color);
+  --effect-transform-hover: scale(1.2);
 }
 *{
   -moz-user-select: none; 
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none; 
+}
+input{
+  width: 100%;
+}
+input[type="search" i]{
+  padding: 8px 4px;
 }
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
@@ -41,13 +50,6 @@ button{
   &:focus{
     outline:0px;
   }
-}
-body{ 
-  display: flex;
-  justify-content: center;
-}
-section{
-  margin: auto;
 }
 form{
   background-color: white;
@@ -108,7 +110,7 @@ select{
       outline:0px;
       & + label{
         transition: transform 1s;
-        transform: translateY(-22px) scale(0.9);
+        transform: translateY(-1.6rem) scale(0.9);
       }
     }
   }

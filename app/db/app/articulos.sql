@@ -1,7 +1,7 @@
 CREATE TABLE `articulos` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `codigo` varchar(10) NOT NULL,
-  `nombre` varchar(30) DEFAULT NULL,
+  `codigo` varchar(10) NOT NULL UNIQUE,
+  `nombre` varchar(30) DEFAULT NULL UNIQUE,
   `descripcion` varchar(100) DEFAULT NULL, 
   `precio` float(10) NOT NULL,
   `coste` float(10) DEFAULT NULL,
