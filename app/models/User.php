@@ -28,7 +28,7 @@ class User extends Query{
         $Data = new Data; 
         $data = $this->getBy(['nivel' => 1, 'nivel' => 2]);
         foreach($data as $key => $value){
-            $Data->addItem($key, new User($value));
+            $Data->addItem(new User($value), $key);
         }
         return $Data;
     }

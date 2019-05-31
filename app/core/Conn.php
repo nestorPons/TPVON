@@ -18,13 +18,13 @@ class Conn{
     /**
      *	Genera la conexión a a la base de datos
      */
-    protected function connect(){
-        $dsn = 'mysql:dbname=' . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
+    protected function connect($credentials){
+        $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
         try {
             $this->pdo = new \PDO(
                     $dsn, 
                     $this->user, 
-                    $this->credentials[$this->user], 
+                    $credentials[$this->user], 
                     [
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
                         \PDO::ATTR_EMULATE_PREPARES     => false, //Se usa para desactivar emulación de consultas preparadas

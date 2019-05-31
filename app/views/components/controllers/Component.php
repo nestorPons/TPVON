@@ -35,6 +35,10 @@ class Component{
         $caption = $this->caption??null;
         $columns = $this->columns??null;
         $tabindex = isset($this->tabindex)?'tabindex='.$this->tabindex:''; 
+        $onclick = isset($this->onclick)?'onclick='.$this->onclick:'';
+        $onblur = isset($this->onblur)?'onblur='.$this->onblur:'';
+        $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:'';
+        $icon = isset($this->icon)?$this->icon:false;
         
         include \FOLDERS\COMPONENTS . "view/$file.phtml";
     }
@@ -62,7 +66,7 @@ class Component{
         return  (empty($this->class))? '' : "class='{$this->class}'";
     }
     protected function printValue(){
-        return  (empty($this->value))? '' : "value='{$this->value}'";
+        return  (!isset($this->value) || is_null($this->value))? '' : "value='{$this->value}'";
     }
     protected function printName(){
         return  (empty($this->name))? '' : "name='{$this->name}'";

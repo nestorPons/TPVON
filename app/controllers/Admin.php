@@ -16,7 +16,7 @@ class Admin extends Controller{
         $data = $Ticket->toArray(true);
 
         $Items = new Items;
-        $data['Services'] = $Items->allData($Items);
+        $data['Services'] = $Items->allData($Items, 'codigo');
 
         $User = new User;
         $data['Employees'] = $User->allEmployees();

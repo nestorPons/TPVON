@@ -8,24 +8,20 @@ class Query extends Conn{
 
     function __construct(string $table = null, string $db = null, string $user = null){
         // Parametros predeterminados para la conexión
-        $this->loadCredentials();
+        $credentials = parse_ini_file(\FILE\CONN);
         if($table) $this->table = $table;
 
-        $this->db = $db?$db:$this->credentials['prefix'] . CODE_COMPANY;
+        $this->db = $db?$db:$credentials['prefix'] . CODE_COMPANY;
         $this->db = Data::codify($this->db);
         $this->user = $user??'root';
         try{
-            if($this->db != $this->credentials['prefix']){
-                $this->conn = $this->connect();
+            if($this->db != $credentials['prefix']){
+                $this->conn = $this->connect($credentials);
                 return gettype($this->conn) === 'object';
             } else return false;
         } catch (\Exception $e){
             prs($e);
         }
-    }
-
-    function loadCredentials(){
-        return $this->credentials = parse_ini_file(\FILE\CONN);
     }
     function __destruct(){
         $this->conn = null;
@@ -227,11 +223,12 @@ class Query extends Conn{
         return $arr;
     }
     // Descarga todos los dados y retorna objetos data
-    function allData(Object $Obj){
+    function allData(Object $Obj, String $key = null){
         $Data = new Data; 
         $data = $this->getAll();
-        foreach($data as $key => $value){
-            $Data->addItem($key, new $Obj($value));
+        $k = $key??'id'; 
+        foreach($data as $value){
+            $Data->addItem(new $Obj($value), $value[$k]);
         }
         return $Data;
     }

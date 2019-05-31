@@ -56,8 +56,8 @@ class Company extends Query{
                 $this->createDb();
                 $this->createTables();
                 //Añadimos el usuario administrador
-                $Data->addItem('nombre', $Data->nombre_usuario); 
-                $Data->addItem('nivel', 2); 
+                $Data->addItem($Data->nombre_usuario, 'nombre'); 
+                $Data->addItem(2, 'nivel'); 
                 
                 $User = new User;
                 if (!$User->new($Data)) throw new \Exception('E019'); 
