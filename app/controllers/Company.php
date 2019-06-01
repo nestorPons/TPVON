@@ -11,6 +11,5 @@ class Company extends Controller{
         if($Model->new($Data)){
             return $this->printView(\FOLDERS\LOGIN . 'newcompanycreated.phtml');
         } else Error::array('');
-
     }
 }

@@ -3,4 +3,5 @@
 const CONN = \FOLDERS\CONFIG . 'conn.ini';
 const MAIL = \FOLDERS\CONFIG . 'mail.php';
 const TPV =  \FOLDERS\ADMIN_SECTIONS . 'tpv.phtml';
-if(defined('CODE_COMPANY')) define(__NAMESPACE__ . '\CONFIG_COMPANY', \FOLDERS\COMPANIES . CODE_COMPANY .  '/config.ini');
+$config_company = defined('CODE_COMPANY') && CODE_COMPANY != 'newcompany' ? \FOLDERS\COMPANIES . CODE_COMPANY . '/': \FOLDERS\TEMPLATE;
+define(__NAMESPACE__ . '\CONFIG_COMPANY', $config_company . 'config.ini');

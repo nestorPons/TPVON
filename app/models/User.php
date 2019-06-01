@@ -34,7 +34,7 @@ class User extends Query{
     }
     function new(Object $Data){
 
-        if ($this->id = $this->loadData($Data)){           
+        if ($this->id = $this->loadData($Data->getAll())){           
             if(
             $this->id = $this->add([
                 'dni' =>  $this->dni??null,
