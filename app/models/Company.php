@@ -80,7 +80,7 @@ class Company extends Query{
         $folder = \FOLDERS\COMPANIES . $this->nombre;
         if (!file_exists($folder)){
             mkdir($folder, 0750);
-            copy(\FOLDERS\TEMPLATE . 'config.ini', \FILE\CONFIG_COMPANY);
+            copy(\FOLDERS\TEMPLATE . 'config.ini', $folder . '/config.ini' );
         } else{
             throw new Error('E017');
         }

@@ -115,6 +115,9 @@ class User extends Query{
 
     }
     private function getFile(String $file, Object $Data = null){
+        foreach($Data->getAll() as $key => $val){
+            ${$key} = $val;
+        }
         ob_start(); # apertura de bufer
         include($file);
         $htmlStrig = ob_get_contents();

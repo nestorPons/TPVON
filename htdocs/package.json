@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "jquery": "^3.4.1",
-    "js-datepicker": "^4.0.10"
+    "js-datepicker": "^4.0.10",
+    "mini.css": "^3.0.1"
   }
 }
