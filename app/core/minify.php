@@ -13,7 +13,7 @@ function checkedCompile($in, $out) {
 // Compilación del os css
 if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
     $minifier_CSS = new Minify\CSS(
-        \FOLDERS\CSS . 'mini.css', 
+        \FOLDERS\NODE_MODULES . 'mini.css/dist/mini-default.min.css', 
         \FOLDERS\CSS . 'main.css'
     );
     $minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css'); 

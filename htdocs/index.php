@@ -9,3 +9,7 @@ require_once \FOLDERS\CORE . 'less.php';
 require_once \FOLDERS\CORE . 'minify.php';
 
 new \app\core\Router($_REQUEST);
+
+
+
+

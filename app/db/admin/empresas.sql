@@ -4,7 +4,7 @@ USE `admin_empresas`;
 CREATE TABLE `empresas` (
   `id` int(11) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   `nombre` varchar(30) NOT NULL UNIQUE KEY,
-  `dni`char(9) NOT NULL UNIQUE KEY,  
+  `nif`char(9) NOT NULL UNIQUE KEY,  
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `sector` tinyint(1) NOT NULL,
   `plan` tinyint(1) NOT NULL DEFAULT '1',

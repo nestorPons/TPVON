@@ -1,7 +1,9 @@
 <?php namespace app\models;
-use \app\core\Error;
-use \app\core\Query;
-use \app\core\Data; 
+use \app\core\{
+    Error,
+    Query,
+    Data
+};
 
 class Company extends Query{
 
@@ -31,10 +33,11 @@ class Company extends Query{
      * Creamos la carpeta para los archivos de configuración de la aplicación
      */
     public function new(Object $Data){
+
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
         $Data->codifyAttr('nombre_empresa');
-        $Data->nombre = $Data->nombre_empresa;
-        $this->loadData($Data);
+        $Data->set('nombre', $Data->get('nombre_empresa'));
+        $this->loadData($Data->getAll());
         $this->config = parse_ini_file(\FILE\CONN);
         $this->db = $this->config["prefix"]  . $this->nombre; 
         
@@ -56,9 +59,9 @@ class Company extends Query{
                 $this->createDb();
                 $this->createTables();
                 //Añadimos el usuario administrador
-                $Data->addItem($Data->nombre_usuario, 'nombre'); 
-                $Data->addItem(2, 'nivel'); 
-                
+                $Data->set('nombre', $Data->get('nombre_usuario')); 
+                $Data->set('nivel', 2); 
+
                 $User = new User;
                 if (!$User->new($Data)) throw new \Exception('E019'); 
                 // Creamos carpeta con configuración y archivos
@@ -77,7 +80,7 @@ class Company extends Query{
         $folder = \FOLDERS\COMPANIES . $this->nombre;
         if (!file_exists($folder)){
             mkdir($folder, 0750);
-            copy(\FOLDERS\TEMPLATE . 'config.ini', \FILE\CONFIG_COMPANY);
+            copy(\FOLDERS\TEMPLATE . 'config.ini', $folder . '/config.ini' );
         } else{
             throw new Error('E017');
         }

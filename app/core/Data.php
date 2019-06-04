@@ -23,10 +23,13 @@ class Data {
         // Si vamos a pasar un array numerado creamos todos los métodos para extraer los atributos
         if($key) {
             // creeamos el método para la extraccion de datos 
-            
             return $this->data[$key] = $value;
         }
         else return $this->data[] = $value;
+    }
+    function set($arg1, $arg2 = null){
+        if($arg2) return $this->addItem($arg2, $arg1);
+        else return $this->addItem($arg1);
     }
     function get($attr){
         if(is_object(reset($this->data))){
@@ -35,7 +38,13 @@ class Data {
                 $arr[$obj->id] = $obj->{$attr}; 
             }
             return $arr;
-        }else return $this->data[$attr];
+        }else {
+            if(array_key_exists($attr, $this->data)){
+                return $this->data[$attr];
+            }else{
+                return false;
+            }
+        };
     }
     function getAll(){
         return $this->toArray();
@@ -100,12 +109,10 @@ class Data {
         return $attr;
     }
     function normalizeAttr(string $attr){
-        $this->{$attr} = $this->normalize($this->{$attr});
-        return $this->{$attr};
+        return $this->data[$attr] = $this->normalize($this->data[$attr]);
     }
 
     function codifyAttr(string $attr){
-        $this->{$attr} = $this->codify($this->{$attr});
-        return $this->{$attr};
+        return $this->data[$attr] = $this->codify($this->data[$attr]);
     }
 }   

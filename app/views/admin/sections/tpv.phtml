@@ -149,6 +149,7 @@
             this.$price.val(0)
             this.$dto.val(0)
             this.$amount.val(0)
+            this.$code.focus()
         },
         addLine(){
             const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
@@ -169,13 +170,12 @@
             
                 this.$table.append($template) 
                 this.clearLine()
-                this.$code.focus()
                 this.totalizer()
             }
         },
         loadLine(){
             this.$description.val(app.services[this.$code.val()]['descripcion'])
-            this.$description.val(app.services[this.$code.val()]['descripcion'])
+            this.$price.val(app.services[this.$code.val()]['precio'])
         }
     }
 </script>

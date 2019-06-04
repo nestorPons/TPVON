@@ -1,4 +1,5 @@
 var app = {
+    data: {},
     GET: $_GET, 
     getData(data = {}){
         for (let i in app.GET){

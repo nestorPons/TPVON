@@ -20,6 +20,7 @@ class Conn{
      */
     protected function connect($credentials){
         $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
+
         try {
             $this->pdo = new \PDO(
                     $dsn, 
@@ -27,8 +28,8 @@ class Conn{
                     $credentials[$this->user], 
                     [
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
-                        \PDO::ATTR_EMULATE_PREPARES     => false, //Se usa para desactivar emulación de consultas preparadas
-                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
+                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
                         \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
                     ]
                 );
@@ -68,9 +69,10 @@ class Conn{
            return $this->sqlPrepare->execute();
         }
         catch (\PDOException $e) {
-            echo('ERROR INIT \n');
-            echo($sql);
+            echo 'ERROR INIT' . BR;
+            echo $sql . BR;
             pr($params);
+            echo BR; 
             die($e->getMessage());
         }
         
