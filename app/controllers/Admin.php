@@ -21,6 +21,7 @@ class Admin extends Controller{
         $User = new User;
         $data['Employees'] = $User->allEmployees();
         $data['Users'] = $User->allData($User);
+
         return $this->printView( \FOLDERS\ADMIN . 'index.phtml', $data);
     }
 }

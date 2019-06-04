@@ -33,6 +33,7 @@ namespace app\views\components\controllers;
     }
 </style>
 <script>
-    app.services = <?=$Services->toJSON()?>
+    app.data.services = <?=$Services->toJSON()?>;
+    app.data.users = <?=$Users->toJSON()?>;
 </script>
 
