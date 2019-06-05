@@ -4,4 +4,4 @@ htdocs/js
 htdocs/css
 htdocs/companies
 !htdocs/companies/template
-server/PHP_errors.log
+server/logs
