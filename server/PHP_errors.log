@@ -9880,3 +9880,6 @@ Stack trace:
   thrown in /var/www/html/htdocs/index.php on line 10
 [02-Jun-2019 09:06:53 UTC] PHP Notice:  Constant NAME_COMPANY already defined in /var/www/html/app/models/Company.php on line 47
 [02-Jun-2019 09:07:39 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/datalist.phtml on line 3
+[05-Jun-2019 15:39:31 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/aol/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[05-Jun-2019 15:39:31 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2068
+[05-Jun-2019 15:40:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/datalist.phtml on line 3
