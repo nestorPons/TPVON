@@ -1,5 +1,6 @@
 <?php use app\views\components\controllers \ {
     InputText,
+    InputNumber,
     InputSearch,
     ButtonSuccess,
     ButtonCancel,
@@ -8,21 +9,22 @@
 <section id="tpv">
 
         <?php
-        $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe']]);
+        $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
+            'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputText(['value' => $tickets_id, 'label' => 'Id'],  false);
         $hour = new InputText(['value' => $tickets_hora, 'label' => 'Hora'],  false);
-        $emp = new InputSearch(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre')], false);
-        $cli = new InputSearch(['label' => 'Cliente', 'options' => $Users->get('nombre')], false);
+        $emp = new InputSearch(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre'), 'tabindex'=>1], false);
+        $cli = new InputSearch(['label' => 'Cliente', 'options' => $Users->get('nombre'), 'tabindex'=>2], false);
         
         // Linea
-        $code = new InputSearch(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 
-            'options' => $Services->get('codigo'), 'tabindex'=>1, 'onblur'=>'tpv.loadLine()'], false);
-        $des = new InputText(['label' => 'Desctipcion','tabindex'=>2],  false);
-        $quan = new InputText(['label' => 'Cantidad', 'tabindex'=>3, 'value'=>'1', 'onblur'=>'tpv.calculate()'], false);
-        $pric = new InputText(['label' => 'Precio', 'tabindex'=>4, 'value'=>'0', 'onblur'=>'tpv.calculate()'], false);
-        $dto = new InputText(['label' => 'Dto %', 'tabindex'=>5,'value'=>'0', 'onblur'=>'tpv.calculate()'], false);
-        $amo = new InputText(['id' => 'amount', 'label' => 'Importe', 'disabled' => true, 'value'=>'0'], false);
-        $btnOk = new ButtonSuccess(['tabindex'=>6, 'onclick'=>'tpv.addLine()']);
+        $code = new InputSearch(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
+            'options' => $Services->get('codigo'), 'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
+        $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
+        $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+        $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+        $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>8,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+        $amo = new InputNumber(['id' => 'amount', 'label' => 'Importe', 'disabled' => true, 'value'=>'0'], false);
+        $btnOk = new ButtonSuccess(['tabindex'=>7, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
         $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
 
         $txtTotal = new InputText(['value' => 0, 'label' => 'Total', 'disabled' => true], false);
@@ -116,8 +118,9 @@
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
 <script>
+    $('#input_<?=$emp->id()?>').focus()
     const tpv = {
-        currentLine: null, 
+        total: 0, 
         ticket : new Ticket(),
         $table : $('#<?=$table->id()?>'), 
         $code :  $('#input_<?=$code->id()?>'),
@@ -138,29 +141,37 @@
                 total = amount - dto
             this.$amount.val(total)
         },
-        totalizer(){
-            let t = this.ticket.total()
-            this.$total.val(t)
-        },
         clearLine(){
             this.$code.val('')
             this.$description.val('')
-            this.$quantity.val(0)
+            this.$quantity.val(1)
             this.$price.val(0)
             this.$dto.val(0)
             this.$amount.val(0)
             this.$code.focus()
         },
+        totalizer(){
+            this.total = this.ticket.total()
+            this.$total.val(this.total)
+        },
         addLine(){
+            this.calculate()
             const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
-            var line = this.ticket.addLine(this.$code.val(), this.$description.val(), this.$quantity.val(), this.$price.val(), this.$dto.val(), this.$amount.val())
+            var line = this.ticket.addLine(
+                this.$code.val(), 
+                this.$description.val(), 
+                this.$quantity.val(), 
+                this.$price.val(), 
+                this.$dto.val(), 
+                this.$amount.val()
+            )
             // Scroll al final
             this.$table.animate({ scrollTop: this.$table.height() }, 100);
     
             // Validamos los datos
             if(line.success){
                 $template
-                    .attr('id', line.id)
+                    .attr('idline', line.id)
                     .find('.Código').html(line.cod).end()
                     .find('.Descripción').html(line.des).end()
                     .find('.Cantidad').html(line.qua).end()
@@ -171,11 +182,30 @@
                 this.$table.append($template) 
                 this.clearLine()
                 this.totalizer()
+            } else {
+                this.$code.focus()
             }
         },
         loadLine(){
-            this.$description.val(app.services[this.$code.val()]['descripcion'])
-            this.$price.val(app.services[this.$code.val()]['precio'])
+            
+            if(app.data.services[this.$code.val()]){
+                this.$description.val(app.data.services[this.$code.val()]['descripcion'])
+                this.$price.val(app.data.services[this.$code.val()]['precio'])
+            }
+        },
+        loadLineFromTable(e){
+            let line = this.ticket.lines[e.path[1].attributes.idline.value]
+            this.$code.val(line.cod)
+            this.$description.val(line.des)
+            this.$quantity.val(line.qua)
+            this.$price.val(line.pri)
+            this.$dto.val(line.dto)
+            this.$amount.val(line.amo)
+
+            $('#<?=$table->id()?>').find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
+            delete this.ticket.lines[e.path[1].attributes.idline.value]
+
+            this.totalizer()
         }
     }
 </script>

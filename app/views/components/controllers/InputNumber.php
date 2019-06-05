@@ -2,7 +2,7 @@
 /**
  * Clase de input de tipo numero
  */
-class Number extends Component{
+class InputNumber extends Component{
 
     function __construct(Array $data = []){
         $this->type = 'number';

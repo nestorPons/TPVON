@@ -5,7 +5,7 @@
 class ButtonCancel extends Component{
     protected 
         $spinner = false,
-        $class = 'secondary',
+        $mainclass = 'secondary',
         $type = 'button',
         $caption = 'Cancelar';
 

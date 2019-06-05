@@ -5,7 +5,7 @@
 class ButtonAccept extends Component{
     protected 
         $spinner = true,
-        $class = 'tertiary',
+        $mainclass = 'tertiary',
         $type = 'button',
         $caption = 'Aceptar';
     

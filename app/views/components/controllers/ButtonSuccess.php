@@ -5,7 +5,7 @@
 class ButtonSuccess extends Component{
     protected 
         $spinner = true,
-        $class = 'tertiary',
+        $mainclass = 'tertiary',
         $type = 'submit',
         $caption = 'Aceptar';
     
