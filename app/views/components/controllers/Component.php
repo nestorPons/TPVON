@@ -55,9 +55,11 @@ class Component{
         return $this->prefix; 
     }
     protected function class(bool $collapse = false, string $args = null){
-        if ($args) $this->class .= ' ' . $args;
-        $this->class .= $collapse ? ' collapse' : ''; 
-        return $this->class;
+        $class = $this->mainclass ?? '';
+        $class .= ' ' . $this->class ?? ''; 
+        if ($args) $class .= ' ' . $args;
+        $class .= $collapse ? ' collapse' : ''; 
+        return $class;
     }
     protected function printRequired(){
         return  ($this->required)? 'required' : '';

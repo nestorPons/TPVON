@@ -9,38 +9,43 @@ class Conn{
         this.objectStore = {}
         this.version = undefined
         this.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-
+        this.startDB(()=> (table != '') && this.addObjectStore(table)) // For load version 
     } 
-    startDB(close = true, callback){
+    startDB(callback){
         let request = this.indexedDB.open(this.nameDB, this.version) 
         request.onupgradeneeded = (e) => {
+            console.log('onupgradeneeded...')
             let db = request.result
             if (Object.keys(this.objectStore).length !== 0 ){
                 let storeName = this.objectStore.store.name
-            let obj = db.createObjectStore(storeName,{
-                    keyPath: this.objectStore.store.key, 
-                    autoIncrement : this.objectStore.store.autoIncrement
-                })
-                for(let i in this.objectStore.fieldIndexed){
-                    var index = this.objectStore.fieldIndexed[i]
-                    var name = index.nameField || 'field' + i
-                    obj.createIndex('by_' + name, name, { 
-                        unique : index.unique || false
-                    });
+                try{
+                    let obj = db.createObjectStore(storeName,{
+                        keyPath: this.objectStore.store.key, 
+                        autoIncrement : this.objectStore.store.autoIncrement
+                    })
+                    for(let i in this.objectStore.fieldIndexed){
+                        var index = this.objectStore.fieldIndexed[i]
+                        var name = index.nameField || 'field' + i
+                        obj.createIndex('by_' + name, name, { 
+                            unique : index.unique || false
+                        });
+                    }
+                } catch (e) {
+                    console.warn(e)
+                } finally {
+                    this.objectStore = {}
                 }
-                this.objectStore = {}
             } 
         }
         request.onsuccess = (e) => {
+
             this.db  = request.result
             this.version = this.db.version
             
             typeof callback === 'function' && callback()
+            this.db.close()
         }
         request.onerror = (e) => console.log(e)
-        request.oncomplete = (e) => {
-            if (close) this.db.close()
-        }
     }
     /** 
      *  Add "tables" to bd 
@@ -48,7 +53,9 @@ class Conn{
      *   store => {'tableX', key: 'id', autoIncrement: true}
      *   fieldIndexed => [{nameField: 'field', unique: false }]
     */
-    addObjectStore(table, key=  'id', autoIncrement= true, fieldIndexed = []){
+    addObjectStore(table, key = 'id', autoIncrement = true, fieldIndexed = []){
+        this.table = table
+        if(this.db != null) this.db.close()
         this.version++
         this.objectStore.store = {
             name: table || this.table || 'table' + this.countTables, 
@@ -60,35 +67,32 @@ class Conn{
         this.startDB()
     }
     put(data = {}){ 
-        this.startDB(false, ()=>{
+        this.startDB(()=>{
             const obj = this._openStorage(READWRITE)
                 obj.put(data)
                     .onerror = (e) =>  alert(request.error.name + '\n\n' + request.error.message)
                     .oncomplete = (e)=> console.log('Put success')
-            this.db.close()
         })      
     }
     delete(key){
-        this.startDB(false, ()=>{
+        this.startDB(()=>{
             const obj = this._openStorage(READWRITE)
                 obj.delete(key)
                     .onerror = (e) =>  alert(request.error.name + '\n\n' + request.error.message)
                     .oncomplete = (e)=> console.log('delete success')
-            this.db.close()
         })     
     }
-    get(){ 
+    get(key){ 
         this.data = []
-        this.startDB(false, ()=>{
+        this.startDB(()=>{
             const obj = this._openStorage(READONLY)
-                obj.openCursor().onsuccess = (e) =>{
+                obj.openCursor(key).onsuccess = (e) =>{
                     var result = e.target.result;
-                    if (result === null) return;
-                    
+                    if (result === null) return
                     this.data.push(result.value)
+                    //this.data.push(result.value)
                     result.continue()
                 }
-                this.db.close()
             })  
         return this.data
     }

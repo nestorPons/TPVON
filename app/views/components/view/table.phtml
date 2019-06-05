@@ -8,7 +8,7 @@
         </tbody>
 </table>
 <template id="template_<?=$id?>">
-    <tr>
+    <tr <?=$onclick?>>
         <?php foreach($columns as $key => $val): ?>
             <td class="<?=$val?>"></td>
         <?php endforeach?>

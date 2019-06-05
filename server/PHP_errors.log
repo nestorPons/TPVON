@@ -9880,6 +9880,64 @@ Stack trace:
   thrown in /var/www/html/htdocs/index.php on line 10
 [02-Jun-2019 09:06:53 UTC] PHP Notice:  Constant NAME_COMPANY already defined in /var/www/html/app/models/Company.php on line 47
 [02-Jun-2019 09:07:39 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/datalist.phtml on line 3
+<<<<<<< HEAD
 [05-Jun-2019 15:39:31 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/aol/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
 [05-Jun-2019 15:39:31 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2068
 [05-Jun-2019 15:40:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/datalist.phtml on line 3
+=======
+[05-Jun-2019 10:40:36 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:40:36 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:40:36 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:40:48 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:40:48 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:40:48 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:41:19 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:41:19 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:41:19 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:41:28 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:41:28 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:41:28 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:43:52 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:43:52 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:43:52 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:44:27 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:44:27 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:44:27 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:45:23 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:45:23 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 10:45:23 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[05-Jun-2019 11:24:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputText::$mainclass in /var/www/html/app/views/components/controllers/Component.php on line 59
+[05-Jun-2019 11:24:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputPass::$mainclass in /var/www/html/app/views/components/controllers/Component.php on line 59
+[05-Jun-2019 11:24:24 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputText::$mainclass in /var/www/html/app/views/components/controllers/Component.php on line 59
+[05-Jun-2019 11:24:24 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputPass::$mainclass in /var/www/html/app/views/components/controllers/Component.php on line 59
+[05-Jun-2019 13:23:03 UTC] PHP Fatal error:  Uncaught Error: Class 'InputNumber' not found in /var/www/html/app/views/admin/sections/tpv.phtml:22
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(56): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Admin.php(25): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Login.php(72): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 22
+[05-Jun-2019 13:23:32 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\InputNumber' not found in /var/www/html/app/views/admin/sections/tpv.phtml:23
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(56): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Admin.php(25): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Login.php(72): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(95): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(73): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 23
+>>>>>>> 6c8844a36b28308f17e0ca1d9f89f932ef768c64
