@@ -49,7 +49,7 @@ class User extends Query{
               
                 $Token = new Tokens();
                 $url = HOST . '/'. CODE_COMPANY. "/login/confirmation/{$Token->create($this)}";
-                $body = $this->getFile(\FOLDERS\LOGIN . 'mailNewUser.phtml', new Data(['url'=>$url]));
+                $body = $this->getFile(\VIEWS\LOGIN . 'mailNewUser.phtml', new Data(['url'=>$url]));
                 return $this->sendMail($body, $this->company . 'Activacion de la cuenta en '. $this->company);
             }
             else return Error::array('E022');
@@ -84,7 +84,7 @@ class User extends Query{
     function resetPassword(){
         $Token = new Tokens();
         $url = HOST . '/'. CODE_COMPANY. "/login/newpassword/{$Token->create($this)}";
-        $body = $this->getFile(\FOLDERS\LOGIN . 'mailresetpassword.phtml', new Data(['url'=>$url]));
+        $body = $this->getFile(\VIEWS\LOGIN . 'mailresetpassword.phtml', new Data(['url'=>$url]));
         return $this->sendMail($body, $this->company . ' nueva contraseña');
     }
     private function sendMail($body, string $subject){

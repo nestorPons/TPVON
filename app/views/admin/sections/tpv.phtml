@@ -2,19 +2,22 @@
     InputText,
     InputNumber,
     InputSearch,
+    InputRead,
     ButtonSuccess,
     ButtonCancel,
-    Table
+    Table,
+    Select,
+    Modal
 }; ?>
 <section id="tpv">
 
         <?php
         $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
             'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
-        $id = new InputText(['value' => $tickets_id, 'label' => 'Id'],  false);
-        $hour = new InputText(['value' => $tickets_hora, 'label' => 'Hora'],  false);
-        $emp = new InputSearch(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre'), 'tabindex'=>1], false);
-        $cli = new InputSearch(['label' => 'Cliente', 'options' => $Users->get('nombre'), 'tabindex'=>2], false);
+        $id = new InputRead(['value' => $tickets_id, 'label' => 'Id'],  false);
+        $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora'],  false);
+        $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre'), 'tabindex'=>1], false);
+        $cli = new Select(['label' => 'Cliente', 'options' => $Users->get('nombre'), 'tabindex'=>2], false);
         
         // Linea
         $code = new InputSearch(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
@@ -23,20 +26,26 @@
         $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>8,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
-        $amo = new InputNumber(['id' => 'amount', 'label' => 'Importe', 'disabled' => true, 'value'=>'0'], false);
+        $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value'=>'0'], false);
         $btnOk = new ButtonSuccess(['tabindex'=>7, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
         $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
 
-        $txtTotal = new InputText(['value' => 0, 'label' => 'Total', 'disabled' => true], false);
+        $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
         $btnTicket = new ButtonSuccess(['onclick'=>'tpv.createTicket()', 'caption'=>'Ticket']);
         ?> 
+     
 </section> 
+<section id="auxiliars_components">
+    <?php 
+        $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml']);
+    ?>
+</section>
 <style>
     #tpv{
         align-items: flex-start;
         display: grid;
         grid-template-rows: auto [table] 400px auto auto auto;
-        grid-template-columns: [first] 10rem 1fr 1fr 4rem 6rem [prelast] 4rem  [last] 6rem;
+        grid-template-columns: [first] 10rem 1fr 1fr 6rem 6rem [prelast] 6rem  [last] 8rem;
         grid-row-gap: 5px;
     }
     #tpv table:not(.horizontal) thead{
@@ -121,13 +130,28 @@
     $('#input_<?=$emp->id()?>').focus()
     const tpv = {
         total: 0, 
-        ticket : new Ticket(),
+        Ticket : new Ticket(),
+        ticket: {
+            open(){
+                $('#control_<?=$modTicket->id()?>').prop('checked',true)
+            },
+            add(){
+
+            }, 
+            close(){
+                $('#control_<?=$modTicket->id()?>').prop('checked',false)
+            },
+            put(){
+
+            }, 
+        },
+        $id : $('#<?=$id->id()?>'), 
         $table : $('#<?=$table->id()?>'), 
         $code :  $('#input_<?=$code->id()?>'),
         $description : $('#input_<?=$des->id()?>'),
         $employees : $('#input_<?=$emp->id()?>'),
-        $hour : $('#input_<?=$hour->id()?>'),
         $client : $('#input_<?=$cli->id()?>'),
+        $hour : $('#input_<?=$hour->id()?>'),
         $quantity : $('#input_<?=$quan->id()?>'),
         $price : $('#input_<?=$pric->id()?>'),
         $dto : $('#input_<?=$dto->id()?>'),
@@ -151,13 +175,13 @@
             this.$code.focus()
         },
         totalizer(){
-            this.total = this.ticket.total()
+            this.total = this.Ticket.total()
             this.$total.val(this.total)
         },
         addLine(){
             this.calculate()
             const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
-            var line = this.ticket.addLine(
+            var line = this.Ticket.addLine(
                 this.$code.val(), 
                 this.$description.val(), 
                 this.$quantity.val(), 
@@ -194,7 +218,7 @@
             }
         },
         loadLineFromTable(e){
-            let line = this.ticket.lines[e.path[1].attributes.idline.value]
+            let line = this.Ticket.lines[e.path[1].attributes.idline.value]
             this.$code.val(line.cod)
             this.$description.val(line.des)
             this.$quantity.val(line.qua)
@@ -203,9 +227,18 @@
             this.$amount.val(line.amo)
 
             $('#<?=$table->id()?>').find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
-            delete this.ticket.lines[e.path[1].attributes.idline.value]
+            delete this.Ticket.lines[e.path[1].attributes.idline.value]
 
             this.totalizer()
-        }
+        }, 
+        createTicket(){
+
+            this.Ticket.employees = this.$employees.val()
+            this.Ticket.client = this.$client.val()
+            this.Ticket.date = new Date
+            this.Ticket.id = this.$id.val()
+            this.ticket.open()
+         }
     }
 </script>
+

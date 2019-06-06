@@ -1,6 +1,6 @@
-var app = {
+const app = {
     data: {},
-    GET: $_GET, 
+    GET: $_GET,
     getData(data = {}){
         for (let i in app.GET){
             data[i] =  app.GET[i]
@@ -91,6 +91,19 @@ var app = {
                })
            }
         },
+        show(section){
+            // Comprueba que  la seccion existe o no 
+            if($('section#' + section).length){
+                // Si existe oculta todas menos la solicitada
+                app.sections.toggle(section)
+            }else{
+                // Manda una petición para la nueva vista
+                app.get({
+                    controller: section,
+                    action: 'view'
+                });
+            }
+        }
     },
     form: {
         verify($this){

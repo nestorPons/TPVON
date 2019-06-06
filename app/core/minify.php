@@ -11,15 +11,15 @@ function checkedCompile($in, $out) {
 }
 
 // Compilación del os css
-if(checkedCompile(\FOLDERS\CSS . 'main.css', \FOLDERS\CSS . 'main.min.css')){
+if(checkedCompile(\FPUBLIC\CSS . 'main.css', \FPUBLIC\CSS . 'main.min.css')){
     $minifier_CSS = new Minify\CSS(
         \FOLDERS\NODE_MODULES . 'mini.css/dist/mini-default.min.css', 
-        \FOLDERS\CSS . 'main.css'
+        \FPUBLIC\CSS . 'main.css'
     );
-    $minifier_CSS->minify(\FOLDERS\CSS . 'main.min.css'); 
+    $minifier_CSS->minify(\FPUBLIC\CSS . 'main.min.css'); 
 }
 
-function listar($path, $exit_path = \FOLDERS\JSMIN){
+function listar($path, $exit_path = \FPUBLIC\JS){
     // Desarrollo no minificar
     if ($folder = opendir($path)) {
         while (false !== ($file = readdir($folder))) {

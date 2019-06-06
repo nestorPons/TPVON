@@ -7,7 +7,7 @@ use \app\core\Error;
 class Login extends Controller{
     private 
         $company, $zone, $password, $email,  
-        $folders = \FOLDERS\LOGIN, 
+        $folders = \VIEWS\LOGIN, 
         $level_admin = LEVEL_ADMIN, 
         $level_user = LEVEL_USER;
 
@@ -78,7 +78,7 @@ class Login extends Controller{
         
     }
     private function zone(bool $admin){
-        $folder = ($admin)?\FOLDERS\ADMIN : \FOLDERS\USER;
+        $folder = ($admin)?\VIEWS\ADMIN : \FOLDERS\USER;
         return $this->zone = $folder . 'index.phtml'; 
     }
     protected function newuser($Data){

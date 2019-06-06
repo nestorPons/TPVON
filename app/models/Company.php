@@ -77,10 +77,10 @@ class Company extends Query{
     }
 
     private function createFolder(){
-        $folder = \FOLDERS\COMPANIES . $this->nombre;
+        $folder = \FPUBLIC\COMPANIES . $this->nombre;
         if (!file_exists($folder)){
             mkdir($folder, 0750);
-            copy(\FOLDERS\TEMPLATE . 'config.ini', $folder . '/config.ini' );
+            copy(\FPUBLIC\TEMPLATE . 'config.ini', $folder . '/config.ini' );
         } else{
             throw new Error('E017');
         }

@@ -3,7 +3,7 @@
 $(document)
 .on('click', 'a', function (e) {
     e.preventDefault();
-    var section = $(this).attr('href'), data = {};
+    var section = $(this).attr('href')
     // Comprobamos si tiene parametros get 
     // Significa que se solicita redirección
     if(section.indexOf('?') != -1){
@@ -11,16 +11,7 @@ $(document)
         let get = arr[1].split('=')
         location.href ="?" + get[0] + "=" + get[1];
     } else {
-        // Comprueba que  la seccion existe o no 
-        if($('section#' + section).length){
-            // Si existe oculta todas menos la solicitada
-            app.sections.toggle(section)
-        }else{
-            // Manda una petición de la nueva vista
-            data.controller = section
-            data.action = 'view' 
-            app.get(data);
-        }
+        app.sections.show(section)
     }
 })
 // FORMULARIOS

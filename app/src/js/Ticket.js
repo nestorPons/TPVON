@@ -1,8 +1,12 @@
 class Ticket{
 
     constructor(){
+        this.id = null
         this.lines = []
-        this.idLine = 0; 
+        this.idLine = 0
+        this.employee = null
+        this.client = null
+        this.date = null
     }
     addLine(cod, des, qua, pri, dto, amo){
         this.idLine++; 

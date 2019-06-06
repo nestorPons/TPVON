@@ -17,9 +17,17 @@
 input{
   width: 100%;
 }
-input[type="search" i]{
+input[type="search"]{
   padding: 8px 4px;
 }
+input[type="number"]{
+  text-align: right;
+}
+input[readonly], input[readonly]:hover, input[readonly]:focus{
+  border-color: var(--fore-color) !important;
+  cursor: inherit;
+}
+
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

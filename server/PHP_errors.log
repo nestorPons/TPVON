@@ -1465,7 +1465,7 @@ Stack trace:
 [19-Apr-2019 17:32:19 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/utils/Seleccione un plan.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/dev.php on line 15
 [19-Apr-2019 17:33:11 UTC] PHP Warning:  include(/var/www/html/app/views/utils/Seleccione un plan.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/dev.php on line 15
 [19-Apr-2019 17:33:11 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/utils/Seleccione un plan.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/core/dev.php on line 15
-[20-Apr-2019 07:15:59 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\COMPONENTS' in /var/www/html/app/core/dev.php:15
+[20-Apr-2019 07:15:59 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'VIEW\COMPONENTS' in /var/www/html/app/core/dev.php:15
 Stack trace:
 #0 /var/www/html/app/views/newcompany.phtml(8): loadUtils('input-txt', Array)
 #1 /var/www/html/app/controllers/Controller.php(50): require_once('/var/www/html/a...')
@@ -4959,7 +4959,7 @@ Stack trace:
 [10-May-2019 08:58:38 UTC] PHP Notice:  Undefined index: db in /var/www/html/app/models/User.php on line 41
 [10-May-2019 09:02:46 UTC] PHP Parse error:  syntax error, unexpected ';' in /var/www/html/app/models/User.php on line 50
 [10-May-2019 09:13:24 UTC] PHP Warning:  file_get_contents(mailNewUser.phtml) [<a href='0function.file-get-contents0'>function.file-get-contents0</a>]: failed to open stream: No such file or directory in /var/www/html/app/models/User.php on line 53
-[10-May-2019 09:13:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEW' in /var/www/html/app/models/User.php:53
+[10-May-2019 09:13:24 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEWS' in /var/www/html/app/models/User.php:53
 Stack trace:
 #0 /var/www/html/app/models/User.php(21): app\models\User->sendMail()
 #1 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
@@ -4970,7 +4970,7 @@ Stack trace:
 #6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #7 {main}
   thrown in /var/www/html/app/models/User.php on line 53
-[10-May-2019 09:13:49 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEW' in /var/www/html/app/models/User.php:53
+[10-May-2019 09:13:49 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEWS' in /var/www/html/app/models/User.php:53
 Stack trace:
 #0 /var/www/html/app/models/User.php(21): app\models\User->sendMail()
 #1 /var/www/html/app/controllers/Controller.php(47): app\models\User->new(Object(app\core\Data))
@@ -6947,7 +6947,7 @@ Stack trace:
 #5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #6 {main}
   thrown in /var/www/html/app/controllers/Login.php on line 38
-[20-May-2019 08:06:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEW' in /var/www/html/app/views/admin/index.phtml:7
+[20-May-2019 08:06:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FOLDERS\VIEWS' in /var/www/html/app/views/admin/index.phtml:7
 Stack trace:
 #0 /var/www/html/app/controllers/Login.php(70): require()
 #1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))

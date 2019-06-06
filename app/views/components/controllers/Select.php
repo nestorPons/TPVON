@@ -19,6 +19,6 @@ class Select extends Component{
         $required = $this->printRequired();
         $options = $this->options; 
         $label = $this->printLabel();
-        include \FOLDERS\COMPONENTS . 'view/select.phtml';
+        include \VIEWS\COMPONENTS . 'view/select.phtml';
     }
 }

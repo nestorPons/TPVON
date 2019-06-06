@@ -19,6 +19,8 @@ class Component{
         $id = $this->id; 
         $hidden = ($type == 'hidden')?'hidden':'';
         $disabled = (isset($this->disabled))?'disabled':'';
+        $readonly = (isset($this->readonly))?'readonly':'';
+        $body = $this->body??null;
         $idSel = 'input_' .$this->id; 
         $name = $this->printName(); 
         $title = $this->printTitle();
@@ -40,7 +42,7 @@ class Component{
         $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:'';
         $icon = isset($this->icon)?$this->icon:false;
         
-        include \FOLDERS\COMPONENTS . "view/$file.phtml";
+        include \VIEWS\COMPONENTS . "view/$file.phtml";
     }
     protected function getnameclass(){
         $arr_controller= explode('\\',get_class($this));
@@ -104,7 +106,7 @@ class Component{
             ${$key} = $val;
         }
 
-        include \FOLDERS\COMPONENTS . "view/$file.phtml";
+        include \VIEWS\COMPONENTS . "view/$file.phtml";
     }
     // getters y setters
     function id(int $arg = null){

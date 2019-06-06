@@ -21,6 +21,6 @@ class InputSearch extends Component{
         $id = $this->list; 
         $options = $this->options??null;
 
-        include \FOLDERS\COMPONENTS . 'view/datalist.phtml';
+        include \VIEWS\COMPONENTS . 'view/datalist.phtml';
     }
 }

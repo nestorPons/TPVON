@@ -25,15 +25,17 @@ class Controller{
         }
     }
     protected function view($data = null){
-        $file = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
-        if(!file_exists($file))
-            $file = \FOLDERS\LOGIN . $this->controller . '.phtml';
-        else if(!file_exists($file))
-            $file = \FOLDERS\ADMIN . $this->controller . '.phtml';
-        else if(!file_exists($file))
-            $file = \FOLDERS\USER . $this->controller . '.phtml';
-        else return false; 
-        return $this->printView($file, $data);
+        // Carpetas donde buscar las vistas
+        $files[] = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
+        $files[] = \VIEWS\LOGIN . $this->controller . '.phtml';
+        $files[] = \VIEWS\ADMIN . $this->controller . '.phtml';
+        $files[] = \VIEWS\USERS . $this->controller . '.phtml';
+        $files[] = \VIEWS\ADMIN\SECTIONS . $this->controller . '.phtml';
+        foreach($files as $file){
+            if(file_exists($file)) return $this->printView($file, $data);
+        }
+
+        
     }
     protected function update(Object $Data){
         $this->Model = $this->getModel(intval($Data->id));

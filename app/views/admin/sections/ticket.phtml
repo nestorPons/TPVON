@@ -1,0 +1,24 @@
+<?php use app\views\components\controllers \ {
+    InputText,
+    InputNumber,
+    InputSearch,
+    InputRead,
+    ButtonSuccess,
+    ButtonCancel,
+    Table,
+    Select
+}; ?>
+<component id="ticket">
+    <label for="modal-control" class="modal-close" ></label>
+
+    <?php
+        $btnAcceptTicket = new ButtonSuccess(['onclick'=>'tpv.ticket.accept()','class'=>'keyEnterOut', 'collapse'=>false]);
+        $btnCancelTicket = new ButtonCancel(['caption'=> 'Cancelar', 'onclick'=>'tpv.ticket.close()', 'icon' => 'cross','collapse'=>false]);
+    ?> 
+</component>
+<style>
+    #ticket{
+
+
+    }
+</style>
