@@ -1,15 +1,15 @@
-<div id="<?=$id?>" class="row col-sm-12 col-md-12">
+<div id="<?=$idContainer?>" class="row col-sm-12 col-md-12">
     <select 
-        id="<?=$idSel?>" 
+        id="<?=$idElement?>" 
         class="collapse" 
         <?=$printName?>
         <?=$printTitle?>
         <?=$required?>
-        > 
+    > 
         <option value="" hidden></option>
         <?php foreach($options as $key => $val): ?>
             <option value="<?=$key?>"><?=$val?></option>
         <?php endforeach ?>
     </select> 
-    <label for="<?=$idSel?>"><?=$label?></label>
+    <label for="<?=$idElement?>"><?=$label?></label>
 </div>  

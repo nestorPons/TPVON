@@ -5,7 +5,8 @@
 class Modal extends Component{
 
     function __construct(Array $data = [],  bool $collapse = true){
-       parent::__construct($data);
-       $this->print('modal');
+        $this->type = 'modal';
+        parent::__construct($data);
+        $this->print( $this->type);
     }
 }

@@ -115,4 +115,13 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 	}
 	$_GET[_decode(arguments[1])] = _decode(arguments[2]);
  });
-// *** 
+// ***  
+
+var mns = {
+    error(mns){
+        alert(mns)
+    },
+    success(mns){
+        alert(mns)
+    }
+}

@@ -19,3 +19,6 @@ https://www.antofernandez.com/menu-hamburguesa-con-css/
 
 Iconos 
 https://linearicons.com/
+
+dialogos JS
+http://bootboxjs.com

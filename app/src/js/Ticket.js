@@ -18,7 +18,23 @@ class Ticket{
             var line = this.lines[i]           
             total += parseInt(line.amo)
         }
-        return total
-    }
 
+        return total || 0
+    }
+    validate(){
+        if(
+            this.id == '' ||
+            this.lines.length == 0 ||
+            this.employee == '' ||
+            this.client == '' ||
+            this.date == '' 
+        ) return false
+        else return true
+    }
+    deleteLine(index){
+
+        arreglo = this.lines.filter( (line, i) =>  line.id == ); // filtramos
+
+        console.log( arreglo );
+    }
 }

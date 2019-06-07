@@ -2,14 +2,11 @@
 /**
  * Clase de input de tipo numero
  */
-class InputHidden extends Component{
+class InputHidden extends Input{
 
     function __construct(Array $data = []){
         $this->type = 'hidden';
-        $this->COLLAPSE = false;
-        $this->MINLENGTH = null;
-        $this->MAXLENGTH = null; 
+
         parent::__construct($data);
-        $this->print('input');
     }
 }

@@ -7,8 +7,11 @@ class Table extends Component{
     
     function __construct(Array $data = []){
         if(!(isset($data['columns']))) die("Faltan datos para construir el objeto select");
-
+        $this->type = 'table';
         parent::__construct($data);        
         $this->print('table');
+    }
+    function idEl(){
+        return $this->id;
     }
 }

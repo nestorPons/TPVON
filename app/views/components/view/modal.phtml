@@ -1,15 +1,26 @@
-<div id="<?=$id?>">
-    <input type="checkbox" id="control_<?=$id?>" class="modal">
-    <div>
-        <div class="card_<?=$id?>">
-            <?php include($body)?>
-        </div>
-    </div>
+<!-- <label for="control_<?=$id?>"></label> -->
+<input type="checkbox" id="control_<?=$id?>" class="modal">
+<div>
+  <div class="card card-modal" id="card_<?=$id?>">
+    <label for="control_<?=$id?>" class="modal-close" ></label>
+    <?php include($body)?>
+  </div>
 </div>
+  <style>
+  #card_<?=$id?>{
+      overflow: inherit;
+      padding: var(--universal-padding);
+  }
+  #card_<?=$id?> .modal-close{
+    top: -1em;
+    background-color: inherit;
+    right: -1em;
+    border-radius: 25px;
+    padding: 0;
+    border: 1px solid var(--border-color);
 
-<style>
-    .card{
-
-    }
-</style>
-
+  }
+  #card_<?=$id?> label.modal-close:hover:before{
+    color: var(--input-invalid-color) ;
+  }
+  </style>

@@ -7,21 +7,26 @@ class Component{
     $COLLAPSE = false,
     $MINLENGTH = 1, 
     $MAXLENGTH = 255;
+
+    const PREFIX_CONTAINER = 'container_'; 
+    const PREFIX_ELEMENT = 'main_';
         
     function __construct(Array $data = []){
+
         foreach($data as $key => $val){
             $this->{$key} = $val??null;
         }
-        $this->id = ($this->id)??$this->type . $this->randomid();
+        $this->id = ($this->id)??$this->randomid();
     }
-    protected function print(string $file = 'input'){
+    function print(string $file = 'input'){
         $type= $this->type??null;
-        $id = $this->id; 
+        $id = $this->id;
+        $idContainer = self::PREFIX_CONTAINER . $id;
+        $idElement = $this->idEl(); 
         $hidden = ($type == 'hidden')?'hidden':'';
         $disabled = (isset($this->disabled))?'disabled':'';
         $readonly = (isset($this->readonly))?'readonly':'';
         $body = $this->body??null;
-        $idSel = 'input_' .$this->id; 
         $name = $this->printName(); 
         $title = $this->printTitle();
         $required = $this->printRequired();
@@ -50,11 +55,7 @@ class Component{
         return strtolower($controller);
     }
     protected function randomid(){
-        return uniqid($this->prefix());
-    }
-    protected function prefix(string $arg = null){
-        if(!empty($arg)) $this->prefix = $arg; 
-        return $this->prefix; 
+        return uniqid($this->type);
     }
     protected function class(bool $collapse = false, string $args = null){
         $class = $this->mainclass ?? '';
@@ -112,5 +113,8 @@ class Component{
     function id(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 
+    }
+    function idEl(){ 
+        return  SELF::PREFIX_ELEMENT . $this->id; 
     }
 }

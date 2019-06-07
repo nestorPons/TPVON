@@ -1,19 +1,8 @@
-<?php use app\views\components\controllers \ {
-    InputText,
-    InputNumber,
-    InputSearch,
-    InputRead,
-    ButtonSuccess,
-    ButtonCancel,
-    Table,
-    Select,
-    Modal
-}; ?>
+<?php namespace app\views\components\controllers;?>
 <section id="tpv">
-
-        <?php
+    <?php
         $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
-            'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
+        'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputRead(['value' => $tickets_id, 'label' => 'Id'],  false);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora'],  false);
         $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre'), 'tabindex'=>1], false);
@@ -31,7 +20,7 @@
         $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
 
         $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
-        $btnTicket = new ButtonSuccess(['onclick'=>'tpv.createTicket()', 'caption'=>'Ticket']);
+        $btnTicket = new ButtonSuccess(['onclick'=>'tpv.create()', 'caption'=>'Ticket']);
         ?> 
      
 </section> 
@@ -106,12 +95,10 @@
         font-size: 1.2rem;
         color: var(--fore-color);   
     }
-    
     #tpv #<?= $btnTicket->id() ?>{
         grid-row: 5;
         grid-column: prelast / span 2 ;
     }
-
     #tpv .Importe{
         text-align: right;
     }
@@ -131,34 +118,41 @@
     const tpv = {
         total: 0, 
         Ticket : new Ticket(),
-        ticket: {
-            open(){
-                $('#control_<?=$modTicket->id()?>').prop('checked',true)
-            },
-            add(){
-
-            }, 
-            close(){
-                $('#control_<?=$modTicket->id()?>').prop('checked',false)
-            },
-            put(){
-
-            }, 
+        open(){
+            $('#control_<?=$modTicket->id()?>').prop('checked',true)
+            ticket.open(tpv.Ticket)
         },
-        $id : $('#<?=$id->id()?>'), 
-        $table : $('#<?=$table->id()?>'), 
-        $code :  $('#input_<?=$code->id()?>'),
-        $description : $('#input_<?=$des->id()?>'),
-        $employees : $('#input_<?=$emp->id()?>'),
-        $client : $('#input_<?=$cli->id()?>'),
-        $hour : $('#input_<?=$hour->id()?>'),
-        $quantity : $('#input_<?=$quan->id()?>'),
-        $price : $('#input_<?=$pric->id()?>'),
-        $dto : $('#input_<?=$dto->id()?>'),
-        $amount : $('#input_<?=$amo->id()?>'),
-        $btnOk : $('#<?=$btnOk->id()?>'),
-        $btnClear : $('#<?=$btnClear->id()?>'),
-        $total : $('#input_<?=$txtTotal->id()?>'),
+        close(){
+            $('#control_<?=$modTicket->id()?>').prop('checked',false)
+        },
+        create(){
+            this.Ticket.employee = this.$employees.val()
+            this.Ticket.employee_name = this.$employees.find(':selected').text()
+            this.Ticket.client = this.$client.val()
+            this.Ticket.client_name = this.$client.find(':selected').text()
+            this.Ticket.date = new Date
+            this.Ticket.id = this.$id.val()
+
+            if(this.Ticket.validate())
+                this.open()
+            else 
+                mns.error('Faltan datos para crear el ticket')
+
+        },
+        $id : $('#<?=$id->idEl()?>'), 
+        $table : $('#<?=$table->idEl()?>'), 
+        $code :  $('#<?=$code->idEl()?>'),
+        $description : $('#<?=$des->idEl()?>'),
+        $employees : $('#<?=$emp->idEl()?>'),
+        $client : $('#<?=$cli->idEl()?>'),
+        $hour : $('#<?=$hour->idEl()?>'),
+        $quantity : $('#<?=$quan->idEl()?>'),
+        $price : $('#<?=$pric->idEl()?>'),
+        $dto : $('#<?=$dto->idEl()?>'),
+        $amount : $('#<?=$amo->idEl()?>'),
+        $btnOk : $('#<?=$btnOk->idEl()?>'),
+        $btnClear : $('#<?=$btnClear->idEl()?>'),
+        $total : $('#<?=$txtTotal->idEl()?>'),
         calculate(){
             let amount = this.$quantity.val() * this.$price.val(), 
                 dto = this.$dto.val() * amount / 100, 
@@ -227,18 +221,13 @@
             this.$amount.val(line.amo)
 
             $('#<?=$table->id()?>').find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
+            
+            this.Ticket.deleteLine(e.path[1].attributes.idline.value)
             delete this.Ticket.lines[e.path[1].attributes.idline.value]
 
-            this.totalizer()
-        }, 
-        createTicket(){
 
-            this.Ticket.employees = this.$employees.val()
-            this.Ticket.client = this.$client.val()
-            this.Ticket.date = new Date
-            this.Ticket.id = this.$id.val()
-            this.ticket.open()
-         }
+            this.totalizer()
+        }
     }
 </script>
 

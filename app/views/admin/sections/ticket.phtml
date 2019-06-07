@@ -1,24 +1,32 @@
-<?php use app\views\components\controllers \ {
-    InputText,
-    InputNumber,
-    InputSearch,
-    InputRead,
-    ButtonSuccess,
-    ButtonCancel,
-    Table,
-    Select
-}; ?>
+<?php namespace app\views\components\controllers;?>
 <component id="ticket">
-    <label for="modal-control" class="modal-close" ></label>
-
     <?php
-        $btnAcceptTicket = new ButtonSuccess(['onclick'=>'tpv.ticket.accept()','class'=>'keyEnterOut', 'collapse'=>false]);
-        $btnCancelTicket = new ButtonCancel(['caption'=> 'Cancelar', 'onclick'=>'tpv.ticket.close()', 'icon' => 'cross','collapse'=>false]);
+        $lblDate = new InputRead(['label' => 'Fecha/Hora'],  false);
+        $lblEmployee = new InputRead(['label' => 'Operador'], false);
+        $lblClient = new InputRead(['label' => 'Cliente'], false);
+        $txtDto = new InputText(['value' => 0, 'label' => 'general DTO%']);
+        $lblTotal = new InputRead(['value' => 0, 'label' => 'Total']);
+        $btnAcceptTicket = new ButtonSuccess(['onclick'=>'tpv.ticket.accept()','class'=>'keyEnterOut']);
+        $btnCancelTicket = new ButtonCancel(['caption'=> 'Cancelar', 'onclick'=>'tpv.ticket.close()', 'icon' => 'cross']);
     ?> 
 </component>
 <style>
-    #ticket{
-
-
-    }
+#ticket *{
+    text-align: right;
+}
 </style>
+<script>
+const ticket = {
+    $date : $('#<?=$lblDate->idEl()?>'),
+    $employee : $('#<?=$lblEmployee->idEl()?>'),
+    $client : $('#<?=$lblClient->idEl()?>'),
+    $dto : $('#<?=$txtDto->idEl()?>'),
+    $total : $('#<?=$lblTotal->idEl()?>'),
+    open(Ticket){
+        this.$date.val(Ticket.date.toLocaleString())
+        this.$employee.val(Ticket.employee_name)
+        this.$client.val(Ticket.client_name)
+        this.$total.val(Ticket.total())
+    }
+}
+</script>

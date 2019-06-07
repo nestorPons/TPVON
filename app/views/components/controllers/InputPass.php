@@ -2,14 +2,11 @@
 /**
  * Clase de input de tipo numero
  */
-class InputPass extends Component{
-
+class InputPass extends Input{
     function __construct(Array $data = []){
         $this->type = 'password';
-        $this->COLLAPSE = true;
         $this->MINLENGTH = 6;
-        $this->MAXLENGTH = null; 
+        $this->MAXLENGTH = null;
         parent::__construct($data);
-        $this->print('input');
     }
 }
