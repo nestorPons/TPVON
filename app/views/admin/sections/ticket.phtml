@@ -5,8 +5,9 @@
         $lblEmployee = new InputRead(['label' => 'Operador'], false);
         $lblClient = new InputRead(['label' => 'Cliente'], false);
         $txtDto = new InputText(['value' => 0, 'label' => 'general DTO%']);
+        $txtIva = new InputText(['label' => 'Iva aplicado']);
         $lblTotal = new InputRead(['value' => 0, 'label' => 'Total']);
-        $btnAcceptTicket = new ButtonSuccess(['onclick'=>'tpv.ticket.accept()','class'=>'keyEnterOut']);
+        $btnAcceptTicket = new ButtonSuccess(['onclick'=>'ticket.save()','class'=>'keyEnterOut']);
         $btnCancelTicket = new ButtonCancel(['caption'=> 'Cancelar', 'onclick'=>'tpv.ticket.close()', 'icon' => 'cross']);
     ?> 
 </component>
@@ -22,11 +23,26 @@ const ticket = {
     $client : $('#<?=$lblClient->idEl()?>'),
     $dto : $('#<?=$txtDto->idEl()?>'),
     $total : $('#<?=$lblTotal->idEl()?>'),
+    $iva : $('#<?=$txtIva->idEl()?>'),
     open(Ticket){
         this.$date.val(Ticket.date.toLocaleString())
         this.$employee.val(Ticket.employee_name)
         this.$client.val(Ticket.client_name)
         this.$total.val(Ticket.total())
+        this.$iva.val(app.data.config.iva)
+echo(app.data.config)
+    },
+    save(){
+        tpv.Ticket.changeToLocaleDate()
+
+        let data = {
+            controller: 'tickets',
+            action: 'new', 
+            data: JSON.stringify(tpv.Ticket)
+        }
+        app.post(data, function(){
+            echo('YATA')
+        })
     }
 }
 </script>

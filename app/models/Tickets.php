@@ -3,14 +3,14 @@ use \app\core\{Query, Data, Error};
 class Tickets extends Query{
     public $id, $id_empleado, $id_cliente, $estado, $fecha, $hora;
     protected $table = 'tickets';
-    function __construct(int $id = null){
+    function __construct($args = null){
         parent::__construct();
-        if($id){
+        if(is_int($args)){
             $this->loadData(
-                $this->getById($id)
+                $this->getById($args)
             );
         }else{
-            $this->new();
+            //$this->new();
         }
 /*         $data = ($id) ? $this->getById($id) : $this->getLast();
         $date = new \DateTime($data[0]['fecha']);
@@ -21,19 +21,31 @@ class Tickets extends Query{
     function last(){
         $data = $this->getLast();
         $this->loadData($data);
-        $date = new \DateTime($data[0]['fecha']);
+        $date = new \DateTime($data['fecha']);
         $this->hora = $date->format('H:i'); 
         $this->fecha = $date->format('d/m/Y');
     }
-    function new(){
-        $date = new \DateTime();
-        $this->hora = $date->format('H:i'); 
-        $this->fecha = $date->format('d/m/Y');
-        
-        $this->id = (int)$this->getLast('id') + 1;
-        $this->id_empleado = 0; 
-        $this->id_cliente = 0; 
-        $this->estado = 1;
+    function new(Object $Data){
 
+    /*     $this->id = $this->add([
+            'id_empleado' => $Data['employee'],
+            'fecha' => $Data['date'],
+            'id_cliente' => $Data['client'],
+            'estado' => 1
+        ]);
+        foreach($Data->lines as $data){
+            $Line = new Lines;
+            $Line->add([
+                'id_tiket' => $this->id,
+                'articulo' => $Data['cod'],
+                'precio'   => $Data['pri'],
+                'dto'      => $Data['dto'],
+                'precio'   => $Data['precio'],
+                'cantidad' => $Data['qua'],
+                'iva'      => $Data['iva']
+
+            ]);
+        }   */
+            
     }
 }

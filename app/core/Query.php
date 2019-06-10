@@ -69,11 +69,11 @@ class Query extends Conn{
         $value = $params[$column];
         return $this->sendQuery(
             "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
-        );
+        )[0];
      }
-    protected function getLast(){
-        return $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true); 
-    }
+    public function getLast(){
+        return $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true)[0]; 
+     }
     // Devuelve los registros con el valor entre los dos valores proporcionados de un campo
     public function getBetween ( string $column, $val1, $val2, string $args = null, bool $desc = false){
         return $this->sendQuery(

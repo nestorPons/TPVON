@@ -36,7 +36,6 @@ $(document)
     }
     // Envio de datos
     app.post({
-        db: get['db'],
         controller: $this.attr('controller'),
         action: $this.attr('action'),
         data: JSON.stringify(data)

@@ -3,23 +3,24 @@ class Ticket{
     constructor(){
         this.id = null
         this.lines = []
-        this.idLine = 0
+        this.lineId = 0
         this.employee = null
         this.client = null
         this.date = null
     }
-    addLine(cod, des, qua, pri, dto, amo){
-        this.idLine++; 
-        return this.lines[this.idLine] = new Line(this.idLine, cod, des, qua, pri, dto, amo)
+    addLine(cod, des, qua, pri, dto, amo){ 
+        let newLine = new Line(this.idLine, cod, des, qua, pri, dto, amo)
+        newLine.id = this.lineId
+        this.lines.push(newLine)
+        this.lineId++
+        return newLine
     }
-    total(){
+    total(){        
         let total = 0
         for(let i in this.lines){
-            var line = this.lines[i]           
-            total += parseInt(line.amo)
+            total += parseInt(this.lines[i].amo || 0)
         }
-
-        return total || 0
+        return total
     }
     validate(){
         if(
@@ -32,9 +33,10 @@ class Ticket{
         else return true
     }
     deleteLine(index){
-
-        arreglo = this.lines.filter( (line, i) =>  line.id == ); // filtramos
-
-        console.log( arreglo );
+        let i = this.lines.indexOf(index) // filtramos
+        return this.lines.splice(i,1)
+    }
+    changeToLocaleDate(){
+        this.date = this.date.toLocaleString()
     }
 }

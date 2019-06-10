@@ -4,10 +4,11 @@
  */
 class Data {
     // Creamos los atributos en el constructor
-    public $data = []; 
-
+    public $data = [];
+    
     function __construct(Array $data = null){
-        if($data){
+        $this->data = $data;
+/*         if($data){
             foreach($data as $key => $value){
                 if(is_array($value)){
                     foreach($value as $ke => $val){
@@ -16,7 +17,7 @@ class Data {
                     }
                 } else $this->addItem($value, $key);  
             }
-        }
+        } */
     }
     function addItem($value, $key = null){
         

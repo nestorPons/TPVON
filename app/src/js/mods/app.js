@@ -1,4 +1,5 @@
 const app = {
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
     data: {},
     GET: $_GET,
     getData(data = {}){
@@ -8,7 +9,8 @@ const app = {
         return data
     },
     post: function (data, callback) {
-        if (typeof data.controller === 'undefined') return false;
+        if (typeof data.controller === 'undefined') return false
+        if (typeof data.db === 'undefined') data.db = $_GET['db']
         var jqxhr = $.post('index.php', data, function (respond, status, xhr, dataType) {
             // La respuesta puede ser json o html 
             try {

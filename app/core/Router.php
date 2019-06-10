@@ -69,7 +69,7 @@ class Router{
             
             // Pasamos los datos de json a objeto Data
             $this->data = new \app\core\Data((array)json_decode($params['data']) ?? null);
-            
+        
             $respond = $this->loadController(); 
 
             // Siempre devuelvo un objeto json con un success de respuesta

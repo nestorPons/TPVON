@@ -168,7 +168,7 @@
             this.$amount.val(0)
             this.$code.focus()
         },
-        totalizer(){
+        printTotal(){
             this.total = this.Ticket.total()
             this.$total.val(this.total)
         },
@@ -199,7 +199,7 @@
             
                 this.$table.append($template) 
                 this.clearLine()
-                this.totalizer()
+                this.printTotal()
             } else {
                 this.$code.focus()
             }
@@ -212,7 +212,10 @@
             }
         },
         loadLineFromTable(e){
-            let line = this.Ticket.lines[e.path[1].attributes.idline.value]
+            // Eliminamos la linea del objeto
+            let line = this.Ticket.deleteLine(e.path[1].attributes.idline.value)[0]
+
+            // Vista
             this.$code.val(line.cod)
             this.$description.val(line.des)
             this.$quantity.val(line.qua)
@@ -222,12 +225,8 @@
 
             $('#<?=$table->id()?>').find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
             
-            this.Ticket.deleteLine(e.path[1].attributes.idline.value)
-            delete this.Ticket.lines[e.path[1].attributes.idline.value]
-
-
-            this.totalizer()
-        }
+            this.printTotal()
+        },
     }
 </script>
 
