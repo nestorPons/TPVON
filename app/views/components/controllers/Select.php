@@ -10,16 +10,6 @@ class Select extends Component{
         $this->options = $data['options'];
         $this->type = 'select';
         parent::__construct($data);
-        $this->printSelect($data);
-    }
-    function printSelect(){
-        $id = $this->id; 
-        $idElement = $this->idEl();
-        $printName = $this->printName(); 
-        $printTitle = $this->printTitle();
-        $required = $this->printRequired();
-        $options = $this->options; 
-        $label = $this->printLabel();
-        include \VIEWS\COMPONENTS . 'view/select.phtml';
+        $this->print('select');
     }
 }

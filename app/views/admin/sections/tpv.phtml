@@ -9,14 +9,14 @@
         $cli = new Select(['label' => 'Cliente', 'options' => $Users->get('nombre'), 'tabindex'=>2], false);
         
         // Linea
-        $code = new InputSearch(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
+        $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
             'options' => $Services->get('codigo'), 'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
         $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
         $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
-        $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>8,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+        $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>7,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value'=>'0'], false);
-        $btnOk = new ButtonSuccess(['tabindex'=>7, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
+        $btnOk = new ButtonSuccess(['tabindex'=>8, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
         $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
 
         $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
@@ -110,6 +110,9 @@
         grid-row: 4;
         grid-column: prelast;
     }
+    #<?=$modTicket->idEl()?>{
+        max-height: inherit;
+    }
 </style>
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
@@ -164,7 +167,6 @@
             this.$description.val('')
             this.$quantity.val(1)
             this.$price.val(0)
-            this.$dto.val(0)
             this.$amount.val(0)
             this.$code.focus()
         },
@@ -205,10 +207,10 @@
             }
         },
         loadLine(){
-            
-            if(app.data.services[this.$code.val()]){
-                this.$description.val(app.data.services[this.$code.val()]['descripcion'])
-                this.$price.val(app.data.services[this.$code.val()]['precio'])
+            let code = this.$code.find(':selected').text()
+            if(app.data.services[code]){
+                this.$description.val(app.data.services[code]['descripcion'])
+                this.$price.val(app.data.services[code]['precio'])
             }
         },
         loadLineFromTable(e){

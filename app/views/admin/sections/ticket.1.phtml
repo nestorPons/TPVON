@@ -1,0 +1,42 @@
+<?php namespace app\views\components\controllers;?>
+<component id="ticket">
+    <?php
+        $lblDate        = new InputRead(['label' => 'Fecha/Hora'],  false);
+        $lblEmployee    = new InputRead(['label' => 'Operador'], false);
+        $lblClient      = new InputRead(['label' => 'Cliente'], false);
+        $lblTotal       = new InputRead(['value' => 0, 'label' => 'Total']);
+        $btnAcceptTicket = new ButtonSuccess(['onclick'=>'ticket.save()','class'=>'keyEnterOut']);
+        $btnCancelTicket = new ButtonCancel(['caption'=> 'Cancelar', 'onclick'=>'tpv.ticket.close()', 'icon' => 'cross']);
+    ?> 
+</component>
+<style>
+#ticket *{
+    text-align: right;
+}
+</style>
+<script>
+const ticket = {
+    $date : $('#<?=$lblDate->idEl()?>'),
+    $employee : $('#<?=$lblEmployee->idEl()?>'),
+    $client : $('#<?=$lblClient->idEl()?>'),
+    $total : $('#<?=$lblTotal->idEl()?>'),
+    open(Ticket){
+        this.$date.val(Ticket.date.toLocaleString())
+        this.$employee.val(Ticket.employee_name)
+        this.$client.val(Ticket.client_name)
+        this.$total.val(Ticket.total())
+    },
+    save(){
+        tpv.Ticket.changeToLocaleDate()
+
+        let data = {
+            controller: 'tickets',
+            action: 'new', 
+            data: JSON.stringify(tpv.Ticket)
+        }
+        app.post(data, function(){
+            echo('YATA')
+        })
+    }
+}
+</script>

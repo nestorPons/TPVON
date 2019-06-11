@@ -34,6 +34,6 @@ namespace app\views\components\controllers;
     app.data.services = <?=$Services->toJSON()?>;
     app.data.users = <?=$Users->toJSON()?>;
     app.data.config = <?=$Config->toJSON()?>;
-// AKI :::::. desmenuzando el iva en el ticket
+    app.data.config = app.data.config[1]
 </script>
 

@@ -9,7 +9,7 @@ class Component{
     $MAXLENGTH = 255;
 
     const PREFIX_CONTAINER = 'container_'; 
-    const PREFIX_ELEMENT = 'main_';
+    const PREFIX_ELEMENT = 'el_';
         
     function __construct(Array $data = []){
 
@@ -46,6 +46,9 @@ class Component{
         $onblur = isset($this->onblur)?'onblur='.$this->onblur:'';
         $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:'';
         $icon = isset($this->icon)?$this->icon:false;
+        $printName = $this->printName();
+        $options = $this->options??null;
+        $printTitle = $this->printTitle();
         
         include \VIEWS\COMPONENTS . "view/$file.phtml";
     }
@@ -116,5 +119,8 @@ class Component{
     }
     function idEl(){ 
         return  SELF::PREFIX_ELEMENT . $this->id; 
+    }
+    function idCon(){ 
+        return  SELF::PREFIX_CONTAINER . $this->id; 
     }
 }

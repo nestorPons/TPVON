@@ -9,6 +9,7 @@ class Ticket{
         this.date = null
     }
     addLine(cod, des, qua, pri, dto, amo){ 
+
         let newLine = new Line(this.idLine, cod, des, qua, pri, dto, amo)
         newLine.id = this.lineId
         this.lines.push(newLine)
@@ -16,9 +17,9 @@ class Ticket{
         return newLine
     }
     total(){        
-        let total = 0
+        let total = 0.00
         for(let i in this.lines){
-            total += parseInt(this.lines[i].amo || 0)
+            total += parseFloat(this.lines[i].amo || 0)
         }
         return total
     }

@@ -1,10 +1,20 @@
-<div id="<?=$idContainer?>" class="row col-sm-12 col-md-12">
+<div id="<?=$id?>" class="row col-sm-12 col-md-12">
     <select 
         id="<?=$idElement?>" 
         class="collapse" 
         <?=$printName?>
         <?=$printTitle?>
         <?=$required?>
+        <?=$onfocus?>
+        <?=$onblur?>
+        <?=$onclick?>
+        <?=$readonly?>
+        <?=$for?>
+        <?=$required?> 
+        <?=$value?> 
+        <?=$list?>
+        <?=$disabled?>
+        <?=$tabindex?>
     > 
         <option value="" hidden></option>
         <?php foreach($options as $key => $val): ?>

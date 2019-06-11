@@ -1,16 +1,18 @@
-<table id="<?=$id?>" class="<?=$class?>">
-<thead>        
-        <?php foreach($columns as $key => $val): ?>
-            <th class="<?=$val?>"><?=$val?></th>
-        <?php endforeach?>
+
+<table id="<?= $idElement ?>" class="<?= $class ?>">
+    <thead>
+        <?php foreach ($columns as $key => $val) : ?>
+            <th class="<?= $val ?>"><?= $val ?></th>
+        <?php endforeach ?>
     </thead>
     <tbody>
-        </tbody>
+    </tbody>
 </table>
-<template id="template_<?=$id?>">
-    <tr <?=$onclick?>>
-        <?php foreach($columns as $key => $val): ?>
-            <td class="<?=$val?>"></td>
-        <?php endforeach?>
+<template id="template_<?= $id ?>">
+    <tr <?= $onclick ?>>
+        <?php foreach ($columns as $key => $val) : ?>
+            <td class="<?= $val ?>"></td>
+        <?php endforeach ?>
     </tr>
 </template>
+
