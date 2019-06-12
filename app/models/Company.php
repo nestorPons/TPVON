@@ -7,8 +7,10 @@ use \app\core\{
 
 class Company extends Query{
 
-    protected 
+    public 
         $id, $nombre, $fecha, $sector, $plan, $ultimo_acceso, $nif,
+        $nombre_empresa, $apellidos, $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais; 
+    protected
         $data = null;
 
     function __construct($arg = null){
@@ -16,12 +18,16 @@ class Company extends Query{
         parent::__construct('empresas', 'admin_empresas');
         if($arg){
             if (is_int($arg)){
-
-                $this->data = $this->getById($arg);
+                $d = $this->getById($arg);
             } else if (is_string($arg)){
-                $this->data = $this->getBy(['nombre'=>$arg]);
+                $d = $this->getBy(['nombre'=>$arg], '*', true);
+                $d['nombre_empresa'] = $d['nombre'];
             }
-            if($this->data) $this->loadData($this->data);
+            if($d) {
+                $this->loadData($d);
+                parent::__construct('facturacion', 'admin_empresas');
+                $this->loadData($this->getById($this->id));
+            }
         }
     }
 

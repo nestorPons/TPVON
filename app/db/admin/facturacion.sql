@@ -10,7 +10,7 @@ CREATE TABLE `facturacion` (
   `calle` varchar(50) NOT NULL,
   `numero` SMALLINT NOT NULL,
   `piso` tinyint DEFAULT NULL,
-  `escalera` char(1) DEFAULT NULL,
+  `escalera` char(2) DEFAULT NULL,
   `poblacion` varchar(30) DEFAULT NULL, 
   `CP` SMALLINT(5) DEFAULT NULL,
   `provincia` VARCHAR(30) DEFAULT NULL,

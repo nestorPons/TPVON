@@ -25,6 +25,7 @@ class Controller{
         }
     }
     protected function view($data = null){
+        
         // Carpetas donde buscar las vistas
         $files[] = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
         $files[] = \VIEWS\LOGIN . $this->controller . '.phtml';

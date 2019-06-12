@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\models\{Items, Tickets, User, Config};
+use \app\models\{Items, Tickets, User, Config, Company};
 
 /**
  * Controla la vista y la recepción de los datos del formulario de login
@@ -21,9 +21,6 @@ class Admin extends Controller{
         $Config = new Config;
         $data['Config'] = $Config->allData($Config);
         $data['iva'] = $data['Config']->get('iva');
-
-
-
 
         $User = new User;
         $data['Employees'] = $User->allEmployees();

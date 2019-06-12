@@ -18,7 +18,7 @@ class Component{
         }
         $this->id = ($this->id)??$this->randomid();
     }
-    function print(string $file = 'input'){
+    function print(string $file = 'input', Object $Data = null){
         $type= $this->type??null;
         $id = $this->id;
         $idContainer = self::PREFIX_CONTAINER . $id;

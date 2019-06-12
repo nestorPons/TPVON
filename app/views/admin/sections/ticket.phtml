@@ -3,7 +3,7 @@
     <img src="https://yt3.ggpht.com/-3BKTe8YFlbA/AAAAAAAAAAI/AAAAAAAAAAA/ad0jqQ4IkGE/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="Logotipo">
     <p>
         TICKET DE VENTA
-      <br>New New York
+      <br><?=CITY?>
       <br>17/10/2017 02:22 a.m.
     </p>
         <?php
@@ -11,7 +11,9 @@
         ?>
     <p>¡GRACIAS POR SU VISITA!
       <br><?=NAME_COMPANY?></p>
-  <?php  $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir']); ?>
+      <div id=""></div>
+    <?php $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir'])?>
+    <?php $btnSndTicket = new ButtonSuccess(['onclick'=>'ticket.send()', 'caption'=>'Enviar'])?>
 </component>
 <style id='ticketStyle'>
     #ticket {
@@ -25,8 +27,31 @@
         padding: 5px;
     }
     @media print{
+        *{
+            page-break-after:avoid;
+            text-align: center;
+        }
+        component{
+            margin: auto;
+        }
         button{
             display: none !important;
+        }
+        img{
+            max-width: 40mm;
+        }
+        @page{
+            /* AKI:: En tintero cambiar el tamaño del papel del ticket*/
+            size: 80mm 500px;
+        }
+        table thead{
+            text-decoration: underline;
+        }
+        table td:last{
+            text-align: right;
+        }
+        .break {
+            page-break-after: always;
         }
     }
 </style>
@@ -45,7 +70,7 @@ const ticket = {
         w.focus(); // necessary for IE >= 10
 		w.print();
 		w.close();
-        return true;
+        return true; 
     },
     open(Ticket){
         const $template = $($('#template_' + this.table.id)[0].innerHTML)
@@ -56,8 +81,15 @@ const ticket = {
                         .find('.Des').text(line.des).end()
                         .find('.Imp').text(line.amo).end()
             
-            this.table.ob.append(l) 
+            this.table.ob.find('tbody').append(l) 
         }   
+        let t = $template.clone()
+                    .find('.Cant').text().end()
+                    .find('.Des').text('TOTAL').end()
+                    .find('.Imp').text(Ticket.total())
+        this.table.ob.find('tfoot').append(t) 
+            
+
 
     },
     save(){

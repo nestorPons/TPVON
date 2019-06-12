@@ -55,6 +55,7 @@ $(document)
         $(this).removeClass(selclass)
 })
 .on('keypress', '.keyEnterOut', function (e) {
+    e.preventDefault()
     if(e.key == 'Enter') {
         let ind = $(".keyEnterOut").index(this)
         $(".keyEnterOut").eq(ind + 1).focus()

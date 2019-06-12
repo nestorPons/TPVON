@@ -7,8 +7,8 @@ class Data {
     public $data = [];
     
     function __construct(Array $data = null){
-        $this->data = $data;
-/*         if($data){
+        if($data){
+            $this->data = $data; 
             foreach($data as $key => $value){
                 if(is_array($value)){
                     foreach($value as $ke => $val){
@@ -17,13 +17,15 @@ class Data {
                     }
                 } else $this->addItem($value, $key);  
             }
-        } */
+        }
     }
     function addItem($value, $key = null){
-        
+       
         // Si vamos a pasar un array numerado creamos todos los métodos para extraer los atributos
-        if($key) {
-            // creeamos el método para la extraccion de datos 
+        // creeamos el método para la extraccion de datos 
+
+        if($key){
+            $this->${$key} = $value; 
             return $this->data[$key] = $value;
         }
         else return $this->data[] = $value;

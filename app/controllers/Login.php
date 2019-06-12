@@ -12,7 +12,6 @@ class Login extends Controller{
         $level_user = LEVEL_USER;
 
     function __construct(String $action = null, String $db = null, $data){
-
         $this->company = new Company($db);
         if($this->company->id()){
             parent::__construct($action, null, $data);
@@ -56,7 +55,6 @@ class Login extends Controller{
      * Devuelve la vista
      */
     protected function auth(Object $Data){
-
         if($Data->isEmail('email')){
             $this->email = $Data->get('email'); 
         }
@@ -97,7 +95,7 @@ class Login extends Controller{
     }
     protected function view( $data = null){
         // VAlor predeterminado de la vista
-        if (!$data) $data = ['page' => 'login', 'data' => $this->company->data()];
+        if (!$data) $data = ['page' => 'login', 'data' =>  $this->company->toArray()];
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
 }

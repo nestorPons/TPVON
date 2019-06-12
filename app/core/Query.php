@@ -47,17 +47,18 @@ class Query extends Conn{
      }
     // Devuelve datos de una peticion por id
     public function getById(int $id, string $return = '*'){
-        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;")[0];
+        $r =  $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;"); 
+        return $r ? $r[0] : null ;
      }
     // Devuelve datos de una peticion por algun campo del registro
-    public function getBy(array $args , string $return = '*', bool $desc = false){
+    public function getBy(array $args , string $return = '*', bool $unique = false,  bool $desc = false){
         $filters = '';
         foreach($args as $column => $value){
             $filters .= (string)$column ." = '".(string)$value ."' AND ";
         }
         $filters = trim($filters,"AND ");
-
-        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);   
+        $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);
+        return   $unique ? $r[0] : $r; 
      }
     // Devuelve datos de una peticion por una consulta sql
     public function getBySQL(string $sql, bool $desc = false){

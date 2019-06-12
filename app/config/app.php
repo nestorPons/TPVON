@@ -6,6 +6,7 @@ define('ENV', TRUE);
 if(isset($_REQUEST['db'])){
     define('CODE_COMPANY', filter_var((strtolower($_REQUEST['db'])), FILTER_SANITIZE_SPECIAL_CHARS));
     define('NAME_COMPANY', ucwords(CODE_COMPANY));
+    
 }
 define('HOST', 'localhost');
 define('KEY_JWT', 'elahs93uojeqkjpmi3io23');

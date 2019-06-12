@@ -10,6 +10,6 @@ class Company extends Controller{
         $Model = new CompanyModel; 
         if($Model->new($Data)){
             return $this->printView(\VIEWS\LOGIN . 'newcompanycreated.phtml');
-        } else Error::array('');
+        } else Error::array('No se ha encontrado NEW Company');
     }
 }
