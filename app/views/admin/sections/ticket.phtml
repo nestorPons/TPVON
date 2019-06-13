@@ -1,24 +1,38 @@
 <?php namespace app\views\components\controllers;?>
-<component id="ticket">
-    <img src="https://yt3.ggpht.com/-3BKTe8YFlbA/AAAAAAAAAAI/AAAAAAAAAAA/ad0jqQ4IkGE/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="Logotipo">
-    <p>
-        TICKET DE VENTA
-      <br><?=CITY?>
-      <br>17/10/2017 02:22 a.m.
-    </p>
+<component id="buttonsTicket">
+    <?php $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir'])?>
+    <?php $btnSndTicket = new ButtonSuccess(['onclick'=>'ticket.send()', 'caption'=>'Enviar'])?>
+</component>
+<component id="ticket" class="hidden">
+    <img src="<?=$Data->pathLogo?>" alt="Logotipo">
+    <div class="data">
+        <div>TICKET DE VENTA <span><?=$Data->nombre()?></span></div>
+        <div>Dir: <?=$Data->calle?> <?=$Data->numero?></div>
+        <div><?=$Data->CP?> <?=$Data->poblacion?></div>
+        <div>Tel: <?=$Data->telefono?> NIF: <?=$Data->nif?></div>
+        <br>
+        <div>N Fac: <span id="idTicket"></span></div>
+        <div>Fecha: <span id="dateTicket"></span></div>
+    </div>
         <?php
             $tblTicket = new Table(['columns'=>['Cant', 'Des', 'Imp']]);
         ?>
-    <p>¡GRACIAS POR SU VISITA!
-      <br><?=NAME_COMPANY?></p>
-      <div id=""></div>
-    <?php $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir'])?>
-    <?php $btnSndTicket = new ButtonSuccess(['onclick'=>'ticket.send()', 'caption'=>'Enviar'])?>
+    <p>
+        <div>Iva incluído</div>
+        <div>¡GRACIAS POR SU VISITA!</div>
+    </p>
 </component>
 <style id='ticketStyle'>
     #ticket {
         transform: scale(0.8);
         text-align: center;
+        overflow: auto;
+    }
+    #buttonsTicket{
+        margin: 1rem 0;
+    }
+    #ticket .data{
+        margin: 5px auto; 
     }
     #ticket img{
         max-width: 200px;
@@ -26,26 +40,34 @@
     #<?=$tblTicket->id()?>{
         padding: 5px;
     }
+    #ticket .footer td{
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
     @media print{
         *{
             page-break-after:avoid;
             text-align: center;
         }
         component{
-            margin: auto;
+            margin: none;
         }
         button{
             display: none !important;
         }
         img{
-            max-width: 40mm;
+            max-width: 60mm;
         }
         @page{
             /* AKI:: En tintero cambiar el tamaño del papel del ticket*/
-            size: 80mm 500px;
+            size: 80mm 190mm;
         }
         table thead{
             text-decoration: underline;
+            border-bottom: 1px solid black;
+        }
+        table td:first{
+            border-top: 1px solid black;
         }
         table td:last{
             text-align: right;
@@ -53,56 +75,65 @@
         .break {
             page-break-after: always;
         }
+        table .footer td{
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
     }
 </style>
 <script>
-const ticket = {
-    table : {
-        id: '<?=$tblTicket->id()?>',
-        ob: $('#<?=$tblTicket->id()?>')
-    },
-    print(){
-        var printContents = document.getElementById('ticket').innerHTML;
-        printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
-        w = window.open();
-        w.document.write(printContents);
-        w.document.close(); // necessary for IE >= 10
-        w.focus(); // necessary for IE >= 10
-		w.print();
-		w.close();
-        return true; 
-    },
-    open(Ticket){
-        const $template = $($('#template_' + this.table.id)[0].innerHTML)
-        for(i in Ticket.lines){
-            let line =  Ticket.lines[i]
-            let l = $template.clone()
+    const ticket = {
+        Ticket: null, 
+        table : {
+            id: '<?=$tblTicket->id()?>',
+            ob: $('#<?=$tblTicket->id()?>')
+        }, 
+        print(){
+            this.save(false)
+            /* 
+            var printContents = document.getElementById('ticket').innerHTML;
+            printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
+            w = window.open();
+            w.document.write(printContents);
+            w.document.close(); // necessary for IE >= 10
+            w.focus(); // necessary for IE >= 10
+            w.print();
+            w.close();
+            return true; */ 
+        },
+        open(Ticket){
+            this.Ticket = Ticket
+            const $template = $($('#template_' + this.table.id)[0].innerHTML)
+            $('#ticket')
+                .find('#dateTicket').text(Ticket.date.toLocaleString()).end()
+                .find('#idTicket').text(Ticket.id).end()
+            for(i in Ticket.lines){
+                let line =  Ticket.lines[i]
+                let l = $template.clone()
                         .find('.Cant').text(line.qua).end()
                         .find('.Des').text(line.des).end()
                         .find('.Imp').text(line.amo).end()
-            
-            this.table.ob.find('tbody').append(l) 
-        }   
-        let t = $template.clone()
-                    .find('.Cant').text().end()
-                    .find('.Des').text('TOTAL').end()
-                    .find('.Imp').text(Ticket.total())
-        this.table.ob.find('tfoot').append(t) 
-            
-
-
-    },
-    save(){
-        tpv.Ticket.changeToLocaleDate()
-
-        let data = {
-            controller: 'tickets',
-            action: 'new', 
-            data: JSON.stringify(tpv.Ticket)
+                
+                this.table.ob.find('tbody').append(l) 
+            }   
+            let t = $template.clone()
+                .addClass('footer')
+                .find('.Cant').text('').end()
+                .find('.Des').text('TOTAL').end()
+                .find('.Imp').text(Ticket.total()).end()
+            this.table.ob.find('tbody').append(t) 
+        },
+        save(sendMail = false){
+            let Ticket = this.Ticket
+            Ticket.fecha = Ticket.fecha.toLocaleString()
+            let data = {
+                controller: 'tickets',
+                action: 'new', 
+                data: JSON.stringify(Ticket)
+            }
+            app.post(data, function(){
+                echo('YATA')
+            })
         }
-        app.post(data, function(){
-            echo('YATA')
-        })
     }
-}
 </script>

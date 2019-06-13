@@ -18,9 +18,12 @@ class Admin extends Controller{
         $Items = new Items;
         $data['Services'] = $Items->allData($Items, 'codigo');
         
-        $Config = new Config;
-        $data['Config'] = $Config->allData($Config);
-        $data['iva'] = $data['Config']->get('iva');
+/*         $Config = new Config;
+        $conf = $Config->getId(0);
+    prs($conf);
+        $data['iva'] = $conf->iva; */
+        
+        $data['Company'] = new Company(NAME_COMPANY);
 
         $User = new User;
         $data['Employees'] = $User->allEmployees();

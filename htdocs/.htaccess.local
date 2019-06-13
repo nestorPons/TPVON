@@ -36,6 +36,7 @@ RewriteRule ^sources/(.*)$ - [L]
 RewriteRule ^dist/(.*)$ - [L]
 RewriteRule ^css/(.*)$ - [L]
 RewriteRule ^node_modules/(.*)$ - [L]
+RewriteRule ^companies/(.*)$ - [L]
 
 RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?db=$1&controller=$2&action=$3&args=$4 [R,L]
 RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php?db=$1&controller=$2&action=$3 [R,L]

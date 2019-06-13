@@ -1,6 +1,7 @@
 <?php 
 namespace FOLDERS; 
 define('ROOT' ,dirname(dirname(__DIR__)) . '/');
+const PUBLIC_ = 'htdocs/'; 
 const APP                           = ROOT . 'app/';
     const CONTROLLERS               = APP . 'controllers/';
     const VIEWS                     = APP . 'views/';
@@ -24,12 +25,13 @@ namespace VIEWS;
 namespace VIEWS\ADMIN; 
     const SECTIONS    = \VIEWS\ADMIN . 'sections/';
 
-namespace FPUBLIC; 
+namespace PUBLICF; 
     const JS                     = \FOLDERS\HTDOCS . 'js/';
     const CSS                    = \FOLDERS\HTDOCS . 'css/';
     const COMPANIES              = \FOLDERS\HTDOCS . 'companies/';
     const TEMPLATE               = \FOLDERS\HTDOCS . 'companies/template/';
     const NODE_MODULES           = \FOLDERS\HTDOCS . 'node_modules/';
 
-
+namespace URL;
+    const COMPANIES              =  'companies/';
 include \FOLDERS\CONFIG . 'files.php';

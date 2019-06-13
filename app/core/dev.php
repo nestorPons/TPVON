@@ -11,3 +11,6 @@ function prs($arr){
     echo('</pre>');
     die();
 }
+function included($path, $data){
+    include $path;
+}

@@ -56,13 +56,13 @@ class Login extends Controller{
      */
     protected function auth(Object $Data){
         if($Data->isEmail('email')){
-            $this->email = $Data->get('email'); 
+            $this->email = $Data->email; 
         }
         if ($Data->isString('password', 250)){
-            $this->password = $Data->get('password');
+            $this->password = $Data->password;
         };
 
-        $this->User = new User($Data->get('email'));
+        $this->User = new User($Data->email);
 
         if($this->verify($this->User->password())){
             if ($this->isAdmin()){

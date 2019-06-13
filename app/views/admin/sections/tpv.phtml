@@ -5,12 +5,12 @@
         'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputRead(['value' => $tickets_id, 'label' => 'Id'],  false);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora'],  false);
-        $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->get('nombre'), 'tabindex'=>1], false);
-        $cli = new Select(['label' => 'Cliente', 'options' => $Users->get('nombre'), 'tabindex'=>2], false);
+        $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->getArray('nombre'), 'tabindex'=>1], false);
+        $cli = new Select(['label' => 'Cliente', 'options' => $Users->getArray('nombre'), 'tabindex'=>2], false);
         
         // Linea
         $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
-            'options' => $Services->get('codigo'), 'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
+            'options' => $Services->getArray('codigo'), 'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
         $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
         $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
@@ -26,7 +26,7 @@
 </section> 
 <section id="auxiliars_components">
     <?php
-        $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml']);
+        $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company);
     ?>
 </section>
 <style>
@@ -111,7 +111,7 @@
         grid-column: prelast;
     }
     #<?=$modTicket->idEl()?>{
-        max-height: inherit;
+        max-height: 80vh;
     }
 </style>
 <script src="js/Line.min.js"></script>

@@ -1,15 +1,15 @@
 <?php namespace app\models;
 use \app\core\{
     Error,
-    Query,
-    Data
+    Query
 };
 
 class Company extends Query{
 
     public 
         $id, $nombre, $fecha, $sector, $plan, $ultimo_acceso, $nif,
-        $nombre_empresa, $apellidos, $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais; 
+        $nombre_empresa, $apellidos, $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais,
+        $pathLogo; 
     protected
         $data = null;
 
@@ -27,6 +27,7 @@ class Company extends Query{
                 $this->loadData($d);
                 parent::__construct('facturacion', 'admin_empresas');
                 $this->loadData($this->getById($this->id));
+                $this->pathLogo = \URL\COMPANIES . $this->nombre_empresa . '/logo.png'; 
             }
         }
     }
@@ -42,7 +43,7 @@ class Company extends Query{
 
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
         $Data->codifyAttr('nombre_empresa');
-        $Data->set('nombre', $Data->get('nombre_empresa'));
+        $Data->set('nombre', $Data->nombre_empresa);
         $this->loadData($Data->getAll());
         $this->config = parse_ini_file(\FILE\CONN);
         $this->db = $this->config["prefix"]  . $this->nombre; 
@@ -65,7 +66,7 @@ class Company extends Query{
                 $this->createDb();
                 $this->createTables();
                 //Añadimos el usuario administrador
-                $Data->set('nombre', $Data->get('nombre_usuario')); 
+                $Data->set('nombre', $Data->nombre_usuario); 
                 $Data->set('nivel', 2); 
 
                 $User = new User;
@@ -83,10 +84,10 @@ class Company extends Query{
     }
 
     private function createFolder(){
-        $folder = \FPUBLIC\COMPANIES . $this->nombre;
+        $folder = \PUBLICF\COMPANIES . $this->nombre;
         if (!file_exists($folder)){
             mkdir($folder, 0750);
-            copy(\FPUBLIC\TEMPLATE . 'config.ini', $folder . '/config.ini' );
+            copy(\PUBLICF\TEMPLATE . 'config.ini', $folder . '/config.ini' );
         } else{
             throw new Error('E017');
         }
@@ -119,8 +120,8 @@ class Company extends Query{
         return $this->{__FUNCTION__}; 
     }
     function nombre(string $arg = null){
-        if($arg) $this->{__FUNCTION__} = $arg; 
-        return ucwords($this->{__FUNCTION__}); 
+        if($arg) $this->nombre_empresa = $arg; 
+        return ucwords($this->nombre_empresa); 
     }
     function data(array $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 

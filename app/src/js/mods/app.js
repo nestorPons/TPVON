@@ -136,7 +136,7 @@ const app = {
             }
         }
     },
-    toObject (form){
+    formToObject (form){
         var obj = {};
         var elements = form.querySelectorAll("input, select, textarea");
         for (var i = 0; i < elements.length; ++i) {
@@ -149,7 +149,7 @@ const app = {
         }
         return obj;
     },
-    toJSONString (form){
+    formToJSONString (form){
         var obj = {};
         var elements = form.querySelectorAll("input, select, textarea");
         for (var i = 0; i < elements.length; ++i) {

@@ -6,12 +6,9 @@ use app\core\Data;
  */
 class Modal extends Component{
 
-    function __construct(Array $data = [],  bool $collapse = true){
+    function __construct(Array $args = [],  bool $collapse = true, Object $Data){
         $this->type = 'modal';
-        parent::__construct($data);
-        $Company = new Company(NAME_COMPANY);
-        $Data = new Data($Company->toArray());
-        prs($Data->data->nombre_usuario);
-        $this->print( $this->type, $Data);
+        parent::__construct($args);
+        $this->print($this->type, $Data);
     }
 }

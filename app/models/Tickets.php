@@ -25,27 +25,29 @@ class Tickets extends Query{
         $this->hora = $date->format('H:i'); 
         $this->fecha = $date->format('d/m/Y');
     }
-    function new(Object $Data){
-
-    /*     $this->id = $this->add([
-            'id_empleado' => $Data['employee'],
-            'fecha' => $Data['date'],
-            'id_cliente' => $Data['client'],
+    function new(Object $Ticket){
+        $lines = $Ticket->lines; 
+        $Ticket->delete('lines');
+prs($Ticket);
+        $this->id = $this->add([
+            'id_empleado' =>$Ticket->employee,
+            'fecha' => $Ticket->date,
+            'id_cliente' => $Ticket->client,
             'estado' => 1
         ]);
-        foreach($Data->lines as $data){
+
+        foreach($lines as $line){
             $Line = new Lines;
             $Line->add([
                 'id_tiket' => $this->id,
-                'articulo' => $Data['cod'],
-                'precio'   => $Data['pri'],
-                'dto'      => $Data['dto'],
-                'precio'   => $Data['precio'],
-                'cantidad' => $Data['qua'],
-                'iva'      => $Data['iva']
-
+                'articulo' => $line['cod'],
+                'precio'   => $line['pri'],
+                'dto'      => $line['dto'],
+                'precio'   => $line['precio'],
+                'cantidad' => $line['qua'],
+                'iva'      => $line['iva']
             ]);
-        }   */
+        }  
             
     }
 }
