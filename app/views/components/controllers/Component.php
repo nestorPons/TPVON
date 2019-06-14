@@ -45,6 +45,7 @@ class Component{
         $onclick = isset($this->onclick)?'onclick='.$this->onclick:'';
         $onblur = isset($this->onblur)?'onblur='.$this->onblur:'';
         $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:'';
+        $onload = isset($this->onload)?'onload='.$this->onload:'';
         $icon = isset($this->icon)?$this->icon:false;
         $printName = $this->printName();
         $options = $this->options??null;

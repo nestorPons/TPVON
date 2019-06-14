@@ -47,8 +47,10 @@ class Conn{
 	 }
 
     private function init($sql, $params = null){
-/* echo $sql;pr($params);   */ 
-        try {
+/* 
+echo $sql;pr($params);
+pr($this->pdo);
+ */        try {
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
             

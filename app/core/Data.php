@@ -138,4 +138,12 @@ class Data {
     function codifyAttr(string $attr){
         return $this->{$attr} = $this->codify($this->{$attr});
     }
+    function filter(Object $obj){
+        foreach($this as $key => $val){
+            if(!property_exists($obj, $key)){
+                unset($this->{$key});
+            }
+        }
+        return $this;
+    }
 }   

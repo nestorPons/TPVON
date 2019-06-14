@@ -12,6 +12,7 @@ const app = {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
         var jqxhr = $.post('index.php', data, function (respond, status, xhr, dataType) {
+            let data = null
             // La respuesta puede ser json o html 
             try {
                 // comprobamos si es json
@@ -27,7 +28,8 @@ const app = {
                 app.sections.load(html.attr('id'), html)
 
             } finally {
-                typeof callback == "function" && callback()
+                let resp = data ? data.data : null
+                typeof callback == "function" && callback(resp)
             }
         })
     },
@@ -76,9 +78,13 @@ const app = {
     },
     sections: {
         toggle(section, callback) {
-            $('section').fadeOut('fast', function () {
+            let $mainSection = $('section')
+            if($('#appadmin').length || $('#appuser').length ){
+                $mainSection = $('section').find('section')
+            } 
+            $mainSection.fadeOut('fast', function () {
                 $('section#' + section).fadeIn()
-                callback != undefined && callback()
+                typeof callback === 'function' && callback()
             })
         },
         load(section = '', html = jQuery){
@@ -162,5 +168,29 @@ const app = {
         }
         return JSON.stringify(obj);
     },
+    clock(){ 
+        momentoActual = new Date() 
+        hora = momentoActual.getHours() 
+        minuto = momentoActual.getMinutes() 
+        segundo = momentoActual.getSeconds() 
+
+        str_segundo = new String (segundo) 
+        if (str_segundo.length == 1) 
+            segundo = "0" + segundo 
+
+        str_minuto = new String (minuto) 
+        if (str_minuto.length == 1) 
+            minuto = "0" + minuto 
+
+        str_hora = new String (hora) 
+        if (str_hora.length == 1) 
+            hora = "0" + hora 
+
+        horaImprimible = hora + " : " + minuto + " : " + segundo 
+
+        $('.clock').val(horaImprimible) 
+
+        setTimeout("app.clock()",1000) 
+    } 
   
 };

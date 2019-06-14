@@ -4,7 +4,7 @@
         $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
         'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputRead(['value' => $tickets_id, 'label' => 'Id'],  false);
-        $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora'],  false);
+        $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
         $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->getArray('nombre'), 'tabindex'=>1], false);
         $cli = new Select(['label' => 'Cliente', 'options' => $Users->getArray('nombre'), 'tabindex'=>2], false);
         
@@ -24,7 +24,7 @@
         ?> 
      
 </section> 
-<section id="auxiliars_components">
+<section id="auxiliar">
     <?php
         $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company);
     ?>
@@ -34,7 +34,7 @@
         align-items: flex-start;
         display: grid;
         grid-template-rows: auto [table] 400px auto auto auto;
-        grid-template-columns: [first] 10rem 1fr 1fr 6rem 6rem [prelast] 6rem  [last] 8rem;
+        grid-template-columns: [first] 10rem 1fr 1fr 6rem 6rem  6rem  [prelast] 8rem [last] 2rem;
         grid-row-gap: 5px;
     }
     #tpv table:not(.horizontal) thead{
@@ -52,7 +52,7 @@
     }
     #tpv #<?= $hour->id() ?>{
         grid-row: 1;
-        grid-column: last;
+        grid-column: prelast;
     }
     #tpv #<?= $code->id() ?>{
         grid-area: 3/1;
@@ -78,7 +78,7 @@
     }
     #tpv #<?= $amo->id() ?>{
         grid-row: 3;
-        grid-column: last;
+        grid-column: prelast;
     }
     /* TXT TOTAL */
     #tpv #<?= $txtTotal->id() ?>{
@@ -104,11 +104,11 @@
     }
     #tpv #<?= $btnOk->id() ?>{
         grid-row: 4;
-        grid-column: last;
+        grid-column: prelast / span 2;
     }
     #tpv #<?= $btnClear->id() ?>{
-        grid-row: 4;
-        grid-column: prelast;
+        grid-row: 3;
+        grid-column: last;
     }
     #<?=$modTicket->idEl()?>{
         max-height: 80vh;
@@ -121,29 +121,8 @@
     const tpv = {
         total: 0, 
         Ticket : new Ticket(),
-        open(){
-            $('#control_<?=$modTicket->id()?>').prop('checked',true)
-            ticket.open(tpv.Ticket)
-        },
-        close(){
-            $('#control_<?=$modTicket->id()?>').prop('checked',false)
-        },
-        create(){
-            this.Ticket.employee = this.$employees.val()
-            this.Ticket.employee_name = this.$employees.find(':selected').text()
-            this.Ticket.client = this.$client.val()
-            this.Ticket.client_name = this.$client.find(':selected').text()
-            this.Ticket.date = new Date
-            this.Ticket.id = this.$id.val()
-
-            if(this.Ticket.validate())
-                this.open()
-            else 
-                mns.error('Faltan datos para crear el ticket')
-
-        },
         $id : $('#<?=$id->idEl()?>'), 
-        $table : $('#<?=$table->idEl()?>'), 
+        $table : $('#<?=$table->idEl()?>').find('tbody'), 
         $code :  $('#<?=$code->idEl()?>'),
         $description : $('#<?=$des->idEl()?>'),
         $employees : $('#<?=$emp->idEl()?>'),
@@ -156,6 +135,36 @@
         $btnOk : $('#<?=$btnOk->idEl()?>'),
         $btnClear : $('#<?=$btnClear->idEl()?>'),
         $total : $('#<?=$txtTotal->idEl()?>'),
+        $switch : $('#control_<?=$modTicket->id()?>'), 
+        open(){
+            this.$switch.prop('checked',true)
+            ticket.open(tpv.Ticket)
+        },
+        close(){
+            this.$switch.prop('checked',false)
+        },
+        reset(){
+            this.Ticket = new Ticket()
+            this.clearLine()
+            this.clearLines()
+            this.clearUsers()
+            this.printTotal()
+            this.close()
+        },
+        create(){
+            this.Ticket.id_empleado = this.$employees.val()
+            this.Ticket.employee_name = this.$employees.find(':selected').text()
+            this.Ticket.id_cliente = this.$client.val()
+            this.Ticket.client_name = this.$client.find(':selected').text()
+            this.Ticket.fecha = new Date
+            this.Ticket.id = this.$id.val()
+
+            if(this.Ticket.validate())
+                this.open()
+            else 
+                mns.error('Faltan datos para crear el ticket')
+
+        },
         calculate(){
             let amount = this.$quantity.val() * this.$price.val(), 
                 dto = this.$dto.val() * amount / 100, 
@@ -169,6 +178,13 @@
             this.$price.val(0)
             this.$amount.val(0)
             this.$code.focus()
+        },
+        clearLines(){
+            this.$table.find('tr').remove()
+        },
+        clearUsers(){
+            this.$client.val('')
+            this.$employees.val('').focus()
         },
         printTotal(){
             this.total = this.Ticket.total()
@@ -192,10 +208,10 @@
             if(line.success){
                 $template
                     .attr('idline', line.id)
-                    .find('.Código').html(line.cod).end()
+                    .find('.Código').html(line.articulo).end()
                     .find('.Descripción').html(line.des).end()
-                    .find('.Cantidad').html(line.qua).end()
-                    .find('.Precio').html(line.pri).end()
+                    .find('.Cantidad').html(line.cantidad).end()
+                    .find('.Precio').html(line.precio).end()
                     .find('.Dto').html(line.dto).end()
                     .find('.Importe').html(line.amo).end()
             
@@ -218,17 +234,17 @@
             let line = this.Ticket.deleteLine(e.path[1].attributes.idline.value)[0]
 
             // Vista
-            this.$code.val(line.cod)
+            this.$code.val(line.articulo)
             this.$description.val(line.des)
-            this.$quantity.val(line.qua)
-            this.$price.val(line.pri)
+            this.$quantity.val(line.cantidad)
+            this.$price.val(line.precio)
             this.$dto.val(line.dto)
             this.$amount.val(line.amo)
 
-            $('#<?=$table->id()?>').find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
+            this.$table.find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
             
             this.printTotal()
-        },
+        }
     }
 </script>
 

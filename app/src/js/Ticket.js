@@ -4,13 +4,13 @@ class Ticket{
         this.id = null
         this.lines = []
         this.lineId = 0
-        this.employee = null
-        this.client = null
-        this.date = null
+        this.id_empleado = null
+        this.id_cliente = null
+        this.fecha = null
     }
-    addLine(cod, des, qua, pri, dto, amo){ 
+    addLine(articulo, des, cantidad, precio, dto, amo){ 
 
-        let newLine = new Line(this.idLine, cod, des, qua, pri, dto, amo)
+        let newLine = new Line(this.idLine, articulo, des, cantidad, precio, dto, amo)
         newLine.id = this.lineId
         this.lines.push(newLine)
         this.lineId++
@@ -25,19 +25,15 @@ class Ticket{
     }
     validate(){
         if(
-            this.id == '' ||
             this.lines.length == 0 ||
-            this.employee == '' ||
-            this.client == '' ||
-            this.date == '' 
+            this.id_empleado == '' ||
+            this.id_cliente == '' ||
+            this.fecha == '' 
         ) return false
         else return true
     }
     deleteLine(index){
         let i = this.lines.indexOf(index) // filtramos
         return this.lines.splice(i,1)
-    }
-    changeToLocaleDate(){
-        this.date = this.date.toLocaleString()
     }
 }

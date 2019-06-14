@@ -11,7 +11,7 @@
         <div><?=$Data->CP?> <?=$Data->poblacion?></div>
         <div>Tel: <?=$Data->telefono?> NIF: <?=$Data->nif?></div>
         <br>
-        <div>N Fac: <span id="idTicket"></span></div>
+        <div>N Fac: <span id="idFra"></span></div>
         <div>Fecha: <span id="dateTicket"></span></div>
     </div>
         <?php
@@ -50,13 +50,15 @@
             text-align: center;
         }
         component{
-            margin: none;
+            margin: 0;
+            padding: 0;
         }
         button{
             display: none !important;
         }
         img{
             max-width: 60mm;
+            margin: 10px;
         }
         @page{
             /* AKI:: En tintero cambiar el tamaño del papel del ticket*/
@@ -87,30 +89,31 @@
         table : {
             id: '<?=$tblTicket->id()?>',
             ob: $('#<?=$tblTicket->id()?>')
-        }, 
+        },
         print(){
-            this.save(false)
-            /* 
-            var printContents = document.getElementById('ticket').innerHTML;
-            printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
-            w = window.open();
-            w.document.write(printContents);
-            w.document.close(); // necessary for IE >= 10
-            w.focus(); // necessary for IE >= 10
-            w.print();
-            w.close();
-            return true; */ 
+            this.put(false,function(){
+                var printContents = document.getElementById('ticket').innerHTML;
+                printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
+                w = window.open();
+                w.document.write(printContents);
+                w.document.close(); // necessary for IE >= 10
+                w.focus(); // necessary for IE >= 10
+                w.print();
+                w.close(); 
+            })
         },
         open(Ticket){
             this.Ticket = Ticket
             const $template = $($('#template_' + this.table.id)[0].innerHTML)
+            let numFra = this.Ticket.fecha.getFullYear().toString().substr(2) 
+            numFra += '/' + this.Ticket.id.toString().padStart(6,0)
             $('#ticket')
-                .find('#dateTicket').text(Ticket.date.toLocaleString()).end()
-                .find('#idTicket').text(Ticket.id).end()
+                .find('#dateTicket').text(Ticket.fecha.toLocaleString()).end()
+                .find('#idFra').text(numFra).end()
             for(i in Ticket.lines){
                 let line =  Ticket.lines[i]
                 let l = $template.clone()
-                        .find('.Cant').text(line.qua).end()
+                        .find('.Cant').text(line.cantidad).end()
                         .find('.Des').text(line.des).end()
                         .find('.Imp').text(line.amo).end()
                 
@@ -123,17 +126,20 @@
                 .find('.Imp').text(Ticket.total()).end()
             this.table.ob.find('tbody').append(t) 
         },
-        save(sendMail = false){
+        put(sendMail = false, callback){
+
             let Ticket = this.Ticket
-            Ticket.fecha = Ticket.fecha.toLocaleString()
+            new Date().toISOString().slice(0,16).replace('T',' ')
             let data = {
                 controller: 'tickets',
                 action: 'new', 
                 data: JSON.stringify(Ticket)
             }
-            app.post(data, function(){
-                echo('YATA')
-            })
+            app.post(data, function(data){
+                tpv.Ticket.id = data.id 
+                tpv.reset()
+                callback()
+             })
         }
     }
 </script>

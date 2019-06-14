@@ -1,5 +1,6 @@
 <?php namespace app\controllers;
-use \app\models\{Items, Tickets, User, Config, Company};
+use \app\models\{Items, Tickets, User, Company};
+use \app\core\{Query, Data};
 
 /**
  * Controla la vista y la recepción de los datos del formulario de login
@@ -18,10 +19,10 @@ class Admin extends Controller{
         $Items = new Items;
         $data['Services'] = $Items->allData($Items, 'codigo');
         
-/*         $Config = new Config;
-        $conf = $Config->getId(0);
-    prs($conf);
-        $data['iva'] = $conf->iva; */
+        $Iva = new Query('tipo_iva');
+        $conf = new Data(['iva' => $Iva->getOneBy(['pre'=>true])]);
+
+        $data['Config'] = $conf;
         
         $data['Company'] = new Company(NAME_COMPANY);
 

@@ -35,5 +35,6 @@ namespace app\views\components\controllers;
     app.data.users = <?=$Users->toJSON()?>;
     app.data.config = <?=$Config->toJSON()?>;
     app.data.config = app.data.config[1]
+    app.clock()
 </script>
 
