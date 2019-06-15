@@ -3,4 +3,7 @@ class User{
         this.id = null
         this.nombre = null
     }
+    getAll(){
+        return app.data.users
+    }
 }

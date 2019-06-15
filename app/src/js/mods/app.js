@@ -78,6 +78,7 @@ const app = {
     },
     sections: {
         toggle(section, callback) {
+            if ($('section#'+section).is(':visible')) return 
             let $mainSection = $('section')
             if($('#appadmin').length || $('#appuser').length ){
                 $mainSection = $('section').find('section')

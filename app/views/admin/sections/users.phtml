@@ -1,0 +1,31 @@
+<?php namespace app\views\components\controllers;?>
+<section id="users">
+    <?php
+        $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 
+            'class'=>'hoverable', 'onclick'=>'users.showEdit(window.event)']);
+        ?>
+</section>
+<script>
+var users = {
+    $table : $('#<?=$table->id()?>').find('tbody'),
+    $template :$( $('#template_<?=$table->id()?>')[0].innerHTML ), 
+    load(){
+        for( i in app.data.users ){
+            var user = app.data.users[i]
+            this.$template.clone()
+                .find('.id').text(user.id).end()
+                .find('.Nombre').text(user.nombre).end()
+                .find('.Tel').text(user.tel).end()
+                .find('.Email').text(user.email).end()
+                .appendTo(this.$table)
+        }
+    }
+}
+users.load()
+</script>
+<style>
+    #users #<?=$table->id()?>{
+        max-height: 80vh ;
+        height: 80vh ;
+    }
+</style>
