@@ -31,10 +31,16 @@ namespace app\views\components\controllers;
     }
 </style>
 <script>
+    app.db.put('servicios', <?=$Services->toJSON()?>)
+    app.db.put('usuarios', <?=$Users->toJSON()?>)
+
+    //Art.put()
+       
+
     app.data.services = <?=$Services->toJSON()?>;
     app.data.users = <?=$Users->toJSON()?>;
     app.data.config = <?=$Config->toJSON()?>;
     app.data.config = app.data.config[1]
     app.clock()
-</script>
+    </script>
 

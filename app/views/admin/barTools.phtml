@@ -1,7 +1,10 @@
 <?php namespace app\views\components\controllers;?>
 <header id="bartools">
     <div>
-        zona herramienta
+        <?php $add = new Icon('plus-circle', ['onclick'=>'app.sections.add()'])?>
+        <?php $del = new Icon('cross-circle', ['onclick'=>'app.sections.del()'])?>
+        <?php $prev = new Icon('chevron-left-circle', ['onclick'=>'app.sections.prev()'])?>
+        <?php $next = new Icon('chevron-right-circle', ['onclick'=>'app.sections.next()'])?>
     </div>
     <div>
         <?php new DatePicker?>
@@ -44,3 +47,19 @@
         transform: var(--effect-transform-hover);
     }
 </style>
+<script>
+    const menu = {
+        buttons : {
+            $next: $('#<?= $next->id()?>'),
+            $prev: $('#<?= $prev->id()?>'),
+            $add: $('#<?= $add->id()?>'),
+            $del: $('#<?= $del->id()?>'),
+            show(arr = []){               
+                $('#bartools').find('.menu-buttons').hide()
+                for(i in arr){
+                    menu.buttons['$'+arr[i]].show()
+                }
+            }
+        }
+    }
+</script>

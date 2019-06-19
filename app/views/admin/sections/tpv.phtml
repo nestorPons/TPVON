@@ -3,7 +3,7 @@
     <?php
         $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
         'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
-        $id = new InputRead(['value' => $tickets_id, 'label' => 'Id'],  false);
+        $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
         $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->getArray('nombre'), 'tabindex'=>1], false);
         $cli = new Select(['label' => 'Cliente', 'options' => $Users->getArray('nombre'), 'tabindex'=>2], false);
@@ -117,9 +117,10 @@
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
 <script>
-    $('#input_<?=$emp->id()?>').focus()
-    const tpv = {
-        total: 0, 
+    var tpv = {
+        buttons: ['prev', 'next','del'],
+        total: 0,
+        currentId: <?=$tickets_new_id?>,
         Ticket : new Ticket(),
         $id : $('#<?=$id->idEl()?>'), 
         $table : $('#<?=$table->idEl()?>').find('tbody'), 
@@ -135,7 +136,10 @@
         $btnOk : $('#<?=$btnOk->idEl()?>'),
         $btnClear : $('#<?=$btnClear->idEl()?>'),
         $total : $('#<?=$txtTotal->idEl()?>'),
-        $switch : $('#control_<?=$modTicket->id()?>'), 
+        $switch : $('#control_<?=$modTicket->id()?>'),
+        load(){
+            this.$employees.focus()
+        },
         open(){
             this.$switch.prop('checked',true)
             ticket.open(tpv.Ticket)
@@ -151,8 +155,9 @@
             this.printTotal()
             this.close()
         },
+        // Cargamos un Ticket con los datos introducidos por el usuario
         create(){
-            this.Ticket.id_empleado = this.$employees.val()
+            this.Ticket.id_empleado =this.$employees.val()
             this.Ticket.employee_name = this.$employees.find(':selected').text()
             this.Ticket.id_cliente = this.$client.val()
             this.Ticket.client_name = this.$client.find(':selected').text()
@@ -192,7 +197,7 @@
         },
         addLine(){
             this.calculate()
-            const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
+            
             var line = this.Ticket.addLine(
                 this.$code.val(), 
                 this.$description.val(), 
@@ -201,27 +206,28 @@
                 this.$dto.val(), 
                 this.$amount.val()
             )
+            // Validamos los datos e ingresamos en la tabla
+            if(line.success) this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+            else  this.$code.focus()
+        },
+        addLineTable(id, articulo, des, cantidad, precio, dto, amo){
+            
+            const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
+            $template
+                .attr('idline', id)
+                .find('.Código').html(articulo).end()
+                .find('.Descripción').html(des).end()
+                .find('.Cantidad').html(cantidad).end()
+                .find('.Precio').html(precio).end()
+                .find('.Dto').html(dto).end()
+                .find('.Importe').html(amo).end()
+        
+            this.$table.append($template) 
+            this.clearLine()
+            this.printTotal()
             // Scroll al final
             this.$table.animate({ scrollTop: this.$table.height() }, 100);
-    
-            // Validamos los datos
-            if(line.success){
-                $template
-                    .attr('idline', line.id)
-                    .find('.Código').html(line.articulo).end()
-                    .find('.Descripción').html(line.des).end()
-                    .find('.Cantidad').html(line.cantidad).end()
-                    .find('.Precio').html(line.precio).end()
-                    .find('.Dto').html(line.dto).end()
-                    .find('.Importe').html(line.amo).end()
-            
-                this.$table.append($template) 
-                this.clearLine()
-                this.printTotal()
-            } else {
-                this.$code.focus()
-            }
-        },
+        },  
         loadLine(){
             let code = this.$code.find(':selected').text()
             if(app.data.services[code]){
@@ -244,6 +250,44 @@
             this.$table.find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
             
             this.printTotal()
+        },
+        del(){
+            alert('eliminar ticket')
+        },
+        next(){
+
+        },
+        prev(){
+            let id = this.currentId - 1
+            this.getTicket(id)
+        },
+        getTicket(id){
+            let self = this
+            data = {
+                controller: 'tickets', 
+                action: 'get',
+                data: {
+                    id: id
+                }
+            }
+            app.post(data, function(respond){
+                self.loadDataToForm(respond)
+            })
+        },
+        loadDataToForm( Ticket ){
+            let arrdate = Ticket.fecha.split(' ')
+
+            this.$id.val(Ticket.id) 
+            this.$employees.find('[value='+Ticket.id_empleado+']').attr("selected", true)
+            this.$client.find('[value='+Ticket.id_cliente+']').attr("selected", true)
+            this.$hour.val(arrdate[1].substr(0,5))
+            app.loadDate(arrdate[0])
+
+            for(let i in Ticket.lines){
+                var line = Ticket.lines[i]
+                this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+            }
+
         }
     }
 </script>

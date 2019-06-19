@@ -84,7 +84,7 @@
     }
 </style>
 <script>
-    const ticket = {
+    var ticket = {
         Ticket: null, 
         table : {
             id: '<?=$tblTicket->id()?>',
@@ -133,7 +133,7 @@
             let data = {
                 controller: 'tickets',
                 action: 'new', 
-                data: JSON.stringify(Ticket)
+                data: Ticket
             }
             app.post(data, function(data){
                 tpv.Ticket.id = data.id 

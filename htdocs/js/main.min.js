@@ -38,7 +38,7 @@ $(document)
     app.post({
         controller: $this.attr('controller'),
         action: $this.attr('action'),
-        data: JSON.stringify(data)
+        data: data
     },
         function(){
             // Ocultamos spinner

@@ -9,7 +9,7 @@ class ButtonCloseApp extends Component{
         $this->icon = 'power-switch';
         $this->type = 'buttonClose';
         parent::__construct();
-        $this->printView('closeapp');
+        $this->print('closeapp');
     }
     function idEl(){
         return $this->id;

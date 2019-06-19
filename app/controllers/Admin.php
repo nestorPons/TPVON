@@ -13,12 +13,12 @@ class Admin extends Controller{
 
         $Ticket = new Tickets; 
         $lastTicket = $Ticket->getLast();
-        $data['tickets_id'] = $lastTicket['id'];
+        $data['tickets_new_id'] = $lastTicket['id'] + 1 ;
         $data['tickets_hora'] = '';
         
         $Items = new Items;
         $data['Services'] = $Items->allData($Items, 'codigo');
-        
+ 
         $Iva = new Query('tipo_iva');
         $conf = new Data(['iva' => $Iva->getOneBy(['pre'=>true])]);
 

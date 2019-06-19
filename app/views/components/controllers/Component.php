@@ -18,7 +18,12 @@ class Component{
         }
         $this->id = ($this->id)??$this->randomid();
     }
-    function print(string $file = 'input', Object $Data = null){
+    /** Imprime ĺa vista 
+    * $file => Nombre de la vista a imprimir 
+    * $Data => Objeto Data para pasar datos a la vista [opcional]
+    */
+    function print(string $file, Object $Data = null){
+
         $type= $this->type??null;
         $id = $this->id;
         $idContainer = self::PREFIX_CONTAINER . $id;

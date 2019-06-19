@@ -1,6 +1,16 @@
 const app = {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
     data: {},
+    db: {
+        tables : ['servicios', 'usuarios'],
+        ob: new DataBase($_GET.db,  ['servicios', 'usuarios']), 
+        put(table, JSON){
+            this.ob.table = table
+            for(let i in JSON ){
+                this.ob.put(JSON[i])
+            }
+        }
+    }, 
     GET: $_GET,
     getData(data = {}){
         for (let i in app.GET){
@@ -11,6 +21,7 @@ const app = {
     post: function (data, callback) {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
+
         var jqxhr = $.post('index.php', data, function (respond, status, xhr, dataType) {
             let data = null
             // La respuesta puede ser json o html 
@@ -77,7 +88,9 @@ const app = {
         }
     },
     sections: {
+        active:  null, 
         toggle(section, callback) {
+            let self = this
             if ($('section#'+section).is(':visible')) return 
             let $mainSection = $('section')
             if($('#appadmin').length || $('#appuser').length ){
@@ -86,19 +99,20 @@ const app = {
             $mainSection.fadeOut('fast', function () {
                 $('section#' + section).fadeIn()
                 typeof callback === 'function' && callback()
+                self.inicialize(section)
             })
         },
         load(section = '', html = jQuery){
             // Comprueba que  la seccion existe o no 
             if($('section#' + section).length){
                // Si existe oculta todas menos la solicitada
-               app.sections.toggle(section);
+               this.toggle(section);
            }else{
                // Cargammos el codigo html
                this.toggle(section, function(){
                    html.appendTo('body')
                })
-           }
+           }  
         },
         show(section){
             // Comprueba que  la seccion existe o no 
@@ -106,12 +120,39 @@ const app = {
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section)
             }else{
+                let self = this
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
                     action: 'view'
+                }, function(){
+                    self.inicialize(section)
                 });
             }
+            
+        },
+        // Comportamiento de la sección activa al cargarse 
+        inicialize(section){
+            if (section == 'appadmin') section = 'tpv'
+            this.active = section
+            echo('Zona activa:' + section)
+
+            let activeZone = window[this.active]
+            typeof activeZone.buttons == 'object' && menu.buttons.show(activeZone.buttons)
+            typeof activeZone.load == 'function' && activeZone.load()
+        },
+        // Comportamiento de los botones de herramientas según la seccion que esté activa
+        next(){
+            typeof window[this.active].next == 'function' && window[this.active].next()
+        },
+        prev(){
+            typeof window[this.active].prev == 'function' && window[this.active].prev()
+        },
+        del(){
+            typeof window[this.active].del == 'function' && window[this.active].del()
+        },
+        add(){
+            typeof window[this.active].add == 'function' && window[this.active].add()
         }
     },
     form: {
@@ -192,6 +233,6 @@ const app = {
         $('.clock').val(horaImprimible) 
 
         setTimeout("app.clock()",1000) 
-    } 
-  
+    },
+    
 };

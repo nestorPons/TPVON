@@ -4,6 +4,7 @@ class Tickets extends Query{
     public $id, $id_empleado, $id_cliente, $estado, $fecha, $hora;
     protected $table = 'tickets';
     function __construct($args = null){
+
         parent::__construct();
         if(is_int($args)){
             $this->loadData(
@@ -27,21 +28,30 @@ class Tickets extends Query{
     }
     function new(Object $Data){
         $lines = $Data->lines; 
+
         $Data->filter(new Tickets); 
         $DateTime = new \DateTime;
         $Data->fecha = $DateTime->format('Y-m-d H:i');
         $this->id = $this->add($Data->toArray());
-
         foreach($lines as $line){
             $Line = new Lines;
             $Line->add([
                 'id_ticket' => $this->id,
-                'articulo' => intval($line->articulo),
-                'precio'   => floatval($line->precio),
-                'cantidad' => intval($line->cantidad),
-                'dto'      => floatval($line->dto)
+                'articulo' => intval($line['articulo']),
+                'precio'   => floatval($line['precio']),
+                'cantidad' => intval($line['cantidad']),
+                'dto'      => floatval($line['dto'])
             ]);
         }  
         return ['id' => $this->id]; 
+    }
+    // Método genérico de captura de tickets con sus lineas
+    function get(int $id){
+        $Data = new Data($this->getById($id));
+        $Lines = new Lines; 
+        $lines = $Lines->getBy(['id_ticket'=>$id]);
+        $Data->addItem($lines, 'lines');
+
+        return $Data;
     }
 }
