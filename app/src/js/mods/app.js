@@ -1,23 +1,22 @@
 const app = {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
-    data: {},
-    db: {
-        tables : ['servicios', 'usuarios'],
-        ob: new DataBase($_GET.db,  ['servicios', 'usuarios']), 
-        put(table, JSON){
-            this.ob.table = table
-            for(let i in JSON ){
-                this.ob.put(JSON[i])
-            }
+    data: {
+        storage: [],
+        get(index , key, value){
+            if(key == undefined || value == undefined ) return false
+            else return this.storage[index].find((el) => el[key] == value)
+        },
+        set(index, data){
+            //inicializa
+            if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
+            // Guarda datos en formato array
+            for(let i in data){
+                this.storage[index].push(data[i])
+            }     
         }
-    }, 
-    GET: $_GET,
-    getData(data = {}){
-        for (let i in app.GET){
-            data[i] =  app.GET[i]
-        }
-        return data
     },
+    GET: $_GET,
+    // Peticiones con datos 
     post: function (data, callback) {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
@@ -29,7 +28,7 @@ const app = {
                 // comprobamos si es json
                 data = JSON.parse(respond);
                 // la respuesta es JSON
-                echo (data)
+                console.log(data)
                 // Imprimimos mensaje de error si lo hay 
                 if(data.success == false && exist(data.mens)) app.mens.error(data.mens)
                 
@@ -39,14 +38,19 @@ const app = {
                 app.sections.load(html.attr('id'), html)
 
             } finally {
-                let resp = data ? data.data : null
-                typeof callback == "function" && callback(resp)
+                let resp = data ? data.data : null, 
+                    state = data ? data.success : false
+                typeof callback == "function" && callback(resp, state)
             }
         })
     },
+    // Carga de zonas por método get
     get: function (data) {
         if (typeof data.controller === 'undefined') return false;
-        $.get('index.php', app.getData(data), function (html) {
+
+        for (let i in this.GET) data[i] = this.GET[i]
+
+        $.get('index.php', data, function (html) {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
             $container = ($('main').length != 0) ? $('main') : $('body')
             $container
@@ -135,7 +139,6 @@ const app = {
         inicialize(section){
             if (section == 'appadmin') section = 'tpv'
             this.active = section
-            echo('Zona activa:' + section)
 
             let activeZone = window[this.active]
             typeof activeZone.buttons == 'object' && menu.buttons.show(activeZone.buttons)

@@ -46,12 +46,14 @@ class Tickets extends Query{
         return ['id' => $this->id]; 
     }
     // Método genérico de captura de tickets con sus lineas
-    function get(int $id){
+    function get(int $id, bool $all = false){
         $Data = new Data($this->getById($id));
         $Lines = new Lines; 
         $lines = $Lines->getBy(['id_ticket'=>$id]);
         $Data->addItem($lines, 'lines');
 
-        return $Data;
+        if($all) return $Data;
+        else if(@$Data->estado == 1) return $Data;
+        else return false; 
     }
 }

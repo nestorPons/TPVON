@@ -54,6 +54,9 @@
         grid-row: 1;
         grid-column: prelast;
     }
+    #tpv #<?= $hour->idEl() ?>{
+        text-align: center;
+    }
     #tpv #<?= $code->id() ?>{
         grid-area: 3/1;
     }
@@ -117,10 +120,12 @@
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
 <script>
+    'use strict'
     var tpv = {
         buttons: ['prev', 'next','del'],
         total: 0,
         currentId: <?=$tickets_new_id?>,
+        lastId: <?=$tickets_new_id?>, 
         Ticket : new Ticket(),
         $id : $('#<?=$id->idEl()?>'), 
         $table : $('#<?=$table->idEl()?>').find('tbody'), 
@@ -147,6 +152,11 @@
         close(){
             this.$switch.prop('checked',false)
         },
+        new(){
+            this.$id.val(++this.lastId)
+            this.currentId = this.lastId
+            this.reset() 
+        },
         reset(){
             this.Ticket = new Ticket()
             this.clearLine()
@@ -157,7 +167,7 @@
         },
         // Cargamos un Ticket con los datos introducidos por el usuario
         create(){
-            this.Ticket.id_empleado =this.$employees.val()
+            this.Ticket.id_empleado = this.$employees.val()
             this.Ticket.employee_name = this.$employees.find(':selected').text()
             this.Ticket.id_cliente = this.$client.val()
             this.Ticket.client_name = this.$client.find(':selected').text()
@@ -188,8 +198,8 @@
             this.$table.find('tr').remove()
         },
         clearUsers(){
-            this.$client.val('')
-            this.$employees.val('').focus()
+            this.$client.find(':selected').attr("selected", false).removeClass('valid')
+            this.$employees.find(':selected').attr("selected", false).focus().removeClass('valid')
         },
         printTotal(){
             this.total = this.Ticket.total()
@@ -228,11 +238,14 @@
             // Scroll al final
             this.$table.animate({ scrollTop: this.$table.height() }, 100);
         },  
+        // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
-            let code = this.$code.find(':selected').text()
-            if(app.data.services[code]){
-                this.$description.val(app.data.services[code]['descripcion'])
-                this.$price.val(app.data.services[code]['precio'])
+            let code = this.$code.find(':selected').text(),
+                el = app.data.get('servicios', 'codigo' , code)
+
+            if(el){
+                this.$description.val(el.descripcion)
+                this.$price.val(el.precio)
             }
         },
         loadLineFromTable(e){
@@ -255,14 +268,18 @@
             alert('eliminar ticket')
         },
         next(){
-
+            if(this.currentId ==  this.lastId) {
+                this.reset()
+                this.$id.val(this.currentId) 
+            }
+            if(this.currentId < this.lastId) this.getTicket(++this.currentId, this.next)
         },
         prev(){
-            let id = this.currentId - 1
-            this.getTicket(id)
+            if(this.currentId > 0) this.getTicket(--this.currentId, this.prev)
         },
-        getTicket(id){
-            let self = this
+        getTicket(id, fn){
+            
+            let self = this,
             data = {
                 controller: 'tickets', 
                 action: 'get',
@@ -270,22 +287,33 @@
                     id: id
                 }
             }
-            app.post(data, function(respond){
-                self.loadDataToForm(respond)
+            app.post(data, function(respond, status){
+                if(status) self.loadDataTicket(respond)
+                else fn.apply(self)
             })
         },
-        loadDataToForm( Ticket ){
-            let arrdate = Ticket.fecha.split(' ')
+        loadDataTicket( ticket ){
+            echo('loadTicket....')
+            this.reset()
+            if(ticket.estado == undefined) {
+                this.$id.val(this.currentId)
+                return false 
+            }
 
-            this.$id.val(Ticket.id) 
-            this.$employees.find('[value='+Ticket.id_empleado+']').attr("selected", true)
-            this.$client.find('[value='+Ticket.id_cliente+']').attr("selected", true)
+            let arrdate = ticket.fecha.split(' ')
+
+            this.$id.val(ticket.id) 
+            this.$employees.addClass('valid').find('[value='+ticket.id_empleado+']').attr("selected", true)
+            this.$client.addClass('valid').find('[value='+ticket.id_cliente+']').attr("selected", true)
             this.$hour.val(arrdate[1].substr(0,5))
-            app.loadDate(arrdate[0])
 
-            for(let i in Ticket.lines){
-                var line = Ticket.lines[i]
-                this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+            for(let i in ticket.lines){
+                var line = ticket.lines[i],
+                    ser  = app.data.get('servicios', 'id' , line.articulo)
+                
+                if(ser)
+                    this.addLineTable(line.codigo, ser.codigo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+
             }
 
         }

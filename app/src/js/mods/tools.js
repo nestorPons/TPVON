@@ -1,5 +1,7 @@
 // Funciones para desarrollo
-var echo = function ($arg) { return console.log($arg); };
+var echo = function () { 
+    for(let i in arguments) console.log(arguments[i]); 
+};
 // Funcion para recorrer dom al estilo jq
 var $y = function ($arg) {
     if ($arg === void 0) { $arg = ''; }

@@ -24,7 +24,6 @@ $(document)
 })
 .on('submit', 'form', function (e, i) {
     e.preventDefault()
-    let get = app.getData(); 
     $this = $(this)
     // Filtro bloqueo reenvio 
     if($(this).hasClass('sending')) return false 

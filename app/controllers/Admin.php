@@ -17,8 +17,8 @@ class Admin extends Controller{
         $data['tickets_hora'] = '';
         
         $Items = new Items;
-        $data['Services'] = $Items->allData($Items, 'codigo');
- 
+        $data['Services'] = $Items->allData($Items, 'codigo'); // para php
+        $data['jsonServices'] = json_encode($Items->getAll()); // para js
         $Iva = new Query('tipo_iva');
         $conf = new Data(['iva' => $Iva->getOneBy(['pre'=>true])]);
 
@@ -29,6 +29,7 @@ class Admin extends Controller{
         $User = new User;
         $data['Employees'] = $User->allEmployees();
         $data['Users'] = $User->allData($User);
+        $data['jsonUsers'] = json_encode($User->getAll()); // para js
 
         return $this->printView( \VIEWS\ADMIN . 'index.phtml', $data);
     }
