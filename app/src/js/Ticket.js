@@ -1,12 +1,13 @@
 class Ticket{
 
-    constructor(){
-        this.id = null
-        this.lines = []
+    constructor(data = {}){
+
+        this.id = data.id || null
+        this.lines = data.lines || []
         this.lineId = 0
-        this.id_empleado = null
-        this.id_cliente = null
-        this.fecha = null
+        this.id_empleado = data.id_empleado || null
+        this.id_cliente = data.id_cliente || null
+        this.fecha = data.fecha || null
     }
     addLine(articulo, des, cantidad, precio, dto, amo){ 
 
@@ -33,7 +34,10 @@ class Ticket{
         else return true
     }
     deleteLine(index){
-        let i = this.lines.indexOf(index) // filtramos
-        return this.lines.splice(i,1)
+        this.lines = this.lines.filter(e => e.id != index)
+        return this.lines
+    }
+    getLine( index ){
+        return this.lines.filter(e => e.id == index)[0]
     }
 }

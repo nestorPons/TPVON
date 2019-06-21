@@ -5,6 +5,7 @@
         <?php $del = new Icon('cross-circle', ['onclick'=>'app.sections.del()'])?>
         <?php $prev = new Icon('chevron-left-circle', ['onclick'=>'app.sections.prev()'])?>
         <?php $next = new Icon('chevron-right-circle', ['onclick'=>'app.sections.next()'])?>
+        <?php $search = new Icon('magnifier', ['onclick'=>'app.sections.search()'])?>
     </div>
     <div>
         <?php new DatePicker?>
@@ -54,6 +55,7 @@
             $prev: $('#<?= $prev->id()?>'),
             $add: $('#<?= $add->id()?>'),
             $del: $('#<?= $del->id()?>'),
+            $search: $('#<?= $search->id()?>'),
             show(arr = []){               
                 $('#bartools').find('.menu-buttons').hide()
                 for(i in arr){

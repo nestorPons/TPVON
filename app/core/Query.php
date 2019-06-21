@@ -234,4 +234,7 @@ class Query extends Conn{
         }
         return $Data;
     }
+    function id(){
+        return $this->id;
+    }
 }

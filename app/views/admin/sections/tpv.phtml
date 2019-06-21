@@ -65,10 +65,12 @@
         grid-column: 2 / span 2;
     }
     #tpv #<?= $emp->id() ?>{
-        grid-area: 1/2;
+        grid-row: 1;
+        grid-column: 2/span 2;
     }
     #tpv #<?= $cli->id() ?>{
-        grid-area: 1/3;
+        grid-row: 1; 
+        grid-column: 4/span 2;
     }
     #tpv #<?= $quan->id() ?>{
         grid-area: 3/4;
@@ -120,15 +122,15 @@
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
 <script>
-    'use strict'
+
     var tpv = {
         buttons: ['prev', 'next','del'],
         total: 0,
         currentId: <?=$tickets_new_id?>,
         lastId: <?=$tickets_new_id?>, 
         Ticket : new Ticket(),
+        Table : new Table('<?=$table->idEl()?>'), 
         $id : $('#<?=$id->idEl()?>'), 
-        $table : $('#<?=$table->idEl()?>').find('tbody'), 
         $code :  $('#<?=$code->idEl()?>'),
         $description : $('#<?=$des->idEl()?>'),
         $employees : $('#<?=$emp->idEl()?>'),
@@ -142,10 +144,10 @@
         $btnClear : $('#<?=$btnClear->idEl()?>'),
         $total : $('#<?=$txtTotal->idEl()?>'),
         $switch : $('#control_<?=$modTicket->id()?>'),
-        load(){
+        open(){
             this.$employees.focus()
         },
-        open(){
+        openTicket(){
             this.$switch.prop('checked',true)
             ticket.open(tpv.Ticket)
         },
@@ -175,7 +177,7 @@
             this.Ticket.id = this.$id.val()
 
             if(this.Ticket.validate())
-                this.open()
+                this.openTicket()
             else 
                 mns.error('Faltan datos para crear el ticket')
 
@@ -195,7 +197,7 @@
             this.$code.focus()
         },
         clearLines(){
-            this.$table.find('tr').remove()
+            this.Table.clearLines()
         },
         clearUsers(){
             this.$client.find(':selected').attr("selected", false).removeClass('valid')
@@ -221,22 +223,12 @@
             else  this.$code.focus()
         },
         addLineTable(id, articulo, des, cantidad, precio, dto, amo){
-            
-            const $template = $( $('#template_<?=$table->id()?>')[0].innerHTML )
-            $template
-                .attr('idline', id)
-                .find('.Código').html(articulo).end()
-                .find('.Descripción').html(des).end()
-                .find('.Cantidad').html(cantidad).end()
-                .find('.Precio').html(precio).end()
-                .find('.Dto').html(dto).end()
-                .find('.Importe').html(amo).end()
-        
-            this.$table.append($template) 
+            this.Table.addLine(id, [articulo, des, cantidad, precio, dto, amo || cantidad * precio])
+
             this.clearLine()
             this.printTotal()
             // Scroll al final
-            this.$table.animate({ scrollTop: this.$table.height() }, 100);
+            this.Table.endScroll()
         },  
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
@@ -249,23 +241,35 @@
             }
         },
         loadLineFromTable(e){
+            const idLine = e.path[1].attributes.idline.value
+   
             // Eliminamos la linea del objeto
-            let line = this.Ticket.deleteLine(e.path[1].attributes.idline.value)[0]
+            let line = this.Ticket.getLine(idLine)
+            this.Ticket.deleteLine(idLine)
 
             // Vista
-            this.$code.val(line.articulo)
-            this.$description.val(line.des)
+            let ser = app.data.get('servicios','id',line.articulo)
+
+            this.$code
+                .addClass('valid')
+                .find('options').attr("selected", false).end()
+                .find('[value='+ line.articulo +']').attr("selected", true)
+                
+            this.$description.val(ser.descripcion)
             this.$quantity.val(line.cantidad)
             this.$price.val(line.precio)
             this.$dto.val(line.dto)
             this.$amount.val(line.amo)
 
-            this.$table.find('[idline="'+e.path[1].attributes.idline.value+'"]').remove()
-            
+            this.Table.delLine(e.path[1].attributes.idline.value)
+                       
             this.printTotal()
         },
         del(){
-            alert('eliminar ticket')
+            let self = this
+            this.request('del', function(respond, status){
+                self.next()
+            })
         },
         next(){
             if(this.currentId ==  this.lastId) {
@@ -278,23 +282,32 @@
             if(this.currentId > 0) this.getTicket(--this.currentId, this.prev)
         },
         getTicket(id, fn){
+            let self = this
             
-            let self = this,
-            data = {
-                controller: 'tickets', 
-                action: 'get',
-                data: {
-                    id: id
-                }
-            }
-            app.post(data, function(respond, status){
+            this.request('get', function(respond, status){
                 if(status) self.loadDataTicket(respond)
                 else fn.apply(self)
             })
         },
+        request(action, callback){
+            let self = this,
+            data = {
+                controller: 'tickets', 
+                action: action,
+                data: {
+                    id: this.currentId
+                }
+            }
+            app.post(data, function(respond, status){
+                typeof callback == 'function' && callback(respond, status)
+            })
+        },
+        // Cargamos los datos del ticket actual
         loadDataTicket( ticket ){
             echo('loadTicket....')
             this.reset()
+            this.Ticket = new Ticket(ticket)
+
             if(ticket.estado == undefined) {
                 this.$id.val(this.currentId)
                 return false 
@@ -307,12 +320,13 @@
             this.$client.addClass('valid').find('[value='+ticket.id_cliente+']').attr("selected", true)
             this.$hour.val(arrdate[1].substr(0,5))
 
+            // Cargamos las lineas 
             for(let i in ticket.lines){
                 var line = ticket.lines[i],
                     ser  = app.data.get('servicios', 'id' , line.articulo)
-                
+
                 if(ser)
-                    this.addLineTable(line.codigo, ser.codigo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+                    this.addLineTable(line.id, ser.codigo, ser.des, line.cantidad, line.precio, line.dto)
 
             }
 

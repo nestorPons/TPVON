@@ -3,7 +3,10 @@ const app = {
     data: {
         storage: [],
         get(index , key, value){
-            if(key == undefined || value == undefined ) return false
+            // Si no se pasan key o value devolvemos todos los registros            
+            if(key == undefined || value == undefined ){    
+                return this.storage[index]
+            }
             else return this.storage[index].find((el) => el[key] == value)
         },
         set(index, data){
@@ -46,6 +49,7 @@ const app = {
     },
     // Carga de zonas por método get
     get: function (data) {
+        let self = this
         if (typeof data.controller === 'undefined') return false;
 
         for (let i in this.GET) data[i] = this.GET[i]
@@ -56,7 +60,9 @@ const app = {
             $container
                 .find('section').hide().end()
                 .append(html);
-            
+            // Inicializamos el método de carga del objeto
+            window[data.controller].load()
+            self.sections.inicialize(data.controller) 
         }, 'html');
     },
     loadSync: function (name, callback) {
@@ -88,7 +94,10 @@ const app = {
     },
     mens: {
         error(mens){
-            alert(mens);
+            return alert(mens);
+        },
+        confirm(mens){
+            return confirm(mens);
         }
     },
     sections: {
@@ -139,10 +148,18 @@ const app = {
         inicialize(section){
             if (section == 'appadmin') section = 'tpv'
             this.active = section
-
+            
             let activeZone = window[this.active]
-            typeof activeZone.buttons == 'object' && menu.buttons.show(activeZone.buttons)
-            typeof activeZone.load == 'function' && activeZone.load()
+
+            // Cargamos los botones de herramientas
+            typeof activeZone.buttons != 'undefined' &&
+            typeof activeZone.buttons == 'object' && 
+            menu.buttons.show(activeZone.buttons)
+
+            // Se cargan 
+            typeof activeZone.open != 'undefined' &&
+            typeof activeZone.open == 'function' && 
+            activeZone.open()
         },
         // Comportamiento de los botones de herramientas según la seccion que esté activa
         next(){

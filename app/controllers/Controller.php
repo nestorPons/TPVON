@@ -84,6 +84,19 @@ class Controller{
         }
         return $respond;
     }
+    /**
+     * Método por defecto de eliminación de registros
+     */
+    protected function del(Object $Data = null){
+        $respond = false; 
+        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
+        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
+        if(file_exists($fileModel)){
+            $model = new $nameModel($Data);
+            $respond = $model->del();
+        }
+        return $respond;
+    }
     private function getController(){
         $arr_controller= explode('\\',get_class($this));
         $controller = end($arr_controller);

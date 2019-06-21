@@ -17,4 +17,54 @@
         <?php endforeach ?>
     </tr>
 </template>
+<script>
+class Table{
+    constructor(id){
 
+        this.$table = $('#' + id)
+        this.$template =  $( $('#template_' + id)[0].innerHTML )
+    }
+    addLine(id, data){
+
+        this.$template
+            .clone()
+            .attr('idline', id || this.$table.find('tr').length)
+            .find('td').each(function(i, el){
+                $(this).html(data[i])
+            })
+            .end()
+            .appendTo(this.$table.find('tbody'))      
+    }
+    endScroll(){
+        this.$table.animate({ scrollTop: this.$table.height() }, 100);
+    }
+    clearLines(){
+        this.$table.find('tbody').find('tr').remove()
+    }
+    delLine(id){
+        this.$table.find('[idline="'+id+'"]').remove()
+    }
+}
+/* var table = {
+    addLine(id, data = []){
+
+        const $table = $('#' + id), 
+            $template = $( $('#template_' + id)[0].innerHTML )
+
+            $template
+                .clone()
+                .attr('idline', id)
+                .find('td').each(function(i, el){
+                    $(this).html(data[i])
+                })
+                .end()
+                .appendTo($table.find('tbody'))
+
+
+
+    },
+    del(){
+
+    }
+} */
+</script>
