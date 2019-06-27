@@ -15,7 +15,7 @@ const APP                           = ROOT . 'app/';
     const HTDOCS                    = ROOT . 'htdocs/'; // Carpeta pública
         const NODE_MODULES              = HTDOCS . 'node_modules/';
 
-    
+
 namespace VIEWS; 
     const COMPONENTS            = \FOLDERS\VIEWS . 'components/';
     const ADMIN                 = \FOLDERS\VIEWS . 'admin/';

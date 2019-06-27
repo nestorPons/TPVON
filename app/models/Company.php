@@ -12,10 +12,13 @@ class Company extends Query{
         $pathLogo; 
     protected
         $data = null;
+    const 
+        TABLE_ADMIN = 'admin_empresas';
 
     function __construct($arg = null){
-        // Cambiamos la tabla y prefijo para referirnos a la tabla de administrcion de empresas
-        parent::__construct('empresas', 'admin_empresas');
+        // Conectamos o creamos la tabla de administrcion de empresas si no existe
+        if(!parent::__construct('empresas', self::TABLE_ADMIN)) $this->initializeDB();
+  
         if($arg){
             if (is_int($arg)){
                 $d = $this->getById($arg);
@@ -63,7 +66,7 @@ class Company extends Query{
             // Creamos la base de datos
             
             try{
-                $this->createDb();
+                $this->createDb($this->db);
                 $this->createTables();
                 //Añadimos el usuario administrador
                 $Data->set('nombre', $Data->nombre_usuario); 
@@ -94,8 +97,12 @@ class Company extends Query{
     }
     // Extraemos el prefijo por defecto para las bbdd de la aplicación
     // Creamos la base de datos con el nombre correspondiente
-    private function createDb(){
-        if(!$this->query('CREATE DATABASE '. $this->db . ' COLLATE utf8_spanish2_ci;')) throw new Error('E013');  
+    private function createDb($db){
+        $credentials = parse_ini_file(\FILE\CONN);
+        $dsn =  'mysql:host=' . $credentials["host"] . ';port='. $credentials["port"];
+        $this->conn = $this->connect($dsn, $credentials[$this->user]);
+        if(!$this->query("CREATE DATABASE $db COLLATE utf8_spanish2_ci;")) throw new Error('E013');
+        else return true;  
     }
     private function createTables(){
         $newConn = new Query(null, $this->db);
@@ -113,7 +120,6 @@ class Company extends Query{
         
         if(!$newConn->pdo->commit()) throw new Error('E014');
     }
-
     // getters y setters
     function id(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
@@ -128,4 +134,16 @@ class Company extends Query{
         return $this->{__FUNCTION__}; 
     }
     
+    function initializeDB(){
+        
+        $this->createDb(self::TABLE_ADMIN);
+    
+        $newConn = new Query(null, self::TABLE_ADMIN);
+        $newConn->pdo->beginTransaction();
+            $newConn->query(file_get_contents(\FOLDERS\DB . 'admin/empresas.sql'));
+            $newConn->query(file_get_contents(\FOLDERS\DB . 'admin/facturacion.sql'));
+        
+        if(!$newConn->pdo->commit()) throw new Error('E014'); 
+        else self::__construct();
+    }
 }
