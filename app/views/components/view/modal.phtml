@@ -9,6 +9,7 @@
   <style>
   #<?=$idElement?>{
       overflow: inherit;
+      padding: 2rem;
   }
   #<?=$idElement?>  .modal-close{
     top: -1em;
@@ -23,3 +24,17 @@
     color: var(--input-invalid-color) ;
   }
   </style>
+  <script>
+  class Modal{
+    constructor(id){
+      this.$form = $('#<?=$prefix_element?>'+ id)
+      this.$switch = $('#control_' + id)
+    }
+    show(){
+      this.$switch.prop('checked',true)
+    }
+    hide(){
+      this.$switch.prop('checked',false)
+    }
+  }
+  </script>

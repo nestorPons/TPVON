@@ -3,7 +3,7 @@
     <?php
     $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 
         'class'=>'hoverable', 'onclick'=>'users.show(window.event)']);
-    $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company);
+    $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'users/new.phtml'], false);
     ?>
 
 </section>
@@ -12,7 +12,7 @@
 var users = {
     buttons: ['add', 'del', 'search'],
     Table: new Table('<?=$table->idEl()?>'),
-    $switch : $('#control_<?=$editUser->id()?>'),
+    Form : new Modal('<?=$editUser->id()?>'),
     edit(){
         
     },
@@ -21,14 +21,13 @@ var users = {
         for( i in users ){
             var user = users[i]
             this.Table.addLine(
-                '<?=$table->id()?>', 
+                user.id, 
                 [user.id, user.nombre, user.tel, user.email]
             )
-
         }
     },
     show(e){
-        echo(e)
+        this.Form.show()
     }
 }
 </script>

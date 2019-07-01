@@ -23,7 +23,7 @@ class Component{
     * $Data => Objeto Data para pasar datos a la vista [opcional]
     */
     function print(string $file, Object $Data = null){
-
+        $prefix_element = self::PREFIX_ELEMENT; 
         $type= $this->type??null;
         $id = $this->id;
         $idContainer = self::PREFIX_CONTAINER . $id;
