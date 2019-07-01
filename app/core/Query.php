@@ -7,21 +7,22 @@ class Query extends Conn{
     protected $conn, $table;
 
     function __construct(string $table = null, string $db = null, string $user = null){
-        // Parametros predeterminados para la conexión
-        $credentials = parse_ini_file(\FILE\CONN);
-        if($table) $this->table = $table;
-
-        $this->db = $db?$db:$credentials['prefix'] . CODE_COMPANY;
-        $this->db = Data::codify($this->db);
-        $this->user = $user??'root';
-        try{
-            if($this->db != $credentials['prefix']){
-                $this->conn = $this->connect($credentials);
-                return gettype($this->conn) === 'object';
-            } else return false;
-        } catch (\Exception $e){
-            prs($e);
-        }
+            // Parametros predeterminados para la conexión
+            $credentials = parse_ini_file(\FILE\CONN);
+            if($table) $this->table = $table;
+    
+            $this->db = $db?$db:$credentials['prefix'] . CODE_COMPANY;
+            $this->db = Data::codify($this->db);
+            $this->user = $user??'root';
+            $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
+            try{
+                if($this->db != $credentials['prefix']){
+                    $this->conn = $this->connect($dsn, $credentials[$this->user]);
+                    return gettype($this->conn) === 'object';
+                } else return false;
+            } catch (\Exception $e){
+                return false;
+            }
     }
     function __destruct(){
         $this->conn = null;

@@ -18,14 +18,12 @@ class Conn{
     /**
      *	Genera la conexión a a la base de datos
      */
-    protected function connect($credentials){
-        $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
-
+    protected function connect($dsn, $pass){
         try {
             $this->pdo = new \PDO(
                     $dsn, 
                     $this->user, 
-                    $credentials[$this->user], 
+                    $pass,  
                     [
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
                         \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
@@ -36,7 +34,8 @@ class Conn{
            return $this->pdo; 
         }
         catch (\PDOException $e){ 
-            die('fallo conexion base datos ' . $e->getMessage());
+
+            throw new \PDOException($e->getMessage());
         }
     }
     function __destruct(){

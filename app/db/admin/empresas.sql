@@ -1,6 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `admin_empresas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `admin_empresas`;
-
 CREATE TABLE `empresas` (
   `id` int(11) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   `nombre` varchar(30) NOT NULL UNIQUE KEY,
