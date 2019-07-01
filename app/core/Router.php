@@ -70,6 +70,7 @@ class Router{
         // action => Acción a realizar
         // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto!)
         if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {    
+
             // Pasamos los datos de json a objeto Data
             $this->data = new \app\core\Data($params['data'] ?? null);
         

@@ -3,21 +3,30 @@
     <?php
     $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 
         'class'=>'hoverable', 'onclick'=>'users.show(window.event)']);
-    $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'users/new.phtml'], false);
+    $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'users/edit.phtml'], false);
     ?>
 
 </section>
 <script>
 'use strict'
-var users = {
+var users = { 
+    table: 'usuarios',
     buttons: ['add', 'del', 'search'],
+    currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$editUser->id()?>'),
-    edit(){
+    save(){
+        let data = this.Form.getData()
+        app.data.set(this.table, data , 'id', this.currentId)
+
+        this.Table.updateLine(this.currentId, [this.currentId, data.nombre, data.tel, data.email])
+        this.Form.hide()
+    },
+    loadData(){
         
     },
     load(){
-        let users  = app.data.get('usuarios')
+        let users  = app.data.get(this.table)
         for( i in users ){
             var user = users[i]
             this.Table.addLine(
@@ -27,7 +36,9 @@ var users = {
         }
     },
     show(e){
-        this.Form.show()
+        this.currentId = e.path[1].attributes.idline.value
+        let data = app.data.get(this.table, 'id', this.currentId)
+        this.Form.show(data)
     }
 }
 </script>

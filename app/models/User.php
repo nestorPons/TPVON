@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 use \app\core\Error;
 
 class User extends Query{
-    public $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token;
+    public $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token, $telefonos;
     protected $table = 'usuarios';
     /**
      * $arg puede ser un string email para buscar por email
@@ -23,7 +23,6 @@ class User extends Query{
             else if (strpos($arg, '@')) $this->searchByEmail($arg);
         }
     }
-
     function allEmployees(){
         $Data = new Data; 
         $data = $this->getBy(['nivel' => 1, 'nivel' => 2]);
@@ -80,6 +79,7 @@ class User extends Query{
         if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
         $data = $Data->toArray();
         return $this->saveById($data);
+
     }
     function resetPassword(){
         $Token = new Tokens();

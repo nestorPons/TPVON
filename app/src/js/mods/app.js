@@ -2,6 +2,7 @@ const app = {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
     data: {
         storage: [],
+        current: {}, 
         get(index , key, value){
             // Si no se pasan key o value devolvemos todos los registros            
             if(key == undefined || value == undefined ){    
@@ -9,13 +10,21 @@ const app = {
             }
             else return this.storage[index].find((el) => el[key] == value)
         },
-        set(index, data){
-            //inicializa
-            if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
-            // Guarda datos en formato array
-            for(let i in data){
-                this.storage[index].push(data[i])
-            }     
+        set(index, data, key, value){
+            
+            if(key){
+                let i = this.storage[index].findIndex(el=>{
+                    return el[key] == value
+                })
+                this.storage[index][i] = data
+            } else {
+                //inicializa
+                if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
+                // Guarda datos en formato array
+                for(let i in data){
+                    this.storage[index].push(data[i])
+                } 
+            }
         }
     },
     GET: $_GET,
@@ -206,16 +215,15 @@ const app = {
     },
     formToObject (form){
         var obj = {};
-        var elements = form.querySelectorAll("input, select, textarea");
-        for (var i = 0; i < elements.length; ++i) {
-            var element = elements[i];
-            var name = element.name;
-            var value = element.value;
-            if (name) {
-                obj[name] = value;
-            }
+        var elements = form.querySelectorAll("input, select, textarea")
+        for (let i = 0; i < elements.length; ++i) {
+            var element = elements[i],
+                name = element.name,
+                value = element.value
+
+            if (name) obj[name] = value
         }
-        return obj;
+        return obj
     },
     formToJSONString (form){
         var obj = {};

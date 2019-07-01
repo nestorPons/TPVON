@@ -34,19 +34,23 @@ class Controller{
         $files[] = \VIEWS\ADMIN\SECTIONS . $this->controller . '.phtml';
         foreach($files as $file){
             if(file_exists($file)) return $this->printView($file, $data);
-        }
-
-        
+        }        
     }
+    /**
+     * Método genérico para actualizar registros
+     */
     protected function update(Object $Data){
         $this->Model = $this->getModel(intval($Data->id));
         $this->Model->loadData($Data);
         $Data->delete('id'); 
         return $this->Model->save($Data);
     }
+    /**
+     * Método genérico para guardar registros
+     */
     protected function save(Object $Data){
-        $data = $Data->toArray();
-        $this->Model->saveById($data);
+        $this->getModel();
+        $this->Model->saveById($Data->toArray(), $Data->id);
     }
     protected function printView(String $route, array $data = null){  
         if(isset($_GET['db'])) $Company = new Company($_GET['db']);

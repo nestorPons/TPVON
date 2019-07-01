@@ -46,10 +46,11 @@ class Conn{
 	 }
 
     private function init($sql, $params = null){
-/* 
-echo $sql;pr($params);
+
+/* echo $sql;pr($params);
 pr($this->pdo);
- */        try {
+ */
+         try {
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
             
@@ -64,7 +65,11 @@ pr($this->pdo);
                     } else {
                         $type = \PDO::PARAM_STR;
                     }
-                    $this->sqlPrepare->bindValue($value[0], $value[1], $type);
+
+                    $this->sqlPrepare->bindValue(
+                        $value[0], 
+                        empty($value[1]) ? NULL : $value[1], 
+                        $type);
                 }
             }
            return $this->sqlPrepare->execute();

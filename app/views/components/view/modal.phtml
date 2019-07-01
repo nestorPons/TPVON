@@ -25,16 +25,27 @@
   }
   </style>
   <script>
-  class Modal{
+  var Modal = class{
     constructor(id){
-      this.$form = $('#<?=$prefix_element?>'+ id)
+      this.el = document.getElementById('<?=$idElement?>')
+      this.$el = $('#<?=$idElement?>')
       this.$switch = $('#control_' + id)
     }
-    show(){
+    show(data = null){
+      if(data) this.load(data)
       this.$switch.prop('checked',true)
     }
     hide(){
       this.$switch.prop('checked',false)
+    }
+    load(data){
+      const inputs = this.$el.find('input')
+      inputs.each(function(){
+        $(this).val(data[$(this).attr('name')])
+      })
+    }
+    getData(){ 
+      return app.formToObject(this.el)
     }
   }
   </script>

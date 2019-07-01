@@ -1,0 +1,16 @@
+<?php namespace app\views\components\controllers;?>
+<component id="editUser">
+    <h1>Edición usuario</h1>
+    <form controller="user" action="update">
+    <?php
+        $id = new InputRead(['label' => 'Id usuario', 'name'=>'id'],  false);
+        $dni = new InputText(['label' => 'DNI','tabindex'=>0, 'name'=>'dni'],  false);
+        $name = new InputText(['label' => 'Nombre','tabindex'=>1, 'name'=>'nombre'],  false);
+        $email = new InputText(['label' => 'Email','tabindex'=>2, 'name'=>'email'],  false);
+        $phone = new InputText(['label' => 'Teléfono','tabindex'=>2, 'name'=>'tel'],  false);
+        $fnaci = new InputDate(['label' => 'Fecha nacimiento','tabindex'=>3, 'name'=>'fecha_nacimiento'],  false);
+        $status = new InputText(['label' => 'Estado','tabindex'=>4, 'name'=>'estado'],  false);
+        $btnSave = new ButtonSuccess(['onclick'=>'users.save()', 'caption'=>'Guardar']);
+    ?> 
+    </form>
+</component>

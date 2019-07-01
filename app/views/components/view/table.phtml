@@ -18,19 +18,21 @@
     </tr>
 </template>
 <script>
-class Table{
+var Table = class{
     constructor(id){
 
         this.$table = $('#' + id)
         this.$template =  $( $('#template_' + id)[0].innerHTML )
     }
-    addLine(id, data){
-
+    /**
+     * arrData = array de datos en orden de salida
+     */
+    addLine(id, arrData){
         this.$template
             .clone()
             .attr('idline', id || this.$table.find('tr').length)
             .find('td').each(function(i, el){
-                $(this).html(data[i])
+                $(this).html(arrData[i])
             })
             .end()
             .appendTo(this.$table.find('tbody'))      
@@ -43,6 +45,10 @@ class Table{
     }
     delLine(id){
         this.$table.find('[idline="'+id+'"]').remove()
+    }
+    updateLine(idLine, data){
+        this.delLine(idLine)
+        this.addLine(idLine, data)
     }
 }
 /* var table = {
