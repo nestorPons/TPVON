@@ -31,6 +31,7 @@ class Component{
         $hidden = ($type == 'hidden')?'hidden':'';
         $disabled = (isset($this->disabled))?'disabled':'';
         $readonly = (isset($this->readonly))?'readonly':'';
+        $checked = (isset($this->checked))?'checked':'';
         $body = $this->body??null;
         $name = $this->printName(); 
         $title = $this->printTitle();

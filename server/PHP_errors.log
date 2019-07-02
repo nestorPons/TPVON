@@ -20085,3 +20085,34 @@ Stack trace:
 #10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #11 {main}
   thrown in /var/www/html/app/views/admin/sections/users/edit.phtml on line 11
+[02-Jul-2019 07:58:16 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/core/Query.php on line 52
+[02-Jul-2019 10:02:01 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\Checkbox' not found in /var/www/html/app/views/admin/sections/users/edit.phtml:12
+Stack trace:
+#0 /var/www/html/app/views/components/view/modal.phtml(6): include()
+#1 /var/www/html/app/views/components/controllers/Component.php(59): include('/var/www/html/a...')
+#2 /var/www/html/app/views/components/controllers/Modal.php(11): app\views\components\controllers\Component->print('modal', NULL)
+#3 /var/www/html/app/views/admin/sections/users.phtml(6): app\views\components\controllers\Modal->__construct(Array, false)
+#4 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->printView('/var/www/html/a...', NULL)
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->view(NULL)
+#7 /var/www/html/app/core/Router.php(101): app\controllers\Controller->__construct('view', 'Users', NULL)
+#8 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Users')
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/users/edit.phtml on line 12
+[02-Jul-2019 10:02:27 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\Checkbox' not found in /var/www/html/app/views/admin/sections/users/edit.phtml:12
+Stack trace:
+#0 /var/www/html/app/views/components/view/modal.phtml(6): include()
+#1 /var/www/html/app/views/components/controllers/Component.php(59): include('/var/www/html/a...')
+#2 /var/www/html/app/views/components/controllers/Modal.php(11): app\views\components\controllers\Component->print('modal', NULL)
+#3 /var/www/html/app/views/admin/sections/users.phtml(6): app\views\components\controllers\Modal->__construct(Array, false)
+#4 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->printView('/var/www/html/a...', NULL)
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->view(NULL)
+#7 /var/www/html/app/core/Router.php(101): app\controllers\Controller->__construct('view', 'Users', NULL)
+#8 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Users')
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/users/edit.phtml on line 12

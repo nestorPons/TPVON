@@ -24,26 +24,46 @@ $(document)
 })
 .on('submit', 'form', function (e, i) {
     e.preventDefault()
-    $this = $(this)
+    let $this = $(this),
+        _send = function(data){
+            // Envio de datos
+            app.post({
+                controller: $this.attr('controller'),
+                action: $this.attr('action'),
+                data: data
+            },
+              function(){
+                if(c = $this.attr('callback')) eval(c)
+                _hideSpiner()
+              } 
+            )
+        },
+        _hideSpiner= function(){
+            
+            // Ocultamos spinner
+            $this.removeClass('sending').find('.spinner').fadeOut()
+            return true
+            
+        }
     // Filtro bloqueo reenvio 
     if($(this).hasClass('sending')) return false 
     // Mostramos spinner
     $(this).addClass('sending').find('.spinner').hide().removeClass('hidden').fadeIn()
     let data = app.formToObject(e.currentTarget);
-    if(exist(data.password)){ 
-        data.password = sha256(data.password)
-    }
-    // Envio de datos
-    app.post({
-        controller: $this.attr('controller'),
-        action: $this.attr('action'),
-        data: data
-    },
-        function(){
-            // Ocultamos spinner
-            $this.removeClass('sending').find('.spinner').fadeOut()
-        }
-    )
+
+    if(exist(data.password)) data.password = sha256(data.password)
+    
+    // Validamos los datos antes de enviarlos 
+    if(v = $(this).attr('validation')){
+        if( eval(v) ){
+             _send(data)
+
+        } else {
+            _hideSpiner() 
+            app.mens.error('Hay datos incorrectos!')
+        } 
+    } else _send(data)
+
 })
 // FIN DE FORMULARIOS
 .on('change', 'select', function () {

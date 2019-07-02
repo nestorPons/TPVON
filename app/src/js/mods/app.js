@@ -8,7 +8,7 @@ const app = {
             if(key == undefined || value == undefined ){    
                 return this.storage[index]
             }
-            else return this.storage[index].find((el) => el[key] == value)
+            else return this.storage[index].find((el) => el[key] == value) || false
         },
         set(index, data, key, value){
             
@@ -42,7 +42,7 @@ const app = {
                 // la respuesta es JSON
                 console.log(data)
                 // Imprimimos mensaje de error si lo hay 
-                if(data.success == false && exist(data.mens)) app.mens.error(data.mens)
+                if(data.success == false || data.success == 0 && exist(data.mens)) app.mens.error(data.mens||'No se ha podido rehalizar la petición!')
                 
             } catch(e) {
                 // la respuesta es HTML

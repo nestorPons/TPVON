@@ -77,9 +77,7 @@ class User extends Query{
     }
     function save(Object $Data){
         if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
-        $data = $Data->toArray();
-        return $this->saveById($data);
-
+        return $this->saveById($Data->toArray());
     }
     function resetPassword(){
         $Token = new Tokens();

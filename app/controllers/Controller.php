@@ -18,11 +18,9 @@ class Controller{
         $this->controller =strtolower($controller ?? $this->getController());
 
         // Constructor alternativo básico
-        if(method_exists($this, $this->action)){
-            $this->result = $this->{$this->action}($Data);
-        } else {
-            die('Accion no permitida!!');
-        }
+        if(method_exists($this, $this->action)) $this->result = $this->{$this->action}($Data);
+        else die('Accion no permitida!!');
+
     }
     protected function view($data = null){
         
@@ -40,10 +38,14 @@ class Controller{
      * Método genérico para actualizar registros
      */
     protected function update(Object $Data){
-        $this->Model = $this->getModel(intval($Data->id));
-        $this->Model->loadData($Data);
-        $Data->delete('id'); 
-        return $this->Model->save($Data);
+        try{
+            $this->Model = $this->getModel(intval($Data->id));
+            $this->Model->loadData($Data);
+            $Data->delete('id'); 
+            return $this->Model->save($Data);
+        } catch (\Exception $e){
+            return false;
+        }
     }
     /**
      * Método genérico para guardar registros

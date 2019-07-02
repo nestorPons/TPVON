@@ -41,7 +41,9 @@
     load(data){
       const inputs = this.$el.find('input')
       inputs.each(function(){
-        $(this).val(data[$(this).attr('name')])
+        if($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio')
+          data[$(this).attr('name')] == 1 && $(this).prop('checked', true) 
+        else $(this).val(data[$(this).attr('name')])
       })
     }
     getData(){ 

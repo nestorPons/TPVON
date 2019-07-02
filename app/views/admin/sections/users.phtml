@@ -9,18 +9,23 @@
 </section>
 <script>
 'use strict'
-var users = { 
+var users = {
     table: 'usuarios',
     buttons: ['add', 'del', 'search'],
     currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$editUser->id()?>'),
-    save(){
+    validation(){
+        let data = this.Form.getData()
+        return  app.data.get(this.table,'dni', data.dni) == false
+    },
+    save(){ 
         let data = this.Form.getData()
         app.data.set(this.table, data , 'id', this.currentId)
 
         this.Table.updateLine(this.currentId, [this.currentId, data.nombre, data.tel, data.email])
         this.Form.hide()
+        
     },
     loadData(){
         

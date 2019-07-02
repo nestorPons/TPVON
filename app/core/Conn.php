@@ -75,11 +75,7 @@ pr($this->pdo);
            return $this->sqlPrepare->execute();
         }
         catch (\PDOException $e) {
-            echo 'ERROR INIT' . BR;
-            echo $sql . BR;
-            pr($params);
-            echo BR; 
-            die($e->getMessage());
+            return ($e->getMessage());
         }
         
         $this->params = [];

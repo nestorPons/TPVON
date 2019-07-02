@@ -78,9 +78,9 @@ class Router{
 
             // Siempre devuelvo un objeto json con un success de respuesta
             $respond = 
-            ($respond === true || $respond === 1) ? ['success'=> 1] : 
-            (($respond === false || $respond === 0) ? ['success'=> 0] : 
-            ['success' => 1, 'data' => $respond]);
+                ($respond === true || $respond === 1) ? ['success'=> 1] : 
+                (($respond === false || $respond === 0) ? ['success'=> 0] : 
+                ['success' => 1, 'data' => $respond]);
             // SALIDA 
             exit (json_encode($respond, true));
 
