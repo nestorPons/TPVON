@@ -1,9 +1,7 @@
 <?php namespace app\models;
 
-use \app\core\Query;
-use \app\core\Data;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use \app\core\{ Query, Data };
+use PHPMailer\PHPMailer\{ PHPMailer,  Exception};
 use \app\core\Error;
 
 class User extends Query{
@@ -15,12 +13,14 @@ class User extends Query{
      * false para no crear conexion
      */
     function __construct($arg = null, bool $conn = true){
+
         $this->company = NAME_COMPANY??null;
         if($conn) parent::__construct();
         if($arg){
             if (is_array($arg)) $this->loadData($arg);
             else if (is_int($arg)) $this->searchById($arg);
-            else if (strpos($arg, '@')) $this->searchByEmail($arg);
+            else if (is_string($arg) && strpos($arg, '@')) $this->searchByEmail($arg);
+            else if (is_object($arg)) $this->searchById($arg->id);
         }
     }
     function allEmployees(){
@@ -33,7 +33,8 @@ class User extends Query{
     }
     function new(Object $Data){
 
-        if ($this->id = $this->loadData($Data->getAll())){           
+        if ($this->id = $this->loadData($Data->getAll())){  
+            
             if(
             $this->id = $this->add([
                 'dni' =>  $this->dni??null,
@@ -45,11 +46,16 @@ class User extends Query{
                 'password' => $this->password_hash(),
                 'intentos' => $this->intentos??0
             ])) {
-              
-                $Token = new Tokens();
-                $url = HOST . '/'. CODE_COMPANY. "/login/confirmation/{$Token->create($this)}";
-                $body = $this->getFile(\VIEWS\LOGIN . 'mailNewUser.phtml', new Data(['url'=>$url]));
-                return $this->sendMail($body, $this->company . 'Activacion de la cuenta en '. $this->company);
+
+                // Varible para saltarse la activación del usuario
+                if(!isset($Data->noAuth)){
+                    $Token = new Tokens();
+                    $url = HOST . '/'. CODE_COMPANY. "/login/confirmation/{$Token->create($this)}";
+                    $body = $this->getFile(\VIEWS\LOGIN . 'mailNewUser.phtml', new Data(['url'=>$url]));
+                    return $this->sendMail($body, $this->company . 'Activacion de la cuenta en '. $this->company);
+                } else {
+                    return $this->id;
+                }
             }
             else return Error::array('E022');
             
@@ -57,7 +63,7 @@ class User extends Query{
     }
     function password_hash(string $pass = null){
         $pass = $pass??$this->password();
-        return password_hash($pass, PASSWORD_DEFAULT);
+        return $pass ? password_hash($pass, PASSWORD_DEFAULT) : null;
     }
     function searchById(int $arg){
 
@@ -76,8 +82,12 @@ class User extends Query{
         return $this->saveById(['estado'=>1]);
     }
     function save(Object $Data){
-        if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
-        return $this->saveById($Data->toArray());
+        $noAuth = $Data->use('noAuth');
+        if($this->id == -1) $this->new($Data);
+        else {
+            if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
+            return $this->saveById($Data->toArray());
+        }
     }
     function resetPassword(){
         $Token = new Tokens();

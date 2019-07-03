@@ -70,7 +70,7 @@ const app = {
                 .find('section').hide().end()
                 .append(html);
             // Inicializamos el método de carga del objeto
-            window[data.controller].load()
+            if(exist(window[data.controller].load)) window[data.controller].load()
             self.sections.inicialize(data.controller) 
         }, 'html');
     },
@@ -185,6 +185,7 @@ const app = {
         }
     },
     form: {
+        // Verificamo y si es erroneo nos muestra un mensaje con el atributo tile-error o un mensaje por defecto
         verify($this){
             var $this = $this
             let type  = $this.get(0).tagName, 

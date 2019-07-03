@@ -225,6 +225,10 @@ class Query extends Conn{
         }
         return $arr;
     }
+    // getter generico
+    function id(){
+        return $this->id;
+    }
     // Descarga todos los dados y retorna objetos data
     function allData(Object $Obj, String $key = null){
         $Data = new Data; 
@@ -235,7 +239,9 @@ class Query extends Conn{
         }
         return $Data;
     }
-    function id(){
-        return $this->id;
+    // El método de eliminación genérico para las clases hijas
+    // Método genérico de eliminación de registros
+    function del($id){
+        return $this->saveById(['estado'=>0]);
     }
 }

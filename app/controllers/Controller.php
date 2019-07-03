@@ -48,11 +48,11 @@ class Controller{
         }
     }
     /**
-     * Método genérico para guardar registros
+     * Método genérico para guardar registros comprueba que es nuevo o edicion y envia los datos al metodo apropiado
      */
     protected function save(Object $Data){
-        $this->getModel();
-        $this->Model->saveById($Data->toArray(), $Data->id);
+        if($Data->id == -1 ) return $this->new($Data);
+        else return $this->update($Data);
     }
     protected function printView(String $route, array $data = null){  
         if(isset($_GET['db'])) $Company = new Company($_GET['db']);
@@ -75,6 +75,7 @@ class Controller{
             $model = new $nameModel($this->action);
             $respond = $model->new($Data);
         }
+
         return $respond;
     }
     /**
@@ -93,13 +94,13 @@ class Controller{
     /**
      * Método por defecto de eliminación de registros
      */
-    protected function del(Object $Data = null){
+    protected function del($arg){
         $respond = false; 
         $nameModel = '\\app\\models\\' . ucfirst($this->controller);
         $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
         if(file_exists($fileModel)){
-            $model = new $nameModel($Data);
-            $respond = $model->del();
+            $model = new $nameModel($arg);
+            $respond = $model->del($arg);
         }
         return $respond;
     }

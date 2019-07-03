@@ -1,7 +1,6 @@
 <?php namespace app\views\components\controllers;?>
 <component id="editUser">
-    <h1>Edición usuario</h1>
-    <form controller="user" action="update" validation="users.validation()" callback="users.save()">
+    <form controller="user" action="save" validation="users.validation()" callback="users.save(data)">
     <?php
         $id = new InputRead(['label' => 'Id usuario', 'name'=>'id'],  false);
         $dni = new InputText(['label' => 'DNI','tabindex'=>1, 'name'=>'dni', 'pattern'=>"(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))", 'title'=>"Introduzca el dni" ],  false);
@@ -10,7 +9,9 @@
         $phone = new InputText(['label' => 'Teléfono','tabindex'=>4, 'name'=>'tel'],  false);
         $fnaci = new InputDate(['label' => 'Fecha nacimiento','tabindex'=>5, 'name'=>'fecha_nacimiento'],  false);
         $status = new Checkbox(['label' => 'Cuenta activa', 'tabindex'=>6, 'name'=>'estado', 'value'=>1],  false);
+        $hidden = new InputHidden(['name'=>'noAuth', 'value'=>'1']);
         $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>7]);
+        $btnDel = new ButtonCancel(['caption'=>'Eliminar', 'tabindex'=>8, 'class'=>'fnDelete']);
     ?> 
     </form>
 </component>

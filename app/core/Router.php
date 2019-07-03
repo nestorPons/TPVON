@@ -99,7 +99,7 @@ class Router{
         $cont = $this->isController($this->controller)
             ? new $nameClass($this->action, $this->db, $this->data)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);
-       
+
         return $cont->result; 
     }
     /**

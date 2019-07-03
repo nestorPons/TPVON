@@ -22,6 +22,25 @@ $(document)
 .on('change', 'form', function (e, i) {
     app.form.verify($(this))
 })
+// Comportamiento general de eliminación de registro
+// Para su correcto funcionamiento todos los obj js tienen que tener establecida la propiedad currentId
+.on('click', '.fnDelete', function (e, i) {
+    let $section = $(this).parents('section'),
+        $form = $(this).parent('form'), 
+        controller = $form.attr('controller')
+        obj = window[$section.attr('id')]
+   
+    // Envio de datos
+    app.post({
+        controller: controller,
+        action: 'del',
+        data: {id: obj.currentId}
+    },
+    function(r){
+        exist(obj.del) && obj.del() 
+    })
+})
+// Comportamiento general de envio de formulario al servidor
 .on('submit', 'form', function (e, i) {
     e.preventDefault()
     let $this = $(this),
@@ -32,14 +51,14 @@ $(document)
                 action: $this.attr('action'),
                 data: data
             },
-              function(){
+            function(id){
+                data.id = id // Se usa para nuevos registros con id autoincremental
                 if(c = $this.attr('callback')) eval(c)
                 _hideSpiner()
-              } 
-            )
+            } 
+        )
         },
         _hideSpiner= function(){
-            
             // Ocultamos spinner
             $this.removeClass('sending').find('.spinner').fadeOut()
             return true
@@ -54,13 +73,14 @@ $(document)
     if(exist(data.password)) data.password = sha256(data.password)
     
     // Validamos los datos antes de enviarlos 
+    // Todos los validations tendrán que devolver con un objeto {success: ... , mens: ... , [code]....}
     if(v = $(this).attr('validation')){
-        if( eval(v) ){
-             _send(data)
-
-        } else {
+        let r = eval(v)
+        if(r.success) _send(data)
+        else {
             _hideSpiner() 
-            app.mens.error('Hay datos incorrectos!')
+            if(r.code) $this.find(`[name="${r.code}]`).addClass('invalid').focus()
+            app.mens.error(r.mens)
         } 
     } else _send(data)
 

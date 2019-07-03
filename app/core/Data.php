@@ -34,26 +34,9 @@ class Data {
         if($arg2) return $this->addItem($arg2, $arg1);
         else return $this->addItem($arg1);
     }
-/*     function get($attr){
-        if(is_object(reset($this))){
-            $arr = []; 
-            foreach($this->data as $obj){
-                $arr[$obj->id] = $obj->{$attr}; 
-            }
-            return $arr;
-        }else {
-            if(array_key_exists($attr, $this->data)){
-                return $this->data[$attr];
-            }else{
-                return false;
-            }
-        };
-    } */
     function getAll(){
         return $this->toArray();
     }
-    
-
     function getArray($attr){
         if(is_object(reset($this))){
             $arr = []; 
@@ -97,11 +80,9 @@ class Data {
         if(!(isset($this->{$arg}) && strlen($this->{$arg}) < $len)) Error::die('E009', $this->{$arg}??null);
         return true;
     }
- 
     function toArray(){ 
         return (array)$this;
     }
-    
     function toJSON(){
         return json_encode($this->toArray());
     }
@@ -127,9 +108,11 @@ class Data {
     }
     // Usa un atributo y lo destruye 
     function use(string $arg){
-        $attr =  $this->{$arg};
-        $this->delete($arg);
-        return $attr;
+        if(isset($this->{$arg})){
+            $attr =  $this->{$arg};
+            $this->delete($arg);
+            return $attr;
+        } else return false;
     }
     function normalizeAttr(string $attr){
         return $this->{$attr} = $this->normalize($this->{$attr});

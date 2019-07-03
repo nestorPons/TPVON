@@ -51,8 +51,4 @@ class Tickets extends Query{
         else if(@$Data->estado == 1) return $Data;
         else return false; 
     }
-    // Método genérico de eliminación de registros
-    function del(){
-        return $this->saveById(['estado'=>0]);
-    }
 }

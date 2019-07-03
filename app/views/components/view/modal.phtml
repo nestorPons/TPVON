@@ -3,13 +3,14 @@
 <div>
   <div class="card card-modal" id="<?=$idElement?>">
     <label for="control_<?=$id?>" class="modal-close" ></label>
+    <h1 id="tileModal<?=$idElement?>"></h1>
     <?php include($body)?>
   </div>
 </div>
   <style>
   #<?=$idElement?>{
       overflow: inherit;
-      padding: 2rem;
+      padding: 1rem;
   }
   #<?=$idElement?>  .modal-close{
     top: -1em;
@@ -31,12 +32,22 @@
       this.$el = $('#<?=$idElement?>')
       this.$switch = $('#control_' + id)
     }
+    clear(){
+      this.$el.find('form').trigger('reset')
+      return this
+    }
+    setTile(tile){
+      $('#tileModal<?=$idElement?>').html(tile)
+      return this
+    }
     show(data = null){
       if(data) this.load(data)
       this.$switch.prop('checked',true)
+      return this
     }
     hide(){
       this.$switch.prop('checked',false)
+      return this
     }
     load(data){
       const inputs = this.$el.find('input')
@@ -45,6 +56,7 @@
           data[$(this).attr('name')] == 1 && $(this).prop('checked', true) 
         else $(this).val(data[$(this).attr('name')])
       })
+      return this
     }
     getData(){ 
       return app.formToObject(this.el)

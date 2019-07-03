@@ -16,34 +16,53 @@ var users = {
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$editUser->id()?>'),
     validation(){
-        let data = this.Form.getData()
-        return  app.data.get(this.table,'dni', data.dni) == false
-    },
-    save(){ 
-        let data = this.Form.getData()
-        app.data.set(this.table, data , 'id', this.currentId)
+        let data = this.Form.getData(),
+            usuarios = app.data.get('usuarios')
 
-        this.Table.updateLine(this.currentId, [this.currentId, data.nombre, data.tel, data.email])
-        this.Form.hide()
-        
+        for(i in usuarios) {
+            let u = usuarios[i]
+            if(u.dni == data.dni && u.id != data.id) return {success: false, code: 'dni', mens: 'Error dni duplicado'} 
+            else if( u.email == data.email && u.id != data.id ) return {success: false, code: 'email', mens: 'Error email duplicado'} 
+        }
+
+        return {success: true}
     },
-    loadData(){
-        
+    del(){
+        this.Table.delLine(this.currentId)
+        this.Form.hide()
+    },
+    add(){
+        let data = {    
+            id: -1,
+            estado: 1
+        }
+        this.Form.clear().show(data).setTile('Nuevo usuario')
+    },
+    save(data){ 
+        app.data.set(this.table, data , 'id', data.id)
+
+        if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.nombre, data.tel, data.email])
+        else this.Table.updateLine(data.id, [data.id, data.nombre, data.tel, data.email])
+
+        this.Form.hide()
     },
     load(){
         let users  = app.data.get(this.table)
         for( i in users ){
             var user = users[i]
-            this.Table.addLine(
-                user.id, 
-                [user.id, user.nombre, user.tel, user.email]
-            )
+            // Listamos los usuarios activos solamente
+            if(user.estado == 1){
+                this.Table.addLine(
+                    user.id, 
+                    [user.id, user.nombre, user.tel, user.email]
+                )
+            }
         }
     },
     show(e){
         this.currentId = e.path[1].attributes.idline.value
         let data = app.data.get(this.table, 'id', this.currentId)
-        this.Form.show(data)
+        this.Form.show(data).setTile('Edicion usuario')
     }
 }
 </script>
