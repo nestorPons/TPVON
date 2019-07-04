@@ -23,6 +23,14 @@ class Component{
     * $Data => Objeto Data para pasar datos a la vista [opcional]
     */
     function print(string $file, Object $Data = null){
+
+        // Variables no obligatorias (Elemtos especificos)
+        $data = (array)$this;  
+        foreach($data as $key => $value){
+            ${$key} = $value;
+        }
+
+        // Variables obligatorias para usos generales
         $prefix_element = self::PREFIX_ELEMENT; 
         $type= $this->type??null;
         $id = $this->id;
@@ -56,6 +64,7 @@ class Component{
         $printName = $this->printName();
         $options = $this->options??null;
         $printTitle = $this->printTitle();
+        $selected = $this->selected??null; 
         
         include \VIEWS\COMPONENTS . "view/$file.phtml";
     }

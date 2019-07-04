@@ -31,6 +31,7 @@
       this.el = document.getElementById('<?=$idElement?>')
       this.$el = $('#<?=$idElement?>')
       this.$switch = $('#control_' + id)
+      this.$el.keyup(e => (e.key === 'Escape') && this.hide())
     }
     clear(){
       this.$el.find('form').trigger('reset')
@@ -43,6 +44,7 @@
     show(data = null){
       if(data) this.load(data)
       this.$switch.prop('checked',true)
+      this.$el.find('[tabindex=1]').focus()
       return this
     }
     hide(){
@@ -50,10 +52,24 @@
       return this
     }
     load(data){
-      const inputs = this.$el.find('input')
+      const inputs = this.$el.find('input'),
+            selects = this.$el.find('select')
+
+      selects.each(function(){
+  
+        $(this).find('[selected]').attr('selected',false)
+        if(data.id != -1)
+          $(this)
+            .find('option[value="'+data[$(this).attr('name')]+'"]').attr('selected', true)    
+        else
+          $(this)
+            .find('[default]').attr('selected',true)
+        
+
+      })
       inputs.each(function(){
         if($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio')
-          data[$(this).attr('name')] == 1 && $(this).prop('checked', true) 
+          data[$(this).attr('name')] == 1 && $(this).prop('checked', true)  
         else $(this).val(data[$(this).attr('name')])
       })
       return this

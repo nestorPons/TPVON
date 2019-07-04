@@ -37,11 +37,14 @@ class Data {
     function getAll(){
         return $this->toArray();
     }
-    function getArray($attr){
+    function getArray($attr, Array $filter = null){
+
         if(is_object(reset($this))){
             $arr = []; 
             foreach($this as $obj){
-                $arr[$obj->id] = $obj->{$attr}; 
+                if(!$filter) $arr[$obj->id] = $obj->{$attr}; 
+                // Filtramos los datos de salida con un argumento dado en tipo de array clave => valor
+                else if ($obj->{key($filter)} == $filter[key($filter)]) $arr[$obj->id] = $obj->{$attr}; 
             }
             return $arr;
         }else {
@@ -129,4 +132,5 @@ class Data {
         }
         return $this;
     }
+
 }   

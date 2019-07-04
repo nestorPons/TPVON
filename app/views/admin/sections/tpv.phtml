@@ -5,8 +5,8 @@
         'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
-        $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->getArray('nombre'), 'tabindex'=>1], false);
-        $cli = new Select(['label' => 'Cliente', 'options' => $Users->getArray('nombre'), 'tabindex'=>2], false);
+        $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->getArray('nombre',['estado'=>1]), 'tabindex'=>1], false);
+        $cli = new Select(['label' => 'Cliente', 'options' => $Users->getArray('nombre', ['estado'=>1]), 'tabindex'=>2], false);
         
         // Linea
         $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
@@ -146,6 +146,9 @@
         $switch : $('#control_<?=$modTicket->id()?>'),
         open(){
             this.$employees.focus()
+        },
+        load(){
+
         },
         openTicket(){
             this.$switch.prop('checked',true)

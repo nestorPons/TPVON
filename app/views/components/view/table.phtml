@@ -28,14 +28,15 @@ var Table = class{
      * arrData = array de datos en orden de salida
      */
     addLine(id, arrData){
-        this.$template
+        return this.$template
             .clone()
             .attr('idline', id || this.$table.find('tr').length)
             .find('td').each(function(i, el){
-                $(this).html(arrData[i])
+                $(this)
+                    .html(arrData[i])
             })
             .end()
-            .appendTo(this.$table.find('tbody'))      
+            .prependTo(this.$table.find('tbody'))      
     }
     endScroll(){
         this.$table.animate({ scrollTop: this.$table.height() }, 100);
@@ -44,11 +45,11 @@ var Table = class{
         this.$table.find('tbody').find('tr').remove()
     }
     delLine(id){
-        this.$table.find('[idline="'+id+'"]').remove()
+        this.$table.find(`[idline="${id}"]`).remove()
     }
-    updateLine(idLine, data){
-        this.delLine(idLine)
-        this.addLine(idLine, data)
+    updateLine(id, data){
+        this.delLine(id)
+        this.addLine(id, data)
     }
 }
 /* var table = {

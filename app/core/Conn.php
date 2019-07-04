@@ -46,7 +46,7 @@ class Conn{
 	 }
 
     private function init($sql, $params = null){
-/* 
+        /* 
 echo $sql;pr($params);
 pr($this->pdo); 
   */
@@ -56,14 +56,14 @@ pr($this->pdo);
             
             if (!empty($this->params)) {
                 foreach ($this->params as $param => $value) {
-                    if(is_int($value[1])) {
+                    if(is_numeric($value[1])) {
                         $type = \PDO::PARAM_INT;
                     } else if(is_bool($value[1])) {
                         $type = \PDO::PARAM_BOOL;
-                    } else if(is_null($value[1])) {
+                    } else if(is_null($value[1]) || $value[1] == '') {
+                        $value[1] = null;
                         $type = \PDO::PARAM_NULL;
                     } else {
-                        if($value[1] == '') $value[1] = NULL; 
                         $type = \PDO::PARAM_STR;
                     }
                     $this->sqlPrepare->bindValue($value[0], $value[1], $type);

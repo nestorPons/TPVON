@@ -93,7 +93,7 @@ $(document)
     else
         $(this).removeClass(selclass)
 })
-.on('keypress', '.keyEnterOut', function (e) {
+.on('keyup', '.keyEnterOut', function (e) {
     e.preventDefault()
     if(e.key == 'Enter') {
         let ind = $(".keyEnterOut").index(this)

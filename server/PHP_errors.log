@@ -20297,3 +20297,437 @@ Stack trace:
 #3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #4 {main}
   thrown in /var/www/html/app/core/Query.php on line 50
+[03-Jul-2019 11:20:24 UTC] PHP Notice:  Undefined variable: EmployeesActive in /var/www/html/app/views/admin/sections/tpv.phtml on line 8
+[03-Jul-2019 11:20:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getArray() on null in /var/www/html/app/views/admin/sections/tpv.phtml:8
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Admin.php(36): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 8
+[03-Jul-2019 11:34:59 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/app/core/Data.php on line 139
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Warning:  Use of undefined constant key - assumed 'key' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:38:48 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined variable: key in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:01 UTC] PHP Notice:  Undefined property: app\models\User::$ in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:39:33 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Data::app\core\{closure}(), 1 passed and exactly 2 expected in /var/www/html/app/core/Data.php:137
+Stack trace:
+#0 [internal function]: app\core\Data->app\core\{closure}(Object(app\models\User))
+#1 /var/www/html/app/core/Data.php(140): array_filter(Array, Object(Closure))
+#2 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#3 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#4 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#6 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#7 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#8 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#9 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#10 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#11 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#12 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#13 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#14 {main}
+  thrown in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 11:43:59 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\models\User as array in /var/www/html/app/core/Data.php:137
+Stack trace:
+#0 [internal function]: app\core\Data->app\core\{closure}(Object(app\models\User))
+#1 /var/www/html/app/core/Data.php(139): array_filter(Array, Object(Closure))
+#2 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#3 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#4 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#6 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#7 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#8 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#9 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#10 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#11 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#12 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#13 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#14 {main}
+  thrown in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 11:44:09 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\models\User as array in /var/www/html/app/core/Data.php:137
+Stack trace:
+#0 [internal function]: app\core\Data->app\core\{closure}(Object(app\models\User))
+#1 /var/www/html/app/core/Data.php(139): array_filter(Array, Object(Closure))
+#2 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#3 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#4 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#6 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#7 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#8 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#9 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#10 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#11 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#12 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#13 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#14 {main}
+  thrown in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 11:47:19 UTC] PHP Notice:  Undefined variable: arr in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 11:47:19 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /var/www/html/app/core/Data.php:137
+Stack trace:
+#0 [internal function]: app\core\Data->app\core\{closure}(Object(app\models\User))
+#1 /var/www/html/app/core/Data.php(138): array_filter(Array, Object(Closure))
+#2 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#3 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#4 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#6 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#7 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#8 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#9 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#10 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#11 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#12 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#13 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#14 {main}
+  thrown in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 11:47:32 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /var/www/html/app/core/Data.php:137
+Stack trace:
+#0 [internal function]: app\core\Data->app\core\{closure}(Object(app\models\User))
+#1 /var/www/html/app/core/Data.php(138): array_filter(Array, Object(Closure))
+#2 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#3 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#4 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#5 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#6 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#7 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#8 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#9 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#10 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#11 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#12 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#13 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#14 {main}
+  thrown in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 11:48:51 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/components/view/select.phtml on line 21
+[03-Jul-2019 11:56:43 UTC] PHP Notice:  Trying to get property 'id' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 11:56:43 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 11:56:43 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/components/view/select.phtml on line 21
+[03-Jul-2019 11:57:09 UTC] PHP Notice:  Trying to get property 'id' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 11:57:09 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 11:57:09 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/components/view/select.phtml on line 21
+[03-Jul-2019 11:59:50 UTC] PHP Warning:  Use of undefined constant filter - assumed 'filter' (this will throw an Error in a future version of PHP) in /var/www/html/app/core/Data.php on line 41
+[03-Jul-2019 11:59:50 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 41
+[03-Jul-2019 11:59:50 UTC] PHP Notice:  Undefined property: app\core\Data::$data in /var/www/html/app/core/Data.php on line 136
+[03-Jul-2019 11:59:50 UTC] PHP Warning:  array_filter() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 11:59:50 UTC] PHP Notice:  Trying to get property 'id' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 11:59:50 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 11:59:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Data::arrayFilter(), 1 passed in /var/www/html/app/views/admin/sections/tpv.phtml on line 9 and exactly 2 expected in /var/www/html/app/core/Data.php:135
+Stack trace:
+#0 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#1 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#2 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#7 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#9 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Data.php on line 135
+[03-Jul-2019 12:01:09 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 41
+[03-Jul-2019 12:01:09 UTC] PHP Notice:  Undefined property: app\core\Data::$data in /var/www/html/app/core/Data.php on line 136
+[03-Jul-2019 12:01:09 UTC] PHP Warning:  array_filter() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 138
+[03-Jul-2019 12:01:09 UTC] PHP Notice:  Trying to get property 'id' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 12:01:09 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/core/Data.php on line 46
+[03-Jul-2019 12:01:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Data::arrayFilter(), 1 passed in /var/www/html/app/views/admin/sections/tpv.phtml on line 9 and exactly 2 expected in /var/www/html/app/core/Data.php:135
+Stack trace:
+#0 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#1 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#2 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#7 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#9 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Data.php on line 135
+[03-Jul-2019 12:01:48 UTC] PHP Notice:  Undefined property: app\core\Data::$data in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 12:01:48 UTC] PHP Warning:  array_filter() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 139
+[03-Jul-2019 12:01:48 UTC] PHP Notice:  Trying to get property 'id' of non-object in /var/www/html/app/core/Data.php on line 47
+[03-Jul-2019 12:01:48 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/core/Data.php on line 47
+[03-Jul-2019 12:01:48 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Data::arrayFilter(), 1 passed in /var/www/html/app/views/admin/sections/tpv.phtml on line 9 and exactly 2 expected in /var/www/html/app/core/Data.php:136
+Stack trace:
+#0 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#1 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#2 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#7 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#9 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Data.php on line 136
+[03-Jul-2019 12:02:25 UTC] PHP Notice:  Undefined property: app\core\Data::$data in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 12:02:25 UTC] PHP Warning:  array_filter() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 139
+[03-Jul-2019 12:02:25 UTC] PHP Notice:  Trying to get property 'id' of non-object in /var/www/html/app/core/Data.php on line 47
+[03-Jul-2019 12:02:25 UTC] PHP Notice:  Trying to get property 'nombre' of non-object in /var/www/html/app/core/Data.php on line 47
+[03-Jul-2019 12:02:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Data::arrayFilter(), 1 passed in /var/www/html/app/views/admin/sections/tpv.phtml on line 9 and exactly 2 expected in /var/www/html/app/core/Data.php:136
+Stack trace:
+#0 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#1 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#2 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#7 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#9 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Data.php on line 136
+[03-Jul-2019 12:02:59 UTC] PHP Notice:  Undefined property: app\core\Data::$data in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 12:23:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Data::arrayFilter(), 1 passed in /var/www/html/app/views/admin/sections/tpv.phtml on line 9 and exactly 2 expected in /var/www/html/app/core/Data.php:137
+Stack trace:
+#0 /var/www/html/app/views/admin/sections/tpv.phtml(9): app\core\Data->arrayFilter(Array)
+#1 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#2 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#4 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#5 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#6 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#7 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#9 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#10 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#11 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#12 {main}
+  thrown in /var/www/html/app/core/Data.php on line 137
+[03-Jul-2019 12:27:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Data::arrayFilter() in /var/www/html/app/views/admin/sections/tpv.phtml:9
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 9
+[03-Jul-2019 12:31:43 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 50
+[03-Jul-2019 12:31:43 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 50
+[03-Jul-2019 12:31:59 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:31:59 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:31:59 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:31:59 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:31:59 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:31:59 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:32:15 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:32:15 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:32:15 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:32:15 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:32:15 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:32:15 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:03 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Notice:  Undefined property: app\models\Items::$ in /var/www/html/app/core/Data.php on line 49
+[03-Jul-2019 12:33:18 UTC] PHP Warning:  key() expects parameter 1 to be array, null given in /var/www/html/app/core/Data.php on line 49
+[04-Jul-2019 08:11:52 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\views\components\controllers\Select::selected(), 0 passed in /var/www/html/app/views/components/view/select.phtml on line 21 and exactly 1 expected in /var/www/html/app/views/components/controllers/Select.php:16
+Stack trace:
+#0 /var/www/html/app/views/components/view/select.phtml(21): app\views\components\controllers\Select->selected()
+#1 /var/www/html/app/views/components/controllers/Component.php(60): include('/var/www/html/a...')
+#2 /var/www/html/app/views/components/controllers/Select.php(14): app\views\components\controllers\Component->print('select')
+#3 /var/www/html/app/views/admin/sections/tpv.phtml(8): app\views\components\controllers\Select->__construct(Array, false)
+#4 /var/www/html/app/views/admin/main.phtml(2): include('/var/www/html/a...')
+#5 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#6 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#7 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#8 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#9 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#10 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#11 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#12 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#13 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#14 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#15 {main}
+  thrown in /var/www/html/app/views/components/controllers/Select.php on line 16
+[04-Jul-2019 08:16:55 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputText::$selected in /var/www/html/app/views/components/controllers/Component.php on line 59
+[04-Jul-2019 08:16:55 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputPass::$selected in /var/www/html/app/views/components/controllers/Component.php on line 59
+[04-Jul-2019 08:16:55 UTC] PHP Notice:  Undefined property: app\views\components\controllers\ButtonSuccess::$selected in /var/www/html/app/views/components/controllers/Component.php on line 59
+[04-Jul-2019 08:16:55 UTC] PHP Notice:  Undefined property: app\views\components\controllers\ButtonCancel::$selected in /var/www/html/app/views/components/controllers/Component.php on line 59
+[04-Jul-2019 09:29:34 UTC] PHP Notice:  Undefined index: articulo in /var/www/html/app/models/Tickets.php on line 35
+[04-Jul-2019 09:29:34 UTC] PHP Notice:  Undefined index: precio in /var/www/html/app/models/Tickets.php on line 36
+[04-Jul-2019 09:29:34 UTC] PHP Notice:  Undefined index: cantidad in /var/www/html/app/models/Tickets.php on line 37
+[04-Jul-2019 09:29:34 UTC] PHP Notice:  Undefined index: dto in /var/www/html/app/models/Tickets.php on line 38
+[04-Jul-2019 10:15:30 UTC] PHP Notice:  Undefined variable: arrABC in /var/www/html/app/views/components/view/listabc.phtml on line 2
+[04-Jul-2019 10:15:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/listabc.phtml on line 2
+[04-Jul-2019 10:32:07 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\views\components\controllers\ListABC::__construct() must be of the type array, string given, called in /var/www/html/app/views/admin/sections/users.phtml on line 5 and defined in /var/www/html/app/views/components/controllers/ListABC.php:8
+Stack trace:
+#0 /var/www/html/app/views/admin/sections/users.phtml(5): app\views\components\controllers\ListABC->__construct('table5d1dd5a7ed...')
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->printView('/var/www/html/a...', NULL)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->view(NULL)
+#4 /var/www/html/app/core/Router.php(101): app\controllers\Controller->__construct('view', 'Users', NULL)
+#5 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Users')
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/views/components/controllers/ListABC.php on line 8

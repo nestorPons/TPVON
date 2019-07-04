@@ -7,11 +7,13 @@
         $name = new InputText(['label' => 'Nombre','tabindex'=>2, 'name'=>'nombre'],  false);
         $email = new InputText(['label' => 'Email','tabindex'=>3, 'name'=>'email'],  false);
         $phone = new InputText(['label' => 'Teléfono','tabindex'=>4, 'name'=>'tel'],  false);
-        $fnaci = new InputDate(['label' => 'Fecha nacimiento','tabindex'=>5, 'name'=>'fecha_nacimiento'],  false);
-        $status = new Checkbox(['label' => 'Cuenta activa', 'tabindex'=>6, 'name'=>'estado', 'value'=>1],  false);
+        $fnaci = new InputText(['label' => 'Fecha nacimiento','tabindex'=>5, 'name'=>'fecha_nacimiento'],  false);
+        $level = new Select(['label' => 'Tipo usuario', 'tabindex'=>6, 'name'=>'nivel', 'class'=>'valid',
+            'options' => [1=>'Usuario', 2=>'Administrador',0=>'Cliente'],'selected' => 0], true);
+        $status = new Checkbox(['label' => 'Cuenta activa', 'tabindex'=>7, 'name'=>'estado', 'value'=>1],  false);
         $hidden = new InputHidden(['name'=>'noAuth', 'value'=>'1']);
-        $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>7]);
-        $btnDel = new ButtonCancel(['caption'=>'Eliminar', 'tabindex'=>8, 'class'=>'fnDelete']);
+        $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>8]);
+        $btnDel = new ButtonCancel(['caption'=>'Eliminar', 'tabindex'=>9, 'class'=>'fnDelete']);
     ?> 
     </form>
-</component>
+</component> 

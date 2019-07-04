@@ -1,8 +1,7 @@
 <?php namespace app\models;
 
-use \app\core\{ Query, Data };
+use \app\core\{ Query, Data, Error };
 use PHPMailer\PHPMailer\{ PHPMailer,  Exception};
-use \app\core\Error;
 
 class User extends Query{
     public $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token, $telefonos;
@@ -25,12 +24,25 @@ class User extends Query{
     }
     function allEmployees(){
         $Data = new Data; 
-        $data = $this->getBy(['nivel' => 1, 'nivel' => 2]);
+        $data = $this->getBy(['nivel' => 2, 'nivel' => 1]);
         foreach($data as $key => $value){
             $Data->addItem(new User($value), $key);
         }
         return $Data;
     }
+    // Funcion que rehaciza el nuevo registro o la edicion según corresponda
+    function save(Object $Data){
+        $noAuth = $Data->use('noAuth');
+        if($this->id == -1) $this->new($Data);
+        else {
+            if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
+            // Edicion método padre
+
+            if($this->saveById($Data->toArray()));
+        }
+        return $this->id;
+    }
+    // Nuevos registros
     function new(Object $Data){
 
         if ($this->id = $this->loadData($Data->getAll())){  
@@ -81,14 +93,7 @@ class User extends Query{
     function activate(){
         return $this->saveById(['estado'=>1]);
     }
-    function save(Object $Data){
-        $noAuth = $Data->use('noAuth');
-        if($this->id == -1) $this->new($Data);
-        else {
-            if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
-            return $this->saveById($Data->toArray());
-        }
-    }
+
     function resetPassword(){
         $Token = new Tokens();
         $url = HOST . '/'. CODE_COMPANY. "/login/newpassword/{$Token->create($this)}";
