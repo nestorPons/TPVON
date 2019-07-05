@@ -27,6 +27,7 @@ var users = {
     currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$editUser->id()?>'),
+    $table: $('#<?=$table->id()?>').find('tbody'),
     validation(){
         let f = this.Form.getData(),
             usuarios = app.data.get('usuarios')
@@ -77,6 +78,26 @@ var users = {
         this.currentId = e.path[1].attributes.idline.value
         let data = app.data.get(this.table, 'id', this.currentId)
         this.Form.show(data).setTile('Edicion usuario')
+    },
+    search(value){
+        this.$table.find('tr').hide()
+        if(value.indexOf('@') != -1) this.searchBy.email()
+        else this.searchBy.name(value)
+    },
+    searchBy: {
+        $table: $('#<?=$table->id()?>').find('tbody'),
+        hide(){
+
+        },
+        name(value){
+           let n =  app.data.get('usuarios','nombre', value, 'estado==1')
+           for(let i in n){
+               this.$table.find(`[idline='${n[i]}'`).show()
+           }
+        },
+        email(value){
+            echo('Buscando por email...')
+        }
     }
 }
 </script>

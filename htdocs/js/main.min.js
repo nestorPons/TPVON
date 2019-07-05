@@ -25,19 +25,21 @@ $(document)
 // Comportamiento general de eliminación de registro
 // Para su correcto funcionamiento todos los obj js tienen que tener establecida la propiedad currentId
 .on('click', '.fnDelete', function (e, i) {
-    let $section = $(this).parents('section'),
-        $form = $(this).parent('form'), 
-        controller = $form.attr('controller')
-        obj = window[$section.attr('id')]
-   
-    // Envio de datos
-    app.post({
-        controller: controller,
-        action: 'del',
-        data: {id: obj.currentId}
-    },
-    function(r){
-        exist(obj.del) && obj.del() 
+    app.mens.confirm('¿Seguro que desea eliminar el registro?' , fn =>{
+        let $section = $(this).parents('section'),
+            $form = $(this).parent('form'), 
+            controller = $form.attr('controller')
+            obj = window[$section.attr('id')]
+       
+        // Envio de datos
+        app.post({
+            controller: controller,
+            action: 'del',
+            data: {id: obj.currentId}
+        },
+        function(r){
+            exist(obj.del) && obj.del() 
+        })
     })
 })
 // Comportamiento general de envio de formulario al servidor

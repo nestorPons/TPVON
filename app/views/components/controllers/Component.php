@@ -40,6 +40,7 @@ class Component{
         $disabled = (isset($this->disabled))?'disabled':'';
         $readonly = (isset($this->readonly))?'readonly':'';
         $checked = (isset($this->checked))?'checked':'';
+        $placeholder = (isset($this->placeholder))?"placeholder = '{$this->placeholder}'":'';
         $body = $this->body??null;
         $name = $this->printName(); 
         $title = $this->printTitle();
@@ -60,6 +61,9 @@ class Component{
         $onblur = isset($this->onblur)?'onblur='.$this->onblur:'';
         $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:'';
         $onload = isset($this->onload)?'onload='.$this->onload:'';
+        $onkeypress = isset($this->onkeypress)?'onkeypress='.$this->onkeypress:'';
+        $onkeydown = isset($this->onkeydown)?'onkeydown='.$this->onkeydown:'';
+        $onkeyup = isset($this->onkeyup)?'onkeyup='.$this->onkeyup:'';
         $icon = isset($this->icon)?$this->icon:false;
         $printName = $this->printName();
         $options = $this->options??null;

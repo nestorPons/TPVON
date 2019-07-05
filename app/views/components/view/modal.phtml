@@ -42,7 +42,9 @@
       return this
     }
     show(data = null){
+ 
       if(data) this.load(data)
+  
       this.$switch.prop('checked',true)
       this.$el.find('[tabindex=1]').focus()
       return this
@@ -53,24 +55,23 @@
     }
     load(data){
       const inputs = this.$el.find('input'),
-            selects = this.$el.find('select')
-
+            selects = this.$el.find('select'),
+            d = data[0]
+            
       selects.each(function(){
-  
+
         $(this).find('[selected]').attr('selected',false)
-        if(data.id != -1)
+        if(d.id != -1)
           $(this)
-            .find('option[value="'+data[$(this).attr('name')]+'"]').attr('selected', true)    
+            .find('option[value="'+d[$(this).attr('name')]+'"]').attr('selected', true)    
         else
           $(this)
             .find('[default]').attr('selected',true)
-        
-
       })
       inputs.each(function(){
         if($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio')
-          data[$(this).attr('name')] == 1 && $(this).prop('checked', true)  
-        else $(this).val(data[$(this).attr('name')])
+          d[$(this).attr('name')] == 1 && $(this).prop('checked', true)  
+        else $(this).val(d[$(this).attr('name')])
       })
       return this
     }

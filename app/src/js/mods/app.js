@@ -3,12 +3,29 @@ const app = {
     data: {
         storage: [],
         current: {}, 
-        get(index , key, value){
+        get(index , key, value, filter){
             // Si no se pasan key o value devolvemos todos los registros            
             if(key == undefined || value == undefined ){    
                 return this.storage[index]
             }
-            else return this.storage[index].find((el) => el[key] == value) || false
+            else return this.storage[index].filter((el) => {
+                if (filter) {
+                    if(filter.indexOf('==') != -1){
+                        let arr = filter.split('==')
+                        return el[key] == value && el[arr[0]] == arr[1]
+                    }
+                    else if(filter.indexOf('>=') != -1){
+                        let arr = filter.split('==')
+                        return el[key] == value && el[arr[0]] >= arr[1]                       
+                    }
+                    else if(filter.indexOf('<=') != -1){
+                        let arr = filter.split('==')
+                        return el[key] == value && el[arr[0]] >= arr[1]                       
+                    }
+                    
+                }
+                else return el[key] == value 
+            }) || false
         },
         set(index, data, key, value){
             
@@ -105,8 +122,8 @@ const app = {
         error(mens){
             return alert(mens);
         },
-        confirm(mens){
-            return confirm(mens);
+        confirm(mens, callback){
+            return confirm(mens) && callback()
         }
     },
     sections: {
@@ -182,6 +199,9 @@ const app = {
         },
         add(){
             typeof window[this.active].add == 'function' && window[this.active].add()
+        },
+        search(){
+
         }
     },
     form: {

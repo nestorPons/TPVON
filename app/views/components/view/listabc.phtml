@@ -22,6 +22,7 @@
     }
     #<?=$id?> ul li:hover{
         color: var(--blockquote-color);
+        transform: scale(1.1)
     }
 </style>
 <script>
@@ -31,7 +32,7 @@
             const val = el.path[0].attributes.value.value.toLowerCase(),
                 $t = $('#<?=$table?>')
 
-                $t.find('tr').hide(function(){
+                $t.find('tbody tr').hide(function(){
                     $t.find(`.${val}`).show()
                 })
         }

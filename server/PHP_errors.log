@@ -20731,3 +20731,138 @@ Stack trace:
 #7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #8 {main}
   thrown in /var/www/html/app/views/components/controllers/ListABC.php on line 8
+[05-Jul-2019 07:34:53 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 59
+[05-Jul-2019 07:34:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:59
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 59
+[05-Jul-2019 07:40:04 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:68
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:15 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:68
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:32 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:32 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:68
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:48 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:40:48 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:68
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 68
+[05-Jul-2019 07:44:57 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 72
+[05-Jul-2019 07:44:57 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:72
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 72
+[05-Jul-2019 07:46:07 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 73
+[05-Jul-2019 07:46:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:73
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 73
+[05-Jul-2019 07:47:59 UTC] PHP Notice:  Undefined variable: search in /var/www/html/app/views/admin/barTools.phtml on line 73
+[05-Jul-2019 07:47:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:73
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 73
+[05-Jul-2019 07:52:19 UTC] PHP Notice:  Undefined variable: btnSearch in /var/www/html/app/views/admin/barTools.phtml on line 75
+[05-Jul-2019 07:52:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function id() on null in /var/www/html/app/views/admin/barTools.phtml:75
+Stack trace:
+#0 /var/www/html/app/views/admin/index.phtml(5): include()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Admin.php(34): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(100): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/views/admin/barTools.phtml on line 75
