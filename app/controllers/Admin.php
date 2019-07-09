@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\models\{Items, Tickets, User, Company};
+use \app\models\{Items, Tickets, User, Company, Config};
 use \app\core\{Query, Data};
 
 /**
@@ -10,7 +10,8 @@ class Admin extends Controller{
     function __construct(){
     }
     function loadView(){
-
+        $Config = new Config; 
+        $data['iva'] = $Config->iva;
         $Ticket = new Tickets; 
         $lastTicket = $Ticket->getLast();
         $data['tickets_new_id'] = $lastTicket['id'] + 1 ;
@@ -19,18 +20,13 @@ class Admin extends Controller{
         $Items = new Items;
         $data['Services'] = $Items->allData($Items, 'codigo'); // para php
         $data['jsonServices'] = json_encode($Items->getAll()); // para js
-        $Iva = new Query('tipo_iva');
-        $conf = new Data(['iva' => $Iva->getOneBy(['pre'=>true])]);
 
-        $data['Config'] = $conf;
-        
         $data['Company'] = new Company(NAME_COMPANY);
 
+    
         $User = new User;
-        $data['Employees'] = $User->allEmployees();
-        $data['Users'] = $User->allData($User);
-        $data['jsonUsers'] = json_encode($User->getAll()); // para js
-
+        $data['Users'] = $User->all();
+        $data['jsonUsers'] = json_encode($data['Users']); // para js
         return $this->printView( \VIEWS\ADMIN . 'index.phtml', $data);
     }
 }

@@ -29,6 +29,7 @@ class Data {
             if(is_object($value)) return $this->{get_class($value)} = $value;
             else return $this->{$value} = $value;
         } 
+        
     }
     function set($arg1, $arg2 = null){
         if($arg2) return $this->addItem($arg2, $arg1);
@@ -104,6 +105,7 @@ class Data {
         return $arg; 
      }
     function delete(string $arg){ 
+
         if(property_exists($this, $arg)){
             unset($this->{$arg});
             return true; 

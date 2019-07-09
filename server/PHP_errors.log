@@ -20866,3 +20866,427 @@ Stack trace:
 #9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #10 {main}
   thrown in /var/www/html/app/views/admin/barTools.phtml on line 75
+[08-Jul-2019 07:56:31 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/aol/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[08-Jul-2019 07:56:31 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[08-Jul-2019 07:56:34 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/aol/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[08-Jul-2019 07:56:34 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[08-Jul-2019 07:57:00 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Newcompany::__construct() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 100 and defined in /var/www/html/app/controllers/Newcompany.php:7
+Stack trace:
+#0 /var/www/html/app/core/Router.php(100): app\controllers\Newcompany->__construct('view', NULL, NULL)
+#1 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Newcompany')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Newcompany.php on line 7
+[08-Jul-2019 07:59:54 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Newcompany::__construct() must be of the type string, null given, called in /var/www/html/app/core/Router.php on line 100 and defined in /var/www/html/app/controllers/Newcompany.php:7
+Stack trace:
+#0 /var/www/html/app/core/Router.php(100): app\controllers\Newcompany->__construct('view', NULL, NULL)
+#1 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Newcompany')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Newcompany.php on line 7
+[08-Jul-2019 08:21:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:21:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:27:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:27:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:27:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:27:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:29:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:29:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:31:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:31:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:34:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:34:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:35:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:35:13 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:36:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:36:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:38:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:38:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:39:20 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:39:20 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:41:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:41:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:41:57 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:41:57 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:42:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 08:42:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:15:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:15:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:15:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:15:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:17:03 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:17:03 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:17:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:17:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:19:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:19:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:19:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:19:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:48:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:48:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:50:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:52:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:57:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:58:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:58:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 09:59:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:00:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:02:57 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:04:06 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:05:09 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:05:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:09:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:09:43 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:09:58 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:10:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:11:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:21:55 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:22:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:23:25 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:24:03 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:25:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:26:39 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:29:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:30:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:32:01 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:32:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 10:33:31 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[08-Jul-2019 10:33:31 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[08-Jul-2019 10:33:31 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 67
+[08-Jul-2019 10:33:31 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getById() must be of the type int, null given, called in /var/www/html/app/models/Company.php on line 32 and defined in /var/www/html/app/core/Query.php:50
+Stack trace:
+#0 /var/www/html/app/models/Company.php(32): app\core\Query->getById(NULL)
+#1 /var/www/html/app/core/Router.php(47): app\models\Company->__construct('auth')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Query.php on line 50
+[08-Jul-2019 10:33:55 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/auth/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[08-Jul-2019 10:33:55 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[08-Jul-2019 10:33:55 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 67
+[08-Jul-2019 10:33:55 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getById() must be of the type int, null given, called in /var/www/html/app/models/Company.php on line 32 and defined in /var/www/html/app/core/Query.php:50
+Stack trace:
+#0 /var/www/html/app/models/Company.php(32): app\core\Query->getById(NULL)
+#1 /var/www/html/app/core/Router.php(47): app\models\Company->__construct('auth')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Query.php on line 50
+[08-Jul-2019 10:37:51 UTC] PHP Notice:  Undefined property: app\core\Data::$data in /var/www/html/app/core/Data.php on line 107
+[08-Jul-2019 11:26:49 UTC] PHP Warning:  Declaration of app\models\User::allData() should be compatible with app\core\Query::allData(object $Obj, ?string $key = NULL) in /var/www/html/app/models/User.php on line 176
+[08-Jul-2019 11:26:49 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\core\Query::allData(), 0 passed in /var/www/html/app/models/User.php on line 26 and at least 1 expected in /var/www/html/app/core/Query.php:238
+Stack trace:
+#0 /var/www/html/app/models/User.php(26): app\core\Query->allData()
+#1 /var/www/html/app/controllers/Admin.php(26): app\models\User->allData(Object(app\models\User))
+#2 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Query.php on line 238
+[08-Jul-2019 11:27:40 UTC] PHP Warning:  Declaration of app\models\User::allData() should be compatible with app\core\Query::allData(object $Obj, ?string $key = NULL) in /var/www/html/app/models/User.php on line 176
+[08-Jul-2019 11:27:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\User::allDataUser() in /var/www/html/app/controllers/Admin.php:26
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Admin.php on line 26
+[08-Jul-2019 11:29:20 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\models\User as array in /var/www/html/app/models/User.php:28
+Stack trace:
+#0 /var/www/html/app/controllers/Admin.php(26): app\models\User->all()
+#1 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/User.php on line 28
+[08-Jul-2019 11:29:48 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\models\User as array in /var/www/html/app/models/User.php:28
+Stack trace:
+#0 /var/www/html/app/controllers/Admin.php(26): app\models\User->all()
+#1 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/User.php on line 28
+[08-Jul-2019 11:31:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 11:33:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 11:38:32 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getArray() on array in /var/www/html/app/views/admin/sections/tpv.phtml:8
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Admin.php(29): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 8
+[08-Jul-2019 11:39:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getArray() on array in /var/www/html/app/views/admin/sections/tpv.phtml:8
+Stack trace:
+#0 /var/www/html/app/views/admin/main.phtml(2): include()
+#1 /var/www/html/app/views/admin/index.phtml(7): include('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#3 /var/www/html/app/controllers/Admin.php(29): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/views/admin/sections/tpv.phtml on line 8
+[08-Jul-2019 11:46:31 UTC] PHP Recoverable fatal error:  Object of class app\models\User could not be converted to string in /var/www/html/app/views/components/view/select.phtml on line 21
+[08-Jul-2019 11:47:19 UTC] PHP Recoverable fatal error:  Object of class app\models\User could not be converted to string in /var/www/html/app/views/components/view/select.phtml on line 22
+[08-Jul-2019 11:50:53 UTC] PHP Notice:  Undefined property: app\models\User::$name in /var/www/html/app/models/User.php on line 40
+[08-Jul-2019 11:50:53 UTC] PHP Notice:  Undefined property: app\models\User::$name in /var/www/html/app/models/User.php on line 40
+[08-Jul-2019 11:50:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 11:51:19 UTC] PHP Notice:  Undefined property: app\models\User::$name in /var/www/html/app/models/User.php on line 40
+[08-Jul-2019 11:51:19 UTC] PHP Notice:  Undefined property: app\models\User::$name in /var/www/html/app/models/User.php on line 40
+[08-Jul-2019 11:51:19 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:01:30 UTC] PHP Notice:  Undefined variable: filter in /var/www/html/app/models/User.php on line 27
+[08-Jul-2019 12:01:30 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getAll() must be of the type string, null given, called in /var/www/html/app/models/User.php on line 27 and defined in /var/www/html/app/core/Query.php:46
+Stack trace:
+#0 /var/www/html/app/models/User.php(27): app\core\Query->getAll(NULL)
+#1 /var/www/html/app/controllers/Admin.php(26): app\models\User->all('nombre')
+#2 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Query.php on line 46
+[08-Jul-2019 12:03:45 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getAll() must be of the type string, null given, called in /var/www/html/app/models/User.php on line 27 and defined in /var/www/html/app/core/Query.php:46
+Stack trace:
+#0 /var/www/html/app/models/User.php(27): app\core\Query->getAll(NULL)
+#1 /var/www/html/app/controllers/Admin.php(26): app\models\User->all()
+#2 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Query.php on line 46
+[08-Jul-2019 12:05:52 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/components/controllers/Select.php on line 11
+[08-Jul-2019 12:05:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:05:52 UTC] PHP Notice:  Undefined index: options in /var/www/html/app/views/components/controllers/Select.php on line 11
+[08-Jul-2019 12:05:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:05:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:06:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:06:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:06:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:08:09 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:08:09 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:08:09 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:16:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:16:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:16:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:17:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:17:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:17:41 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:18:49 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:18:49 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:18:49 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:19:31 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:19:31 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:19:31 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:20:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:20:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:20:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:22:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:22:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:22:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:23:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:23:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:23:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:24:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:24:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:24:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:24:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:24:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:24:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:25:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:25:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:25:51 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:26:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:26:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:26:23 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:26:40 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:26:40 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:26:40 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:28:58 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:28:58 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:28:58 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:29:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:31:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:31:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:31:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:32:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:32:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:32:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:33:25 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:33:25 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:33:25 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:33:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:33:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:33:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:34:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:34:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:34:30 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:35:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:35:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[08-Jul-2019 12:35:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:33:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:33:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:33:59 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:34:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:34:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:34:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:35:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:35:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:35:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:37:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:37:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:37:21 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:38:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:38:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:38:10 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:38:32 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:38:32 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:38:32 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:39:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:39:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:39:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:39:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:39:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:39:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:50:11 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:50:11 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:50:25 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:50:25 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:51:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:51:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:52:19 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:52:19 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:52:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:52:53 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:53:27 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:53:27 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:54:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:54:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:54:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:54:44 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:56:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:56:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:56:45 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:58:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:58:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:58:34 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:18 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 07:59:36 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/select.phtml on line 20
+[09-Jul-2019 08:17:48 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\core\Data as array in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[09-Jul-2019 08:17:48 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\core\Data as array in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[09-Jul-2019 08:17:53 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\core\Data as array in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[09-Jul-2019 08:17:53 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\core\Data as array in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[09-Jul-2019 08:17:54 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\core\Data as array in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[09-Jul-2019 08:17:55 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type app\core\Data as array in /var/www/html/app/core/Router.php:83
+Stack trace:
+#0 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#1 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#2 {main}
+  thrown in /var/www/html/app/core/Router.php on line 83
+[09-Jul-2019 09:09:52 UTC] PHP Notice:  Undefined variable: Config in /var/www/html/app/controllers/Admin.php on line 14
+[09-Jul-2019 09:12:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Config::iva() in /var/www/html/app/controllers/Admin.php:14
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Admin.php on line 14
+[09-Jul-2019 09:13:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Config::__get() in /var/www/html/app/controllers/Admin.php:14
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Admin.php on line 14
+[09-Jul-2019 09:16:07 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 38
+[09-Jul-2019 09:18:39 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 38
+[09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: articulo in /var/www/html/app/models/Tickets.php on line 35
+[09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: precio in /var/www/html/app/models/Tickets.php on line 36
+[09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: cantidad in /var/www/html/app/models/Tickets.php on line 37
+[09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 38
+[09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: dto in /var/www/html/app/models/Tickets.php on line 39

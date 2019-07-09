@@ -52,12 +52,17 @@ class Query extends Conn{
         return $r ? $r[0] : null ;
      }
     // Devuelve datos de una peticion por algun campo del registro
-    public function getBy(array $args , string $return = '*', bool $unique = false,  bool $desc = false){
+    // Args puede ser String (1.1) o un array clave =>valor (1.0)
+    public function getBy($args , string $return = '*', bool $unique = false,  bool $desc = false){
         $filters = '';
-        foreach($args as $column => $value){
-            $filters .= (string)$column ." = '".(string)$value ."' AND ";
-        }
-        $filters = trim($filters,"AND ");
+
+        if(is_string($args)) $filters = $args;
+        else {
+            foreach($args as $column => $value){
+                $filters .= (string)$column ." = '".(string)$value ."' AND ";
+            }
+            $filters = trim($filters,"AND ");
+         }
         $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);
         return   $unique ? $r[0] : $r; 
      }

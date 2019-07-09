@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\{ PHPMailer,  Exception};
 class User extends Query{
     public $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token, $telefonos;
     protected $table = 'usuarios';
+    private $allUsers; 
     /**
      * $arg puede ser un string email para buscar por email
      * integer buscar por id de usuario
@@ -22,13 +23,13 @@ class User extends Query{
             else if (is_object($arg)) $this->searchById($arg->id);
         }
     }
-    function allEmployees(){
-        $Data = new Data; 
-        $data = $this->getBy(['nivel' => 2, 'nivel' => 1]);
-        foreach($data as $key => $value){
-            $Data->addItem(new User($value), $key);
+    function all(){
+        $arr = $this->getAll();
+        foreach ($arr as $user){
+            unset($user['password']);
+            $r[] = $user; 
         }
-        return $Data;
+        return $r; 
     }
     // Funcion que rehaciza el nuevo registro o la edicion según corresponda
     function save(Object $Data){

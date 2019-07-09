@@ -87,10 +87,12 @@
             distance: 1000, 
             velocity: 500,
             open(){
+                $this = this
+                $this.$txtSearch.val('')
                 this.$search.animate({
                     left: this.$search.position().left - this.distance
                 }, this.velocity, function(){
-
+                    $this.$txtSearch.focus()
                 })
             },
             close(){

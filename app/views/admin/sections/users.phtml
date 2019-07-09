@@ -3,7 +3,7 @@
     <?php
     $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 'class'=>'hoverable', 'onclick'=>'users.show(window.event)']);
     $abc = new ListABC($table->id());
-    $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'users/edit.phtml'], false);
+    $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
     ?>
 
 </section>
@@ -52,8 +52,11 @@ var users = {
         }
         this.Form.clear().show(data).setTile('Nuevo usuario')
     },
-    save(data){ 
+    save(data){
+
         app.data.set(this.table, data , 'id', data.id)
+        
+
 
         if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.nombre, data.tel, data.email])
         else this.Table.updateLine(data.id, [data.id, data.nombre, data.tel, data.email])
@@ -79,25 +82,16 @@ var users = {
         let data = app.data.get(this.table, 'id', this.currentId)
         this.Form.show(data).setTile('Edicion usuario')
     },
+    // Formas de busqueda en usuarios
     search(value){
         this.$table.find('tr').hide()
-        if(value.indexOf('@') != -1) this.searchBy.email()
-        else this.searchBy.name(value)
+        if(/^([0-9])*$/.test(value)) this.searchBy('tel', value)
+        else if(value.indexOf('@') != -1) this.searchBy('email', value)
+        else this.searchBy('nombre', value)
     },
-    searchBy: {
-        $table: $('#<?=$table->id()?>').find('tbody'),
-        hide(){
-
-        },
-        name(value){
-           let n =  app.data.get('usuarios','nombre', value, 'estado==1')
-           for(let i in n){
-               this.$table.find(`[idline='${n[i]}'`).show()
-           }
-        },
-        email(value){
-            echo('Buscando por email...')
-        }
+    searchBy(field, value){
+        const v = app.data.get(this.table, field, value, 'estado==1')
+        for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
     }
 }
 </script>

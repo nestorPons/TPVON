@@ -1,5 +1,5 @@
 class Line{
-    constructor(id, articulo, des, cantidad, precio, dto, amo) {
+    constructor(id, articulo, des, cantidad, precio, dto, amo, iva) {
         this.success = false
         if (isEmpty(articulo)) return false;
         this.id = id
@@ -10,5 +10,6 @@ class Line{
         this.dto = dto||0
         this.amo = amo||0
         this.success = true
+        this.iva = iva || 21
     }
 }

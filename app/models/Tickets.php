@@ -32,10 +32,11 @@ class Tickets extends Query{
             $Line = new Lines;
             $Line->add([
                 'id_ticket' => $this->id,
-                'articulo' => intval($line['articulo']),
-                'precio'   => floatval($line['precio']),
-                'cantidad' => intval($line['cantidad']),
-                'dto'      => floatval($line['dto'])
+                'articulo'  => intval($line['articulo']),
+                'precio'    => floatval($line['precio']),
+                'cantidad'  => intval($line['cantidad']),
+                'iva'       => intval($line['iva']), 
+                'dto'       => floatval($line['dto'])
             ]);
         }  
         return ['id' => $this->id]; 

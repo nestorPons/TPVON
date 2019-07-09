@@ -4,6 +4,13 @@ const app = {
         storage: [],
         current: {}, 
         get(index , key, value, filter){
+            const _equalValues = function(el){
+                let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
+                    v = (typeof value === 'string') ? value.toLowerCase().trim() : value
+
+                if(k) return typeof k === 'number' ? k == v : k.includes(v)
+                else return false
+             }
             // Si no se pasan key o value devolvemos todos los registros            
             if(key == undefined || value == undefined ){    
                 return this.storage[index]
@@ -12,19 +19,19 @@ const app = {
                 if (filter) {
                     if(filter.indexOf('==') != -1){
                         let arr = filter.split('==')
-                        return el[key] == value && el[arr[0]] == arr[1]
+                        return _equalValues(el) && el[arr[0].trim()] == arr[1].trim()
                     }
-                    else if(filter.indexOf('>=') != -1){
-                        let arr = filter.split('==')
-                        return el[key] == value && el[arr[0]] >= arr[1]                       
+                    else if(filter.indexOf('>') != -1){
+                        let arr = filter.split('>')
+                        return _equalValues(el) && el[arr[0].trim()] > arr[1].trim()         
                     }
-                    else if(filter.indexOf('<=') != -1){
-                        let arr = filter.split('==')
-                        return el[key] == value && el[arr[0]] >= arr[1]                       
+                    else if(filter.indexOf('<') != -1){
+                        let arr = filter.split('<')
+                        return _equalValues(el) && el[arr[0].trim()] < arr[1].trim()                       
                     }
                     
                 }
-                else return el[key] == value 
+                else return _equalValues(el) 
             }) || false
         },
         set(index, data, key, value){
@@ -42,6 +49,8 @@ const app = {
                     this.storage[index].push(data[i])
                 } 
             }
+
+
         }
     },
     GET: $_GET,

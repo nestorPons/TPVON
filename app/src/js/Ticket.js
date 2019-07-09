@@ -8,10 +8,11 @@ class Ticket{
         this.id_empleado = data.id_empleado || null
         this.id_cliente = data.id_cliente || null
         this.fecha = data.fecha || null
+        this.iva = data.iva || null
     }
-    addLine(articulo, des, cantidad, precio, dto, amo){ 
+    addLine(articulo, des, cantidad, precio, dto, amo, iva){ 
 
-        let newLine = new Line(this.idLine, articulo, des, cantidad, precio, dto, amo)
+        let newLine = new Line(this.idLine, articulo, des, cantidad, precio, dto, amo, iva)
         newLine.id = this.lineId
         this.lines.push(newLine)
         this.lineId++

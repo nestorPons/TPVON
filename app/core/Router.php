@@ -80,6 +80,7 @@ class Router{
             $respond = 
                 ($respond === true || $respond === 1) ? ['success'=> 1] : 
                 (($respond === false || $respond === 0) ? ['success'=> 0] : 
+                ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :
                 ['success' => 1, 'data' => $respond]);
             // SALIDA 
             exit (json_encode($respond, true));

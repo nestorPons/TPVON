@@ -136,6 +136,7 @@
                 data: Ticket
             }
             app.post(data, function(data){
+                    
                 tpv.lastId = tpv.Ticket.id = data.id
                 tpv.new()
                 callback()

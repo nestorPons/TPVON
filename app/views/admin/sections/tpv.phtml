@@ -5,15 +5,16 @@
         'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
-        $emp = new Select(['label' => 'Operador', 'required' => true, 'options' => $Employees->getArray('nombre',['estado'=>1]), 'tabindex'=>1], false);
-        $cli = new Select(['label' => 'Cliente', 'options' => $Users->getArray('nombre', ['estado'=>1]), 'tabindex'=>2], false);
+        $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex'=>1], false);
+        $cli = new Select(['label' => 'Cliente', 'tabindex'=>2], false);
         
         // Linea
         $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
-            'options' => $Services->getArray('codigo'), 'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
+            'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
         $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
         $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+        $iva = new InputHidden(['label' => 'Iva %','value'=>"$iva"], false);
         $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>7,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
         $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value'=>'0'], false);
         $btnOk = new ButtonSuccess(['tabindex'=>8, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
@@ -122,7 +123,6 @@
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
 <script>
-
     var tpv = {
         buttons: ['prev', 'next','del'],
         total: 0,
@@ -132,9 +132,12 @@
         Table : new Table('<?=$table->idEl()?>'), 
         $id : $('#<?=$id->idEl()?>'), 
         $code :  $('#<?=$code->idEl()?>'),
+        selCod: <?=$code->id()?>, 
         $description : $('#<?=$des->idEl()?>'),
         $employees : $('#<?=$emp->idEl()?>'),
+        selEmp  : <?=$emp->id()?>, 
         $client : $('#<?=$cli->idEl()?>'),
+        selCli: <?=$cli->id()?>, 
         $hour : $('#<?=$hour->idEl()?>'),
         $quantity : $('#<?=$quan->idEl()?>'),
         $price : $('#<?=$pric->idEl()?>'),
@@ -144,11 +147,31 @@
         $btnClear : $('#<?=$btnClear->idEl()?>'),
         $total : $('#<?=$txtTotal->idEl()?>'),
         $switch : $('#control_<?=$modTicket->id()?>'),
+        $iva :  $('#<?=$iva->idEl()?>'),
         open(){
             this.$employees.focus()
         },
         load(){
+            this.loadUsers()
+            this.loadServ()
+        },
+        loadUsers(){
+            const emp = app.data.get('usuarios','estado', 1, 'nivel>0')
+            const users = app.data.get('usuarios','estado', 1)
+            
+            for(i in emp){
+                this.selEmp.addOption(emp[i].id, emp[i].nombre)
+            }
+            for(i in users){
+                this.selCli.addOption(users[i].id, users[i].nombre)
+            }
 
+        },
+        loadServ(){
+            const serv = app.data.get('servicios','estado', 1)
+            for(i in serv){
+                this.selCod.addOption(serv[i].id, serv[i].codigo)
+            }
         },
         openTicket(){
             this.$switch.prop('checked',true)
@@ -219,9 +242,10 @@
                 this.$quantity.val(), 
                 this.$price.val(), 
                 this.$dto.val(), 
-                this.$amount.val()
+                this.$amount.val(),
+                this.$iva.val()
             )
-            // Validamos los datos e ingresamos en la tabla
+            // Validamos los d  mos en la tabla
             if(line.success) this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
             else  this.$code.focus()
         },
@@ -236,7 +260,7 @@
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
             let code = this.$code.find(':selected').text(),
-                el = app.data.get('servicios', 'codigo' , code)
+                el = app.data.get('servicios', 'codigo' , code)[0]
 
             if(el){
                 this.$description.val(el.descripcion)
@@ -286,7 +310,6 @@
         },
         getTicket(id, fn){
             let self = this
-            
             this.request('get', function(respond, status){
                 if(status) self.loadDataTicket(respond)
                 else fn.apply(self)
@@ -332,8 +355,12 @@
                     this.addLineTable(line.id, ser.codigo, ser.des, line.cantidad, line.precio, line.dto)
 
             }
-
         }
     }
-</script>
+    // Caso especial de carga de js por ser el formulario inicial
+    // El resto se cargan con su funcion load()
+    $(function(){
+        tpv.load()
+    })
 
+</script>

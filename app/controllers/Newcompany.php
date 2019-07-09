@@ -4,9 +4,8 @@
  */
 class Newcompany extends Controller{
 
-    function __construct(String $db, String $controller, String $action){    
-        die('Controllador newcomany');
-        //parent::__construct($controller, $action);
+    function __construct(String $controller = null){    
+        parent::__construct($controller);
     }
     protected function getView( Array $data = []){
         return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page' => 'newcompany.phtml']);
