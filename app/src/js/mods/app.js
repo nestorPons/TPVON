@@ -40,7 +40,10 @@ const app = {
                 let i = this.storage[index].findIndex(el=>{
                     return el[key] == value
                 })
-                this.storage[index][i] = data
+                if(i == -1)
+                    this.storage[index].push(data)
+                else
+                    this.storage[index][i] = data
             } else {
                 //inicializa
                 if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
@@ -63,14 +66,20 @@ const app = {
             let data = null
             // La respuesta puede ser json o html 
             try {
+                echo('JSON response...')
                 // comprobamos si es json
                 data = JSON.parse(respond);
                 // la respuesta es JSON
                 console.log(data)
                 // Imprimimos mensaje de error si lo hay 
-                if(data.success == false || data.success == 0 && exist(data.mens)) app.mens.error(data.mens||'No se ha podido rehalizar la petición!')
+                if( isEmpty(data.success) || 
+                    data.success == false || 
+                    data.success == 0 && 
+                    exist(data.mens)) 
+                        app.mens.error(data.mens||'No se ha podido rehalizar la petición!')
                 
             } catch(e) {
+                echo('HTMLresponse...')
                 // la respuesta es HTML
                 html = $(respond)
                 app.sections.load(html.attr('id'), html)

@@ -10,4 +10,13 @@ class Items extends Query{
         if (is_array($arg)) $this->loadData($arg);
         else if (is_int($arg)) $this->loadData($this->getById($arg));
     }
+    // Nuevos registros
+    function new(Object $Data){
+
+        if ($this->id = $this->loadData($Data->getAll())){  
+            if($this->id = $this->add($Data->toArray())) return $this->id;
+            else return Error::array('E022');
+            
+        } else throw new \Exception('E060');
+    }
 }

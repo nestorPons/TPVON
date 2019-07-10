@@ -31,7 +31,11 @@ $(document)
             controller = $form.attr('controller')
             obj = window[$section.attr('id')]
        
-        // Envio de datos
+        // Eliminamos el registro de la base datos local
+        //obj.del()
+
+ 
+        // Envio de datos para eliminar del servidor
         app.post({
             controller: controller,
             action: 'del',
@@ -40,7 +44,7 @@ $(document)
         function(r){
             exist(obj.del) && obj.del() 
         })
-    })
+     })
 })
 // Comportamiento general de envio de formulario al servidor
 .on('submit', 'form', function (e, i) {

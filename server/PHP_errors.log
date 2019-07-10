@@ -21290,3 +21290,151 @@ Stack trace:
 [09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: cantidad in /var/www/html/app/models/Tickets.php on line 37
 [09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 38
 [09-Jul-2019 09:26:45 UTC] PHP Notice:  Undefined index: dto in /var/www/html/app/models/Tickets.php on line 39
+[09-Jul-2019 11:41:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\User::dateFormat() in /var/www/html/app/models/User.php:37
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(45): app\models\User->save(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(55): app\controllers\Controller->update(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'User', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/User.php on line 37
+[09-Jul-2019 11:48:24 UTC] PHP Fatal error:  Uncaught Error: Class 'app\core\DateTime' not found in /var/www/html/app/core/Data.php:23
+Stack trace:
+#0 /var/www/html/app/models/User.php(36): app\core\Data->dateFormat('fecha_nacimient...', 'yyyy-mm-dd')
+#1 /var/www/html/app/controllers/Controller.php(45): app\models\User->save(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(55): app\controllers\Controller->update(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'User', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/core/Data.php on line 23
+[09-Jul-2019 11:50:25 UTC] PHP Warning:  date_format() expects parameter 1 to be DateTimeInterface, string given in /var/www/html/app/core/Data.php on line 23
+[09-Jul-2019 11:51:24 UTC] PHP Warning:  date_format() expects parameter 1 to be DateTimeInterface, string given in /var/www/html/app/core/Data.php on line 24
+[09-Jul-2019 11:51:47 UTC] PHP Warning:  date_format() expects parameter 1 to be DateTimeInterface, string given in /var/www/html/app/core/Data.php on line 24
+[10-Jul-2019 07:52:33 UTC] PHP Fatal error:  Uncaught Error: Class 'app\models\DateTime' not found in /var/www/html/app/models/User.php:169
+Stack trace:
+#0 /var/www/html/app/models/User.php(58): app\models\User->fecha_nacimiento(NULL, 'yyyy-mm-dd')
+#1 /var/www/html/app/controllers/Controller.php(76): app\models\User->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(54): app\controllers\Controller->new(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'User', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/User.php on line 169
+[10-Jul-2019 09:38:47 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (to):  in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php:1004
+Stack trace:
+#0 /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php(934): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', '', 'Servicio 2')
+#1 /var/www/html/app/models/User.php(114): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL, 'Servicio 2')
+#2 /var/www/html/app/models/User.php(70): app\models\User->sendMail('<form action=""...', 'AolActivacion d...')
+#3 /var/www/html/app/controllers/Controller.php(76): app\models\User->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(54): app\controllers\Controller->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'User', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/vendor/phpmailer/phpmailer/src/PHPMailer.php on line 1004
+[10-Jul-2019 09:48:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Items::new() in /var/www/html/app/controllers/Controller.php:76
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(54): app\controllers\Controller->new(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'Items', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 76
+[10-Jul-2019 10:28:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:28:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:28:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:29:33 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:29:33 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:29:33 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:29:57 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:29:57 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:29:57 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:30:18 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:30:18 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:30:18 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:30:34 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:30:34 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:30:34 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:31:02 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:31:02 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:31:02 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:31:25 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:31:25 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:31:25 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:32:52 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:32:52 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:32:52 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:34:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:34:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:34:31 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:37:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:37:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:37:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:38:59 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:38:59 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:38:59 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:39:11 UTC] PHP Fatal error:  Uncaught Exception: parse error: unclosed block in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:2371
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse('@font-color: #3...')
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#3 /var/www/html/app/models/Mylessc.php(23): lessc->cachedCompile(Array)
+#4 /var/www/html/app/models/Mylessc.php(12): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#5 /var/www/html/app/core/less.php(9): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#7 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2371
+[10-Jul-2019 10:39:12 UTC] PHP Fatal error:  Uncaught Exception: parse error: unclosed block in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:2371
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse('@font-color: #3...')
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#3 /var/www/html/app/models/Mylessc.php(23): lessc->cachedCompile(Array)
+#4 /var/www/html/app/models/Mylessc.php(12): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#5 /var/www/html/app/core/less.php(9): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#7 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2371
+[10-Jul-2019 10:39:12 UTC] PHP Fatal error:  Uncaught Exception: parse error: unclosed block in /var/www/html/vendor/leafo/lessphp/lessc.inc.php:2371
+Stack trace:
+#0 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1890): lessc_parser->parse('@font-color: #3...')
+#1 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1925): lessc->compile('@font-color: #3...', '/var/www/html/a...')
+#2 /var/www/html/vendor/leafo/lessphp/lessc.inc.php(1997): lessc->compileFile('/var/www/html/a...')
+#3 /var/www/html/app/models/Mylessc.php(23): lessc->cachedCompile(Array)
+#4 /var/www/html/app/models/Mylessc.php(12): app\models\Mylessc->autoCompileLess('/var/www/html/a...', '/var/www/html/h...')
+#5 /var/www/html/app/core/less.php(9): app\models\Mylessc->compileFolder('/var/www/html/a...', '/var/www/html/h...')
+#6 /var/www/html/htdocs/index.php(8): require_once('/var/www/html/a...')
+#7 {main}
+  thrown in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2371
+[10-Jul-2019 10:39:21 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:39:21 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:39:21 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:39:44 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:39:44 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:39:44 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[10-Jul-2019 10:57:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fecha_nacimiento() on array in /var/www/html/app/models/User.php:30
+Stack trace:
+#0 /var/www/html/app/controllers/Admin.php(28): app\models\User->all()
+#1 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->auth(Object(app\core\Data))
+#3 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(101): app\controllers\Login->__construct('auth', 'aol', Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#6 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#7 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#8 {main}
+  thrown in /var/www/html/app/models/User.php on line 30
+[10-Jul-2019 11:03:07 UTC] PHP Notice:  Undefined property: app\core\Data::$fecha_nacimiento in /var/www/html/app/core/Data.php on line 23
+[10-Jul-2019 11:04:58 UTC] PHP Warning:  date_format() expects parameter 1 to be DateTimeInterface, bool given in /var/www/html/app/core/Data.php on line 23

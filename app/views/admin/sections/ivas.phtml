@@ -1,7 +1,7 @@
 <?php namespace app\views\components\controllers;?>
-<section id="services">
+<section id="ivas">
     <?php
-    $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 'onclick'=>'services.show(window.event)']);
+    $table = new Table(['columns'=>['id', 'Nombre', 'Valor', 'Predeterminado'], 'class'=>'hoverable', 'onclick'=>'ivas.show(window.event)']);
     $abc = new ListABC($table->id());
     $form = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/service.phtml'], false);
     ?>
@@ -21,15 +21,15 @@
 </style>
 <script>
 'use strict'
-var services = {
-    table: 'servicios',
+var ivas = {
+    table: 'ivas',
     buttons: ['add', 'search'],
     currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$form->id()?>'),
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(){
-        return true
+return true
         let f = this.Form.getData(),
             usuarios = app.data.get('usuarios')
 
@@ -43,13 +43,7 @@ var services = {
         return {success: true}
     },
     del(){
-        // Eliminamos de la bd local
-        let d = app.data.get(this.table,'id', this.currentId)[0]
-        d.estado = 0 
-        app.data.set(this.table, d, 'id', d.id)
-        // Eliminamos de la tabla 
         this.Table.delLine(this.currentId)
-        // Cerramos formulario
         this.Form.hide()
     },
     add(){
@@ -59,19 +53,12 @@ var services = {
         }
         this.Form.clear().show(data).setTile('Nuevo servicio o artículo')
     },
-    addLine(data){
-        this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
-            .addClass(data.codigo[0].toLowerCase())
-    },
-    updateLine(data){
-        this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
-            .addClass(data.nombre[0].toLowerCase())
-    },
     save(data){
-        app.data.set(this.table, data , 'id', data.id)
 
-        if (this.currentId == -1 ) this.addLine(data)
-        else this.updateLine(data)
+        app.data.set(this.table, data , 'id', data.id)
+        
+        if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
+        else this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
         this.Form.hide()
     },
     load(){

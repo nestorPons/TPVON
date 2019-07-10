@@ -6,7 +6,6 @@ class InputText extends Input{
 
     function __construct(Array $data = [],  bool $collapse = true){
         $this->type = 'text';
-
         parent::__construct($data);
     }
 }

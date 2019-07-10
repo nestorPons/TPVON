@@ -23,17 +23,23 @@ class User extends Query{
             else if (is_object($arg)) $this->searchById($arg->id);
         }
     }
+    // Devolvemos todos los datos formateados   
     function all(){
         $arr = $this->getAll();
         foreach ($arr as $user){
             unset($user['password']);
+
+            if(!empty($user['fecha_nacimiento']))
+                $user['fecha_nacimiento'] = date_format(date_create($user['fecha_nacimiento']), 'd/m/Y');
             $r[] = $user; 
         }
         return $r; 
     }
-    // Funcion que rehaciza el nuevo registro o la edicion según corresponda
+    // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Object $Data){
+        $Data->dateFormat('fecha_nacimiento', 'Y-m-d');
         $noAuth = $Data->use('noAuth');
+
         if($this->id == -1) $this->new($Data);
         else {
             if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
@@ -47,7 +53,7 @@ class User extends Query{
     function new(Object $Data){
 
         if ($this->id = $this->loadData($Data->getAll())){  
-            
+       
             if(
             $this->id = $this->add([
                 'dni' =>  $this->dni??null,
@@ -94,7 +100,6 @@ class User extends Query{
     function activate(){
         return $this->saveById(['estado'=>1]);
     }
-
     function resetPassword(){
         $Token = new Tokens();
         $url = HOST . '/'. CODE_COMPANY. "/login/newpassword/{$Token->create($this)}";
@@ -157,10 +162,6 @@ class User extends Query{
         return $this->{__FUNCTION__}; 
     }
     function nivel(int $arg = null){
-        if($arg) $this->{__FUNCTION__} = $arg; 
-        return $this->{__FUNCTION__}; 
-    }
-    function fecha_nacimiento(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 
     }

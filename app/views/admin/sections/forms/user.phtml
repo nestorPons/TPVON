@@ -3,13 +3,14 @@
     <form controller="user" action="save" validation="users.validation()" callback="users.save(data)">
     <?php
         $id = new InputRead(['label' => 'Id usuario', 'name'=>'id'],  false);
-        $dni = new InputText(['label' => 'DNI','tabindex'=>1, 'name'=>'dni', 'pattern'=>"(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))", 'title'=>"Introduzca el dni" ],  false);
-        $name = new InputText(['label' => 'Nombre','tabindex'=>2, 'name'=>'nombre'],  false);
-        $email = new InputText(['label' => 'Email','tabindex'=>3, 'name'=>'email'],  false);
-        $phone = new InputText(['label' => 'Teléfono','tabindex'=>4, 'name'=>'tel'],  false);
-        $fnaci = new InputText(['label' => 'Fecha nacimiento','tabindex'=>5, 'name'=>'fecha_nacimiento'],  false);
+        $name = new InputText(['label' => 'Nombre','tabindex'=>1, 'name'=>'nombre', 'required'=>true],  false);
+        $email = new InputText(['label' => 'Email','tabindex'=>2, 'name'=>'email'],  false);
+        $phone = new InputText(['label' => 'Teléfono','tabindex'=>3, 'name'=>'tel'],  false);
+        $dni = new InputText(['label' => 'DNI','tabindex'=>4, 'name'=>'dni', 'pattern'=>"(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))", 'title'=>"Introduzca el dni" ],  false);
+        $fnaci = new InputText(['label' =>'Fecha nacimiento dd/mm/yyyy','tabindex'=>5, 'name'=>'fecha_nacimiento', 
+        'pattern' => '(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}'],  false);
         $level = new Select(['label' => 'Tipo usuario', 'tabindex'=>6, 'name'=>'nivel', 'class'=>'valid',
-            'options' => [1=>'Usuario', 2=>'Administrador',0=>'Cliente'],'selected' => 0], true);
+        'options' => [1=>'Usuario', 2=>'Administrador',0=>'Cliente'],'selected' => 0, 'required'=>true], true);
         $status = new Checkbox(['label' => 'Cuenta activa', 'tabindex'=>7, 'name'=>'estado', 'value'=>1],  false);
         $hidden = new InputHidden(['name'=>'noAuth', 'value'=>'1']);
         $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>8]);

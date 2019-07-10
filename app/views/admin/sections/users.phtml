@@ -23,7 +23,7 @@
 'use strict'
 var users = {
     table: 'usuarios',
-    buttons: ['add', 'del', 'search'],
+    buttons: ['add', 'search'],
     currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$editUser->id()?>'),
@@ -42,7 +42,13 @@ var users = {
         return {success: true}
     },
     del(){
+        // Eliminamos de la bd local
+        let d = app.data.get(this.table,'id', this.currentId)[0]
+        d.estado = 0 
+        app.data.set(this.table, d, 'id', d.id)
+        // Eliminamos de la tabla 
         this.Table.delLine(this.currentId)
+        // Cerramos formulario
         this.Form.hide()
     },
     add(){
@@ -52,14 +58,22 @@ var users = {
         }
         this.Form.clear().show(data).setTile('Nuevo usuario')
     },
+    addLine(data){
+        this.Table.addLine(
+                data.id, 
+                [data.id, data.nombre, data.tel, data.email]
+            )
+            .addClass(data.nombre[0].toLowerCase())
+    },
+    updateLine(data){
+        this.Table.updateLine(data.id, [data.id, data.nombre, data.tel, data.email])
+        .addClass(data.nombre[0].toLowerCase())
+    },
     save(data){
-
         app.data.set(this.table, data , 'id', data.id)
-        
-
-
-        if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.nombre, data.tel, data.email])
-        else this.Table.updateLine(data.id, [data.id, data.nombre, data.tel, data.email])
+    
+        if (this.currentId == -1 ) this.addLine(data)
+        else this.updateLine(data)
         this.Form.hide()
     },
     load(){
@@ -67,14 +81,7 @@ var users = {
         for( i in users ){
             var user = users[i]
             // Listamos los usuarios activos solamente
-            if(user.estado == 1){
-                this.Table.addLine(
-                    user.id, 
-                    [user.id, user.nombre, user.tel, user.email]
-                )
-                .addClass(user.nombre[0].toLowerCase())
-                
-            }
+            if(user.estado == 1) this.addLine(user)
         }
     },
     show(e){
