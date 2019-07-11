@@ -69,8 +69,11 @@
             .find('[default]').attr('selected',true)
       })
       inputs.each(function(){
-        if($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio')
-          d[$(this).attr('name')] == 1 && $(this).prop('checked', true)  
+        if($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio'){
+          if(d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
+          else $(this).prop('checked', false)  
+
+        }
         else $(this).val(d[$(this).attr('name')])
       })
       return this

@@ -21451,3 +21451,17 @@ Stack trace:
 [11-Jul-2019 09:13:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/listabc.phtml on line 3
 [11-Jul-2019 09:13:37 UTC] PHP Notice:  Undefined variable: table in /var/www/html/app/views/components/view/listabc.phtml on line 33
 [11-Jul-2019 09:15:24 UTC] PHP Fatal error:  Access level to app\views\components\controllers\ButtonSuccess::$type must be public (as in class app\views\components\controllers\Component) in /var/www/html/app/views/components/controllers/ButtonSuccess.php on line 19
+[11-Jul-2019 10:06:53 UTC] PHP Fatal error:  Access level to app\views\components\controllers\ButtonSuccess::$type must be public (as in class app\views\components\controllers\Component) in /var/www/html/app/views/components/controllers/ButtonSuccess.php on line 19
+[11-Jul-2019 10:06:56 UTC] PHP Fatal error:  Access level to app\views\components\controllers\ButtonSuccess::$type must be public (as in class app\views\components\controllers\Component) in /var/www/html/app/views/components/controllers/ButtonSuccess.php on line 19
+[11-Jul-2019 10:16:40 UTC] PHP Notice:  Undefined variable: attr_default in /var/www/html/app/views/components/view/input.phtml on line 30
+[11-Jul-2019 10:16:40 UTC] PHP Notice:  Undefined variable: attr_default in /var/www/html/app/views/components/view/input.phtml on line 30
+[11-Jul-2019 10:17:21 UTC] PHP Notice:  Undefined variable: attr_default in /var/www/html/app/views/components/view/input.phtml on line 30
+[11-Jul-2019 10:17:21 UTC] PHP Notice:  Undefined variable: attr_default in /var/www/html/app/views/components/view/input.phtml on line 30
+[11-Jul-2019 10:18:24 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/components/controllers/Component.php on line 30
+[11-Jul-2019 10:18:24 UTC] PHP Notice:  Array to string conversion in /var/www/html/app/views/components/controllers/Component.php on line 30
+[11-Jul-2019 10:34:35 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[11-Jul-2019 10:34:35 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[11-Jul-2019 10:34:35 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[11-Jul-2019 10:36:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[11-Jul-2019 10:36:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[11-Jul-2019 10:36:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279

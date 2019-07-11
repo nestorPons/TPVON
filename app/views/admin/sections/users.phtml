@@ -61,15 +61,22 @@ var users = {
         this.Form.clear().show(data).setTile('Nuevo usuario')
     },
     addLine(data){
-        this.Table.addLine(
+        const ob = this.Table.addLine(
                 data.id, 
                 [data.id, data.nombre, data.tel, data.email]
             )
-            .addClass(data.nombre[0].toLowerCase())
+        this.loadClass(ob, data)
+            
     },
     updateLine(data){
-        this.Table.updateLine(data.id, [data.id, data.nombre, data.tel, data.email])
-        .addClass(data.nombre[0].toLowerCase())
+        const ob = this.Table.updateLine(data.id, [data.id, data.nombre, data.tel, data.email])
+        this.loadClass(ob, data)
+    },
+    loadClass(ob, data){
+        ob.addClass(data.nombre[0].toLowerCase())
+
+        if(data.estado == 2) ob.addClass('alert')
+        else ob.removeClass('alert')
     },
     save(data){
         app.data.set(this.table, data , 'id', data.id)

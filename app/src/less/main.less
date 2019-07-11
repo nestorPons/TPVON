@@ -7,6 +7,7 @@
   --main-color: @main-color; 
   --nav-font-color: contrast(@main-color);
   --effect-transform-hover: scale(1.2);
+  --color-red: #f00; 
 }
 *{
   -moz-user-select: none; 
@@ -136,4 +137,10 @@ select{
 }
 .card{
   max-height: inherit !important;
+}
+.alert{
+  color: var(--color-red) !important;
+  *{
+    color: var(--color-red) !important;
+  }
 }

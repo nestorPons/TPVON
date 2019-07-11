@@ -12,7 +12,7 @@
         $level = new Select(['label' => 'Tipo usuario', 'tabindex'=>6, 'name'=>'nivel', 'class'=>'valid',
         'options' => [0=>'Cliente', 1=>'Usuario', 2=>'Administrador'],'selected' => 0, 'required'=>true], true);
         
-        $status = new Checkbox(['label' => 'Bloquear cuenta', 'tabindex'=>7, 'name'=>'estado', 'data-default'=>'1', 'value'=>2],  false);
+        $status = new Checkbox(['label' => 'Bloquear cuenta', 'tabindex'=>7, 'name'=>'estado', 'default'=>'1', 'value'=>2],  false);
 
         $hidden = new InputHidden(['name'=>'noAuth', 'value'=>'1']);
         $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>8]);

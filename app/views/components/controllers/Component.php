@@ -3,8 +3,7 @@
  * Clase de madre de los componentes html
  */
 class Component{
-    public $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix;
-    protected 
+    protected $type, $id, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix,
     $COLLAPSE = false,
     $MINLENGTH = 1, 
     $MAXLENGTH = 255;
@@ -25,11 +24,10 @@ class Component{
     */
     function print(string $file, Object $Data = null){
 
-        // Variables no obligatorias (Elemtos especificos)
-        $data = (array)$this;
-        $args = '';   
-        foreach($data as $key => $value){
+        // Variables no obligatorias (Elemtos especificos) 
+        foreach($this as $key => $value){
             ${$key} = $value;
+            @${'attr_'.$key} = "$key = '$value'";
         }
 
         // Variables obligatorias para usos generales
