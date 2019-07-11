@@ -156,6 +156,9 @@
             this.loadServ()
         },
         loadUsers(){
+            this.selEmp.clear()
+            this.selCli.clear()
+
             const emp = app.data.get('usuarios','estado', 1, 'nivel>0')
             const users = app.data.get('usuarios','estado', 1)
             
@@ -168,6 +171,7 @@
 
         },
         loadServ(){
+            this.selCod.clear()
             const serv = app.data.get('servicios','estado', 1)
             for(i in serv){
                 this.selCod.addOption(serv[i].id, serv[i].codigo)

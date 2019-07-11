@@ -258,7 +258,9 @@ const app = {
         for (let i = 0; i < elements.length; ++i) {
             var element = elements[i],
                 name = element.name,
-                value = element.value
+                value = (element.type == 'checkbox' || element.type == 'radio' )
+                    ? ((element.checked) ? element.value : element.dataset.default || 0)
+                    : element.value
 
             if (name) obj[name] = value
         }

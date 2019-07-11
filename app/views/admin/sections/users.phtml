@@ -50,6 +50,8 @@ var users = {
         this.Table.delLine(this.currentId)
         // Cerramos formulario
         this.Form.hide()
+
+        tpv.loadUsers()
     },
     add(){
         let data = {    
@@ -75,13 +77,15 @@ var users = {
         if (this.currentId == -1 ) this.addLine(data)
         else this.updateLine(data)
         this.Form.hide()
+
+        tpv.loadUsers()
     },
     load(){
         let users  = app.data.get(this.table)
         for( i in users ){
             var user = users[i]
             // Listamos los usuarios activos solamente
-            if(user.estado == 1) this.addLine(user)
+            if(user.estado > 0) this.addLine(user)
         }
     },
     show(e){
@@ -97,7 +101,7 @@ var users = {
         else this.searchBy('nombre', value)
     },
     searchBy(field, value){
-        const v = app.data.get(this.table, field, value, 'estado==1')
+        const v = app.data.get(this.table, field, value, 'estado>0')
         for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
     }
 }

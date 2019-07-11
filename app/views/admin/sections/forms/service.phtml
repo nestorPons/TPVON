@@ -9,7 +9,7 @@
         $pri = new InputText(['label' => 'Precio','tabindex'=>4, 'name'=>'precio', 'required'=>true],  false);
         $cos = new InputText(['label' => 'Coste','tabindex'=>5, 'name'=>'coste'],  false);
         $tip = new Select(['label' => 'Tipo producto', 'tabindex'=>6, 'name'=>'tipo', 'class'=>'valid',
-        'options' => [1=>'Servicio', 2=>'Producto'],'selected' => 1], true);
+        'options' => [1=>'Servicio', 2=>'Producto'],'selected' => 1, 'required'=>true], true);
 /*         $iva = new Select(['label' => 'Tipo iva', 'tabindex'=>6, 'name'=>'id_iva', 'class'=>'valid',
             'options' => [1=>'Usuario', 2=>'Administrador',0=>'Cliente'],'selected' => 0], true); */
         $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>8]);

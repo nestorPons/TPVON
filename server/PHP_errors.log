@@ -21438,3 +21438,16 @@ Stack trace:
   thrown in /var/www/html/app/models/User.php on line 30
 [10-Jul-2019 11:03:07 UTC] PHP Notice:  Undefined property: app\core\Data::$fecha_nacimiento in /var/www/html/app/core/Data.php on line 23
 [10-Jul-2019 11:04:58 UTC] PHP Warning:  date_format() expects parameter 1 to be DateTimeInterface, bool given in /var/www/html/app/core/Data.php on line 23
+[11-Jul-2019 08:21:23 UTC] PHP Parse error:  syntax error, unexpected 'default' (T_DEFAULT) in /var/www/html/app/views/components/view/input.phtml on line 29
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputText::$class in /var/www/html/app/views/components/controllers/Component.php on line 85
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined variable: arguments in /var/www/html/app/views/components/view/input.phtml on line 29
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\InputPass::$class in /var/www/html/app/views/components/controllers/Component.php on line 85
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined variable: arguments in /var/www/html/app/views/components/view/input.phtml on line 29
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\ButtonSuccess::$required in /var/www/html/app/views/components/controllers/Component.php on line 91
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\ButtonSuccess::$class in /var/www/html/app/views/components/controllers/Component.php on line 85
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\ButtonCancel::$required in /var/www/html/app/views/components/controllers/Component.php on line 91
+[11-Jul-2019 09:10:20 UTC] PHP Notice:  Undefined property: app\views\components\controllers\ButtonCancel::$class in /var/www/html/app/views/components/controllers/Component.php on line 85
+[11-Jul-2019 09:13:37 UTC] PHP Notice:  Undefined variable: arrABC in /var/www/html/app/views/components/view/listabc.phtml on line 3
+[11-Jul-2019 09:13:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/app/views/components/view/listabc.phtml on line 3
+[11-Jul-2019 09:13:37 UTC] PHP Notice:  Undefined variable: table in /var/www/html/app/views/components/view/listabc.phtml on line 33
+[11-Jul-2019 09:15:24 UTC] PHP Fatal error:  Access level to app\views\components\controllers\ButtonSuccess::$type must be public (as in class app\views\components\controllers\Component) in /var/www/html/app/views/components/controllers/ButtonSuccess.php on line 19

@@ -51,6 +51,8 @@ var services = {
         this.Table.delLine(this.currentId)
         // Cerramos formulario
         this.Form.hide()
+        
+        tpv.loadServ()
     },
     add(){
         let data = {    
@@ -65,14 +67,17 @@ var services = {
     },
     updateLine(data){
         this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
-            .addClass(data.nombre[0].toLowerCase())
+            .addClass(data.codigo[0].toLowerCase())
     },
     save(data){
+        data.estado = 1
         app.data.set(this.table, data , 'id', data.id)
 
         if (this.currentId == -1 ) this.addLine(data)
         else this.updateLine(data)
         this.Form.hide()
+
+        tpv.loadServ()
     },
     load(){
         let data  = app.data.get(this.table)
