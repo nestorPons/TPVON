@@ -20,10 +20,11 @@ class Admin extends Controller{
         $Items = new Items;
         $data['Services'] = $Items->allData($Items, 'codigo'); // para php
         $data['jsonServices'] = json_encode($Items->getAll()); // para js
+        
+        $Company = new Company(NAME_COMPANY);
+        $data['Company'] = $Company;
+        $data['data_company'] = json_encode($Company->getAll());
 
-        $data['Company'] = new Company(NAME_COMPANY);
-
-    
         $User = new User;
         $data['Users'] = $User->all();
         $data['jsonUsers'] = json_encode($data['Users']); // para js

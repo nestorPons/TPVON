@@ -21465,3 +21465,132 @@ Stack trace:
 [11-Jul-2019 10:36:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
 [11-Jul-2019 10:36:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
 [11-Jul-2019 10:36:54 UTC] PHP Warning:  A non-numeric value encountered in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 1279
+[11-Jul-2019 11:05:50 UTC] PHP Notice:  Undefined index: articulo in /var/www/html/app/models/Tickets.php on line 35
+[11-Jul-2019 11:05:50 UTC] PHP Notice:  Undefined index: precio in /var/www/html/app/models/Tickets.php on line 36
+[11-Jul-2019 11:05:50 UTC] PHP Notice:  Undefined index: cantidad in /var/www/html/app/models/Tickets.php on line 37
+[11-Jul-2019 11:05:50 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 38
+[11-Jul-2019 11:05:50 UTC] PHP Notice:  Undefined index: dto in /var/www/html/app/models/Tickets.php on line 39
+[11-Jul-2019 11:28:20 UTC] PHP Notice:  Undefined index: articulo in /var/www/html/app/models/Tickets.php on line 36
+[11-Jul-2019 11:28:20 UTC] PHP Notice:  Undefined index: precio in /var/www/html/app/models/Tickets.php on line 37
+[11-Jul-2019 11:28:20 UTC] PHP Notice:  Undefined index: cantidad in /var/www/html/app/models/Tickets.php on line 38
+[11-Jul-2019 11:28:20 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 39
+[11-Jul-2019 11:28:20 UTC] PHP Notice:  Undefined index: dto in /var/www/html/app/models/Tickets.php on line 40
+[11-Jul-2019 11:43:39 UTC] PHP Notice:  Undefined index: articulo in /var/www/html/app/models/Tickets.php on line 35
+[11-Jul-2019 11:43:39 UTC] PHP Notice:  Undefined index: precio in /var/www/html/app/models/Tickets.php on line 36
+[11-Jul-2019 11:43:39 UTC] PHP Notice:  Undefined index: cantidad in /var/www/html/app/models/Tickets.php on line 37
+[11-Jul-2019 11:43:39 UTC] PHP Notice:  Undefined index: iva in /var/www/html/app/models/Tickets.php on line 38
+[11-Jul-2019 11:43:39 UTC] PHP Notice:  Undefined index: dto in /var/www/html/app/models/Tickets.php on line 39
+[11-Jul-2019 11:56:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Items::save() in /var/www/html/app/controllers/Controller.php:45
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(55): app\controllers\Controller->update(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'Items', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 45
+[11-Jul-2019 11:57:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Items::save() in /var/www/html/app/controllers/Controller.php:45
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(55): app\controllers\Controller->update(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'Items', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 45
+[11-Jul-2019 12:37:45 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'VIEW\ADMIN\FORMS' in /var/www/html/app/views/admin/sections/conf.phtml:4
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(65): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->printView('/var/www/html/a...', NULL)
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->view(NULL)
+#3 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('view', 'Conf', NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Conf')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/admin/sections/conf.phtml on line 4
+[11-Jul-2019 12:38:01 UTC] PHP Warning:  include(/var/www/html/app/views/admin/sections/formsmydata.phtml) [<a href='0function.include0'>function.include0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/admin/sections/conf.phtml on line 4
+[11-Jul-2019 12:38:01 UTC] PHP Warning:  include() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/admin/sections/formsmydata.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/admin/sections/conf.phtml on line 4
+[11-Jul-2019 12:55:25 UTC] PHP Notice:  Undefined variable: data_company in /var/www/html/app/views/admin/sections/conf.phtml on line 7
+[11-Jul-2019 12:56:09 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /var/www/html/app/controllers/Admin.php on line 26
+[11-Jul-2019 12:59:10 UTC] PHP Notice:  Undefined variable: data_company in /var/www/html/app/views/admin/sections/conf.phtml on line 7
+[12-Jul-2019 07:53:24 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\SelectCountries' not found in /var/www/html/app/views/admin/sections/conf.phtml:13
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(65): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->printView('/var/www/html/a...', NULL)
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->view(NULL)
+#3 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('view', 'Conf', NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Conf')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/admin/sections/conf.phtml on line 13
+[12-Jul-2019 07:54:14 UTC] PHP Fatal error:  Uncaught Error: Class 'app\views\components\controllers\SelectCountries' not found in /var/www/html/app/views/admin/sections/conf.phtml:13
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(65): require_once()
+#1 /var/www/html/app/controllers/Controller.php(34): app\controllers\Controller->printView('/var/www/html/a...', NULL)
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->view(NULL)
+#3 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('view', 'Conf', NULL)
+#4 /var/www/html/app/core/Router.php(62): app\core\Router->loadController('Conf')
+#5 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/views/admin/sections/conf.phtml on line 13
+[12-Jul-2019 09:45:02 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/save/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 09:45:02 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 09:45:02 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 67
+[12-Jul-2019 09:45:02 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getById() must be of the type int, null given, called in /var/www/html/app/models/Company.php on line 32 and defined in /var/www/html/app/core/Query.php:50
+Stack trace:
+#0 /var/www/html/app/models/Company.php(32): app\core\Query->getById(NULL)
+#1 /var/www/html/app/core/Router.php(47): app\models\Company->__construct('save')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Query.php on line 50
+[12-Jul-2019 09:45:30 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/save/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 09:45:30 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 09:45:30 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 67
+[12-Jul-2019 09:45:30 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getById() must be of the type int, null given, called in /var/www/html/app/models/Company.php on line 32 and defined in /var/www/html/app/core/Query.php:50
+Stack trace:
+#0 /var/www/html/app/models/Company.php(32): app\core\Query->getById(NULL)
+#1 /var/www/html/app/core/Router.php(47): app\models\Company->__construct('save')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Query.php on line 50
+[12-Jul-2019 09:46:50 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/save/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 09:46:50 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 09:46:50 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 67
+[12-Jul-2019 09:46:50 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getById() must be of the type int, null given, called in /var/www/html/app/models/Company.php on line 32 and defined in /var/www/html/app/core/Query.php:50
+Stack trace:
+#0 /var/www/html/app/models/Company.php(32): app\core\Query->getById(NULL)
+#1 /var/www/html/app/core/Router.php(47): app\models\Company->__construct('save')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Query.php on line 50
+[12-Jul-2019 09:48:05 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/save/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 09:48:05 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 09:48:05 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 67
+[12-Jul-2019 09:48:05 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to app\core\Query::getById() must be of the type int, null given, called in /var/www/html/app/models/Company.php on line 32 and defined in /var/www/html/app/core/Query.php:50
+Stack trace:
+#0 /var/www/html/app/models/Company.php(32): app\core\Query->getById(NULL)
+#1 /var/www/html/app/core/Router.php(47): app\models\Company->__construct('save')
+#2 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/core/Query.php on line 50
+[12-Jul-2019 09:48:42 UTC] PHP Notice:  Undefined property: app\core\Data::$id in /var/www/html/app/controllers/Controller.php on line 54
+[12-Jul-2019 09:48:42 UTC] PHP Notice:  Undefined property: app\core\Data::$id in /var/www/html/app/controllers/Controller.php on line 42
+[12-Jul-2019 09:48:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Config::save() in /var/www/html/app/controllers/Controller.php:45
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(55): app\controllers\Controller->update(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Controller->save(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(102): app\controllers\Controller->__construct('save', 'Config', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(77): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(32): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 45

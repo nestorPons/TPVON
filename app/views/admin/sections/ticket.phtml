@@ -125,18 +125,19 @@
                 .find('.Des').text('TOTAL').end()
                 .find('.Imp').text(Ticket.total()).end()
             this.table.ob.find('tbody').append(t) 
+
         },
         put(sendMail = false, callback){
 
             let Ticket = this.Ticket
-            new Date().toISOString().slice(0,16).replace('T',' ')
+            Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')
             let data = {
                 controller: 'tickets',
                 action: 'new', 
                 data: Ticket
             }
             app.post(data, function(data){
-                    
+
                 tpv.lastId = tpv.Ticket.id = data.id
                 tpv.new()
                 callback()

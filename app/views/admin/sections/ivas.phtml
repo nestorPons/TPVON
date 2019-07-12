@@ -31,7 +31,7 @@ var ivas = {
     validation(){
 return true
         let f = this.Form.getData(),
-            usuarios = app.data.get('usuarios')
+            usuarios = DB.get('usuarios')
 
         for(i in usuarios) {
             let u = usuarios[i]
@@ -55,14 +55,14 @@ return true
     },
     save(data){
 
-        app.data.set(this.table, data , 'id', data.id)
+        DB.set(this.table, data , 'id', data.id)
         
         if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
         else this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
         this.Form.hide()
     },
     load(){
-        let data  = app.data.get(this.table)
+        let data  = DB.get(this.table)
         for( let i in data ){
             var d = data[i]
             // Listamos los servicios activos solamente
@@ -78,7 +78,7 @@ return true
     },
     show(e){
         this.currentId = e.path[1].attributes.idline.value
-        let data = app.data.get(this.table, 'id', this.currentId)
+        let data = DB.get(this.table, 'id', this.currentId)
         this.Form.show(data).setTile('Edicion servicio o artículo')
     },
     search(value){
@@ -86,7 +86,7 @@ return true
         this.searchBy('codigo', value)
     },
     searchBy(field, value){
-        const v = app.data.get(this.table, field, value, 'estado==1')
+        const v = DB.get(this.table, field, value, 'estado==1')
         for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
     }
 }

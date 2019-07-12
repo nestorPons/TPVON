@@ -266,18 +266,9 @@ const app = {
         }
         return obj
     },
+
     formToJSONString (form){
-        var obj = {};
-        var elements = form.querySelectorAll("input, select, textarea");
-        for (var i = 0; i < elements.length; ++i) {
-            var element = elements[i];
-            var name = element.name;
-            var value = element.value;
-            if (name) {
-                obj[name] = value;
-            }
-        }
-        return JSON.stringify(obj);
+        return JSON.stringify(this.formToObject(form));
     },
     clock(){ 
         momentoActual = new Date() 
@@ -297,11 +288,79 @@ const app = {
         if (str_hora.length == 1) 
             hora = "0" + hora 
 
-        horaImprimible = hora + " : " + minuto + " : " + segundo 
+        horaImprimible = hora + " : " + minuto  
 
         $('.clock').val(horaImprimible) 
 
-        setTimeout("app.clock()",1000) 
+        //setTimeout("app.clock()",1000) 
     },
-    
-};
+    loadDataToForm(data, form){
+        const els = form.getElementsByTagName('input')
+        for(let i in els){
+            const el = els[i]
+            if(el.attributes != undefined) el.value = data[el.attributes.name.value]
+        }
+        return form
+    }, 
+}
+const DB = {
+    storage: [],
+    current: {}, 
+    get(index , key, value, filter){
+        const _equalValues = function(el){
+            let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
+                v = (typeof value === 'string') ? value.toLowerCase().trim() : value
+
+            if(k) return typeof k === 'number' ? k == v : k.includes(v)
+            else return false
+         }
+        if(index == undefined){
+            // Si no le paso un indice me devuelve todos los nombres de tablas
+            return this.storage
+        }else{
+            // Si no se pasan key o value devolvemos todos los registros            
+            if(key == undefined || value == undefined ){    
+                return this.storage[index]
+            }
+            else return this.storage[index].filter((el) => {
+                if (filter) {
+                    if(filter.indexOf('==') != -1){
+                        let arr = filter.split('==')
+                        return _equalValues(el) && el[arr[0].trim()] == arr[1].trim()
+                    }
+                    else if(filter.indexOf('>') != -1){
+                        let arr = filter.split('>')
+                        return _equalValues(el) && el[arr[0].trim()] > arr[1].trim()         
+                    }
+                    else if(filter.indexOf('<') != -1){
+                        let arr = filter.split('<')
+                        return _equalValues(el) && el[arr[0].trim()] < arr[1].trim()                       
+                    }
+                    
+                }
+                else return _equalValues(el)
+            }) || false
+        } 
+    },
+    set(index, data, key, value){
+        
+        if(key){
+            let i = this.storage[index].findIndex(el=>{
+                return el[key] == value
+            })
+            if(i == -1)
+                this.storage[index].push(data)
+            else
+                this.storage[index][i] = data
+        } else {
+            //inicializa
+            if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
+            // Guarda datos en formato array
+            for(let i in data){
+                this.storage[index].push(data[i])
+            } 
+        }
+
+
+    }
+}

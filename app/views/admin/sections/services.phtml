@@ -31,7 +31,7 @@ var services = {
     validation(){
         return true
         let f = this.Form.getData(),
-            usuarios = app.data.get('usuarios')
+            usuarios = DB.get('usuarios')
 
         for(i in usuarios) {
             let u = usuarios[i]
@@ -44,9 +44,9 @@ var services = {
     },
     del(){
         // Eliminamos de la bd local
-        let d = app.data.get(this.table,'id', this.currentId)[0]
+        let d = DB.get(this.table,'id', this.currentId)[0]
         d.estado = 0 
-        app.data.set(this.table, d, 'id', d.id)
+        DB.set(this.table, d, 'id', d.id)
         // Eliminamos de la tabla 
         this.Table.delLine(this.currentId)
         // Cerramos formulario
@@ -71,7 +71,7 @@ var services = {
     },
     save(data){
         data.estado = 1
-        app.data.set(this.table, data , 'id', data.id)
+        DB.set(this.table, data , 'id', data.id)
 
         if (this.currentId == -1 ) this.addLine(data)
         else this.updateLine(data)
@@ -80,7 +80,7 @@ var services = {
         tpv.loadServ()
     },
     load(){
-        let data  = app.data.get(this.table)
+        let data  = DB.get(this.table)
         for( let i in data ){
             var d = data[i]
             // Listamos los servicios activos solamente
@@ -96,16 +96,19 @@ var services = {
     },
     show(e){
         this.currentId = e.path[1].attributes.idline.value
-        let data = app.data.get(this.table, 'id', this.currentId)
+        let data = DB.get(this.table, 'id', this.currentId)
         this.Form.show(data).setTile('Edicion servicio o artículo')
     },
     search(value){
         this.$table.find('tr').hide()
-        this.searchBy('codigo', value)
+        this.searchBy('codigo', value) || 
+        this.searchBy('nombre', value) || 
+        this.searchBy('descripcion', value)
     },
     searchBy(field, value){
-        const v = app.data.get(this.table, field, value, 'estado==1')
+        const v = DB.get(this.table, field, value, 'estado==1')
         for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
+        return v != false
     }
 }
 </script>

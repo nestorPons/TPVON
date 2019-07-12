@@ -8,10 +8,10 @@
         <?php $search = new Icon('magnifier', ['onclick'=>'menu.search.toggle()'])?>
         <?php $txtSearch = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)'], false)?>
     </div>
-    <div>
+    <div id="bartools-central">
         <?php new DatePicker?>
     </div>  
-    <div>
+    <div id="bartools-general">
         <?php new ButtonCloseApp?>
     </div>
 </header>
@@ -39,7 +39,6 @@
     #bartools > div:last-child{
         text-align: right;
     }
-
     #bartools .lnr{
         display: inline-block;
         font-size: 1.4rem;

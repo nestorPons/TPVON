@@ -5,4 +5,4 @@ CREATE TABLE `tipo_iva`(
   `pre` TINYINT(1), 
 ) ENGINE=InnoDB DEFAULT CHARSET utf8 COLLATE utf8_spanish2_ci;
 
-INSERT INTO `tipo_iva`(`nombre`, `valor`) VALUES ('normal',21 ,1);
+INSERT INTO `tipo_iva`(nombre, valor, pre) VALUES ('normal',21 ,1);

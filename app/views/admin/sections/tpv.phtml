@@ -159,8 +159,8 @@
             this.selEmp.clear()
             this.selCli.clear()
 
-            const emp = app.data.get('usuarios','estado', 1, 'nivel>0')
-            const users = app.data.get('usuarios','estado', 1)
+            const emp = DB.get('usuarios','estado', 1, 'nivel>0')
+            const users = DB.get('usuarios','estado', 1)
             
             for(i in emp){
                 this.selEmp.addOption(emp[i].id, emp[i].nombre)
@@ -172,7 +172,7 @@
         },
         loadServ(){
             this.selCod.clear()
-            const serv = app.data.get('servicios','estado', 1)
+            const serv = DB.get('servicios','estado', 1)
             for(i in serv){
                 this.selCod.addOption(serv[i].id, serv[i].codigo)
             }
@@ -239,7 +239,7 @@
         },
         addLine(){
             this.calculate()
-            
+    
             var line = this.Ticket.addLine(
                 this.$code.val(), 
                 this.$description.val(), 
@@ -264,7 +264,7 @@
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
             let code = this.$code.find(':selected').text(),
-                el = app.data.get('servicios', 'codigo' , code)[0]
+                el = DB.get('servicios', 'codigo' , code)[0]
 
             if(el){
                 this.$description.val(el.descripcion)
@@ -279,7 +279,7 @@
             this.Ticket.deleteLine(idLine)
 
             // Vista
-            let ser = app.data.get('servicios','id',line.articulo)
+            let ser = DB.get('servicios','id',line.articulo)[0]
 
             this.$code
                 .addClass('valid')
@@ -334,7 +334,7 @@
         },
         // Cargamos los datos del ticket actual
         loadDataTicket( ticket ){
-            echo('loadTicket....')
+
             this.reset()
             this.Ticket = new Ticket(ticket)
 
@@ -353,11 +353,9 @@
             // Cargamos las lineas 
             for(let i in ticket.lines){
                 var line = ticket.lines[i],
-                    ser  = app.data.get('servicios', 'id' , line.articulo)
-
+                    ser  = DB.get('servicios', 'id' , line.articulo)[0]
                 if(ser)
                     this.addLineTable(line.id, ser.codigo, ser.des, line.cantidad, line.precio, line.dto)
-
             }
         }
     }

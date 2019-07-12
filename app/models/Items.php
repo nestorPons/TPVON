@@ -19,4 +19,10 @@ class Items extends Query{
             
         } else throw new \Exception('E060');
     }
+    function save(Object $Data){
+        if($this->id == -1) $this->new($Data);
+        else ($this->saveById($Data->toArray()));
+        
+        return $this->id;
+    }
 }

@@ -33,8 +33,9 @@ namespace app\views\components\controllers;
 </style>
 <script>
     'use strict'
-    app.data.set('servicios', <?=$jsonServices?>)      
-    app.data.set('usuarios', <?=$jsonUsers?>)
+    DB.set('servicios', <?=$jsonServices?>)      
+    DB.set('usuarios', <?=$jsonUsers?>)
+    DB.set('empresa', <?=$data_company?>)
 
     app.clock()
     </script>

@@ -21,9 +21,10 @@ namespace VIEWS;
     const ADMIN                 = \FOLDERS\VIEWS . 'admin/';
     const USERS                 = \FOLDERS\VIEWS . 'users/';
     const LOGIN                 = \FOLDERS\VIEWS . 'login/';
-
+    
 namespace VIEWS\ADMIN; 
-    const SECTIONS    = \VIEWS\ADMIN . 'sections/';
+    const SECTIONS              = \VIEWS\ADMIN . 'sections/';
+    const FORMS                 = \VIEWS\ADMIN . 'sections/forms';
 
 namespace PUBLICF; 
     const JS                     = \FOLDERS\HTDOCS . 'js/';
@@ -34,4 +35,5 @@ namespace PUBLICF;
 
 namespace URL;
     const COMPANIES              =  'companies/';
+
 include \FOLDERS\CONFIG . 'files.php';
