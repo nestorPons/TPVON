@@ -1,0 +1,50 @@
+<?php namespace app\views\components\controllers;?>
+<section id="income">
+<?php $from = new DatePicker(['label'=>'De'])?>
+<?php $to = new DatePicker(['label'=>'Hasta'])?>
+<?php $btn = new ButtonSuccess(['onclick'=>'income.filter()', 'icon'=>'funnel'])?>
+<? $table = new Table(['columns'=>['Id','Fecha', 'Importe']])?>
+</section>
+<style>
+    #income{
+        align-items: flex-start;
+        display: grid;
+        grid-template-rows: auto [table] 1fr;
+        grid-template-columns: [first] 1fr [last] 1fr auto;
+        grid-row-gap: 5px;
+
+    }
+    #<?= $table->id()?>{
+        grid-column: 1 / -1;
+    }
+    #income .Importe{
+        text-align: right;
+    }
+</style>
+<script>
+    const income = {
+        txtFrom : <?=$from->id()?>, 
+        txtTo : <?=$to->id()?>, 
+        Table: new Table('<?=$table->idEl()?>'),
+        load(){
+
+        },
+        filter(){
+            this.Table.clear()
+            data = {
+                controller: 'tickets',
+                action: 'getBetween',
+                data:{
+                    f1 : app.date.format(this.txtFrom.value + '  00:00:00.000', 'sql'),
+                    f2 : app.date.format(this.txtTo.value + ' 23:59:59.999', 'sql'),
+                }
+            }
+            app.post(data, (data) => {
+                for(let i in data){
+                    let d = data[i]
+                    if(d.estado == 1) this.Table.addLine( d.id , [d.id, app.date.format(d.fecha, 'print'), d.total])
+                }
+            } )
+        }
+    }
+</script>

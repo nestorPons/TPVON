@@ -4,22 +4,25 @@ use app\core\Data;
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query extends Conn{
-    protected $conn, $table;
+    protected 
+        $conn, 
+        $table;
 
     function __construct(string $table = null, string $db = null, string $user = null){
+
             // Parametros predeterminados para la conexión
             $credentials = parse_ini_file(\FILE\CONN);
             if($table) $this->table = $table;
     
-            $this->db = $db?$db:$credentials['prefix'] . CODE_COMPANY;
-            $this->db = Data::codify($this->db);
+            $this->db = $db ?? CONN['db'];
             $this->user = $user??'root';
             $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
+
             try{
-                if($this->db != $credentials['prefix']){
-                    $this->conn = $this->connect($dsn, $credentials[$this->user]);
-                    return gettype($this->conn) === 'object';
-                } else return false;
+     
+                $this->conn = $this->connect($dsn, $credentials[$this->user]);
+                return gettype($this->conn) === 'object';
+          
             } catch (\Exception $e){
                 return false;
             }
@@ -27,6 +30,7 @@ class Query extends Conn{
     function __destruct(){
         $this->conn = null;
      }
+
      /**
       * Prepara el string sql para enviar a hacer la consulta 
       * añadimos si queremos que sean ordenados de forma inversa
@@ -76,7 +80,7 @@ class Query extends Conn{
         $value = $params[$column];
         return $this->sendQuery(
             "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
-        )[0];
+        )[0] ?? false;
      }
     public function getLast(){ 
         $r = $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true); 
@@ -248,5 +252,8 @@ class Query extends Conn{
     // Método genérico de eliminación de registros
     function del($id){
         return $this->saveById(['estado'=>0]);
+    }
+    function isConnected(){
+        return !is_null($this->conn);
     }
 }

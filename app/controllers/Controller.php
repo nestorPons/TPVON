@@ -12,8 +12,9 @@ class Controller{
     protected $conn, $controller, $action, $data;
     public $result = null;
     private $Model; 
+    private $db = CONN['db'];
     
-    function __construct(String $action, String $controller = null, Object $Data = null){
+    function __construct(String $action, String $controller = null, $Data = null){
         $this->action = strtolower($action);
         $this->controller =strtolower($controller ?? $this->getController());
 
@@ -55,7 +56,7 @@ class Controller{
         else return $this->update($Data);
     }
     protected function printView(String $route, array $data = null){  
-        if(isset($_GET['db'])) $Company = new Company($_GET['db']);
+        $Company = new Company($this->db);
         if($data){
             foreach($data as $key => $val){
                 ${$key} = $val;
@@ -92,6 +93,13 @@ class Controller{
         return $respond;
     }
     /**
+     * Método por defecto de consulta de datos entre parametros
+     */
+    protected function getBetween(Object $Data){
+        if($model = $this->getModel()) return $model->between($Data);
+        else return false;
+    }
+    /**
      * Método por defecto de eliminación de registros
      */
     protected function del($arg){
@@ -112,7 +120,7 @@ class Controller{
     private function getModel($arg = null){
         $nameModel = '\\app\\models\\' . ucfirst($this->controller);
         $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)) return $this->Model = new $nameModel($arg);
-        return false;
+        if(file_exists($fileModel)) return new $nameModel($arg);
+        return die('No existe el modelo');
     }
 }

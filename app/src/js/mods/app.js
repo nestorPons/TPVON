@@ -1,61 +1,5 @@
 const app = {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
-    data: {
-        storage: [],
-        current: {}, 
-        get(index , key, value, filter){
-            const _equalValues = function(el){
-                let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
-                    v = (typeof value === 'string') ? value.toLowerCase().trim() : value
-
-                if(k) return typeof k === 'number' ? k == v : k.includes(v)
-                else return false
-             }
-            // Si no se pasan key o value devolvemos todos los registros            
-            if(key == undefined || value == undefined ){    
-                return this.storage[index]
-            }
-            else return this.storage[index].filter((el) => {
-                if (filter) {
-                    if(filter.indexOf('==') != -1){
-                        let arr = filter.split('==')
-                        return _equalValues(el) && el[arr[0].trim()] == arr[1].trim()
-                    }
-                    else if(filter.indexOf('>') != -1){
-                        let arr = filter.split('>')
-                        return _equalValues(el) && el[arr[0].trim()] > arr[1].trim()         
-                    }
-                    else if(filter.indexOf('<') != -1){
-                        let arr = filter.split('<')
-                        return _equalValues(el) && el[arr[0].trim()] < arr[1].trim()                       
-                    }
-                    
-                }
-                else return _equalValues(el) 
-            }) || false
-        },
-        set(index, data, key, value){
-            
-            if(key){
-                let i = this.storage[index].findIndex(el=>{
-                    return el[key] == value
-                })
-                if(i == -1)
-                    this.storage[index].push(data)
-                else
-                    this.storage[index][i] = data
-            } else {
-                //inicializa
-                if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
-                // Guarda datos en formato array
-                for(let i in data){
-                    this.storage[index].push(data[i])
-                } 
-            }
-
-
-        }
-    },
     GET: $_GET,
     // Peticiones con datos 
     post: function (data, callback) {
@@ -93,12 +37,11 @@ const app = {
     },
     // Carga de zonas por método get
     get: function (data) {
-        let self = this
         if (typeof data.controller === 'undefined') return false;
 
         for (let i in this.GET) data[i] = this.GET[i]
 
-        $.get('index.php', data, function (html) {
+        $.get('index.php', data, html => {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
             $container = ($('main').length != 0) ? $('main') : $('body')
             $container
@@ -106,7 +49,7 @@ const app = {
                 .append(html);
             // Inicializamos el método de carga del objeto
             if(exist(window[data.controller].load)) window[data.controller].load()
-            self.sections.inicialize(data.controller) 
+            this.sections.inicialize(data.controller) 
         }, 'html');
     },
     loadSync: function (name, callback) {
@@ -266,7 +209,6 @@ const app = {
         }
         return obj
     },
-
     formToJSONString (form){
         return JSON.stringify(this.formToObject(form));
     },
@@ -295,13 +237,78 @@ const app = {
         //setTimeout("app.clock()",1000) 
     },
     loadDataToForm(data, form){
-        const els = form.getElementsByTagName('input')
+    
+        var els = form.getElementsByTagName('input')
+        for(let i in els){
+            const el = els[i]
+            if(el.attributes != undefined) el.value = data[el.attributes.name.value]
+        }
+        els = form.getElementsByTagName('select')
         for(let i in els){
             const el = els[i]
             if(el.attributes != undefined) el.value = data[el.attributes.name.value]
         }
         return form
     }, 
+    date : {
+        format(date, format){
+            let fecha = !isEmpty(date)?date.toString():Fecha.general,
+                hora = false
+            
+            // Si tiene horas 
+            if(fecha.indexOf(":")>0){   
+                let f = fecha.split(' ')
+                    hora = f[1]
+                    fecha = f[0]
+            }
+            if (fecha.indexOf("/")>0){
+                var mdy = fecha.split('/');
+                var d = ("0" + mdy[0]).slice (-2);
+                var m = ("0" + mdy[1]).slice (-2);
+                var a = mdy[2];
+            }else if(fecha.indexOf("-")>0){
+                var mdy = fecha.split('-');
+                var d = ("0" + mdy[2]).slice (-2);
+                var m = ("0" + mdy[1]).slice (-2);
+                var a = mdy[0];
+            }else if(fecha.length==4){
+                var d = fecha.substr(2);
+                var m = fecha.substr(0,2);
+                var a =  fechaActual('y');
+            }else if(fecha.length==8){
+                var d = fecha.substr(6,2);
+                var m = fecha.substr(4,2);
+                var a =  fecha.substr(0,4);
+            }
+            switch(format) {
+                case 'sql':
+                    var fch= a+'-'+m+'-'+d;
+                    break;
+                case 'print':
+                    var fch= d+'/'+m+'/'+a;
+                    break;
+                case 'md':
+                    var fch = m+d;
+                    break;
+                case 'number':
+                    var fch = a+m+d;
+                    break;
+                case 'day':
+                    var fch = d;
+                    break;
+                case 'month':
+                    var fch = m;
+                    break;
+                case 'year':
+                    var fch = a;
+                    break;
+                default:
+                   var fch = new Date(a, m-1,d);
+            }
+        
+            return (hora) ? fch + ' ' + hora : (fch); 
+        }
+    }
 }
 const DB = {
     storage: [],

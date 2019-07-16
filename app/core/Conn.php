@@ -19,6 +19,7 @@ class Conn{
      *	Genera la conexión a a la base de datos
      */
     protected function connect($dsn, $pass){
+
         try {
             $this->pdo = new \PDO(
                     $dsn, 
@@ -34,7 +35,6 @@ class Conn{
            return $this->pdo; 
         }
         catch (\PDOException $e){ 
-
             throw new \PDOException($e->getMessage());
         }
     }
@@ -45,11 +45,11 @@ class Conn{
 		if($this->pdo) $this->pdo = null;
 	 }
 
-    private function init($sql, $params = null){
-        /* 
-echo $sql;pr($params);
+     private function init($sql, $params = null){
+/* 
+pr($sql, $params);
 pr($this->pdo); 
-  */
+*/
          try {
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);

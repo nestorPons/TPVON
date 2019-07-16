@@ -1,6 +1,6 @@
 <?php namespace app\controllers;
 use \app\models\{Tokens, User, Company, ZoneAdmin, ZoneUser, Tickets};
-use \app\core\Error;
+use \app\core\{Error, Query};
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
@@ -9,15 +9,19 @@ class Login extends Controller{
         $company, $zone, $password, $email,  
         $folders = \VIEWS\LOGIN, 
         $level_admin = LEVEL_ADMIN, 
-        $level_user = LEVEL_USER;
+        $level_user = LEVEL_USER,
+        $db = CONN['db'];
 
     function __construct(String $action = null, String $db = null, $data){
-        $this->company = new Company($db);
-        if($this->company->id()){
+        // Comprobamos que la empresa existe si no enviamos el formulario de nueva empresa
+        $c = new Query(null, $this->db);
+
+        if($c->isConnected()) {
+            $this->company = new Company();
             parent::__construct($action, null, $data);
-        }else{
-           die('Empresa no encontrada');
         }
+        else parent::__construct('view', 'index', ['page' => 'newcompany']);
+    
     }
     function confirmation(){
     
@@ -25,7 +29,7 @@ class Login extends Controller{
             $data = Tokens::decode($_GET['args']);
             $User = new User($data->id); 
             $User->activate();
-            $this->view(['page' => 'useractivate', 'name_company' =>$this->company->nombre()]); 
+            $this->view(['page' => 'useractivate', 'name_company' => $this->company->nombre()]); 
         } else die('token obligatorio');
     
     }
@@ -55,17 +59,14 @@ class Login extends Controller{
      * Devuelve la vista
      */
     protected function auth(Object $Data){
-        if($Data->isEmail('email')){
-            $this->email = $Data->email; 
-        }
-        if ($Data->isString('password', 250)){
-            $this->password = $Data->password;
-        };
+        if($Data->isEmail('email')) $this->email = $Data->email;
+        if($Data->isString('password', 250)) $this->password = $Data->password;
 
         $this->User = new User($Data->email);
 
         if($this->verify($this->User->password())){
             if ($this->isAdmin()){
+
                 $Admin = new Admin; 
                 return $Admin->loadView();
             } else if ($this->isUser()){
@@ -94,8 +95,10 @@ class Login extends Controller{
         return $this->User->nivel() >= $this->level_user; 
     }
     protected function view( $data = null){
+
         // VAlor predeterminado de la vista
         if (!$data) $data = ['page' => 'login', 'data' =>  $this->company->toArray()];
+
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
 }

@@ -21594,3 +21594,1061 @@ Stack trace:
 #5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
 #6 {main}
   thrown in /var/www/html/app/controllers/Controller.php on line 45
+[12-Jul-2019 10:06:41 UTC] PHP Warning:  require_once(/var/www/html/app/app/config/conn.php) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:06:41 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/app/config/conn.php' (include_path='.:/usr/local/lib/php') in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:06:44 UTC] PHP Warning:  require_once(/var/www/html/app/app/config/conn.php) [<a href='0function.require-once0'>function.require-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:06:44 UTC] PHP Fatal error:  require_once() [<a href='0function.require0'>function.require0</a>]: Failed opening required '/var/www/html/app/app/config/conn.php' (include_path='.:/usr/local/lib/php') in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:09:57 UTC] PHP Warning:  parse_ini_file(/var/www/html/app/app/config/conn.php) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:10:01 UTC] PHP Warning:  parse_ini_file(/var/www/html/app/app/config/conn.php) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:10:27 UTC] PHP Warning:  parse_ini_file(/var/www/html/app/app/config/conn.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/config/app.php on line 4
+[12-Jul-2019 10:12:59 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:12:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(102): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(63): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:14:12 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:14:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:14:40 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:14:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:26:27 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:26:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:26:31 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:26:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:31:38 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:31:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:33:05 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:33:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:33:17 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:33:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(103): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(64): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(33): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:34:13 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:34:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(102): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(63): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(32): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:35:32 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:35:32 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(99): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(17): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(99): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(59): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:36:04 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:36:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(100): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(18): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(99): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(59): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:36:35 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 10:36:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(99): app\controllers\Login->__construct('view', 'aol', NULL)
+#6 /var/www/html/app/core/Router.php(59): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[12-Jul-2019 11:05:59 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:05:59 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:11:37 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:11:37 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:11:50 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:11:50 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:12:40 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:12:40 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:13:38 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:13:38 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:16:42 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:16:42 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:17:32 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:17:32 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:17:52 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:17:52 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:17:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\controllers\Login::require() in /var/www/html/app/controllers/Login.php:23
+Stack trace:
+#0 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#1 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 23
+[12-Jul-2019 11:22:51 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:22:51 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:22:51 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::printView() must be of the type array or null, object given, called in /var/www/html/app/controllers/Login.php on line 101 and defined in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', 'index', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#4 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[12-Jul-2019 11:25:11 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:25:11 UTC] PHP Warning:  array_merge() [<a href='0function.array-merge0'>function.array-merge0</a>]: Expected parameter 2 to be an array, bool given in /var/www/html/vendor/leafo/lessphp/lessc.inc.php on line 2071
+[12-Jul-2019 11:25:11 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::printView() must be of the type array or null, object given, called in /var/www/html/app/controllers/Login.php on line 101 and defined in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', 'index', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#4 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[12-Jul-2019 11:28:34 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:29:08 UTC] PHP Notice:  Undefined variable: arr_conf in /var/www/html/app/core/less.php on line 8
+[12-Jul-2019 11:30:22 UTC] PHP Notice:  Constant file\CONFIG_COMPANY already defined in /var/www/html/app/config/files.php on line 8
+[12-Jul-2019 11:30:22 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /var/www/html/app/core/less.php on line 6
+[12-Jul-2019 11:31:46 UTC] PHP Warning:  parse_ini_file(template/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 8
+[12-Jul-2019 11:32:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function FILE\prs() in /var/www/html/app/config/files.php:9
+Stack trace:
+#0 /var/www/html/app/config/folders.php(39): include()
+#1 /var/www/html/htdocs/index.php(5): require_once('/var/www/html/a...')
+#2 {main}
+  thrown in /var/www/html/app/config/files.php on line 9
+[12-Jul-2019 11:32:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function FILE\prs() in /var/www/html/app/config/files.php:9
+Stack trace:
+#0 /var/www/html/app/config/folders.php(39): include()
+#1 /var/www/html/htdocs/index.php(5): require_once('/var/www/html/a...')
+#2 {main}
+  thrown in /var/www/html/app/config/files.php on line 9
+[12-Jul-2019 11:33:02 UTC] PHP Warning:  parse_ini_file(template/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 8
+[12-Jul-2019 11:33:52 UTC] PHP Warning:  parse_ini_file(/var/www/html/htdocs/companies/tpv/template/config.ini) [<a href='0function.parse-ini-file0'>function.parse-ini-file0</a>]: failed to open stream: No such file or directory in /var/www/html/app/core/less.php on line 8
+[12-Jul-2019 11:35:22 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::printView() must be of the type array or null, object given, called in /var/www/html/app/controllers/Login.php on line 101 and defined in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', 'index', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#4 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[12-Jul-2019 11:37:09 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\controllers\Controller::printView() must be of the type array or null, object given, called in /var/www/html/app/controllers/Login.php on line 101 and defined in /var/www/html/app/controllers/Controller.php:57
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', 'index', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#4 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/controllers/Controller.php on line 57
+[12-Jul-2019 11:37:57 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/newcompany.phtml.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 24
+[12-Jul-2019 11:37:57 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/newcompany.phtml.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 24
+[12-Jul-2019 11:38:59 UTC] PHP Warning:  include_once(/var/www/html/app/views/login/newcompany.phtml.phtml) [<a href='0function.include-once0'>function.include-once0</a>]: failed to open stream: No such file or directory in /var/www/html/app/views/index.phtml on line 24
+[12-Jul-2019 11:38:59 UTC] PHP Warning:  include_once() [<a href='0function.include0'>function.include0</a>]: Failed opening '/var/www/html/app/views/login/newcompany.phtml.phtml' for inclusion (include_path='.:/usr/local/lib/php') in /var/www/html/app/views/index.phtml on line 24
+[12-Jul-2019 11:40:45 UTC] PHP Notice:  Constant CODE_COMPANY already defined in /var/www/html/app/models/Company.php on line 38
+[12-Jul-2019 11:40:45 UTC] PHP Notice:  Constant NAME_COMPANY already defined in /var/www/html/app/models/Company.php on line 39
+[12-Jul-2019 11:40:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(108): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(46): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[12-Jul-2019 11:42:38 UTC] PHP Fatal error:  Uncaught Error: Undefined constant 'FILE\TEMPLATE_CONFIG' in /var/www/html/app/core/less.php:8
+Stack trace:
+#0 /var/www/html/htdocs/index.php(8): require_once()
+#1 {main}
+  thrown in /var/www/html/app/core/less.php on line 8
+[12-Jul-2019 11:44:12 UTC] PHP Notice:  Constant CODE_COMPANY already defined in /var/www/html/app/models/Company.php on line 38
+[12-Jul-2019 11:44:12 UTC] PHP Notice:  Constant NAME_COMPANY already defined in /var/www/html/app/models/Company.php on line 39
+[12-Jul-2019 11:44:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(108): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(46): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[12-Jul-2019 11:44:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(108): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(42): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[12-Jul-2019 11:45:51 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(108): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(42): app\core\Query->add(Array)
+#3 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#4 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[13-Jul-2019 09:31:50 UTC] PHP Notice:  Undefined index: action in /var/www/html/app/controllers/Login.php on line 17
+[15-Jul-2019 07:26:00 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /var/www/html/app/models/Company.php on line 43
+[15-Jul-2019 07:44:54 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:44:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:45:08 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:45:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:45:12 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:45:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:45:58 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:45:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:46:35 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:46:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:46:37 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:46:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:46:47 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:46:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(101): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 07:47:44 UTC] PHP Notice:  Undefined property: app\models\Company::$nombre_empresa in /var/www/html/app/models/Company.php on line 110
+[15-Jul-2019 07:59:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\models\Company::unset() in /var/www/html/app/models/Company.php:22
+Stack trace:
+#0 /var/www/html/app/models/Company.php(47): app\models\Company->save()
+#1 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/models/Company.php on line 22
+[15-Jul-2019 08:00:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(109): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(26): app\core\Query->add(Array)
+#3 /var/www/html/app/models/Company.php(47): app\models\Company->save()
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 08:00:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('INSERT INTO emp...', Array)
+#1 /var/www/html/app/core/Query.php(109): app\core\Conn->query('INSERT INTO emp...', Array)
+#2 /var/www/html/app/models/Company.php(25): app\core\Query->add(Array)
+#3 /var/www/html/app/models/Company.php(46): app\models\Company->save()
+#4 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#5 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#6 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#8 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#9 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#10 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 08:10:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Query::construct() in /var/www/html/app/models/Company.php:49
+Stack trace:
+#0 /var/www/html/app/controllers/Company.php(11): app\models\Company->new(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'tpv', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Company.php on line 49
+[15-Jul-2019 08:26:13 UTC] PHP Notice:  Undefined property: app\models\Company::$dsn in /var/www/html/app/models/Company.php on line 49
+[15-Jul-2019 08:40:07 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /var/www/html/app/models/Company.php on line 49
+[15-Jul-2019 08:48:46 UTC] PHP Fatal error:  Uncaught Error: Class 'app\controllers\Query' not found in /var/www/html/app/controllers/Login.php:16
+Stack trace:
+#0 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'tpv', NULL)
+#1 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 16
+[15-Jul-2019 08:49:01 UTC] PHP Notice:  Undefined property: app\controllers\Login::$db in /var/www/html/app/controllers/Login.php on line 16
+[15-Jul-2019 09:41:01 UTC] PHP Notice:  Undefined property: app\controllers\Login::$db in /var/www/html/app/controllers/Login.php on line 17
+[15-Jul-2019 09:41:01 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\core\Query::__construct() must be of the type string, null given, called in /var/www/html/app/controllers/Login.php on line 17 and defined in /var/www/html/app/core/Query.php:12
+Stack trace:
+#0 /var/www/html/app/controllers/Login.php(17): app\core\Query->__construct(NULL, NULL)
+#1 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#2 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#3 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#4 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#5 {main}
+  thrown in /var/www/html/app/core/Query.php on line 12
+[15-Jul-2019 09:43:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Query::idConected() in /var/www/html/app/controllers/Login.php:18
+Stack trace:
+#0 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#1 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:47:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function toArray() on null in /var/www/html/app/controllers/Login.php:99
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(20): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#3 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 99
+[15-Jul-2019 09:48:51 UTC] PHP Fatal error:  Uncaught Error: Cannot access protected property app\core\Query::$conn in /var/www/html/app/controllers/Login.php:18
+Stack trace:
+#0 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#1 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:48:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method app\core\Query::conn() in /var/www/html/app/controllers/Login.php:18
+Stack trace:
+#0 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#1 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:49:08 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ')' in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:53:26 UTC] PHP Notice:  Undefined variable: c in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:53:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function isConnected() on null in /var/www/html/app/controllers/Login.php:18
+Stack trace:
+#0 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#1 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#2 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#3 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#4 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:55:02 UTC] PHP Recoverable fatal error:  Object of class app\core\Query could not be converted to string in /var/www/html/app/controllers/Login.php on line 18
+[15-Jul-2019 09:57:45 UTC] PHP Fatal error:  Access level to app\models\Company::$db must be protected (as in class app\core\Query) or weaker in /var/www/html/app/models/Company.php on line 7
+[15-Jul-2019 09:58:34 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\core\Query::__construct() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 19 and defined in /var/www/html/app/core/Query.php:12
+Stack trace:
+#0 /var/www/html/app/models/Company.php(19): app\core\Query->__construct('empresa', NULL)
+#1 /var/www/html/app/controllers/Company.php(10): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'app_tpv', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 12
+[15-Jul-2019 09:59:44 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\core\Query::__construct() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 19 and defined in /var/www/html/app/core/Query.php:12
+Stack trace:
+#0 /var/www/html/app/models/Company.php(19): app\core\Query->__construct('empresa', NULL)
+#1 /var/www/html/app/controllers/Company.php(10): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'app_tpv', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 12
+[15-Jul-2019 10:00:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to app\core\Query::__construct() must be of the type string, null given, called in /var/www/html/app/models/Company.php on line 19 and defined in /var/www/html/app/core/Query.php:12
+Stack trace:
+#0 /var/www/html/app/models/Company.php(19): app\core\Query->__construct('empresa', NULL)
+#1 /var/www/html/app/controllers/Company.php(10): app\models\Company->__construct()
+#2 /var/www/html/app/controllers/Controller.php(21): app\controllers\Company->new(Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(93): app\controllers\Controller->__construct('new', 'app_tpv', Object(app\core\Data))
+#4 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#5 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#6 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#7 {main}
+  thrown in /var/www/html/app/core/Query.php on line 12
+[15-Jul-2019 10:02:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/controllers/Login.php:29
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->confirmation(NULL)
+#1 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('confirmation', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('confirmation', 'app_tpv', NULL)
+#3 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('Login')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 29
+[15-Jul-2019 10:03:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function toArray() on null in /var/www/html/app/controllers/Login.php:99
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(NULL)
+#1 /var/www/html/app/controllers/Login.php(19): app\controllers\Controller->__construct('view', NULL, NULL)
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#3 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 99
+[15-Jul-2019 10:06:08 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:06:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(103): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:05 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(103): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:18 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(104): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:31 UTC] PHP Notice:  Undefined variable: Data in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(104): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:07:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on array in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(104): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:08:38 UTC] PHP Notice:  Undefined variable: Company in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:08:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function nombre() on null in /var/www/html/app/views/login/login.phtml:6
+Stack trace:
+#0 /var/www/html/app/views/index.phtml(24): include_once()
+#1 /var/www/html/app/controllers/Controller.php(65): require_once('/var/www/html/a...')
+#2 /var/www/html/app/controllers/Login.php(105): app\controllers\Controller->printView('/var/www/html/a...', Array)
+#3 /var/www/html/app/controllers/Controller.php(21): app\controllers\Login->view(Array)
+#4 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('view', NULL, NULL)
+#5 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('view', 'app_tpv', NULL)
+#6 /var/www/html/app/core/Router.php(53): app\core\Router->loadController('login')
+#7 /var/www/html/app/core/Router.php(31): app\core\Router->isGet()
+#8 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#9 {main}
+  thrown in /var/www/html/app/views/login/login.phtml on line 6
+[15-Jul-2019 10:11:10 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 83
+[15-Jul-2019 10:11:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(74): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:11:15 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 83
+[15-Jul-2019 10:11:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(74): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:16:35 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 83
+[15-Jul-2019 10:16:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:16:56 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 83
+[15-Jul-2019 10:16:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:17:52 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 83
+[15-Jul-2019 10:17:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:18:47 UTC] PHP Notice:  Undefined offset: 0 in /var/www/html/app/core/Query.php on line 83
+[15-Jul-2019 10:18:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:19:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:19:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(70): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:20:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(71): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:20:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(71): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:21:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(71): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:22:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(71): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:22:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /var/www/html/app/core/Conn.php:54
+Stack trace:
+#0 /var/www/html/app/core/Conn.php(117): app\core\Conn->init('SELECT * FROM e...', NULL)
+#1 /var/www/html/app/core/Query.php(42): app\core\Conn->query('SELECT * FROM e...')
+#2 /var/www/html/app/core/Query.php(51): app\core\Query->sendQuery('SELECT * FROM e...', false)
+#3 /var/www/html/app/controllers/Admin.php(26): app\core\Query->getAll()
+#4 /var/www/html/app/controllers/Login.php(71): app\controllers\Admin->loadView()
+#5 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#6 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#7 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#8 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#9 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#10 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#11 {main}
+  thrown in /var/www/html/app/core/Conn.php on line 54
+[15-Jul-2019 10:24:30 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 10:25:14 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 10:25:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 10:25:34 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 10:27:15 UTC] PHP Fatal error:  Uncaught Error: Class 'app\controllers\Clients' not found in /var/www/html/app/controllers/Login.php:73
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(22): app\controllers\Login->auth(Object(app\core\Data))
+#1 /var/www/html/app/controllers/Login.php(21): app\controllers\Controller->__construct('auth', NULL, Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(93): app\controllers\Login->__construct('auth', 'app_tpv', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/controllers/Login.php on line 73
+[15-Jul-2019 10:27:30 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:01:45 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:05:59 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:07:26 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:07:49 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:09:30 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:13:28 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:14:50 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:15:20 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:16:20 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:16:57 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:18:06 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:19:07 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:24:21 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:25:11 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:25:36 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:26:53 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:27:50 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:28:14 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:48:10 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:52:46 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:53:58 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:54:25 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:55:12 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:56:47 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 11:56:59 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 12:17:38 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 12:20:04 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 12:21:40 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 12:24:35 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[15-Jul-2019 12:33:11 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:27:37 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:38:19 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:38:33 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:39:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:39:28 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:41:30 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:42:10 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:43:40 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:48:40 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:49:25 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:49:50 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:54:34 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:54:56 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 07:57:55 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:01:29 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:02:57 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:06:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:10:16 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:10:39 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:14:38 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 08:15:04 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:13:39 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:14:18 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:14:39 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:15:14 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:16:08 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:17:53 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:19:43 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:20:07 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:22:46 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:23:27 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:28:19 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:29:43 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:31:23 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:32:04 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:32:35 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:36:20 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:37:36 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:37:55 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:56:57 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:57:00 UTC] PHP Recoverable fatal error:  Object of class app\views\components\controllers\DatePicker could not be converted to string in /var/www/html/app/views/admin/sections/income.phtml on line 22
+[16-Jul-2019 09:58:14 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:58:35 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 09:59:19 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:05:30 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:05:51 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:06:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:06:44 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:08:48 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:09:51 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:10:32 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:12:37 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:14:06 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:14:06 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:14:35 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:14:35 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:15:29 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:15:29 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:15:44 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:15:44 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:16:25 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:16:25 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:17:01 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:17:01 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:18:09 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:18:09 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:23:48 UTC] PHP Warning:  Declaration of app\models\Tickets::getBetween($c, $f1, $f2) should be compatible with app\core\Query::getBetween(string $column, $val1, $val2, ?string $args = NULL, bool $desc = false) in /var/www/html/app/models/Tickets.php on line 59
+[16-Jul-2019 10:23:48 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:24:40 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:30:18 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:30:37 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:33:33 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:33:36 UTC] PHP Notice:  Undefined property: app\core\Data::$id in /var/www/html/app/controllers/Controller.php on line 99
+[16-Jul-2019 10:33:36 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Tickets::between(), 1 passed in /var/www/html/app/controllers/Controller.php on line 99 and exactly 2 expected in /var/www/html/app/models/Tickets.php:55
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(99): app\models\Tickets->between(NULL)
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->getBetween(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(94): app\controllers\Controller->__construct('getbetween', 'Tickets', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Tickets.php on line 55
+[16-Jul-2019 10:35:35 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 10:36:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function app\models\Tickets::between(), 0 passed in /var/www/html/app/controllers/Controller.php on line 99 and exactly 1 expected in /var/www/html/app/models/Tickets.php:55
+Stack trace:
+#0 /var/www/html/app/controllers/Controller.php(99): app\models\Tickets->between()
+#1 /var/www/html/app/controllers/Controller.php(22): app\controllers\Controller->getBetween(Object(app\core\Data))
+#2 /var/www/html/app/core/Router.php(94): app\controllers\Controller->__construct('getbetween', 'Tickets', Object(app\core\Data))
+#3 /var/www/html/app/core/Router.php(68): app\core\Router->loadController()
+#4 /var/www/html/app/core/Router.php(31): app\core\Router->isPost(Array)
+#5 /var/www/html/htdocs/index.php(11): app\core\Router->__construct(Array)
+#6 {main}
+  thrown in /var/www/html/app/models/Tickets.php on line 55
+[16-Jul-2019 10:56:14 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:13:05 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:14:10 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:15:30 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:16:21 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:17:24 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:17:54 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:18:11 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:20:58 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:22:07 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:22:29 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:22:47 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 11:23:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:22:43 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:23:25 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:24:07 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:24:41 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:34:38 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:35:05 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:37:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:37:32 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:40:23 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:40:45 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:41:19 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:44:02 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:44:20 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:46:41 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:49:17 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:51:06 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:52:58 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:53:20 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:53:41 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:55:33 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7
+[16-Jul-2019 12:57:03 UTC] PHP Notice:  Undefined property: app\models\Company::$pathLogo in /var/www/html/app/views/admin/sections/ticket.phtml on line 7

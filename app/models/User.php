@@ -16,6 +16,7 @@ class User extends Query{
 
         $this->company = NAME_COMPANY??null;
         if($conn) parent::__construct();
+
         if($arg){
             if (is_array($arg)) $this->loadData($arg);
             else if (is_int($arg)) $this->searchById($arg);
@@ -95,7 +96,7 @@ class User extends Query{
         $data = $this->getBy(['email' => $arg]);
         if($data) return  $this->loadData($data);
         // en caso que no lo encuentre
-        Error::die('E025');
+        else Error::die('E025');
     }
     function activate(){
         return $this->saveById(['estado'=>1]);

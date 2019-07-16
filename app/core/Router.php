@@ -15,17 +15,16 @@
 class Router{
     
     private 
-        $id = null, 
         $data, 
         $db,
-        $nameDb, 
         $controller, 
         $action;
 
     function __construct($params = []){
 
         // Valores por defecto
-        $this->db = $params['db'] ?? null; 
+
+        $this->db = CODE_COMPANY; 
         $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
 
@@ -43,20 +42,12 @@ class Router{
                 if (empty($this->controller)) $this->controller = 'main';
                 $this->controller = $this->controller; 
             } else {
-                // Si hemos ingresado segundo parametro en la url y existe buscamos la empresa
-                $Company = new \app\models\Company($this->db);
-                
-                if ($Company){   
-                    $this->id = $Company->id();
-                    $this->nameDb = $Company->nombre();
-                    // Si esta vacio controlador nos envia al login
-                    if (empty($this->controller)) {
-                        $this->action = 'view'; 
-                        $this->controller = 'login';
-                    }
-                } else {
-                    Error::toString('E018');
-                } 
+
+                // Si esta vacio controlador nos envia al login
+                if (empty($this->controller)) {
+                    $this->action = 'view'; 
+                    $this->controller = 'login';
+                }
             } 
             
             exit ($this->loadController($this->controller));
@@ -94,6 +85,7 @@ class Router{
     // Carga controladores
     // Si se le pasa argumentos cambia el controlador asignado
     private function loadController(string $controller = null){
+
         if(!empty($controller)) $this->controller = ucwords($controller); 
         $nameClass = '\\app\\controllers\\' . $this->controller;
 

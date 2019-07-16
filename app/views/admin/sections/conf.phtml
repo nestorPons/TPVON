@@ -4,8 +4,7 @@
         <fieldset>
             <legend>Datos empresa</legend>
             <?php
-            $txt01 = new InputText(['label' => 'Nombre admin', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de administrador", 'required'=>true]);
-            $txt02 = new InputText(['label' => 'Apellidos admin', 'name'=>'apellidos','required'=>true]);
+            $txt01 = new InputText(['label' => 'Nombre empresa', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la empresa", 'required'=>true]);
             $txt03 = new InputText(['label' => 'Teléfono', 'name'=>'telefono']);
             $txt04 = new InputText(['label' => 'Email', 'name'=>'email']);
             $txt05 = new InputText(['label' => 'Calle', 'name'=>'calle']);
@@ -14,7 +13,7 @@
             $txt08 = new InputText(['label' => 'Piso', 'name'=>'piso']);
             $txt09 = new InputText(['label' => 'Población', 'name'=>'poblacion']);
             $txt10 = new InputText(['label' => 'Provincia', 'name'=>'provincia']);
-            $txt11 = new InputText(['label' => 'Codigo postal', 'name'=>'CP', 'title'=>"Introduzca el codigo postal", 'required'=>true]);
+            $txt11 = new InputText(['label' => 'Codigo postal', 'name'=>'CP', 'title'=>"Introduzca el codigo postal"]);
             $txt12 = new SelectCountries(['label' => 'Pais', 'name'=>'pais']);
             ?> 
         </fieldset>

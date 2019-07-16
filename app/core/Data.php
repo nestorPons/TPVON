@@ -109,7 +109,6 @@ class Data {
         return $arg; 
      }
     function delete(string $arg){ 
-
         if(property_exists($this, $arg)){
             unset($this->{$arg});
             return true; 

@@ -4,6 +4,7 @@
         $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
         'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
         $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
+        $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
         $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex'=>1], false);
         $cli = new Select(['label' => 'Cliente', 'tabindex'=>2], false);
@@ -35,7 +36,7 @@
         align-items: flex-start;
         display: grid;
         grid-template-rows: auto [table] 400px auto auto auto;
-        grid-template-columns: [first] 10rem 1fr 1fr 6rem 6rem  6rem  [prelast] 8rem [last] 2rem;
+        grid-template-columns: [first] 10rem 1fr 1fr 7rem 7rem 7rem  [prelast] 7rem [last] 2rem;
         grid-row-gap: 5px;
     }
     #tpv table:not(.horizontal) thead{
@@ -55,6 +56,11 @@
         grid-row: 1;
         grid-column: prelast;
     }
+    #tpv #<?= $date->id() ?>{
+        grid-row: 1;
+        grid-column: 6;
+        text-align: center;
+    }
     #tpv #<?= $hour->idEl() ?>{
         text-align: center;
     }
@@ -67,11 +73,11 @@
     }
     #tpv #<?= $emp->id() ?>{
         grid-row: 1;
-        grid-column: 2/span 2;
+        grid-column: 2;
     }
     #tpv #<?= $cli->id() ?>{
         grid-row: 1; 
-        grid-column: 4/span 2;
+        grid-column: 3;
     }
     #tpv #<?= $quan->id() ?>{
         grid-area: 3/4;
@@ -129,7 +135,9 @@
         currentId: <?=$tickets_new_id?>,
         lastId: <?=$tickets_new_id?>, 
         Ticket : new Ticket(),
-        Table : new Table('<?=$table->idEl()?>'), 
+        Table : new Table('<?=$table->idEl()?>'),
+        date : <?=$date->idEl()?>,
+        hour : <?=$hour->idEl()?>,
         $id : $('#<?=$id->idEl()?>'), 
         $code :  $('#<?=$code->idEl()?>'),
         selCod: <?=$code->id()?>, 
@@ -190,7 +198,11 @@
             this.reset() 
         },
         reset(){
+            const f = new Date();
+
             this.Ticket = new Ticket()
+            this.date.value = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+            this.hour.value = f.getHours() + ":" + f.getMinutes()
             this.clearLine()
             this.clearLines()
             this.clearUsers()
@@ -263,12 +275,14 @@
         },  
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
-            let code = this.$code.find(':selected').text(),
-                el = DB.get('servicios', 'codigo' , code)[0]
-
-            if(el){
+            let code = this.$code.find(':selected').text()
+            
+            if(code != ''){
+                let el = DB.get('servicios', 'codigo' , code)[0]
                 this.$description.val(el.descripcion)
                 this.$price.val(el.precio)
+
+                //app.clock()
             }
         },
         loadLineFromTable(e){
@@ -334,7 +348,6 @@
         },
         // Cargamos los datos del ticket actual
         loadDataTicket( ticket ){
-
             this.reset()
             this.Ticket = new Ticket(ticket)
 
@@ -342,13 +355,15 @@
                 this.$id.val(this.currentId)
                 return false 
             }
-
+            let d = new Date(ticket.fecha)
             let arrdate = ticket.fecha.split(' ')
 
             this.$id.val(ticket.id) 
             this.$employees.addClass('valid').find('[value='+ticket.id_empleado+']').attr("selected", true)
             this.$client.addClass('valid').find('[value='+ticket.id_cliente+']').attr("selected", true)
-            this.$hour.val(arrdate[1].substr(0,5))
+            
+            this.date.value = d.toLocaleDateString()
+            this.hour.value = d.toLocaleTimeString()
 
             // Cargamos las lineas 
             for(let i in ticket.lines){

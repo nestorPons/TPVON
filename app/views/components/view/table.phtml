@@ -44,6 +44,9 @@ var Table = class{
     clearLines(){
         this.$table.find('tbody').find('tr').remove()
     }
+    clear(){
+        this.clearLines()
+    }
     delLine(id){
         this.$table.find(`[idline="${id}"]`).remove()
     }

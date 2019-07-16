@@ -12,7 +12,6 @@ class Tickets extends Query{
         }else if(is_object($args)){
             $this->loadData($args);
         }
-
     }
     function last(){
         $data = $this->getLast();
@@ -51,5 +50,22 @@ class Tickets extends Query{
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
         else return false; 
+    }
+    // Método get de obtención por rando de fechas
+    function between(Object $Data){
+
+        $arr_tickets =  $this->getBetween('fecha',$Data->f1, $Data->f2);
+        foreach($arr_tickets as $key => $ticket){
+            $total = 0; 
+            $lines = new Lines; 
+            $arr_tickets[$key]['lineas'] = $lines->getBy(['id_ticket'=>$ticket['id']]);
+            foreach($arr_tickets[$key]['lineas'] as $line){
+                $t = $line['precio'] * $line['cantidad']; 
+                $dto = $line['dto']  * $t / 100; 
+                $total += $t - $dto; 
+            }
+            $arr_tickets[$key]['total'] = $total;
+        }
+        return $arr_tickets; 
     }
 }
