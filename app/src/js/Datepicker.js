@@ -9,8 +9,12 @@ class Datepicker{
             startDay: 1, 
             customDays: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
             customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            formatter: (input, date, instance) => {
+                const value = date.toLocaleDateString()
+                input.value = value // => '1/1/2099'
+            },
             onSelect: function(el, date) {
-                app.loadDate(date.getDate())
+                app.loadDate(date.toLocaleDateString())
             }
         })
         this.loadEvents()

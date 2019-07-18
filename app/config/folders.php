@@ -4,7 +4,8 @@ define('ROOT' ,dirname(dirname(__DIR__)) . '/');
 const PUBLIC_ = 'htdocs/'; 
 const APP                           = ROOT . 'app/';
     const CONTROLLERS               = APP . 'controllers/';
-    const VIEWS                     = APP . 'views/';
+    /* const VIEWS                     = APP . 'views/'; */
+    const NATIVE_VIEWS              = APP . 'views/';
     const CORE                      = APP . 'core/';
     const MODELS                    = APP . 'models/';
     const CONFIG                    = APP . 'config/';
@@ -14,6 +15,7 @@ const APP                           = ROOT . 'app/';
     const DB                        = APP . 'db/';
     const HTDOCS                    = ROOT . 'htdocs/'; // Carpeta pública
         const NODE_MODULES              = HTDOCS . 'node_modules/';
+        const VIEWS                     = HTDOCS . 'build/';
 
 
 namespace VIEWS; 

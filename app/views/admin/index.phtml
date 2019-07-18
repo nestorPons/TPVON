@@ -8,7 +8,7 @@ namespace app\views\components\controllers;
     <?php include(\FOLDERS\VIEWS . 'admin/footer.phtml')?>
 </section>
 <style>
-    #appadmin{
+    #appadmin{ 
         display: grid;
         grid-template-areas:
             'header header'
@@ -16,10 +16,10 @@ namespace app\views\components\controllers;
             'menu footer';
         grid-template-rows: 60px 1fr 60px;
         grid-template-columns: auto 1fr; 
+        header{
+            grid-area: header;
+        }    
     }
-    #appadmin header{
-        grid-area: header;
-    }    
     #appadmin main{
         grid-area: main;
         height: 82vh;
@@ -38,5 +38,5 @@ namespace app\views\components\controllers;
     DB.set('empresa', <?=$data_company?>)
 
     app.clock()
-    </script>
+</script>
 

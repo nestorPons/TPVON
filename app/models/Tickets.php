@@ -54,15 +54,19 @@ class Tickets extends Query{
     // Método get de obtención por rando de fechas
     function between(Object $Data){
 
-        $arr_tickets =  $this->getBetween('fecha',$Data->f1, $Data->f2);
+        $arr_tickets =  $this->getBetween('fecha',$Data->f1 . ' 00:00:00.000', $Data->f2 . ' 23:59:59.999');
         foreach($arr_tickets as $key => $ticket){
             $total = 0; 
             $lines = new Lines; 
             $arr_tickets[$key]['lineas'] = $lines->getBy(['id_ticket'=>$ticket['id']]);
-            foreach($arr_tickets[$key]['lineas'] as $line){
+            foreach($arr_tickets[$key]['lineas'] as $k => $line){
+                $Art = new Items($line['articulo']);
+                $arr_tickets[$key]['lineas'][$k]['articulo'] = $Art->codigo();
+
                 $t = $line['precio'] * $line['cantidad']; 
-                $dto = $line['dto']  * $t / 100; 
-                $total += $t - $dto; 
+                $dto = $line['dto']  * $t / 100;
+                $arr_tickets[$key]['lineas'][$k]['importe'] = $t - $dto; 
+                $total +=  $arr_tickets[$key]['lineas'][$k]['importe']; 
             }
             $arr_tickets[$key]['total'] = $total;
         }

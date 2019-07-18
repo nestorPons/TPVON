@@ -1,0 +1,10 @@
+<a href="login">
+    <?php include \VIEWS\COMPONENTS . 'view/icon.phtml'; ?>
+</a>
+<script>
+    $('#<?=$id?>').click(function(){
+        
+        // Eliminamos las zonas abiertas
+        $('section:not("#login")').remove()
+    })
+</script>

@@ -2,7 +2,7 @@
 use \app\core\{Query, Data};
 
 class Items extends Query{
-    public $id, $codigo,	$nombre, $descripcion, $precio, $coste, $id_iva, $tipo, $estado;
+    public $id, $codigo, $nombre, $descripcion, $precio, $coste, $id_iva, $tipo, $estado;
     protected $table = 'articulos';
 
     function __construct($arg = null){
@@ -25,4 +25,12 @@ class Items extends Query{
         
         return $this->id;
     }
+    
+    // getters y setters
+    function nombre(){
+        return $this->nombre; 
+    } 
+    function codigo(){
+        return $this->codigo; 
+    } 
 }

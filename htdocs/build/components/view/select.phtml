@@ -1,0 +1,39 @@
+<div id="<?=$id?>" class="row col-sm-12 col-md-12">
+    <select 
+        id="<?=$idElement?>" 
+        class = "<?=$class?>"
+        <?=$printName?>
+        <?=$printTitle?>
+        <?=$required?>
+        <?=$onfocus?>
+        <?=$onblur?>
+        <?=$onclick?>
+        <?=$readonly?>
+        <?=$for?>
+        <?=$required?> 
+        <?=$value?> 
+        <?=$list?>
+        <?=$disabled?>
+        <?=$tabindex?>
+    > 
+        <option value="" hidden></option>
+        <?php if($options):?>
+            <?php foreach($options as $key => $val): ?>
+                <option value="<?=$key?>"  <?php if($key == $selected) echo "selected"?>><?=$val?></option>
+            <?php endforeach ?>
+        <?php endif?>
+    </select> 
+    <label for="<?=$idElement?>"><?=$label?></label>
+</div>  
+<script>
+    const <?=$id?> = {
+        $el: $('#<?=$idElement?>'), 
+        addOption(value, option){
+            const line = `<option value="${value}">${option}</option>`
+            this.$el.append(line)
+        },
+        clear(){
+            this.$el.find('option:not(:first-child)').remove()
+        }
+    }
+</script>

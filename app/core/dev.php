@@ -3,14 +3,14 @@ const BR = '</br>';
 function pr(...$args){
     foreach($args as $arr){
         echo('<pre>');
-        var_dump($arr);
+        print_r($arr);
         echo('</pre>');
     }
 }
 function prs(...$args){
     foreach($args as $arr){
         echo('<pre>');
-        var_dump($arr);
+        print_r($arr);
         echo('</pre>');
     }
     die();
