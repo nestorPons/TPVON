@@ -2,7 +2,7 @@ const app = {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
     GET: $_GET,
     // Peticiones con datos 
-    post: function (data, callback) {
+    post: function (data, callback, error = true) {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
 
@@ -19,8 +19,9 @@ const app = {
                 if( isEmpty(data.success) || 
                     data.success == false || 
                     data.success == 0 && 
-                    exist(data.mens)) 
-                        app.mens.error(data.mens||'No se ha podido rehalizar la petición!')
+                    exist(data.mens) &&
+                    error) 
+                        echo(data.mens||'No se ha podido rehalizar la petición!')
                 
             } catch(e) {
                 echo('HTMLresponse...')

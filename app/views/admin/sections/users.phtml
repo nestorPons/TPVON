@@ -26,7 +26,7 @@ var users = {
     buttons: ['add', 'search'],
     currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
-    Form : <?=$editUser->idObj()?>,
+    Form : new Modal('<?=$editUser->id()?>'),
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(){
         let f = this.Form.getData(),

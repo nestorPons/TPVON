@@ -1,6 +1,5 @@
 <div id="<?=$id?>" class="row col-sm-12 col-md-12">
-    <select 
-        id="<?=$idElement?>" 
+    <select
         class = "<?=$class?>"
         <?=$printName?>
         <?=$printTitle?>
@@ -26,12 +25,14 @@
     <label for="<?=$idElement?>"><?=$label?></label>
 </div>  
 <script>
-    const <?=$id?> = {
-        $el: $('#<?=$idElement?>'), 
+    class Select{
+        constructor(id){
+            this.$el = $('#'+id).find('select') 
+        }
         addOption(value, option){
             const line = `<option value="${value}">${option}</option>`
             this.$el.append(line)
-        },
+        }
         clear(){
             this.$el.find('option:not(:first-child)').remove()
         }

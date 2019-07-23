@@ -26,7 +26,7 @@ var services = {
     buttons: ['add', 'search'],
     currentId: null, 
     Table: new Table('<?=$table->idEl()?>'),
-    Form : <?=$form->idObj()?>,
+    Form : new Modal('<?=$form->id()?>'),
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(){
         return true

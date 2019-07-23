@@ -1,10 +1,10 @@
 <?php 
 namespace FOLDERS; 
 define('ROOT' ,dirname(dirname(__DIR__)) . '/');
+
 const PUBLIC_ = 'htdocs/'; 
 const APP                           = ROOT . 'app/';
     const CONTROLLERS               = APP . 'controllers/';
-    /* const VIEWS                     = APP . 'views/'; */
     const NATIVE_VIEWS              = APP . 'views/';
     const CORE                      = APP . 'core/';
     const MODELS                    = APP . 'models/';
@@ -16,6 +16,7 @@ const APP                           = ROOT . 'app/';
     const HTDOCS                    = ROOT . 'htdocs/'; // Carpeta pública
         const NODE_MODULES              = HTDOCS . 'node_modules/';
         const VIEWS                     = HTDOCS . 'build/';
+            const CLASSES_JS            = HTDOCS . 'build/js/';    
 
 
 namespace VIEWS; 

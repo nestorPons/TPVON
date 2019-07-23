@@ -130,32 +130,32 @@
 <script src="js/Ticket.min.js"></script>
 <script>
     var tpv = {
-        buttons: ['prev', 'next','del'],
-        total: 0,
-        currentId: <?=$tickets_new_id?>,
-        lastId: <?=$tickets_new_id?>, 
-        Ticket : new Ticket(),
-        Table : new Table('<?=$table->idEl()?>'),
-        modal : <?=$modTicket->idObj()?>,
-        date : <?=$date->idEl()?>,
-        hour : <?=$hour->idEl()?>,
-        $id : $('#<?=$id->idEl()?>'), 
-        $code :  $('#<?=$code->idEl()?>'),
-        selCod: <?=$code->id()?>, 
-        $description : $('#<?=$des->idEl()?>'),
-        $employees : $('#<?=$emp->idEl()?>'),
-        selEmp  : <?=$emp->id()?>, 
-        $client : $('#<?=$cli->idEl()?>'),
-        selCli: <?=$cli->id()?>, 
-        $hour : $('#<?=$hour->idEl()?>'),
-        $quantity : $('#<?=$quan->idEl()?>'),
-        $price : $('#<?=$pric->idEl()?>'),
-        $dto : $('#<?=$dto->idEl()?>'),
-        $amount : $('#<?=$amo->idEl()?>'),
-        $btnOk : $('#<?=$btnOk->idEl()?>'),
-        $btnClear : $('#<?=$btnClear->idEl()?>'),
-        $total : $('#<?=$txtTotal->idEl()?>'),
-        $iva :  $('#<?=$iva->idEl()?>'),
+        buttons     : ['prev', 'next','del'],
+        total       : 0,
+        currentId   : <?=$tickets_new_id?>,
+        lastId      : <?=$tickets_new_id?>, 
+        Ticket      : new Ticket(),
+        Table       : new Table('<?=$table->idEl()?>'),
+        Modal       : new Modal('<?=$modTicket->id()?>') ,
+        selCod      : new Select('<?=$code->id()?>'), 
+        selEmp      : new Select('<?=$emp->id()?>'), 
+        selCli      : new Select('<?=$cli->id()?>'), 
+        date        : <?=$date->idEl()?>,
+        hour        : <?=$hour->idEl()?>,
+        $id         : $('#<?=$id->idEl()?>'), 
+        $code       : $('#<?=$code->idEl()?>'),
+        $description: $('#<?=$des->idEl()?>'),
+        $employees  : $('#<?=$emp->idEl()?>'),
+        $client     : $('#<?=$cli->idEl()?>'),
+        $hour       : $('#<?=$hour->idEl()?>'),
+        $quantity   : $('#<?=$quan->idEl()?>'),
+        $price      : $('#<?=$pric->idEl()?>'),
+        $dto        : $('#<?=$dto->idEl()?>'),
+        $amount     : $('#<?=$amo->idEl()?>'),
+        $btnOk      : $('#<?=$btnOk->idEl()?>'),
+        $btnClear   : $('#<?=$btnClear->idEl()?>'),
+        $total      : $('#<?=$txtTotal->idEl()?>'),
+        $iva        : $('#<?=$iva->idEl()?>'),
         open(){
             this.$employees.focus()
         },
@@ -186,11 +186,11 @@
             }
         },
         openTicket(){
-            this.modal.open()
+            this.Modal.open()
             ticket.open(tpv.Ticket)
         },
         close(){
-            this.modal.close()
+            this.Modal.close()
         },
         new(){
             this.$id.val(++this.lastId)
@@ -344,7 +344,7 @@
             }
             app.post(data, function(respond, status){
                 typeof callback == 'function' && callback(respond, status)
-            })
+            }, false)
         },
         // Cargamos los datos del ticket actual
         loadDataTicket( ticket ){
