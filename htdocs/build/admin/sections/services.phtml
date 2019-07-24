@@ -1,5 +1,4 @@
-<?php namespace app\views\components\controllers;?>
-<section id="services">
+<?php namespace app\views\components\controllers;?><section id="services">
     <?php
     $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 'onclick'=>'services.show(window.event)']);
     $abc = new ListABC($table->id());
@@ -50,7 +49,7 @@ var services = {
         // Eliminamos de la tabla 
         this.Table.delLine(this.currentId)
         // Cerramos formulario
-        this.Form.hide()
+        this.Form.close()
         
         tpv.loadServ()
     },
@@ -75,7 +74,7 @@ var services = {
 
         if (this.currentId == -1 ) this.addLine(data)
         else this.updateLine(data)
-        this.Form.hide()
+        this.Form.close()
 
         tpv.loadServ()
     },

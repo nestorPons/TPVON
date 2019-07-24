@@ -23,18 +23,29 @@
         <?php endif?>
     </select> 
     <label for="<?=$idElement?>"><?=$label?></label>
-</div>  
+</div> 
 <script>
-    class Select{
+    class Select extends Component{
         constructor(id){
-            this.$el = $('#'+id).find('select') 
+            super()
+            this.el = document.getElementById(id).getElementsByTagName('select')[0]
+            this.o =  this.el.getElementsByTagName('option')
+            echo(id)
         }
         addOption(value, option){
-            const line = `<option value="${value}">${option}</option>`
-            this.$el.append(line)
+            let line = document.createElement('option')
+                line.value = value 
+                line.innerHTML = option
+            this.el.append(line)
+        }
+        default(){
+            this.el.value = 0
         }
         clear(){
-            this.$el.find('option:not(:first-child)').remove()
+            let ops = this.el.querySelector('option:not(:first-child)')
+            for(let i in ops){
+                if(ops[i]) this.el.remove(ops[i].selectedIndex)
+            }
         }
     }
 </script>

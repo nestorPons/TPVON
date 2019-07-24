@@ -3,10 +3,11 @@ session_start();
 use MatthiasMullie\Minify;
 
 class Prepocessor{
-    const BUILD = \FOLDERS\HTDOCS . 'build/';
-    const CACHE_FILE = \FOLDERS\CORE  . 'cache_views.ini'; 
-    const FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS; 
-
+    const 
+        BUILD = \FOLDERS\HTDOCS . 'build/',
+        CACHE_FILE = \FOLDERS\CORE  . 'cache_views.ini',
+        FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
+        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml';
     private
         $cache_class_js,  
         $cache,
@@ -47,6 +48,17 @@ class Prepocessor{
         }
 
         return $return;
+    }
+    private function compress_code($code){
+        $search = array(
+        '/\>[^\S ]+/s',  // remove whitespaces after tags
+        '/[^\S ]+\</s',  // remove whitespaces before tags
+        '/(\s)+/s'       // remove multiple whitespace sequences
+        );
+
+        $replace = array('>','<','\\1');
+        $code = preg_replace($search, $replace, $code);
+        return $code;
     }
     private function extract($tag){
         $pos_tag_open = strpos($this->content, "<$tag"); 
@@ -90,7 +102,7 @@ class Prepocessor{
                     // ARCHIVOS
                     $this->getContent($file);
                     $a = $this->args('style');
-//pr($file);          
+          
                     //$this->include();
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
@@ -98,10 +110,26 @@ class Prepocessor{
                     
                     $this->js($this->extract('script'));
                     
+                    if( $file == self::MAIN_PAGE ) $this->queue();
+                    // Compresión salida html
+                    //$this->content  = $this->compress_code($this->content);
+
+                    //Añadimos nombre de espacio a todos los archivos 
+                    $this->add_name_space();
+                    
                     file_put_contents($file_build, $this->content, LOCK_EX  );
                 }
             }
         } 
+    }
+    private function add_name_space(){
+        $this->content = '<?php namespace app\views\components\controllers;?>' . $this->content; 
+    }
+    private function queue(){
+        $content = $this->content; 
+        $new_content = str_replace('</head>', $this->queue . '</head>', $content);
+        $this->content = $new_content;
+
     }
     private function include(){
         
@@ -116,34 +144,43 @@ class Prepocessor{
             }
         } 
     }
+    /**
+     * Extraemos las clases de los componentes 
+     * y las cargamos en un ambito global
+     */
     private function js($content){ 
-        // Comprobamos si existe una clase y la cacheamos par no volver a mandarla
-        $regex = '/class [A-Za-z0-9]{1,150}/';
 
+        // Buscamos clases js en el archivo
+        $regex = '/class [A-Za-z0-9]{1,150}/';
         if(preg_match($regex, $content, $r)){
 
+            // Agregamos clases padre a la carga principal de la aplicación 
+            $regex_extends = '/extends [A-Za-z0-9]*/';
+            if(preg_match($regex_extends, $content, $match)){
+    
+                $main_class = explode(' ',$match[0])[1];
+                $src = "<script src='./js/$main_class.min.js'></script>";
+                if (!strpos($this->queue, $src)) $this->queue .= $src; 
+        
+            }
+
             $folder = \FOLDERS\CLASSES_JS;
-            $file_index = \FOLDERS\VIEWS . 'index.phtml';
             $ac = explode(' ',$r[0]);
-            $nameClass= $ac[1];
             
+            // Creamos el archivo de la clase
+            $nameClass= $ac[1];
             $regex = '#\<script(.*)>((.|\n)*)</script>#';
             $len = preg_match($regex, $this->content, $matches);            
             if(!file_exists($folder)) mkdir($folder, 0775, true);
             file_put_contents($folder.$nameClass.'.js', $matches[2]);
             
-            // Creamos el vínculo al archivo de la clase 
-            $this->queue .= "<script scr='$folder$nameClass.js'></script>";
-//AKI :: añadiendo scripts al index o puerta de entrada principal
-            $content = file_get_contents($file_index); 
-            $new_content = str_replace('</head>', $tag . '</head>', $content);
-            $this->wait_put($folder.$nameClass.'.js', $new_content);
-            file_put_contents($file_index, $new_content);    
+            // Eliminamos TODO EL BLOQUE JS del componente
+            $this->content = preg_replace($regex, ' ', $this->content);
 
-          /*   for($i = 0; $i < $len; $i++){
-                pr(htmlspecialchars($matches[0][$i][1]));
-            } */
-           
+            // Añadimos una cola para agregar los enlaces en el index o puerta principal 
+            $this->queue .= "<script src='./build/js/$nameClass.js'></script>";
+   
+            
             // Buscamos la clase en la sesión
             if(!empty($this->cache_class_js) && in_array($ac[1], $this->cache_class_js)){
                 // si ya esta cargada
@@ -174,7 +211,7 @@ class Prepocessor{
         } else return false;
     }
     private function isModified($file){
-return true;
+        return true;
         if($this->cacheable){
             // Comprobamos si han habido modificaciones
             if (!isset($this->cache[$file]) || $this->cache[$file] != filectime($file)){

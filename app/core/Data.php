@@ -19,10 +19,6 @@ class Data {
             }
         }
     }
-    function dateFormat($atr, $format){
-        $this->{$atr} =  date_format(date_create($this->{$atr}), $format);
-        return $this->{$atr}; 
-    }
     function addItem($value, $key = null){
        
         // Si vamos a pasar un array numerado creamos todos los métodos para extraer los atributos

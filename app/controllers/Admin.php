@@ -25,6 +25,9 @@ class Admin extends Controller{
         $data['Company'] = $Company;
         $data['data_company'] = json_encode($Company->getAll());
         
+        $Promos = new Query('promos'); 
+        $data['promos'] = json_encode($Promos->getAll()); 
+
         $User = new User;
         $data['Users'] = $User->all();
         $data['jsonUsers'] = json_encode($data['Users']); // para js

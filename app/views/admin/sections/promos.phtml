@@ -1,0 +1,28 @@
+<section id="promos">
+    <form controller="promos" action="save" callback="promos.save(data)" class="input-group">
+        <fieldset>
+            <legend>Promociones</legend>
+            <?php
+            $txt00 = new InputRead(['label' => 'Id', 'name'=>'id']);
+            $txt01 = new InputText(['label' => 'Nombre', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la promoción", 'required'=>true]);
+            $txt02 = new InputText(['label' => 'Numero de dias', 'name'=>'valor']);
+            $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name'=>'dto']);
+            ?> 
+        </fieldset>
+    </form>
+</section>
+<script> 
+var promos = {
+    table: 'promos',
+    buttons: [],
+    form: document.getElementById('promos').getElementsByTagName('form')[0],
+    load(){
+        let d = DB.get('promos')[0]
+        app.loadDataToForm(d, this.form)
+    },
+    save(){
+        DB.set(this.table, app.formToObject(this.form), 'id' , 1)
+        $(this.form).submit()
+    },
+}
+</script>

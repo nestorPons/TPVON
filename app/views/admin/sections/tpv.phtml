@@ -1,4 +1,3 @@
-<?php namespace app\views\components\controllers;?>
 <section id="tpv">
     <?php
         $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
@@ -137,13 +136,12 @@
         Ticket      : new Ticket(),
         Table       : new Table('<?=$table->idEl()?>'),
         Modal       : new Modal('<?=$modTicket->id()?>') ,
-        selCod      : new Select('<?=$code->id()?>'), 
+        selCode      : new Select('<?=$code->id()?>'), 
         selEmp      : new Select('<?=$emp->id()?>'), 
         selCli      : new Select('<?=$cli->id()?>'), 
         date        : <?=$date->idEl()?>,
         hour        : <?=$hour->idEl()?>,
         $id         : $('#<?=$id->idEl()?>'), 
-        $code       : $('#<?=$code->idEl()?>'),
         $description: $('#<?=$des->idEl()?>'),
         $employees  : $('#<?=$emp->idEl()?>'),
         $client     : $('#<?=$cli->idEl()?>'),
@@ -179,10 +177,10 @@
 
         },
         loadServ(){
-            this.selCod.clear()
+            this.selCode.clear()
             const serv = DB.get('servicios','estado', 1)
             for(i in serv){
-                this.selCod.addOption(serv[i].id, serv[i].codigo)
+                this.selCode.addOption(serv[i].id, serv[i].codigo)
             }
         },
         openTicket(){
@@ -231,12 +229,12 @@
             this.$amount.val(total)
         },
         clearLine(){
-            this.$code.val('')
+            this.selCode.default()
             this.$description.val('')
             this.$quantity.val(1)
             this.$price.val(0)
             this.$amount.val(0)
-            this.$code.focus()
+            //this.selCode.el.focus()
         },
         clearLines(){
             this.Table.clearLines()
@@ -253,7 +251,7 @@
             this.calculate()
     
             var line = this.Ticket.addLine(
-                this.$code.val(), 
+                this.selCode.value(), 
                 this.$description.val(), 
                 this.$quantity.val(), 
                 this.$price.val(), 
@@ -261,9 +259,10 @@
                 this.$amount.val(),
                 this.$iva.val()
             )
+
             // Validamos los d  mos en la tabla
             if(line.success) this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
-            else  this.$code.focus()
+            else  this.selCode.el.focus
         },
         addLineTable(id, articulo, des, cantidad, precio, dto, amo){
             this.Table.addLine(id, [articulo, des, cantidad, precio, dto, amo || cantidad * precio])
@@ -275,14 +274,12 @@
         },  
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
-            let code = this.$code.find(':selected').text()
-            
-            if(code != ''){
-                let el = DB.get('servicios', 'codigo' , code)[0]
+            let id = this.selCode.value()
+
+            if(id){
+                let el = DB.get('servicios', 'id' , id)[0]
                 this.$description.val(el.descripcion)
                 this.$price.val(el.precio)
-
-                //app.clock()
             }
         },
         loadLineFromTable(e){

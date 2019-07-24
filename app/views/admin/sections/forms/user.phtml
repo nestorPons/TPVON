@@ -1,4 +1,3 @@
-<?php namespace app\views\components\controllers;?>
 <component id="editUser">
     <form controller="user" action="save" validation="users.validation()" callback="users.save(data)">
     <?php
@@ -13,6 +12,7 @@
         'options' => [0=>'Cliente', 1=>'Usuario', 2=>'Administrador'],'selected' => 0, 'required'=>true], true);
         
         $status = new Checkbox(['label' => 'Bloquear cuenta', 'tabindex'=>7, 'name'=>'estado', 'default'=>'1', 'value'=>2],  false);
+        $promos = new Checkbox(['label' => 'Activar promociones', 'tabindex'=>8, 'name'=>'promos', 'default'=>'0', 'value'=>1],  false);
 
         $hidden = new InputHidden(['name'=>'noAuth', 'value'=>'1']);
         $btnSave = new ButtonSuccess(['caption'=>'Guardar', 'tabindex'=>8]);

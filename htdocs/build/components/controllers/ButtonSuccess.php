@@ -1,4 +1,4 @@
-<?php namespace app\views\components\controllers;
+<?php namespace app\views\components\controllers;?><?php namespace app\views\components\controllers;
 /**
  * Clase de input de tipo numero
  */
@@ -10,7 +10,7 @@ class ButtonSuccess extends Component{
         $caption;
     
     function __construct(Array $data = []){
-        $this->caption = $data['caption']??'aceptar';
+        $this->caption = $data['caption']??'Aceptar';
         parent::__construct($data);
         $this->print('button');
     }

@@ -38,7 +38,10 @@ class User extends Query{
     }
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Object $Data){
-        $Data->dateFormat('fecha_nacimiento', 'Y-m-d');
+        
+        $date = str_replace('/', '-', $Data->fecha_nacimiento );
+        $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
+
         $noAuth = $Data->use('noAuth');
 
         if($this->id == -1) $this->new($Data);

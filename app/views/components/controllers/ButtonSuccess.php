@@ -10,7 +10,7 @@ class ButtonSuccess extends Component{
         $caption;
     
     function __construct(Array $data = []){
-        $this->caption = $data['caption']??'aceptar';
+        $this->caption = $data['caption']??'Aceptar';
         parent::__construct($data);
         $this->print('button');
     }

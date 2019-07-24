@@ -1,4 +1,3 @@
-<?php namespace app\views\components\controllers;?>
 <section id="ivas">
     <?php
     $table = new Table(['columns'=>['id', 'Nombre', 'Valor', 'Predeterminado'], 'class'=>'hoverable', 'onclick'=>'ivas.show(window.event)']);
@@ -44,7 +43,7 @@ return true
     },
     del(){
         this.Table.delLine(this.currentId)
-        this.Form.hide()
+        this.Form.close()
     },
     add(){
         let data = {    
@@ -59,7 +58,7 @@ return true
         
         if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
         else this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
-        this.Form.hide()
+        this.Form.close()
     },
     load(){
         let data  = DB.get(this.table)
@@ -79,7 +78,7 @@ return true
     show(e){
         this.currentId = e.path[1].attributes.idline.value
         let data = DB.get(this.table, 'id', this.currentId)
-        this.Form.show(data).setTile('Edicion servicio o artículo')
+        this.Form.open(data).setTile('Edicion servicio o artículo')
     },
     search(value){
         this.$table.find('tr').hide()

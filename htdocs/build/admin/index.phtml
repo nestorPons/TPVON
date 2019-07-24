@@ -1,7 +1,4 @@
-<?php 
-namespace app\views\components\controllers;
-?>
-<section id="appadmin">
+<?php namespace app\views\components\controllers;?><section id="appadmin">
     <?php include(\FOLDERS\VIEWS . 'admin/barTools.phtml')?>
     <?php include(\FOLDERS\VIEWS . 'admin/navBar.phtml')?>
     <?php include(\FOLDERS\VIEWS . 'admin/main.phtml')?>
@@ -13,6 +10,7 @@ namespace app\views\components\controllers;
     DB.set('servicios', <?=$jsonServices?>)      
     DB.set('usuarios', <?=$jsonUsers?>)
     DB.set('empresa', <?=$data_company?>)
+    DB.set('promos', <?=$promos?>)
 
     app.clock()
 

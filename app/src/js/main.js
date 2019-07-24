@@ -103,6 +103,9 @@ $(document)
     e.preventDefault()
     if(e.key == 'Enter') {
         let ind = $(".keyEnterOut").index(this)
-        $(".keyEnterOut").eq(ind + 1).focus()
+        if($(".keyEnterOut").eq(ind + 1).lenght)
+            $(".keyEnterOut").eq(ind + 1).focus()
+        else
+            $(".keyEnterOut").eq(0).focus()
     }
 })

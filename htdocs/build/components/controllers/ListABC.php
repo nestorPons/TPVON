@@ -1,4 +1,4 @@
-<?php namespace app\views\components\controllers;
+<?php namespace app\views\components\controllers;?><?php namespace app\views\components\controllers;
 use app\core\Data;
 /**
  * Clase de input de tipo numero
