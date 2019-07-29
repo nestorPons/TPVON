@@ -7,7 +7,9 @@ class Prepocessor{
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CORE  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
-        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml';
+        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml',
+        NAMESPACE_COMPONENTS = 'app\controllers\components';
+
     private
         $cache_class_js,  
         $cache,
@@ -123,7 +125,7 @@ class Prepocessor{
         } 
     }
     private function add_name_space(){
-        $this->content = '<?php namespace app\views\components\controllers;?>' . $this->content; 
+        $this->content = "<?php namespace " . self::NAMESPACE_COMPONENTS ."?>" . $this->content; 
     }
     private function queue(){
         $content = $this->content; 

@@ -1,7 +1,7 @@
 <?php namespace app\models;
 use \app\core\{Query, Data, Error};
 class Tickets extends Query{
-    public $id, $id_empleado, $id_cliente, $estado, $fecha, $hora;
+    public $id, $id_usuario, $id_cliente, $estado, $fecha, $hora;
     protected $table = 'tickets';
     function __construct($args = null){
         parent::__construct();
@@ -19,6 +19,7 @@ class Tickets extends Query{
         $date = new \DateTime($data['fecha']);
         $this->hora = $date->format('H:i'); 
         $this->fecha = $date->format('d/m/Y');
+        return $data;
     }
     function new(Object $Data){
         $lines = $Data->lines; 
@@ -50,6 +51,9 @@ class Tickets extends Query{
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
         else return false; 
+    }
+    function getLastUser(Object $Data){
+        return $this->getOneBy(['id_cliente'=>$Data->id], 'fecha', true);
     }
     // Método get de obtención por rando de fechas
     function between(Object $Data){

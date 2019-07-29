@@ -58,7 +58,7 @@ var services = {
             id: -1,
             estado: 1
         }
-        this.Form.clear().show(data).setTile('Nuevo servicio o artículo')
+        this.Form.clear().open(data).setTile('Nuevo servicio o artículo')
     },
     addLine(data){
         this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])

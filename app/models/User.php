@@ -16,13 +16,13 @@ class User extends Query{
 
         $this->company = NAME_COMPANY??null;
         if($conn) parent::__construct();
-
         if($arg){
             if (is_array($arg)) $this->loadData($arg);
             else if (is_int($arg)) $this->searchById($arg);
             else if (is_string($arg) && strpos($arg, '@')) $this->searchByEmail($arg);
             else if (is_object($arg)) $this->searchById($arg->id);
         }
+
     }
     // Devolvemos todos los datos formateados   
     function all(){
@@ -38,24 +38,19 @@ class User extends Query{
     }
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Object $Data){
-        
+        $this->loadData($Data);
         $date = str_replace('/', '-', $Data->fecha_nacimiento );
         $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
+        if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
 
         $noAuth = $Data->use('noAuth');
-
         if($this->id == -1) $this->new($Data);
-        else {
-            if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
-            // Edicion método padre
-
-            if($this->saveById($Data->toArray()));
-        }
+        else if($this->saveById($Data->toArray()));
+        
         return $this->id;
     }
     // Nuevos registros
     function new(Object $Data){
-
         if ($this->id = $this->loadData($Data->getAll())){  
        
             if(

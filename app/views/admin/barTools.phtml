@@ -5,7 +5,7 @@
         <?php $prev = new Icon('chevron-left-circle', ['onclick'=>'app.sections.prev()'])?>
         <?php $next = new Icon('chevron-right-circle', ['onclick'=>'app.sections.next()'])?>
         <?php $search = new Icon('magnifier', ['onclick'=>'menu.search.toggle()'])?>
-        <?php $txtSearch = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)'], false)?>
+        <?php $txtSearch = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'], false)?>
     </div>
     <div id="bartools-central">
         <?php new DatePicker?>

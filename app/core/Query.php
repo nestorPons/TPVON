@@ -38,7 +38,6 @@ class Query extends Conn{
     private function sendQuery(String $sql, bool $desc = false){
         $order = $desc?'ORDER BY id DESC':'';
         $sql = str_replace('order_by', $order, $sql); 
-
         return $this->query($sql);
     }
     // Devolvemos la conexión
@@ -113,7 +112,7 @@ class Query extends Conn{
             return $this->lastInsertId();
         }else return $r;
      }
-    // Edita registro mediante su id
+    // Guarda registro mediante su id
     public function saveById (Array $args = null) {
         $sql = $this->getSQLUpdate($args, "id=". $this->id());
         return $this->query($sql, $args);

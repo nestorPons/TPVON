@@ -4,16 +4,14 @@ class Ticket{
 
         this.id = data.id || null
         this.lines = data.lines || []
-        this.idLine = 0
-        this.id_empleado = data.id_empleado || null
+        this.id_usuario = data.id_usuario || null
         this.id_cliente = data.id_cliente || null
         this.fecha = data.fecha || null
         this.iva = data.iva || null
     }
     addLine(articulo, des, cantidad, precio, dto, amo, iva){ 
         let newLine = new Line(this.idLine, articulo, des, cantidad, precio, dto, amo, iva)
-        newLine.id = this.idLine
-        this.idLine++
+        this.lines.push(newLine)
         return newLine
     }
     total(){        
@@ -26,7 +24,7 @@ class Ticket{
     validate(){
         if(
             this.lines.length == 0 ||
-            this.id_empleado == '' ||
+            this.id_usuario == '' ||
             this.id_cliente == '' ||
             this.fecha == '' 
         ) return false

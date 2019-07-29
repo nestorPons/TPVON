@@ -114,9 +114,9 @@ pr($this->pdo);
     function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
 
         $this->sql = trim(str_replace("\r", " ", $sql)); 
+
         $respond = $this->init($this->sql, $params);
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
-
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]);
         if ($statement === 'select' || $statement === 'show') {

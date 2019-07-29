@@ -39,14 +39,9 @@ class Controller{
      * Método genérico para actualizar registros
      */
     protected function update(Object $Data){
-        try{
-            $this->Model = $this->getModel(intval($Data->id));
-            $this->Model->loadData($Data);
-            $Data->delete('id'); 
-            return $this->Model->save($Data);
-        } catch (\Exception $e){
-            return false;
-        }
+        if(!$this->getModel()) return false; 
+        $model = new $this->name_model($Data);
+        return $model->save($Data);
     }
     /**
      * Método genérico para guardar registros comprueba que es nuevo o edicion y envia los datos al metodo apropiado
@@ -69,28 +64,19 @@ class Controller{
      * Método por defecto de agregación de registros a la base de datos
      */
     protected function new(Object $Data = null){
-        $respond = false; 
-        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
-        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)){
-            $model = new $nameModel($this->action);
-            $respond = $model->new($Data);
-        }
-
-        return $respond;
+        if(!$this->getModel()) return false; 
+        $model = new $this->name_model($this->action);
+        return $model->new($Data);
+        
     }
     /**
      * Método por defecto de consulta de datos 
      */
     protected function get(Object $Data = null){
-        $respond = false; 
-        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
-        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)){
-            $model = new $nameModel($this->action);
-            $respond = $model->get($Data->id);
-        }
-        return $respond;
+        if(!$this->getModel()) return false;
+        $model = new $this->name_model($this->action);
+        return $model->get($Data->id);
+        
     }
     /**
      * Método por defecto de consulta de datos entre parametros
@@ -103,24 +89,27 @@ class Controller{
      * Método por defecto de eliminación de registros
      */
     protected function del($arg){
-        $respond = false; 
-        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
-        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)){
-            $model = new $nameModel($arg);
-            $respond = $model->del($arg);
-        }
-        return $respond;
+        if(!$this->getModel()) return false;
+        $model = new $this->name_model($arg);
+        return $model->del($arg);
+        
     }
     private function getController(){
         $arr_controller= explode('\\',get_class($this));
         $controller = end($arr_controller);
         return strtolower($controller);
     }
-    private function getModel($arg = null){
-        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
-        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)) return new $nameModel($arg);
-        return die('No existe el modelo');
+    protected function getModel($arg = null){
+        if(file_exists(\FOLDERS\MODELS . ucfirst($this->controller) . '.php')){
+            $this->name_model = '\\app\\models\\' . ucfirst($this->controller);
+        }else {
+            
+        }
+
+        if (file_exists($this->file_model)){
+            return true; 
+        }else{
+
+        } 
     }
 }

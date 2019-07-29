@@ -12,7 +12,7 @@ class Login extends Controller{
         $level_user = LEVEL_USER,
         $db = CONN['db'];
 
-    function __construct(String $action = null, String $db = null, $data){
+    function __construct(String $action = null, $data){
         // Comprobamos que la empresa existe si no enviamos el formulario de nueva empresa
         $c = new Query(null, $this->db);
 

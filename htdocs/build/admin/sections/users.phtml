@@ -1,4 +1,4 @@
-<?php namespace app\views\components\controllers;?><section id="users">
+<?php namespace app\controllers\components?><section id="users">
     <?php
     $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 'class'=>'hoverable', 'onclick'=>'users.show(window.event)']);
     $abc = new ListABC($table->id());
@@ -57,7 +57,7 @@ var users = {
             id: -1,
             estado: 1
         }
-        this.Form.clear().show(data).setTile('Nuevo usuario')
+        this.Form.clear().open(data).setTile('Nuevo usuario')
     },
     addLine(data){
         const ob = this.Table.addLine(

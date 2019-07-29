@@ -1,5 +1,4 @@
-<?php namespace app\views\components\controllers;?><?php namespace app\views\components\controllers;
-/**
+<?php namespace app\views\components\controllers;?><?php namespace app\controllers\components;/**
  * Clase de madre de los componentes html
  */
 class Component{

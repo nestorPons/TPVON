@@ -1,4 +1,4 @@
-<?php namespace app\views\components\controllers;?><section id="ivas">
+<?php namespace app\controllers\components?><section id="ivas">
     <?php
     $table = new Table(['columns'=>['id', 'Nombre', 'Valor', 'Predeterminado'], 'class'=>'hoverable', 'onclick'=>'ivas.show(window.event)']);
     $abc = new ListABC($table->id());
@@ -50,7 +50,7 @@ return true
             id: -1,
             estado: 1
         }
-        this.Form.clear().show(data).setTile('Nuevo servicio o artículo')
+        this.Form.clear().open(data).setTile('Nuevo servicio o artículo')
     },
     save(data){
 

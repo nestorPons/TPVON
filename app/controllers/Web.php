@@ -4,7 +4,7 @@
  */
 class Web extends Controller{
 
-    function __construct(String $db = null, String $controller = null, String $action = null){    
+    function __construct(){    
         $this->action = 'view';
         $this->getView();
     }

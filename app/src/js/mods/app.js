@@ -252,9 +252,24 @@ const app = {
         return form
     }, 
     date : {
-        format(date, format){
-            let d, m , a , h, 
-                fecha = !isEmpty(date)?date.toString():Fecha.general
+        actual(){
+            let f = new Date();
+            return(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
+
+        },  
+        now(arg = ''){
+            let f = new Date()
+            switch(arg){
+                case 'date': 
+                    return f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+                case 'hour':
+                    return f.getHours() + ":" + f.getMinutes()
+                default: 
+                    return f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear() + ' ' + f.getHours() + ":" + f.getMinutes()
+            }
+        },
+        format(fecha, format){
+            let d, m , a , h
             
             // Si tiene horas 
             if(fecha.indexOf(":")>0){   
@@ -293,7 +308,15 @@ const app = {
                 default:        return new Date(a, m-1, d)
             }
 
-        }
+        },
+        diff: function (f1,f2){
+            
+            let d1 = new Date(this.format(f1,'sql')).getTime(),
+                d2 = new Date(this.format(f2,'sql')).getTime(),
+                diff = d2 - d1;
+
+                return (diff/(1000*60*60*24) );
+         },
     }
 }
 const DB = {

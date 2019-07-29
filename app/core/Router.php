@@ -59,7 +59,7 @@ class Router{
         // Método post recibe siempre 3 parametros 
         // controller => Controlador
         // action => Acción a realizar
-        // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto!)
+        // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
         if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {    
 
             // Pasamos los datos de json a objeto Data
@@ -90,7 +90,7 @@ class Router{
         $nameClass = '\\app\\controllers\\' . $this->controller;
 
         $cont = $this->isController($this->controller)
-            ? new $nameClass($this->action, $this->db, $this->data)
+            ? new $nameClass($this->action, $this->data)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);
 
         return $cont->result; 

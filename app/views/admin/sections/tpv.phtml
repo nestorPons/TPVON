@@ -6,7 +6,7 @@
         $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
         $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
         $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex'=>1], false);
-        $cli = new Select(['label' => 'Cliente', 'tabindex'=>2], false);
+        $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'tpv.loadClient()'], false);
         
         // Linea
         $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
@@ -127,18 +127,21 @@
 </style>
 <script src="js/Line.min.js"></script>
 <script src="js/Ticket.min.js"></script>
+
 <script>
     var tpv = {
         buttons     : ['prev', 'next','del'],
         total       : 0,
+        client      : null, 
         currentId   : <?=$tickets_new_id?>,
         lastId      : <?=$tickets_new_id?>, 
         Ticket      : new Ticket(),
         Table       : new Table('<?=$table->idEl()?>'),
         Modal       : new Modal('<?=$modTicket->id()?>') ,
-        selCode      : new Select('<?=$code->id()?>'), 
+        selCode     : new Select('<?=$code->id()?>'), 
         selEmp      : new Select('<?=$emp->id()?>'), 
         selCli      : new Select('<?=$cli->id()?>'), 
+        dto         : document.getElementById('<?=$dto->idEl()?>'), 
         date        : <?=$date->idEl()?>,
         hour        : <?=$hour->idEl()?>,
         $id         : $('#<?=$id->idEl()?>'), 
@@ -148,14 +151,17 @@
         $hour       : $('#<?=$hour->idEl()?>'),
         $quantity   : $('#<?=$quan->idEl()?>'),
         $price      : $('#<?=$pric->idEl()?>'),
-        $dto        : $('#<?=$dto->idEl()?>'),
         $amount     : $('#<?=$amo->idEl()?>'),
         $btnOk      : $('#<?=$btnOk->idEl()?>'),
         $btnClear   : $('#<?=$btnClear->idEl()?>'),
         $total      : $('#<?=$txtTotal->idEl()?>'),
         $iva        : $('#<?=$iva->idEl()?>'),
         open(){
-            this.$employees.focus()
+            this.selEmp.el.focus()
+        },
+        loadClient(){
+            echo('buscando cliente...')
+            this.client = new User(tpv.selCli.value())
         },
         load(){
             this.loadUsers()
@@ -174,7 +180,6 @@
             for(i in users){
                 this.selCli.addOption(users[i].id, users[i].nombre)
             }
-
         },
         loadServ(){
             this.selCode.clear()
@@ -199,8 +204,10 @@
             const f = new Date();
 
             this.Ticket = new Ticket()
-            this.date.value = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
-            this.hour.value = f.getHours() + ":" + f.getMinutes()
+            this.date.value = app.date.now('date')
+            this.hour.value = app.date.now('hour')
+            this.dto.value = 0
+            this.selCli.value(0)
             this.clearLine()
             this.clearLines()
             this.clearUsers()
@@ -209,14 +216,12 @@
         },
         // Cargamos un Ticket con los datos introducidos por el usuario
         create(){
-            this.Ticket.id_empleado = this.$employees.val()
-            this.Ticket.employee_name = this.$employees.find(':selected').text()
-            this.Ticket.id_cliente = this.$client.val()
-            this.Ticket.client_name = this.$client.find(':selected').text()
+            this.Ticket.id_usuario = this.selEmp.value()
+            this.Ticket.id_cliente = this.selCli.value()
             this.Ticket.fecha = new Date
             this.Ticket.id = this.$id.val()
 
-            if(this.Ticket.validate())
+            if(this.Ticket.validate(), this.client.validate())
                 this.openTicket()
             else 
                 mns.error('Faltan datos para crear el ticket')
@@ -224,7 +229,7 @@
         },
         calculate(){
             let amount = this.$quantity.val() * this.$price.val(), 
-                dto = this.$dto.val() * amount / 100, 
+                dto = this.dto.value * amount / 100, 
                 total = amount - dto
             this.$amount.val(total)
         },
@@ -255,14 +260,25 @@
                 this.$description.val(), 
                 this.$quantity.val(), 
                 this.$price.val(), 
-                this.$dto.val(), 
+                this.dto.value, 
                 this.$amount.val(),
                 this.$iva.val()
             )
 
             // Validamos los d  mos en la tabla
             if(line.success) this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
-            else  this.selCode.el.focus
+            else this.selCode.el.focus
+        },
+        // Estrategia de promocion de filiacion clientes VIP por tiempo regular 
+        addPromo(){
+         
+            if(this.client && this.client.promos) {
+                let promo = DB.get('promos','id',1)[0]
+
+                // Aplicamos la promocion si el último ticket esta dentro del periodo establecido como valido
+                if(this.client.lastTicket && app.date.diff(this.client.lastTicket, app.date.actual()) <= promo.valor) this.dto.value = promo.dto
+               
+            }
         },
         addLineTable(id, articulo, des, cantidad, precio, dto, amo){
             this.Table.addLine(id, [articulo, des, cantidad, precio, dto, amo || cantidad * precio])
@@ -275,7 +291,7 @@
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
             let id = this.selCode.value()
-
+            this.addPromo()
             if(id){
                 let el = DB.get('servicios', 'id' , id)[0]
                 this.$description.val(el.descripcion)
@@ -300,7 +316,7 @@
             this.$description.val(ser.descripcion)
             this.$quantity.val(line.cantidad)
             this.$price.val(line.precio)
-            this.$dto.val(line.dto)
+            this.dto.value = line.dto
             this.$amount.val(line.amo)
 
             this.Table.delLine(e.path[1].attributes.idline.value)
@@ -308,10 +324,7 @@
             this.printTotal()
         },
         del(){
-            let self = this
-            this.request('del', function(respond, status){
-                self.next()
-            })
+            this.request('del', this.currentId, (respond, status) => this.next())
         },
         next(){
             if(this.currentId ==  this.lastId) {
@@ -324,19 +337,15 @@
             if(this.currentId > 0) this.getTicket(--this.currentId, this.prev)
         },
         getTicket(id, fn){
-            let self = this
-            this.request('get', function(respond, status){
-                if(status) self.loadDataTicket(respond)
-                else fn.apply(self)
-            })
+            this.request('get', this.currentId, (respond, status) => this.next())
         },
-        request(action, callback){
+        request(action, id, callback){
             let self = this,
             data = {
                 controller: 'tickets', 
                 action: action,
                 data: {
-                    id: this.currentId
+                    id: id
                 }
             }
             app.post(data, function(respond, status){
@@ -356,7 +365,7 @@
             let arrdate = ticket.fecha.split(' ')
 
             this.$id.val(ticket.id) 
-            this.$employees.addClass('valid').find('[value='+ticket.id_empleado+']').attr("selected", true)
+            this.$employees.addClass('valid').find('[value='+ticket.id_usuario+']').attr("selected", true)
             this.$client.addClass('valid').find('[value='+ticket.id_cliente+']').attr("selected", true)
             
             this.date.value = d.toLocaleDateString()

@@ -89,20 +89,24 @@
             id: '<?=$tblTicket->id()?>',
             ob: $('#<?=$tblTicket->id()?>')
         },
-        print(){
-            this.put(false,function(){
-                var printContents = document.getElementById('ticket').innerHTML;
+        print(callback){
+            this.put(false,f=>{
+
+                let printContents = document.getElementById('ticket').innerHTML
                 printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
-                w = window.open();
+
+            
+                let w = window.open();
                 w.document.write(printContents);
                 w.document.close(); // necessary for IE >= 10
                 w.focus(); // necessary for IE >= 10
                 w.print();
-                w.close(); 
+                w.close();
+                
+                typeof callback == 'function' && callback()
             })
         },
         open(Ticket){
-
             this.Ticket = Ticket
             const $template = $($('#template_' + this.table.id)[0].innerHTML)
             let numFra = this.Ticket.fecha.getFullYear().toString().substr(2) 
@@ -128,7 +132,6 @@
 
         },
         put(sendMail = false, callback){
-
             let Ticket = this.Ticket
             Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')
             let data = {
@@ -136,9 +139,8 @@
                 action: 'new', 
                 data: Ticket
             }
-            app.post(data, function(data){
-
-                tpv.lastId = tpv.Ticket.id = data.id
+            app.post(data, (data) => {
+                this.lastId = this.Ticket.id = data.id
                 tpv.new()
                 callback()
              })

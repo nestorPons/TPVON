@@ -1,11 +1,11 @@
-<?php namespace app\views\components\controllers;?><header id="bartools">
+<?php namespace app\controllers\components?><header id="bartools">
     <div id="bartools-actions">
         <?php $add = new Icon('plus-circle', ['onclick'=>'app.sections.add()'])?>
         <?php $del = new Icon('cross-circle', ['onclick'=>'app.sections.del()'])?>
         <?php $prev = new Icon('chevron-left-circle', ['onclick'=>'app.sections.prev()'])?>
         <?php $next = new Icon('chevron-right-circle', ['onclick'=>'app.sections.next()'])?>
         <?php $search = new Icon('magnifier', ['onclick'=>'menu.search.toggle()'])?>
-        <?php $txtSearch = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)'], false)?>
+        <?php $txtSearch = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'], false)?>
     </div>
     <div id="bartools-central">
         <?php new DatePicker?>
