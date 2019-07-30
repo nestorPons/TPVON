@@ -1,8 +1,8 @@
 const app = {
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, 
-    GET: $_GET,
+    timeZone    : Intl.DateTimeFormat().resolvedOptions().timeZone, 
+    GET         : $_GET,
     // Peticiones con datos 
-    post: function (data, callback, error = true) {
+    post (data, callback, error = true) {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
 
@@ -37,7 +37,7 @@ const app = {
         })
     },
     // Carga de zonas por método get
-    get: function (data) {
+    get (data) {
         if (typeof data.controller === 'undefined') return false;
 
         for (let i in this.GET) data[i] = this.GET[i]
@@ -53,13 +53,13 @@ const app = {
             this.sections.inicialize(data.controller) 
         }, 'html');
     },
-    loadSync: function (name, callback) {
+    loadSync (name, callback) {
         var s = document.createElement("script");
         s.onload = callback;
         s.src = name;
         document.querySelector("body").appendChild(s);
     },
-    loadAsync: function (src, callback) {
+    loadAsync (src, callback) {
         if (callback === void 0) { callback = null; }
         var script = document.createElement('script');
         script.src = src;
@@ -88,19 +88,20 @@ const app = {
             return confirm(mens) && callback()
         }
     },
-    sections: {
-        active:  null, 
+    sections    : {
+        active  :  null,
+        last    : null,
         toggle(section, callback) {
-            let self = this
+
             if ($('section#'+section).is(':visible')) return 
             let $mainSection = $('section')
             if($('#appadmin').length || $('#appuser').length ){
                 $mainSection = $('section').find('section')
             } 
-            $mainSection.fadeOut('fast', function () {
+            $mainSection.fadeOut('fast', f => {
                 $('section#' + section).fadeIn()
                 typeof callback === 'function' && callback()
-                self.inicialize(section)
+                this.inicialize(section)
             })
         },
         load(section = '', html = jQuery){
@@ -116,21 +117,21 @@ const app = {
            }  
         },
         show(section){
+            this.last = this.active
             // Comprueba que  la seccion existe o no 
             if($('section#' + section).length){
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section)
             }else{
-                let self = this
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
                     action: 'view'
-                }, function(){
-                    self.inicialize(section)
+                }, f => {
+                    this.inicialize(section)
                 });
             }
-            
+            this.onblur()
         },
         // Comportamiento de la sección activa al cargarse 
         inicialize(section){
@@ -164,6 +165,13 @@ const app = {
         },
         search(){
 
+        },
+        onblur(){
+            if(typeof window[this.last].onblur == 'function'){
+                window[this.last].onblur(f => {
+                    window[this.last].change = false
+                })
+            }
         }
     },
     form: {

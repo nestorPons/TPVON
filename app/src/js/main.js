@@ -98,6 +98,9 @@ $(document)
         $(this).addClass(selclass)
     else
         $(this).removeClass(selclass)
+
+    let p = $(this).parents('section').attr('id')
+    window[p].change = true
 })
 .on('keyup', '.keyEnterOut', function (e) {
     e.preventDefault()
@@ -108,4 +111,8 @@ $(document)
         else
             $(".keyEnterOut").eq(0).focus()
     }
+})
+.on('change', 'input', function(e){
+    let p = $(this).parents('section').attr('id')
+    window[p].change = true
 })

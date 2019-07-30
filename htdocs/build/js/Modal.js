@@ -18,7 +18,8 @@
       open(data = null){
         if(data) this.load(data)
         this.$switch.prop('checked',true)
-        let o = this.el.querySelector('[tabindex="1"]') && o.focus() 
+        let o = this.el.querySelector('[tabindex="1"]')
+        o.focus() 
         return this
       }
       close(){

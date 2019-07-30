@@ -4,22 +4,27 @@
             <legend>Promociones</legend>
             <?php
             $txt00 = new InputRead(['label' => 'Id', 'name'=>'id']);
-            $txt01 = new InputText(['label' => 'Nombre', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la promoción", 
-                'onchange'=>'promos.save()', 'required'=>true]);
-            $txt02 = new InputText(['label' => 'Numero de dias', 'name'=>'valor', 'onchange'=>'promos.save()']);
-            $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name'=>'dto', 'onchange'=>'promos.save()',]);
+            $txt01 = new InputText(['label' => 'Nombre', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la promoción", 'required'=>true]);
+            $txt02 = new InputText(['label' => 'Numero de dias', 'name'=>'valor']);
+            $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name'=>'dto']);
             ?> 
         </fieldset>
     </form>
 </section>
 <script> 
 var promos = {
-    table: 'promos',
-    buttons: [],
-    form: document.getElementById('promos').getElementsByTagName('form')[0],
+    table   : 'promos',
+    el      : document.getElementById('promos'),
+    form    : document.getElementById('promos').getElementsByTagName('form')[0],
+    buttons : [],
+    change  : false,
     load(){
         let d = DB.get('promos')[0]
         app.loadDataToForm(d, this.form)
+    },
+    onblur(callback){
+        this.change && this.save()
+        typeof callback == 'function' && callback()
     },
     save(){
         app.post({

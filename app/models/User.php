@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\{ PHPMailer,  Exception};
 class User extends Query{
     public $id, $dni, $nombre, $email, $fecha_nacimiento, $estado, $nivel, $password, $intentos, $company, $token, $telefonos;
     protected $table = 'usuarios';
-    private $allUsers; 
     /**
      * $arg puede ser un string email para buscar por email
      * integer buscar por id de usuario
