@@ -1,7 +1,7 @@
 <?php namespace app\models;
 use \app\core\{Query, Data, Error};
 class Tickets extends Query{
-    public $id, $id_usuario, $id_cliente, $estado, $fecha, $hora;
+    public $id, $id_usuario, $id_cliente, $estado, $fecha, $hora, $regalo = 0;
     protected $table = 'tickets';
     function __construct($args = null){
         parent::__construct();
@@ -23,14 +23,15 @@ class Tickets extends Query{
     }
     function new(Object $Data){
         $lines = $Data->lines; 
-
+        $esregalo = $Data->regalo; 
         $Data->filter(new Tickets); 
         $DateTime = new \DateTime;
         $Data->fecha = $DateTime->format('Y-m-d H:i');
         $this->id = $this->add($Data->toArray());
+
         foreach($lines as $line){
             $Line = new Lines;
-            $Line->add([
+            $idLine = $Line->add([
                 'id_ticket' => $this->id,
                 'articulo'  => intval($line['articulo']),
                 'precio'    => floatval($line['precio']),
@@ -38,26 +39,36 @@ class Tickets extends Query{
                 'iva'       => intval($line['iva']), 
                 'dto'       => floatval($line['dto'])
             ]);
+            if($esregalo) {
+                $Control = new Control();
+                $Control->add([
+                    'id_linea' => $idLine 
+                ]); 
+            }
         }  
         return ['id' => $this->id]; 
     }
     // Método genérico de captura de tickets con sus lineas
-    function get(int $id, bool $all = false){
+    function get($data, bool $all = false){
+        $id = is_object($data) ? $data->id : $data;
         $Data = new Data($this->getById($id));
         $Lines = new Lines; 
         $lines = $Lines->getBy(['id_ticket'=>$id]);
+        $Control = new Control; 
+        foreach($lines as $k => $v){
+            $r = $Control->getBy(['id_linea'=>$v['id']]);
+            $lines[$k]['fecha_regalo'] = $r[0]['fecha'];
+        }
         $Data->addItem($lines, 'lines');
-
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
         else return false; 
     }
-    function getLastUser(Object $Data){
+    function getLastUser(Data $Data){
         return $this->getOneBy(['id_cliente'=>$Data->id], 'fecha', true);
     }
     // Método get de obtención por rando de fechas
-    function between(Object $Data){
-
+    function between(Data $Data){
         $arr_tickets =  $this->getBetween('fecha',$Data->f1 . ' 00:00:00.000', $Data->f2 . ' 23:59:59.999');
         foreach($arr_tickets as $key => $ticket){
             $total = 0; 
@@ -75,5 +86,26 @@ class Tickets extends Query{
             $arr_tickets[$key]['total'] = $total;
         }
         return $arr_tickets; 
+    }
+    function prev(Data $Data){
+        $arr = $this->query("SELECT * FROM $this->table WHERE id < $Data->id  ORDER BY id DESC  LIMIT 1;");
+        if(isset($arr[0])) {
+            $d = new Data($arr[0]); 
+            return $this->getLines($d);
+        } else return 0;
+
+    }
+    function next(Data $d){
+        $arr = $this->query("SELECT * FROM $this->table WHERE id > $d->id  ORDER BY id  LIMIT 1;");
+        if(isset($arr[0])) {
+            $d = new Data($arr[0]); 
+            return $this->getLines($d);
+        } else return ['id'=>-1];
+    }
+    function getLines(Data $d){
+        $Lines = new Lines; 
+        $lines = $Lines->getBy(['id_ticket'=>$d->id]);
+        $d->addItem($lines, 'lines');
+        return $d; 
     }
 }

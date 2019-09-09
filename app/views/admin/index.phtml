@@ -30,6 +30,9 @@
 </style>
 <script>
     'use strict'
+
+    var services = {db  : new Db('servicios', <?=$jsonServices?>)} 
+    var users = {db: new Db('usuarios', <?=$jsonUsers?>)} 
     DB.set('servicios', <?=$jsonServices?>)      
     DB.set('usuarios', <?=$jsonUsers?>)
     DB.set('empresa', <?=$data_company?>)

@@ -8,6 +8,7 @@ use \app\core\{Query, Data};
 class Tickets extends Controller{
 
     function __construct(String $action,  $Data = null){
+        $this->Data = $Data; 
         $this->controller = 'Tickets';
         $this->result =  $this->{$action}($Data);
     }
@@ -16,4 +17,16 @@ class Tickets extends Controller{
         return $Model->getLastUser($Data);
     }
 
+    function prev($Data){
+        $Model = new Model; 
+        return $Model->prev($Data);
+    }
+    function next($Data){
+        $Model = new Model; 
+        return $Model->next($Data);
+    }
+    function last($Data){
+        $Model = new Model;
+        return $Model->getLast($Data);
+    }
 }

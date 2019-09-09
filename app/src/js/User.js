@@ -12,10 +12,13 @@ class User{
         })
     }
     search(){
-        let u = DB.get('usuarios','id',this.id)[0]
-        this.nombre = u.nombre 
-        this.promos = u.promos
-        this.lastTicket()
+        DB.get('usuarios','id',this.id)
+            .then(d => d[0])
+            .then(u => {
+                this.nombre = u.nombre 
+                this.promos = u.promos
+                this.lastTicket()
+            })
     }
     validate(){
         return this.validation 

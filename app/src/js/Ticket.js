@@ -8,6 +8,7 @@ class Ticket{
         this.id_cliente = data.id_cliente || null
         this.fecha = data.fecha || null
         this.iva = data.iva || null
+        if(data.estado != undefined) this.estado = data.estado
     }
     addLine(articulo, des, cantidad, precio, dto, amo, iva){ 
         let newLine = new Line(this.idLine, articulo, des, cantidad, precio, dto, amo, iva)
@@ -19,7 +20,7 @@ class Ticket{
         for(let i in this.lines){
             total += parseFloat(this.lines[i].amo || 0)
         }
-        return total
+        return total.toFixed(2)
     }
     validate(){
         if(

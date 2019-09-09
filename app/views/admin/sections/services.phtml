@@ -21,12 +21,13 @@
 <script>
 'use strict'
 var services = {
-    table: 'servicios',
-    buttons: ['add', 'search'],
-    currentId: null, 
-    Table: new Table('<?=$table->idEl()?>'),
-    Form : new Modal('<?=$form->id()?>'),
-    $table: $('#<?=$table->id()?>').find('tbody'),
+    ...services, 
+    table       : 'servicios',
+    buttons     : ['add', 'search'],
+    currentId   : null, 
+    Table       : new Table('<?=$table->idEl()?>'),
+    Form        : new Modal('<?=$form->id()?>'),
+    $table      : $('#<?=$table->id()?>').find('tbody'),
     validation(){
         return true
         let f = this.Form.getData(),
@@ -43,15 +44,18 @@ var services = {
     },
     del(){
         // Eliminamos de la bd local
-        let d = DB.get(this.table,'id', this.currentId)[0]
-        d.estado = 0 
-        DB.set(this.table, d, 'id', d.id)
-        // Eliminamos de la tabla 
-        this.Table.delLine(this.currentId)
-        // Cerramos formulario
-        this.Form.close()
-        
-        tpv.loadServ()
+        DB.get(this.table,'id', this.currentId)
+            .then(d => d[0])
+            .then(d => {
+                d.estado = 0 
+                DB.set(this.table, d, 'id', d.id)
+                // Eliminamos de la tabla 
+                this.Table.delLine(this.currentId)
+                // Cerramos formulario
+                this.Form.close()
+                
+                tpv.loadServ()
+            })
     },
     add(){
         let data = {    
@@ -79,24 +83,26 @@ var services = {
         tpv.loadServ()
     },
     load(){
-        let data  = DB.get(this.table)
-        for( let i in data ){
-            var d = data[i]
-            // Listamos los servicios activos solamente
-            if(d.estado == 1){
-                this.Table.addLine(
-                    d.id, 
-                    [d.id, d.codigo, d.nombre, d.descripcion, d.precio]
-                )
-                .addClass(d.codigo[0].toLowerCase())
-                
-            }
-        }
+        DB.get(this.table)
+            .then( data => {
+                for( let i in data ){
+                    var d = data[i]
+                    // Listamos los servicios activos solamente
+                    if(d.estado == 1){
+                        this.Table.addLine(
+                            d.id, 
+                            [d.id, d.codigo, d.nombre, d.descripcion, d.precio]
+                        )
+                        .addClass(d.codigo[0].toLowerCase())
+                        
+                    }
+                }
+            })
     },
     show(e){
         this.currentId = e.path[1].attributes.idline.value
-        let data = DB.get(this.table, 'id', this.currentId)
-        this.Form.open(data).setTile('Edicion servicio o artículo')
+        DB.get(this.table, 'id', this.currentId)
+            .then( data => this.Form.open(data).setTile('Edicion servicio o artículo'))
     },
     search(value){
         this.$table.find('tr').hide()

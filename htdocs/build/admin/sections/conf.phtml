@@ -25,8 +25,9 @@ var conf = {
     buttons: [],
     form: document.getElementById('conf').getElementsByTagName('form')[0],
     load(){
-        let d = DB.get('empresa')[0]
-        app.loadDataToForm(d, this.form)
+        DB.get('empresa')
+            .then(d => d[0])
+            .then(d => app.loadDataToForm(d, this.form))
     },
     save(){
         DB.set(this.table, app.formToObject(this.form), 'id' , 1)

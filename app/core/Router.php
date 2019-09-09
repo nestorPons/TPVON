@@ -88,7 +88,6 @@ class Router{
 
         if(!empty($controller)) $this->controller = ucwords($controller); 
         $nameClass = '\\app\\controllers\\' . $this->controller;
-
         $cont = $this->isController($this->controller)
             ? new $nameClass($this->action, $this->data)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);

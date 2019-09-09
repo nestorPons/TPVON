@@ -81,6 +81,7 @@ class Query extends Conn{
             "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
         )[0] ?? false;
      }
+    // Devuelve el último registro
     public function getLast(){ 
         $r = $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true); 
         return $r ? $r[0] : null ;
@@ -139,6 +140,7 @@ class Query extends Conn{
             $values = trim( "'" . $values , "'," ) ;
             $sql .= "INSERT INTO {$this->table} ($columns) VALUES ($values);" ;
         }
+prs($sql);
         return $this->query($sql, $args);
      }
     // Edita todos los campos de la tabla
@@ -234,7 +236,8 @@ class Query extends Conn{
         return $arr;
     }
     // getter generico
-    function id(){
+    function id(int $arg = null){
+        if ($arg) $this->id = $arg; 
         return $this->id;
     }
     // Descarga todos los dados y retorna objetos data

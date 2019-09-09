@@ -14,13 +14,17 @@ class Controller{
     private $Model; 
     private $db = CONN['db'];
     
-    function __construct(String $action, String $controller = null, $Data = null){
+    function __construct(String $action, $controller = null, $Data = null){
         $this->action = strtolower($action);
         $this->controller =strtolower($controller ?? $this->getController());
         $this->Data = $Data; 
+
         // Constructor alternativo básico
         if(method_exists($this, $this->action)) $this->result = $this->{$this->action}($Data);
-        else die('Accion no permitida!!');
+        else {
+            // Si no encuentra el métodod en el controlador los busca en el modelo
+            $this->exec ($this->action, ''); 
+        };
 
     }
     protected function view($data = null){

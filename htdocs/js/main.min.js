@@ -3,7 +3,7 @@
 $(document)
 .on('click', 'a', function (e) {
     e.preventDefault();
-    var section = $(this).attr('href')
+    let section = $(this).attr('href')
     // Comprobamos si tiene parametros get 
     // Significa que se solicita redirección
     if(section.indexOf('?') != -1){

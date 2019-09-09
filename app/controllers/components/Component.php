@@ -63,6 +63,7 @@ class Component{
         $iconlast = isset($this->iconlast)?'iconlast='.$this->iconlast:null; 
         $tabindex = isset($this->tabindex)?'tabindex='.$this->tabindex:null; 
         $onclick = isset($this->onclick)?'onclick='.$this->onclick:null;
+        $ondblclick = isset($this->ondblclick)?'ondblclick='.$this->ondblclick:null;
         $onblur = isset($this->onblur)?'onblur='.$this->onblur:null;
         $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:null;
         $onload = isset($this->onload)?'onload='.$this->onload:null;

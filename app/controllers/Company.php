@@ -6,6 +6,9 @@ use \app\core\Error;
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Company extends Controller{
+    function __construct($arg1, $arg2){
+        parent::__construct($arg1, null, $arg2);
+    }
     protected function new(Object $Data = null){
         $Model = new CompanyModel; 
         if($Model->new($Data)){

@@ -11,7 +11,10 @@
     </tfoot>
 </table>
 <template id="template_<?= $id ?>">
-    <tr <?= $onclick ?>>
+    <tr 
+        <?= $onclick ?> 
+        <?= $ondblclick ?>
+    >
         <?php foreach ($columns as $key => $val) : ?>
             <td class="<?= $val ?>"></td>
         <?php endforeach ?>
@@ -55,26 +58,4 @@ var Table = class{
         return this.addLine(id, data)
     }
 }
-/* var table = {
-    addLine(id, data = []){
-
-        const $table = $('#' + id), 
-            $template = $( $('#template_' + id)[0].innerHTML )
-
-            $template
-                .clone()
-                .attr('idline', id)
-                .find('td').each(function(i, el){
-                    $(this).html(data[i])
-                })
-                .end()
-                .appendTo($table.find('tbody'))
-
-
-
-    },
-    del(){
-
-    }
-} */
 </script>

@@ -1,6 +1,9 @@
 <component id="buttonsTicket">
-    <?php $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir'])?>
-    <?php $btnSndTicket = new ButtonSuccess(['onclick'=>'ticket.send()', 'caption'=>'Enviar'])?>
+    <?php 
+    $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir']);
+    $btnSndTicket = new ButtonSuccess(['onclick'=>'ticket.send()', 'caption'=>'Enviar']);
+    $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
+    ?>
 </component>
 <component id="ticket" class="hidden">
     <img src="<?=$Data->pathLogo?>" alt="Logotipo">
@@ -84,10 +87,11 @@
 </style>
 <script>
     var ticket = {
-        Ticket: null, 
-        table : {
-            id: '<?=$tblTicket->id()?>',
-            ob: $('#<?=$tblTicket->id()?>')
+        Ticket  : null, 
+        present : document.getElementById('<?=$present->idEl()?>'), 
+        table   : {
+            id  : '<?=$tblTicket->id()?>',
+            ob  : $('#<?=$tblTicket->id()?>')
         },
         print(callback){
             this.put(false,f=>{
@@ -95,7 +99,6 @@
                 let printContents = document.getElementById('ticket').innerHTML
                 printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
 
-            
                 let w = window.open();
                 w.document.write(printContents);
                 w.document.close(); // necessary for IE >= 10
@@ -107,6 +110,8 @@
             })
         },
         open(Ticket){
+            // Reseteamos valor de la casilla regalo
+            this.present.checked = 0
             this.Ticket = Ticket
             const $template = $($('#template_' + this.table.id)[0].innerHTML)
             let numFra = this.Ticket.fecha.getFullYear().toString().substr(2) 
@@ -129,19 +134,22 @@
                 .find('.Des').text('TOTAL').end()
                 .find('.Imp').text(Ticket.total()).end()
             this.table.ob.find('tbody').append(t) 
-
         },
         put(sendMail = false, callback){
-            let Ticket = this.Ticket
-            Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')
+            this.Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')
+            this.Ticket.estado = 1
+            this.Ticket.regalo = this.present.checked | 0 
+            if(this.Ticket.regalo != 0 && typeof control != 'undefined') control.load() 
             let data = {
                 controller: 'tickets',
                 action: 'new', 
-                data: Ticket
+                data: this.Ticket
             }
-            app.post(data, (data) => {
+            app.post(data, data => {
                 this.lastId = this.Ticket.id = data.id
-                tpv.new()
+                if(this.Ticket.regalo && typeof control != 'undefined') control.add(this.Ticket)
+                tpv.add()
+                
                 callback()
              })
         }

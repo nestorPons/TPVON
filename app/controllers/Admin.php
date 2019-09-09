@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\models\{Items, Tickets, User, Company, Config};
+use \app\models\{Items, Tickets, User, Company, Config, Control};
 use \app\core\{Query, Data};
 
 /**
@@ -12,11 +12,13 @@ class Admin extends Controller{
     function loadView(){
         $Config = new Config; 
         $data['iva'] = $Config->iva;
+        
         $Ticket = new Tickets; 
         $lastTicket = $Ticket->getLast();
         $data['tickets_new_id'] = $lastTicket['id'] + 1 ;
         $data['tickets_hora'] = '';
         $data['today'] = date('d/m/Y'); 
+        
         $Items = new Items;
         $data['Services'] = $Items->allData($Items, 'codigo'); // para php
         $data['jsonServices'] = json_encode($Items->getAll()); // para js
@@ -31,6 +33,8 @@ class Admin extends Controller{
         $User = new User;
         $data['Users'] = $User->all();
         $data['jsonUsers'] = json_encode($data['Users']); // para js
+
+
 
         return $this->printView( \VIEWS\ADMIN . 'index.phtml', $data);
     }

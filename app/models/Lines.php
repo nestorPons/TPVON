@@ -9,6 +9,9 @@ class Lines extends Query{
         parent::__construct();
         if(is_array($arg)){
             $this->add($arg);
+        } else if(is_int($arg)){
+            $data = $this->getById($arg);
+            $this->loadData($data);
         }
     }
 }

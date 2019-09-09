@@ -120,6 +120,8 @@ class Company extends Query{
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tickets.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/lineas.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/historial.sql'));
+            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/control.sql'));
+            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/promos.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tokens.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/empresa.sql'));
         if(!$newConn->pdo->commit()) throw new Error('E014');

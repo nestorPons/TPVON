@@ -1,30 +1,30 @@
 <section id="tpv">
     <?php
-        $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
-        'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
-        $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
-        $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
-        $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
-        $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex'=>1], false);
-        $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'tpv.loadClient()'], false);
-        
-        // Linea
-        $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
-            'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
-        $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
-        $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
-        $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
-        $iva = new InputHidden(['label' => 'Iva %','value'=>"$iva"], false);
-        $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>7,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
-        $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value'=>'0'], false);
-        $btnOk = new ButtonSuccess(['tabindex'=>8, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
-        $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
+    $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
+    'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
+    $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
+    $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
+    $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
+    $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex'=>1], false);
+    $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'tpv.loadClient()'], false);
+    
+    // Linea
+    $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
+        'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
+    $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
+    $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+    $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+    $iva = new InputHidden(['label' => 'Iva %','value'=>"$iva"], false);
+    $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>7,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+    $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value'=>'0'], false);
+    $btnOk = new ButtonSuccess(['tabindex'=>8, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
+    $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
 
-        $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
-        $btnTicket = new ButtonSuccess(['onclick'=>'tpv.create()', 'caption'=>'Ticket']);
+    $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
+    $btnTicket = new ButtonSuccess(['onclick'=>'tpv.create()', 'caption'=>'Ticket']);
 
-        $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company);
-        ?> 
+    $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company);
+    ?> 
      
 </section> 
 <style>
@@ -125,12 +125,9 @@
         max-height: 80vh;
     }
 </style>
-<script src="js/Line.min.js"></script>
-<script src="js/Ticket.min.js"></script>
-
 <script>
     var tpv = {
-        buttons     : ['prev', 'next','del'],
+        buttons     : ['add', 'prev', 'next','del'],
         total       : 0,
         client      : null, 
         currentId   : <?=$tickets_new_id?>,
@@ -142,16 +139,16 @@
         selEmp      : new Select('<?=$emp->id()?>'), 
         selCli      : new Select('<?=$cli->id()?>'), 
         dto         : document.getElementById('<?=$dto->idEl()?>'), 
+        amount      : document.getElementById('<?=$amo->idEl()?>'),
         date        : <?=$date->idEl()?>,
-        hour        : <?=$hour->idEl()?>,
+        hour        : <?=$hour->idEl()?>, 
         $id         : $('#<?=$id->idEl()?>'), 
         $description: $('#<?=$des->idEl()?>'),
-        $employees  : $('#<?=$emp->idEl()?>'),
-        $client     : $('#<?=$cli->idEl()?>'),
+        $employees  : $('#<?=$emp->id()?>'),
+        $client     : $('#<?=$cli->id()?>'),
         $hour       : $('#<?=$hour->idEl()?>'),
         $quantity   : $('#<?=$quan->idEl()?>'),
         $price      : $('#<?=$pric->idEl()?>'),
-        $amount     : $('#<?=$amo->idEl()?>'),
         $btnOk      : $('#<?=$btnOk->idEl()?>'),
         $btnClear   : $('#<?=$btnClear->idEl()?>'),
         $total      : $('#<?=$txtTotal->idEl()?>'),
@@ -171,22 +168,27 @@
             this.selEmp.clear()
             this.selCli.clear()
 
-            const emp = DB.get('usuarios','estado', 1, 'nivel>0')
-            const users = DB.get('usuarios','estado', 1)
-            
-            for(i in emp){
-                this.selEmp.addOption(emp[i].id, emp[i].nombre)
-            }
-            for(i in users){
-                this.selCli.addOption(users[i].id, users[i].nombre)
-            }
+            DB.get('usuarios','estado', 1, 'nivel>0')
+                .then(emp => {
+                    for(i in emp){
+                        this.selEmp.addOption(emp[i].id, emp[i].nombre)
+                    }
+                })
+            DB.get('usuarios','estado', 1)
+                .then(users => {
+                    for(i in users){
+                        this.selCli.addOption(users[i].id, users[i].nombre)
+                    }
+                })
         },
         loadServ(){
             this.selCode.clear()
-            const serv = DB.get('servicios','estado', 1)
-            for(i in serv){
-                this.selCode.addOption(serv[i].id, serv[i].codigo)
-            }
+            DB.get('servicios','estado', 1)
+            .then(serv => {
+                for(i in serv){
+                    this.selCode.addOption(serv[i].id, serv[i].codigo)
+                }
+            })
         },
         openTicket(){
             this.Modal.open()
@@ -194,11 +196,6 @@
         },
         close(){
             this.Modal.close()
-        },
-        new(){
-            this.$id.val(++this.lastId)
-            this.currentId = this.lastId
-            this.reset() 
         },
         reset(){
             const f = new Date();
@@ -231,22 +228,22 @@
             let amount = this.$quantity.val() * this.$price.val(), 
                 dto = this.dto.value * amount / 100, 
                 total = amount - dto
-            this.$amount.val(total)
+            this.amount.value = total.toFixed(2)
         },
         clearLine(){
             this.selCode.default()
             this.$description.val('')
             this.$quantity.val(1)
             this.$price.val(0)
-            this.$amount.val(0)
+            this.amount.value = 0
             //this.selCode.el.focus()
         },
         clearLines(){
             this.Table.clearLines()
         },
         clearUsers(){
-            this.$client.find(':selected').attr("selected", false).removeClass('valid')
-            this.$employees.find(':selected').attr("selected", false).focus().removeClass('valid')
+            this.selCli.reset()
+            this.selEmp.reset()
         },
         printTotal(){
             this.total = this.Ticket.total()
@@ -261,7 +258,7 @@
                 this.$quantity.val(), 
                 this.$price.val(), 
                 this.dto.value, 
-                this.$amount.val(),
+                this.amount.value,
                 this.$iva.val()
             )
 
@@ -269,15 +266,18 @@
             if(line.success) this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
             else this.selCode.el.focus
         },
-        // Estrategia de promocion de filiacion clientes VIP por tiempo regular 
-        addPromo(){
-         
+        // Estrategia de promocion de filiacion clientes VIP por tiempo 
+        addPromo(callback){
             if(this.client && this.client.promos) {
-                let promo = DB.get('promos','id',1)[0]
-
-                // Aplicamos la promocion si el último ticket esta dentro del periodo establecido como valido
-                if(this.client.lastTicket && app.date.diff(this.client.lastTicket, app.date.actual()) <= promo.valor) this.dto.value = promo.dto
-               
+                DB.get('promos','id',1)
+                .then(d => d[0])
+                .then(promo => {       
+                        // Aplicamos la promocion si el último ticket esta dentro del periodo establecido como valido
+                        if(this.client.lastTicket && app.date.diff(this.client.lastTicket, app.date.actual()) <= promo.valor) this.dto.value = promo.dto
+                        callback()
+                    })               
+            } else {
+                callback()
             }
         },
         addLineTable(id, articulo, des, cantidad, precio, dto, amo){
@@ -291,12 +291,16 @@
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
             let id = this.selCode.value()
-            this.addPromo()
-            if(id){
-                let el = DB.get('servicios', 'id' , id)[0]
-                this.$description.val(el.descripcion)
-                this.$price.val(el.precio)
-            }
+            this.addPromo(_=>{
+                if(id){
+                    DB.get('servicios', 'id' , id)
+                        .then(d => d[0])
+                        .then(el => {
+                            this.$description.val(el.descripcion)
+                            this.$price.val(el.precio)
+                        })
+                }
+            })
         },
         loadLineFromTable(e){
             const idLine = e.path[1].attributes.idline.value
@@ -306,38 +310,46 @@
             this.Ticket.deleteLine(idLine)
 
             // Vista
-            let ser = DB.get('servicios','id',line.articulo)[0]
-
-            this.$code
-                .addClass('valid')
-                .find('options').attr("selected", false).end()
-                .find('[value='+ line.articulo +']').attr("selected", true)
-                
-            this.$description.val(ser.descripcion)
-            this.$quantity.val(line.cantidad)
-            this.$price.val(line.precio)
-            this.dto.value = line.dto
-            this.$amount.val(line.amo)
-
-            this.Table.delLine(e.path[1].attributes.idline.value)
-                       
-            this.printTotal()
+            DB.get('servicios','id',line.articulo)
+                .then(d => d[0])
+                .then(ser => {
+                    this.$code
+                        .addClass('valid')
+                        .find('options').attr("selected", false).end()
+                        .find('[value='+ line.articulo +']').attr("selected", true)
+                        
+                    this.$description.val(ser.descripcion)
+                    this.$quantity.val(line.cantidad)
+                    this.$price.val(line.precio)
+                    this.dto.value = line.dto
+                    this.amount.value = line.amo
+        
+                    this.Table.delLine(e.path[1].attributes.idline.value)
+                               
+                    this.printTotal()
+                })
         },
         del(){
             this.request('del', this.currentId, (respond, status) => this.next())
         },
         next(){
-            if(this.currentId ==  this.lastId) {
-                this.reset()
-                this.$id.val(this.currentId) 
-            }
-            if(this.currentId < this.lastId) this.getTicket(++this.currentId, this.next)
+            this.request('next', this.currentId, d => {
+                d.id == -1 && this.add(d) || this.loadDataTicket(d)
+            })
         },
         prev(){
-            if(this.currentId > 0) this.getTicket(--this.currentId, this.prev)
+            this.request('prev', this.currentId, d => this.loadDataTicket(d))
         },
-        getTicket(id, fn){
-            this.request('get', this.currentId, (respond, status) => this.next())
+        add(){
+            this.request('last', this.currentId, d => this.loadDataTicket(
+                {
+                    id          : parseInt(d.id) + 1, 
+                    estado      : 1, 
+                    id_usuario  : 0, 
+                    id_cliente  : 0, 
+                    fecha       : app.date.current(), 
+                    lines       : [] 
+                }))
         },
         request(action, id, callback){
             let self = this,
@@ -353,30 +365,32 @@
             }, false)
         },
         // Cargamos los datos del ticket actual
-        loadDataTicket( ticket ){
-            this.reset()
-            this.Ticket = new Ticket(ticket)
+        loadDataTicket(data){
 
-            if(ticket.estado == undefined) {
+            this.reset()
+            this.Ticket = new Ticket(data)
+            if(data.estado == undefined) {
                 this.$id.val(this.currentId)
                 return false 
             }
-            let d = new Date(ticket.fecha)
-            let arrdate = ticket.fecha.split(' ')
+            let d = new Date(data.fecha)
+            let arrdate = data.fecha.split(' ')
 
-            this.$id.val(ticket.id) 
-            this.$employees.addClass('valid').find('[value='+ticket.id_usuario+']').attr("selected", true)
-            this.$client.addClass('valid').find('[value='+ticket.id_cliente+']').attr("selected", true)
+            this.$id.val(data.id)
+            this.selEmp.option(data.id_usuario)
+            this.selCli.option(data.id_cliente)
             
             this.date.value = d.toLocaleDateString()
             this.hour.value = d.toLocaleTimeString()
-
+            
+            // Cargamos el id del tickket actual
+            this.currentId = data.id
             // Cargamos las lineas 
-            for(let i in ticket.lines){
-                var line = ticket.lines[i],
-                    ser  = DB.get('servicios', 'id' , line.articulo)[0]
-                if(ser)
-                    this.addLineTable(line.id, ser.codigo, ser.des, line.cantidad, line.precio, line.dto)
+            for(let i in data.lines){
+                let line = data.lines[i]
+                DB.get('servicios', 'id' , line.articulo)
+                    .then(d => d[0])
+                    .then(ser => {if(ser) this.addLineTable(line.id, ser.codigo, ser.des, line.cantidad, line.precio, line.dto)})
             }
         }
     }

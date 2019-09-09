@@ -5,7 +5,7 @@
             <?php
             $txt00 = new InputRead(['label' => 'Id', 'name'=>'id']);
             $txt01 = new InputText(['label' => 'Nombre', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la promoción", 'required'=>true]);
-            $txt02 = new InputText(['label' => 'Numero de dias', 'name'=>'valor']);
+            $txt02 = new InputText(['label' => 'Total de dias', 'name'=>'valor']);
             $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name'=>'dto']);
             ?> 
         </fieldset>
@@ -19,18 +19,21 @@ var promos = {
     buttons : [],
     change  : false,
     load(){
-        let d = DB.get('promos')[0]
-        app.loadDataToForm(d, this.form)
+        DB.get('promos')
+            .then(d => d[0])
+            .then(d => app.loadDataToForm(d, this.form))
     },
     onblur(callback){
         this.change && this.save()
         typeof callback == 'function' && callback()
     },
     save(){
+        let data = app.formToObject(this.form)
+        if(data.id == '') data.id = -1
         app.post({
                 controller: 'promos',
                 action: 'save',
-                data: app.formToObject(this.form)
+                data: data 
             })
         DB.set(this.table, app.formToObject(this.form), 'id' , 1)   
     },

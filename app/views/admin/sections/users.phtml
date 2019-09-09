@@ -21,6 +21,7 @@
 <script>
 'use strict'
 var users = {
+    ...users,
     table: 'usuarios',
     buttons: ['add', 'search'],
     currentId: null, 
@@ -28,29 +29,33 @@ var users = {
     Form : new Modal('<?=$editUser->id()?>'),
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(){
-        let f = this.Form.getData(),
-            usuarios = DB.get('usuarios')
-
-        for(i in usuarios) {
-            let u = usuarios[i]
-
-            if(!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) return {success: false, code: 'dni', mens: 'Error dni duplicado'} 
-            else if( !isEmpty(f.email) && u.email == f.email && u.id != f.id ) return {success: false, code: 'email', mens: 'Error email duplicado'} 
-        }
-
+        let f = this.Form.getData()        
+        DB.get('usuarios')
+            .then(usuarios => {
+                for(i in usuarios) {
+                    let u = usuarios[i]
+                    
+                    if(!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) return {success: false, code: 'dni', mens: 'Error dni duplicado'} 
+                    else if( !isEmpty(f.email) && u.email == f.email && u.id != f.id ) return {success: false, code: 'email', mens: 'Error email duplicado'} 
+                }
+            })
+                
         return {success: true}
     },
     del(){
         // Eliminamos de la bd local
-        let d = DB.get(this.table,'id', this.currentId)[0]
-        d.estado = 0 
-        DB.set(this.table, d, 'id', d.id)
-        // Eliminamos de la tabla 
-        this.Table.delLine(this.currentId)
-        // Cerramos formulario
-        this.Form.close()
-
-        tpv.loadUsers()
+        DB.get(this.table,'id', this.currentId)
+            .then(d => d[0])
+            .then(d =>{
+                d.estado = 0 
+                DB.set(this.table, d, 'id', d.id)
+                // Eliminamos de la tabla 
+                this.Table.delLine(this.currentId)
+                // Cerramos formulario
+                this.Form.close()
+        
+                tpv.loadUsers()
+            })
     },
     add(){
         let data = {    
@@ -87,17 +92,19 @@ var users = {
         tpv.loadUsers()
     },
     load(){
-        let users  = DB.get(this.table)
-        for( i in users ){
-            var user = users[i]
-            // Listamos los usuarios activos solamente
-            if(user.estado > 0) this.addLine(user)
-        }
+        DB.get(this.table)
+            .then(users => {
+                for( i in users ){
+                    var user = users[i]
+                    // Listamos los usuarios activos solamente
+                    if(user.estado > 0) this.addLine(user)
+                }
+            })
     },
     show(e){
         this.currentId = e.path[1].attributes.idline.value
-        let data = DB.get(this.table, 'id', this.currentId)
-        this.Form.open(data).setTile('Edicion usuario')
+        DB.get(this.table, 'id', this.currentId)
+            .then(data => this.Form.open(data).setTile('Edicion usuario'))
     },
     // Formas de busqueda en usuarios
     search(value){
@@ -107,8 +114,9 @@ var users = {
         else this.searchBy('nombre', value)
     },
     searchBy(field, value){
-        const v = DB.get(this.table, field, value, 'estado>0')
-        for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
+        let db = new Db(this.table)
+        db.get(field, value, 'estado>0')
+            .then(v => {for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()})
     }
 }
 </script>

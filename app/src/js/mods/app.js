@@ -6,7 +6,7 @@ const app = {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
 
-        var jqxhr = $.post('index.php', data, function (respond, status, xhr, dataType) {
+        $.post('index.php', data, function (respond, status, xhr, dataType) {
             let data = null
             // La respuesta puede ser json o html 
             try {
@@ -47,7 +47,8 @@ const app = {
             $container = ($('main').length != 0) ? $('main') : $('body')
             $container
                 .find('section').hide().end()
-                .append(html);
+                .append(html)
+
             // Inicializamos el método de carga del objeto
             if(exist(window[data.controller].load)) window[data.controller].load()
             this.sections.inicialize(data.controller) 
@@ -123,13 +124,14 @@ const app = {
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section)
             }else{
+
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
                     action: 'view'
                 }, f => {
                     this.inicialize(section)
-                });
+                })
             }
             this.onblur()
         },
@@ -246,7 +248,7 @@ const app = {
         //setTimeout("app.clock()",1000) 
     },
     loadDataToForm(data, form){
-    
+        if(data == undefined) return false
         var els = form.getElementsByTagName('input')
         for(let i in els){
             const el = els[i]
@@ -260,30 +262,42 @@ const app = {
         return form
     }, 
     date : {
+        current(){
+            return this.actual()
+        }, 
         actual(){
             let f = new Date();
             return(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
-
         },  
         now(arg = ''){
-            let f = new Date()
+            let f = new Date(), 
+                d = f.getDate().toString().padStart(2, '0'), 
+                m = (f.getMonth() +1).toString().padStart(2, '0'),
+                y = f.getFullYear().toString(),
+                h = f.getHours().toString().padStart(2, '0'),
+                n = f.getMinutes().toString().padStart(2, '0')
             switch(arg){
                 case 'date': 
-                    return f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear()
+                    return d + "/" + m + "/" + y
                 case 'hour':
-                    return f.getHours() + ":" + f.getMinutes()
+                    return h + ":" + n
                 default: 
-                    return f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear() + ' ' + f.getHours() + ":" + f.getMinutes()
+                    return d + "/" + m + "/" + y + ' ' + h + ":" + n
             }
         },
-        format(fecha, format){
-            let d, m , a , h
-            
+        format(date, format){
+            if(typeof date !== 'string') return false
+            let d, m , a , h, n, s,
+                f = date.split(' '),
+                fecha = f[0],
+                horario = f[1] 
+
             // Si tiene horas 
-            if(fecha.indexOf(":")>0){   
-                let f = fecha.split(' ')
-                h = f[1]
-                fecha = f[0]
+            if(horario){   
+                let x = horario.split(':')
+                h = x[0]
+                n = x[1]
+                s = x[2]
             }
             if (fecha.indexOf("/")>0){
                 let arr = fecha.split('/');
@@ -305,15 +319,16 @@ const app = {
                 a = fecha.substr(0,4);
             }
             switch(format) {
-                case 'sql':     return a+'-'+m+'-'+d
-                case 'print':   return d+'/'+m+'/'+a
-                case 'md':      return m+d
-                case 'id':      return a+m+d
-                case 'day':     return d
-                case 'month':   return m
-                case 'year':    return a
-                case 'hour':    return h || false
-                default:        return new Date(a, m-1, d)
+                case 'sql'      : return a + '-' + m + '-' + d
+                case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + n
+                case 'print'    : return d + '/' + m + '/' + a
+                case 'md'       : return m + d 
+                case 'id'       : return a + m + d
+                case 'day'      : return d
+                case 'month'    : return m
+                case 'year'     : return a
+                case 'hour'     : return h || false
+                default         : return new Date(a, m-1, d)
             }
 
         },
@@ -330,61 +345,75 @@ const app = {
 const DB = {
     storage: [],
     current: {}, 
-    get(index , key, value, filter){
-        const _equalValues = function(el){
-            let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
-                v = (typeof value === 'string') ? value.toLowerCase().trim() : value
-
-            if(k) return typeof k === 'number' ? k == v : k.includes(v)
-            else return false
-         }
-        if(index == undefined){
-            // Si no le paso un indice me devuelve todos los nombres de tablas
-            return this.storage
-        }else{
-            // Si no se pasan key o value devolvemos todos los registros            
-            if(key == undefined || value == undefined ){    
-                return this.storage[index]
-            }
-            else return this.storage[index].filter((el) => {
-                if (filter) {
-                    if(filter.indexOf('==') != -1){
-                        let arr = filter.split('==')
-                        return _equalValues(el) && el[arr[0].trim()] == arr[1].trim()
-                    }
-                    else if(filter.indexOf('>') != -1){
-                        let arr = filter.split('>')
-                        return _equalValues(el) && el[arr[0].trim()] > arr[1].trim()         
-                    }
-                    else if(filter.indexOf('<') != -1){
-                        let arr = filter.split('<')
-                        return _equalValues(el) && el[arr[0].trim()] < arr[1].trim()                       
-                    }
-                    
-                }
-                else return _equalValues(el)
-            }) || false
-        } 
+    key(table, key, value){
+        this.get(table)
+        .then(d => {
+            
+        })
     },
-    set(index, data, key, value){
-        
-        if(key){
-            let i = this.storage[index].findIndex(el=>{
-                return el[key] == value
-            })
-            if(i == -1)
-                this.storage[index].push(data)
-            else
-                this.storage[index][i] = data
-        } else {
-            //inicializa
-            if ( typeof this.storage[index] == 'undefined') this.storage[index] = []
-            // Guarda datos en formato array
-            for(let i in data){
-                this.storage[index].push(data[i])
+    get(table , key, value, filter){
+        return new Promise((resolve, reject) => {
+            const _equalValues = function(el){
+                let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
+                    v = (typeof value === 'string') ? value.toLowerCase().trim() : value
+
+                if(k) return typeof k === 'number' ? k == v : k.includes(v)
+                else return false
+            }
+            if(table == undefined){
+                // Si no le paso un indice me devuelve todos los nombres de tablas
+                resolve(this.storage)
+            }else{
+                // Si no se pasan key o value devolvemos todos los registros            
+                if(key == undefined || value == undefined ){    
+                    resolve(this.storage[table])
+                }
+                else resolve(this.storage[table].filter((el) => {
+                    if (filter) {
+                        if(filter.indexOf('==') != -1){
+                            let arr = filter.split('==')
+                            return _equalValues(el) && el[arr[0].trim()] == arr[1].trim()
+                        }
+                        else if(filter.indexOf('>') != -1){
+                            let arr = filter.split('>')
+                            return _equalValues(el) && el[arr[0].trim()] > arr[1].trim()         
+                        }
+                        else if(filter.indexOf('<') != -1){
+                            let arr = filter.split('<')
+                            return _equalValues(el) && el[arr[0].trim()] < arr[1].trim()                       
+                        }
+                        
+                    }
+                    else return _equalValues(el)
+                })) || reject(false)
             } 
-        }
-
-
-    }
+        })
+    },
+    set(table, data, key, value){
+        return new Promise( (resolve, reject) => {
+            if(key){
+                let i = this.storage[table].findIndex(el=>{
+                    return el[key] == value
+                })
+                if(i == -1)
+                    this.storage[table].push(data)
+                else
+                    this.storage[table][i] = data
+            } else {
+                //inicializa
+                if ( typeof this.storage[table] == 'undefined') this.storage[table] = []
+                // Guarda datos en formato array
+                for(let i in data){
+                    this.storage[table].push(data[i])
+                } 
+            }
+            resolve(this.storage[table])
+        })
+    },
+    last(table){
+        return this.get(table).then( d => d[d['length'] - 1 ])  
+    },
+    lastId(table){
+        return this.get(table).then( d => d[d['length'] -1 ].id)
+    },
 }
