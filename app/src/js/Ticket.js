@@ -1,7 +1,7 @@
 class Ticket{
 
-    constructor(data = {}){
-
+    constructor(data){
+        if (data == undefined) return false
         this.id = data.id || null
         this.lines = data.lines || []
         this.id_usuario = data.id_usuario || null

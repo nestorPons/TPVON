@@ -228,7 +228,8 @@
             let amount = this.$quantity.val() * this.$price.val(), 
                 dto = this.dto.value * amount / 100, 
                 total = amount - dto
-            this.amount.value = total.toFixed(2)
+            return this.amount.value = total.toFixed(2)
+             
         },
         clearLine(){
             this.selCode.default()
@@ -308,21 +309,16 @@
             // Eliminamos la linea del objeto
             let line = this.Ticket.getLine(idLine)
             this.Ticket.deleteLine(idLine)
-
             // Vista
             DB.get('servicios','id',line.articulo)
                 .then(d => d[0])
                 .then(ser => {
-                    this.$code
-                        .addClass('valid')
-                        .find('options').attr("selected", false).end()
-                        .find('[value='+ line.articulo +']').attr("selected", true)
-                        
+                    this.selCode.option(line.articulo)                        
                     this.$description.val(ser.descripcion)
                     this.$quantity.val(line.cantidad)
                     this.$price.val(line.precio)
                     this.dto.value = line.dto
-                    this.amount.value = line.amo
+                    this.amount.value = this.calculate()
         
                     this.Table.delLine(e.path[1].attributes.idline.value)
                                
@@ -338,7 +334,7 @@
             })
         },
         prev(){
-            this.request('prev', this.currentId, d => this.loadDataTicket(d))
+            this.request('prev', this.currentId, d => {if(d) this.loadDataTicket(d)})
         },
         add(){
             this.request('last', this.currentId, d => this.loadDataTicket(
