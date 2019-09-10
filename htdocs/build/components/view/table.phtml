@@ -1,0 +1,80 @@
+<?php namespace app\views\components\controllers;?>
+<table id="<?= $idElement ?>" class="<?= $class ?>">
+    <thead>
+        <?php foreach ($columns as $key => $val) : ?>
+            <th class="<?= $val ?>"><?= $val ?></th>
+        <?php endforeach ?>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+<template id="template_<?= $id ?>">
+    <tr <?= $onclick ?>>
+        <?php foreach ($columns as $key => $val) : ?>
+            <td class="<?= $val ?>"></td>
+        <?php endforeach ?>
+    </tr>
+</template>
+<script>
+var Table = class{
+    constructor(id){
+
+        this.$table = $('#' + id)
+        this.$template =  $( $('#template_' + id)[0].innerHTML )
+    }
+    /**
+     * arrData = array de datos en orden de salida
+     */
+    addLine(id, arrData){
+        return this.$template
+            .clone()
+            .attr('idline', id || this.$table.find('tr').length)
+            .find('td').each(function(i, el){
+                $(this)
+                    .html(arrData[i])
+            })
+            .end()
+            .prependTo(this.$table.find('tbody'))      
+    }
+    endScroll(){
+        this.$table.animate({ scrollTop: this.$table.height() }, 100);
+    }
+    clearLines(){
+        this.$table.find('tbody').find('tr').remove()
+    }
+    clear(){
+        this.clearLines()
+    }
+    delLine(id){
+        this.$table.find(`[idline="${id}"]`).remove()
+    }
+    updateLine(id, data){
+        this.delLine(id)
+        return this.addLine(id, data)
+    }
+}
+/* var table = {
+    addLine(id, data = []){
+
+        const $table = $('#' + id), 
+            $template = $( $('#template_' + id)[0].innerHTML )
+
+            $template
+                .clone()
+                .attr('idline', id)
+                .find('td').each(function(i, el){
+                    $(this).html(data[i])
+                })
+                .end()
+                .appendTo($table.find('tbody'))
+
+
+
+    },
+    del(){
+
+    }
+} */
+</script>

@@ -18,24 +18,24 @@ class Conn{
     /**
      *	Genera la conexión a a la base de datos
      */
-    protected function connect(){
-        $dsn = 'mysql:dbname=' . $this->db . ';host=' . $this->credentials["host"] . ';port='. $this->credentials["port"];
+    protected function connect($dsn, $pass){
+
         try {
             $this->pdo = new \PDO(
                     $dsn, 
                     $this->user, 
-                    $this->credentials[$this->user], 
+                    $pass,  
                     [
                         \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
-                        \PDO::ATTR_EMULATE_PREPARES     => false, //Se usa para desactivar emulación de consultas preparadas
-                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_SILENT, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
+                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
                         \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
                     ]
                 );
            return $this->pdo; 
         }
         catch (\PDOException $e){ 
-            die('fallo conexion base datos ' . $e->getMessage());
+            throw new \PDOException($e->getMessage());
         }
     }
     function __destruct(){
@@ -45,37 +45,34 @@ class Conn{
 		if($this->pdo) $this->pdo = null;
 	 }
 
-    private function init($sql, $params = null){
-/*   echo $sql; 
-pr(
-    $params
-);   */
-        try {
+     private function init($sql, $params = null){
+/* 
+pr($sql, $params);
+pr($this->pdo); 
+*/
+         try {
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
             
             if (!empty($this->params)) {
                 foreach ($this->params as $param => $value) {
-                    if(is_int($value[1])) {
+                    if(is_numeric($value[1])) {
                         $type = \PDO::PARAM_INT;
                     } else if(is_bool($value[1])) {
                         $type = \PDO::PARAM_BOOL;
-                    } else if(is_null($value[1])) {
+                    } else if(is_null($value[1]) || $value[1] == '') {
+                        $value[1] = null;
                         $type = \PDO::PARAM_NULL;
                     } else {
                         $type = \PDO::PARAM_STR;
                     }
                     $this->sqlPrepare->bindValue($value[0], $value[1], $type);
-                }
+                    }
             }
-            
            return $this->sqlPrepare->execute();
         }
         catch (\PDOException $e) {
-            echo('ERROR INIT \n');
-            echo($sql);
-            pr($params);
-            die($e->getMessage());
+            die ($e->getMessage());
         }
         
         $this->params = [];
@@ -117,9 +114,9 @@ pr(
     function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
 
         $this->sql = trim(str_replace("\r", " ", $sql)); 
+
         $respond = $this->init($this->sql, $params);
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
-
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]);
         if ($statement === 'select' || $statement === 'show') {

@@ -2,4 +2,6 @@ vendor
 node_modules
 htdocs/js
 htdocs/css
-server/PHP_errors.log
+htdocs/companies
+!htdocs/companies/template
+server/logs

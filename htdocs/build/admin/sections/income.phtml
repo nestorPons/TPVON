@@ -1,0 +1,97 @@
+<?php namespace app\controllers\components?><section id="income">
+<?php 
+    $from = new DatePicker(['label'=>'De']);
+    $to = new DatePicker(['label'=>'Hasta']);
+    $total = new InputText(['label' => 'Total', 'iconlast' => '', 'class'=>'text-right']);
+    $btnFilter = new ButtonSuccess(['onclick'=>'income.filter()', 'icon'=>'funnel', 'caption'=>'']);
+    $btnPrint = new ButtonSuccess(['onclick'=>'income.print()', 'icon'=>'printer', 'caption'=>'']);
+    $table = new Table(['columns'=>['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
+?>
+</section>
+<style>
+    #income{
+            align-items: flex-start;
+            display: grid;
+            grid-template-rows: auto auto [table] 1fr [last] auto;
+            grid-template-columns: [first] 1fr 1fr repeat(5, auto) [last] 1fr;
+            grid-row-gap: 5px;
+    }
+    #<?= $table->id()?>{
+        grid-column: 1 / -1;
+        max-height: 75vh;
+    }
+    #<?= $total->id()?>{
+        grid-row: -1;
+        grid-column: last;
+
+    }
+    .Importe{
+        text-align: right;
+    }
+</style>
+<script>
+    var income = {
+        txtFrom : <?=$from->id()?>, 
+        txtTo : <?=$to->id()?>, 
+        txtTotal : <?=$total->idEl()?>,
+        table : <?=$table->id()?>, 
+        Table: new Table('<?=$table->id()?>'),
+        load(){
+            this.filter()
+        },
+        filter(){
+            this.Table.clear()
+            data = {
+                controller: 'tickets',
+                action: 'getBetween',
+                data:{
+                    f1 : app.date.format(this.txtFrom.value, 'sql'),
+                    f2 : app.date.format(this.txtTo.value, 'sql'),
+                }
+            }
+            app.post(data, (data) => {
+                let t = 0
+                for(let i in data){
+                    let d = data[i]
+                    for(let x in d.lineas){
+                        let l = d.lineas[x]
+                        if(d.estado == 1) this.Table.addLine( null , 
+                            [
+                                d.id, 
+                                app.date.format(d.fecha, 'print'), 
+                                app.date.format(d.fecha, 'hour'),
+                                l.articulo, 
+                                l.precio, 
+                                l.cantidad, 
+                                l.dto, 
+                                l.importe
+                            ])
+                    }
+                    t += d.total
+                    
+                }
+                this.txtTotal.value = t.toFixed(2)
+
+            } )
+        },
+        print(){
+
+            let printContents = 
+                `<h1> Listado de ingresos </h1>
+                <h2> Fecha inicio : ${this.txtFrom.value}</h2>
+                <h2> Fecha fin : ${this.txtTo.value}</h2>
+
+                <table> ${this.table.innerHTML} </table>
+                <h4>Total: <b>${this.txtTotal.value}</b></h4>`
+
+            //printContents += '<style>' + document.getElementById('incomeStyle').innerHTML + '</style>'
+            w = window.open();
+            w.document.write(printContents);
+            w.document.close(); // necessary for IE >= 10
+            w.focus(); // necessary for IE >= 10
+            w.print();
+            w.close(); 
+            
+        },
+    }
+</script>

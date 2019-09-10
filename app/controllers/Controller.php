@@ -1,6 +1,6 @@
 <?php 
 namespace app\controllers;
-
+use \app\models\Company;
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
  * Tiene lo mínimo para la creación de una subclase: 
@@ -12,60 +12,98 @@ class Controller{
     protected $conn, $controller, $action, $data;
     public $result = null;
     private $Model; 
+    private $db = CONN['db'];
     
-    function __construct(String $action, String $controller = null, Object $Data = null){
+    function __construct(String $action, $controller = null, $Data = null){
         $this->action = strtolower($action);
         $this->controller =strtolower($controller ?? $this->getController());
+        $this->Data = $Data; 
 
         // Constructor alternativo básico
-        if(method_exists($this, $this->action)){
-            $this->result = $this->{$this->action}($Data);
-        } else {
-            die('Accion no permitida!!');
-        }
-    }
+        if(method_exists($this, $this->action)) $this->result = $this->{$this->action}($Data);
+        else {
+            // Si no encuentra el métodod en el controlador los busca en el modelo
+            $this->exec ($this->action, ''); 
+        };
 
+    }
     protected function view($data = null){
-        return $this->require(\FOLDERS\VIEWS . $this->controller . '.phtml', $data);
-    }
-    protected function update(Object $Data){
-        $this->Model = $this->getModel(intval($Data->id));
-        $this->Model->loadData($Data);
-        $Data->delete('id'); 
-        return $this->Model->save($Data);
-    }
-    protected function save(Object $Data){
-        $data = $Data->toArray();
-        $this->Model->saveById($data);
-    }
-    protected function require(String $route, $data = null){
-        if(isset($_GET['db'])) $Company = new \app\models\Company($_GET['db']);
-        if (is_array($data))
-            $data = new \app\core\Data($data);
-        return require_once $route;
+        
+        // Carpetas donde buscar las vistas
+        $files[] = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
+        $files[] = \VIEWS\LOGIN . $this->controller . '.phtml';
+        $files[] = \VIEWS\ADMIN . $this->controller . '.phtml';
+        $files[] = \VIEWS\USERS . $this->controller . '.phtml';
+        $files[] = \VIEWS\ADMIN\SECTIONS . $this->controller . '.phtml';
+        foreach($files as $file){
+            if(file_exists($file)) return $this->printView($file, $data);
+        }        
     }
     /**
+     * Método genérico para guardar registros comprueba que es nuevo o edicion y envia los datos al metodo apropiado
+     */
+    protected function save(Object $Data){
+        if($Data->id == -1 ) return $this->new($Data);
+        else return $this->update($Data);
+    }
+        /**
      * Método por defecto de agregación de registros a la base de datos
      */
     protected function new(Object $Data = null){
-        $respond = false; 
-        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
-        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)){
-            $model = new $nameModel($this->action);
-            $respond = $model->new($Data);
+        return $this->exec('new', 'add');
+    }
+    /**
+     * Método genérico para actualizar registros
+     */
+    protected function update(Object $Data){
+        return $this->exec('save', 'saveById'); 
+    }
+    /**
+     * Método por defecto de consulta de datos 
+     */
+    protected function get(Object $Data = null){
+        return $this->exec('get', 'getById');
+    }
+    protected function printView(String $route, array $data = null){  
+        $Company = new Company($this->db);
+        if($data){
+            foreach($data as $key => $val){
+                ${$key} = $val;
+            }
         }
-        return $respond;
+        
+        return require_once $route;
+    }
+    /**
+     * Método por defecto de consulta de datos entre parametros
+     */
+    protected function getBetween(Object $Data){
+        return $this->exec('between', 'getBetween');
+    }
+    /**
+     * Método por defecto de eliminación de registros
+     */
+    protected function del($arg){
+        return $this->exec('del', 'deleteById');
     }
     private function getController(){
         $arr_controller= explode('\\',get_class($this));
         $controller = end($arr_controller);
         return strtolower($controller);
     }
-    private function getModel($arg = null){
-        $nameModel = '\\app\\models\\' . ucfirst($this->controller);
-        $fileModel = \FOLDERS\MODELS . ucfirst($this->controller) . '.php';
-        if(file_exists($fileModel)) return $this->Model = new $nameModel($arg);
-        return false;
+    protected function getModel($arg = null){
+        return (file_exists(\FOLDERS\MODELS . ucfirst($this->controller) . '.php'))
+            ? '\\app\\models\\' . ucfirst($this->controller)
+            : '\\app\\core\\Query';
+    }
+    private function exec (String $method, String $method_generic){
+        $name_model = $this->getModel(); 
+        $model = new $name_model($this->controller);
+        if (method_exists($model, $method)){
+            return  $model->{$method}($this->Data);
+        } else {
+            $model->id = $this->Data->id;
+            return $model->{$method_generic}($this->Data->toArray());
+        }
     }
 }

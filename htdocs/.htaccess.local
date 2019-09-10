@@ -1,4 +1,5 @@
-## DEVELOP
+## DEVELOP 
+
 Options +Indexes
 # PHP error handling for development servers
 php_flag display_startup_errors on
@@ -35,10 +36,13 @@ RewriteRule ^font/(.*)$ - [L]
 RewriteRule ^sources/(.*)$ - [L]
 RewriteRule ^dist/(.*)$ - [L]
 RewriteRule ^css/(.*)$ - [L]
+RewriteRule ^node_modules/(.*)$ - [L]
+RewriteRule ^companies/(.*)$ - [L]
+RewriteRule ^build/(.*)$ - [L]
 
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?db=$1&controller=$2&action=$3&args=$4 [R,L]
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php?db=$1&controller=$2&action=$3 [R,L]
-RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php?db=$1&controller=$2 [R,L]
-RewriteRule ^([0-9a-z_-]+)/?$ index.php?db=$1 [R=301,R,L]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?controller=$2&action=$3&args=$4 [R,L]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/([^/]+)/?$ index.php?controller=$2&action=$3 [R,L]
+RewriteRule ^([0-9a-z_-]+)/([^/]+)/?$ index.php?controller=$2 [R,L]
+RewriteRule ^([0-9a-z_-]+)/?$ index.php? [R=301,R,L]
 
 ErrorDocument 404 error404.php

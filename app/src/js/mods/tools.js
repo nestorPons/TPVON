@@ -1,5 +1,7 @@
 // Funciones para desarrollo
-var echo = function ($arg) { return console.log($arg); };
+var echo = function () { 
+    for(let i in arguments) console.log(arguments[i]); 
+};
 // Funcion para recorrer dom al estilo jq
 var $y = function ($arg) {
     if ($arg === void 0) { $arg = ''; }
@@ -11,6 +13,12 @@ var $y = function ($arg) {
 };
 var exist = function(arg = undefined){
     return arg != undefined
+}
+var isset = function(arg = undefined){
+    return typeof arg == undefined || arg == null || arg == false || arg == 0
+}
+var isEmpty = function(arg = undefined){
+    return typeof arg == undefined || arg == null || arg == false || arg == 0 || arg == ''
 }
 var isTrue = function(arg = null){
     return arg === true
@@ -31,7 +39,7 @@ var sha256 = function (ascii) {
     // Initial hash value: first 32 bits of the fractional parts of the square roots of the first 8 primes
     // (we actually calculate the first 64, but extra values are just ignored)
     var hash = sha256.h = sha256.h || [];
-    // Round constants: first 32 bits of the fractional parts of the cube roots of the first 64 primes
+    // Round varants: first 32 bits of the fractional parts of the cube roots of the first 64 primes
     var k = sha256.k = sha256.k || [];
     var primeCounter = k[lengthProperty];
     /*/
@@ -109,4 +117,13 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 	}
 	$_GET[_decode(arguments[1])] = _decode(arguments[2]);
  });
-// *** 
+// ***  
+
+var mns = {
+    error(mns){
+        alert(mns)
+    },
+    success(mns){
+        alert(mns)
+    }
+}

@@ -1,0 +1,37 @@
+<?php namespace app\controllers\components?><section id="conf">
+    <form controller="config" action="save" callback="config.save(data)" class="input-group">
+        <fieldset>
+            <legend>Datos empresa</legend>
+            <?php
+            $txt01 = new InputText(['label' => 'Nombre empresa', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la empresa", 'required'=>true]);
+            $txt03 = new InputText(['label' => 'Teléfono', 'name'=>'telefono']);
+            $txt04 = new InputText(['label' => 'Email', 'name'=>'email']);
+            $txt05 = new InputText(['label' => 'Calle', 'name'=>'calle']);
+            $txt06 = new InputText(['label' => 'Numero', 'name'=>'numero']);
+            $txt07 = new InputText(['label' => 'Escalera', 'name'=>'escalera']);
+            $txt08 = new InputText(['label' => 'Piso', 'name'=>'piso']);
+            $txt09 = new InputText(['label' => 'Población', 'name'=>'poblacion']);
+            $txt10 = new InputText(['label' => 'Provincia', 'name'=>'provincia']);
+            $txt11 = new InputText(['label' => 'Codigo postal', 'name'=>'CP', 'title'=>"Introduzca el codigo postal"]);
+            $txt12 = new SelectCountries(['label' => 'Pais', 'name'=>'pais']);
+            ?> 
+        </fieldset>
+    </form>
+</section>
+<script>
+// Cargamos los datos de la base de datos 
+var conf = {
+    table: 'empresa',
+    buttons: [],
+    form: document.getElementById('conf').getElementsByTagName('form')[0],
+    load(){
+        DB.get('empresa')
+            .then(d => d[0])
+            .then(d => app.loadDataToForm(d, this.form))
+    },
+    save(){
+        DB.set(this.table, app.formToObject(this.form), 'id' , 1)
+        $(this.form).submit()
+    },
+}
+</script>

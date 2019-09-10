@@ -11,10 +11,8 @@ class Main extends Controller{
         $this->result = $this->getView($this->getCompanies());
     }
     protected function getView( Array $data = null){ 
-        return $this->require(\FOLDERS\VIEWS . 'index.phtml', ['page'=>'main', 'companies' => $data]);
+        return $this->printView(\FOLDERS\VIEWS . 'index.phtml', ['page'=>'main', 'companies' => $data]);
     }
-    public function getModel(){}
-    public function setModel(){}
     private function getCompanies(){
         $Companies = new \app\models\Company;
         return $this->companies($Companies->getAll('nombre'));

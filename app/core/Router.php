@@ -15,17 +15,16 @@
 class Router{
     
     private 
-        $id = null, 
         $data, 
         $db,
-        $nameDb, 
         $controller, 
         $action;
 
     function __construct($params = []){
 
         // Valores por defecto
-        $this->db = $params['db'] ?? null; 
+
+        $this->db = CODE_COMPANY; 
         $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
 
@@ -43,20 +42,12 @@ class Router{
                 if (empty($this->controller)) $this->controller = 'main';
                 $this->controller = $this->controller; 
             } else {
-                // Si hemos ingresado segundo parametro en la url y existe buscamos la empresa
-                $Company = new \app\models\Company($this->db);
-                
-                if ($Company){   
-                    $this->id = $Company->id();
-                    $this->nameDb = $Company->nombre();
-                    // Si esta vacio controlador nos envia al login
-                    if (empty($this->controller)) {
-                        $this->action = 'view'; 
-                        $this->controller = 'login';
-                    }
-                } else {
-                    Error::toString('E018');
-                } 
+
+                // Si esta vacio controlador nos envia al login
+                if (empty($this->controller)) {
+                    $this->action = 'view'; 
+                    $this->controller = 'login';
+                }
             } 
             
             exit ($this->loadController($this->controller));
@@ -65,17 +56,23 @@ class Router{
         
     }
     private function isPost($params){
-        if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') { 
-            
+        // Método post recibe siempre 3 parametros 
+        // controller => Controlador
+        // action => Acción a realizar
+        // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
+        if(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {    
+
             // Pasamos los datos de json a objeto Data
-            $this->data = new \app\core\Data((array)json_decode($params['data']) ?? null);
-            
+            $this->data = new \app\core\Data($params['data'] ?? null);
+        
             $respond = $this->loadController(); 
 
             // Siempre devuelvo un objeto json con un success de respuesta
-            if($respond === true || $respond === 1) $respond = ['success'=> 1];
-            if($respond === false || $respond === 0) $respond = ['success'=> 0];
-            
+            $respond = 
+                ($respond === true || $respond === 1) ? ['success'=> 1] : 
+                (($respond === false || $respond === 0) ? ['success'=> 0] : 
+                ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :
+                ['success' => 1, 'data' => $respond]);
             // SALIDA 
             exit (json_encode($respond, true));
 
@@ -88,13 +85,13 @@ class Router{
     // Carga controladores
     // Si se le pasa argumentos cambia el controlador asignado
     private function loadController(string $controller = null){
+
         if(!empty($controller)) $this->controller = ucwords($controller); 
         $nameClass = '\\app\\controllers\\' . $this->controller;
-
         $cont = $this->isController($this->controller)
-            ? new $nameClass($this->action, $this->db, $this->data)
+            ? new $nameClass($this->action, $this->data)
             : new \app\controllers\Controller($this->action, $this->controller, $this->data);
-       
+
         return $cont->result; 
     }
     /**

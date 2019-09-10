@@ -4,6 +4,10 @@
 :root {
   /* --spinner-fore-color: inherit; */
   --universal-border-radius: 5px;
+  --main-color: @main-color; 
+  --nav-font-color: contrast(@main-color);
+  --effect-transform-hover: scale(1.2);
+  --color-red: #f00; 
 }
 *{
   -moz-user-select: none; 
@@ -11,6 +15,25 @@
   -ms-user-select: none;
   user-select: none; 
 }
+body{
+  height: 100vh;
+  overflow: hidden;
+}
+input{
+  width: 100%;
+}
+input[type="search"]{
+  padding: 8px 4px;
+}
+input[type="number"]{
+  text-align: right;
+}
+input[readonly], input[readonly]:hover, input[readonly]:focus{
+  border-color: var(--fore-color) !important;
+  color: var(--secondary-fore-color) !important;
+  cursor: inherit;
+}
+
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -34,20 +57,13 @@ button{
   i{
     position: relative;
   }
-  &:hover{
+  &:hover, &:focus{
     background: var(--button-back-color) !important;
     color: var(--back-color) !important;
   }
   &:focus{
     outline:0px;
   }
-}
-body{ 
-  display: flex;
-  justify-content: center;
-}
-section{
-  margin: auto;
 }
 form{
   background-color: white;
@@ -108,9 +124,23 @@ select{
       outline:0px;
       & + label{
         transition: transform 1s;
-        transform: translateY(-22px) scale(0.9);
+        transform: translateY(-1.6rem) scale(0.9);
       }
     }
   }
 }
-
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right; 
+}
+.card{
+  max-height: inherit !important;
+}
+.alert{
+  color: var(--color-red) !important;
+  *{
+    color: var(--color-red) !important;
+  }
+}

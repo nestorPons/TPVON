@@ -1,0 +1,27 @@
+<?php namespace app\views\components\controllers;?><div id="<?=$id?>" class="row col-sm-12 col-md-12">
+    <select
+        class = "<?=$class?>"
+        <?=$printName?>
+        <?=$printTitle?>
+        <?=$required?>
+        <?=$onfocus?>
+        <?=$onblur?>
+        <?=$onclick?>
+        <?=$readonly?>
+        <?=$for?>
+        <?=$required?> 
+        <?=$value?> 
+        <?=$list?>
+        <?=$disabled?>
+        <?=$tabindex?>
+    > 
+        <option value="" hidden></option>
+        <?php if($options):?>
+            <?php foreach($options as $key => $val): ?>
+                <option value="<?=$key?>"  <?php if($key == $selected) echo "selected"?>><?=$val?></option>
+            <?php endforeach ?>
+        <?php endif?>
+    </select> 
+    <label for="<?=$idElement?>"><?=$label?></label>
+</div> 
+ 

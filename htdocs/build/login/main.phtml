@@ -1,0 +1,22 @@
+<?php namespace app\controllers\components?><section id="main" style="
+    width: 690px
+    ">
+    <h1>Main Page</h1>
+    <a href="newcompany">Nueva empresa</a>
+    <div class="row">
+        <?php foreach ($companies as $value):?>
+            <div class="card">
+                <div class="section">
+                    <h3 class="doc"><?=$value['nombre']?></h3>
+                    <a href="?db=<?=$value['nombre']?>" class="doc">ir al login.</a>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+
+</section>
+<style>
+#main{
+    margin: auto;
+}
+</style>

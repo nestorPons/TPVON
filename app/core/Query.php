@@ -1,35 +1,36 @@
 <?php namespace app\core;
+use app\core\Data;
 /**
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query extends Conn{
-    protected $conn, $table;
+    protected 
+        $conn, 
+        $table;
 
     function __construct(string $table = null, string $db = null, string $user = null){
-        // Parametros predeterminados para la conexión
 
-        $this->loadCredentials();
-        if($table) $this->table = $table;
+            // Parametros predeterminados para la conexión
+            $credentials = parse_ini_file(\FILE\CONN);
+            if($table) $this->table = $table;
+    
+            $this->db = $db ?? CONN['db'];
+            $this->user = $user??'root';
+            $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
 
-        $this->db = $db?strtolower($db):$this->credentials['prefix'] . CODE_COMPANY;
-        $this->user = $user??'root';  
-        try{
-
-            if($this->db != $this->credentials['prefix']){
-                $this->conn = $this->connect();
+            try{
+     
+                $this->conn = $this->connect($dsn, $credentials[$this->user]);
                 return gettype($this->conn) === 'object';
-            } else return false;
-        } catch (\Exception $e){
-            prs($e);
-        }
-    }
-
-    function loadCredentials(){
-        return $this->credentials = parse_ini_file('../app/config/conn.ini');
+          
+            } catch (\Exception $e){
+                return false;
+            }
     }
     function __destruct(){
         $this->conn = null;
      }
+
      /**
       * Prepara el string sql para enviar a hacer la consulta 
       * añadimos si queremos que sean ordenados de forma inversa
@@ -50,17 +51,23 @@ class Query extends Conn{
      }
     // Devuelve datos de una peticion por id
     public function getById(int $id, string $return = '*'){
-        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;")[0];
+        $r =  $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;"); 
+        return $r ? $r[0] : null ;
      }
     // Devuelve datos de una peticion por algun campo del registro
-    public function getBy(array $args , string $return = '*', bool $desc = false){
+    // Args puede ser String (1.1) o un array clave =>valor (1.0)
+    public function getBy($args , string $return = '*', bool $unique = false,  bool $desc = false){
         $filters = '';
-        foreach($args as $column => $value){
-            $filters .= (string)$column ." = '".(string)$value ."' AND ";
-        }
-        $filters = trim($filters,"AND ");
 
-        return $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);   
+        if(is_string($args)) $filters = $args;
+        else {
+            foreach($args as $column => $value){
+                $filters .= (string)$column ." = '".(string)$value ."' AND ";
+            }
+            $filters = trim($filters,"AND ");
+         }
+        $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);
+        return   $unique ? $r[0] : $r; 
      }
     // Devuelve datos de una peticion por una consulta sql
     public function getBySQL(string $sql, bool $desc = false){
@@ -72,7 +79,12 @@ class Query extends Conn{
         $value = $params[$column];
         return $this->sendQuery(
             "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;", $desc
-        );
+        )[0] ?? false;
+     }
+    // Devuelve el último registro
+    public function getLast(){ 
+        $r = $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true); 
+        return $r ? $r[0] : null ;
      }
     // Devuelve los registros con el valor entre los dos valores proporcionados de un campo
     public function getBetween ( string $column, $val1, $val2, string $args = null, bool $desc = false){
@@ -101,7 +113,7 @@ class Query extends Conn{
             return $this->lastInsertId();
         }else return $r;
      }
-    // Edita registro mediante su id
+    // Guarda registro mediante su id
     public function saveById (Array $args = null) {
         $sql = $this->getSQLUpdate($args, "id=". $this->id());
         return $this->query($sql, $args);
@@ -128,6 +140,7 @@ class Query extends Conn{
             $values = trim( "'" . $values , "'," ) ;
             $sql .= "INSERT INTO {$this->table} ($columns) VALUES ($values);" ;
         }
+prs($sql);
         return $this->query($sql, $args);
      }
     // Edita todos los campos de la tabla
@@ -199,7 +212,6 @@ class Query extends Conn{
     }
     // setter genérico para la inserción de datos en los atributos de la clase hija
     function loadData($data){
-
         if(!$data) return false;
         // Normalización de los datos para direfentes casos de uso
         if(is_object($data)) $data = (array)$data;
@@ -212,5 +224,38 @@ class Query extends Conn{
         }
         return true;
     }
-
+    function toArray(bool $nameSpace = false){ 
+        $prefix = ($nameSpace)?$this->table . '_' : '';
+        $arr = [];
+        foreach((array)$this as $key => $val){
+            // No pasamos a array los objetos 
+            if(!strpos($key, '*')){
+                $arr[$prefix . $key] = $val;
+            }
+        }
+        return $arr;
+    }
+    // getter generico
+    function id(int $arg = null){
+        if ($arg) $this->id = $arg; 
+        return $this->id;
+    }
+    // Descarga todos los dados y retorna objetos data
+    function allData(Object $Obj, String $key = null){
+        $Data = new Data; 
+        $data = $this->getAll();
+        $k = $key??'id'; 
+        foreach($data as $value){
+            $Data->addItem(new $Obj($value), $value[$k]);
+        }
+        return $Data;
+    }
+    // El método de eliminación genérico para las clases hijas
+    // Método genérico de eliminación de registros
+    function del($id){
+        return $this->saveById(['estado'=>0]);
+    }
+    function isConnected(){
+        return !is_null($this->conn);
+    }
 }

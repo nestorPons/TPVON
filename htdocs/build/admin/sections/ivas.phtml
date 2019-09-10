@@ -1,0 +1,92 @@
+<?php namespace app\controllers\components?><section id="ivas">
+    <?php
+    $table = new Table(['columns'=>['id', 'Nombre', 'Valor', 'Predeterminado'], 'class'=>'hoverable', 'onclick'=>'ivas.show(window.event)']);
+    $abc = new ListABC($table->id());
+    $form = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/service.phtml'], false);
+    ?>
+
+</section>
+<style>
+    #services{
+        display: grid;
+        grid-template-rows: 2; 
+    }
+
+    #<?=$table->id()?>{
+        max-height: 80vh ;
+        grid-row: 2;
+    }
+
+</style>
+<script>
+'use strict'
+var ivas = {
+    table: 'ivas',
+    buttons: ['add', 'search'],
+    currentId: null, 
+    Table: new Table('<?=$table->idEl()?>'),
+    Form : new Modal('<?=$form->id()?>'),
+    $table: $('#<?=$table->id()?>').find('tbody'),
+    validation(){
+return true
+        let f = this.Form.getData(),
+            usuarios = DB.get('usuarios')
+
+        for(i in usuarios) {
+            let u = usuarios[i]
+
+            if(!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) return {success: false, code: 'dni', mens: 'Error dni duplicado'} 
+            else if( !isEmpty(f.email) && u.email == f.email && u.id != f.id ) return {success: false, code: 'email', mens: 'Error email duplicado'} 
+        }
+
+        return {success: true}
+    },
+    del(){
+        this.Table.delLine(this.currentId)
+        this.Form.close()
+    },
+    add(){
+        let data = {    
+            id: -1,
+            estado: 1
+        }
+        this.Form.clear().open(data).setTile('Nuevo servicio o artículo')
+    },
+    save(data){
+
+        DB.set(this.table, data , 'id', data.id)
+        
+        if (this.currentId == -1 ) this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
+        else this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
+        this.Form.close()
+    },
+    load(){
+        let data  = DB.get(this.table)
+        for( let i in data ){
+            var d = data[i]
+            // Listamos los servicios activos solamente
+            if(d.estado == 1){
+                this.Table.addLine(
+                    d.id, 
+                    [d.id, d.codigo, d.nombre, d.descripcion, d.precio]
+                )
+                .addClass(d.codigo[0].toLowerCase())
+                
+            }
+        }
+    },
+    show(e){
+        this.currentId = e.path[1].attributes.idline.value
+        let data = DB.get(this.table, 'id', this.currentId)
+        this.Form.open(data).setTile('Edicion servicio o artículo')
+    },
+    search(value){
+        this.$table.find('tr').hide()
+        this.searchBy('codigo', value)
+    },
+    searchBy(field, value){
+        const v = DB.get(this.table, field, value, 'estado==1')
+        for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
+    }
+}
+</script>
