@@ -10,12 +10,6 @@ class Data {
         if($data){
             foreach($data as $key => $value){
                 $this->addItem($value, $key);
-/*                 if(is_array($value)){
-                    foreach($value as $ke => $val){
-                        if(is_array($val)) foreach($val as $k => $v) $this->addItem($v, $k);
-                        else $this->addItem($val, $ke);
-                    }
-                } else $this->addItem($value, $key);   */
             }
         }
     }
@@ -121,7 +115,6 @@ class Data {
     function normalizeAttr(string $attr){
         return $this->{$attr} = $this->normalize($this->{$attr});
     }
-
     function codifyAttr(string $attr){
         return $this->{$attr} = $this->codify($this->{$attr});
     }
@@ -132,6 +125,9 @@ class Data {
             }
         }
         return $this;
+    }
+    function exist(String $prop){
+        return property_exists($this, $prop);
     }
 
 }   

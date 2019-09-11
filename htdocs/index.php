@@ -4,15 +4,21 @@ use \app\core\{
     Prepocessor
 };
 
-phpinfo();die();
+ //phpinfo();die();
 /* session_start(); */
 require_once dirname(__DIR__) . '/app/config/app.php';
 require_once dirname(__DIR__) . '/app/config/folders.php';
 require_once dirname(__DIR__) . '/vendor/autoload.php';  
 
-require_once \FOLDERS\CORE  . 'dev.php'; // Quitar en produccion
-require_once \FOLDERS\CORE  . 'less.php';
-require_once \FOLDERS\CORE  . 'minify.php';
+// Desarrollo
+if( ENV ){
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
 
-if( ENV && !isset($_REQUEST['controller'])) new Prepocessor(false); 
+    require_once \FOLDERS\CORE  . 'dev.php';
+    require_once \FOLDERS\CORE  . 'less.php';
+    require_once \FOLDERS\CORE  . 'minify.php';
+    new Prepocessor(false);
+}  
+
 new Router($_REQUEST);

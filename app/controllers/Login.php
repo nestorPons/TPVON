@@ -50,8 +50,8 @@ class Login extends Controller{
         } else return false;
     }
     protected function newpassword(){
-        $Data =Tokens::decode($_GET['args']); 
-        $this->view(['page' => 'resetpassword', 'name_company' => $this->company->nombre(), 'idUser'=> $Data->id]); 
+        $d = Tokens::decode($_GET['args']);
+        $this->view(['page' => 'resetpassword', 'name_company' => $this->company->nombre(), 'idUser'=> $d->id]); 
     }
     /**
      * Autentifica el usuario
@@ -95,10 +95,9 @@ class Login extends Controller{
         return $this->User->nivel() >= $this->level_user; 
     }
     protected function view( $data = null){
+        // Valor predeterminado de la vista
 
-        // VAlor predeterminado de la vista
         if (!$data) $data = ['page' => 'login', 'data' =>  $this->company->toArray()];
-
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
 }

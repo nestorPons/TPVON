@@ -38,8 +38,10 @@ class User extends Query{
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Object $Data){
         $this->loadData($Data);
-        $date = str_replace('/', '-', $Data->fecha_nacimiento );
-        $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
+        if (($Data->exist('fecha_nacimiento'))){
+            $date = str_replace('/', '-', $Data->fecha_nacimiento );
+            $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
+        }
         if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
 
         $noAuth = $Data->use('noAuth');
@@ -67,7 +69,7 @@ class User extends Query{
                 // Varible para saltarse la activación del usuario
                 if(!isset($Data->noAuth)){
                     $Token = new Tokens();
-                    $url = HOST . '/'. CODE_COMPANY. "/login/confirmation/{$Token->create($this)}";
+                    $url = $_SERVER['HTTP_HOST'] . '/'. CODE_COMPANY. "/login/confirmation/{$Token->create($this)}";
                     $body = $this->getFile(\VIEWS\LOGIN . 'mailNewUser.phtml', new Data(['url'=>$url]));
                     return $this->sendMail($body, $this->company . 'Activacion de la cuenta en '. $this->company);
                 } else {
@@ -83,7 +85,6 @@ class User extends Query{
         return $pass ? password_hash($pass, PASSWORD_DEFAULT) : null;
     }
     function searchById(int $arg){
-
         $data = $this->getById($arg); 
         if($data) return  $this->loadData($data);
         // en caso que no lo encuentre
@@ -100,34 +101,35 @@ class User extends Query{
     }
     function resetPassword(){
         $Token = new Tokens();
-        $url = HOST . '/'. CODE_COMPANY. "/login/newpassword/{$Token->create($this)}";
+        $url = $_SERVER['HTTP_HOST'] . '/'. CODE_COMPANY. "/login/newpassword/{$Token->create($this)}";
         $body = $this->getFile(\VIEWS\LOGIN . 'mailresetpassword.phtml', new Data(['url'=>$url]));
         return $this->sendMail($body, $this->company . ' nueva contraseña');
     }
     private function sendMail($body, string $subject){
-
-        $Mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);
         // Configuración para mandar emails
-            include_once \FILE\MAIL;
-            $Mail->IsHTML(true);
-            $Mail->isSMTP();
-            //definimos el destinatario (dirección y, opcionalmente, nombre)
-            $Mail->AddAddress($this->email, $this->nombre);
-            //Definimos el tema del email
-            $Mail->Subject = $subject ;
-            $Mail->Body = 'esto es el cuerpo de la prueba';
-            //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
-                     
-        $Mail->MsgHTML($body, dirname(\FOLDERS\VIEWS));
-    
-    
-    //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano (también será válida para lectores de pantalla)
-            $Mail->AltBody =  $body;
-            return $Mail->Send();
         try {
-           
+            if (SEND_MAIL){
+                include_once \FILE\MAIL;
+                
+                //definimos el destinatario (dirección y, opcionalmente, nombre)
+                $mail->AddAddress($this->email, $this->nombre);
+                //Definimos el tema del email
+                $mail->Subject = $subject ;
+                $mail->Body = 'esto es el cuerpo de la prueba';
+                //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
+                
+                $mail->MsgHTML($body, dirname(\FOLDERS\VIEWS));
+                
+                //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano 
+                // (también será válida para lectores de pantalla)
+                $mail->AltBody =  $body;
+                return $mail->Send();
+            } else return false;
+            
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            return false;
         }
 
     }
@@ -141,8 +143,8 @@ class User extends Query{
         ob_end_clean(); # cierre de bufer
         return $htmlStrig; 
     }
-    //getters setters
 
+    //getters setterS
     function id(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 

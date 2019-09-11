@@ -4,7 +4,7 @@ use app\core\Data;
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query extends Conn{
-    protected 
+    protected  
         $conn, 
         $table;
 
@@ -15,11 +15,10 @@ class Query extends Conn{
             if($table) $this->table = $table;
     
             $this->db = $db ?? CONN['db'];
-            $this->user = $user??'root';
+            $this->user = $user??$credentials['current_user'];
             $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port='. $credentials["port"];
 
             try{
-     
                 $this->conn = $this->connect($dsn, $credentials[$this->user]);
                 return gettype($this->conn) === 'object';
           
@@ -109,9 +108,9 @@ class Query extends Conn{
         $strCol = trim($strCol , ',') ;
         $strPre = trim($strPre , ',') ;
 
-        if ($r = $this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
+        if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
             return $this->lastInsertId();
-        }else return $r;
+        }else return false;
      }
     // Guarda registro mediante su id
     public function saveById (Array $args = null) {

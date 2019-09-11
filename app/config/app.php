@@ -1,6 +1,8 @@
 <?php namespace CONFIG; 
 // Entorno de desarrollo 
 define('ENV', TRUE);
+define('SEND_MAIL', TRUE);
+
 $conn = parse_ini_file(dirname(__DIR__) . '/config/conn.ini');
 define('CONN', $conn);
 // Constantes de la aplicación
@@ -12,7 +14,6 @@ if(isset(CONN['db'])){
     die('No hay asignada una base de datos!!');
 }
 
-define('HOST', 'localhost');
 define('KEY_JWT', 'elahs93uojeqkjpmi3io23');
 
 // Usuarios de la aplicacion con sus niveles

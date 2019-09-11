@@ -1,6 +1,7 @@
 <?php 
 namespace app\controllers;
 use \app\models\Company;
+use \app\core\{Error, Data};
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
  * Tiene lo mínimo para la creación de una subclase: 
@@ -42,26 +43,26 @@ class Controller{
     /**
      * Método genérico para guardar registros comprueba que es nuevo o edicion y envia los datos al metodo apropiado
      */
-    protected function save(Object $Data){
+    protected function save(Data $Data){
         if($Data->id == -1 ) return $this->new($Data);
         else return $this->update($Data);
     }
         /**
      * Método por defecto de agregación de registros a la base de datos
      */
-    protected function new(Object $Data = null){
+    protected function new(Data $Data = null){
         return $this->exec('new', 'add');
     }
     /**
      * Método genérico para actualizar registros
      */
-    protected function update(Object $Data){
+    protected function update(Data $Data){
         return $this->exec('save', 'saveById'); 
     }
     /**
      * Método por defecto de consulta de datos 
      */
-    protected function get(Object $Data = null){
+    protected function get(Data $Data = null){
         return $this->exec('get', 'getById');
     }
     protected function printView(String $route, array $data = null){  
@@ -77,7 +78,7 @@ class Controller{
     /**
      * Método por defecto de consulta de datos entre parametros
      */
-    protected function getBetween(Object $Data){
+    protected function getBetween(Data $Data){
         return $this->exec('between', 'getBetween');
     }
     /**

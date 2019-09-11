@@ -1,5 +1,5 @@
 <?php namespace app\models;
-
+use PHPMailer\PHPMailer\{ PHPMailer,  Exception};
 use \app\core\{
     Error,
     Query
@@ -31,7 +31,7 @@ class Company extends Query{
      * Creamos la carpeta para los archivos de configuración de la aplicación
      */
     public function new(Object $Data){
-        
+   
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
         $Data->codifyAttr('nombre_empresa');
         $Data->set('nombre', $Data->nombre_empresa);
@@ -59,8 +59,7 @@ class Company extends Query{
             $data['poblacion'] = 'Población';  
             $data['provincia'] = 'Provincia';
             $data['CP'] = '12345';
-            $data['pais'] = 'ES';
-            
+            $data['pais'] = 'ES';      
             
             $new->add($data);
             $ser = new Items();
@@ -80,16 +79,14 @@ class Company extends Query{
             $Data->set('nivel', 2);
 
             $User = new User;
-
             if (!$User->new($Data)) throw new \Exception('E019'); 
             // Creamos carpeta con configuración y archivos
-               $this->createFolder();
-            return true; 
+            $this->createFolder();
             
+            return true; 
         } catch( \Exception $e){
             return Error::array($e->getMessage());
         }
-        
     }
 
     private function createFolder(){

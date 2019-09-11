@@ -6,7 +6,7 @@ const app = {
         if (typeof data.controller === 'undefined') return false
         if (typeof data.db === 'undefined') data.db = $_GET['db']
 
-        $.post('index.php', data, function (respond, status, xhr, dataType) {
+        $.post('index.php', data, (respond, status, xhr, dataType) => {
             let data = null
             // La respuesta puede ser json o html 
             try {
@@ -15,13 +15,14 @@ const app = {
                 data = JSON.parse(respond);
                 // la respuesta es JSON
                 console.log(data)
+
                 // Imprimimos mensaje de error si lo hay 
                 if( isEmpty(data.success) || 
                     data.success == false || 
                     data.success == 0 && 
-                    exist(data.mens) &&
+                    exist(data.mens) ||
                     error) 
-                        echo(data.mens||'No se ha podido rehalizar la petición!')
+                        this.mens.error(data.mens||'No se ha podido rehalizar la petición!')
                 
             } catch(e) {
                 echo('HTMLresponse...')
@@ -83,7 +84,7 @@ const app = {
     },
     mens: {
         error(mens){
-            return alert(mens);
+            alert(mens);
         },
         confirm(mens, callback){
             return confirm(mens) && callback()
@@ -169,7 +170,7 @@ const app = {
 
         },
         onblur(){
-            if(typeof window[this.last].onblur == 'function'){
+            if(window[this.last] != undefined && typeof window[this.last].onblur == 'function'){
                 window[this.last].onblur(f => {
                     window[this.last].change = false
                 })
