@@ -3,7 +3,10 @@ const app = {
     GET         : $_GET,
     // Peticiones con datos 
     post (data, callback, error = true) {
-        if (typeof data.controller === 'undefined') return false
+        if (typeof data.controller === 'undefined'){ 
+            this.mens.error({success :false, error: 'No se ha asignado  controlador'})
+            return false
+        }
         if (typeof data.db === 'undefined') data.db = $_GET['db']
 
         $.post('index.php', data, (respond, status, xhr, dataType) => {
@@ -15,15 +18,16 @@ const app = {
                 data = JSON.parse(respond);
                 // la respuesta es JSON
                 console.log(data)
-
-                // Imprimimos mensaje de error si lo hay 
-                if( isEmpty(data.success) || 
-                    data.success == false || 
-                    data.success == 0 && 
-                    exist(data.mens) ||
-                    error) 
-                        this.mens.error(data.mens||'No se ha podido rehalizar la petición!')
                 
+                // Imprimimos mensaje de error si lo hay 
+                if(error)
+                if( (isEmpty(data.success) || 
+                    data.success == false || 
+                    data.success == 0 ) && 
+                    exist(data.mens)) {
+                        this.mens.error(data.mens||'No se ha podido rehalizar la petición!')
+                        return false
+                    }    
             } catch(e) {
                 echo('HTMLresponse...')
                 // la respuesta es HTML
@@ -51,7 +55,7 @@ const app = {
                 .append(html)
 
             // Inicializamos el método de carga del objeto
-            if(exist(window[data.controller].load)) window[data.controller].load()
+            if(exist(app[data.controller].load)) app[data.controller].load()
             this.sections.inicialize(data.controller) 
         }, 'html');
     },
@@ -84,7 +88,7 @@ const app = {
     },
     mens: {
         error(mens){
-            alert(mens);
+            alert('ERROR!! \n' + mens);
         },
         confirm(mens, callback){
             return confirm(mens) && callback()
@@ -141,7 +145,7 @@ const app = {
             if (section == 'appadmin') section = 'tpv'
             this.active = section
             
-            let activeZone = window[this.active]
+            let activeZone = app[this.active]
 
             // Cargamos los botones de herramientas
             typeof activeZone.buttons != 'undefined' &&
@@ -155,24 +159,24 @@ const app = {
         },
         // Comportamiento de los botones de herramientas según la seccion que esté activa
         next(){
-            typeof window[this.active].next == 'function' && window[this.active].next()
+            typeof app[this.active].next == 'function' && app[this.active].next()
         },
         prev(){
-            typeof window[this.active].prev == 'function' && window[this.active].prev()
+            typeof app[this.active].prev == 'function' && app[this.active].prev()
         },
         del(){
-            typeof window[this.active].del == 'function' && window[this.active].del()
+            typeof app[this.active].del == 'function' && app[this.active].del()
         },
         add(){
-            typeof window[this.active].add == 'function' && window[this.active].add()
+            typeof app[this.active].add == 'function' && app[this.active].add()
         },
         search(){
 
         },
         onblur(){
-            if(window[this.last] != undefined && typeof window[this.last].onblur == 'function'){
-                window[this.last].onblur(f => {
-                    window[this.last].change = false
+            if(app[this.last] != undefined && typeof app[this.last].onblur == 'function'){
+                app[this.last].onblur(f => {
+                    app[this.last].change = false
                 })
             }
         }
@@ -251,9 +255,12 @@ const app = {
     loadDataToForm(data, form){
         if(data == undefined) return false
         var els = form.getElementsByTagName('input')
-        for(let i in els){
-            const el = els[i]
-            if(el.attributes != undefined) el.value = data[el.attributes.name.value]
+        for(const el of els){
+            if(el.attributes != undefined) {
+                if(el.type == 'checkbox') {
+                    el.checked = data[el.attributes.name.value] > 0
+                } else el.value = data[el.attributes.name.value]
+            }
         }
         els = form.getElementsByTagName('select')
         for(let i in els){

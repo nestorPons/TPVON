@@ -1,7 +1,7 @@
 <?php namespace app\controllers\components?><component id="buttonsTicket">
     <?php 
-    $btnPrTicket = new ButtonSuccess(['onclick'=>'ticket.print()', 'caption'=>'Imprimir']);
-    $btnSndTicket = new ButtonSuccess(['onclick'=>'ticket.send()', 'caption'=>'Enviar']);
+    $btnPrTicket = new ButtonSuccess(['onclick'=>'app.ticket.print()', 'caption'=>'Imprimir']);
+    $btnSndTicket = new ButtonSuccess(['onclick'=>'app.ticket.send()', 'caption'=>'Enviar']);
     $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
     ?>
 </component>
@@ -86,7 +86,7 @@
     }
 </style>
 <script>
-    var ticket = {
+    app.ticket = {
         Ticket  : null, 
         present : document.getElementById('<?=$present->idEl()?>'), 
         table   : {
@@ -139,7 +139,7 @@
             this.Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')
             this.Ticket.estado = 1
             this.Ticket.regalo = this.present.checked | 0 
-            if(this.Ticket.regalo != 0 && typeof control != 'undefined') control.load() 
+            if(this.Ticket.regalo != 0 && typeof app.control != 'undefined') app.control.load() 
             let data = {
                 controller: 'tickets',
                 action: 'new', 
@@ -147,8 +147,8 @@
             }
             app.post(data, data => {
                 this.lastId = this.Ticket.id = data.id
-                if(this.Ticket.regalo && typeof control != 'undefined') control.add(this.Ticket)
-                tpv.add()
+                if(this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket)
+                app.tpv.add()
                 
                 callback()
              })

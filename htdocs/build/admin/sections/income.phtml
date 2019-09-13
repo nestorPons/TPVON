@@ -3,8 +3,8 @@
     $from = new DatePicker(['label'=>'De']);
     $to = new DatePicker(['label'=>'Hasta']);
     $total = new InputText(['label' => 'Total', 'iconlast' => '', 'class'=>'text-right']);
-    $btnFilter = new ButtonSuccess(['onclick'=>'income.filter()', 'icon'=>'funnel', 'caption'=>'']);
-    $btnPrint = new ButtonSuccess(['onclick'=>'income.print()', 'icon'=>'printer', 'caption'=>'']);
+    $btnFilter = new ButtonSuccess(['onclick'=>'app.income.filter()', 'icon'=>'funnel', 'caption'=>'']);
+    $btnPrint = new ButtonSuccess(['onclick'=>'app.income.print()', 'icon'=>'printer', 'caption'=>'']);
     $table = new Table(['columns'=>['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
 ?>
 </section>
@@ -30,7 +30,7 @@
     }
 </style>
 <script>
-    var income = {
+    app.income = {
         txtFrom : <?=$from->id()?>, 
         txtTo : <?=$to->id()?>, 
         txtTotal : <?=$total->idEl()?>,
@@ -49,7 +49,7 @@
                     f2 : app.date.format(this.txtTo.value, 'sql'),
                 }
             }
-            app.post(data, (data) => {
+            app.post(data, data => {
                 let t = 0
                 for(let i in data){
                     let d = data[i]

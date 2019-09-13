@@ -1,6 +1,6 @@
 <?php namespace app\controllers\components?><section id="services">
     <?php
-    $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 'onclick'=>'services.show(window.event)']);
+    $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 'onclick'=>'app.services.show(window.event)']);
     $abc = new ListABC($table->id());
     $form = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/service.phtml'], false);
     ?>
@@ -20,7 +20,7 @@
 </style>
 <script>
 'use strict'
-var services = {
+app.services = {
     ...services, 
     table       : 'servicios',
     buttons     : ['add', 'search'],
@@ -54,7 +54,7 @@ var services = {
                 // Cerramos formulario
                 this.Form.close()
                 
-                tpv.loadServ()
+                app.tpv.loadServ()
             })
     },
     add(){
@@ -80,7 +80,7 @@ var services = {
         else this.updateLine(data)
         this.Form.close()
 
-        tpv.loadServ()
+        app.tpv.loadServ()
     },
     load(){
         DB.get(this.table)

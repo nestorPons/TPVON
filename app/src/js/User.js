@@ -6,7 +6,7 @@ class User{
     }
     lastTicket(){
         this.validation = false
-        tpv.request('getLast', this.id, r => {
+        app.tpv.request('getLast', this.id, r => {
             this.validation = true
             r && (this.lastTicket = r.fecha) 
         })

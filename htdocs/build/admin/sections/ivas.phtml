@@ -1,6 +1,6 @@
 <?php namespace app\controllers\components?><section id="ivas">
     <?php
-    $table = new Table(['columns'=>['id', 'Nombre', 'Valor', 'Predeterminado'], 'class'=>'hoverable', 'onclick'=>'ivas.show(window.event)']);
+    $table = new Table(['columns'=>['id', 'Nombre', 'Valor', 'Predeterminado'], 'class'=>'hoverable', 'onclick'=>'app.ivas.show(window.event)']);
     $abc = new ListABC($table->id());
     $form = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/service.phtml'], false);
     ?>
@@ -20,7 +20,7 @@
 </style>
 <script>
 'use strict'
-var ivas = {
+app.ivas = {
     table: 'ivas',
     buttons: ['add', 'search'],
     currentId: null, 

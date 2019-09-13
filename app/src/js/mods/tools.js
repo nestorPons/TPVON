@@ -12,7 +12,13 @@ var $y = function ($arg) {
         : selected[0];
 };
 var exist = function(arg = undefined){
-    return arg != undefined
+    return arg != undefined && arg != null 
+}
+var remove = function(arr = []){
+    do{
+        let b = arr[0]
+        b.remove()
+    } while(arr.length > 0)
 }
 var isset = function(arg = undefined){
     return typeof arg == undefined || arg == null || arg == false || arg == 0

@@ -107,10 +107,9 @@ class Query extends Conn{
          }  
         $strCol = trim($strCol , ',') ;
         $strPre = trim($strPre , ',') ;
-
         if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)){
             return $this->lastInsertId();
-        }else return false;
+        }else return 0;
      }
     // Guarda registro mediante su id
     public function saveById (Array $args = null) {

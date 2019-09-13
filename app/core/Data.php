@@ -129,5 +129,9 @@ class Data {
     function exist(String $prop){
         return property_exists($this, $prop);
     }
-
+    function isEmpty(String $prop){
+        if(isset($this->{$prop})){
+            return empty($this->{$prop});
+        } else return true;
+    }   
 }   

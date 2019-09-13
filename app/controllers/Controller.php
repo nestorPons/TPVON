@@ -36,6 +36,7 @@ class Controller{
         $files[] = \VIEWS\ADMIN . $this->controller . '.phtml';
         $files[] = \VIEWS\USERS . $this->controller . '.phtml';
         $files[] = \VIEWS\ADMIN\SECTIONS . $this->controller . '.phtml';
+
         foreach($files as $file){
             if(file_exists($file)) return $this->printView($file, $data);
         }        
@@ -72,7 +73,7 @@ class Controller{
                 ${$key} = $val;
             }
         }
-        
+
         return require_once $route;
     }
     /**

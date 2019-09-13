@@ -1,5 +1,5 @@
 <?php namespace app\controllers\components?><component>
-    <form controller="items" action="save" callback="services.save(data)">
+    <form controller="items" action="save" callback="app.services.save(data)">
     <?php
         $id = new InputRead(['label' => 'Id', 'name'=>'id'],  false);
         $cod = new InputText(['label' => 'Código','tabindex'=>1, 'name'=>'codigo', 'title'=>"Introduzca el código", 'required'=>true, 'pattern'=>'\S{4,10}'],  false);

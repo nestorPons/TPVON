@@ -1,27 +1,27 @@
 <?php namespace app\controllers\components?><section id="tpv">
     <?php
     $table = new Table(['columns'=>['Código', 'Descripción', 'Cantidad', 'Precio', 'Dto', 'Importe'], 
-    'class'=>'hoverable', 'onclick'=>'tpv.loadLineFromTable(window.event)']);
+    'class'=>'hoverable', 'onclick'=>'app.tpv.loadLineFromTable(window.event)']);
     $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
     $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
     $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
     $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex'=>1], false);
-    $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'tpv.loadClient()'], false);
+    $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()'], false);
     
     // Linea
     $code = new Select(['label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class'=>'keyEnterOut', 
-        'tabindex'=>3, 'onblur'=>'tpv.loadLine()'], false);
+        'tabindex'=>3, 'onblur'=>'app.tpv.loadLine()'], false);
     $des = new InputText(['label' => 'Desctipcion','tabindex'=>4, 'class'=>'keyEnterOut'],  false);
-    $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
-    $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+    $quan = new InputNumber(['label' => 'Cantidad', 'tabindex'=>5, 'value'=>'1', 'onblur'=>'app.tpv.calculate()', 'class'=>'keyEnterOut'], false);
+    $pric = new InputNumber(['label' => 'Precio', 'tabindex'=>6, 'value'=>'0', 'onblur'=>'app.tpv.calculate()', 'class'=>'keyEnterOut'], false);
     $iva = new InputHidden(['label' => 'Iva %','value'=>"$iva"], false);
-    $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>7,'value'=>'0', 'onblur'=>'tpv.calculate()', 'class'=>'keyEnterOut'], false);
+    $dto = new InputNumber(['label' => 'Dto %', 'tabindex'=>7,'value'=>'0', 'onblur'=>'app.tpv.calculate()', 'class'=>'keyEnterOut'], false);
     $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value'=>'0'], false);
-    $btnOk = new ButtonSuccess(['tabindex'=>8, 'onclick'=>'tpv.addLine()','class'=>'keyEnterOut']);
-    $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'tpv.clearLine()', 'icon' => 'cross']);
+    $btnOk = new ButtonSuccess(['tabindex'=>8, 'onclick'=>'app.tpv.addLine()','class'=>'keyEnterOut']);
+    $btnClear = new ButtonCancel(['caption'=> '', 'onclick'=>'app.tpv.clearLine()', 'icon' => 'cross']);
 
     $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
-    $btnTicket = new ButtonSuccess(['onclick'=>'tpv.create()', 'caption'=>'Ticket']);
+    $btnTicket = new ButtonSuccess(['onclick'=>'app.tpv.create()', 'caption'=>'Ticket']);
 
     $modTicket = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company);
     ?> 
@@ -37,9 +37,6 @@
     }
     #tpv table:not(.horizontal) thead{
         height: 60px;
-    }
-    #tpv * {
-        font-size: 0.8rem;
     }
     #tpv table{
         grid-row: table;
@@ -126,7 +123,7 @@
     }
 </style>
 <script>
-    var tpv = {
+    app.tpv = {
         buttons     : ['add', 'prev', 'next','del'],
         total       : 0,
         client      : null, 
@@ -157,8 +154,7 @@
             this.selEmp.el.focus()
         },
         loadClient(){
-            echo('buscando cliente...')
-            this.client = new User(tpv.selCli.value())
+            this.client = new User(this.selCli.value())
         },
         load(){
             this.loadUsers()
@@ -168,16 +164,11 @@
             this.selEmp.clear()
             this.selCli.clear()
 
-            DB.get('usuarios','estado', 1, 'nivel>0')
-                .then(emp => {
-                    for(i in emp){
-                        this.selEmp.addOption(emp[i].id, emp[i].nombre)
-                    }
-                })
             DB.get('usuarios','estado', 1)
                 .then(users => {
-                    for(i in users){
-                        this.selCli.addOption(users[i].id, users[i].nombre)
+                    for(let u of users){
+                        if(u.nivel > 0) this.selEmp.addOption(u.id, u.nombre)
+                        this.selCli.addOption(u.id, u.nombre)
                     }
                 })
         },
@@ -185,14 +176,14 @@
             this.selCode.clear()
             DB.get('servicios','estado', 1)
             .then(serv => {
-                for(i in serv){
-                    this.selCode.addOption(serv[i].id, serv[i].codigo)
+                for(s of serv){
+                    this.selCode.addOption(s.id, s.codigo)
                 }
             })
         },
         openTicket(){
             this.Modal.open()
-            ticket.open(tpv.Ticket)
+            app.ticket.open(this.Ticket)
         },
         close(){
             this.Modal.close()
@@ -337,15 +328,19 @@
             this.request('prev', this.currentId, d => {if(d) this.loadDataTicket(d)})
         },
         add(){
-            this.request('last', this.currentId, d => this.loadDataTicket(
+            this.request('last', this.currentId, d => { 
+                // Si es el primer registro lo inicializamos a 1
+                let id = (d) ? parseInt(d.id) + 1  : 1 
+                this.loadDataTicket(
                 {
-                    id          : parseInt(d.id) + 1, 
+                    id          : id, 
                     estado      : 1, 
                     id_usuario  : 0, 
                     id_cliente  : 0, 
                     fecha       : app.date.current(), 
                     lines       : [] 
-                }))
+                })
+            })
         },
         request(action, id, callback){
             let self = this,
@@ -356,8 +351,8 @@
                     id: id
                 }
             }
-            app.post(data, function(respond, status){
-                typeof callback == 'function' && callback(respond, status)
+            app.post(data, function(d, s){
+                typeof callback == 'function' && callback(d, s)
             }, false)
         },
         // Cargamos los datos del ticket actual
@@ -393,7 +388,7 @@
     // Caso especial de carga de js por ser el formulario inicial
     // El resto se cargan con su funcion load()
     $(function(){
-        tpv.load()
+        app.tpv.load()
     })
 
 </script>

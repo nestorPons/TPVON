@@ -38,7 +38,7 @@
             }
             return  this.el.value
         }
-        
+        // Seleciona una opcion por su valor
         option(data){
             let options = this.el.getElementsByTagName('option'),
                 optionselected = false

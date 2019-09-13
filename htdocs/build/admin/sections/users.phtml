@@ -1,26 +1,14 @@
 <?php namespace app\controllers\components?><section id="users">
     <?php
-    $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 'class'=>'hoverable', 'onclick'=>'users.show(window.event)']);
+    $table = new Table(['columns'=>['id', 'Nombre', 'Tel', 'Email'], 'class'=>'hoverable', 'onclick'=>'app.users.show(window.event)']);
     $abc = new ListABC($table->id());
     $editUser = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
     ?>
-
 </section>
-<style>
-    #users{
-        display: grid;
-        grid-template-rows: 2; 
-    }
-
-    #users #<?=$table->id()?>{
-        max-height: 80vh ;
-        grid-row: 2;
-    }
-
-</style>
+<style lang="less">#users{display:grid;grid-template-rows:2}#users #<?=$table->id()?>{max-height:80vh;grid-row:2}#users .card{max-width:360px}</style>
 <script>
 'use strict'
-var users = {
+app.users = {
     ...users,
     table: 'usuarios',
     buttons: ['add', 'search'],
@@ -28,16 +16,17 @@ var users = {
     Table: new Table('<?=$table->idEl()?>'),
     Form : new Modal('<?=$editUser->id()?>'),
     $table: $('#<?=$table->id()?>').find('tbody'),
-    validation(){
+    validation(callback){
         let f = this.Form.getData()        
         DB.get('usuarios')
             .then(usuarios => {
                 for(i in usuarios) {
                     let u = usuarios[i]
                     
-                    if(!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) return {success: false, code: 'dni', mens: 'Error dni duplicado'} 
-                    else if( !isEmpty(f.email) && u.email == f.email && u.id != f.id ) return {success: false, code: 'email', mens: 'Error email duplicado'} 
+                    if(!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) this.error = {success: false, code: 'dni', mens: 'Error dni duplicado'} 
+                    else if( !isEmpty(f.email) && u.email == f.email && u.id != f.id ) this.error = {success: false, code: 'email', mens: 'Error email duplicado'} 
                 }
+                callback(this.error || {success: true})
             })
                 
         return {success: true}
@@ -54,7 +43,7 @@ var users = {
                 // Cerramos formulario
                 this.Form.close()
         
-                tpv.loadUsers()
+                app.tpv.loadUsers()
             })
     },
     add(){
@@ -83,16 +72,21 @@ var users = {
         else ob.removeClass('alert')
     },
     save(data){
-        DB.set(this.table, data , 'id', data.id)
+        if(data && data.id){
+            DB.set(this.table, data , 'id', data.id)
+        
+            if (this.currentId == -1 ) this.addLine(data)
+            else this.updateLine(data)
+            this.Form.close()
     
-        if (this.currentId == -1 ) this.addLine(data)
-        else this.updateLine(data)
-        this.Form.close()
-
-        tpv.loadUsers()
+            app.tpv.loadUsers()
+        } else {
+            app.mens.error('El registro no pudo ser guardado!! \n ' + this.error.mens)
+        }
     },
     load(){
-        DB.get(this.table)
+
+            this.db.get()
             .then(users => {
                 for( i in users ){
                     var user = users[i]

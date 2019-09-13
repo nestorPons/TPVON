@@ -38,14 +38,14 @@ class User extends Query{
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Object $Data){
         $this->loadData($Data);
-        if (($Data->exist('fecha_nacimiento'))){
+        if ((!$Data->isEmpty('fecha_nacimiento'))){
             $date = str_replace('/', '-', $Data->fecha_nacimiento );
             $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
         }
         if(property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
 
         $noAuth = $Data->use('noAuth');
-        if($this->id == -1) $this->new($Data);
+        if($this->id == -1) $this->id = $this->new($Data);
         else if($this->saveById($Data->toArray()));
         
         return $this->id;
@@ -53,13 +53,13 @@ class User extends Query{
     // Nuevos registros
     function new(Object $Data){
         if ($this->id = $this->loadData($Data->getAll())){  
-       
+            
             if(
             $this->id = $this->add([
                 'dni' =>  $this->dni??null,
                 'nombre' => $this->nombre,
                 'email' => $this->email??null,
-                'fecha_nacimiento' => $this->fecha_nacimiento??null,
+                'fecha_nacimiento' => $this->fecha_nacimiento??'NULL',
                 'estado' => $this->estado??0,
                 'nivel' => $this->nivel??0,
                 'password' => $this->password_hash(),

@@ -41,7 +41,7 @@ $(document)
             action: 'del',
             data: {id: obj.currentId}
         },
-        function(r){
+        function(d){
             exist(obj.del) && obj.del() 
         })
      })
@@ -74,14 +74,16 @@ $(document)
     if($(this).hasClass('sending')) return false 
     // Mostramos spinner
     $(this).addClass('sending').find('.spinner').hide().removeClass('hidden').fadeIn()
+
     let data = app.formToObject(e.currentTarget);
 
     if(exist(data.password)) data.password = sha256(data.password)
     
     // Validamos los datos antes de enviarlos 
     // Todos los validations tendrán que devolver con un objeto {success: ... , mens: ... , [code]....}
-    if(v = $(this).attr('validation')){
-        let r = eval(v)
+    let f = eval($(this).attr('validation'))
+    if(typeof f == 'function'){
+        r = f()
         if(r.success) _send(data)
         else {
             _hideSpiner() 

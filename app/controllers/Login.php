@@ -66,7 +66,6 @@ class Login extends Controller{
 
         if($this->verify($this->User->password())){
             if ($this->isAdmin()){
-
                 $Admin = new Admin; 
                 return $Admin->loadView();
             } else if ($this->isUser()){

@@ -1,37 +1,95 @@
 <section id="conf">
-    <form controller="config" action="save" callback="config.save(data)" class="input-group">
-        <fieldset>
-            <legend>Datos empresa</legend>
-            <?php
-            $txt01 = new InputText(['label' => 'Nombre empresa', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la empresa", 'required'=>true]);
-            $txt03 = new InputText(['label' => 'Teléfono', 'name'=>'telefono']);
-            $txt04 = new InputText(['label' => 'Email', 'name'=>'email']);
-            $txt05 = new InputText(['label' => 'Calle', 'name'=>'calle']);
-            $txt06 = new InputText(['label' => 'Numero', 'name'=>'numero']);
-            $txt07 = new InputText(['label' => 'Escalera', 'name'=>'escalera']);
-            $txt08 = new InputText(['label' => 'Piso', 'name'=>'piso']);
-            $txt09 = new InputText(['label' => 'Población', 'name'=>'poblacion']);
-            $txt10 = new InputText(['label' => 'Provincia', 'name'=>'provincia']);
-            $txt11 = new InputText(['label' => 'Codigo postal', 'name'=>'CP', 'title'=>"Introduzca el codigo postal"]);
-            $txt12 = new SelectCountries(['label' => 'Pais', 'name'=>'pais']);
-            ?> 
-        </fieldset>
-    </form>
+    <component>
+            <form controller="company" action="save" class="input-group">
+                <fieldset>
+                <legend>Datos empresa</legend>
+                <?php
+                $txt00 = new InputHidden(['name' => 'id', 'value => 1']);
+                $txt01 = new InputText(['tabindex'=>1, 'label' => 'Nombre empresa', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la empresa", 'required'=>true]);
+                $txt03 = new InputText(['tabindex'=>2, 'label' => 'Teléfono', 'name'=>'telefono']);
+                $txt04 = new InputText(['tabindex'=>3, 'label' => 'Email', 'name'=>'email']);
+                $txt05 = new InputText(['tabindex'=>4, 'label' => 'Calle', 'name'=>'calle']);
+                $txt06 = new InputText(['tabindex'=>5, 'label' => 'Numero', 'name'=>'numero']);
+                $txt07 = new InputText(['tabindex'=>6, 'label' => 'Escalera', 'name'=>'escalera']);
+                $txt08 = new InputText(['tabindex'=>7, 'label' => 'Piso', 'name'=>'piso']);
+                $txt09 = new InputText(['tabindex'=>8, 'label' => 'Población', 'name'=>'poblacion']);
+                $txt10 = new InputText(['tabindex'=>9, 'label' => 'Provincia', 'name'=>'provincia']);
+                $txt11 = new InputText(['tabindex'=>10, 'label' => 'Codigo postal', 'name'=>'CP', 'title'=>"Introduzca el codigo postal"]);
+                $txt12 = new SelectCountries(['tabindex'=>11, 'label' => 'Pais', 'name'=>'pais']);
+                ?> 
+            </fieldset>
+        </form>
+    </component>
+    <?php include_once \VIEWS\ADMIN\FORMS . '/user.phtml' ?>
 </section>
+<style lang="less">
+#conf{
+    component{
+        display: inline-flex;
+    }
+}
+</style>
 <script>
 // Cargamos los datos de la base de datos 
-var conf = {
-    table: 'empresa',
-    buttons: [],
-    form: document.getElementById('conf').getElementsByTagName('form')[0],
+app.conf = {
+    table           : 'empresa',
+    table_user      : 'usuarios',
+    id_user         : null, 
+    buttons         : [],
+    form_company    : document.getElementById('conf').getElementsByTagName('form')[0],
+    form_user       : document.getElementById('conf').getElementsByTagName('form')[1],
     load(){
+        let f = this.form_user, 
+            buttons  = f.getElementsByTagName('button'),
+            checkbox  = document.getElementById('<?=$status->id()?>')
+
+            checkbox.parentNode.removeChild(checkbox)
+            remove(buttons)
+    
+        DB.get('usuarios','nivel', 2)
+        .then(d => d[0])
+        .then(d => {
+            // Cargamos los datos
+            this.id_user = d.id
+            app.loadDataToForm(d, this.form_user)
+        })
         DB.get('empresa')
             .then(d => d[0])
-            .then(d => app.loadDataToForm(d, this.form))
+            .then(d => app.loadDataToForm(d, this.form_company))
+        this.form_user
+    },
+    onblur(callback){
+        this.save()
     },
     save(){
-        DB.set(this.table, app.formToObject(this.form), 'id' , 1)
-        $(this.form).submit()
+        let data_user = {
+            ...app.formToObject(this.form_user), 
+            nivel   : 2
+        }
+        DB.set(this.table, app.formToObject(this.form_company), 'id' , 1)
+        
+        $(this.form_company).submit()
+        this.save_user(data_user)
     },
+    save_user(data){
+
+        if(data && data.id){
+            delete data['noAuth']
+            app.post({
+                controller  : 'user', 
+                action      : 'save', 
+                data        : data
+            }, (d) => {
+                DB.set(this.table_user, { ...data, estado : 1}, 'id' , this.id_user)
+                if (app.users){
+                    if (app.users.currentId == -1 ) app.users.addLine(data)
+                    else app.users.updateLine(data)
+                }
+                app.tpv.loadUsers()
+            })
+        } else {
+            app.mens.error('El registro no pudo ser guardado!! \n ' + this.error.mens)
+        }
+    }
 }
 </script>

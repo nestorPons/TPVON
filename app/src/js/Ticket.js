@@ -1,14 +1,23 @@
 class Ticket{
 
     constructor(data){
-        if (data == undefined) return false
-        this.id = data.id || null
-        this.lines = data.lines || []
-        this.id_usuario = data.id_usuario || null
-        this.id_cliente = data.id_cliente || null
-        this.fecha = data.fecha || null
-        this.iva = data.iva || null
-        if(data.estado != undefined) this.estado = data.estado
+        if (data == undefined) {
+            this.id = null
+            this.lines =  []
+            this.id_usuario = null
+            this.id_cliente =  null
+            this.fecha = null
+            this.iva = null
+            this.estado = 1;
+        } else {
+            this.id = data.id || null
+            this.lines = data.lines || []
+            this.id_usuario = data.id_usuario || null
+            this.id_cliente = data.id_cliente || null
+            this.fecha = data.fecha || null
+            this.iva = data.iva || null
+            this.estado = (data.estado != undefined) ? data.estado : 1 ; 
+        }
     }
     addLine(articulo, des, cantidad, precio, dto, amo, iva){ 
         let newLine = new Line(this.idLine, articulo, des, cantidad, precio, dto, amo, iva)

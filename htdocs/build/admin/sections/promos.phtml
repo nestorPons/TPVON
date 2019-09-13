@@ -12,7 +12,7 @@
     </form>
 </section>
 <script> 
-var promos = {
+app.promos = {
     table   : 'promos',
     el      : document.getElementById('promos'),
     form    : document.getElementById('promos').getElementsByTagName('form')[0],
@@ -34,8 +34,9 @@ var promos = {
                 controller: 'promos',
                 action: 'save',
                 data: data 
+            }, d => {
+                DB.set(this.table, app.formToObject(this.form), 'id' , 1)   
             })
-        DB.set(this.table, app.formToObject(this.form), 'id' , 1)   
     },
 }
 </script>

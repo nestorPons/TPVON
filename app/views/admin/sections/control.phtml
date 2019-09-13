@@ -3,7 +3,7 @@
     $txt01 = new InputText(['label' => 'Ticket']);
     $txt02 = new InputText(['label' => 'Cliente']); 
     $table = new Table(['columns'=>['id_linea', 'Nombre', 'Descripcion', 'fecha'], 
-            'class'=>'hoverable', 'ondblclick'=>'control.addDate(event.target)']);
+            'class'=>'hoverable', 'ondblclick'=>'app.control.addDate(event.target)']);
     ?>
 </section>
 <style lang="less">
@@ -42,15 +42,15 @@
     }
 </style>
 <script>
-var control = {
+app.control = {
     table       : 'control',
     buttons     : ['prev', 'next', 'search'], 
     db          : new Db('control'), 
     Table       : new Table('<?=$table->idEl()?>'),
     txtTicket   : <?=$txt01->idEl()?>,
     txtCli      : <?=$txt02->idEl()?>,
-    btnDel      : ' <span class="lnr lnr-cross-circle" onclick="control.delDate(event.target)"></span>',
-    btnAdd      : ' <span class="lnr lnr-plus-circle" onclick="control.addDate(event.target)"></span>',
+    btnDel      : ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
+    btnAdd      : ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
     load(){
         app.post({
             controller  : this.table,
@@ -86,7 +86,7 @@ var control = {
 
         for(let i in data.lines){
             let line = data.lines[i]
-            services.db.get('id', line.articulo)
+            app.services.db.get('id', line.articulo)
             .then(d => d[0])
             .then(ser => {
                 let date = (line.fecha_regalo != null) ? app.date.format(line.fecha_regalo, 'datetime') + this.btnDel : this.btnAdd
@@ -125,7 +125,7 @@ var control = {
                     fecha       : date
                 }
             }
-            , (d, s) => {
+            , d => {
                 $el.parents('tr').find('.fecha').html(date + this.btnDel)
             }
         )          
@@ -141,8 +141,8 @@ var control = {
                     id_linea    : id
                 }
             }
-            , (d, s) => {
-            if(s) $el.parent().html(this.btnAdd)
+            , d => {
+            $el.parent().html(this.btnAdd)
         })        
     },
 }
