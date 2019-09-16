@@ -170,6 +170,12 @@ const app = {
         add(){
             typeof app[this.active].add == 'function' && app[this.active].add()
         },
+        print(){
+            typeof app[this.active].print == 'function' && app[this.active].print()
+        },
+        filter(){
+            typeof app[this.active].filter == 'function' && app[this.active].filter()
+        },       
         search(){
 
         },
@@ -335,7 +341,7 @@ const app = {
                 case 'day'      : return d
                 case 'month'    : return m
                 case 'year'     : return a
-                case 'hour'     : return h || false
+                case 'hour'     : return h + ':' + m || false
                 default         : return new Date(a, m-1, d)
             }
 

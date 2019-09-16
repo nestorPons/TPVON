@@ -43,9 +43,9 @@ app.conf = {
             buttons  = f.getElementsByTagName('button'),
             checkbox  = document.getElementById('<?=$status->id()?>')
 
-            checkbox.parentNode.removeChild(checkbox)
-            remove(buttons)
-    
+        checkbox.parentNode.removeChild(checkbox)
+        remove(buttons)
+        this.form_user.getElementsByTagName('legend')[0].innerHTML = 'Datos administrador'
         DB.get('usuarios','nivel', 2)
         .then(d => d[0])
         .then(d => {

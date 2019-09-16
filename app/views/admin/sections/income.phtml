@@ -3,8 +3,6 @@
     $from = new DatePicker(['label'=>'De']);
     $to = new DatePicker(['label'=>'Hasta']);
     $total = new InputText(['label' => 'Total', 'iconlast' => '', 'class'=>'text-right']);
-    $btnFilter = new ButtonSuccess(['onclick'=>'app.income.filter()', 'icon'=>'funnel', 'caption'=>'']);
-    $btnPrint = new ButtonSuccess(['onclick'=>'app.income.print()', 'icon'=>'printer', 'caption'=>'']);
     $table = new Table(['columns'=>['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
 ?>
 </section>
@@ -17,12 +15,16 @@
             grid-row-gap: 5px;
     }
     #<?= $table->id()?>{
-        grid-column: 1 / -1;
-        max-height: 75vh;
+        grid-column : 1 / -1;
+        max-height  : 75vh;
+          
+    }
+    #<?= $table->id()?> th, #<?= $table->id()?> td {
+        padding: 0;
     }
     #<?= $total->id()?>{
-        grid-row: -1;
-        grid-column: last;
+        grid-row    : -1;
+        grid-column : last;
 
     }
     .Importe{
@@ -31,11 +33,12 @@
 </style>
 <script>
     app.income = {
-        txtFrom : <?=$from->id()?>, 
-        txtTo : <?=$to->id()?>, 
-        txtTotal : <?=$total->idEl()?>,
-        table : <?=$table->id()?>, 
-        Table: new Table('<?=$table->id()?>'),
+        buttons     : ['print', 'filter'],
+        txtFrom     : <?=$from->id()?>, 
+        txtTo       : <?=$to->id()?>, 
+        txtTotal    : <?=$total->idEl()?>,
+        table       : <?=$table->id()?>, 
+        Table       : new Table('<?=$table->id()?>'),
         load(){
             this.filter()
         },
