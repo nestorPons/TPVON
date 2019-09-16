@@ -164,7 +164,8 @@
             this.selEmp.clear()
             this.selCli.clear()
 
-            DB.get('usuarios','estado', 1)
+            DB
+                .get('usuarios','estado', 1)
                 .then(users => {
                     for(let u of users){
                         if(u.nivel > 0) this.selEmp.addOption(u.id, u.nombre)
