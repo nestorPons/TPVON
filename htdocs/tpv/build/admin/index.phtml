@@ -1,0 +1,21 @@
+<?php namespace app\controllers\components?><section id="appadmin">
+    <?php include(\FOLDERS\VIEWS . 'admin/barTools.phtml')?>
+    <?php include(\FOLDERS\VIEWS . 'admin/navBar.phtml')?>
+    <?php include(\FOLDERS\VIEWS . 'admin/main.phtml')?>
+    <?php include(\FOLDERS\VIEWS . 'admin/footer.phtml')?>
+</section>
+<style lang="less">#appadmin{display:grid;grid-template-areas:'header header' 'menu main' 'menu footer';grid-template-rows:60px 1fr 60px;grid-template-columns:auto 1fr}#appadmin header{grid-area:header}#appadmin main{grid-area:main;height:82vh}#appadmin nav{grid-area:menu}#appadmin footer{grid-area:footer}</style>
+<script>
+    'use strict'
+
+    var services = {db  : new Db('servicios', <?=$jsonServices?>)} 
+    var users = {db: new Db('usuarios', <?=$jsonUsers?>)} 
+    DB.set('servicios', <?=$jsonServices?>)      
+    DB.set('usuarios', <?=$jsonUsers?>)
+    DB.set('empresa', <?=$data_company?>)
+    DB.set('promos', <?=$promos?>)
+
+    app.clock()
+
+</script>
+

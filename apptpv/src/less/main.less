@@ -1,0 +1,146 @@
+@font-color: #333;
+@disabled-color: #999;
+
+:root {
+  /* --spinner-fore-color: inherit; */
+  --universal-border-radius: 5px;
+  --main-color: @main-color; 
+  --nav-font-color: contrast(@main-color);
+  --effect-transform-hover: scale(1.2);
+  --color-red: #f00; 
+}
+*{
+  -moz-user-select: none; 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
+}
+body{
+  height: 100vh;
+  overflow: hidden;
+}
+input{
+  width: 100%;
+}
+input[type="search"]{
+  padding: 8px 4px;
+}
+input[type="number"]{
+  text-align: right;
+}
+input[readonly], input[readonly]:hover, input[readonly]:focus{
+  border-color: var(--fore-color) !important;
+  color: var(--secondary-fore-color) !important;
+  cursor: inherit;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid green;
+  -webkit-text-fill-color: green;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+button{
+  display: inherit !important;
+  background: transparent !important;
+  border: 1px solid var(--button-back-color) !important;
+  color: var(--button-back-color) !important;
+  i{
+    position: relative;
+  }
+  &:hover, &:focus{
+    background: var(--button-back-color) !important;
+    color: var(--back-color) !important;
+  }
+  &:focus{
+    outline:0px;
+  }
+}
+form{
+  background-color: white;
+  .spinner{
+    width: 12px;
+    height: 12px;
+    margin: 0 5px 0 0;
+    vertical-align: sub;
+    border-left-color: initial;
+  }
+}
+label{
+  font-size: 0.8rem;
+}
+.container{
+  padding: var(--universal-padding) ;
+}
+.collapse{
+  // añadido centrado del contenido al collapse del fraemwork
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.float{
+  &-left{
+    float: left;
+  }
+  &-right{
+    float: right;
+  }
+}
+select{
+    &:focus{
+      color: @font-color; 
+    }
+    option{
+      color: @font-color;
+    }
+}
+.row{
+  position: relative;
+  label{
+    z-index: 1;
+    position: absolute;
+    top: 16px;
+    left: var(--universal-margin);
+    color: @disabled-color;
+  }
+  select, textarea, input:not([type="button"]):not([type="submit"]):not([type="reset"]), select:not(value){
+    position: relative;
+    z-index: 2;
+    background-color: transparent; 
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    &:focus, &:not(:placeholder-shown):not(select), &.valid{
+      outline:0px;
+      & + label{
+        transition: transform 1s;
+        transform: translateY(-1.6rem) scale(0.9);
+      }
+    }
+  }
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right; 
+}
+.card{
+  max-height: inherit !important;
+}
+.alert{
+  color: var(--color-red) !important;
+  *{
+    color: var(--color-red) !important;
+  }
+}

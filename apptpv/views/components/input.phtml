@@ -1,0 +1,38 @@
+<div class="row <?=$hidden?>" id="<?=$id?>">
+    <div class="col-sm-12 col-md-12">
+        <input 
+            type = "<?=$type?>" 
+            id = "<?=$idElement?>"
+            class = "<?=$class?>"
+            placeholder=" "
+
+            <?=$placeholder?>
+            <?=$name?>
+            <?=$title?>
+            <?=$minlength?>
+            <?=$maxlength?>
+            <?=$pattern?>
+            <?=$for?>
+            <?=$required?> 
+            <?=$value?> 
+            <?=$list?>
+            <?=$disabled?>
+            <?=$tabindex?>
+            <?=$onfocus?>
+            <?=$onblur?>
+            <?=$onclick?>
+            <?=$onkeypress?>
+            <?=$onkeydown?>
+            <?=$onkeyup?>
+            <?=$onchange?>
+            <?=$onload?>
+            <?=$readonly?>
+            <?=$checked?>
+            <?=@$attr_default?>
+        />
+        <label for="<?=$id?>" class="<?=$classLabel?>"><?=$label?></label>
+        <?php if($iconlast):?>
+            <i id="<?=$id?>" class="lnr lnr-<?=$icon?>"></i>
+        <?php endif?>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<?php namespace app\controllers\components?><div id="<?=$id?>" class="row col-sm-12 col-md-12">
+    <ul>
+        <?php foreach($arrABC as $l):?>
+            <li onclick="<?=$id?>.sel(window.event)" value=<?=$l?> ><?=$l?></li>
+        <?php endforeach?>
+    </ul>
+</div>
+<style>
+    #<?=$id?> ul{
+        width: 100%; 
+        display: flex; 
+        justify-content: space-evenly;
+    }
+    #<?=$id?> ul li{
+        display: inline;
+        padding-left: 3px;
+        padding-right: 3px;
+        cursor: pointer;
+        border: 1px solid var(--a-link-color);
+        border-radius: var(--universal-border-radius);
+        padding: var(--universal-padding)
+    }
+    #<?=$id?> ul li:hover{
+        color: var(--blockquote-color);
+        transform: scale(1.1)
+    }
+</style>
+<script>
+    const <?=$id?> = {
+        sel(el){
+    
+            const val = el.path[0].attributes.value.value.toLowerCase(),
+                $t = $('#<?=$table?>')
+
+                $t.find('tbody tr').hide(function(){
+                    $t.find(`.${val}`).show()
+                })
+        }
+    }
+</script>

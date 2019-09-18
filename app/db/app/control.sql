@@ -1,7 +1,0 @@
-
-CREATE TABLE `control` (
-  `id` int(11) NOT NULL PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `id_linea` bigint(20) NOT NULL,
-  `fecha` DATETIME DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
