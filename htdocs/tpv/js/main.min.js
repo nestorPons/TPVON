@@ -76,20 +76,22 @@ $(document)
     $(this).addClass('sending').find('.spinner').hide().removeClass('hidden').fadeIn()
 
     let data = app.formToObject(e.currentTarget);
-
+    // Ciframos los campos password
     if(exist(data.password)) data.password = sha256(data.password)
     
     // Validamos los datos antes de enviarlos 
     // Todos los validations tendrán que devolver con un objeto {success: ... , mens: ... , [code]....}
-    let f = eval($(this).attr('validation'))
-    if(typeof f == 'function'){
-        r = f()
-        if(r.success) _send(data)
-        else {
-            _hideSpiner() 
-            if(r.code) $this.find(`[name="${r.code}]`).addClass('invalid').focus()
-            app.mens.error(r.mens)
-        } 
+    let fn = $(this).attr('validation')
+    if(fn){
+        let callback = r => {
+            if(r.success) _send(data)
+            else {
+                _hideSpiner() 
+                if(r.code) $this.find(`[name="${r.code}]`).addClass('invalid').focus()
+                app.mens.error(r.mens)
+            } 
+        }
+        eval(fn)
     } else _send(data)
 
 })

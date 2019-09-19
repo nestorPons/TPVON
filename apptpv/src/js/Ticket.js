@@ -26,8 +26,8 @@ class Ticket{
     }
     total(){        
         let total = 0.00
-        for(let i in this.lines){
-            total += parseFloat(this.lines[i].amo || 0)
+        for(let l of this.lines){
+            total += parseFloat(l.amo ||  l.cantidad * l.precio * (1 - l.dto / 100))
         }
         return total.toFixed(2)
     }

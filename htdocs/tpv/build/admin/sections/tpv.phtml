@@ -137,6 +137,7 @@
         selCli      : new Select('<?=$cli->id()?>'), 
         dto         : document.getElementById('<?=$dto->idEl()?>'), 
         amount      : document.getElementById('<?=$amo->idEl()?>'),
+        total       : document.getElementById('<?=$txtTotal->idEl()?>'),
         date        : <?=$date->idEl()?>,
         hour        : <?=$hour->idEl()?>, 
         $id         : $('#<?=$id->idEl()?>'), 
@@ -209,8 +210,8 @@
             this.Ticket.id_cliente = this.selCli.value()
             this.Ticket.fecha = new Date
             this.Ticket.id = this.$id.val()
-
-            if(this.Ticket.validate(), this.client.validate())
+            this.loadClient()
+            if(this.Ticket.validate())
                 this.openTicket()
             else 
                 mns.error('Faltan datos para crear el ticket')
@@ -274,12 +275,13 @@
             }
         },
         addLineTable(id, articulo, des, cantidad, precio, dto, amo){
-            this.Table.addLine(id, [articulo, des, cantidad, precio, dto, amo || cantidad * precio])
+            this.Table.addLine(id, [articulo, des, cantidad, precio, dto, amo || cantidad * precio * (1 - dto / 100)])
 
             this.clearLine()
             this.printTotal()
             // Scroll al final
             this.Table.endScroll()
+            
         },  
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
         loadLine(){
@@ -358,7 +360,7 @@
         },
         // Cargamos los datos del ticket actual
         loadDataTicket(data){
-
+            let t = 0 
             this.reset()
             this.Ticket = new Ticket(data)
             if(data.estado == undefined) {
@@ -372,6 +374,8 @@
             this.selEmp.option(data.id_usuario)
             this.selCli.option(data.id_cliente)
             
+            this.total.value = this.Ticket.total()
+
             this.date.value = d.toLocaleDateString()
             this.hour.value = d.toLocaleTimeString()
             

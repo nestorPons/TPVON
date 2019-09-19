@@ -19,9 +19,9 @@ class Company extends Query{
     function __construct(){ 
         return !parent::__construct('empresa', $this->db);
     }
-    function save(){
+    function save(Data $Data){
+        $this->loadData(get_object_vars($Data));
         $this->ultimo_acceso(date("Y-m-d H:i:s"));
-
         return $this->saveById($this->toArray());
     }
     /**

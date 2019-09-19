@@ -30,7 +30,7 @@ app.users = {
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(callback){
         let f = this.Form.getData()        
-        DB.get('usuarios')
+        this.db.get()
             .then(usuarios => {
                 for(i in usuarios) {
                     let u = usuarios[i]

@@ -119,16 +119,15 @@ class Data {
     function codifyAttr(string $attr){
         return $this->{$attr} = $this->codify($this->{$attr});
     }
-    function filter(Data $obj){
+    // Quitas las propiedades del objeto dado
+    // obj => objeto con las propiedades a eliminar
+    function filter($obj){
         foreach($this as $key => $val){
             if(!property_exists($obj, $key)){
                 unset($this->{$key});
             }
         }
         return $this;
-    }
-    function exist(String $prop){
-        return property_exists($this, $prop);
     }
     function isEmpty(String $prop){
         if(isset($this->{$prop})){

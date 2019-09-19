@@ -8,10 +8,11 @@
 <component id="ticket" class="hidden">
     <img src="<?=$Data->pathLogo?>" alt="Logotipo">
     <div class="data">
-        <div>TICKET DE VENTA <span><?=$Data->nombre?></span></div>
-        <div>Dir: <?=$Data->calle?> <?=$Data->numero?></div>
-        <div><?=$Data->CP?> <?=$Data->poblacion?></div>
-        <div>Tel: <?=$Data->telefono?> NIF: <?=$Data->nif?></div>
+        <div>TICKET DE VENTA <span id="ticket_nombre_empresa"></span></div>
+        <div><span id="ticket_admin"></span></div>
+        <div>Dir: <span id="ticket_dir"></span></div>
+        <div><span id="ticket_cp"></span> <span id="ticket_poblacion"></span></div>
+        <div>Tel: <span id="ticket_tel"></span> NIF: <span id="ticket_nif"></span></div>
         <br>
         <div>N Fac: <span id="idFra"></span></div>
         <div>Fecha: <span id="dateTicket"></span></div>
@@ -87,16 +88,27 @@
 </style>
 <script>
     app.ticket = {
-        Ticket  : null, 
-        present : document.getElementById('<?=$present->idEl()?>'), 
+        Ticket      : null, 
+        present     : document.getElementById('<?=$present->idEl()?>'), 
+        frm    : {
+            nombre      : document.getElementById('ticket_nombre_empresa'), 
+            admin       : document.getElementById('ticket_admin'),
+            dir         : document.getElementById('ticket_dir'),
+            cp          : document.getElementById('ticket_cp'),
+            poblacion   : document.getElementById('ticket_poblacion'),
+            tel         : document.getElementById('ticket_tel'),
+            nif         : document.getElementById('ticket_nif'),
+        },
         table   : {
             id  : '<?=$tblTicket->id()?>',
             ob  : $('#<?=$tblTicket->id()?>')
         },
         print(callback){
-            this.put(false,f=>{
+
+            this.put(false, fn => {
 
                 let printContents = document.getElementById('ticket').innerHTML
+                printContents
                 printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
 
                 let w = window.open();
@@ -110,6 +122,18 @@
             })
         },
         open(Ticket){
+            DB.get('empresa').then(d => d[0])
+            .then(d => {
+                // Cargamos los datos de la empresa
+                this.frm.nombre.value      = d.nombre
+                this.frm.admin.value       = 'ANONIM',
+                this.frm.dir.value         = `${d.calle} ${d.numero}`,
+                this.frm.cp.value          = d.CP,
+                this.frm.poblacion.value   = d.poblacion,
+                this.frm.tel.value         = d.telefono,
+                this.frm.nif.value         = d.nif 
+            })
+
             // Reseteamos valor de la casilla regalo
             this.present.checked = 0
             this.Ticket = Ticket
@@ -145,11 +169,12 @@
                 action: 'new', 
                 data: this.Ticket
             }
-            app.post(data, data => {
-                this.lastId = this.Ticket.id = data.id
-                if(this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket)
-                app.tpv.add()
-                
+            app.post(data, (data, r) => {
+                if(r){
+                    this.lastId = this.Ticket.id = data.id
+                    if(this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket)
+                    app.tpv.add()
+                }
                 callback()
              })
         }

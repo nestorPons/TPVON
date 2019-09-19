@@ -1,5 +1,5 @@
 <component class="editUser">
-    <form controller="user" action="save" validation="app.users.validation" callback="app.users.save(data)">
+    <form controller="user" action="save" validation="app.users.validation(callback)" callback="app.users.save(data)">
         <fieldset>
             <legend>Datos usuario</legend>
             <?php

@@ -22,31 +22,35 @@ class Tickets extends Query{
         return $data;
     }
     function new(Data $Data){
-        $lines = $Data->lines; 
-        $esregalo = $Data->regalo; 
-        $Data->filter(new Tickets); 
-        $DateTime = new \DateTime;
-        $Data->fecha = $DateTime->format('Y-m-d H:i');
-        $this->id = $this->add($Data->toArray());
-
-        foreach($lines as $line){
-            $Line = new Lines;
-            $idLine = $Line->add([
-                'id_ticket' => $this->id,
-                'articulo'  => intval($line['articulo']),
-                'precio'    => floatval($line['precio']),
-                'cantidad'  => intval($line['cantidad']),
-                'iva'       => intval($line['iva']), 
-                'dto'       => floatval($line['dto'])
-            ]);
-            if($esregalo) {
-                $Control = new Control();
-                $Control->add([
-                    'id_linea' => $idLine 
-                ]); 
-            }
-        }  
-        return ['id' => $this->id]; 
+        //Comprobamos si existe
+        if(!$this->getById($Data->id)){
+            $lines = $Data->lines; 
+            $esregalo = $Data->regalo; 
+            $Data->filter(new Tickets); 
+            $DateTime = new \DateTime;
+            $Data->fecha = $DateTime->format('Y-m-d H:i');
+            $this->id = $this->add($Data->toArray());
+    
+            foreach($lines as $line){
+                $Line = new Lines;
+                $idLine = $Line->add([
+                    'id_ticket' => $this->id,
+                    'articulo'  => intval($line['articulo']),
+                    'precio'    => floatval($line['precio']),
+                    'cantidad'  => intval($line['cantidad']),
+                    'iva'       => intval($line['iva']), 
+                    'dto'       => floatval($line['dto'])
+                ]);
+                if($esregalo) {
+                    $Control = new Control();
+                    $Control->add([
+                        'id_linea' => $idLine 
+                    ]); 
+                }
+            }  
+            return ['id' => $this->id]; 
+        } else return false;
+        
     }
     // Método genérico de captura de tickets con sus lineas
     function get($data, bool $all = false){
