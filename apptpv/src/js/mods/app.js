@@ -279,7 +279,8 @@ const app = {
     }, 
     date : {
         current(){
-            return this.actual()
+            let f = new Date();
+            return this.actual() + ' ' + f.getHours() + ':' + f.getMinutes() + ':' + f.getSeconds()
         }, 
         actual(){
             let f = new Date();
@@ -306,13 +307,13 @@ const app = {
             let d, m , a , h, n, s,
                 f = date.split(' '),
                 fecha = f[0],
-                horario = f[1] 
+                horario = f[1]
 
-            // Si tiene horas 
+            // Si tiene horas ... 
             if(horario){   
                 let x = horario.split(':')
                 h = x[0]
-                n = x[1]
+                min = x[1]
                 s = x[2]
             }
             if (fecha.indexOf("/")>0){
@@ -336,15 +337,15 @@ const app = {
             }
             switch(format) {
                 case 'sql'      : return a + '-' + m + '-' + d
-                case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + n
+                case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + min
                 case 'print'    : return d + '/' + m + '/' + a
                 case 'md'       : return m + d 
                 case 'id'       : return a + m + d
                 case 'day'      : return d
                 case 'month'    : return m
                 case 'year'     : return a
-                case 'hour'     : return h + ':' + m || false
-                default         : return new Date(a, m-1, d)
+                case 'hour'     : return h + ':' + min || false
+                default         : return new Date(a, m-1, d, h, min, s)
             }
 
         },

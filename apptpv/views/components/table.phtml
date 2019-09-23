@@ -1,5 +1,5 @@
 
-<table id="<?= $idElement ?>" class="<?= $class ?>">
+<table id="<?=$idElement?>" class="<?= $class ?>">
     <thead>
         <?php foreach ($columns as $key => $val) : ?>
             <th class="<?= $val ?>"><?= $val ?></th>
@@ -8,6 +8,11 @@
     <tbody>
     </tbody>
     <tfoot>
+        <?php if($total) :?>
+        <tr>
+            <td>TOTAL : <span class="id_total"></span> </td>
+        </tr>
+        <?php endif ?>
     </tfoot>
 </table>
 <template id="template_<?= $id ?>">
@@ -16,14 +21,23 @@
         <?= $ondblclick ?>
     >
         <?php foreach ($columns as $key => $val) : ?>
-            <td class="<?= $val ?>"></td>
+            <td class="<?= $val ?>" data-label=""></td>
         <?php endforeach ?>
     </tr>
 </template>
+<style>
+    #<?=$idElement?> tfoot {
+        order   : 3;
+        width   : 100%;
+    }
+    #<?=$idElement?> tfoot tr{
+        text-align  : right;
+    }
+</style>
 <script>
 var Table = class{
     constructor(id){
-
+        this.table = document.getElementById('<?= $idElement ?>')
         this.$table = $('#' + id)
         this.$template =  $( $('#template_' + id)[0].innerHTML )
     }
@@ -37,6 +51,7 @@ var Table = class{
             .find('td').each(function(i, el){
                 $(this)
                     .html(arrData[i])
+                    .attr('data-label', arrData[i])
             })
             .end()
             .prependTo(this.$table.find('tbody'))      
@@ -56,6 +71,11 @@ var Table = class{
     updateLine(id, data){
         this.delLine(id)
         return this.addLine(id, data)
+    }
+    total(arg){
+        const total = this.table.getElementsByClassName('id_total')[0]
+        if(arg) total.innerHTML = arg
+        return total.innerHTML
     }
 }
 </script>

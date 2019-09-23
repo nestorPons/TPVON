@@ -97,8 +97,7 @@ app.users = {
         }
     },
     load(){
-
-            this.db.get()
+        this.db.get()
             .then(users => {
                 for( i in users ){
                     var user = users[i]

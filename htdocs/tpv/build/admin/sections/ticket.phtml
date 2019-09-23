@@ -8,19 +8,25 @@
 <component id="ticket" class="hidden">
     <img src="<?=$Data->pathLogo?>" alt="Logotipo">
     <div class="data">
-        <div>TICKET DE VENTA <span id="ticket_nombre_empresa"></span></div>
-        <div><span id="ticket_admin"></span></div>
-        <div>Dir: <span id="ticket_dir"></span></div>
-        <div><span id="ticket_cp"></span> <span id="ticket_poblacion"></span></div>
-        <div>Tel: <span id="ticket_tel"></span> NIF: <span id="ticket_nif"></span></div>
-        <br>
-        <div>N Fac: <span id="idFra"></span></div>
-        <div>Fecha: <span id="dateTicket"></span></div>
+        <div>TICKET DE VENTA</div>
+        <div><span id="ticket_nombre_empresa"></span></div>
+        <hr>
+        <div id="ticket_razon_social">
+            <div><span id="ticket_admin"></span></div>
+            <div>Dir: <span id="ticket_dir"></span></div>
+            <div><span id="ticket_cp"></span> <span id="ticket_poblacion"></span></div>
+            <div>Tel: <span id="ticket_tel"></span> NIF: <span id="ticket_nif"></span></div>
+            <br>
+            <div>N Fac: <span id="idFra"></span></div>
+            <div>Fecha: <span id="dateTicket"></span></div>
+        </div>
+        <hr>
     </div>
         <?php
-            $tblTicket = new Table(['columns'=>['Cant', 'Des', 'Imp']]);
+            $table = new Table(['columns'=>['Unidad', 'Servicio', 'DTO%', 'Importe'], 'total' => true]);
         ?>
     <p>
+        <hr>
         <div>Iva incluído</div>
         <div>¡GRACIAS POR SU VISITA!</div>
     </p>
@@ -30,6 +36,13 @@
         transform: scale(0.8);
         text-align: center;
         overflow: auto;
+    
+    }
+    #ticket * {
+        padding: 0; 
+    }
+    #ticket_razon_social *{
+        text-align: left !important;
     }
     #buttonsTicket{
         margin: 1rem 0;
@@ -40,7 +53,7 @@
     #ticket img{
         max-width: 200px;
     }
-    #<?=$tblTicket->id()?>{
+    #<?=$table->id()?>{
         padding: 5px;
     }
     #ticket .footer td{
@@ -88,9 +101,9 @@
 </style>
 <script>
     app.ticket = {
-        Ticket      : null, 
-        present     : document.getElementById('<?=$present->idEl()?>'), 
-        frm    : {
+        Ticket          : null, 
+        present         : document.getElementById('<?=$present->idEl()?>'), 
+        frm             : {
             nombre      : document.getElementById('ticket_nombre_empresa'), 
             admin       : document.getElementById('ticket_admin'),
             dir         : document.getElementById('ticket_dir'),
@@ -99,10 +112,7 @@
             tel         : document.getElementById('ticket_tel'),
             nif         : document.getElementById('ticket_nif'),
         },
-        table   : {
-            id  : '<?=$tblTicket->id()?>',
-            ob  : $('#<?=$tblTicket->id()?>')
-        },
+        Table           : new Table('<?=$table->idEl()?>'),
         print(callback){
 
             this.put(false, fn => {
@@ -122,42 +132,40 @@
             })
         },
         open(Ticket){
-            DB.get('empresa').then(d => d[0])
-            .then(d => {
-                // Cargamos los datos de la empresa
-                this.frm.nombre.value      = d.nombre
-                this.frm.admin.value       = 'ANONIM',
-                this.frm.dir.value         = `${d.calle} ${d.numero}`,
-                this.frm.cp.value          = d.CP,
-                this.frm.poblacion.value   = d.poblacion,
-                this.frm.tel.value         = d.telefono,
-                this.frm.nif.value         = d.nif 
-            })
 
-            // Reseteamos valor de la casilla regalo
-            this.present.checked = 0
-            this.Ticket = Ticket
-            const $template = $($('#template_' + this.table.id)[0].innerHTML)
-            let numFra = this.Ticket.fecha.getFullYear().toString().substr(2) 
-            numFra += '/' + this.Ticket.id.toString().padStart(6,0)
-            $('#ticket')
-                .find('#dateTicket').text(Ticket.fecha.toLocaleString()).end()
-                .find('#idFra').text(numFra).end()
-            for(i in Ticket.lines){
-                let line =  Ticket.lines[i]
-                let l = $template.clone()
-                        .find('.Cant').text(line.cantidad).end()
-                        .find('.Des').text(line.des).end()
-                        .find('.Imp').text(line.amo).end()
-                
-                this.table.ob.find('tbody').append(l) 
-            }   
-            let t = $template.clone()
-                .addClass('footer')
-                .find('.Cant').text('').end()
-                .find('.Des').text('TOTAL').end()
-                .find('.Imp').text(Ticket.total()).end()
-            this.table.ob.find('tbody').append(t) 
+            let p1 = DB.get('empresa').then(d => d[0])
+            let p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0])
+
+            Promise.all([p1, p2]).then(d => {
+                let e = d[0], 
+                    u = d[1]
+                // Cargamos los datos de la empresa
+                this.frm.nombre.innerHTML      = e.nombre
+                this.frm.admin.innerHTML       = u.nombre
+                this.frm.dir.innerHTML         = `${e.calle} ${e.numero}`
+                this.frm.cp.innerHTML          = e.CP
+                this.frm.poblacion.innerHTML   = e.poblacion
+                this.frm.tel.innerHTML         = e.telefono
+                this.frm.nif.innerHTML         = e.nif 
+            })
+            .then( _ => {
+                // Reseteamos valor de la casilla regalo
+                this.present.checked = 0
+                this.Table.clear()
+
+                this.Ticket = Ticket
+
+                let numFra = this.Ticket.fecha.getFullYear().toString().substr(2) 
+                numFra += '/' + this.Ticket.id.toString().padStart(6,0)
+                $('#ticket')
+                    .find('#dateTicket').text(Ticket.fecha.toLocaleString()).end()
+                    .find('#idFra').text(numFra).end()
+                for(let i in Ticket.lines){
+                    const line = Ticket.lines[i]
+                    this.Table.addLine(line.id, [line.cantidad, line.articulo, line.dto, `${line.amo}€`])
+                }
+                this.Table.total(this.Ticket.total())
+            })
         },
         put(sendMail = false, callback){
             this.Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')

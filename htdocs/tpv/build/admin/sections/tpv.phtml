@@ -183,7 +183,7 @@
                 }
             })
         },
-        openTicket(){
+        openTicket(){       
             this.Modal.open()
             app.ticket.open(this.Ticket)
         },
@@ -191,8 +191,6 @@
             this.Modal.close()
         },
         reset(){
-            const f = new Date();
-
             this.Ticket = new Ticket()
             this.date.value = app.date.now('date')
             this.hour.value = app.date.now('hour')
@@ -209,7 +207,7 @@
             this.Ticket.id_usuario = this.selEmp.value()
             this.Ticket.id_cliente = this.selCli.value()
             this.Ticket.fecha = new Date
-            this.Ticket.id = this.$id.val()
+            this.Ticket.id = this.currentId
             this.loadClient()
             if(this.Ticket.validate())
                 this.openTicket()
@@ -245,19 +243,17 @@
         },
         addLine(){
             this.calculate()
-    
+            // addLine(articulo, cantidad, precio, dto){ 
             var line = this.Ticket.addLine(
                 this.selCode.value(), 
-                this.$description.val(), 
                 this.$quantity.val(), 
                 this.$price.val(), 
-                this.dto.value, 
-                this.amount.value,
-                this.$iva.val()
+                this.dto.value
             )
 
             // Validamos los d  mos en la tabla
-            if(line.success) this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+            if(line.success) 
+                this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
             else this.selCode.el.focus
         },
         // Estrategia de promocion de filiacion clientes VIP por tiempo 
@@ -360,33 +356,37 @@
         },
         // Cargamos los datos del ticket actual
         loadDataTicket(data){
+
             let t = 0 
             this.reset()
             this.Ticket = new Ticket(data)
+
             if(data.estado == undefined) {
                 this.$id.val(this.currentId)
                 return false 
             }
-            let d = new Date(data.fecha)
-            let arrdate = data.fecha.split(' ')
-
+            
             this.$id.val(data.id)
             this.selEmp.option(data.id_usuario)
             this.selCli.option(data.id_cliente)
             
             this.total.value = this.Ticket.total()
-
-            this.date.value = d.toLocaleDateString()
-            this.hour.value = d.toLocaleTimeString()
+echo(data)
+echo(data.fecha)
+echo(app.date.format( data.fecha, 'hour'))
+            this.date.value = app.date.format( data.fecha, 'print')
+            this.hour.value = app.date.format( data.fecha, 'hour')
             
             // Cargamos el id del tickket actual
             this.currentId = data.id
+
             // Cargamos las lineas 
-            for(let i in data.lines){
-                let line = data.lines[i]
+            for(let line of data.lines){
                 DB.get('servicios', 'id' , line.articulo)
                     .then(d => d[0])
-                    .then(ser => {if(ser) this.addLineTable(line.id, ser.codigo, ser.des, line.cantidad, line.precio, line.dto)})
+                    .then(ser => {
+                        if(ser) this.addLineTable(line.id, ser.codigo, ser.descripcion, line.cantidad, line.precio, line.dto)
+                    })
             }
         }
     }
