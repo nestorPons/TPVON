@@ -14,5 +14,6 @@ CREATE TABLE `empresa` (
   `poblacion` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `CP` smallint(5) DEFAULT NULL,
   `provincia` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `pais` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `pais` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `iva`tinyint (3) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;

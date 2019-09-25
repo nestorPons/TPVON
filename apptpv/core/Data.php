@@ -1,5 +1,4 @@
-<?php namespace app\core;
-use app\core\{Error ,Data}; 
+<?php namespace app\core; 
 /**
  * Clase gestión de datos
  */
@@ -22,9 +21,8 @@ class Data {
         if($key) return $this->{$key} = $value;  
         else {
             if(is_object($value)) return $this->{get_class($value)} = $value;
-            else return $this->{$value} = $value;
+            else return $this->{$value} = trim($value);
         } 
-        
     }
     function set($arg1, $arg2 = null){
         if($arg2) return $this->addItem($arg2, $arg1);

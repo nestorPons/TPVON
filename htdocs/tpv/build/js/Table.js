@@ -1,43 +1,4 @@
 
-<table id="<?=$idElement?>" class="<?= $class ?>">
-    <thead>
-        <?php foreach ($columns as $key => $val) : ?>
-            <th class="<?= $val ?>"><?= $val ?></th>
-        <?php endforeach ?>
-    </thead>
-    <tbody>
-    </tbody>
-    <tfoot>
-        <?php if($total) :?>
-        <tr>
-            <td>TOTAL: <span class="id_total"></span> </td>
-        </tr>
-        <?php endif ?>
-    </tfoot>
-</table>
-<template id="template_<?= $id ?>">
-    <tr 
-        <?= $onclick ?> 
-        <?= $ondblclick ?>
-    >
-        <?php foreach ($columns as $key => $val) : ?>
-            <td class="<?= $val ?>" data-label=""></td>
-        <?php endforeach ?>
-    </tr>
-</template>
-<style>
-    #<?=$idElement?> tfoot {
-        order   : 3;
-        width   : 100%;
-    }
-    #<?=$idElement?> tfoot tr{
-        text-align  : right;
-    }
-    #<?=$idElement?>.hoverable tbody{
-        cursor: pointer;
-    } 
-</style>
-<script>
 class Table{
     constructor(id){
         this.el = document.getElementById(id)
@@ -93,4 +54,3 @@ class Table{
     }
     
 }
-</script>

@@ -17,7 +17,7 @@
             <div><span id="ticket_cp"></span> <span id="ticket_poblacion"></span></div>
             <div>Tel: <span id="ticket_tel"></span> NIF: <span id="ticket_nif"></span></div>
             <br>
-            <div>N Fac: <span id="idFra"></span></div>
+            <div>Factura Simplificada Nº: <span id="idFra"></span></div>
             <div>Fecha: <span id="dateTicket"></span></div>
         </div>
         <hr>
@@ -25,18 +25,17 @@
         <?php
             $table = new Table(['columns'=>['Unidad', 'Servicio', 'DTO%', 'Importe'], 'total' => true]);
         ?>
+        <br>
     <p>
         <hr>
-        <div>Iva incluído</div>
+        <div><span id="ticket_iva"></span>% de iva incluído</div>
         <div>¡GRACIAS POR SU VISITA!</div>
     </p>
 </component>
-<style id='ticketStyle'>
+<style id='ticketStyle'>  
     #ticket {
         transform: scale(0.8);
-        text-align: center;
         overflow: auto;
-    
     }
     #ticket * {
         padding: 0; 
@@ -55,12 +54,8 @@
     }
     #<?=$table->id()?>{
         padding: 5px;
-    }
-    #ticket .footer td{
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
-    @media print{
+    }   
+    @media print{   
         *{
             page-break-after:avoid;
             text-align: center;
@@ -87,13 +82,17 @@
         table td:first{
             border-top: 1px solid black;
         }
-        table td:last{
-            text-align: right;
-        }
         .break {
             page-break-after: always;
         }
-        table .footer td{
+        table {
+            margin-bottom: 10px;
+        }
+        table tfoot tr{
+            position: absolute; 
+            left: 170px;
+        }
+        table tfoot td{
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -111,6 +110,7 @@
             poblacion   : document.getElementById('ticket_poblacion'),
             tel         : document.getElementById('ticket_tel'),
             nif         : document.getElementById('ticket_nif'),
+            iva         : document.getElementById('ticket_iva')
         },
         Table           : new Table('<?=$table->idEl()?>'),
         print(callback){
@@ -133,8 +133,8 @@
         },
         open(Ticket){
 
-            let p1 = DB.get('empresa').then(d => d[0])
-            let p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0])
+            let p1 = DB.get('empresa').then(d => d[0]),
+                p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0])
 
             Promise.all([p1, p2]).then(d => {
                 let e = d[0], 
@@ -147,8 +147,9 @@
                 this.frm.poblacion.innerHTML   = e.poblacion
                 this.frm.tel.innerHTML         = e.telefono
                 this.frm.nif.innerHTML         = e.nif 
+                this.frm.iva.innerHTML         = e.iva 
             })
-            .then( _ => {
+            .then( async fn => {
                 // Reseteamos valor de la casilla regalo
                 this.present.checked = 0
                 this.Table.clear()
@@ -162,7 +163,8 @@
                     .find('#idFra').text(numFra).end()
                 for(let i in Ticket.lines){
                     const line = Ticket.lines[i]
-                    this.Table.addLine(line.id, [line.cantidad, line.articulo, line.dto, `${line.amo}€`])
+                    let a = await DB.get('servicios', 'id', line.articulo )
+                    this.Table.addLine(line.id, [line.cantidad, a[0].nombre, line.dto, `${line.amo}€`])
                 }
                 this.Table.total(this.Ticket.total())
             })

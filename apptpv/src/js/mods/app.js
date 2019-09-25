@@ -91,8 +91,8 @@ const app = {
         error(mens){
             alert('ERROR!! \n' + mens);
         },
-        confirm(mens, callback){
-            return confirm(mens) && callback()
+        confirm(mens){
+            return confirm(mens) 
         }
     },
     sections    : {

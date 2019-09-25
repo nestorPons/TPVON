@@ -1,7 +1,7 @@
 <?php namespace app\models;
 use \app\core\{Query, Data, Error};
 class Tickets extends Query{
-    public $id, $id_usuario, $id_cliente, $estado, $fecha, $hora, $regalo = 0;
+    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $regalo = 0;
     protected $table = 'tickets';
     function __construct($args = null){
         parent::__construct();
@@ -22,6 +22,7 @@ class Tickets extends Query{
         return $data;
     }
     function new(Data $Data){
+
         //Comprobamos si existe
         if(!$this->getById($Data->id)){
             $lines = $Data->lines; 
@@ -37,8 +38,7 @@ class Tickets extends Query{
                     'id_ticket' => $this->id,
                     'articulo'  => intval($line['articulo']),
                     'precio'    => floatval($line['precio']),
-                    'cantidad'  => intval($line['cantidad']),
-                    'iva'       => intval($line['iva']), 
+                    'cantidad'  => intval($line['cantidad']), 
                     'dto'       => floatval($line['dto'])
                 ]);
                 if($esregalo) {
@@ -92,7 +92,7 @@ class Tickets extends Query{
         return $arr_tickets; 
     }
     function prev(Data $Data){
-        $arr = $this->query("SELECT * FROM $this->table WHERE id < $Data->id  ORDER BY id DESC  LIMIT 1;");
+        $arr = $this->query("SELECT * FROM $this->table WHERE id < $Data->id   AND estado = 1 ORDER BY id DESC  LIMIT 1;");
         if(isset($arr[0])) {
             $d = new Data($arr[0]); 
             return $this->getLines($d);
@@ -100,7 +100,7 @@ class Tickets extends Query{
 
     }
     function next(Data $d){
-        $arr = $this->query("SELECT * FROM $this->table WHERE id > $d->id  ORDER BY id  LIMIT 1;");
+        $arr = $this->query("SELECT * FROM $this->table WHERE id > $d->id  AND estado = 1 ORDER BY id  LIMIT 1;");
         if(isset($arr[0])) {
             $d = new Data($arr[0]); 
             return $this->getLines($d);

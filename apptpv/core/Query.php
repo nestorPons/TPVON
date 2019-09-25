@@ -1,5 +1,4 @@
 <?php namespace app\core;
-use app\core\Data;
 /**
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
@@ -145,7 +144,9 @@ class Query extends Conn{
         return $this->query($this->getSQLUpdate($args) , $args);
      } 
     // Eliminamos mediante id
-    public function deleteById(Int $id){
+    public function deleteById(Array $data){
+        $id = $data['id'];
+prs("DELETE FROM {$this->table} WHERE id = $id;");
         return $this->query("DELETE FROM {$this->table} WHERE id = $id;");
      }
     // Eliminamos mediante un campo concreto
@@ -237,19 +238,9 @@ class Query extends Conn{
         if ($arg) $this->id = $arg; 
         return $this->id;
     }
-    // Descarga todos los dados y retorna objetos data
-    function allData($Obj, String $key = null){
-        $Data = new Data; 
-        $data = $this->getAll();
-        $k = $key??'id'; 
-        foreach($data as $value){
-            $Data->addItem(new $Obj($value), $value[$k]);
-        }
-        return $Data;
-    }
     // El método de eliminación genérico para las clases hijas
     // Método genérico de eliminación de registros
-    function del($id){
+    function del(){
         return $this->saveById(['estado'=>0]);
     }
     function isConnected(){

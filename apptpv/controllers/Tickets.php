@@ -16,7 +16,6 @@ class Tickets extends Controller{
         $Model = new Model; 
         return $Model->getLastUser($Data);
     }
-
     function prev(Data $Data){
         $Model = new Model; 
         return $Model->prev($Data);

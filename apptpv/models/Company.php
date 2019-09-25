@@ -10,7 +10,8 @@ class Company extends Query{
 
     public 
         $id = 1, $nombre, $fecha, $ultimo_acceso, $nif,
-        $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais; 
+        $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais,
+        $iva; 
     protected 
         $data = null ,
         $table = 'empresa', 
@@ -33,7 +34,7 @@ class Company extends Query{
      */
     public function new(Data $Data){
    
-        $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
+        $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password', 'iva'], true);
         $Data->codifyAttr('nombre_empresa');
         $Data->set('nombre', $Data->nombre_empresa);
         $this->loadData($Data->getAll());

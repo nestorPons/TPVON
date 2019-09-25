@@ -51,19 +51,19 @@ class Controller{
         /**
      * Método por defecto de agregación de registros a la base de datos
      */
-    protected function new(Data $Data = null){
+    protected function new(){
         return $this->exec('new', 'add');
     }
     /**
      * Método genérico para actualizar registros
      */
-    protected function update(Data $Data){
+    protected function update(){
         return $this->exec('save', 'saveById'); 
     }
     /**
      * Método por defecto de consulta de datos 
      */
-    protected function get(Data $Data = null){
+    protected function get(){
         return $this->exec('get', 'getById');
     }
     protected function printView(String $route, array $data = null){  
@@ -79,13 +79,13 @@ class Controller{
     /**
      * Método por defecto de consulta de datos entre parametros
      */
-    protected function getBetween(Data $Data){
+    protected function getBetween(){
         return $this->exec('between', 'getBetween');
     }
     /**
-     * Método por defecto de eliminación de registros
+     * Método por defecto de eliminación de registros por id
      */
-    protected function del($arg){
+    protected function del(){
         return $this->exec('del', 'deleteById');
     }
     private function getController(){
@@ -93,7 +93,7 @@ class Controller{
         $controller = end($arr_controller);
         return strtolower($controller);
     }
-    protected function getModel($arg = null){
+    protected function getModel(){
         return (file_exists(\FOLDERS\MODELS . ucfirst($this->controller) . '.php'))
             ? '\\app\\models\\' . ucfirst($this->controller)
             : '\\app\\core\\Query';
@@ -101,10 +101,10 @@ class Controller{
     private function exec (String $method, String $method_generic){
         $name_model = $this->getModel(); 
         $model = new $name_model($this->controller);
+        $model->id = $this->Data->id ?? null;
         if (method_exists($model, $method)){
             return  $model->{$method}($this->Data);
         } else {
-            $model->id = $this->Data->id;
             return $model->{$method_generic}($this->Data->toArray());
         }
     }

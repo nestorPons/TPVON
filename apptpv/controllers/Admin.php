@@ -20,7 +20,6 @@ class Admin extends Controller{
         $data['today'] = date('d/m/Y'); 
         
         $Items = new Items;
-        $data['Services'] = $Items->allData($Items, 'codigo'); // para php
         $data['jsonServices'] = json_encode($Items->getAll()); // para js
         
         $Company = new Company();

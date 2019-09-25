@@ -10,7 +10,7 @@
     <tfoot>
         <?php if($total) :?>
         <tr>
-            <td>TOTAL : <span class="id_total"></span> </td>
+            <td>TOTAL: <span class="id_total"></span> </td>
         </tr>
         <?php endif ?>
     </tfoot>
@@ -33,49 +33,8 @@
     #<?=$idElement?> tfoot tr{
         text-align  : right;
     }
+    #<?=$idElement?>.hoverable tbody{
+        cursor: pointer;
+    } 
 </style>
-<script>
-var Table = class{
-    constructor(id){
-        this.table = document.getElementById('<?= $idElement ?>')
-        this.$table = $('#' + id)
-        this.$template =  $( $('#template_' + id)[0].innerHTML )
-    }
-    /**
-     * arrData = array de datos en orden de salida
-     */
-    addLine(id, arrData){
-        return this.$template
-            .clone()
-            .attr('idline', id || this.$table.find('tr').length)
-            .find('td').each(function(i, el){
-                $(this)
-                    .html(arrData[i])
-                    .attr('data-label', arrData[i])
-            })
-            .end()
-            .prependTo(this.$table.find('tbody'))      
-    }
-    endScroll(){
-        this.$table.animate({ scrollTop: this.$table.height() }, 100);
-    }
-    clearLines(){
-        this.$table.find('tbody').find('tr').remove()
-    }
-    clear(){
-        this.clearLines()
-    }
-    delLine(id){
-        this.$table.find(`[idline="${id}"]`).remove()
-    }
-    updateLine(id, data){
-        this.delLine(id)
-        return this.addLine(id, data)
-    }
-    total(arg){
-        const total = this.table.getElementsByClassName('id_total')[0]
-        if(arg) total.innerHTML = arg
-        return total.innerHTML
-    }
-}
-</script>
+ 

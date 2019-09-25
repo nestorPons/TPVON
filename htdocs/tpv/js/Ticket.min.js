@@ -6,13 +6,14 @@ class Ticket{
         this.id_usuario = null
         this.id_cliente =  null
         this.fecha = null
-        this.iva = 21
+        this.iva = 21 
         this.estado = 1;
         if (data != undefined) {  
             this.id = data.id
             this.id_usuario = data.id_usuario
             this.id_cliente = data.id_cliente
             this.fecha = data.fecha
+            this.iva = data.iva
             this.estado = (data.estado != undefined) ? data.estado : 1 ; 
             this.addLines(data.lines)
         }
@@ -41,12 +42,12 @@ class Ticket{
     }
     validate(){
         if(
-            this.lines.length == 0 ||
-            this.id_usuario == '' ||
-            this.id_cliente == '' ||
-            this.fecha == '' 
-        ) return false
-        else return true
+            this.lines.length &&
+            this.id_usuario &&
+            this.id_cliente &&
+            this.fecha 
+        ) return true
+        else return false
     }
     deleteLine(index){
         this.lines = this.lines.filter(e => e.id != index)

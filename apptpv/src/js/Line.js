@@ -8,6 +8,6 @@ class Line{
         this.amo = this.total()
     }
     total(){
-        return this.cantidad * this.precio * (1 - this.dto / 100)
+        return (this.cantidad * this.precio * (1 - this.dto / 100)).toFixed(2)
     }
 }

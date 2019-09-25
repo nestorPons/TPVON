@@ -1,7 +1,7 @@
 <?php namespace app\controllers\components?><header id="bartools">
     <div id="bartools-actions">
         <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()'])?>
-        <?php $del          = new Icon('cross-circle',          ['onclick'=>'app.sections.del()'])?>
+        <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()'])?>
         <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()'])?>
         <?php $next         = new Icon('chevron-right-circle',  ['onclick'=>'app.sections.next()'])?>
         <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()'])?>
@@ -73,8 +73,8 @@
             $add        : $('#<?= $add->id()?>'),
             $del        : $('#<?= $del->id()?>'),
             $search     : $('#<?= $search->id()?>'),
-            $print      :  $('#<?= $print->id()?>'),
-            $filter     :  $('#<?= $filter->id()?>'),
+            $print      : $('#<?= $print->id()?>'),
+            $filter     : $('#<?= $filter->id()?>'),
             show(arr = []){               
                 $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
                 for(i in arr){
@@ -113,6 +113,10 @@
                     typeof window[app.sections.active].search == 'function' && window[app.sections.active].search(this.$txtSearch.val())
 
             }
+        },
+        del(){
+            if(app.mens.confirm('¿Desea eliminar el registro?'))
+                app.sections.del()
         }
     }
 </script>

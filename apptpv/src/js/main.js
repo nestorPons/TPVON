@@ -25,26 +25,23 @@ $(document)
 // Comportamiento general de eliminación de registro
 // Para su correcto funcionamiento todos los obj js tienen que tener establecida la propiedad currentId
 .on('click', '.fnDelete', function (e, i) {
-    app.mens.confirm('¿Seguro que desea eliminar el registro?' , fn =>{
+    if(app.mens.confirm('¿Seguro que desea eliminar el registro?')){
         let $section = $(this).parents('section'),
-            $form = $(this).parent('form'), 
+            $form = $(this).parents('form'), 
             controller = $form.attr('controller')
             obj = app[$section.attr('id')]
-       
-        // Eliminamos el registro de la base datos local
-        //obj.del()
 
- 
         // Envio de datos para eliminar del servidor
         app.post({
             controller: controller,
             action: 'del',
             data: {id: obj.currentId}
         },
-        function(d){
-            exist(obj.del) && obj.del() 
+        function(d, r){
+            if(r) exist(obj.del) && obj.del()
+            else app.mens.error('No se pudo eliminar el registro')
         })
-     })
+     }
 })
 // Comportamiento general de envio de formulario al servidor
 .on('submit', 'form', function (e, i) {
