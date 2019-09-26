@@ -11,8 +11,12 @@ class Company extends Controller{
     }
     protected function new(Data $Data = null){
         $Model = new CompanyModel; 
-        if($Model->new($Data)){
+
+        try {
+            $Model->new($Data);
             return $this->printView(\VIEWS\LOGIN . 'newcompanycreated.phtml');
-        } else Error::array('No se ha encontrado NEW Company');
+        } catch( \Exception $e){
+            return Error::array($e->getMessage());
+        }
     }
 }

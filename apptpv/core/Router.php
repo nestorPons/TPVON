@@ -61,7 +61,9 @@ class Router{
         $respond = $this->loadController(); 
 
         // Siempre devuelvo un objeto json con un success de respuesta
-        $respond = ($respond == true || $respond == 1) ? ['success'=> 1, 'data' => $respond] : ['success'=> 0]; 
+        if(!isset($respond['success']))
+            $respond = ($respond == true || $respond == 1) ? ['success'=> 1, 'data' => $respond] : ['success'=> 0]; 
+        
         
         
         /* ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :

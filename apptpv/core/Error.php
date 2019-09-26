@@ -27,12 +27,12 @@ class Error extends \Exception{
     
     //login 
     const E022 = "Email ocupado."; 
-    const E023 = "Usuario desactivado <br> Consulte con el administrador. ";
+    const E023 = "Usuario desactivado \n Consulte con el administrador. ";
     const E024 = "Cuenta bloqueada. Consulte su administrador.";
     const E025 = "No se ha encontrado el usuario";
     const E026 = "Usuario o contraseña incorrectos.";
     const E027 = "Pin incorrecto";
-    const E028 = "Usuario desactivado <br> Acceda a recordar contraseña para activar la cuenta. ";
+    const E028 = "Usuario desactivado \n Acceda a recordar contraseña para activar la cuenta. ";
 
     //Sessiones y times
     const E050 = "Se ha excedido el tiempo de sessión";
@@ -47,7 +47,7 @@ class Error extends \Exception{
     const E031 = "Tamaño de datos incorrecto";
 
     // Errores relacionados plan contratado
-    const E041 = "Su plan no admite más agendas <br> Pongase en contacto con el administrador. "; 
+    const E041 = "Su plan no admite más agendas \n Pongase en contacto con el administrador. "; 
 
     //Base datos
     const E051 = "No se encontro la base de datos";

@@ -38,68 +38,58 @@ class Company extends Query{
         $Data->codifyAttr('nombre_empresa');
         $Data->set('nombre', $Data->nombre_empresa);
         $this->loadData($Data->getAll());
-    
+// Creamos carpeta con configuración y archivos
+$this->createFolder();
         // Creamos la base de datos
-        try{         
-    
-            $this->createDb($this->db);
-            $this->createTables();
-            
-            // Cargamos los datos de la empresa
-            $this->fecha(date("Y-m-d H:i:s"));
-            $this->ultimo_acceso(date("Y-m-d H:i:s"));
-            $new = new Query($this->table, $this->db); 
-            $data = $this->toArray();
-            unset($data['config']);
-            
-            // VAlores para registros de muestra
-            $data['telefono'] = '123456789';
-            $data['calle'] = 'Calle empresa';
-            $data['numero'] = 1;
-            $data['piso'] = 0;
-            $data['escalera'] = '1'; 
-            $data['poblacion'] = 'Población';  
-            $data['provincia'] = 'Provincia';
-            $data['CP'] = '12345';
-            $data['pais'] = 'ES';      
-            
-            $new->add($data);
-            $ser = new Items();
-            $ser->add([
-                'codigo'        => 'SER001',
-                'nombre'        => 'Servicio 001',
-                'descripcion'   => 'Esto es un servicio de muestra',
-                'precio'        => 4,
-                'coste'         => 2,
-                'id_iva'        => 1,
-                'tipo'          => 1,
-                'estado'        => 1     
-            ]);
+        $this->createDb($this->db);
+        $this->createTables();
+        
+        // Cargamos los datos de la empresa
+        $this->fecha(date("Y-m-d H:i:s"));
+        $this->ultimo_acceso(date("Y-m-d H:i:s"));
+        $new = new Query($this->table, $this->db); 
+        $data = $this->toArray();
+        unset($data['config']);
+        
+        // VAlores para registros de muestra
+        $data['telefono'] = '123456789';
+        $data['calle'] = 'Calle empresa';
+        $data['numero'] = 1;
+        $data['piso'] = 0;
+        $data['escalera'] = '1'; 
+        $data['poblacion'] = 'Población';  
+        $data['provincia'] = 'Provincia';
+        $data['CP'] = '12345';
+        $data['pais'] = 'ES';      
 
-            //Añadimos el usuario administrador
-            $Data->set('nombre', $Data->nombre_usuario); 
-            $Data->set('nivel', 2);
-            $User = new User;
-            if (!$User->new($Data)) throw new \Exception('E019');
+        $new->add($data);
+        $ser = new Items();
+        $ser->add([
+            'codigo'        => 'SER001',
+            'nombre'        => 'Servicio 001',
+            'descripcion'   => 'Esto es un servicio de muestra',
+            'precio'        => 4,
+            'coste'         => 2,
+            'id_iva'        => 1,
+            'tipo'          => 1,
+            'estado'        => 1     
+        ]);
 
-            
-            //$this->add(['nombre' => $this->nombre, 'email' => $this->email]);
-            // Creamos carpeta con configuración y archivos
-            $this->createFolder();
-            
-            return true; 
-        } catch( \Exception $e){
-            return Error::array($e->getMessage());
-        }
+        //Añadimos el usuario administrador
+        $Data->set('nombre', $Data->nombre_usuario); 
+        $Data->set('nivel', 2);
+        $User = new User;
+        if (!$User->new($Data)) throw new \Exception('E019');
+
+        
+        //$this->add(['nombre' => $this->nombre, 'email' => $this->email]);
+  
     }
     private function createFolder(){
-        $folder = \PUBLICF\COMPANIES . $this->nombre;
-        if (!file_exists($folder)){
-            mkdir($folder, 0750);
-            copy(\PUBLICF\TEMPLATE . 'config.ini', $folder . '/config.ini' );
-        } else{
-            throw new Error('E017');
-        }
+        if( 
+            !copy(\FILE\CONFIG_TEMPLATE, \FILE\CONFIG ) ||
+            !copy(\FILE\LOGO_TEMPLATE, \FILE\LOGO )
+        ) throw new Error('E017');
     }
     // Extraemos el prefijo por defecto para las bbdd de la aplicación
     // Creamos la base de datos con el nombre correspondiente

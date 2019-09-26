@@ -12,8 +12,8 @@ class User extends Query{
      * false para no crear conexion
      */
     function __construct($arg = null, bool $conn = true){
-
-        $this->company = NAME_COMPANY??null;
+        $C = new Company; 
+        $this->company = $C->nombre();
         if($conn) parent::__construct();
         if($arg){
             if (is_array($arg)) $this->loadData($arg);
@@ -169,5 +169,8 @@ class User extends Query{
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 
     }
-
+    function estado(int $arg = null){
+        if($arg) $this->{__FUNCTION__} = $arg; 
+        return $this->{__FUNCTION__}; 
+    }
 }

@@ -65,13 +65,15 @@ class Login extends Controller{
         $this->User = new User($Data->email);
 
         if($this->verify($this->User->password())){
-            if ($this->isAdmin()){
-                $Admin = new Admin; 
-                return $Admin->loadView();
-            } else if ($this->isUser()){
-                $Clients = new Clients; 
-                return $Clients->loadView();
-            }
+            if($this->isActive()){
+                if ($this->isAdmin()){
+                    $Admin = new Admin; 
+                    return $Admin->loadView();
+                } else if ($this->isUser()){
+                    $Clients = new Clients; 
+                    return $Clients->loadView();
+                }
+            } else return Error::array('E023');
         } else return Error::array('E026');
         
     }
@@ -98,5 +100,8 @@ class Login extends Controller{
 
         if (!$data) $data = ['page' => 'login', 'data' =>  $this->company->toArray()];
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
+    }
+    private function isActive(){
+        return $this->User->estado() == 1; 
     }
 }
