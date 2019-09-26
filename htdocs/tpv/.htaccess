@@ -1,0 +1,23 @@
+
+Options +FollowSymLinks -MultiViews 
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^img/(.*)$ - [L]
+RewriteRule ^js/(.*)$ - [L]
+RewriteRule ^font/(.*)$ - [L]
+RewriteRule ^sources/(.*)$ - [L]
+RewriteRule ^dist/(.*)$ - [L]
+RewriteRule ^css/(.*)$ - [L]
+RewriteRule ^node_modules/(.*)$ - [L]
+RewriteRule ^companies/(.*)$ - [L]
+RewriteRule ^build/(.*)$ - [L]
+
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ tpv/index.php?controller=$1&action=$2&args=$3 [R,L]
+#RewriteRule ^([^/]+)/([^/]+)/?$ tpv/index.php?controller=$1&action=$2 [R,L]
+##RewriteRule ^(.+)/([^/]+)/?$ tpv/index.php?controller=$1 [R,L]
+##RewriteRule ^(.+)/?$ tpv/index.php [R=301,R,L]
+
+ErrorDocument 404 error404.php

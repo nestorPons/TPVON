@@ -37,5 +37,3 @@ namespace PUBLICF;
 
 namespace URL;
     const COMPANIES              =  'companies/';
-
-include \FOLDERS\CONFIG . 'files.php';

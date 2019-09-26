@@ -89,7 +89,8 @@ app.users = {
             if (this.currentId == -1 ) this.addLine(data)
             else this.updateLine(data)
             this.Form.close()
-    
+
+            if(app.income) app.income.loadUsers()
             app.tpv.loadUsers()
         } else {
             app.mens.error('El registro no pudo ser guardado!! \n ' + this.error.mens)

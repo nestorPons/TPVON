@@ -164,7 +164,7 @@
                 for(let i in Ticket.lines){
                     const line = Ticket.lines[i]
                     let a = await DB.get('servicios', 'id', line.articulo )
-                    this.Table.addLine(line.id, [line.cantidad, a[0].codigo, line.dto, `${line.amo}€`])
+                    this.Table.addLine(line.id, [line.cantidad, a[0].nombre, line.dto, `${line.amo}€`])
                 }
                 this.Table.total(this.Ticket.total())
             })

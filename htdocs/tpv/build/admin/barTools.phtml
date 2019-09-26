@@ -10,7 +10,7 @@
         <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'], false)?>
     </div>
     <div id="bartools-central">
-        <?php new DatePicker?>
+        <!-- <?php new DatePicker?> -->
     </div>  
     <div id="bartools-general">
         <?php new ButtonCloseApp?>
@@ -43,7 +43,8 @@
     #bartools .lnr{
         display: inline-block;
         font-size: 1.4rem;
-        cursor: pointer; 
+        cursor: pointer;
+        margin: 2px;
     }
     #bartools .lnr:hover{
         transform: var(--effect-transform-hover);

@@ -5,6 +5,13 @@ define('SEND_MAIL', TRUE);
 
 $conn = parse_ini_file(dirname(__DIR__) . '/config/conn.ini');
 define('CONN', $conn);
+
+// Comprobamos si se han proporcionado los datos para la conexión
+if(!CONN['configured']) {
+    include_once 'config/index.phtml';
+    exit; 
+}
+
 // Constantes de la aplicación
 if(isset(CONN['db'])){
     define('CODE_COMPANY', filter_var((strtolower(CONN['db'])), FILTER_SANITIZE_SPECIAL_CHARS));

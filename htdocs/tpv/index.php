@@ -7,9 +7,10 @@ use \app\core\{
  //phpinfo();die();
 /* session_start(); */
 define('ROOT' ,dirname(dirname(__DIR__)) . '/');
-require_once ROOT . '/apptpv/config/app.php';
 require_once ROOT . '/apptpv/config/folders.php';
+require_once ROOT . '/apptpv/config/app.php';
 require_once ROOT . '/vendor/autoload.php';  
+include \FOLDERS\CONFIG . 'files.php';
 
 // Desarrollo
 if( ENV ){

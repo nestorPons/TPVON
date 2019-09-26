@@ -1,34 +1,32 @@
 <section id="income">
 <?php 
-    $from = new DatePicker(['label'=>'De']);
-    $to = new DatePicker(['label'=>'Hasta']);
-    $total = new InputText(['label' => 'Total', 'iconlast' => '', 'class'=>'text-right']);
-    $table = new Table(['columns'=>['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
+    $from       = new DatePicker(['label'=>'De', 'tabindex' => 1]);
+    $to         = new DatePicker(['label'=>'Hasta', 'tabindex' => 2]);
+    $seluser    = new Select(['label' => 'Usuario', 'tabindex' => 3]);
+    $total      = new InputRead(['label' => 'Total', 'iconlast' => '', 'class'=>'text-right']);
+    $table      = new Table(['columns'=>['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
 ?>
 </section>
-<style>
+<style lang="less">
     #income{
-            align-items: flex-start;
-            display: grid;
-            grid-template-rows: auto auto [table] 1fr [last] auto;
-            grid-template-columns: [first] 1fr 1fr repeat(5, auto) [last] 1fr;
-            grid-row-gap: 5px;
-    }
-    #<?= $table->id()?>{
-        grid-column : 1 / -1;
-        max-height  : 75vh;
-          
-    }
-    #<?= $table->id()?> th, #<?= $table->id()?> td {
-        padding: 0;
-    }
-    #<?= $total->id()?>{
-        grid-row    : -1;
-        grid-column : last;
-
-    }
-    .Importe{
-        text-align: right;
+        align-items: flex-start;
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: repeat(3, 1fr);
+        grid-row-gap: 5px;
+        table{
+            grid-row    : 2; 
+            grid-column : 1 / span 3;
+            * {
+                padding     : 2px;
+            }
+        }
+        .Importe{
+            text-align: right;
+        }
+        #<?=$total->id()?> {
+            grid-column : 3;
+        }
     }
 </style>
 <script>
@@ -37,10 +35,24 @@
         txtFrom     : <?=$from->id()?>, 
         txtTo       : <?=$to->id()?>, 
         txtTotal    : <?=$total->idEl()?>,
+        SelUser  :  new Select('<?=$seluser->id()?>'),
         table       : <?=$table->id()?>, 
         Table       : new Table('<?=$table->id()?>'),
         load(){
+            this.loadUsers()
             this.filter()
+        },
+        loadUsers(){
+            let el = this.SelUser
+            el.clear()
+
+            DB
+            .get('usuarios','estado', 1)
+            .then(users => {
+                for(let u of users){
+                    el.addOption(u.id, u.nombre)
+                }
+            })
         },
         filter(){
             this.Table.clear()
@@ -50,6 +62,7 @@
                 data:{
                     f1 : app.date.format(this.txtFrom.value, 'sql'),
                     f2 : app.date.format(this.txtTo.value, 'sql'),
+                    u  : this.SelUser.value()
                 }
             }
             app.post(data, data => {

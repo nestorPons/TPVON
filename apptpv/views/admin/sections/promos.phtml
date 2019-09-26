@@ -3,7 +3,7 @@
         <fieldset>
             <legend>Promociones</legend>
             <?php
-            $txt00 = new InputRead(['label' => 'Id', 'name'=>'id']);
+            $txt00 = new InputHidden(['label' => 'Id', 'name'=>'id']);
             $txt01 = new InputText(['label' => 'Nombre', 'name'=>'nombre','tabindex'=>1, 'title'=>"Introduzca el nombre de la promoción", 'required'=>true]);
             $txt02 = new InputText(['label' => 'Total de dias', 'name'=>'valor']);
             $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name'=>'dto']);
@@ -24,7 +24,7 @@ app.promos = {
             .then(d => app.loadDataToForm(d, this.form))
     },
     onblur(callback){
-        this.change && this.save()
+        this.save()
         typeof callback == 'function' && callback()
     },
     save(){

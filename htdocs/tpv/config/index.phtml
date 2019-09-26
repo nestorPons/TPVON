@@ -1,0 +1,23 @@
+<h2>Configuración servidor tpv</h2>
+
+<form action="config/saveconfig.php">
+  Nombre Base datos:<br>
+  <input type="text" name="db" value="<?=CONN['db']?>">
+  <br>
+  Host:<br>
+  <input type="text" name="host" value="<?=CONN['host']?>">
+  <br>
+  Puerto:<br>
+  <input type="text" name="port" value="<?=CONN['port']?>">
+  <br>
+  Driver:<br>
+  <input type="text" name="driver" value="<?=CONN['driver']?>">
+  <br>
+  Nombre usuario base datos:<br>
+  <input type="text" name="current_user" value="<?=CONN['current_user']?>">
+  <br>
+  Contraseña usuario base datos:<br>
+  <input type="password" name="password">
+  <br><br>
+  <input type="submit" value="Submit">
+</form> 

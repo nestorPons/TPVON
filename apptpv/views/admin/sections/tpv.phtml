@@ -262,15 +262,15 @@
 
             // Validamos los d  mos en la tabla
             if(line.articulo) 
-                this.addLineTable(line.id, line.articulo, line.des, line.cantidad, line.precio, line.dto, line.amo)
+                this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto, line.amo)
             else this.selCode.el.focus
         },
         // Estrategia de promocion de filiacion clientes VIP por tiempo 
         addPromo(callback){
             if(this.client && this.client.promos) {
-                DB.get('promos','id',1)
+                DB.get('promos')
                 .then(d => d[0])
-                .then(promo => {       
+                .then(promo => {     
                         // Aplicamos la promocion si el último ticket esta dentro del periodo establecido como valido
                         if( this.client.lastTicket && 
                             promo &&
@@ -281,14 +281,14 @@
                 callback()
             }
         },
-        async addLineTable(id, articulo, des, cantidad, precio, dto, amo){
-            const a = await DB.get('servicios', 'id', articulo)
-            this.Table.addLine(id, [a[0].codigo, des, cantidad, precio, dto, amo || cantidad * precio * (1 - dto / 100)])
+        async addLineTable(id, idArticulo, cantidad, precio, dto, amo){
+            const a = await DB.get('servicios', 'id', idArticulo)
+            this.Table.addLine(id, [a[0].codigo, a[0].descripcion, cantidad, precio, dto, amo || cantidad * precio * (1 - dto / 100)])
 
             this.clearLine()
             this.printTotal()
             // Scroll al final
-            this.Table.endScroll()
+            /* this.Table.endScroll() */
             
         },  
         // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
@@ -398,11 +398,7 @@
 
             // Cargamos las lineas 
             for(let line of data.lines){
-                DB.get('servicios', 'id' , line.articulo)
-                    .then(d => d[0])
-                    .then(ser => {
-                        if(ser) this.addLineTable(line.id, ser.codigo, ser.descripcion, line.cantidad, line.precio, line.dto)
-                    })
+                this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto)
             }
            
         }

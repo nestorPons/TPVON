@@ -8,7 +8,7 @@
                 new InputPass(['label'=>'Contraseña', 'name'=>'password', 'required'=>true, 'value'=>'123456'])
             ?>
         </fieldset>
-        <?php new ButtonSuccess; new ButtonCancel?>
+        <?php new ButtonSuccess(['caption' => 'Acceder']); /* new ButtonCancel */?>
     </form>
     <a href="loginnewuser">Nuevo usuario</a>
     <a href="loginrememberpassword" class="float-right">Recordar contraseña</a>

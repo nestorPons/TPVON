@@ -73,7 +73,8 @@ class Tickets extends Query{
     }
     // Método get de obtención por rando de fechas
     function between(Data $Data){
-        $arr_tickets =  $this->getBetween('fecha',$Data->f1 . ' 00:00:00.000', $Data->f2 . ' 23:59:59.999');
+        $filterUser = (!empty($Data->u)) ? "AND id_cliente = {$Data->u}" : ''; 
+        $arr_tickets =  $this->getBetween('fecha',$Data->f1 . ' 00:00:00.000', $Data->f2 . ' 23:59:59.999', $filterUser);
         foreach($arr_tickets as $key => $ticket){
             $total = 0; 
             $lines = new Lines; 
