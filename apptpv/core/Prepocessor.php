@@ -15,12 +15,17 @@ class Prepocessor{
         $cache,
         $isModified = false,
         $content,
-        $queue; 
+        $queue,
+        $loadeds = []; 
     
     function __construct(bool $cacheable = true){
+        $this->queue = "<script src='./build/js/bundle.js'></script>";
         $this->cache_class_js = $_SESSION['cache_class_js']??null;
         $this->cacheable = $cacheable;
         $this->cache = (file_exists(self::CACHE_FILE)) ? parse_ini_file(self::CACHE_FILE) : [];
+
+        // Reseteamos el archivo de construccion build de js para agrupar todas las clases
+        if(file_exists(\FILE\BUNDLE_JS)) unlink(\FILE\BUNDLE_JS);
 
         if(!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
  
@@ -85,10 +90,11 @@ class Prepocessor{
 
         $this->content = str_replace($content, $content_min, $this->content);
     }  
+    // Lee archivos de directorios y los directorios anidados
     private function showFiles(String $path){
     
         $dir = opendir($path);
-        
+
         while ($current = readdir($dir)){
             if( $current != "." && $current != "..") {
                 
@@ -110,7 +116,7 @@ class Prepocessor{
                     if(isset($a['lang']) && $a['lang'] == 'less') 
                         $this->less( $this->extract('style'));
                     
-                    $this->js($this->extract('script'));
+                    $this->build_js($this->extract('script'));
                     
                     if( $file == self::MAIN_PAGE ) $this->queue();
                     // Compresión salida html
@@ -131,7 +137,6 @@ class Prepocessor{
         $content = $this->content; 
         $new_content = str_replace('</head>', $this->queue . '</head>', $content);
         $this->content = $new_content;
-
     }
     private function include(){
         
@@ -150,57 +155,66 @@ class Prepocessor{
      * Extraemos las clases de los componentes 
      * y las cargamos en un ambito global
      */
-    private function js($content){ 
+    private function build_js($class_js){
+        $strFile = file_exists(\FILE\BUNDLE_JS) 
+            ? \file_get_contents(\FILE\BUNDLE_JS) 
+            : ''; 
 
         // Buscamos clases js en el archivo
         $regex = '/class [A-Za-z0-9]{1,150}/';
-        if(preg_match($regex, $content, $r)){
-
-            // Agregamos clases padre a la carga principal de la aplicación 
+        if(preg_match($regex, $class_js, $r)){
+            // Buscamos clases padre y las agregamos a la carga principal de la aplicación 
             $regex_extends = '/extends [A-Za-z0-9]*/';
-            if(preg_match($regex_extends, $content, $match)){
+            if(preg_match($regex_extends, $class_js, $match)){
     
                 $main_class = explode(' ',$match[0])[1];
                 $src = "<script src='./js/$main_class.min.js'></script>";
-                if (!strpos($this->queue, $src)) $this->queue .= $src; 
+                if (!strpos($this->queue, $src)) $this->queue = $src . $this->queue; 
         
             }
 
-            $folder = \FOLDERS\CLASSES_JS;
-            $ac = explode(' ',$r[0]);
-            
             // Creamos el archivo de la clase
+            $ac = explode(' ',$r[0]);
             $nameClass= $ac[1];
-            $regex = '#\<script(.*)>((.|\n)*)</script>#';
-            $len = preg_match($regex, $this->content, $matches);            
-            if(!file_exists($folder)) mkdir($folder, 0775, true);
-            file_put_contents($folder.$nameClass.'.js', $matches[2]);
+
+            // MINIMIFICAMOS JS
+            $minifier = new Minify\JS;
+            $minifier->add($class_js);
+            $strFile .= $minifier->minify();
+            file_put_contents(\FILE\BUNDLE_JS, $strFile);
+/*             $folder = \FOLDERS\BUILD_JS;
+            file_put_contents($folder.$nameClass.'.js', $class_js); */
             
             // Eliminamos TODO EL BLOQUE JS del componente
+/*             
+            // Esta busqueda da error en algunas ocasiones se deja para su revision
+            $regex = '#\<script((.|\n)*)</script>#';
             $this->content = preg_replace($regex, ' ', $this->content);
+ */
+            // Eliminamos el tag script del documento
+            $this->content = str_replace($class_js,'', $this->content);
+
+            // Registramos la clase como cargada 
+            $this->loadeds[] = $nameClass;
 
             // Añadimos una cola para agregar los enlaces en el index o puerta principal 
-            $this->queue .= "<script src='./build/js/$nameClass.js'></script>";
-   
+            //$this->queue .= "<script src='./build/js/$nameClass.js'></script>";
             
             // Buscamos la clase en la sesión
             if(!empty($this->cache_class_js) && in_array($ac[1], $this->cache_class_js)){
                 // si ya esta cargada
-
-                $this->content = str_replace($content, '', $this->content);
+                $this->content = str_replace($class_js, '', $this->content);
             } else {
                 // Cargamos en la cache de la sesión
                 $this->cache_class_js[] = $ac[1];
-                
             }
         }
-
         // MINIMIFICAMOS JS
         $minifier = new Minify\JS;
-        $minifier->add($content);
+        $minifier->add($class_js);
         $replace = $minifier->minify();
 
-        return str_replace($content, $replace, $this->content);
+        return str_replace($class_js, $replace, $this->content);
     }
     private function cache_record(Array $cache){
         if($this->isModified){

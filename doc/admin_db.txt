@@ -1,5 +1,0 @@
-usarios(#id, DNI, nombre)
-telefonos(#id, -id_empresa, nombre, numero)
-direcciones(#id, -id_empresa, calle, numero, cp, poblacion, localidad, pais)
-emails(#id, -id_empresa, email)
-empresa(#id, nif, web, nombre, codigo)

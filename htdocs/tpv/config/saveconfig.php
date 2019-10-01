@@ -5,7 +5,7 @@ $conn = parse_ini_file($file,true);
 $file = '../../../apptpv/config/conn.ini';
 // write
 $data = array(
-    'configured'            => true, 
+    'configured'            => 1, 
     'db'                    => $_GET['db'],
     'host'                  => $_GET['host'],
     'port'                  => $_GET['port'],

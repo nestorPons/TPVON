@@ -7,7 +7,7 @@ $conn = parse_ini_file(dirname(__DIR__) . '/config/conn.ini');
 define('CONN', $conn);
 
 // Comprobamos si se han proporcionado los datos para la conexión
-if(!CONN['configured']) {
+if(CONN['configured'] != 1) {
     include_once 'config/index.phtml';
     exit; 
 }

@@ -4,21 +4,25 @@
 
 
 
-### Referencias
-##### Clase Conn 
-ha sido modificada del trabajo rehalizado por padrecedano/PHP-PDO 
+# Referencias
+## Clase Conn 
+### ha sido modificada del trabajo rehalizado por padrecedano/PHP-PDO 
 https://github.com/padrecedano/PHP-PDO
-##### Server 
+
+## Server 
 https://github.com/jcavat/docker-lamp
 
-css less
+## css less
 https://leafo.net/lessphp/
 
-Menu responsive
+## Menu responsive
 https://www.antofernandez.com/menu-hamburguesa-con-css/
 
-Iconos 
+## Iconos 
 https://linearicons.com/
 
-dialogos JS
+## dialogos JS
 http://bootboxjs.com
+
+## Minify 
+https://github.com/matthiasmullie/minify

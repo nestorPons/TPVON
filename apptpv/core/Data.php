@@ -77,8 +77,16 @@ class Data {
         if(!(isset($this->{$arg}) && strlen($this->{$arg}) < $len)) Error::die('E009', $this->{$arg}??null);
         return true;
     }
-    function toArray(){ 
-        return (array)$this;
+    // Combierte los datos en un array 
+    // $key => array de claves que se desean eliminar
+    function toArray(Array $key = null){
+        $data = (array)$this; 
+        if($key) {
+            foreach($key as $v){
+                unset($data[$v]);
+            }
+        }
+        return $data;
     }
     function toJSON(){
         return json_encode($this->toArray());

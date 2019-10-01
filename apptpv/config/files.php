@@ -7,6 +7,6 @@ const CONFIG_TEMPLATE   = \PUBLICF\TEMPLATE . 'config.ini';
 const CONFIG            = \PUBLICF\COMPANIES . 'config.ini';
 const LOGO_TEMPLATE     = \PUBLICF\TEMPLATE . 'logo.png';
 const LOGO              = \PUBLICF\COMPANIES . 'logo.png'; 
-
+const BUNDLE_JS         = \FOLDERS\BUILD_JS . 'bundle.js';
 define(__NAMESPACE__ . '\CONFIG_COMPANY', \PUBLICF\COMPANIES . '/config.ini');
 define(__NAMESPACE__ . '\TEMPLATE_CONFIG',  \PUBLICF\TEMPLATE . '/config.ini');

@@ -21,13 +21,29 @@
 <script>
 'use strict'
 app.services = {
-    ...services, 
     table       : 'servicios',
     buttons     : ['add', 'search'],
     currentId   : null, 
     Table       : new Table('<?=$table->idEl()?>'),
     Form        : new Modal('<?=$form->id()?>'),
     $table      : $('#<?=$table->id()?>').find('tbody'),
+    load(){
+        DB.get(this.table)
+            .then( data => {
+                for( let i in data ){
+                    var d = data[i]
+                    // Listamos los servicios activos solamente
+                    if(d.estado == 1){
+                        this.Table.addLine(
+                            d.id, 
+                            [d.id, d.codigo, d.nombre, d.descripcion, d.precio]
+                        )
+                        .addClass(d.codigo[0].toLowerCase())
+                        
+                    }
+                }
+            })
+    },
     validation(){
         return true
         let f = this.Form.getData(),
@@ -82,38 +98,25 @@ app.services = {
 
         app.tpv.loadServ()
     },
-    load(){
-        DB.get(this.table)
-            .then( data => {
-                for( let i in data ){
-                    var d = data[i]
-                    // Listamos los servicios activos solamente
-                    if(d.estado == 1){
-                        this.Table.addLine(
-                            d.id, 
-                            [d.id, d.codigo, d.nombre, d.descripcion, d.precio]
-                        )
-                        .addClass(d.codigo[0].toLowerCase())
-                        
-                    }
-                }
-            })
-    },
     show(e){
         this.currentId = e.path[1].attributes.idline.value
         DB.get(this.table, 'id', this.currentId)
             .then( data => this.Form.open(data).setTile('Edicion servicio o artículo'))
     },
-    search(value){
-        this.$table.find('tr').hide()
-        this.searchBy('codigo', value) || 
-        this.searchBy('nombre', value) || 
-        this.searchBy('descripcion', value)
+    async search(value){
+        this.Table.hideLines()
+        await this.searchBy('codigo', value) || 
+        await this.searchBy('nombre', value) || 
+        await this.searchBy('descripcion', value)
     },
     searchBy(field, value){
-        const v = DB.get(this.table, field, value, 'estado==1')
-        for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()
-        return v != false
+        DB.get(this.table, field, value, 'estado==1').then( d => {
+            if (d){
+                for(let i in d) this.Table.showLines(`[idline='${d[i].id}'`)
+                return true
+            }
+            else return false
+        })
     }
 }
 </script>

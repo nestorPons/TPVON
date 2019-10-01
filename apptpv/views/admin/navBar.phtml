@@ -12,7 +12,7 @@
 </nav>
 <style>
     :root{
-        --nav-initial-width: 46px;
+        --nav-initial-width: 55px;
         --nav-max-width: 145px;
     }
     nav#navBar{
@@ -28,7 +28,7 @@
        padding: 0;
      }
     nav#navBar ul{
-        margin: 10px 0;
+        margin: 10px 5px;
         padding: 0;
         list-style:none;
      }
@@ -79,7 +79,26 @@
     // · estados del menu initial, short, long 
     if(!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
     var navbar = {
-            toggle(change = true){
+        load(){
+            echo('Load navbar...')
+            $('#navBar')
+                .on('click', 'a', function (e) {
+                    e.preventDefault();
+
+                    let section = $(this).attr('href')
+                    // Comprobamos si tiene parametros get 
+                    // Significa que se solicita redirección
+                    if(section.indexOf('?') != -1){
+                        let arr = section.split('?')
+                        let get = arr[1].split('=')
+                        location.href ="?" + get[0] + "=" + get[1];
+                    } else {
+                        app.sections.show(section)
+                    }
+                    if(menu.search.state == 1) menu.search.close() 
+                })
+        },
+        toggle(change = true){
                 let menuWidth = localStorage.getItem('menuWidth')
                 
                 let varClass =  (menuWidth == 'menu-initial')
@@ -98,5 +117,6 @@
     $('#icon-menu').click(navbar.toggle)
     $(function(){
         navbar.addClass(localStorage.getItem('menuWidth'))
+        navbar.load()
     })
 </script>

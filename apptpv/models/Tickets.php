@@ -1,13 +1,13 @@
 <?php namespace app\models;
 use \app\core\{Query, Data, Error};
 class Tickets extends Query{
-    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $regalo = 0;
+    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $regalo = 0, $lines;
     protected $table = 'tickets';
     function __construct($args = null){
         parent::__construct();
         if(is_int($args)){
             $this->loadData(
-                $this->getById($args)
+                $this->get($args)
             );
         }else if(is_object($args)){
             $this->loadData($args);
@@ -27,11 +27,11 @@ class Tickets extends Query{
         if(!$this->getById($Data->id)){
             $lines = $Data->lines; 
             $esregalo = $Data->regalo; 
-            $Data->filter(new Tickets); 
+            $Data->filter(new Tickets);
             $DateTime = new \DateTime;
             $Data->fecha = $DateTime->format('Y-m-d H:i');
-            $this->id = $this->add($Data->toArray());
-    
+            $this->id = $this->add($Data->toArray(['lines']));
+            
             foreach($lines as $line){
                 $Line = new Lines;
                 $idLine = $Line->add([
@@ -58,12 +58,14 @@ class Tickets extends Query{
         $Data = new Data($this->getById($id));
         $Lines = new Lines; 
         $lines = $Lines->getBy(['id_ticket'=>$id]);
-        $Control = new Control; 
+        
         foreach($lines as $k => $v){
-            $r = $Control->getBy(['id_linea'=>$v['id']]);
-            $lines[$k]['fecha_regalo'] = $r[0]['fecha'];
+            $Control = new Control($v['id']); 
+            $lines[$k]['fecha_regalo'] = $Control->fecha;
         }
+
         $Data->addItem($lines, 'lines');
+
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
         else return false; 
@@ -92,25 +94,34 @@ class Tickets extends Query{
         }
         return $arr_tickets; 
     }
-    function prev(Data $Data){
-        $arr = $this->query("SELECT * FROM $this->table WHERE id < $Data->id   AND estado = 1 ORDER BY id DESC  LIMIT 1;");
-        if(isset($arr[0])) {
-            $d = new Data($arr[0]); 
-            return $this->getLines($d);
-        } else return 0;
-
+    function prev(Data $Data = null, String $filter = ''){
+        $id = ($Data) ? $Data->id : $this->id; 
+        $arr = $this->query("SELECT * FROM $this->table WHERE id < $id AND estado = 1 $filter ORDER BY id DESC  LIMIT 1;");
+        if(!empty($arr)) {
+            $this->loadData(
+                $this->get($arr[0]['id'])
+            );
+            return $this->toArray();
+        }
+        else return false;
     }
-    function next(Data $d){
-        $arr = $this->query("SELECT * FROM $this->table WHERE id > $d->id  AND estado = 1 ORDER BY id  LIMIT 1;");
-        if(isset($arr[0])) {
-            $d = new Data($arr[0]); 
-            return $this->getLines($d);
-        } else return ['id'=>-1];
+    function next(Data $Data = null, String $filter = ''){
+        $id = ($Data) ? $Data->id : $this->id; 
+        $arr = $this->query("SELECT * FROM $this->table WHERE id > $id AND estado = 1 $filter ORDER BY id ASC  LIMIT 1;");
+        if(!empty($arr)) {
+            $this->loadData(
+                $this->get($arr[0]['id'])
+            );
+            return $this->toArray();
+        }
+        else return false;
     }
-    function getLines(Data $d){
-        $Lines = new Lines; 
-        $lines = $Lines->getBy(['id_ticket'=>$d->id]);
-        $d->addItem($lines, 'lines');
-        return $d; 
+    function lines(Data $d = null){
+        if($d) {
+            $Lines = new Lines; 
+            $lines = $Lines->getBy(['id_ticket'=>$d->id]);
+            $d->addItem($lines, 'lines');
+        } 
+        return $this->lines; 
     }
 }

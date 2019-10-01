@@ -15,8 +15,7 @@ const APP                           = ROOT . 'apptpv/';
     const HTDOCS                    = ROOT . PUBLIC_FOLDER; // Carpeta pública
         const NODE_MODULES              = HTDOCS . 'node_modules/';
         const VIEWS                     = HTDOCS . 'build/';
-            const CLASSES_JS            = HTDOCS . 'build/js/';    
-
+            const BUILD_JS            = HTDOCS . 'build/js/';    
 
 namespace VIEWS; 
     const COMPONENTS            = \FOLDERS\VIEWS . 'components/';

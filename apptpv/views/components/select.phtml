@@ -33,11 +33,11 @@
             this.o =  this.el.getElementsByTagName('option')
             this.CLASS_SELECTED = 'valid' // Constante del estado seleccionado del select
         }
-        addOption(value, option){
-            let line = document.createElement('option')
-                line.value = value 
-                line.innerHTML = option
-            this.el.append(line)
+        addOption(value, text){
+            let opt = document.createElement('option')
+                opt.appendChild( document.createTextNode(text) )
+                opt.value = value // No se que
+                this.el.appendChild(opt)
         }
         default(){
             this.el.value = 0
@@ -83,6 +83,5 @@
             } 
             /* return this.value() */
         }
-
     }
 </script>

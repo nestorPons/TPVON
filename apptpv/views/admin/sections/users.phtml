@@ -20,7 +20,6 @@
 </style>
 <script>
 app.users = {
-    ...users,
     table: 'usuarios',
     buttons: ['add', 'search'],
     currentId: null, 
@@ -29,7 +28,7 @@ app.users = {
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(callback){
         let f = this.Form.getData()        
-        this.db.get()
+        DB.get(this.table)
             .then(usuarios => {
                 for(i in usuarios) {
                     let u = usuarios[i]
@@ -97,7 +96,7 @@ app.users = {
         }
     },
     load(){
-        this.db.get()
+        DB.get(this.table)
             .then(users => {
                 for( i in users ){
                     var user = users[i]
@@ -113,15 +112,14 @@ app.users = {
     },
     // Formas de busqueda en usuarios
     search(value){
-        this.$table.find('tr').hide()
+        this.Table.hideLines()
         if(/^([0-9])*$/.test(value)) this.searchBy('tel', value)
         else if(value.indexOf('@') != -1) this.searchBy('email', value)
         else this.searchBy('nombre', value)
     },
     searchBy(field, value){
-        let db = new Db(this.table)
-        db.get(field, value, 'estado>0')
-            .then(v => {for(let i in v) this.$table.find(`[idline='${v[i].id}'`).show()})
+        DB.get(this.table, field, value, 'estado>0')
+            .then(v => {for(let i in v)  this.Table.showLines(`[idline='${v[i].id}'`)})
     }
 }
 </script>

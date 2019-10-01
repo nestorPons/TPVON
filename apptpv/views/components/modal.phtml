@@ -1,85 +1,66 @@
-<!-- <label for="control_<?=$id?>"></label> -->
-<input type="checkbox" id="control_<?=$id?>" class="modal">
+<!-- <label for="control_<?= $id ?>"></label> -->
+<input type="checkbox" id="control_<?= $id ?>" class="modal">
 <div>
-  <div class="card card-modal" id="<?=$id?>">
-    <label for="control_<?=$id?>" class="modal-close" ></label>
-    <h1 id="tileModal<?=$id?>" class="tile"></h1>
-    <?php include($body)?>
+  <div class="card card-modal" id="<?= $id ?>">
+    <label for="control_<?= $id ?>" class="modal-close"></label>
+    <h1 id="tileModal<?= $id ?>" class="tile"></h1>
+    <?php include($body) ?>
   </div>
 </div>
-  <style lang="less">
-    #<?=$idElement?>{
-        overflow: inherit;
-        padding: 1rem;
-        .modal-close{
-          top: -1em;
-          background-color: inherit;
-          right: -1em;
-          border-radius: 25px;
-          padding: 0;
-          border: 1px solid var(--border-color);
+<script>
+  class Modal {
+    constructor(id) {
 
-        }
-        label.modal-close:hover:before{
-          color: var(--input-invalid-color) ;
-        }
+      this.el = document.getElementById(id)
+      this.$el = $('#' + id)
+      this.$switch = $('#control_' + id)
+      this.$el.keyup(e => (e.key === 'Escape') && this.close())
     }
-  </style>
-  <script>
-    class Modal{
-      constructor(id){
+    clear() {
+      this.el.getElementsByTagName('form')[0].reset()
+      return this
+    }
+    setTile(tile) {
+      this.el.getElementsByClassName('tile')[0].innerHTML = tile
+      return this
+    }
+    open(data = null) {
+      if (data) this.load(data)
+      this.$switch.prop('checked', true)
+      let o = this.el.querySelector('[tabindex="1"]')
+      o != null && o.focus()
+      return this
+    }
+    close() {
+      this.$switch.prop('checked', false)
+      return this
+    }
+    load(data) {
+      const inputs = this.$el.find('input'),
+        selects = this.$el.find('select'),
+        d = exist(data.id) ? data : data[0]
 
-        this.el = document.getElementById(id)
-        this.$el = $('#' + id)
-        this.$switch = $('#control_' + id)
-        this.$el.keyup(e => (e.key === 'Escape') && this.close())
-      }
-      clear(){
-        this.el.getElementsByTagName('form')[0].reset()
-        return this
-      }
-      setTile(tile){
-        this.el.getElementsByClassName('tile')[0].innerHTML = tile
-        return this
-      }
-      open(data = null){
-        if(data) this.load(data)
-        this.$switch.prop('checked',true)
-        let o = this.el.querySelector('[tabindex="1"]')
-        o != null && o.focus() 
-        return this
-      }
-      close(){
-        this.$switch.prop('checked',false)
-        return this
-      }
-      load(data){
-        const inputs = this.$el.find('input'),
-              selects = this.$el.find('select'),
-              d = exist(data.id) ? data : data[0]
+      selects.each(function() {
 
-        selects.each(function(){
+        $(this).find('[selected]').attr('selected', false)
+        if (d.id != -1)
+          $(this)
+          .find('option[value="' + d[$(this).attr('name')] + '"]').attr('selected', true)
+        else
+          $(this)
+          .find('[default]').attr('selected', true)
+      })
+      inputs.each(function() {
+        if ($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio') {
+          if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
+          else $(this).prop('checked', false)
 
-          $(this).find('[selected]').attr('selected',false)
-          if(d.id != -1)
-            $(this)
-              .find('option[value="'+d[$(this).attr('name')]+'"]').attr('selected', true)    
-          else
-            $(this)
-              .find('[default]').attr('selected',true)
-        })
-        inputs.each(function(){
-          if($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio'){
-            if(d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
-            else $(this).prop('checked', false)  
-
-          }
-          else $(this).val(d[$(this).attr('name')])
-        })
-        return this
-      }
-      getData(){ 
-        return app.formToObject(this.el)
-      }
-    } 
-  </script>
+        } else $(this).val(d[$(this).attr('name')])
+      })
+      return this
+    }
+    getData() {
+      return app.formToObject(this.el)
+    }
+  }
+</script>

@@ -21,13 +21,11 @@ class Controller{
         $this->Data = $Data; 
 
         // Constructor alternativo básico
-        if(method_exists($this, $this->action)) $this->result = $this->{$this->action}($Data);
-        else {
-            // Si no encuentra el métodod en el controlador los busca en el modelo
-            $this->exec ($this->action, ''); 
-        };
-
-    }
+        $this->result = (method_exists($this, $this->action)) 
+                        ? $this->{$this->action}($Data)
+                        // Si no encuentra el métodod en el controlador los busca en el modelo
+                        : $this->exec ($this->action, ''); 
+        }
     protected function view($data = null){
         
         // Carpetas donde buscar las vistas

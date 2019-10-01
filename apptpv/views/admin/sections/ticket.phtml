@@ -170,7 +170,7 @@
             })
         },
         put(sendMail = false, callback){
-            this.Ticket.fecha = new Date().toISOString().slice(0,16).replace('T',' ')
+            this.Ticket.fecha = app.date.now('sql')
             this.Ticket.estado = 1
             this.Ticket.regalo = this.present.checked | 0 
             if(this.Ticket.regalo != 0 && typeof app.control != 'undefined') app.control.load() 

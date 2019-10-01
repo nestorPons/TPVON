@@ -292,12 +292,16 @@ const app = {
                 m = (f.getMonth() +1).toString().padStart(2, '0'),
                 y = f.getFullYear().toString(),
                 h = f.getHours().toString().padStart(2, '0'),
-                n = f.getMinutes().toString().padStart(2, '0')
+                n = f.getMinutes().toString().padStart(2, '0'),
+                s = f.getSeconds().toString().padStart(2, '0')
+                
             switch(arg){
                 case 'date': 
                     return d + "/" + m + "/" + y
                 case 'hour':
                     return h + ":" + n
+                case 'sql':
+                    return y + '-' + m + '-' + d + ' ' + h + ':' + n + ':' + s
                 default: 
                     return d + "/" + m + "/" + y + ' ' + h + ":" + n
             }
@@ -360,53 +364,51 @@ const app = {
     }
 }
 const DB = {
-    storage: [],
-    current: {}, 
+    storage : [],
+    current : 0, 
+    table   : null,
     key(table, key, value){
         this.get(table)
-        .then(d => {
+        .then(d => {    
             
-        })
+        });
     },
-    get(table , key, value, filter){
+    get(table = this.table , key, value, filter){
         return new Promise((resolve, reject) => {
             const _equalValues = function(el){
                 let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
                     v = (typeof value === 'string') ? value.toLowerCase().trim() : value
 
-                if(k) return typeof k === 'number' ? k == v : k.includes(v)
-                else return false
+                if(k) return typeof k === 'number' ? k == v : k.includes(v);
+                else return false;
             }
             if(table == undefined){
                 // Si no le paso un indice me devuelve todos los nombres de tablas
-                resolve(this.storage)
+                resolve(this.storage);
             }else{
                 // Si no se pasan key o value devolvemos todos los registros            
-                if(key == undefined || value == undefined ){    
-                    resolve(this.storage[table])
-                }
+                if(key == undefined || value == undefined )resolve(this.storage[table]);
                 else resolve(this.storage[table].filter((el) => {
                     if (filter) {
                         if(filter.indexOf('==') != -1){
-                            let arr = filter.split('==')
-                            return _equalValues(el) && el[arr[0].trim()] == arr[1].trim()
+                            let arr = filter.split('==');
+                            return _equalValues(el) && el[arr[0].trim()] == arr[1].trim();
                         }
                         else if(filter.indexOf('>') != -1){
-                            let arr = filter.split('>')
-                            return _equalValues(el) && el[arr[0].trim()] > arr[1].trim()         
+                            let arr = filter.split('>');
+                            return _equalValues(el) && el[arr[0].trim()] > arr[1].trim();       
                         }
                         else if(filter.indexOf('<') != -1){
-                            let arr = filter.split('<')
-                            return _equalValues(el) && el[arr[0].trim()] < arr[1].trim()                       
-                        }
-                        
+                            let arr = filter.split('<');
+                            return _equalValues(el) && el[arr[0].trim()] < arr[1].trim();                    
+                        };      
                     }
-                    else return _equalValues(el)
-                })) || reject(false)
-            } 
-        })
+                    else return _equalValues(el);
+                })) || reject(false);
+            };
+        });
     },
-    set(table, data, key, value){
+    set(table = this.table, data, key, value){
         return new Promise( (resolve, reject) => {
             if(key){
                 let i = this.storage[table].findIndex(el=>{
@@ -424,13 +426,25 @@ const DB = {
                     this.storage[table].push(data[i])
                 } 
             }
-            resolve(this.storage[table])
+            resolve(this.storage[table]);
         })
     },
-    last(table){
-        return this.get(table).then( d => d[d['length'] - 1 ])  
+    last(table = this.table){
+        return this.get(table).then( d => d[d['length'] - 1 ]);
     },
-    lastId(table){
-        return this.get(table).then( d => d[d['length'] -1 ].id)
+    lastId(table = this.table){
+        return this.get(table).then( d => d[d['length'] -1 ].id);
     },
+    loadIndex(index){
+        if( this.storage[index] != undefined ){
+            this.current = index;
+            return this.storage[index];
+        };
+    },
+    next(){
+        return this.loadIndex(this.current + 1);
+    },
+    prev(){
+        return this.loadIndex(this.current - 1);
+    }
 }
