@@ -35,7 +35,8 @@ return this.el.classList.contains('hoverable')}
 html(){return this.el.innerHTML}}class Select extends Component{constructor(id){super()
 this.el=document.getElementById(id).getElementsByTagName('select')[0]
 this.o=this.el.getElementsByTagName('option')
-this.CLASS_SELECTED='valid'}
+this.CLASS_SELECTED='valid'
+this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
 addOption(value,text){let opt=document.createElement('option')
 opt.appendChild(document.createTextNode(text))
 opt.value=value
@@ -54,7 +55,7 @@ option(data){if(data!=undefined){let optionselected=!1
 for(let option of this.o){if(option.getAttribute('value')==data){option.selected=!0
 optionselected=!0}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
-else this.el.classList.remove(this.CLASS_SELECTED)}}}class Modal{constructor(id){this.el=document.getElementById(id)
+else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}}class Modal{constructor(id){this.el=document.getElementById(id)
 this.$el=$('#'+id)
 this.$switch=$('#control_'+id)
 this.$el.keyup(e=>(e.key==='Escape')&&this.close())}

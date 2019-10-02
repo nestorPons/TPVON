@@ -1,6 +1,6 @@
 <div id="<?=$id?>" class="row col-sm-12 col-md-12">
     <select
-        class = "<?=$class?>"
+        class = "<?=$class?> <?=$default ? 'valid' : ''?>"
         <?=$printName?>
         <?=$printTitle?>
         <?=$required?>
@@ -16,7 +16,7 @@
         <?=$tabindex?>
         <?=$onchange?>
     > 
-        <option value="" hidden></option>
+        <option value="" <?=$default ? '' : 'hidden'?> ><?=$default?></option>
         <?php if($options):?>
             <?php foreach($options as $key => $val): ?>
                 <option value="<?=$key?>"  <?php if($key == $selected) echo "selected"?>><?=$val?></option>
@@ -32,6 +32,8 @@
             this.el = document.getElementById(id).getElementsByTagName('select')[0]
             this.o =  this.el.getElementsByTagName('option')
             this.CLASS_SELECTED = 'valid' // Constante del estado seleccionado del select
+
+            this.el.addEventListener('change', fn => this.el.classList.add(this.CLASS_SELECTED))
         }
         addOption(value, text){
             let opt = document.createElement('option')
@@ -68,7 +70,6 @@
         }
         // Seleciona una opcion por su valor
         option(data){
-            
             if (data != undefined) {
                 let optionselected = false
                 
@@ -79,7 +80,7 @@
                     } else option.selected = false 
                 }
                 if(optionselected && data != 0 ) this.el.classList.add(this.CLASS_SELECTED)
-                else this.el.classList.remove(this.CLASS_SELECTED)
+                else if( this.el.hasAttribute('hidden') ) this.el.classList.remove(this.CLASS_SELECTED)
             } 
             /* return this.value() */
         }

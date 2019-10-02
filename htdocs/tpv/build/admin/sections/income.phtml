@@ -1,82 +1,81 @@
 <?php namespace app\controllers\components?><section id="income">
-<?php 
-    $from       = new DatePicker(['label'=>'De', 'tabindex' => 1]);
-    $to         = new DatePicker(['label'=>'Hasta', 'tabindex' => 2]);
-    $seluser    = new Select(['label' => 'Usuario', 'tabindex' => 3, 'onchange' => 'app.income.filter()']);
-    $total      = new InputRead(['label' => 'Total', 'iconlast' => '', 'class'=>'text-right']);
-    $table      = new Table(['columns'=>['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
-?>
+    <?php
+    $from       = new DatePicker(['label' => 'De', 'tabindex' => 1]);
+    $to         = new DatePicker(['label' => 'Hasta', 'tabindex' => 2]);
+    $seluser    = new Select(['label' => 'Usuario', 'tabindex' => 3, 'onchange' => 'app.income.filter()', 'default' => 'Todos']);
+    $total      = new InputRead(['label' => 'Total', 'iconlast' => '', 'class' => 'text-right']);
+    $table      = new Table(['columns' => ['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
+    ?>
 </section>
-<style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income table{grid-row:2;grid-column:1 / span 3}#income table *{padding:2px}#income .Importe{text-align:right}#income #<?=$total->id()?>{grid-column:3}</style>
+<style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income table{grid-row:2;grid-column:1 / span 3}#income table *{padding:2px}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}</style>
 <script>
     app.income = {
-        buttons     : ['print', 'filter', 'search'],
-        txtFrom     : <?=$from->id()?>, 
-        txtTo       : <?=$to->id()?>, 
-        txtTotal    : <?=$total->idEl()?>,
-        SelUser     : new Select('<?=$seluser->id()?>'), 
-        Table       : new Table('<?=$table->id()?>'),
-        load(){
+        buttons: ['print', 'filter', 'search'],
+        txtFrom: <?= $from->id() ?>,
+        txtTo: <?= $to->id() ?>,
+        txtTotal: <?= $total->idEl() ?>,
+        SelUser: new Select('<?= $seluser->id() ?>'),
+        Table: new Table('<?= $table->id() ?>'),
+        load() {
             this.loadUsers()
             this.filter()
         },
-        loadUsers(){
+        loadUsers() {
             let el = this.SelUser
-            el.clear()
-
-            DB
-            .get('usuarios')
-            .then(users => {
-                for(let u of users){
-                    const discharged = (u.estado != 1) ? 'red' : null; 
-                    el.addOption(u.id, u.nombre, discharged)
-                }
-            })
+            DB.get('usuarios')
+                .then(users => {
+                    for (let u of users) {
+                        const discharged = (u.estado != 1) ? 'red' : null;
+                        el.addOption(u.id, u.nombre, discharged)
+                    }
+                })
         },
-        filter(){
+        filter() {
             this.Table.clear()
             this.getData({
                 controller: 'tickets',
                 action: 'getBetween',
-                data:{
-                    f1 : app.date.format(this.txtFrom.value, 'sql'),
-                    f2 : app.date.format(this.txtTo.value, 'sql'),
-                    u  : this.SelUser.value()
+                data: {
+                    f1: app.date.format(this.txtFrom.value, 'sql'),
+                    f2: app.date.format(this.txtTo.value, 'sql'),
+                    u: this.SelUser.value()
                 }
             })
         },
-        getData(data){
-            app.post(data, data => {
+        getData(data) {
+            app.post(data, (data, success) => {
                 let _loadData = d => {
-                        for(let x in d.lineas){
-                            let l = d.lineas[x]
-                            if(d.estado == 1) this.Table.addLine( null , 
-                                [
-                                    d.id, 
-                                    app.date.format(d.fecha, 'print'), 
-                                    app.date.format(d.fecha, 'hour'),
-                                    l.articulo, 
-                                    l.precio, 
-                                    l.cantidad, 
-                                    l.dto, 
-                                    l.importe.toFixed(2)
-                                ])
-                        }
-                        return parseFloat(d.total)
+                    for (let x in d.lineas) {
+                        let l = d.lineas[x]
+                        if (d.estado == 1) this.Table.addLine(null,
+                            [
+                                d.id,
+                                app.date.format(d.fecha, 'print'),
+                                app.date.format(d.fecha, 'hour'),
+                                l.articulo,
+                                l.precio,
+                                l.cantidad,
+                                l.dto,
+                                l.importe.toFixed(2)
+                            ])
                     }
-                if(data.id){
+                    return parseFloat(d.total)
+                }
+                if (success && data.id) {
                     this.txtTotal.value = _loadData(data[i]).toFixed(2)
                 } else {
                     let x = 0
-                    for(let i in data){ x += _loadData(data[i]) }
+                    for (let i in data) {
+                        x += _loadData(data[i])
+                    }
                     this.txtTotal.value = x.toFixed(2)
                 }
 
-            } )
+            })
         },
-        print(){
+        print() {
 
-            let printContents = 
+            let printContents =
                 `<h1> Listado de ingresos </h1>
                 <h2> Fecha inicio : ${this.txtFrom.value}</h2>
                 <h2> Fecha fin : ${this.txtTo.value}</h2>
@@ -90,20 +89,20 @@
             w.document.close(); // necessary for IE >= 10
             w.focus(); // necessary for IE >= 10
             w.print();
-            w.close(); 
-            
+            w.close();
+
         },
-        search(value){
+        search(value) {
 
             this.Table.clear()
             this.getData({
                 controller: 'tickets',
                 action: 'get',
-                data:{
-                    id  : value
+                data: {
+                    id: value
                 }
             })
-            
+
         },
     }
 </script>

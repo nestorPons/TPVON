@@ -1,6 +1,6 @@
 <?php namespace app\controllers\components?><div id="<?=$id?>" class="row col-sm-12 col-md-12">
     <select
-        class = "<?=$class?>"
+        class = "<?=$class?> <?=$default ? 'valid' : ''?>"
         <?=$printName?>
         <?=$printTitle?>
         <?=$required?>
@@ -16,7 +16,7 @@
         <?=$tabindex?>
         <?=$onchange?>
     > 
-        <option value="" hidden></option>
+        <option value="" <?=$default ? '' : 'hidden'?> ><?=$default?></option>
         <?php if($options):?>
             <?php foreach($options as $key => $val): ?>
                 <option value="<?=$key?>"  <?php if($key == $selected) echo "selected"?>><?=$val?></option>

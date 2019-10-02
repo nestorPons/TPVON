@@ -80,16 +80,7 @@ $(document)
 
 })
 // FIN DE FORMULARIOS
-.on('change', 'select', function () {
-    var selclass = 'valid';
-    if ($(this).val() != "")
-        $(this).addClass(selclass)
-    else
-        $(this).removeClass(selclass)
 
-    let p = $(this).parents('section').attr('id')
-    window[p].change = true
-})
 .on('keyup', '.keyEnterOut', function (e) {
     e.preventDefault()
     if(e.key == 'Enter') {
