@@ -1,18 +1,19 @@
 <header id="bartools">
     <div id="bartools-actions">
-        <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()'])?>
-        <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()'])?>
-        <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()'])?>
-        <?php $next         = new Icon('chevron-right-circle',  ['onclick'=>'app.sections.next()'])?>
-        <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()'])?>
-        <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()'])?>
-        <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()'])?>
+        <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
+        <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()', 'label' => 'Eliminar'])?>
+        <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()', 'label' => 'Anterior'])?>
+        <?php $next         = new Icon('chevron-right-circle',  ['onclick'=>'app.sections.next()', 'label' => 'Siguiente'])?>
+        <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()', 'label' => 'Imprimir'])?>
+        <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
+        <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
         <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'], false)?>
     </div>
     <div id="bartools-central">
         <!-- <?php new DatePicker?> -->
     </div>  
     <div id="bartools-general">
+        <?php $help         = new Icon('question-circle',       ['onclick'=>'app.help()', 'label'=> 'Ayuda'])?>
         <?php new ButtonCloseApp?>
     </div>
 </header>

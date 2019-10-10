@@ -41,9 +41,7 @@
         form_user: document.getElementById('conf').getElementsByTagName('form')[1],
         load() {
             let f = this.form_user,
-                buttons = f.getElementsByTagName('button'),
-                checkbox = document.getElementById('<?= $status->id() ?>')
-            checkbox.parentNode.removeChild(checkbox)
+                buttons = f.getElementsByTagName('button')
             remove(buttons)
             this.form_user.getElementsByTagName('legend')[0].innerHTML = 'Datos administrador'
             DB.get('usuarios', 'nivel', 2)
@@ -51,11 +49,14 @@
                 .then(d => {
                     // Cargamos los datos
                     this.id_user = d.id
+
                     app.loadDataToForm(d, this.form_user)
                 })
             DB.get('empresa')
                 .then(d => d[0])
-                .then(d => app.loadDataToForm(d, this.form_company))
+                .then(d => {
+                    app.loadDataToForm(d, this.form_company)
+                    })
             this.form_user
         },
         onblur(callback) {

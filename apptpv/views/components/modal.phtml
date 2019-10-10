@@ -42,20 +42,20 @@
 
       selects.each(function() {
 
-        $(this).find('[selected]').attr('selected', false)
         if (d.id != -1)
           $(this)
+          .find('[selected]').attr('selected', false).end()
           .find('option[value="' + d[$(this).attr('name')] + '"]').attr('selected', true)
         else
           $(this)
           .find('[default]').attr('selected', true)
       })
       inputs.each(function() {
-        if ($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio') {
-          if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
-          else $(this).prop('checked', false)
+          if ($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio') {
+            if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
+            else $(this).prop('checked', false)
+          } else $(this).val(d[$(this).attr('name')])
 
-        } else $(this).val(d[$(this).attr('name')])
       })
       return this
     }

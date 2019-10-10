@@ -19,7 +19,7 @@
         <option value="" <?=$default ? '' : 'hidden'?> ><?=$default?></option>
         <?php if($options):?>
             <?php foreach($options as $key => $val): ?>
-                <option value="<?=$key?>"  <?php if($key == $selected) echo "selected"?>><?=$val?></option>
+                <option value="<?=$key?>"  <?php if($key == $selected )echo 'selected'?>><?=$val?></option>
             <?php endforeach ?>
         <?php endif?>
     </select> 
@@ -77,9 +77,10 @@
                     if(option.getAttribute('value') == data) {
                         option.selected = true 
                         optionselected = true
+                        break
                     } else option.selected = false 
                 }
-                if(optionselected && data != 0 ) this.el.classList.add(this.CLASS_SELECTED)
+                if(optionselected && data != 0 ) this.el.classList.add(this.CLASS_SELECTED) 
                 else if( this.el.hasAttribute('hidden') ) this.el.classList.remove(this.CLASS_SELECTED)
             } 
             /* return this.value() */

@@ -31,7 +31,9 @@ class Component{
         foreach($this as $key => $value){
             ${$key} = $value;
             @${'attr_'.$key} = "$key = '$value'";      
-        }        // Variables obligatorias para usos generales
+        }        
+        // Variables obligatorias para usos generales
+        $class = $this->class($this->COLLAPSE);
         $prefix_element = self::PREFIX_ELEMENT; 
         $type= $this->type??null;
         $id = $this->id;
@@ -49,7 +51,6 @@ class Component{
         $title = $this->printTitle();
         $required = $this->printRequired();
         $label = $this->printLabel();
-        $class = $this->class($this->COLLAPSE);
         $minlength = $this->printMinlength($this->MINLENGTH);
         $maxlength = $this->printMaxlength($this->MAXLENGTH);
         $pattern = $this->printPattern();

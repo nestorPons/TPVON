@@ -95,3 +95,19 @@ $(document)
     let p = $(this).parents('section').attr('id')
     window[p].change = true
 })
+// Comportamiento general de los links 
+.on('click', 'a', function(e) {
+    e.preventDefault();
+
+    let section = $(this).attr('href')
+    // Comprobamos si tiene parametros get 
+    // Significa que se solicita redirección
+    if (section.indexOf('?') != -1) {
+        let arr = section.split('?')
+        let get = arr[1].split('=')
+        location.href = "?" + get[0] + "=" + get[1];
+    } else {
+        app.sections.show(section)
+    }
+    if (menu && menu.search.state == 1) menu.search.close()
+})

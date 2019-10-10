@@ -35,11 +35,12 @@ class Company extends Query{
     public function new(Data $Data){
    
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password', 'iva'], true);
-        $Data->codifyAttr('nombre_empresa');
+
         $Data->set('nombre', $Data->nombre_empresa);
         $this->loadData($Data->getAll());
-// Creamos carpeta con configuración y archivos
-$this->createFolder();
+
+        // Creamos carpeta con configuración y archivos
+        $this->createFolder();
         // Creamos la base de datos
         $this->createDb($this->db);
         $this->createTables();

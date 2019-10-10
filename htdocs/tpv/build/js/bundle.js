@@ -53,7 +53,8 @@ this.el.seletedIndex=v}
 return this.el.value}
 option(data){if(data!=undefined){let optionselected=!1
 for(let option of this.o){if(option.getAttribute('value')==data){option.selected=!0
-optionselected=!0}else option.selected=!1}
+optionselected=!0
+break}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
 else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}}class Modal{constructor(id){this.el=document.getElementById(id)
 this.$el=$('#'+id)
@@ -71,9 +72,8 @@ return this}
 close(){this.$switch.prop('checked',!1)
 return this}
 load(data){const inputs=this.$el.find('input'),selects=this.$el.find('select'),d=exist(data.id)?data:data[0]
-selects.each(function(){$(this).find('[selected]').attr('selected',!1)
-if(d.id!=-1)
-$(this).find('option[value="'+d[$(this).attr('name')]+'"]').attr('selected',!0)
+selects.each(function(){if(d.id!=-1)
+$(this).find('[selected]').attr('selected',!1).end().find('option[value="'+d[$(this).attr('name')]+'"]').attr('selected',!0)
 else $(this).find('[default]').attr('selected',!0)})
 inputs.each(function(){if($(this).attr('type')=='checkbox'||$(this).attr('type')=='radio'){if(d[$(this).attr('name')]==$(this).val())$(this).prop('checked',!0)
 else $(this).prop('checked',!1)}else $(this).val(d[$(this).attr('name')])})

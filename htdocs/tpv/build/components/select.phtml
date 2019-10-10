@@ -19,7 +19,7 @@
         <option value="" <?=$default ? '' : 'hidden'?> ><?=$default?></option>
         <?php if($options):?>
             <?php foreach($options as $key => $val): ?>
-                <option value="<?=$key?>"  <?php if($key == $selected) echo "selected"?>><?=$val?></option>
+                <option value="<?=$key?>"  <?php if($key == $selected )echo 'selected'?>><?=$val?></option>
             <?php endforeach ?>
         <?php endif?>
     </select> 

@@ -40,6 +40,10 @@ const app = {
                 typeof callback == "function" && callback(resp, state)
             }
         })
+        .fail(fn => {
+            this.mens.error( "Fallo de conexión \n No se pudo guardar los datos" );
+            typeof callback == "function" && callback(null, 0)
+          })
     },
     // Carga de zonas por método get
     get (data) {
@@ -264,9 +268,9 @@ const app = {
         if(data == undefined) return false
         var els = form.getElementsByTagName('input')
         for(const el of els){
-            if(el.attributes != undefined) {
+            if(el.attributes != undefined && el.hasAttribute('name')) {
                 if(el.type == 'checkbox') {
-                    el.checked = data[el.attributes.name.value] > 0
+                    el.checked = data[el.attributes.name.value] > el.getAttribute('default') 
                 } else el.value = data[el.attributes.name.value]
             }
         }

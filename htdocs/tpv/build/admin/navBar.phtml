@@ -79,44 +79,26 @@
     // · estados del menu initial, short, long 
     if(!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
     var navbar = {
-        load(){
-            echo('Load navbar...')
-            $('#navBar')
-                .on('click', 'a', function (e) {
-                    e.preventDefault();
-
-                    let section = $(this).attr('href')
-                    // Comprobamos si tiene parametros get 
-                    // Significa que se solicita redirección
-                    if(section.indexOf('?') != -1){
-                        let arr = section.split('?')
-                        let get = arr[1].split('=')
-                        location.href ="?" + get[0] + "=" + get[1];
-                    } else {
-                        app.sections.show(section)
-                    }
-                    if(menu.search.state == 1) menu.search.close() 
-                })
-        },
         toggle(change = true){
                 let menuWidth = localStorage.getItem('menuWidth')
                 
                 let varClass =  (menuWidth == 'menu-initial')
                     ? 'menu-max'  
-                    : ((menuWidth == 'menu-max') 
-                        ? 'menu-close' 
-                        : 'menu-initial')
+                    : 'menu-initial'
+                
 
                 navbar.addClass(varClass) 
                 if(change) localStorage.setItem('menuWidth', varClass)
             },
             addClass(varclass){
                 $('#navBar').removeClass().addClass(varclass)
+                if(varclass == 'menu-max') $('.label').show('slow') 
+                else $('.label').hide('slow')
+                
             }
         }
     $('#icon-menu').click(navbar.toggle)
     $(function(){
         navbar.addClass(localStorage.getItem('menuWidth'))
-        navbar.load()
     })
 </script>

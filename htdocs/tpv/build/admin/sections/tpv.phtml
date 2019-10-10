@@ -199,6 +199,7 @@
                     for (let u of users) {
                         if (u.nivel > 0) this.selEmp.addOption(u.id, u.nombre)
                         this.selCli.addOption(u.id, u.nombre)
+                        if(u.codigo) this.selCli.addOption(u.id, u.codigo)
                     }
                 })
         },
