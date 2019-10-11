@@ -6,4 +6,3 @@ htdocs/companies
 !htdocs/companies/template
 server/logs
 apptpv/config/conn.ini
-apptpv/config/mail.php

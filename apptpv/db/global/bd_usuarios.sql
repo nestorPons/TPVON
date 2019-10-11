@@ -1,3 +1,8 @@
+/* 
+Usuarios para crear una capa de seguridad de la aplicación 
+En desarrollo
+*/
+
 CREATE USER 'create' IDENTIFIED BY 'UYQsjBRIv6dCVfEz';
 GRANT INSERT, CREATE, RELOAD, REFERENCES, INDEX, ALTER ON *.* TO 'create'@'%';
 CREATE USER 'demo' IDENTIFIED BY 'YLot6pyQCwgTjolF';

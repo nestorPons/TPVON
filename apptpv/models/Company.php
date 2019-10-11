@@ -33,7 +33,7 @@ class Company extends Query{
      * Creamos la carpeta para los archivos de configuración de la aplicación
      */
     public function new(Data $Data){
-   
+
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password', 'iva'], true);
 
         $Data->set('nombre', $Data->nombre_empresa);
@@ -51,7 +51,6 @@ class Company extends Query{
         $new = new Query($this->table, $this->db); 
         $data = $this->toArray();
         unset($data['config']);
-        
         // VAlores para registros de muestra
         $data['telefono'] = '123456789';
         $data['calle'] = 'Calle empresa';
@@ -71,7 +70,6 @@ class Company extends Query{
             'descripcion'   => 'Esto es un servicio de muestra',
             'precio'        => 4,
             'coste'         => 2,
-            'id_iva'        => 1,
             'tipo'          => 1,
             'estado'        => 1     
         ]);
@@ -107,8 +105,6 @@ class Company extends Query{
         $newConn->pdo->beginTransaction();
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/usuarios.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/articulos.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/login.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tipo_iva.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tickets.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/lineas.sql'));
             $newConn->query(file_get_contents(\FOLDERS\DB . 'app/historial.sql'));

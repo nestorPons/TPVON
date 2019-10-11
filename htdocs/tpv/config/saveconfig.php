@@ -1,20 +1,32 @@
 <?php
-$file = '../../../apptpv/config/conncopy.ini';
+// Guardado configuración conexión base de datos
+$file = '../../../apptpv/config/conndefault.ini';
 $conn = parse_ini_file($file,true);
 
 $file = '../../../apptpv/config/conn.ini';
 // write
 $data = array(
-    'configured'            => 1, 
+    'configured'  => 1, 
     'db'                    => $_GET['db'],
     'host'                  => $_GET['host'],
     'port'                  => $_GET['port'],
     'driver'                => $_GET['driver'],
-    'current_user'          => $_GET['current_user'],
+    'user'                  => $_GET['user']
 );
-$data["{$_GET['current_user']}"] =  $_GET['password'];
+$data["{$_GET['user']}"] =  $_GET['password'];
 
 write_ini_file($data, $file);
+
+// Configuracion mail
+$file = '../../../apptpv/config/mail.ini';
+write_ini_file(array(
+    'host'      => $_GET['host_mail'],
+    'username'  => $_GET['username_mail'],
+    'fromname'  => $_GET['fromname_mail'],
+    'password'  => $_GET['password_mail'],
+    'secure'    => $_GET['secure_mail'],
+    'port'      => $_GET['port_mail'],
+), $file);
 
  exit("Finalizado el registro /n vuelva a recargar la pagina <a href='/tpv/'>Aqui</a>");
 /**

@@ -19,7 +19,7 @@ class Query extends Conn
         if ($table) $this->table = $table;
 
         $this->db = $db ?? CONN['db'];
-        $this->user = $user ?? $credentials['current_user'];
+        $this->user = $user ?? $credentials['user'];
         $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port=' . $credentials["port"];
 
         try {

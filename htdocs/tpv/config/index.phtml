@@ -1,6 +1,7 @@
 <h2>Configuración servidor tpv</h2>
-
 <form action="config/saveconfig.php">
+<fieldset>
+  <legend>Base Datos</legend>
   Nombre Base datos:<br>
   <input type="text" name="db" value="<?=CONN['db']?>">
   <br>
@@ -14,10 +15,30 @@
   <input type="text" name="driver" value="<?=CONN['driver']?>">
   <br>
   Nombre usuario base datos:<br>
-  <input type="text" name="current_user" value="<?=CONN['current_user']?>">
+  <input type="text" name="user" value="<?=CONN['user']?>">
   <br>
   Contraseña usuario base datos:<br>
-  <input type="password" name="password">
-  <br><br>
+  <input type="text" name="password" value="<?=CONN[CONN['user']]?>">
+</fieldset>
+<fieldset>
+  <legend>Correo electronico</legend>
+  Host:<br>
+  <input type="text" name="host_mail" value="<?=MAIL['host']?>">
+  <br>
+  Nombre de usuario/email:<br>
+  <input type="text" name="username_mail" value="<?=MAIL['username']?>">
+  <br>
+  Email:<br>
+  <input type="text" name="fromname_mail" value="<?=MAIL['fromname']?>">
+  <br>
+  Contraseña:<br>
+  <input type="text" name="password_mail" value="<?=MAIL['password']?>">
+  <br>
+  Seguridad:<br>
+  <input type="text" name="secure_mail" value="<?=MAIL['secure']?>">
+  <br>
+  Puerto:<br>
+  <input type="text" name="port_mail" value="<?=MAIL['port']?>">
+</fieldset>
   <input type="submit" value="Submit">
 </form> 

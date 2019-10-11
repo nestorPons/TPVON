@@ -4,5 +4,5 @@ CREATE TABLE `historial` (
   `id_registro` BIGINT(20) NOT NULL,
   `tabla` VARCHAR(10) NOT NULL,
   `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
-  `accion` FLOAT(10) NOT NULL COMMENT '0 crear, 1 actualizar'
+  `accion` FLOAT(10) NOT NULL COMMENT '0 crear, 1 actualizar 3 eliminar 4 login 5 logout '
 ) ENGINE=InnoDB DEFAULT CHARSET utf8 COLLATE utf8_spanish2_ci;

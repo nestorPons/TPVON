@@ -1,92 +1,113 @@
+# TPV ONLINE
+Tpv en linea dirigido a las micropymes del sector servicios.
+Proyecto desarrollado con una metodología propia de trabajo por lo que no hace uso de fraemworks reconocidos.
+Su sistema de objetos es sencillo y facil de implementar y poder crear y destruir partes de la aplicación facilmente. 
+Su principales carateristicas son su sencillez de programar y velocidad de ejecución de la aplicación.
 
-# TPV ONLINE OPENSOURCE
-Tpv Online para micropymes de servicios
+## Comenzando 🚀
 
-Comenzando rocket
-Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Mira Deployment para conocer como desplegar el proyecto.
+Mira **Deployment** para conocer como desplegar el proyecto.
 
-Pre-requisitos clipboard
-Que cosas necesitas para instalar el software y como instalarlas
 
+### Pre-requisitos 📋
+
+_Disponer de un hosting o servidor LAMP local_
+PHP 7.3.10 o superior 
+MYSQL 8.0
+
+Se dispone de un contenedor docker con lamp en el mismo proyecto
+```
+.server/
+```
+
+### Instalación 🔧
+
+_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+
+_Dí cómo será ese paso_
+
+```
 Da un ejemplo
-Instalación wrench
-Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose
+```
 
-Dí cómo será ese paso
+_Y repite_
 
-Da un ejemplo
-Y repite
-
+```
 hasta finalizar
-Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo
+```
 
-Ejecutando las pruebas gear
-Explica como ejecutar las pruebas automatizadas para este sistema
+_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
-Analice las pruebas end-to-end nut_and_bolt
-Explica que verifican estas pruebas y por qué
+## Ejecutando las pruebas ⚙️
 
+_Explica como ejecutar las pruebas automatizadas para este sistema_
+
+### Analice las pruebas end-to-end 🔩
+
+_Explica que verifican estas pruebas y por qué_
+
+```
 Da un ejemplo
-Y las pruebas de estilo de codificación keyboard
-Explica que verifican estas pruebas y por qué
+```
 
+### Y las pruebas de estilo de codificación ⌨️
+
+_Explica que verifican estas pruebas y por qué_
+
+```
 Da un ejemplo
-Deployment package
-Agrega notas adicionales sobre como hacer deploy
+```
 
-Construido con hammer_and_wrench
-Menciona las herramientas que utilizaste para crear tu proyecto
+## Deployment 📦
 
-Dropwizard - El framework web usado
-Maven - Manejador de dependencias
-ROME - Usado para generar RSS
-Contribuyendo paperclips
-Por favor lee el CONTRIBUTING.md para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
+Clona el proyecto: 
+```
+git clone tpvonline https://github.com/nestorPons/tpv.git
 
-Wiki book
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra Wiki
+```
+## Construido con 🛠️
 
-Versionado pushpin
-Usamos SemVer para el versionado. Para todas las versiones disponibles, mira los tags en este repositorio.
+_Menciona las herramientas que utilizaste para crear tu proyecto_
 
-Autores black_nib
-Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
+* [Maven](https://maven.apache.org/) - Manejador de dependencias
+* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
 
-Andrés Villanueva - Trabajo Inicial - villanuevand
-Fulanito Detal - Documentación - fulanitodetal
-También puedes mirar la lista de todos los contribuyentes quíenes han participado en este proyecto.
+## Contribuyendo 🖇️
 
-Licencia page_facing_up
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo LICENSE.md para detalles
+Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
 
-Expresiones de Gratitud gift
-Comenta a otros sobre este proyecto loudspeaker
-Invita una cerveza beer a alguien del equipo.
-Da las gracias públicamente nerd_face.
-etc.
-# README 
+## Wiki 📖
 
-# Referencias
-## Clase Conn 
-### ha sido modificada del trabajo rehalizado por padrecedano/PHP-PDO 
-https://github.com/padrecedano/PHP-PDO
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
 
-## Server 
-https://github.com/jcavat/docker-lamp
+## Versionado 📌
 
-## css less
-https://leafo.net/lessphp/
+Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
 
-## Menu responsive
-https://www.antofernandez.com/menu-hamburguesa-con-css/
+## Autores ✒️
 
-## Iconos 
-https://linearicons.com/
+_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-## dialogos JS
-http://bootboxjs.com
+* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
+* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
 
-## Minify 
-https://github.com/matthiasmullie/minify
+También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+
+## Expresiones de Gratitud 🎁
+
+* Comenta a otros sobre este proyecto 📢
+* Invita una cerveza 🍺 a alguien del equipo. 
+* Da las gracias públicamente 🤓.
+* etc.
+
+
+
+---
+⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊

@@ -10,8 +10,9 @@ class Admin extends Controller{
     function __construct(){
     }
     function loadView(){
-        $Config = new Config; 
-        $data['iva'] = $Config->iva;
+        $Company = new Company();
+
+        $data['iva'] = $Company->iva;
         
         $Ticket = new Tickets; 
         $lastTicket = $Ticket->getLast();
@@ -22,7 +23,6 @@ class Admin extends Controller{
         $Items = new Items;
         $data['jsonServices'] = json_encode($Items->getAll()); // para js
         
-        $Company = new Company();
         $data['Company'] = $Company;
         $data['data_company'] = json_encode($Company->getAll());
         

@@ -1,7 +1,7 @@
 CREATE TABLE `usuarios` (
   `id` int(11) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   `codigo` varchar(10) DEFAULT NULL,
-  `dni` char(9) NULL UNIQUE,
+  `dni` char(9) NULL UNIQUE ,
   `nombre` varchar(90) NOT NULL,
   `email` varchar(60) NULL UNIQUE, 
   `tel` varchar(10) DEFAULT NULL,
