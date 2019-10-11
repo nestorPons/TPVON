@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\models\{Items, Tickets, User, Company, Config, Control};
+use \app\models\{Items, Tickets, User, Company, Control};
 use \app\core\{Query, Data};
 
 /**

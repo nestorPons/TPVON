@@ -14,66 +14,67 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 ### Pre-requisitos 📋
 
 _Disponer de un hosting o servidor LAMP local_
-PHP 7.3.10 o superior 
-MYSQL 8.0
-
-Se dispone de un contenedor docker con lamp en el mismo proyecto
-```
-.server/
-```
+* PHP 7.3.10 o superior 
+* MYSQL 8.0
+* Docker y docker-compose - para ejecutarlo en local con el servidor que viene incorporado
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
+_Clone o descargue el proyecto_
 
 ```
-Da un ejemplo
+git clone https://github.com/nestorPons/tpv.git
 ```
 
-_Y repite_
+_Entre en la carpeta del proyecto_ 
 
 ```
-hasta finalizar
+cd tpvonline
+```
+#### Para desplegarlo en su hosting
+_Suba la carpeta descargada a su hosting mediante ftp o git._
+
+**La constante PUBLIC_FOLDER_ROOT declarada en apptpv/config/folders.php contiene la carpeta publica del servidor.**
+que por defecto es htdocs
+
+#### Para desplegarlo en local
+Si se desea se dispone de un contenedor docker con lamp instalado en el mismo proyecto
+Para construirlo por primera vez: 
+```
+.server/docker-compose build 
+```
+Para activalo:
+```
+.server/docker-compose up -d 
+```
+Para pararlo:
+```
+.server/docker-compose down
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
-## Ejecutando las pruebas ⚙️
-
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
-
+Desde el navegador acceda al localhost o su su hosting donde desplegó su aplicación.
 ```
-Da un ejemplo
-```
+localhost/tpv o www.tuhosting.com/tpv
+``` 
+_Se inicia el configurado de la aplicación en su primer acceso._
 
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
 
 ## Deployment 📦
 
-Clona el proyecto: 
-```
-git clone tpvonline https://github.com/nestorPons/tpv.git
+Consulte su hosting para saber que opciones le proporciona.
+Manualmente solo debe copiar la carpeta del prollecto en la localización deseada. 
 
-```
+
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+_Herramientas_
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* [padrecedano](https://github.com/padrecedano/PHP-PDO) - Conexión base datos con pequeñas modificaciones en la clase.
+* [jcavat](https://github.com/jcavat/docker-lamp) - Servidor docker con adaptaciones para el proyecto. 
+* [lessphp](https://leafo.net/lessphp/) - Compilador less con php. 
+* [linearicons](https://linearicons.com/) - Iconos de la aplicación.
+* [cacoo.com](https://cacoo.com) - Diagramas 
+
 
 ## Contribuyendo 🖇️
 
@@ -81,7 +82,7 @@ Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) 
 
 ## Wiki 📖
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/nestorPons/tpv/wiki)
 
 ## Versionado 📌
 

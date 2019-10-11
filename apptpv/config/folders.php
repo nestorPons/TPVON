@@ -1,7 +1,10 @@
 <?php 
 namespace FOLDERS; 
 
-const PUBLIC_FOLDER = 'htdocs/tpv/'; 
+const PUBLIC_FOLDER_ROOT = 'htdocs/';
+
+const PUBLIC_FOLDER = PUBLIC_FOLDER_ROOT . 'tpv/'; 
+
 const APP                           = ROOT . 'apptpv/';
     const CONTROLLERS               = APP . 'controllers/';
     const NATIVE_VIEWS              = APP . 'views/';
