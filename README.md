@@ -1,4 +1,4 @@
-# TPV ONLINE
+# TPVON
 Tpv en linea dirigido a las micropymes del sector servicios.
 Proyecto desarrollado con una metodología propia de trabajo por lo que no hace uso de fraemworks reconocidos.
 Su sistema de objetos es sencillo y facil de implementar y poder crear y destruir partes de la aplicación facilmente. 
