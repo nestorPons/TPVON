@@ -17,6 +17,12 @@ _Disponer de un hosting o servidor LAMP local_
 * PHP 7.3.10 o superior 
 * MYSQL 8.0
 * Docker y docker-compose - para ejecutarlo en local con el servidor que viene incorporado
+* Navegador: 
+    * Chrome 41.0.2272.101 o superior
+    * Mozilla Firefox 57.0.3 o superior
+    * Microsoft Edge 41.16299.15.0 o superior
+    * Opera 50.0 o superior
+    * Safari 6.0.2 o superior 
 
 ### Instalación 🔧
 
@@ -74,11 +80,15 @@ _Herramientas_
 * [lessphp](https://leafo.net/lessphp/) - Compilador less con php. 
 * [linearicons](https://linearicons.com/) - Iconos de la aplicación.
 * [cacoo.com](https://cacoo.com) - Diagramas 
+* [Minify](https://github.com/matthiasmullie/minify) - Minificador de codigo js y css en php
 
 
 ## Contribuyendo 🖇️
 
 Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
+
+## Conaciones 
+* [Paypal](paypal.me/reservatucita)
 
 ## Wiki 📖
 
