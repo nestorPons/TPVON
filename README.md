@@ -1,4 +1,6 @@
-# TPV ONLINE
+![Logo](./htdocs/tpv/img/logo.png)
+
+# TPVON
 Tpv en linea dirigido a las micropymes del sector servicios.
 Proyecto desarrollado con una metodología propia de trabajo por lo que no hace uso de fraemworks reconocidos.
 Su sistema de objetos es sencillo y facil de implementar y poder crear y destruir partes de la aplicación facilmente. 
@@ -81,6 +83,7 @@ _Herramientas_
 * [linearicons](https://linearicons.com/) - Iconos de la aplicación.
 * [cacoo.com](https://cacoo.com) - Diagramas 
 * [Minify](https://github.com/matthiasmullie/minify) - Minificador de codigo js y css en php
+* [Freelogodesing](https://es.freelogodesign.org/) - Logotipo
 
 
 ## Contribuyendo 🖇️
