@@ -41,7 +41,7 @@ class Company extends Query{
 
         // Creamos carpeta con configuración y archivos
         $this->createFolder();
-        // Creamos la base de datos
+        // Creamos la base de datos y tablas
         $this->createDb($this->db);
         $this->createTables();
         
@@ -103,15 +103,9 @@ class Company extends Query{
     private function createTables(){
         $newConn = new Query(null, $this->db);
         $newConn->pdo->beginTransaction();
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/usuarios.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/articulos.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tickets.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/lineas.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/historial.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/control.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/promos.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/tokens.sql'));
-            $newConn->query(file_get_contents(\FOLDERS\DB . 'app/empresa.sql'));
+        foreach(explode(';', file_get_contents(\FOLDERS\DB . 'app_tpv.sql')) as $sql){
+            if(!empty($sql)) $newConn->query($sql);
+        }
         if(!$newConn->pdo->commit()) throw new Error('E014');
         return true;
     }

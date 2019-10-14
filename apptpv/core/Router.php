@@ -23,8 +23,7 @@ class Router{
     function __construct($params = []){
 
         // Valores por defecto
-
-        $this->db = 'app_tpv'; 
+        $this->db = CONN['db'];
         $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
         if      (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') $this->isPost($params);
