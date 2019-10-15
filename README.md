@@ -1,10 +1,10 @@
-![Logo](./htdocs/tpv/img/logo.png)
-
-# TPVON
+<p align="center">
+<img src="htdocs/tpv/img/logo.png">
+</p>
 Tpv en linea dirigido a las micropymes del sector servicios.
-Proyecto desarrollado con una metodología propia de trabajo por lo que no hace uso de fraemworks reconocidos.
-Su sistema de objetos es sencillo y facil de implementar y poder crear y destruir partes de la aplicación facilmente. 
-Su principales carateristicas son su sencillez de programar y velocidad de ejecución de la aplicación.
+Proyecto desarrollado con una metodología de trabajo propia.
+Su sistema de objetos es sencillo y fácil de implementar y se puede crear y destruir partes de la aplicación fácilmente. 
+Su principales características son su sencillez de programar y velocidad de ejecución de la aplicación.
 
 ## Comenzando 🚀
 
@@ -84,7 +84,9 @@ _Herramientas_
 * [cacoo.com](https://cacoo.com) - Diagramas 
 * [Minify](https://github.com/matthiasmullie/minify) - Minificador de codigo js y css en php
 * [Freelogodesing](https://es.freelogodesign.org/) - Logotipo
-
+* [PHPMailer](https://github.com/nestorPons/tpv/wiki/Base-de-datos) - Envios de email con php
+* [Minicss](https://minicss.org) - Mini fraemwork css 
+ 
 
 ## Contribuyendo 🖇️
 
