@@ -27,7 +27,7 @@ class Controller{
                         : $this->exec ($this->action, ''); 
         }
     protected function view($data = null){
-        
+        $arr_data = (is_object($data)) ? $data->toArray() : $data;
         // Carpetas donde buscar las vistas
         $files[] = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
         $files[] = \VIEWS\LOGIN . $this->controller . '.phtml';
@@ -36,7 +36,7 @@ class Controller{
         $files[] = \VIEWS\ADMIN\SECTIONS . $this->controller . '.phtml';
 
         foreach($files as $file){
-            if(file_exists($file)) return $this->printView($file, $data);
+            if(file_exists($file)) return $this->printView($file, $arr_data);
         }        
     }
     /**
@@ -64,7 +64,8 @@ class Controller{
     protected function get(){
         return $this->exec('get', 'getById');
     }
-    protected function printView(String $route, array $data = null){  
+    protected function printView(String $route, array $data = null){
+
         $Company = new Company($this->db);
         if($data){
             foreach($data as $key => $val){

@@ -133,3 +133,19 @@ var mns = {
         alert(mns)
     }
 }
+function imprimirElemento(elemento, estilos){
+    return new Promise((resolve, reject) => {
+        let ventana = window.open('');
+        ventana.document.write('<html><head><title>' + document.title + '</title>');
+        ventana.document.write(`<style type="text/css" media="print">${estilos.innerHTML}</style>`);
+        ventana.document.write(`</head><body id="${elemento.id}">`);
+        ventana.document.write(elemento.innerHTML);
+        ventana.document.write('</body></html>');
+        ventana.document.close();
+        ventana.focus();
+        ventana.print();
+        ventana.close(); 
+        resolve(ventana);
+    })
+  }
+  AKI :: 

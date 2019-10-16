@@ -48,6 +48,5 @@ if( ENV ){
     require_once \FOLDERS\CORE  . 'less.php';
     require_once \FOLDERS\CORE  . 'minify.php';
     new Prepocessor(false);
-}  
-
+}
 new Router($_REQUEST);

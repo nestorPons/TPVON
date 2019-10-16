@@ -29,6 +29,7 @@ class Prepocessor{
 
         if(!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
  
+        // Inicia compilacion de los archivos
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
         $this->cache_record($this->cache);
     }
@@ -90,11 +91,18 @@ class Prepocessor{
 
         $this->content = str_replace($content, $content_min, $this->content);
     }  
-    // Lee archivos de directorios y los directorios anidados
+    // Funcion que aplica una sintaxis propia  a las vistas
+    // Todos los comandos de las vista deben enpezar por --
+    private function sintax(){
+        // Comando --id -> Genera un id único para todo el documento.
+        $id = uniqid('id'); 
+        $this->content = str_ireplace('--id', $id, $this->content, $count);
+    }
     private function showFiles(String $path){
     
         $dir = opendir($path);
 
+        // Lee archivos de directorios y los directorios anidados
         while ($current = readdir($dir)){
             if( $current != "." && $current != "..") {
                 
@@ -109,6 +117,10 @@ class Prepocessor{
                 } else {
                     // ARCHIVOS
                     $this->getContent($file);
+
+                    // Transformamos la nueva sintaxis en las vistas
+                    $this->sintax();
+
                     $a = $this->args('style');
           
                     //$this->include();

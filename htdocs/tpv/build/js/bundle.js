@@ -12,7 +12,23 @@ validate(){if(this.lines.length&&this.id_usuario&&this.id_cliente&&this.fecha)re
 else return!1}
 deleteLine(index){this.lines=this.lines.filter(e=>e.id!=index)
 return this.lines}
-getLine(index){return this.lines.filter(e=>e.id==index)[0]}}class Table{constructor(id){this.el=document.getElementById(id)
+getLine(index){return this.lines.filter(e=>e.id==index)[0]}}class Present{constructor($id){this.el=document.getElementById($id)
+this.style=this.el.getElementsByTagName('style')[0]
+this.desc=this.el.querySelector('#descripcion')
+this.date=this.el.querySelector('#fecha')
+this.day=this.el.querySelector('#dia')
+this.month=this.el.querySelector('#mes')
+this.year=this.el.querySelector('#anyo')}
+description(arr=[]){arr.foreach(text=>{this.desc.innerHTML+=text+'<br>'})
+return this.desc.innerHTML}
+date(d,m,y){this.day.innerHTML=d
+this.month.innerHTML=m
+this.year.innerHTML=y
+return this.desc.innerHTML}
+clear(){this.day.innerHTML=''
+this.month.innerHTML=''
+this.year.innerHTML=''
+this.desc.innerHTML=''}}class Table{constructor(id){this.el=document.getElementById(id)
 this.$table=$('#'+id)
 this.$template=$($('#template_'+id)[0].innerHTML)}
 line(){return parseInt(this.el.rows.length)}

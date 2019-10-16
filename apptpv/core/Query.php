@@ -33,7 +33,6 @@ class Query extends Conn
     {
         $this->conn = null;
     }
-
     /**
      * Prepara el string sql para enviar a hacer la consulta 
      * añadimos si queremos que sean ordenados de forma inversa

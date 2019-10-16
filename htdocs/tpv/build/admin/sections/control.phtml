@@ -12,7 +12,7 @@
 <script>
     app.control = {
         table: 'control',
-        buttons: ['prev', 'next', 'search'],
+        buttons: ['prev', 'next', 'search', 'print'],
         Table: new Table('<?= $table->idEl() ?>'),
         txtTicket: <?= $txt01->idEl() ?>,
         txtCli: <?= $txt02->idEl() ?>,
@@ -33,6 +33,28 @@
                         this.loadTable(lst);
                     });
             })
+        },
+        // Impresion de los vales regalo
+        print(){
+            // Comprobamos que este cargado el módulo del vale regalo
+            if(app.present) {
+                imprimirElemento(app.present.el, app.present.style)
+            } else {
+                // Si no esta cargado lo cargamos pero no lo mostramos
+                app.get({
+                    controller : 'present', 
+                    action  : 'view',
+                    data: {}
+                }, false, html => {
+                    // Obtenemos el id del elemento
+                    let h = document.createElement('div')
+                    h.innerHTML = html
+                    let el = h.getElementsByTagName('component')[0]
+                    // Cargamos la clase
+                    app.present = new Present(el.id)
+                    this.print()
+                })
+            }
         },
         add(data) {
             this.db.lastId()

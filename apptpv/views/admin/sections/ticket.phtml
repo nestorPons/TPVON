@@ -1,8 +1,8 @@
 <component id="buttonsTicket">
     <?php 
+    $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
     $btnPrTicket = new ButtonSuccess(['onclick'=>'app.ticket.print()', 'caption'=>'Imprimir']);
     $btnSndTicket = new ButtonSuccess(['onclick'=>'app.ticket.send()', 'caption'=>'Enviar']);
-    $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
     ?>
 </component>
 <component id="ticket" class="hidden">
@@ -115,19 +115,12 @@
         Table           : new Table('<?=$table->idEl()?>'),
         print(callback){
 
-            this.put(false, fn => {
+            this.put(false, async fn => {
+                await imprimirElemento(
+                    document.getElementById('ticket'), 
+                    document.getElementById('ticketStyle') 
+                )
 
-                let printContents = document.getElementById('ticket').innerHTML
-                printContents
-                printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
-
-                let w = window.open();
-                w.document.write(printContents);
-                w.document.close(); // necessary for IE >= 10
-                w.focus(); // necessary for IE >= 10
-                w.print();
-                w.close();
-                
                 typeof callback == 'function' && callback()
             })
         },
