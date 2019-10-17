@@ -6,7 +6,7 @@
     ?>
 </component>
 <component id="ticket" class="hidden">
-    <img src="<?=$Data->pathLogo?>" alt="Logotipo">
+    <img src="/tpv/companies/logo.png" alt="Logotipo">
     <div class="data">
         <div>TICKET DE VENTA</div>
         <div><span id="ticket_nombre_empresa"></span></div>
@@ -51,6 +51,8 @@
     }
     #ticket img{
         max-width: 200px;
+        height: 100px;
+        width: 100px;
     }
     #<?=$table->id()?>{
         padding: 5px;
@@ -115,8 +117,8 @@
         Table           : new Table('<?=$table->idEl()?>'),
         print(callback){
 
-            this.put(false, async fn => {
-                await imprimirElemento(
+            this.put(false, fn => {
+                imprimirElemento(
                     document.getElementById('ticket'), 
                     document.getElementById('ticketStyle') 
                 )

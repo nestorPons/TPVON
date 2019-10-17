@@ -7,7 +7,9 @@
     $table      = new Table(['columns' => ['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
     ?>
 </section>
-<style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income table{grid-row:2;grid-column:1 / span 3}#income table *{padding:2px}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}</style>
+<style lang="less">
+    #income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income table{grid-row:2;grid-column:1 / span 3}#income table *{padding:2px}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}
+</style>
 <script>
     app.income = {
         buttons: ['print', 'filter', 'search'],

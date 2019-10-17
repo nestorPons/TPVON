@@ -109,7 +109,7 @@ const app = {
             return confirm(mens) 
         }
     },
-    sections    : {
+    sections: {
         active  :  null,
         last    : null,
         toggle(section, callback) {

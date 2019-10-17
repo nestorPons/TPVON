@@ -28,7 +28,8 @@ return this.desc.innerHTML}
 clear(){this.day.innerHTML=''
 this.month.innerHTML=''
 this.year.innerHTML=''
-this.desc.innerHTML=''}}class Table{constructor(id){this.el=document.getElementById(id)
+this.desc.innerHTML=''}
+print(){let ventana=window.open('','_blank','PRINT');ventana.document.write('<html><head><title>'+document.title+'</title>');ventana.document.write(`<style type="text/css">${this.style.innerHTML}</style>`);ventana.document.write(`</head><body id="${this.el.id}">`);ventana.document.write(this.el.innerHTML);ventana.document.write('</body></html>');ventana.document.close();ventana.focus();ventana.print();ventana.close()}}class Table{constructor(id){this.el=document.getElementById(id)
 this.$table=$('#'+id)
 this.$template=$($('#template_'+id)[0].innerHTML)}
 line(){return parseInt(this.el.rows.length)}
