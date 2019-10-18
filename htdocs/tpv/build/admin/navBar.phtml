@@ -1,0 +1,104 @@
+<?php namespace app\controllers\components?><nav id="navBar" class="menu-initial">
+    <i id="icon-menu" class="lnr lnr-menu"></i>
+    <ul>
+        <li><a href="tpv"><i class="lnr lnr-laptop"></i><span>TPV</span></a></li>
+		<li><a href="users"><i class="lnr lnr-users"></i><span>Usuarios</span></a></li>
+        <li><a href="services"><i class="lnr lnr-layers"></i><span>Servicios</span></a></li>
+        <li><a href="income"><i class="lnr lnr-database"></i><span>Historial</span></a></li>
+        <li><a href="control"><i class="lnr lnr-gift"></i><span>Regalo</span></a></li>
+        <li><a href="conf"><i class="lnr lnr-cog"></i><span>Config</span></a></li>
+        <li><a href="promos"><i class="lnr lnr-diamond"></i><span>VIP</span></a></li>
+    </ul>
+</nav>
+<style>
+    :root{
+        --nav-initial-width: 55px;
+        --nav-max-width: 145px;
+    }
+    nav#navBar{
+        margin: 0;
+        overflow: hidden;
+        transition: width 1s ease;
+        background: var(--main-color);
+        color: var(--nav-font-color);
+        width: var(--nav-initial-width);
+     }
+    nav#navbar * {
+       margin: 0;
+       padding: 0;
+     }
+    nav#navBar ul{
+        margin: 10px 5px;
+        padding: 0;
+        list-style:none;
+     }
+    nav#navBar li{
+        margin: 10px 0;
+        padding: 0;
+     }
+    nav#navBar li a{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        width: min-content;
+        color: inherit;
+     }
+     nav#navBar li a:hover{
+        background: none;
+        transform: var(--effect-transform-hover);
+     }  
+    nav#navBar li a i{
+        font-size: 1.5rem;
+     }
+    #navBar a, #navBar a:hover, #navBar a:link, #navBar a:visited{
+        color: var(--nav-font-color);
+    }
+    #icon-menu{
+        position: fixed; 
+        cursor: pointer;
+        top: 6px;
+        left: 1px;
+        font-size: 2em;
+     }
+     #icon-menu:hover{
+        background:rgb(0,0,0,0.5);	
+     }
+     nav#navBar.menu-close{
+        width: 0px;    
+     }
+     nav#navBar.menu-max{
+         max-width: min-content;
+         width: var(--nav-max-width);
+     }
+     nav#navBar.menu-initial{
+        width: var(--nav-initial-width);
+     }
+
+</style>
+<script>
+    // · estados del menu initial, short, long 
+    if(!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
+    var navbar = {
+        toggle(change = true){
+                let menuWidth = localStorage.getItem('menuWidth')
+                
+                let varClass =  (menuWidth == 'menu-initial')
+                    ? 'menu-max'  
+                    : 'menu-initial'
+                
+
+                navbar.addClass(varClass) 
+                if(change) localStorage.setItem('menuWidth', varClass)
+            },
+            addClass(varclass){
+                $('#navBar').removeClass().addClass(varclass)
+                if(varclass == 'menu-max') $('.label').show('slow') 
+                else $('.label').hide('slow')
+                
+            }
+        }
+    $('#icon-menu').click(navbar.toggle)
+    $(function(){
+        navbar.addClass(localStorage.getItem('menuWidth'))
+    })
+</script>

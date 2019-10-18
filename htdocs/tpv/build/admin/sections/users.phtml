@@ -1,0 +1,133 @@
+<?php namespace app\controllers\components?><section id="users">
+    <?php
+    $table = new Table(['columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 'class' => 'hoverable', 'onclick' => 'app.users.show(window.event)']);
+    $abc = new ListABC($table->id());
+    $editUser = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
+    ?>
+</section>
+<style lang="less">
+    #users{display:grid;grid-template-rows:2}#users #<?=$table->id() ?>{max-height:80vh;grid-row:2}#users .card{max-width:360px}
+</style>
+<script>
+    app.users = {
+        table: 'usuarios',
+        buttons: ['add', 'search'],
+        currentId: null,
+        Table       : new Table('<?= $table->idEl() ?>'),
+        Form        : new Modal('<?= $editUser->id() ?>'),
+        $table      : $('#<?= $table->id() ?>').find('tbody'),
+        validation(callback) {
+            let f = this.Form.getData()
+            DB.get(this.table)
+                .then(usuarios => {
+                    for (i in usuarios) {
+                        let u = usuarios[i]
+
+                        if (!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) this.error = {
+                            success: false,
+                            code: 'dni',
+                            mens: 'Error dni duplicado'
+                        }
+                        else if (!isEmpty(f.email) && u.email == f.email && u.id != f.id) this.error = {
+                            success: false,
+                            code: 'email',
+                            mens: 'Error email duplicado'
+                        }
+                    }
+                    callback(this.error || {
+                        success: true
+                    })
+                })
+
+            return {
+                success: true
+            }
+        },
+        del() {
+            // Eliminamos de la bd local
+            DB.get(this.table, 'id', this.currentId)
+                .then(d => d[0])
+                .then(d => {
+                    d.estado = 0
+                    DB.set(this.table, d, 'id', d.id)
+                    // Eliminamos de la tabla 
+                    this.Table.delLine(this.currentId)
+                    // Cerramos formulario
+                    this.Form.close()
+
+                    app.tpv.loadUsers()
+                })
+        },
+        add() {
+            let data = {
+                id: -1,
+                estado: 1
+            }
+            this.Form.clear().open(data).setTile('Nuevo usuario')
+        },
+        addLine(data) {
+            const ob = this.Table.addLine(
+                data.id,
+                [data.id, data.nombre, data.obs, data.tel, data.email]
+            )
+            this.loadClass(ob, data)
+
+        },
+        updateLine(data) {
+            const ob = this.Table.updateLine(
+                data.id, 
+                [data.id, data.nombre, data.obs, data.tel, data.email]
+            )
+            this.loadClass(ob, data)
+        },
+        loadClass(ob, data) {
+            ob.addClass(data.nombre[0].toLowerCase())
+
+            if (data.estado == 2) ob.addClass('alert')
+            else ob.removeClass('alert')
+        },
+        save(data) {
+            if (data) {
+                DB.set(this.table, data, 'id', data.id)
+
+                if (this.currentId == -1) this.addLine(data)
+                else this.updateLine(data)
+                this.Form.close()
+
+                if (app.income) app.income.loadUsers()
+                app.tpv.loadUsers()
+            } else {
+                app.mens.error('El registro no pudo ser guardado!! \n ' + this.error.mens)
+            }
+        },
+        load() {
+            DB.get(this.table)
+                .then(users => {
+                    for (i in users) {
+                        var user = users[i]
+                        // Listamos los usuarios activos solamente
+                        if (user.estado > 0) this.addLine(user)
+                    }
+                })
+        },
+        show(e) {
+            this.currentId = e.path[1].attributes.idline.value
+            DB.get(this.table, 'id', this.currentId)
+                .then(data => this.Form.open(data).setTile('Edicion usuario'))
+        },
+        // Formas de busqueda en usuarios
+        search(value) {
+            let _search = (field, value) => {
+                DB.get(this.table, field, value, 'estado>0')
+                    .then(v => {
+                        for (let i in v) this.Table.showLines(`[idline='${v[i].id}'`)
+                    })
+            }
+            this.Table.hideLines()
+            if (/([0-9]){9,13}/.test(value)) _search('tel', value)
+            else if (/[0-9]{8}[A-Za-z]{1}/.test(value)) _search('dni', value)
+            else if (value.indexOf('@') != -1) _search('email', value)
+            else _search('nombre', value) || _search('codigo', value)
+        }
+    }
+</script>

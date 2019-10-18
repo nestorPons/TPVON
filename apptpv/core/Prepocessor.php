@@ -19,7 +19,7 @@ class Prepocessor{
         $loadeds = []; 
     
     function __construct(bool $cacheable = true){
-        $this->queue = "<script src='./build/js/bundle.js'></script>";
+        $this->queue = "<script src='./build/".\FILE\JS."'></script>";
         $this->cache_class_js = $_SESSION['cache_class_js']??null;
         $this->cacheable = $cacheable;
         $this->cache = (file_exists(self::CACHE_FILE)) ? parse_ini_file(self::CACHE_FILE) : [];
@@ -220,6 +220,7 @@ class Prepocessor{
      * y las cargamos en un ambito global
      */
     private function build_js($class_js){
+
         $strFile = file_exists(\FILE\BUNDLE_JS) 
             ? \file_get_contents(\FILE\BUNDLE_JS) 
             : ''; 

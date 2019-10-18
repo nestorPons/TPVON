@@ -1,0 +1,126 @@
+<?php namespace app\controllers\components?><header id="bartools">
+    <div id="bartools-actions">
+        <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
+        <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()', 'label' => 'Eliminar'])?>
+        <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()', 'label' => 'Anterior'])?>
+        <?php $next         = new Icon('chevron-right-circle',  ['onclick'=>'app.sections.next()', 'label' => 'Siguiente'])?>
+        <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()', 'label' => 'Imprimir'])?>
+        <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
+        <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
+        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'], false)?>
+    </div>
+    <div id="bartools-central">
+        <!-- <?php new DatePicker?> -->
+    </div>  
+    <div id="bartools-general">
+        <?php $help         = new Icon('question-circle',       ['onclick'=>'app.help()', 'label'=> 'Ayuda'])?>
+        <?php new ButtonCloseApp?>
+    </div>
+</header>
+<style>
+    #bartools{
+        background-color: var(--main-color);
+        color: var(--nav-font-color);
+        padding: 0 20px 0 60px;
+        display: flex;
+        align-items: center;
+        overflow-x: visible;
+        overflow-y: visible;
+        height: auto;
+    
+    }
+    #bartools a, #bartools a:hover, #bartools a:link, #bartools a:visited{
+        color: var(--nav-font-color);
+    }
+    #bartools > div{
+        flex-grow: 1;
+    }
+    #bartools > div:nth-child(2){
+        text-align: center;
+    }
+    #bartools > div:last-child{
+        text-align: right;
+    }
+    #bartools .lnr{
+        display: inline-block;
+        font-size: 1.4rem;
+        cursor: pointer;
+        margin: 2px;
+    }
+    #bartools .lnr:hover{
+        transform: var(--effect-transform-hover);
+    }
+    #bartools #<?=$txtSearch->id()?>{
+        position: absolute;
+        background: var(--main-color);
+        top: 0;
+        left: 3204px;
+        width: 100%;
+        height: 58px;
+        z-index: 1;
+        text-align: left;
+        display: flex; 
+        align-items: center;  
+    }
+    #bartools #<?=$txtSearch->idEl()?>{
+        width: 300px;
+        background-color: var(--form-back-color);
+    }
+</style>
+<script>
+    var menu = {
+        buttons : {
+            $next       : $('#<?= $next->id()?>'),
+            $prev       : $('#<?= $prev->id()?>'),
+            $add        : $('#<?= $add->id()?>'),
+            $del        : $('#<?= $del->id()?>'),
+            $search     : $('#<?= $search->id()?>'),
+            $print      : $('#<?= $print->id()?>'),
+            $filter     : $('#<?= $filter->id()?>'),
+            show(arr = []){               
+                $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
+                for(i in arr){
+                    menu.buttons['$'+arr[i]].show()
+                }
+            }
+        },
+        search          : {
+            $search     : $('#<?= $txtSearch->id()?>'), 
+            $txtSearch  : $('#<?= $txtSearch->idEl()?>'),
+            distance    : 3000, 
+            velocity    : 500,
+            state       : 0,
+            open(){
+                this.state = 1
+                $this = this
+                $this.$txtSearch.val('')
+                this.$search.animate({
+                    left: this.$search.position().left - this.distance
+                }, this.velocity, function(){
+                    $this.$txtSearch.focus()
+                })
+            },
+            close(){
+                this.state = 0
+                this.$search.animate({
+                    left: this.$search.position().left + this.distance
+                }, this.velocity, function(){
+
+                })    
+            },
+            toggle(){
+                if( this.$search.position().left < this.distance) this.close()
+                else this.open()
+                
+            },
+            keypress(e){
+                if(e.key == 'Enter')
+                    typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val())
+            }
+        },
+        del(){
+            if(app.mens.confirm('¿Desea eliminar el registro?'))
+                app.sections.del()
+        }
+    }
+</script>
