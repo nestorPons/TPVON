@@ -1,0 +1,87 @@
+<component class="hidden">
+    <img src="/tpv/img/fondo_regalo.jpg" alt="Cheque regalo">
+    <h1>Cheque Regalo</h1>
+    <div id="descripcion">Tratamiento que se regala</div>
+    <div id="mensfecha">
+        Disfrutar antes del
+        <div id="fecha">
+            <span id="dia">13</span> de
+            <span id="mes">Febrero</span> del
+            <span id="anyo">2019</span>
+        </div>
+    </div>
+    <h3>Le Bouquet Esthetiqué</h3>
+    <button onclick="app.present.print()"></button>
+    <style lang="less" scoped>
+    @import url('https://fonts.googleapis.com/css?family=Parisienne&display=swap');
+
+    * {
+        color: #444;
+        font-family: 'Parisienne', cursive;
+        position: fixed;
+    }
+
+    h1 {
+        top: 70px;
+        left: 103px;
+        font-size: 2rem;
+    }
+
+    h3 {
+        top: 280px;
+        left: 100px;
+        font-size: 1.4rem;
+    }
+
+    #mensfecha {
+        top: 220px;
+        left: 110px;
+
+        * {
+            position: initial;
+        }
+    }
+
+    #descripcion {
+        top: 150px;
+        left: 110px;
+        font-size: 1.4rem;
+    }
+</style>
+<script>
+    class Present {
+        constructor($id) {
+            
+            this.el     = document.getElementById($id)
+            this.style  = this.el.getElementsByTagName('style')[0]
+            this.desc   = this.el.querySelector('#descripcion')
+            this.date   = this.el.querySelector('#fecha')
+            this.day    = this.el.querySelector('#dia')
+            this.month  = this.el.querySelector('#mes')
+            this.year   = this.el.querySelector('#anyo')
+
+        }
+        description(arr = []) {
+            arr.foreach(text => {
+                this.desc.innerHTML += text + '<br>'
+            })
+            return this.desc.innerHTML
+        }
+        date(d, m, y) {
+            this.day.innerHTML = d
+            this.month.innerHTML = m
+            this.year.innerHTML = y
+            return this.desc.innerHTML
+        }
+        clear() {
+            this.day.innerHTML = ''
+            this.month.innerHTML = ''
+            this.year.innerHTML = ''
+            this.desc.innerHTML = ''
+        }
+        print(){
+
+        }
+    }
+    </script>
+</component>

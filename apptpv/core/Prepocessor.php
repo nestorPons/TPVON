@@ -29,6 +29,7 @@ class Prepocessor{
 
         if(!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
  
+        // Inicia compilacion de los archivos
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
         $this->cache_record($this->cache);
     }
@@ -67,13 +68,36 @@ class Prepocessor{
         $code = preg_replace($search, $replace, $code);
         return $code;
     }
+    // Solo extrae el primer tag
     private function extract($tag){
-        $pos_tag_open = strpos($this->content, "<$tag"); 
-        $pos_tag_close = strpos($this->content, "</$tag>");
-        $pos_end_tag_open = strpos($this->content, '>',$pos_tag_open);
+        $attr = []; 
+        $pos_tag_open       = strpos($this->content, "<$tag"); 
+        $pos_tag_open_end   = strpos($this->content, ">",$pos_tag_open);
+        $pos_tag_close      = strpos($this->content, "</$tag>");
+        $pos_end_tag_open   = strpos($this->content, '>',$pos_tag_open);
         $pos_end_tag_open += 1 ;
 
-        return substr($this->content, $pos_end_tag_open, $pos_tag_close - $pos_end_tag_open);
+        $str_tag = substr($this->content, $pos_tag_open, $pos_tag_open_end); 
+        if(preg_match_all('/[A-Za-z]*\s*=\s*".*?"[\s]*?/', $str_tag, $matches)){
+            foreach($matches[0] as $match ){
+                $arr = explode('=', $match); 
+                $a = trim($arr[1],'"'); 
+                $attr[$arr[0]] = trim($a,"'");
+            }
+        }
+        return [
+            'content' => trim(substr($this->content, $pos_end_tag_open, $pos_tag_close - $pos_end_tag_open)),
+            'attr'    => $attr
+        ];
+    }
+    // Añade atributos a la etiqueta
+    private function addAttr($tag, $attr, $value){
+        $regex = "/<\s*{$tag}.*?>/";
+        if(preg_match($regex, $this->content, $matches)){
+            $search = substr($matches[0], 0 ,-1); 
+            $replace = "{$search} {$attr}='{$value}'";
+            $this->content = str_replace($search, $replace, $this->content);
+        };  
     }
     private function getContent(String $file){
         return $this->content = file_get_contents($file);
@@ -90,11 +114,47 @@ class Prepocessor{
 
         $this->content = str_replace($content, $content_min, $this->content);
     }  
-    // Lee archivos de directorios y los directorios anidados
+    // Generador de ids únicos
+    private function uniqid(){
+        // Se le añade unprefijo para que siempre empieze por una letra
+        return uniqid('id');
+    }
+    // Funcion que aplica una sintaxis propia  a las vistas
+    // Todos los comandos de las vista deben enpezar por --
+    private function sintax(){
+        // Comando --id -> Genera un id único para todo el documento.
+        $id = $this->uniqid();
+        $this->content = str_ireplace('--id', $id, $this->content);
+
+        // Comando scoped -> individualiza el style en el objeto contenedor
+        $has_scoped = preg_match('/scoped[^<]*>/', $this->content, $matches);
+
+        if($has_scoped) {
+            // Comprobamos si es un componente o una sección
+            $tag = strpos($this->content, '<component') !== false ? 'component' : 'section'; 
+            // Quitamos el comando scope
+            $noscope = str_replace('scoped', '', $matches[0]); 
+            $this->content = str_replace($matches[0], $noscope, $this->content);
+            // Buscamos el id del elemento contenedor, o es un componente o una sectión
+            // Si no tiene id se crea uno y se coloca al style y al componente
+            $id = $this->extract($tag)['attr']['id'] ?? null; 
+            if(!$id){
+                $id = $this->uniqid(); 
+                $this->addAttr($tag,'id',$id);    
+            } 
+            // Quitamos las reglas principales
+            $content = $this->extract('style')['content']; 
+            $content = preg_replace('/@import.*?;/', '', $content);  
+            $content = preg_replace('/@charser.*?;/', '', $content);  
+            // Se coloca el id a los estilos 
+            $this->content = str_replace($content, "#{$id}{{$content}}", $this->content);
+        };
+    }
     private function showFiles(String $path){
     
         $dir = opendir($path);
 
+        // Lee archivos de directorios y los directorios anidados
         while ($current = readdir($dir)){
             if( $current != "." && $current != "..") {
                 
@@ -109,14 +169,18 @@ class Prepocessor{
                 } else {
                     // ARCHIVOS
                     $this->getContent($file);
+
+                    // Transformamos la nueva sintaxis en las vistas
+                    $this->sintax();
+
                     $a = $this->args('style');
           
                     //$this->include();
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
-                        $this->less( $this->extract('style'));
+                        $this->less( $this->extract('style')['content'] );
                     
-                    $this->build_js($this->extract('script'));
+                    $this->build_js( $this->extract('script')['content'] );
                     
                     if( $file == self::MAIN_PAGE ) $this->queue();
                     // Compresión salida html

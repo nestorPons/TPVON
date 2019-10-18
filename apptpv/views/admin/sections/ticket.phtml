@@ -1,12 +1,12 @@
 <component id="buttonsTicket">
     <?php 
+    $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
     $btnPrTicket = new ButtonSuccess(['onclick'=>'app.ticket.print()', 'caption'=>'Imprimir']);
     $btnSndTicket = new ButtonSuccess(['onclick'=>'app.ticket.send()', 'caption'=>'Enviar']);
-    $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
     ?>
 </component>
 <component id="ticket" class="hidden">
-    <img src="<?=$Data->pathLogo?>" alt="Logotipo">
+    <img src="/tpv/companies/logo.png" alt="Logotipo">
     <div class="data">
         <div>TICKET DE VENTA</div>
         <div><span id="ticket_nombre_empresa"></span></div>
@@ -51,6 +51,8 @@
     }
     #ticket img{
         max-width: 200px;
+        height: 100px;
+        width: 100px;
     }
     #<?=$table->id()?>{
         padding: 5px;
@@ -116,18 +118,11 @@
         print(callback){
 
             this.put(false, fn => {
+                imprimirElemento(
+                    document.getElementById('ticket'), 
+                    document.getElementById('ticketStyle') 
+                )
 
-                let printContents = document.getElementById('ticket').innerHTML
-                printContents
-                printContents += '<style>' + document.getElementById('ticketStyle').innerHTML + '</style>'
-
-                let w = window.open();
-                w.document.write(printContents);
-                w.document.close(); // necessary for IE >= 10
-                w.focus(); // necessary for IE >= 10
-                w.print();
-                w.close();
-                
                 typeof callback == 'function' && callback()
             })
         },

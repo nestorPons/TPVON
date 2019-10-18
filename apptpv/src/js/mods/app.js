@@ -46,22 +46,32 @@ const app = {
           })
     },
     // Carga de zonas por método get
-    get (data) {
+    // data => {controller : ... , action: (view), data : ....}
+    // load => {
+    //      (true) => carga y muestra componente/seccion además carga inicializador
+    //       false => Carga el componente pero no lo muestra
+    //  }
+    get (data, load = true, callback) {
         if (typeof data.controller === 'undefined') return false;
 
         for (let i in this.GET) data[i] = this.GET[i]
 
         $.get('index.php', data, html => {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
+            
             $container = ($('main').length != 0) ? $('main') : $('body')
-            $container
+            if(load){
+                $container
                 .find('section').hide().end()
                 .append(html)
-
-            // Inicializamos el método de carga del objeto
-            if(app[data.controller] != undefined )
-                if(exist(app[data.controller].load)) app[data.controller].load()
-            this.sections.inicialize(data.controller) 
+                // Inicializamos el método de carga del objeto
+                if(app[data.controller] != undefined )
+                    if(exist(app[data.controller].load)) app[data.controller].load()
+                this.sections.inicialize(data.controller) 
+            } else {
+                $container.append(html)
+            }
+            typeof callback == 'function' && callback(html)
         }, 'html');
     },
     loadSync (name, callback) {
@@ -99,7 +109,7 @@ const app = {
             return confirm(mens) 
         }
     },
-    sections    : {
+    sections: {
         active  :  null,
         last    : null,
         toggle(section, callback) {

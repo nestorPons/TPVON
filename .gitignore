@@ -3,6 +3,7 @@ node_modules
 htdocs/js
 htdocs/css
 htdocs/companies
+htdocs/build
 !htdocs/companies/template
 server/logs
 apptpv/config/conn.ini

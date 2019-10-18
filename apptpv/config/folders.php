@@ -15,10 +15,12 @@ const APP                           = ROOT . 'apptpv/';
         const LESS                  = SRC . 'less/';
         const JS                    = SRC . 'js/';
     const DB                        = APP . 'db/';
-    const HTDOCS                    = ROOT . PUBLIC_FOLDER; // Carpeta pública
-        const NODE_MODULES              = HTDOCS . 'node_modules/';
-        const VIEWS                     = HTDOCS . 'build/';
-            const BUILD_JS            = HTDOCS . 'build/js/';    
+    
+const HTDOCS                        = ROOT . PUBLIC_FOLDER; // Carpeta pública
+    const NODE_MODULES              = HTDOCS . 'node_modules/';
+    const VIEWS                     = HTDOCS . 'build/';
+        const BUILD_JS              = HTDOCS . 'build/js/';
+        const IMG                   = HTDOCS . 'img/';
 
 namespace VIEWS; 
     const COMPONENTS            = \FOLDERS\VIEWS . 'components/';
