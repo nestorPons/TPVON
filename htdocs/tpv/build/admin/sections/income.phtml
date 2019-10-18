@@ -83,15 +83,9 @@
                 <h2> Fecha fin : ${this.txtTo.value}</h2>
 
                 <table> ${this.Table.html()} </table>
-                <h4>Total: <b>${this.txtTotal.value}</b></h4>`
-
-            //printContents += '<style>' + document.getElementById('incomeStyle').innerHTML + '</style>'
-            w = window.open();
-            w.document.write(printContents);
-            w.document.close(); // necessary for IE >= 10
-            w.focus(); // necessary for IE >= 10
-            w.print();
-            w.close();
+                <h4>Total: <b>${this.txtTotal.value}</b></h4>`;
+                
+                imprimirElemento(printContents);
 
         },
         search(value) {

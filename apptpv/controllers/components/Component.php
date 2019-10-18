@@ -137,7 +137,7 @@ class Component{
             ${$key} = $val;
         }
 
-        include \VIEWS\COMPONENTS . "view/$file.phtml";
+        include \VIEWS\COMPONENTS . "$file.phtml";
     }
     // getters y setters
     function id(int $arg = null){

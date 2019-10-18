@@ -40,7 +40,17 @@
         print(){
             // Comprobamos que este cargado el módulo del vale regalo
             if(app.present) {
-                imprimirElemento(app.present.el, app.present.style)
+                /* imprimirElemento(app.present.el, app.present.style) */
+                let elemento = app.present.el
+                let estilos = app.present.style
+                let ventana = window.open('PRINT    ', '_blank', 'PRINT');
+                    ventana.document.write('<html><head><title>' + document.title + '</title>');
+                    ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
+                    ventana.document.write(`</head><body id="${elemento.id}">`);
+                    ventana.document.write(elemento.innerHTML);
+                    ventana.document.write('</body></html>');
+                    ventana.document.close();
+                    ventana.focus();
             } else {
                 // Si no esta cargado lo cargamos pero no lo mostramos
                 app.get({
