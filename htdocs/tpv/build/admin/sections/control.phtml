@@ -43,7 +43,7 @@
                 /* imprimirElemento(app.present.el, app.present.style) */
                 let elemento = app.present.el
                 let estilos = app.present.style
-                let ventana = window.open('PRINT    ', '_blank', 'PRINT');
+                let ventana = window.open('', '', 'PRINT');
                     ventana.document.write('<html><head><title>' + document.title + '</title>');
                     ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
                     ventana.document.write(`</head><body id="${elemento.id}">`);

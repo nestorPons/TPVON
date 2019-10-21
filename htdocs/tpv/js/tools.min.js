@@ -134,7 +134,7 @@ var mns = {
     }
 }
 function imprimirElemento(elemento, estilos){
-    let ventana = window.open('', '_blank', 'PRINT');
+    let ventana = window.open('', '_blank', '');
     ventana.document.write('<html><head><title>' + document.title + '</title>');
     ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
     ventana.document.write(`</head><body id="${elemento.id}">`);
