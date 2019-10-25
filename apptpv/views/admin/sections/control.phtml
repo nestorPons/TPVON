@@ -2,6 +2,8 @@
     <?php
     $txt01 = new InputText(['label' => 'Ticket']);
     $txt02 = new InputText(['label' => 'Cliente']);
+    $txt03 = new InputText(['label' => 'Fecha']);
+    $txt04 = new InputText(['label' => 'Dias de validez']);
     $table = new Table([
         'columns' => ['id_linea', 'Nombre', 'Descripcion', 'fecha'],
         'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
@@ -11,10 +13,12 @@
 <style lang="less">
     #control {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
 
         table {
-            grid-column: 1 / span 2;
+            grid-row : 2;
+            grid-column-start: 1;
+            grid-column-end: -1;
         }
 
         .fecha {
@@ -52,15 +56,16 @@
 </style>
 <script>
     app.control = {
-        table: 'control',
-        buttons: ['prev', 'next', 'search', 'print'],
-        Table: new Table('<?= $table->idEl() ?>'),
-        txtTicket: <?= $txt01->idEl() ?>,
-        txtCli: <?= $txt02->idEl() ?>,
-        btnDel: ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
-        btnAdd: ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
+        table       : 'control',
+        buttons     : ['prev', 'next', 'search', 'print', 'conf'],
+        Table       : new Table('<?= $table->idEl() ?>'),
+        txtTicket   : <?= $txt01->idEl() ?>,
+        txtCli      : <?= $txt02->idEl() ?>,
+        txtFecha    : <?= $txt03->idEl() ?>,
+        txtDias     : <?= $txt04->idEl() ?>,
+        btnDel      : ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
+        btnAdd      : ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
         load() {
-
             this.db = DB
             this.db.table = this.table
             app.post({
@@ -80,16 +85,32 @@
             // Comprobamos que este cargado el módulo del vale regalo
             if(app.present) {
                 /* imprimirElemento(app.present.el, app.present.style) */
-                let elemento = app.present.el
-                let estilos = app.present.style
-                let ventana = window.open('', '', 'PRINT');
-                    ventana.document.write('<html><head><title>' + document.title + '</title>');
-                    ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
-                    ventana.document.write(`</head><body id="${elemento.id}">`);
-                    ventana.document.write(elemento.innerHTML);
-                    ventana.document.write('</body></html>');
-                    ventana.document.close();
-                    ventana.focus();
+
+                let p = app.present, 
+                    t = this.Table, 
+                    elemento = p.el,
+                    estilos = p.style,
+                    ventana = window.open('', '', 'PRINT'),
+                    arr = []
+
+                for(let i in t.data){
+                    arr.push(t.data[i][1])  
+                }
+                // Obtenemos la fecha del ticket
+
+                //Cargamos los datos en la vista
+                p.description(arr);
+
+                let d = app.date.add(this.txtFecha.value, 365, 'days')
+                p.date = d
+
+                ventana.document.write('<html><head><title>' + document.title + '</title>');
+                ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
+                ventana.document.write(`</head><body id="${elemento.id}">`);
+                ventana.document.write(elemento.innerHTML);
+                ventana.document.write('</body></html>');
+                ventana.document.close();
+                ventana.focus();
             } else {
                 // Si no esta cargado lo cargamos pero no lo mostramos
                 app.get({
@@ -128,12 +149,15 @@
         prev() {
             this.getTicket('prev');
         },
+        // Carga los datos en la tabla
         loadTable(data) {
 
             if (data == undefined) return false;
             this.Table.clear();
 
             this.txtTicket.value = data.id;
+            this.txtFecha.value = data.fecha
+            this.txtDias.value = data.dias
 
             DB.get('usuarios', 'id', data.id_cliente)
                 .then(d => d[0])
@@ -147,7 +171,7 @@
                     .then(d => d[0])
                     .then(ser => {
                         let date = (line.fecha_regalo != null) ? app.date.format(line.fecha_regalo, 'datetime') + this.btnDel : this.btnAdd
-
+                
                         this.Table.addLine(
                             line.id,
                             [line.id, ser.nombre, ser.descripcion, date]
@@ -177,7 +201,7 @@
                 controller: 'control',
                 action: 'addDate',
                 data: {
-                    id_linea: id,
+                    id: id,
                     fecha: date
                 }
             }, d => {
@@ -192,11 +216,14 @@
                 controller: 'control',
                 action: 'delete',
                 data: {
-                    id_linea: id
+                    id: id
                 }
             }, d => {
                 $el.parent().html(this.btnAdd)
             })
         },
+        conf(){
+            alert('CONFIGURANDO')
+        }
     }
 </script>

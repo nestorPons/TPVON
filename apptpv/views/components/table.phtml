@@ -45,6 +45,7 @@
             this.el = document.getElementById(id)
             this.$table = $('#' + id)
             this.$template = $($('#template_' + id)[0].innerHTML)
+            this.data = []
         }
         line() {
             return parseInt(this.el.rows.length)
@@ -53,6 +54,8 @@
          * arrData = array de datos en orden de salida
          */
         addLine(id, arrData) {
+            // Cargamos los datos en una variable para posteriores consultas (getData(){})
+            this.data.push(arrData)
             return this.$template
                 .clone()
                 .attr('idline', id || this.$table.find('tr').length)
@@ -94,7 +97,6 @@
             return total.innerHTML
         }
         hoverable(value) {
-            echo('Hoverable...')
             if (value != undefined) {
                 if (value) this.el.classList.add('hoverable')
                 else this.el.classList.remove('hoverable')
@@ -104,6 +106,5 @@
         html() {
             return this.el.innerHTML
         }
-
     }
 </script>

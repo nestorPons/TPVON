@@ -1,8 +1,9 @@
 <?php namespace app\controllers\components?><component id="buttonsTicket">
     <?php 
-    $present = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1]);
-    $btnPrTicket = new ButtonSuccess(['onclick'=>'app.ticket.print()', 'caption'=>'Imprimir']);
-    $btnSndTicket = new ButtonSuccess(['onclick'=>'app.ticket.send()', 'caption'=>'Enviar']);
+    $present        = new Checkbox(['label' => 'Regalo', 'name'=>'control', 'value'=>1, 'onclick' => 'app.ticket.toggle()']);
+    $txt00          = new InputDate(['label' => 'Fecha vencimiento', 'name'=>'fecha_vencimiento']);
+    $btnPrTicket    = new ButtonSuccess(['onclick'=>'app.ticket.print()', 'caption'=>'Imprimir']);
+    $btnSndTicket   = new ButtonSuccess(['onclick'=>'app.ticket.send()', 'caption'=>'Enviar']);
     ?>
 </component>
 <component id="ticket" class="hidden">
@@ -32,6 +33,9 @@
         <div>¡GRACIAS POR SU VISITA!</div>
     </p>
 </component>
+<style lang="less">
+    #buttonsTicket{display:grid;grid-template-columns:1fr 2fr;grid-template-rows:1fr 1fr 1fr}#buttonsTicket #<?=$txt00->idEl()?>{transition:opacity 1s ease-out}#buttonsTicket #<?=$btnPrTicket->id()?>{grid-row:2;grid-column:1 / span 2}#buttonsTicket #<?=$btnSndTicket->id()?>{grid-row:3;grid-column:1 / span 2}
+</style>
 <style id='ticketStyle'>  
     #ticket {
         transform: scale(0.8);
@@ -103,7 +107,9 @@
 <script>
     app.ticket = {
         Ticket          : null, 
-        present         : document.getElementById('<?=$present->idEl()?>'), 
+        present         : <?=$present->idEl()?>, 
+        cont_end_date   : <?=$txt00->id()?>,
+        end_date        : <?=$txt00->idEl()?>,
         frm             : {
             nombre      : document.getElementById('ticket_nombre_empresa'), 
             admin       : document.getElementById('ticket_admin'),
@@ -116,8 +122,7 @@
         },
         Table           : new Table('<?=$table->idEl()?>'),
         print(callback){
-
-            this.put(false, fn => {
+            this.put(false, _=> {
                 imprimirElemento(
                     document.getElementById('ticket'), 
                     document.getElementById('ticketStyle') 
@@ -128,12 +133,18 @@
         },
         open(Ticket){
 
-            let p1 = DB.get('empresa').then(d => d[0]),
-                p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0])
+            // Ocultamos campo fecha de vencimiento
+            this.toggle()
+            let dias = 0
+            const   p1 = DB.get('empresa').then(d => d[0]),
+                    p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0]),
+                    p3 = DB.get('config').then(d => d[0]);
 
-            Promise.all([p1, p2]).then(d => {
-                let e = d[0], 
-                    u = d[1]
+            Promise.all([p1, p2, p3]).then(d => {
+                const   e = d[0], 
+                        u = d[1],
+                        c = d[2];
+
                 // Cargamos los datos de la empresa
                 this.frm.nombre.innerHTML      = e.nombre
                 this.frm.admin.innerHTML       = u.nombre
@@ -142,9 +153,13 @@
                 this.frm.poblacion.innerHTML   = e.poblacion
                 this.frm.tel.innerHTML         = e.telefono
                 this.frm.nif.innerHTML         = e.nif 
-                this.frm.iva.innerHTML         = e.iva 
+                this.frm.iva.innerHTML         = c.iva 
+
+                dias = c.dias
+
+                return true;
             })
-            .then( async fn => {
+            .then( async _=> {
                 // Reseteamos valor de la casilla regalo
                 this.present.checked = 0
                 this.Table.clear()
@@ -156,12 +171,18 @@
                 $('#ticket')
                     .find('#dateTicket').text(Ticket.fecha.toLocaleString()).end()
                     .find('#idFra').text(numFra).end()
+
                 for(let i in Ticket.lines){
-                    const line = Ticket.lines[i]
-                    let a = await DB.get('servicios', 'id', line.articulo )
-                    this.Table.addLine(line.id, [line.cantidad, a[0].nombre, line.dto, `${line.amo}€`])
+                    const   line = Ticket.lines[i],
+                            a = await DB.get('servicios', 'id', line.articulo ),
+                            nombre = a ? a[0] : 'No encontrado'
+
+                    this.Table.addLine(line.id, [line.cantidad, nombre, line.dto, `${line.amo}€`])
                 }
                 this.Table.total(this.Ticket.total())
+                
+                // Añadimos una fecha standar a la casilla
+                this.end_date.value = app.date.add( app.tpv.date.value , dias, 'days', 'sql')
             })
         },
         put(sendMail = false, callback){
@@ -182,6 +203,9 @@
                 }
                 callback()
              })
+        },
+        toggle(e){
+            this.cont_end_date.classList.toggle('hidden')   
         }
     }
 </script>

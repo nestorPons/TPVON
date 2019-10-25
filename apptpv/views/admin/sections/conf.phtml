@@ -1,87 +1,117 @@
-<section id="conf">
-    <component>
-        <form controller="company" action="save" class="input-group">
-            <fieldset>
-                <legend>Datos empresa</legend>
-                <?php
-                $txt00 = new InputHidden(['name' => 'id', 'value => 1']);
-                $txt01 = new InputText(['tabindex' => 1, 'label' => 'Nombre empresa', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la empresa", 'required' => true]);
-                $txt03 = new InputText(['tabindex' => 2, 'label' => 'Teléfono', 'name' => 'telefono']);
-                $txt04 = new InputText(['tabindex' => 3, 'label' => 'Email', 'name' => 'email']);
-                $txt05 = new InputText(['tabindex' => 4, 'label' => 'Calle', 'name' => 'calle']);
-                $txt06 = new InputText(['tabindex' => 5, 'label' => 'Numero', 'name' => 'numero']);
-                $txt07 = new InputText(['tabindex' => 6, 'label' => 'Escalera', 'name' => 'escalera']);
-                $txt08 = new InputText(['tabindex' => 7, 'label' => 'Piso', 'name' => 'piso']);
-                $txt09 = new InputText(['tabindex' => 8, 'label' => 'Población', 'name' => 'poblacion']);
-                $txt10 = new InputText(['tabindex' => 9, 'label' => 'Provincia', 'name' => 'provincia']);
-                $txt11 = new InputText(['tabindex' => 10, 'label' => 'Codigo postal', 'name' => 'CP', 'title' => "Introduzca el codigo postal"]);
-                $txt12 = new SelectCountries(['tabindex' => 11, 'label' => 'Pais', 'name' => 'pais']);
-                $txt10 = new InputText(['tabindex' => 12, 'label' => '% Iva aplicado', 'name' => 'iva']);
-                ?>
-            </fieldset>
-        </form>
-    </component>
+<section id="--id">
+    <form controller="company" action="save" class="input-group">
+            <legend>Datos empresa</legend>
+            <?php
+            $txt00 = new InputHidden(['name' => 'id', 'value => 1']);
+            $txt01 = new InputText(['tabindex' => 1, 'label' => 'Nombre empresa', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la empresa", 'required' => true]);
+            $txt03 = new InputText(['tabindex' => 2, 'label' => 'Teléfono', 'name' => 'telefono']);
+            $txt04 = new InputText(['tabindex' => 3, 'label' => 'Email', 'name' => 'email']);
+            $txt05 = new InputText(['tabindex' => 4, 'label' => 'Calle', 'name' => 'calle']);
+            $txt06 = new InputText(['tabindex' => 5, 'label' => 'Numero', 'name' => 'numero']);
+            $txt07 = new InputText(['tabindex' => 6, 'label' => 'Escalera', 'name' => 'escalera']);
+            $txt08 = new InputText(['tabindex' => 7, 'label' => 'Piso', 'name' => 'piso']);
+            $txt09 = new InputText(['tabindex' => 8, 'label' => 'Población', 'name' => 'poblacion']);
+            $txt10 = new InputText(['tabindex' => 9, 'label' => 'Provincia', 'name' => 'provincia']);
+            $txt11 = new InputText(['tabindex' => 10, 'label' => 'Codigo postal', 'name' => 'CP', 'title' => "Introduzca el codigo postal"]);
+            $txt12 = new SelectCountries(['tabindex' => 11, 'label' => 'Pais', 'name' => 'pais']);
+            ?>
+    </form>
+    <form controller="config" action="save" class="input-group">
+            <legend>Datos aplicación</legend>
+            <?php
+            new InputHidden(['name' => 'id', 'value => 1']);
+            $txt13 = new InputText(['tabindex' => 12, 'label' => '% Iva aplicado', 'name' => 'iva']);
+            $txt14 = new InputText(['tabindex' => 13, 'label' => 'Dias cheque regalo', 'name' => 'dias']);
+            ?>
+    </form>
     <?php include_once \VIEWS\ADMIN\FORMS . '/user.phtml' ?>
 </section>
 <style lang="less">
-    #conf {
-        component {
-            display: inline-flex;
+    #--id{
+        display : grid;
+        grid-template-columns: 1fr 1fr 1fr; 
+        grid-template-rows: 1fr 1fr; 
+        @media(max-width: 650px){
+            grid-template-columns: 1fr 1fr; 
+            grid-template-rows: 1fr 1fr;        
+        }
+        form {
+            height: min-content;
+        }
+        form:first-of-type{
+            grid-row-start: 1;
+            grid-row-end: -1;
         }
     }
 </style>
 <script>
     // Cargamos los datos de la base de datos 
     app.conf = {
-        table: 'empresa',
-        table_user: 'usuarios',
-        id_user: null,
         buttons: [],
-        form_company: document.getElementById('conf').getElementsByTagName('form')[0],
-        form_user: document.getElementById('conf').getElementsByTagName('form')[1],
+        id_user: null,
+        form    : {
+            company : document.getElementById('--id').getElementsByTagName('form')[0],
+            conf    : document.getElementById('--id').getElementsByTagName('form')[1],
+            user    : document.getElementById('--id').getElementsByTagName('form')[2]
+        },
+        table       : {
+            company : 'empresa',
+            conf    : 'config',
+            users   : 'usuarios',
+        },
         load() {
-            let f = this.form_user,
+            let f = this.form.user,
                 buttons = f.getElementsByTagName('button')
+
             remove(buttons)
-            this.form_user.getElementsByTagName('legend')[0].innerHTML = 'Datos administrador'
+            this.form.user.getElementsByTagName('legend')[0].innerHTML = 'Datos administrador'
             DB.get('usuarios', 'nivel', 2)
                 .then(d => d[0])
                 .then(d => {
                     // Cargamos los datos
                     this.id_user = d.id
 
-                    app.loadDataToForm(d, this.form_user)
+                    app.loadDataToForm(d, this.form.user)
                 })
             DB.get('empresa')
                 .then(d => d[0])
                 .then(d => {
-                    app.loadDataToForm(d, this.form_company)
-                    })
-            this.form_user
+                    app.loadDataToForm(d, this.form.company)
+                })
+            DB.get('config')               
+                .then(d => d[0])
+                .then(d => {
+                    app.loadDataToForm(d, this.form.conf)
+                })
+            this.form.user
         },
         onblur(callback) {
             this.save()
         },
         save() {
-            let data_user = {
-                ...app.formToObject(this.form_user),
-                nivel: 2
-            }
-            DB.set(this.table, app.formToObject(this.form_company), 'id', 1)
+            // Guardamos empresa
+            DB.set(this.table.company, app.formToObject(this.form.company), 'id', 1)
+            $(this.form.company).submit()
+            // Guardamos datos aplicación
+            DB.set(this.table.conf, app.formToObject(this.form.conf), 'id', 1)
+            $(this.form.conf).submit()
 
-            $(this.form_company).submit()
-            this.save_user(data_user)
+            // Guardamos datos usuario administrador
+            this.save_user({
+                ...app.formToObject(this.form.user),
+                nivel: 2
+            })
         },
         save_user(data) {
 
             if (data && data.id) {
                 delete data['noAuth']
                 app.post({
-                    controller: 'user',
+                    controller: this.table.users,
                     action: 'save',
                     data: data
                 }, (d) => {
-                    DB.set(this.table_user, {
+                    DB.set(this.table.users, {
                         ...data,
                         estado: 1
                     }, 'id', this.id_user)

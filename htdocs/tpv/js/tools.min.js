@@ -17,7 +17,7 @@ var exist = function(arg = undefined){
 var remove = function(arr = []){
     do{
         let b = arr[0]
-        b.remove()
+        if (b) b.remove()
     } while(arr.length > 0)
 }
 var isset = function(arg = undefined){

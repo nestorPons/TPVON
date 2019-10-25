@@ -1,7 +1,8 @@
 <?php namespace app\models;
 use \app\core\{Query, Data, Error};
+
 class Tickets extends Query{
-    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $regalo = 0, $lines;
+    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines;
     protected $table = 'tickets';
     function __construct($args = null){
         parent::__construct();
@@ -21,16 +22,20 @@ class Tickets extends Query{
         $this->fecha = $date->format('d/m/Y');
         return $data;
     }
-    function new(Data $Data){
-
+    function new(Data $Post){
         //Comprobamos si existe
-        if(!$this->getById($Data->id)){
-            $lines = $Data->lines; 
-            $esregalo = $Data->regalo; 
-            $Data->filter(new Tickets);
+        if(!$this->getById($Post->id)){
+            $lines = $Post->lines; 
+            $isPresent = $Post->regalo; 
+            $Post->filter(new Tickets);
             $DateTime = new \DateTime;
-            $Data->fecha = $DateTime->format('Y-m-d H:i');
-            $this->id = $this->add($Data->toArray(['lines']));
+            $Post->fecha = $DateTime->format('Y-m-d H:i');
+            $this->id = $this->add($Post->toArray(['lines']));
+            // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
+            if($isPresent) {
+                $Present = new Present;
+                $Present->addTicket($this->id); 
+            }
             
             foreach($lines as $line){
                 $Line = new Lines;
@@ -41,12 +46,8 @@ class Tickets extends Query{
                     'cantidad'  => intval($line['cantidad']), 
                     'dto'       => floatval($line['dto'])
                 ]);
-                if($esregalo) {
-                    $Control = new Control();
-                    $Control->add([
-                        'id_linea' => $idLine 
-                    ]); 
-                }
+                if($isPresent) $Present->addLine($idLine); 
+                
             }  
             return ['id' => $this->id]; 
         } else return false;

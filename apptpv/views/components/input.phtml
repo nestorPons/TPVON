@@ -1,11 +1,10 @@
-<div class="row <?=$hidden?>" id="<?=$id?>">
-    <div class="col-sm-12 col-md-12">
+<div class="<?=$row??''?> <?=$hidden??''?>" id="<?=$id?>">
+
         <input 
             type = "<?=$type?>" 
             id = "<?=$idElement?>"
             class = "<?=$class?>"
             placeholder=" "
-
             <?=$placeholder?>
             <?=$name?>
             <?=$title?>
@@ -30,9 +29,9 @@
             <?=$checked?>
             <?=@$attr_default?>
         />
-        <label for="<?=$id?>" class="<?=$classLabel?>"><?=$label?></label>
+        <label for="<?=$idElement?>" class="<?=$classLabel?>"><?=$label?></label>
         <?php if($iconlast):?>
             <i id="<?=$id?>" class="lnr lnr-<?=$icon?>"></i>
         <?php endif?>
-    </div>
+
 </div>

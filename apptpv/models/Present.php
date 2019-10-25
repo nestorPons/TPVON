@@ -1,16 +1,23 @@
 <?php namespace app\models;
 use \app\core\{Query};
 
-class Control extends Query{
-    public $id, $id_linea, $fecha; 
-    protected $table = 'control';
+class Present extends Query{
+    public $id, $fecha; 
+    protected $table = 'lineas_regalo';
+    private $connTicket = null, $connLine = null; 
 
-    function __construct($arg = null){
-        parent::__construct();
-        if($arg) $this->load($arg);
+    function __construct(){
+        $this->connTicket = new Query('tickets_regalo');
+        $this->connLine = new Query('lineas_regalo');
+    }
+    function addTicket($id_ticket){
+        return $this->connTicket->add(['id'=> $id_ticket], false); 
+    }
+    function addLine($id_line){
+        return $this->connLine->add(['id'=> $id_line], false); 
     }
     function load($id){
-        $d = $this->getBy(['id_linea'=>$id]); 
+        $d = $this->getBy(['id'=>$id]); 
         $this->loadData($d);
         return $d; 
     }
@@ -19,7 +26,7 @@ class Control extends Query{
         $T = new Tickets();
         $t = $T->get(['regalo'=>1]);
 
-        return $this->getBy(['id_linea' => $Data->id]);
+        return $this->getBy(['id' => $Data->id]);
     }
     function next($Data){
         $T = new Tickets((int)$Data->id);
@@ -43,14 +50,14 @@ class Control extends Query{
         return $tickets; 
     }
     function delete($data){
-        $d = $this->getOneBy(['id_linea' => $data->id_linea]);
+        $d = $this->getOneBy(['id' => $data->id]);
         $this->loadData($d);
         $d['fecha'] = '';
         return $this->saveById($d);
     }
     function addDate($data){
 
-        $d = $this->getOneBy(['id_linea' => $data->id_linea]);
+        $d = $this->getOneBy(['id' => $data->id]);
         $this->loadData($d);
         $d['fecha'] = $data->fecha;
         return $this->saveById($d);

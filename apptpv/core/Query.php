@@ -55,9 +55,11 @@ class Query extends Conn
         return $this->sendQuery("SELECT $return FROM {$this->table} order_by;", $desc);
     }
     // Devuelve datos de una peticion por id
-    public function getById(int $id, string $return = '*')
+    // param puede ser array con una clave id o un integer que hace referencia a un id
+    public function getById($param, string $return = '*')
     {
-        $r =  $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
+        $id = $param['id'] ?? $param; 
+        $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
         return $r ? $r[0] : null;
     }
     // Devuelve datos de una peticion por algun campo del registro
@@ -124,9 +126,9 @@ class Query extends Conn
         return $this->rowCount();
     }
     // Añadimos un registro devuelve el id del registro
-    public function add(array $params)
+    public function add(array $params, $del_id = true)
     {
-        unset($params['id']);
+        if($del_id) unset($params['id']);
         $strCol = '';
         $strPre = '';
         foreach ($params as $col => $val) {

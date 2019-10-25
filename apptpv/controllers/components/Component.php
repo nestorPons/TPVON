@@ -41,7 +41,6 @@ class Component{
         $idElement = $this->idEl(); 
         $idObj = $this->idObj;
 
-        $hidden = ($type == 'hidden')?'hidden':null;
         $disabled = (isset($this->disabled))?'disabled':null;
         $readonly = (isset($this->readonly))?'readonly':null;
         $checked = (isset($this->checked))?'checked':null;

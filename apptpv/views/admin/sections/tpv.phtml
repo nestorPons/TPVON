@@ -18,7 +18,6 @@
     $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => 5, 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => 6, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
-    $iva = new InputHidden(['label' => 'Iva %'], false);
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => 7, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value' => '0'], false);
     $btnOk = new ButtonSuccess(['tabindex' => 8, 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
@@ -121,8 +120,8 @@
     }
 
     #tpv #<?= $txtTotal->id() ?>label {
-        font-size: 1.2rem;
-        color: var(--fore-color);
+        font-size: await.2rem;
+        color: var(await-fore-color);
     }
 
     #tpv #<?= $btnTicket->id() ?> {
@@ -169,8 +168,10 @@
             this.id_usuario = null;
             this.id_cliente = null;
             this.fecha = null;
-            this.iva = 21;
+
             this.estado = 1;
+            this.iva = null
+
             if (data != undefined) {
                 this.id = data.id;
                 this.id_usuario = data.id_usuario;
@@ -240,7 +241,6 @@
         total: document.getElementById('<?= $txtTotal->idEl() ?>'),
         date: <?= $date->idEl() ?>,
         hour: <?= $hour->idEl() ?>,
-        iva: <?= $iva->idEl() ?>,
         $id: $('#<?= $id->idEl() ?>'),
         $description: $('#<?= $des->idEl() ?>'),
         $employees: $('#<?= $emp->id() ?>'),
@@ -292,13 +292,11 @@
         close() {
             this.Modal.close()
         },
-        reset() {
-            echo('Reset...')
+        async reset() {
             DB.get('empresa').then(d => {
                 this.Ticket = new Ticket()
                 this.date.value = app.date.now('date')
                 this.hour.value = app.date.now('hour')
-                this.iva.value = d[0].iva
                 this.dto.value = 0
                 this.selCli.value(0)
                 this.clearLine()
@@ -309,13 +307,14 @@
                 this.close()
             })
         },
-        // Cargamos un Ticket con los datos introducidos por el usuario
+        // Cargamos los datos al Ticket
         async create() {
             this.Ticket.id_usuario = this.selEmp.value()
             this.Ticket.id_cliente = this.selCli.value()
             this.Ticket.fecha = new Date
             this.Ticket.id = this.currentId
-            this.Ticket.iva = this.iva.value
+            this.Ticket.iva = await DB.get('config').then( d => d[0].iva)
+
             if (this.Ticket.validate()) {
                 await this.loadClient()
                 this.openTicket()
@@ -474,8 +473,10 @@
         },
         // Cargamos los datos del ticket actual
         async loadDataTicket(data) {
+
             let t = 0
-            await this.reset()
+            await this.reset()  
+
             this.Ticket = new Ticket(data)
 
             if (data.estado != undefined) {
@@ -486,7 +487,7 @@
                 this.selCli.option(data.id_cliente)
 
                 this.total.value = this.Ticket.total()
-                this.date.value = app.date.format(data.fecha, 'print')
+                this.date.value = app.date.format(data.fecha, 'short')
                 this.hour.value = app.date.format(data.fecha, 'hour')
 
                 // Cargamos el id del ticket actual

@@ -1,17 +1,12 @@
 <?php namespace app\models;
 use PHPMailer\PHPMailer\{ PHPMailer,  Exception};
-use \app\core\{
-    Error,
-    Query, 
-    Data
-};
+use \app\core\{Error, Query, Data};
 
 class Company extends Query{
 
     public 
         $id = 1, $nombre, $fecha, $ultimo_acceso, $nif,
-        $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais,
-        $iva; 
+        $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais; 
     protected 
         $data = null ,
         $table = 'empresa', 
@@ -34,7 +29,7 @@ class Company extends Query{
      */
     public function new(Data $Data){
 
-        $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password', 'iva'], true);
+        $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
 
         $Data->set('nombre', $Data->nombre_empresa);
         $this->loadData($Data->getAll());

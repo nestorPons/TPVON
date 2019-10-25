@@ -10,11 +10,13 @@
 <script>
   class Modal {
     constructor(id) {
-
       this.el = document.getElementById(id)
       this.$el = $('#' + id)
       this.$switch = $('#control_' + id)
       this.$el.keyup(e => (e.key === 'Escape') && this.close())
+      // Variable de estado del formulario: nuevo, editanto
+      this.attrState = false
+      this.data = []
     }
     clear() {
       this.el.getElementsByTagName('form')[0].reset()
@@ -40,6 +42,9 @@
         selects = this.$el.find('select'),
         d = exist(data.id) ? data : data[0]
 
+      // Cargamos la informacion en una variable para poder consultar
+      this.data = d
+
       selects.each(function() {
 
         if (d.id != -1)
@@ -61,6 +66,21 @@
     }
     getData() {
       return app.formToObject(this.el)
+    }
+    state(value){
+      if(value){
+        this.attrState = value
+        const el = this.el.querySelector(`[name="id"]`)
+
+        if(el) {
+          if(value == 'new')  el.parentElement.classList.add('hidden')
+          else                el.parentElement.classList.remove('hidden')
+        }
+
+        return this
+      } else {
+        return this.attrState
+      }
     }
   }
 </script>

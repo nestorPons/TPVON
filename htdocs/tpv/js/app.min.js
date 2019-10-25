@@ -56,9 +56,9 @@ const app = {
 
         for (let i in this.GET) data[i] = this.GET[i]
 
-        $.get('index.php', data, html => {
+        $.get('index.php', data, (html, respond) => {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
-            
+
             $container = ($('main').length != 0) ? $('main') : $('body')
             if(load){
                 $container
@@ -126,16 +126,20 @@ const app = {
             })
         },
         load(section = '', html = jQuery){
-            // Comprueba que  la seccion existe o no 
-            if($('section#' + section).length){
-               // Si existe oculta todas menos la solicitada
-               this.toggle(section);
-           }else{
-               // Cargammos el codigo html
-               this.toggle(section, function(){
-                   html.appendTo('body')
-               })
-           }  
+            try{
+                // Comprueba que  la seccion existe o no 
+                if($('section#' + section).length){
+                   // Si existe oculta todas menos la solicitada
+                   this.toggle(section);
+               }else{
+                   // Cargammos el codigo html
+                   this.toggle(section, function(){
+                       html.appendTo('body')
+                   })
+               }  
+            } catch(error) {
+                console.info(error)
+            }   
         },
         show(section){
             this.last = this.active
@@ -292,6 +296,7 @@ const app = {
         return form
     }, 
     date : {
+        date : new Date(),
         current(){
             let f = new Date();
             return this.actual() + ' ' + f.getHours() + ':' + f.getMinutes() + ':' + f.getSeconds()
@@ -321,60 +326,102 @@ const app = {
             }
         },
         format(date, format){
-            if(typeof date !== 'string') return false
-            let d, m , a , h, n, s,
-                f = date.split(' '),
-                fecha = f[0],
-                horario = f[1]
-
-            // Si tiene horas ... 
-            if(horario){   
-                let x = horario.split(':')
-                h = x[0]
-                min = x[1]
-                s = x[2]
-            }
-            if (fecha.indexOf("/")>0){
-                let arr = fecha.split('/');
-                d = ("0" + arr[0]).slice (-2);
-                m = ("0" + arr[1]).slice (-2);
-                a = arr[2];
-            }else if(fecha.indexOf("-")>0){
-                let arr  = fecha.split('-');
-                d = ("0" + arr[2]).slice (-2);
-                m = ("0" + arr[1]).slice (-2);
-                a = arr[0];
-            }else if(fecha.length==4){
-                d = fecha.substr(2);
-                m = fecha.substr(0,2);
-                a =  fechaActual('y');
-            }else if(fecha.length==8){
-                d = fecha.substr(6,2);
-                m = fecha.substr(4,2);
-                a = fecha.substr(0,4);
-            }
+            let d, m , a , h, n, s
+            if(typeof date === 'string') {
+                let f = date.split(' '),
+                    fecha = f[0],
+                    horario = f[1]
+    
+                // Si tiene horas ... 
+                if(horario){   
+                    let x = horario.split(':')
+                    h = x[0]
+                    min = x[1]
+                    s = x[2]
+                }
+                if (fecha.indexOf("/")>0){
+                    let arr = fecha.split('/');
+                    d = ("0" + arr[0]).slice (-2);
+                    m = ("0" + arr[1]).slice (-2);
+                    a = arr[2];
+                }else if(fecha.indexOf("-")>0){
+                    let arr  = fecha.split('-');
+                    d = ("0" + arr[2]).slice (-2);
+                    m = ("0" + arr[1]).slice (-2);
+                    a = arr[0];
+                }else if(fecha.length==4){
+                    d = fecha.substr(2);
+                    m = fecha.substr(0,2);
+                    a =  fechaActual('y');
+                }else if(fecha.length==8){
+                    d = fecha.substr(6,2);
+                    m = fecha.substr(4,2);
+                    a = fecha.substr(0,4);
+                }
+            } else  if(typeof date === 'object') {
+                d = date.getDate().toString().padStart(2 , '0')
+                m = (date.getMonth()+ 1).toString().padStart(2 , '0')
+                a = date.getFullYear().toString()
+                h = date.getHours().toString().padStart(2 , '0')
+                n = date.getMinutes().toString().padStart(2 , '0')
+                s = date.getSeconds().toString().padStart(2 , '0')
+            } else return false
             switch(format) {
                 case 'sql'      : return a + '-' + m + '-' + d
                 case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + min
-                case 'print'    : return d + '/' + m + '/' + a
+                case 'short'    : return d + '/' + m + '/' + a
                 case 'md'       : return m + d 
                 case 'id'       : return a + m + d
                 case 'day'      : return d
                 case 'month'    : return m
                 case 'year'     : return a
                 case 'hour'     : return h + ':' + min || false
+                case 'long'     : 
+                    let month = ''
+                    switch (m) {
+                        case '1' : month = 'Enero'; break;
+                        case '2' : month = 'Febrero'; break;
+                        case '3' : month = 'Marzo'; break;
+                        case '4' : month = 'Abril'; break;
+                        case '5' : month = 'Mayo'; break;
+                        case '6' : month = 'Junio'; break;
+                        case '7' : month = 'Julio'; break;
+                        case '8' : month = 'Agosto'; break;
+                        case '9' : month = 'Septiembre'; break;
+                        case '10' : month = 'Octubre'; break;
+                        case '11' : month = 'Noviembre'; break;
+                        case '12' : month = 'Diciembre'; break;
+                    }
+                    return `${d} de ${month} del ${a}`
+
                 default         : return new Date(a, m-1, d, h, min, s)
             }
 
         },
-        diff: function (f1,f2){
+        diff(f1,f2){
             
             let d1 = new Date(this.format(f1,'sql')).getTime(),
                 d2 = new Date(this.format(f2,'sql')).getTime(),
                 diff = d2 - d1;
 
                 return (diff/(1000*60*60*24) );
-         },
+        },
+        add (strDate, value, unity, format = null){
+            const   date = new Date(this.format(strDate, 'sql')),
+                    v = parseInt(value)
+            switch(unity){
+                case 'days':
+                    date.setDate(date.getDate() + v)
+                    break
+                case 'month':
+                    date.setMonth(date.getMonth() + v)
+                    break
+                case 'year':
+                    date.setFullYear(date.getFullYear() + v)
+                }
+            if(format) return this.format(date, format)
+            else return date
+        }
     }
 }
 const DB = {

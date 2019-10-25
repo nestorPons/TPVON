@@ -8,6 +8,8 @@ class Input extends Component{
         $this->COLLAPSE = false;
         $this->MINLENGTH = null;
         $this->MAXLENGTH = null; 
+        $this->row = 'row';
+        
         parent::__construct($data);
         $this->print('input');
     }

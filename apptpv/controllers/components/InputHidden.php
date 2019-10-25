@@ -4,7 +4,8 @@
 class InputHidden extends Input{
 
     function __construct(Array $data = []){
-        $this->type = 'hidden';
+        $this->type = 'text';
+        $this->hidden ='hidden';
 
         parent::__construct($data);
     }

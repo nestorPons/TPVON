@@ -1,6 +1,7 @@
 <section id="services">
     <?php
-    $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 'onclick'=>'app.services.show(window.event)']);
+    $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 
+    'onclick'=>'app.services.show(window.event)']);
     $abc = new ListABC($table->id());
     $form = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/service.phtml'], false);
     ?>
@@ -27,6 +28,22 @@ app.services = {
     Table       : new Table('<?=$table->idEl()?>'),
     Form        : new Modal('<?=$form->id()?>'),
     $table      : $('#<?=$table->id()?>').find('tbody'),
+    // Validacion del campo codigo
+    async valCode(e){
+        echo('validation code ...')
+        const   el = e.target, 
+                value = el.value,
+                ser = await DB.get('servicios', 'codigo', value).then( d => d[0])
+        if(this.Form.state() == 'new'){
+            // Validamos si creamos un codigo nuevo
+            if(ser != undefined) el.setCustomValidity("Codigo existente")
+            else el.setCustomValidity('')  
+        } else {
+            // Valida si editamos el codigo
+            if(ser && this.Form.data.id != ser.id) el.setCustomValidity("Codigo existente")
+            else el.setCustomValidity('')
+        }
+    },
     load(){
         DB.get(this.table)
             .then( data => {
@@ -43,20 +60,7 @@ app.services = {
                     }
                 }
             })
-    },
-    validation(){
-        return true
-        let f = this.Form.getData(),
-            usuarios = DB.get('usuarios')
-
-        for(i in usuarios) {
-            let u = usuarios[i]
-
-            if(!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) return {success: false, code: 'dni', mens: 'Error dni duplicado'} 
-            else if( !isEmpty(f.email) && u.email == f.email && u.id != f.id ) return {success: false, code: 'email', mens: 'Error email duplicado'} 
-        }
-
-        return {success: true}
+        
     },
     del(){
         // Eliminamos de la bd local
@@ -78,7 +82,12 @@ app.services = {
             id: -1,
             estado: 1
         }
-        this.Form.clear().open(data).setTile('Nuevo servicio o artículo')
+        this.Form
+            .state('new')
+            .clear()
+            .open(data)
+            .setTile('Nuevo servicio o artículo')
+
     },
     addLine(data){
         this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
@@ -101,7 +110,7 @@ app.services = {
     show(e){
         this.currentId = e.path[1].attributes.idline.value
         DB.get(this.table, 'id', this.currentId)
-            .then( data => this.Form.open(data).setTile('Edicion servicio o artículo'))
+            .then( data => this.Form.state('edit').open(data).setTile('Edicion servicio o artículo'))
     },
     async search(value){
         this.Table.hideLines()
