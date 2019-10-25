@@ -28,6 +28,7 @@ app.services = {
     Table       : new Table('<?=$table->idEl()?>'),
     Form        : new Modal('<?=$form->id()?>'),
     $table      : $('#<?=$table->id()?>').find('tbody'),
+    // Validacion del campo codigo
     async valCode(e){
         echo('validation code ...')
         const   el = e.target, 
@@ -38,7 +39,6 @@ app.services = {
             if(ser != undefined) el.setCustomValidity("Codigo existente")
             else el.setCustomValidity('')  
         } else {
-            echo(this.Form.data, ser.id)
             // Valida si editamos el codigo
             if(ser && this.Form.data.id != ser.id) el.setCustomValidity("Codigo existente")
             else el.setCustomValidity('')

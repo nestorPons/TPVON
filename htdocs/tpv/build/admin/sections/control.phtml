@@ -10,12 +10,12 @@
     ]);
     ?>
 </section>
-<style lang="less">
+<style lang="less" >
     #control{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}#control table{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}
 </style>
 <script>
     app.control = {
-        table       : 'control',
+        table       : 'present',
         buttons     : ['prev', 'next', 'search', 'print', 'conf'],
         Table       : new Table('<?= $table->idEl() ?>'),
         txtTicket   : <?= $txt01->idEl() ?>,
@@ -40,20 +40,20 @@
             })
         },
         // Impresion de los vales regalo
-        print(){
+        print() {
             // Comprobamos que este cargado el módulo del vale regalo
-            if(app.present) {
+            if (app.present) {
                 /* imprimirElemento(app.present.el, app.present.style) */
 
-                let p = app.present, 
-                    t = this.Table, 
+                let p = app.present,
+                    t = this.Table,
                     elemento = p.el,
                     estilos = p.style,
                     ventana = window.open('', '', 'PRINT'),
                     arr = []
 
-                for(let i in t.data){
-                    arr.push(t.data[i][1])  
+                for (let i in t.data) {
+                    arr.push(t.data[i][1])
                 }
                 // Obtenemos la fecha del ticket
 
@@ -73,8 +73,8 @@
             } else {
                 // Si no esta cargado lo cargamos pero no lo mostramos
                 app.get({
-                    controller : 'present', 
-                    action  : 'view',
+                    controller: 'present',
+                    action: 'view',
                     data: {}
                 }, false, html => {
                     // Obtenemos el id del elemento
@@ -91,15 +91,15 @@
             this.db.lastId()
                 .then(id => this.db.set(data, 'id', id + 1));
         },
-        getTicket(action){
+        getTicket(action) {
             app.post({
-                controller  : this.table,
-                action      : action,
-                data        : {
-                    id      : (this.txtTicket.value)
+                controller: this.table,
+                action: action,
+                data: {
+                    id: (this.txtTicket.value)
                 }
             }, (data, status) => {
-                if(status) this.loadTable(data);
+                if (status) this.loadTable(data);
             });
         },
         next() {
@@ -110,7 +110,6 @@
         },
         // Carga los datos en la tabla
         loadTable(data) {
-
             if (data == undefined) return false;
             this.Table.clear();
 
@@ -130,7 +129,7 @@
                     .then(d => d[0])
                     .then(ser => {
                         let date = (line.fecha_regalo != null) ? app.date.format(line.fecha_regalo, 'datetime') + this.btnDel : this.btnAdd
-                
+
                         this.Table.addLine(
                             line.id,
                             [line.id, ser.nombre, ser.descripcion, date]
@@ -181,7 +180,7 @@
                 $el.parent().html(this.btnAdd)
             })
         },
-        conf(){
+        conf() {
             alert('CONFIGURANDO')
         }
     }

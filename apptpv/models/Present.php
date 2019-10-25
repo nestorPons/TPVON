@@ -9,12 +9,15 @@ class Present extends Query{
     function __construct(){
         $this->connTicket = new Query('tickets_regalo');
         $this->connLine = new Query('lineas_regalo');
+        $this->connview = new Query('vista_lineas_regalo');
+
     }
-    function addTicket($id_ticket){
-        return $this->connTicket->add(['id'=> $id_ticket], false); 
+    function addTicket($idTicket){
+        return $this->connTicket->add(['id'=> $idTicket], false); 
     }
-    function addLine($id_line){
-        return $this->connLine->add(['id'=> $id_line], false); 
+    function addLine($idLine){
+//pr('LINEA', $idLine);
+        return $this->connLine->add(['id'=> $idLine], false); 
     }
     function load($id){
         $d = $this->getBy(['id'=>$id]); 
@@ -40,14 +43,7 @@ class Present extends Query{
         return $T->toArray();
     }
     function get(){
-        $tickets = [];
-        $T = new Tickets();
-        $t = $T->getBy(['regalo'=>1], 'id');
-        
-        foreach($t as $v){
-            $tickets[] = $T->get($v['id']);
-        }
-        return $tickets; 
+        return $this->connview->getAll();
     }
     function delete($data){
         $d = $this->getOneBy(['id' => $data->id]);

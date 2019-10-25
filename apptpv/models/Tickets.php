@@ -30,27 +30,32 @@ class Tickets extends Query{
             $Post->filter(new Tickets);
             $DateTime = new \DateTime;
             $Post->fecha = $DateTime->format('Y-m-d H:i');
+            // Guardamos el id generado 
+
             $this->id = $this->add($Post->toArray(['lines']));
-            // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
-            if($isPresent) {
-                $Present = new Present;
-                $Present->addTicket($this->id); 
-            }
-            
-            foreach($lines as $line){
-                $Line = new Lines;
-                $idLine = $Line->add([
-                    'id_ticket' => $this->id,
-                    'articulo'  => intval($line['articulo']),
-                    'precio'    => floatval($line['precio']),
-                    'cantidad'  => intval($line['cantidad']), 
-                    'dto'       => floatval($line['dto'])
-                ]);
-                if($isPresent) $Present->addLine($idLine); 
-                
-            }  
-            return ['id' => $this->id]; 
-        } else return false;
+            if($this->id){
+                // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
+                if($isPresent) {
+                    $Present = new Present;
+                    $Present->addTicket($this->id); 
+                }
+
+                foreach($lines as $line){
+                    $Line = new Lines;
+                    $idLine = $Line->add([
+                        'id_ticket' => $this->id,
+                        'articulo'  => intval($line['articulo']),
+                        'precio'    => floatval($line['precio']),
+                        'cantidad'  => intval($line['cantidad']), 
+                        'dto'       => floatval($line['dto'])
+                    ]);
+
+                    if($isPresent) $Present->addLine($idLine);                     
+                }  
+                return ['id' => $this->id]; 
+            } else throw new Error('E053');
+
+        }
         
     }
     // Método genérico de captura de tickets con sus lineas

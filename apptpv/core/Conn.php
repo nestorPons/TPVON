@@ -19,7 +19,6 @@ class Conn{
      *	Genera la conexión a a la base de datos
      */
     protected function connect($dsn, $pass){
-
         try {
             $this->pdo = new \PDO(
                     $dsn, 
@@ -46,10 +45,9 @@ class Conn{
 	 }
 
      private function init($sql, $params = null){
-/* 
-pr($sql, $params);
-pr($this->pdo); 
-*/
+
+// pr('SQL', $sql, $params);
+// pr($this->pdo);  
          try {
             $this->sqlPrepare = $this->pdo->prepare($sql);
             $this->bindMore($params);
@@ -66,6 +64,7 @@ pr($this->pdo);
                     } else {
                         $type = \PDO::PARAM_STR;
                     }
+
                     $this->sqlPrepare->bindValue($value[0], $value[1], $type);
                     }
             }
@@ -84,7 +83,7 @@ pr($this->pdo);
      *	@param array $parray
      */
     public function bindMore($parray){
-        if (empty($this->params) && is_array($parray)) {
+        if (is_array($parray)) {
             $columns = array_keys($parray);
             foreach ($columns as $i => &$column) {
                 $this->bind($column, $parray[$column]);

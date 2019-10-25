@@ -201,3 +201,11 @@ CREATE TABLE `config` (
 
   ALTER TABLE `tokens`
     ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+CREATE VIEW 
+vista_lineas_regalo AS 
+SELECT l.id, l.id_ticket, l.articulo, lr.fecha, t.fecha_vencimiento
+FROM lineas as l
+INNER JOIN lineas_regalo as lr ON l.id = lr.id
+INNER JOIN tickets_regalo as t ON l.id_ticket = t.id;

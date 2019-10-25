@@ -48,7 +48,6 @@ class Query extends Conn
     {
         return $this->conn;
     }
-
     // Devuelve todos los registros de una tabla
     public function getAll(string $return = '*', $desc = false)
     {
@@ -137,9 +136,10 @@ class Query extends Conn
         }
         $strCol = trim($strCol, ',');
         $strPre = trim($strPre, ',');
+
         if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)) {
             return $this->lastInsertId();
-        } else return 0;
+        } else return false;
     }
     // Guarda registro mediante su id
     public function saveById(array $args = null)
@@ -233,7 +233,6 @@ class Query extends Conn
         }
         return trim($sql, ',');
     }
-
     //getters setters
     function db(string $arg = null)
     {
