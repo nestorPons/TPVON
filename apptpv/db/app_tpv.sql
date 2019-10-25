@@ -205,7 +205,13 @@ CREATE TABLE `config` (
 
 CREATE VIEW 
 vista_lineas_regalo AS 
-SELECT l.id, l.id_ticket, l.articulo, lr.fecha, t.fecha_vencimiento
+SELECT l.id, l.id_ticket, l.articulo, lr.fecha
 FROM lineas as l
 INNER JOIN lineas_regalo as lr ON l.id = lr.id
 INNER JOIN tickets_regalo as t ON l.id_ticket = t.id;
+
+CREATE VIEW 
+vista_tickets_regalo AS 
+SELECT t.id, t.fecha, tr.fecha_vencimiento
+FROM tickets as t
+INNER JOIN tickets_regalo as tr ON t.id = tr.id;

@@ -7,16 +7,16 @@ class Present extends Query{
     private $connTicket = null, $connLine = null; 
 
     function __construct(){
+        $this->viewTickets = new Query('vista_tickets_regalo');
         $this->connTicket = new Query('tickets_regalo');
         $this->connLine = new Query('lineas_regalo');
-        $this->connview = new Query('vista_lineas_regalo');
+        $this->viewLines = new Query('vista_lineas_regalo');
 
     }
     function addTicket($idTicket){
         return $this->connTicket->add(['id'=> $idTicket], false); 
     }
     function addLine($idLine){
-//pr('LINEA', $idLine);
         return $this->connLine->add(['id'=> $idLine], false); 
     }
     function load($id){
@@ -43,7 +43,16 @@ class Present extends Query{
         return $T->toArray();
     }
     function get(){
-        return $this->connview->getAll();
+        $tickets = $this->viewTickets->getAll(); 
+     
+        if($tickets){
+            foreach ($tickets as $key => $value) {
+                $lines = $this->viewLines->getBy(['id_ticket' => $value['id']]);
+                $tickets[$key]['lines'] = $lines;
+            }
+            return $tickets;
+        } else return false; 
+
     }
     function delete($data){
         $d = $this->getOneBy(['id' => $data->id]);

@@ -3,7 +3,7 @@
     $txt01 = new InputText(['label' => 'Ticket']);
     $txt02 = new InputText(['label' => 'Cliente']);
     $txt03 = new InputText(['label' => 'Fecha']);
-    $txt04 = new InputText(['label' => 'Dias de validez']);
+    $txt04 = new InputText(['label' => 'Fecha vencimiento']);
     $table = new Table([
         'columns' => ['id_linea', 'Nombre', 'Descripcion', 'fecha'],
         'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
@@ -21,19 +21,17 @@
         txtTicket   : <?= $txt01->idEl() ?>,
         txtCli      : <?= $txt02->idEl() ?>,
         txtFecha    : <?= $txt03->idEl() ?>,
-        txtDias     : <?= $txt04->idEl() ?>,
+        txtFechaV   : <?= $txt04->idEl() ?>,
         btnDel      : ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
         btnAdd      : ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
         load() {
-            this.db = DB
-            this.db.table = this.table
             app.post({
                 controller: this.table,
                 action: 'get',
                 data: {}
             }, data => {
                 DB.set(this.table, data)
-                    .then(_ => this.db.last())
+                    .then(_ => DB.last(this.table))
                     .then(lst => {
                         this.loadTable(lst);
                     });
@@ -110,12 +108,13 @@
         },
         // Carga los datos en la tabla
         loadTable(data) {
+echo(data)
             if (data == undefined) return false;
             this.Table.clear();
 
             this.txtTicket.value = data.id;
             this.txtFecha.value = data.fecha
-            this.txtDias.value = data.dias
+            this.txtFechaV.value = data.fecha_vencimiento
 
             DB.get('usuarios', 'id', data.id_cliente)
                 .then(d => d[0])
@@ -128,6 +127,7 @@
                 DB.get('servicios', 'id', line.articulo)
                     .then(d => d[0])
                     .then(ser => {
+
                         let date = (line.fecha_regalo != null) ? app.date.format(line.fecha_regalo, 'datetime') + this.btnDel : this.btnAdd
 
                         this.Table.addLine(

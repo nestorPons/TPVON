@@ -49,7 +49,6 @@ class Tickets extends Query{
                         'cantidad'  => intval($line['cantidad']), 
                         'dto'       => floatval($line['dto'])
                     ]);
-
                     if($isPresent) $Present->addLine($idLine);                     
                 }  
                 return ['id' => $this->id]; 
