@@ -23,10 +23,13 @@ class Tickets extends Query{
         return $data;
     }
     function new(Data $Post){
+
         //Comprobamos si existe
         if(!$this->getById($Post->id)){
             $lines = $Post->lines; 
             $isPresent = $Post->regalo; 
+            $end_date = $Post->fecha_vencimiento; 
+            // Limpiamos post de datos indeseados
             $Post->filter(new Tickets);
             $DateTime = new \DateTime;
             $Post->fecha = $DateTime->format('Y-m-d H:i');
@@ -37,7 +40,7 @@ class Tickets extends Query{
                 // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
                 if($isPresent) {
                     $Present = new Present;
-                    $Present->addTicket($this->id); 
+                    $Present->addTicket($this->id, $end_date); 
                 }
 
                 foreach($lines as $line){

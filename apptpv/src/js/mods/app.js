@@ -326,77 +326,78 @@ const app = {
             }
         },
         format(date, format){
-            let d, m , a , h, n, s
-            if(typeof date === 'string') {
-                let f = date.split(' '),
-                    fecha = f[0],
-                    horario = f[1]
-    
-                // Si tiene horas ... 
-                if(horario){   
-                    let x = horario.split(':')
-                    h = x[0]
-                    min = x[1]
-                    s = x[2]
-                }
-                if (fecha.indexOf("/")>0){
-                    let arr = fecha.split('/');
-                    d = ("0" + arr[0]).slice (-2);
-                    m = ("0" + arr[1]).slice (-2);
-                    a = arr[2];
-                }else if(fecha.indexOf("-")>0){
-                    let arr  = fecha.split('-');
-                    d = ("0" + arr[2]).slice (-2);
-                    m = ("0" + arr[1]).slice (-2);
-                    a = arr[0];
-                }else if(fecha.length==4){
-                    d = fecha.substr(2);
-                    m = fecha.substr(0,2);
-                    a =  fechaActual('y');
-                }else if(fecha.length==8){
-                    d = fecha.substr(6,2);
-                    m = fecha.substr(4,2);
-                    a = fecha.substr(0,4);
-                }
-            } else  if(typeof date === 'object') {
-                d = date.getDate().toString().padStart(2 , '0')
-                m = (date.getMonth()+ 1).toString().padStart(2 , '0')
-                a = date.getFullYear().toString()
-                h = date.getHours().toString().padStart(2 , '0')
-                n = date.getMinutes().toString().padStart(2 , '0')
-                s = date.getSeconds().toString().padStart(2 , '0')
-            } else return false
-            switch(format) {
-                case 'sql'      : return a + '-' + m + '-' + d
-                case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + min
-                case 'short'    : return d + '/' + m + '/' + a
-                case 'md'       : return m + d 
-                case 'id'       : return a + m + d
-                case 'day'      : return d
-                case 'month'    : return m
-                case 'year'     : return a
-                case 'hour'     : return h + ':' + min || false
-                case 'long'     : 
-                    let month = ''
-                    switch (m) {
-                        case '1' : month = 'Enero'; break;
-                        case '2' : month = 'Febrero'; break;
-                        case '3' : month = 'Marzo'; break;
-                        case '4' : month = 'Abril'; break;
-                        case '5' : month = 'Mayo'; break;
-                        case '6' : month = 'Junio'; break;
-                        case '7' : month = 'Julio'; break;
-                        case '8' : month = 'Agosto'; break;
-                        case '9' : month = 'Septiembre'; break;
-                        case '10' : month = 'Octubre'; break;
-                        case '11' : month = 'Noviembre'; break;
-                        case '12' : month = 'Diciembre'; break;
+            if(date){
+                let d, m , a , h, n, s
+                if(typeof date === 'string') {
+                    let f = date.split(' '),
+                        fecha = f[0],
+                        horario = f[1]
+        
+                    // Si tiene horas ... 
+                    if(horario){   
+                        let x = horario.split(':')
+                        h = x[0]
+                        min = x[1]
+                        s = x[2]
                     }
-                    return `${d} de ${month} del ${a}`
-
-                default         : return new Date(a, m-1, d, h, min, s)
-            }
-
+                    if (fecha.indexOf("/")>0){
+                        let arr = fecha.split('/');
+                        d = ("0" + arr[0]).slice (-2);
+                        m = ("0" + arr[1]).slice (-2);
+                        a = arr[2];
+                    }else if(fecha.indexOf("-")>0){
+                        let arr  = fecha.split('-');
+                        d = ("0" + arr[2]).slice (-2);
+                        m = ("0" + arr[1]).slice (-2);
+                        a = arr[0];
+                    }else if(fecha.length==4){
+                        d = fecha.substr(2);
+                        m = fecha.substr(0,2);
+                        a =  fechaActual('y');
+                    }else if(fecha.length==8){
+                        d = fecha.substr(6,2);
+                        m = fecha.substr(4,2);
+                        a = fecha.substr(0,4);
+                    }
+                } else  if(typeof date === 'object') {
+                    d = date.getDate().toString().padStart(2 , '0')
+                    m = (date.getMonth()+ 1).toString().padStart(2 , '0')
+                    a = date.getFullYear().toString()
+                    h = date.getHours().toString().padStart(2 , '0')
+                    n = date.getMinutes().toString().padStart(2 , '0')
+                    s = date.getSeconds().toString().padStart(2 , '0')
+                } else return false
+                switch(format) {
+                    case 'sql'      : return a + '-' + m + '-' + d
+                    case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + min
+                    case 'short'    : return d + '/' + m + '/' + a
+                    case 'md'       : return m + d 
+                    case 'id'       : return a + m + d
+                    case 'day'      : return d
+                    case 'month'    : return m
+                    case 'year'     : return a
+                    case 'hour'     : return h + ':' + min || false
+                    case 'long'     : 
+                        let month = ''
+                        switch (m) {
+                            case '1' : month = 'Enero'; break;
+                            case '2' : month = 'Febrero'; break;
+                            case '3' : month = 'Marzo'; break;
+                            case '4' : month = 'Abril'; break;
+                            case '5' : month = 'Mayo'; break;
+                            case '6' : month = 'Junio'; break;
+                            case '7' : month = 'Julio'; break;
+                            case '8' : month = 'Agosto'; break;
+                            case '9' : month = 'Septiembre'; break;
+                            case '10' : month = 'Octubre'; break;
+                            case '11' : month = 'Noviembre'; break;
+                            case '12' : month = 'Diciembre'; break;
+                        }
+                        return `${d} de ${month} del ${a}`
+    
+                    default         : return new Date(a, m-1, d, h, min, s)
+                }
+            } return null
         },
         diff(f1,f2){
             
@@ -434,6 +435,7 @@ const DB = {
             
         });
     },
+    // Consultar datos de la
     get(table = this.table , key, value, filter){
         return new Promise((resolve, reject) => {
             const _equalValues = function(el){
@@ -469,6 +471,7 @@ const DB = {
             };
         });
     },
+    // Añade datos a la tabla
     set(table = this.table, data, key, value){
         return new Promise( (resolve, reject) => {
             if(key){

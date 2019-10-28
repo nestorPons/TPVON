@@ -1,23 +1,22 @@
 <?php namespace app\models;
-use \app\core\{Query};
+use \app\core\{Query, Data};
 
 class Present extends Query{
     public $id, $fecha; 
     protected $table = 'lineas_regalo';
-    private $connTicket = null, $connLine = null; 
+    private $viewTickets, $Ticket, $viewLines; 
 
-    function __construct(){
+    function __construct($args = null){
         $this->viewTickets = new Query('vista_tickets_regalo');
-        $this->connTicket = new Query('tickets_regalo');
-        $this->connLine = new Query('lineas_regalo');
+        $this->Ticket = new Query('tickets_regalo');
         $this->viewLines = new Query('vista_lineas_regalo');
-
+        parent::__construct();
     }
-    function addTicket($idTicket){
-        return $this->connTicket->add(['id'=> $idTicket], false); 
+    function addTicket($idTicket, $fechaven){
+        return $this->Ticket->add(['id'=> $idTicket, 'fecha_vencimiento' => $fechaven], false);
     }
     function addLine($idLine){
-        return $this->connLine->add(['id'=> $idLine], false); 
+        return $this->add(['id'=> $idLine], false); 
     }
     function load($id){
         $d = $this->getBy(['id'=>$id]); 
@@ -37,9 +36,8 @@ class Present extends Query{
         return $T->toArray();
     }
     function prev($Data){
-
         $T = new Tickets((int)$Data->id);
-        $T->prev(null, 'AND regalo=1'); 
+        $T->prev(null, 'AND regalo=1');
         return $T->toArray();
     }
     function get(){
@@ -55,16 +53,16 @@ class Present extends Query{
 
     }
     function delete($data){
-        $d = $this->getOneBy(['id' => $data->id]);
-        $this->loadData($d);
-        $d['fecha'] = '';
-        return $this->saveById($d);
+        $this->loadData($data);
+        $this->fecha = null;
+        return $this->saveById();
     }
     function addDate($data){
-
-        $d = $this->getOneBy(['id' => $data->id]);
-        $this->loadData($d);
-        $d['fecha'] = $data->fecha;
-        return $this->saveById($d);
+        $this->loadData($data);
+        return $this->saveById();
+    }
+    function expiration(Data $Post){
+        $this->Ticket->id = $Post->id;
+        return $this->Ticket->saveById($Post->toArray());
     }
 }

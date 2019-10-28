@@ -141,9 +141,14 @@ class Query extends Conn
             return $this->lastInsertId();
         } else return false;
     }
+    // Funcion para mostrar solo los atributos publicos desde dentro de la clase
+    public function getVars(){
+        return array_diff_key(get_object_vars($this), get_class_vars(get_parent_class($this)));
+    }
     // Guarda registro mediante su id
     public function saveById(array $args = null)
     {
+        if(!$args) $args = $this->getVars();
         $sql = $this->getSQLUpdate($args, "id=" . $this->id());
         return $this->query($sql, $args);
     }

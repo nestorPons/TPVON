@@ -1,9 +1,9 @@
 <?php namespace app\controllers\components?><section id="control">
     <?php
-    $txt01 = new InputText(['label' => 'Ticket']);
-    $txt02 = new InputText(['label' => 'Cliente']);
-    $txt03 = new InputText(['label' => 'Fecha']);
-    $txt04 = new InputText(['label' => 'Fecha vencimiento']);
+    $txt01 = new InputRead(['label' => 'Ticket']);
+    $txt02 = new InputRead(['label' => 'Cliente']);
+    $txt03 = new InputRead(['label' => 'Fecha']);
+    $txt04 = new InputText(['label' => 'Fecha vencimiento', 'onchange' => 'app.control.savedate(window.event.target)']);
     $table = new Table([
         'columns' => ['id_linea', 'Nombre', 'Descripcion', 'fecha'],
         'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
@@ -17,6 +17,7 @@
     app.control = {
         table       : 'present',
         buttons     : ['prev', 'next', 'search', 'print', 'conf'],
+        data        : null,
         Table       : new Table('<?= $table->idEl() ?>'),
         txtTicket   : <?= $txt01->idEl() ?>,
         txtCli      : <?= $txt02->idEl() ?>,
@@ -49,17 +50,15 @@
                     estilos = p.style,
                     ventana = window.open('', '', 'PRINT'),
                     arr = []
-
+echo(arr)
                 for (let i in t.data) {
-                    arr.push(t.data[i][1])
+                    arr.push(t.data[i][2])
                 }
-                // Obtenemos la fecha del ticket
 
+                p.clear()
                 //Cargamos los datos en la vista
                 p.description(arr);
-
-                let d = app.date.add(this.txtFecha.value, 365, 'days')
-                p.date = d
+                p.date = new Date(app.date.format(this.txtFechaV.value, 'sql'))
 
                 ventana.document.write('<html><head><title>' + document.title + '</title>');
                 ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
@@ -85,36 +84,28 @@
                 })
             }
         },
-        add(data) {
-            this.db.lastId()
-                .then(id => this.db.set(data, 'id', id + 1));
-        },
-        getTicket(action) {
-            app.post({
-                controller: this.table,
-                action: action,
-                data: {
-                    id: (this.txtTicket.value)
-                }
-            }, (data, status) => {
-                if (status) this.loadTable(data);
-            });
-        },
         next() {
-            this.getTicket('next');
+            DB.get(this.table, 'id', this.data.id + 1).then(d => {
+                this.loadTable(d[0])
+            })
         },
         prev() {
-            this.getTicket('prev');
+            DB.get(this.table, 'id', this.data.id - 1).then(d => {
+                this.loadTable(d[0])
+            })
         },
         // Carga los datos en la tabla
         loadTable(data) {
-echo(data)
             if (data == undefined) return false;
             this.Table.clear();
 
+            // Cargamos los datos  en el objeto 
+            this.data = data
+            // Cargamos datos vista id 
             this.txtTicket.value = data.id;
-            this.txtFecha.value = data.fecha
-            this.txtFechaV.value = data.fecha_vencimiento
+
+            this.txtFecha.value = app.date.format(data.fecha, 'short')
+            this.txtFechaV.value = app.date.format(data.fecha_vencimiento, 'short')
 
             DB.get('usuarios', 'id', data.id_cliente)
                 .then(d => d[0])
@@ -156,7 +147,7 @@ echo(data)
                 date = app.date.format(app.date.now(), 'datetime')
 
             app.post({
-                controller: 'control',
+                controller: 'present',
                 action: 'addDate',
                 data: {
                     id: id,
@@ -171,7 +162,7 @@ echo(data)
                 $parent = $el.parents('tr'),
                 id = $parent.attr('idline')
             app.post({
-                controller: 'control',
+                controller: 'present',
                 action: 'delete',
                 data: {
                     id: id
@@ -180,8 +171,22 @@ echo(data)
                 $el.parent().html(this.btnAdd)
             })
         },
-        conf() {
-            alert('CONFIGURANDO')
+        savedate(el) {
+            if (el.value) {
+                app.post({
+                    controller  : 'present',
+                    action      : 'expiration',
+                    data        : {
+                        id      : this.txtTicket.value,
+                        fecha_vencimiento   : app.date.format(this.txtFechaV.value, 'sql')
+                    }
+                }, d => {
+                    echo('Guardado fecha ticket regalo ...')
+
+                })
+            } else {
+                app.mens.error('Tiene que haber una caducidad!!')
+            }
         }
     }
 </script>

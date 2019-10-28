@@ -77,7 +77,7 @@
   DROP TABLE IF EXISTS `tickets_regalo`;
   CREATE TABLE `tickets_regalo` (
     `id` bigint(20) UNSIGNED NOT NULL,
-    `fecha_vencimiento` datetime DEFAULT CURRENT_TIMESTAMP
+    `fecha_vencimiento` date DEFAULT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
   DROP TABLE IF EXISTS `tokens`;
@@ -205,13 +205,16 @@ CREATE TABLE `config` (
 
 CREATE VIEW 
 vista_lineas_regalo AS 
-SELECT l.id, l.id_ticket, l.articulo, lr.fecha
+SELECT l.*, lr.fecha
 FROM lineas as l
 INNER JOIN lineas_regalo as lr ON l.id = lr.id
-INNER JOIN tickets_regalo as t ON l.id_ticket = t.id;
+INNER JOIN tickets_regalo as tr ON l.id_ticket = tr.id
+INNER JOIN tickets as t ON l.id_ticket = t.id
+WHERE t.estado = 1;
 
 CREATE VIEW 
 vista_tickets_regalo AS 
-SELECT t.id, t.fecha, tr.fecha_vencimiento
+SELECT t.*, tr.fecha_vencimiento
 FROM tickets as t
-INNER JOIN tickets_regalo as tr ON t.id = tr.id;
+INNER JOIN tickets_regalo as tr ON t.id = tr.id
+WHERE t.estado = 1;
