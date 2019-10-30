@@ -13,7 +13,6 @@ const app = {
             let data = null
             // La respuesta puede ser json o html 
             try {
-                echo('JSON response...')
                 // comprobamos si es json
                 data = JSON.parse(respond);
                 // la respuesta es JSON
@@ -29,7 +28,7 @@ const app = {
                         return false
                     }    
             } catch(e) {
-                echo('HTMLresponse...')
+                echo('carga html')
                 // la respuesta es HTML
                 html = $(respond)
                 app.sections.load(html.attr('id'), html)
@@ -58,13 +57,12 @@ const app = {
 
         $.get('index.php', data, (html, respond) => {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
-
             $container = ($('main').length != 0) ? $('main') : $('body')
             if(load){
                 $container
                 .find('section').hide().end()
                 .append(html)
-                // Inicializamos el método de carga del objeto
+                // Inicializamos el método inicializador del objeto
                 if(app[data.controller] != undefined )
                     if(exist(app[data.controller].load)) app[data.controller].load()
                 this.sections.inicialize(data.controller) 
@@ -114,16 +112,18 @@ const app = {
         last    : null,
         toggle(section, callback) {
 
-            if ($('section#'+section).is(':visible')) return 
+            if ($('section#'+section).is(':visible')) return false;
+
             let $mainSection = $('section')
             if($('#appadmin').length || $('#appuser').length ){
                 $mainSection = $('section').find('section')
             } 
-            $mainSection.fadeOut('fast', f => {
-                $('section#' + section).fadeIn()
-                typeof callback === 'function' && callback()
-                this.inicialize(section)
-            })
+            $mainSection.fadeOut('fast')
+
+            $('section#' + section).fadeIn()
+            typeof callback === 'function' && callback()
+            this.inicialize(section)
+            
         },
         load(section = '', html = jQuery){
             try{
@@ -148,7 +148,6 @@ const app = {
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section)
             }else{
-
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
@@ -435,7 +434,7 @@ const DB = {
             
         });
     },
-    // Consultar datos de la
+    // Consultar datos de la bd local
     get(table = this.table , key, value, filter){
         return new Promise((resolve, reject) => {
             const _equalValues = function(el){
@@ -450,7 +449,7 @@ const DB = {
                 resolve(this.storage);
             }else{
                 // Si no se pasan key o value devolvemos todos los registros            
-                if(key == undefined || value == undefined )resolve(this.storage[table]);
+                if((key == undefined || value == undefined) && filter == undefined) resolve(this.storage[table]);
                 else resolve(this.storage[table].filter((el) => {
                     if (filter) {
                         if(filter.indexOf('==') != -1){
@@ -510,5 +509,8 @@ const DB = {
     },
     prev(){
         return this.loadIndex(this.current - 1);
+    },
+    exist(table = this.table){
+        return  typeof this.storage[table] != 'undefined' 
     }
 }

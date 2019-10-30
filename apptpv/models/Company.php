@@ -57,6 +57,10 @@ class Company extends Query{
         $data['CP'] = '12345';
         $data['pais'] = 'ES';      
 
+        $Fam = new Family(); 
+        $Fam->add([
+            'nombre' => 'General'
+        ]);
         $new->add($data);
         $ser = new Items();
         $ser->add([

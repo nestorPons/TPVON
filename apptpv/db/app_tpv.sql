@@ -7,6 +7,7 @@
     `precio` float NOT NULL,
     `coste` float DEFAULT NULL,
     `tipo` tinyint(1) NOT NULL,
+    `id_familia` tinyint(2) NOT NULL DEFAULT '1',
     `estado` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0 desabilitado, 1 activo'
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -104,10 +105,26 @@
     `obs` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+  DROP TABLE IF EXISTS `familias`;
+  CREATE TABLE `familias` (
+    `id` tinyint(2) NOT NULL,
+    `nombre` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+    `mostrar` tinyint(1) NOT NULL DEFAULT '1',
+    `estado` tinyint(1) NOT NULL DEFAULT '1'
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+  DROP TABLE IF EXISTS `config`;
+  CREATE TABLE `config` (
+    `id` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+    `iva` tinyint(2) NOT NULL DEFAULT '21',
+    `dias` smallint(3) NOT NULL DEFAULT '365'
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
   ALTER TABLE `articulos`
     ADD PRIMARY KEY (`id`),
     ADD UNIQUE KEY `codigo` (`codigo`),
-    ADD UNIQUE KEY `nombre` (`nombre`);
+    ADD UNIQUE KEY `nombre` (`nombre`),
+    ADD KEY `id_familia` (`id_familia`);
 
   ALTER TABLE `lineas_regalo`
     ADD PRIMARY KEY (`id`);
@@ -149,11 +166,8 @@
     ADD UNIQUE KEY `dni` (`dni`),
     ADD UNIQUE KEY `email` (`email`);
 
-CREATE TABLE `config` (
-  `id` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `iva` tinyint(2) NOT NULL DEFAULT '21',
-  `dias` smallint(3) NOT NULL DEFAULT '365'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  ALTER TABLE `familias`
+    ADD PRIMARY KEY (`id`);
 
   ALTER TABLE `config`
     ADD PRIMARY KEY (`id`);
@@ -182,6 +196,12 @@ CREATE TABLE `config` (
   ALTER TABLE `usuarios`
     MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
+  ALTER TABLE `familias`
+    MODIFY `id` tinyint(2) NOT NULL AUTO_INCREMENT;
+
+  ALTER TABLE `articulos`
+    ADD CONSTRAINT `art_ibfk_1` FOREIGN KEY (`id_familia`) REFERENCES `familias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
   ALTER TABLE `lineas_regalo`
     ADD CONSTRAINT `lreg_ibfk_1` FOREIGN KEY (`id`) REFERENCES `lineas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -201,7 +221,6 @@ CREATE TABLE `config` (
 
   ALTER TABLE `tokens`
     ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 
 CREATE VIEW 
 vista_lineas_regalo AS 

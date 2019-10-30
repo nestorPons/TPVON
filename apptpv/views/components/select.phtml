@@ -1,5 +1,5 @@
-<div id="<?=$id?>" class="row col-sm-12 col-md-12">
-    <select
+<div id="<?=$idCon?>" class="row col-sm-12 col-md-12">
+    <select id="<?=$id?>"
         class = "<?=$class?> <?=$default ? 'valid' : ''?>"
         <?=$printName?>
         <?=$printTitle?>
@@ -29,17 +29,26 @@
     class Select extends Component{
         constructor(id){
             super()
-            this.el = document.getElementById(id).getElementsByTagName('select')[0]
+            if(typeof id == 'string'){
+                this.el = document.getElementById(id).getElementsByTagName('select')[0]
+            } else {
+                this.el = id
+            }
             this.o =  this.el.getElementsByTagName('option')
             this.CLASS_SELECTED = 'valid' // Constante del estado seleccionado del select
 
             this.el.addEventListener('change', fn => this.el.classList.add(this.CLASS_SELECTED))
         }
+        addClass( myclass ){
+            this.el.classList.add(myclass)
+            return this
+        }
         addOption(value, text){
             let opt = document.createElement('option')
-                opt.appendChild( document.createTextNode(text) )
-                opt.value = value // No se que
-                this.el.appendChild(opt)
+            opt.appendChild( document.createTextNode(text) )
+            opt.value = value 
+            this.el.appendChild(opt)
+            return this
         }
         default(){
             this.el.value = 0
@@ -51,6 +60,7 @@
             for(let o of ops){
                 if(o) this.el.removeChild(o)
             }
+            return this
         }
         // Deselecciona todas las opciones
         reset(){

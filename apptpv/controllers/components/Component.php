@@ -19,6 +19,7 @@ class Component{
             $this->{$key} = $val??null;
         }
         $this->id = ($this->id)??$this->randomid();
+        $this->idCon = 'container' . $this->id; 
         $this->idObj = self::PREFIX_OBJECT . $this->id;
     }
     /** Imprime ĺa vista 
@@ -147,7 +148,7 @@ class Component{
         return  SELF::PREFIX_ELEMENT . $this->id; 
     }
     function idCon(){ 
-        return  SELF::PREFIX_CONTAINER . $this->id; 
+        return $this->idCon; 
     }
     function idObj(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 

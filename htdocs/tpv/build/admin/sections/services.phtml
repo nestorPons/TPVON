@@ -44,7 +44,9 @@ app.services = {
             else el.setCustomValidity('')
         }
     },
-    load(){
+    async load(){
+        this.selFam = new Select(this.Form.el.querySelector('[name="id_familia"]'))
+
         DB.get(this.table)
             .then( data => {
                 for( let i in data ){
@@ -61,6 +63,14 @@ app.services = {
                 }
             })
         
+    },
+    async open(){
+        const families = await DB.get('familias', undefined, undefined,  'estado==1')
+        this.selFam.clear().addClass('valid')
+        for(let f of families){
+            if(f)
+            this.selFam.addOption(f.id, f.nombre)
+        }
     },
     del(){
         // Eliminamos de la bd local
@@ -86,8 +96,7 @@ app.services = {
             .state('new')
             .clear()
             .open(data)
-            .setTile('Nuevo servicio o artículo')
-
+            .setTile('Nuevo A/S')
     },
     addLine(data){
         this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
@@ -110,7 +119,7 @@ app.services = {
     show(e){
         this.currentId = e.path[1].attributes.idline.value
         DB.get(this.table, 'id', this.currentId)
-            .then( data => this.Form.state('edit').open(data).setTile('Edicion servicio o artículo'))
+            .then( data => this.Form.state('edit').open(data).setTile('Edición A/S'))
     },
     async search(value){
         this.Table.hideLines()

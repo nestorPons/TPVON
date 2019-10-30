@@ -98,13 +98,18 @@ class Controller{
             : '\\app\\core\\Query';
     }
     private function exec (String $method, String $method_generic){
+        
         $name_model = $this->getModel(); 
         $model = new $name_model($this->controller);
         $model->id = $this->Data->id ?? null;
-        if (method_exists($model, $method)){
-            return  $model->{$method}($this->Data);
+        // Si no llevamos datos, no pasamos el objeto data 
+        // Para poder utilizar directamente con Query
+        if($this->Data->isEmpty()){
+            if (method_exists($model, $method))return  $model->{$method}();
+            else return $model->{$method_generic}();
         } else {
-            return $model->{$method_generic}($this->Data->toArray());
+            if (method_exists($model, $method)) return  $model->{$method}($this->Data);
+            else return $model->{$method_generic}($this->Data->toArray());
         }
     }
 }

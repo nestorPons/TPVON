@@ -4,17 +4,16 @@
  */
 class Data {
     // Creamos los atributos en el constructor
-    
+
     function __construct($data = null){
         if($data){
             if (is_object($data)) $data = get_object_vars($data);
             foreach($data as $key => $value){
                 $this->addItem($value, $key);
             }
-        }
+        } 
     }
-    function addItem($value, $key = null){
-       
+    function addItem($value, $key = null){      
         // Si vamos a pasar un array numerado creamos todos los métodos para extraer los atributos
         // creeamos el método para la extraccion de datos 
         
@@ -135,9 +134,16 @@ class Data {
         }
         return $this;
     }
-    function isEmpty(String $prop){
-        if(isset($this->{$prop})){
-            return empty($this->{$prop});
-        } else return true;
+    // Comprueba si alguna propiedad esta vacia
+    // O si no se pasan parametros si el objeto tiene propiedades
+    function isEmpty(String $prop = ''): bool
+    {
+        if ($prop !== '') {
+            if(isset($this->{$prop})){
+                return empty($this->{$prop});
+            } else return true;
+        } else {
+            return empty(get_object_vars($this));
+        }
     }   
 }   

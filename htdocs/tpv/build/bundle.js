@@ -55,18 +55,22 @@ hoverable(value){if(value!=undefined){if(value)this.el.classList.add('hoverable'
 else this.el.classList.remove('hoverable')}
 return this.el.classList.contains('hoverable')}
 html(){return this.el.innerHTML}}class Select extends Component{constructor(id){super()
-this.el=document.getElementById(id).getElementsByTagName('select')[0]
+if(typeof id=='string'){this.el=document.getElementById(id).getElementsByTagName('select')[0]}else{this.el=id}
 this.o=this.el.getElementsByTagName('option')
 this.CLASS_SELECTED='valid'
 this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
+addClass(myclass){this.el.classList.add(myclass)
+return this}
 addOption(value,text){let opt=document.createElement('option')
 opt.appendChild(document.createTextNode(text))
 opt.value=value
-this.el.appendChild(opt)}
+this.el.appendChild(opt)
+return this}
 default(){this.el.value=0}
 clear(){this.reset()
 let ops=this.el.querySelectorAll('option:not(:first-child)')
-for(let o of ops){if(o)this.el.removeChild(o)}}
+for(let o of ops){if(o)this.el.removeChild(o)}
+return this}
 reset(){this.el.classList.remove(this.CLASS_SELECTED)
 let options=this.el.getElementsByTagName('option')
 for(let option of options){option.selected=!1}}

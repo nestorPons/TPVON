@@ -3,7 +3,8 @@
     <ul>
         <li><a href="tpv"><i class="lnr lnr-laptop"></i><span>TPV</span></a></li>
 		<li><a href="users"><i class="lnr lnr-users"></i><span>Usuarios</span></a></li>
-        <li><a href="services"><i class="lnr lnr-layers"></i><span>Servicios</span></a></li>
+        <li><a href="services"><i class="lnr lnr-briefcase"></i><span>Servicios</span></a></li>
+        <li><a href="families"><i class="lnr lnr-bug"></i><span>Familias</span></a></li>
         <li><a href="income"><i class="lnr lnr-database"></i><span>Historial</span></a></li>
         <li><a href="control"><i class="lnr lnr-gift"></i><span>Regalo</span></a></li>
         <li><a href="conf"><i class="lnr lnr-cog"></i><span>Config</span></a></li>
@@ -37,6 +38,7 @@
         padding: 0;
      }
     nav#navBar li a{
+        font-size: 0.8rem;
         margin: 0;
         padding: 0;
         text-decoration: none;
@@ -86,15 +88,13 @@
                     ? 'menu-max'  
                     : 'menu-initial'
                 
-
                 navbar.addClass(varClass) 
                 if(change) localStorage.setItem('menuWidth', varClass)
             },
             addClass(varclass){
                 $('#navBar').removeClass().addClass(varclass)
                 if(varclass == 'menu-max') $('.label').show('slow') 
-                else $('.label').hide('slow')
-                
+                else $('.label').hide('slow')   
             }
         }
     $('#icon-menu').click(navbar.toggle)

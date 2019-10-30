@@ -39,7 +39,7 @@
         txtFrom: <?= $from->id() ?>,
         txtTo: <?= $to->id() ?>,
         txtTotal: <?= $total->idEl() ?>,
-        SelUser: new Select('<?= $seluser->id() ?>'),
+        SelUser: new Select(<?= $seluser->id() ?>),
         Table: new Table('<?= $table->id() ?>'),
         load() {
             this.loadUsers()
@@ -75,7 +75,7 @@
                         if (d.estado == 1) this.Table.addLine(null,
                             [
                                 d.id,
-                                app.date.format(d.fecha, 'print'),
+                                app.date.format(d.fecha, 'short'),
                                 app.date.format(d.fecha, 'hour'),
                                 l.articulo,
                                 l.precio,
