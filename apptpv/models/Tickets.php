@@ -4,6 +4,8 @@ use \app\core\{Query, Data, Error};
 class Tickets extends Query{
     public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines;
     protected $table = 'tickets';
+    private $total = 0.0; 
+
     function __construct($args = null){
         parent::__construct();
         if(is_int($args)){
@@ -61,19 +63,28 @@ class Tickets extends Query{
         
     }
     // Método genérico de captura de tickets con sus lineas
+    // Data puede ser el id o un objeto con el id
+    // Se añade una propiedad total que se crea en tiempo de ejecución
     function get($data, bool $all = false){
         $id = is_object($data) ? $data->id : $data;
         $Data = new Data($this->getById($id));
+        // Se usa la clase para buscar todas las lineas
         $Lines = new Lines; 
         $lines = $Lines->getBy(['id_ticket'=>$id]);
         
         foreach($lines as $k => $v){
-            $Control = new Control($v['id']); 
-            $lines[$k]['fecha_regalo'] = $Control->fecha;
+            $Present = new Present($v['id']); 
+            $lines[$k]['fecha_regalo'] = $Present->fecha;
+
+            // Se crea una linea
+            $Line = new Lines($v); 
+            // Se añade el total de la linea al total del ticket
+            $this->total($Line->total());
         }
 
         $Data->addItem($lines, 'lines');
-
+        $Data->addItem($this->total(), 'total');
+        
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
         else return false; 
@@ -131,5 +142,9 @@ class Tickets extends Query{
             $d->addItem($lines, 'lines');
         } 
         return $this->lines; 
+    }
+    function total(float $val = null) : float {
+        if ($val) $this->total += $val;
+        return  round($this->total,2); 
     }
 }

@@ -1,0 +1,96 @@
+<?php namespace app\controllers\components?><section id="chart">
+    <canvas id="myChart" width="400px" height="400px"></canvas>
+    <script>
+        function OrdenarPorClave(arr)
+        {
+            // Inicializamos los arrays
+            var sortedKeys = new Array();
+            var sortedObj = {};
+ 
+            // Separamos la clave en un solo array
+            for (var i in arr){
+                sortedKeys.push(i);
+            }
+            // Ordenamos dicha clave
+            sortedKeys.sort();
+ 
+            // Reconstruimos el array asociativo con la clave ordenada
+            for (var i in sortedKeys){
+                sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
+            }
+            return sortedObj;
+        }
+        app.chart = {
+            load() {
+                app.post({
+                    controller: 'tickets',
+                    action: 'getAll',
+                    data: null
+                }, data => {
+                    let arr = [],
+                        labels = [],
+                        datas = [];
+
+                    // Ponemos los datos en un array
+                    for (let i in data) {
+                        const d = data[i]
+                        if (d) {
+                            const date = app.date.format(d.fecha, 'short')
+                            if (arr[date] != undefined) arr[date] += d.total
+                            else arr[date] = d.total
+                        }
+                    }
+                    // Se ordena el array por fecha
+                    let a = OrdenarPorClave(arr)
+
+echo(a)
+                    // Se dividen los datos en dos arrays
+                    for (let i in a) {
+                        labels.push(i)
+                        datas.push(arr[i])
+                    }
+
+                    let ctx = document.getElementById('myChart');
+                    let myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels : labels,
+                            datasets: [{
+                                label: 'Ingresos por día',
+                                data: datas,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                })
+
+            }
+        };
+    </script>
+</section>

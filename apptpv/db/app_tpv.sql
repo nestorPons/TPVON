@@ -115,7 +115,7 @@
 
   DROP TABLE IF EXISTS `config`;
   CREATE TABLE `config` (
-    `id` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+    `id` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
     `iva` tinyint(2) NOT NULL DEFAULT '21',
     `dias` smallint(3) NOT NULL DEFAULT '365'
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;

@@ -8,24 +8,31 @@ use \app\core\{Query, Data};
 class Tickets extends Controller{
 
     function __construct(String $action,  $Data = null){
+        $this->Model = new Model;
         $this->Data = $Data; 
         $this->controller = 'Tickets';
-        $this->result =  $this->{$action}($Data);
+        $this->result = $this->{$action}($Data);
     }
     function getLast(Data $Data){
-        $Model = new Model; 
-        return $Model->getLastUser($Data);
+        return $this->Model->getLastUser($Data);
     }
     function prev(Data $Data){
-        $Model = new Model; 
-        return $Model->prev($Data);
+        return $this->Model->prev($Data);
     }
     function next(Data $Data){
-        $Model = new Model; 
-        return $Model->next($Data);
+        return $this->Model->next($Data);
     }
     function last(Data $Data){
-        $Model = new Model;
-        return $Model->getLast($Data);
+        return $this->Model->getLast($Data);
+    }
+    function getAll(){
+        $arr = $this->Model->getAll();
+        $all = []; 
+
+        foreach ($arr as $key => $value) {
+            $T = new Model(); 
+            $all[] = $T->get($value['id']) ;
+        }
+        return $all; 
     }
 }
