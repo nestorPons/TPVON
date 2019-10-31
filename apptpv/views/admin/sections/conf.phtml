@@ -1,5 +1,6 @@
 <section id="--id">
     <form controller="company" action="save" class="input-group">
+        <fieldset>
             <legend>Datos empresa</legend>
             <?php
             $txt00 = new InputHidden(['name' => 'id', 'value => 1']);
@@ -15,32 +16,50 @@
             $txt11 = new InputText(['tabindex' => 10, 'label' => 'Codigo postal', 'name' => 'CP', 'title' => "Introduzca el codigo postal"]);
             $txt12 = new SelectCountries(['tabindex' => 11, 'label' => 'Pais', 'name' => 'pais']);
             ?>
+        </fieldset>
     </form>
     <form controller="config" action="save" class="input-group">
+        <fieldset>
             <legend>Datos aplicación</legend>
             <?php
             new InputHidden(['name' => 'id', 'value => 1']);
             $txt13 = new InputText(['tabindex' => 12, 'label' => '% Iva aplicado', 'name' => 'iva']);
             $txt14 = new InputText(['tabindex' => 13, 'label' => 'Dias cheque regalo', 'name' => 'dias']);
             ?>
+        </fieldset>
     </form>
     <?php include_once \VIEWS\ADMIN\FORMS . '/user.phtml' ?>
+    <form controller="promos" action="save" class="input-group">
+        <fieldset>
+            <legend>Promociones</legend>
+            <?php
+            $txt00 = new InputHidden(['label' => 'Id', 'name' => 'id']);
+            $txt01 = new InputText(['label' => 'Nombre', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la promoción", 'required' => true]);
+            $txt02 = new InputText(['label' => 'Total de dias', 'name' => 'valor']);
+            $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name' => 'dto']);
+            ?>
+        </fieldset>
+    </form>
 </section>
 <style lang="less">
-    #--id{
-        display : grid;
-        grid-template-columns: 1fr 1fr 1fr; 
-        grid-template-rows: 1fr 1fr; 
-        @media(max-width: 650px){
-            grid-template-columns: 1fr 1fr; 
-            grid-template-rows: 1fr 1fr;        
+    #--id {
+        display: grid;
+        grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr) minmax(300px, 1fr);
+        grid-template-rows: 1fr 1fr 1fr;
+
+        @media(max-width: 650px) {
+            grid-template-columns: 1fr 1fr;
         }
+
         form {
             height: min-content;
-        }
-        form:first-of-type{
-            grid-row-start: 1;
-            grid-row-end: -1;
+            border: none;
+            padding: 0;
+
+            &:first-of-type {
+                grid-row-start: 1;
+                grid-row-end: -1;
+            }
         }
     }
 </style>
@@ -49,17 +68,23 @@
     app.conf = {
         buttons: [],
         id_user: null,
-        form    : {
+        form: {
             company : document.getElementById('--id').getElementsByTagName('form')[0],
             conf    : document.getElementById('--id').getElementsByTagName('form')[1],
-            user    : document.getElementById('--id').getElementsByTagName('form')[2]
+            user    : document.getElementById('--id').getElementsByTagName('form')[2],
+            promos  : document.getElementById('--id').getElementsByTagName('form')[3],
         },
-        table       : {
-            company : 'empresa',
-            conf    : 'config',
-            users   : 'usuarios',
+        table: {
+            company: 'empresa',
+            conf: 'config',
+            users: 'usuarios',
         },
         load() {
+            // Cargamos los datos promociones
+            DB.get('promos')
+                .then(d => d[0])
+                .then(d => app.loadDataToForm(d, this.form.promos))
+
             let f = this.form.user,
                 buttons = f.getElementsByTagName('button')
 
@@ -78,7 +103,7 @@
                 .then(d => {
                     app.loadDataToForm(d, this.form.company)
                 })
-            DB.get('config')               
+            DB.get('config')
                 .then(d => d[0])
                 .then(d => {
                     app.loadDataToForm(d, this.form.conf)
@@ -100,6 +125,12 @@
             this.save_user({
                 ...app.formToObject(this.form.user),
                 nivel: 2
+            })
+
+            // Guardamos promociones
+            DB.post('promos','save', {
+                ...app.formToObject(this.form), 
+                id: -1
             })
         },
         save_user(data) {

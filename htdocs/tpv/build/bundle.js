@@ -1,4 +1,4 @@
-class Line{constructor(id,articulo,cantidad,precio,dto){this.id=id;this.articulo=articulo;this.cantidad=cantidad||0;this.precio=precio||0;this.dto=dto||0;this.amo=this.setTotal()};setTotal(){return(this.cantidad*this.precio*(1-this.dto/100)).toFixed(2)}};class Ticket{constructor(data){this.id=null;this.lines=[];this.id_usuario=null;this.id_cliente=null;this.fecha=null;this.estado=1;this.iva=null;this.total=0.00;if(data!=undefined){this.id=data.id;this.id_usuario=data.id_usuario;this.id_cliente=data.id_cliente;this.fecha=data.fecha;this.iva=data.iva;this.estado=(data.estado!=undefined)?data.estado:1;this.addLines(data.lines);this.setTotal()}};addLines(dataLines){for(let i in dataLines){const d=dataLines[i]
+class Line{constructor(id,articulo,cantidad,precio,dto){this.id=id;this.articulo=articulo;this.cantidad=cantidad||0;this.precio=precio||0;this.dto=dto||0;this.amo=this.setTotal()};setTotal(){return(this.cantidad*this.precio*(1-this.dto/100)).toFixed(2)}};class Ticket{constructor(data){this.id=null;this.lines=[];this.id_usuario=null;this.id_cliente=null;this.fecha=null;this.estado=1;this.iva=null;this.total=0.00;this.new=!0;if(data!=undefined){this.id=data.id;this.id_usuario=data.id_usuario;this.id_cliente=data.id_cliente;this.fecha=data.fecha;this.iva=data.iva;this.estado=(data.estado!=undefined)?data.estado:1;this.addLines(data.lines);this.setTotal()}};addLines(dataLines){for(let i in dataLines){const d=dataLines[i]
 this.addLine(d.id,d.articulo,d.cantidad,d.precio,d.dto)}
 return!0}
 addLine(id,articulo,cantidad,precio,dto){let newLine=new Line(id,articulo,cantidad,precio,dto)
@@ -14,6 +14,7 @@ return this.lines}
 getLine(index){return this.lines.filter(e=>e.id==index)[0]}
 sendData(){let props=this
 delete props.total
+delete props.new
 return props}}class Present{constructor($id){this.el=document.getElementById($id)
 this.style=this.el.getElementsByTagName('style')[0]
 this.desc=this.el.querySelector('#descripcion')

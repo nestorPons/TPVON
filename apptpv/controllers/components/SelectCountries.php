@@ -9,6 +9,7 @@ class SelectCountries extends Component{
         $this->options = $data['options'] ?? null;
 		$this->type = 'select';
         $this->options = $this->loadData(); 
+		$this->default = '';
 		
         parent::__construct($data);
         $this->print('select');

@@ -1,6 +1,6 @@
 <div id="<?=$idCon?>" class="row col-sm-12 col-md-12">
     <select id="<?=$id?>"
-        class = "<?=$class?> <?=$default ? 'valid' : ''?>"
+        class = "<?=$class?> <?=$default?>"
         <?=$printName?>
         <?=$printTitle?>
         <?=$required?>
@@ -16,7 +16,7 @@
         <?=$tabindex?>
         <?=$onchange?>
     > 
-        <option value="" <?=$default ? '' : 'hidden'?> ><?=$default?></option>
+        <option value="" <?=$default?> ><?=$default?></option>
         <?php if($options):?>
             <?php foreach($options as $key => $val): ?>
                 <option value="<?=$key?>"  <?php if($key == $selected )echo 'selected'?>><?=$val?></option>

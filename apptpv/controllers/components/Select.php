@@ -8,8 +8,9 @@ class Select extends Component{
         $this->COLLAPSE = true;
         $this->selected = $data['selected'] ?? null; 
         $this->options = $data['options'] ?? null;
-        $this->default = null; 
+        $this->default = ''; 
         $this->type = 'select';
+
         parent::__construct($data);
         $this->print('select');
     }

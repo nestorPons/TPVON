@@ -81,15 +81,13 @@
         print() {
             // Comprobamos que este cargado el módulo del vale regalo
             if (app.present) {
-                /* imprimirElemento(app.present.el, app.present.style) */
-
                 let p = app.present,
                     t = this.Table,
                     elemento = p.el,
                     estilos = p.style,
                     ventana = window.open('', '', 'PRINT'),
                     arr = []
-echo(arr)
+
                 for (let i in t.data) {
                     arr.push(t.data[i][2])
                 }

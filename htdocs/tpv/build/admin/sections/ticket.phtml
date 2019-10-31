@@ -203,17 +203,21 @@
                 })
         },
         async put(sendMail = false, callback) {
-            this.Ticket.fecha = app.date.now('sql')
-            this.Ticket.estado = 1
-            this.Ticket.regalo = this.present.checked | 0
-            this.Ticket.fecha_vencimiento = this.end_date.value
-           
-            // Guardamos los datos 
-            let data = await DB.post('tickets', 'new', this.Ticket.sendData())
-            this.lastId = this.Ticket.id = data.id
+            if(this.Ticket.new){
+                this.Ticket.fecha = app.date.now('sql')
+                this.Ticket.estado = 1
+                this.Ticket.regalo = this.present.checked | 0
+                this.Ticket.fecha_vencimiento = this.end_date.value
+               
+                // Guardamos los datos 
+                let data = await DB.post('tickets', 'new', this.Ticket.sendData())
+                this.lastId = this.Ticket.id = data.id
+    
+                if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket)
+                app.tpv.add()
+            }
 
-            if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket)
-            app.tpv.add()
+            callback()
         },
         toggle(e) {
             this.cont_end_date.classList.toggle('hidden')

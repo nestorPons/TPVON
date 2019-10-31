@@ -1,5 +1,6 @@
-<?php namespace app\controllers\components?><section id="id5dbabeadbd4ed">
+<?php namespace app\controllers\components?><section id="id5dbadc056c5e9">
     <form controller="company" action="save" class="input-group">
+        <fieldset>
             <legend>Datos empresa</legend>
             <?php
             $txt00 = new InputHidden(['name' => 'id', 'value => 1']);
@@ -15,36 +16,56 @@
             $txt11 = new InputText(['tabindex' => 10, 'label' => 'Codigo postal', 'name' => 'CP', 'title' => "Introduzca el codigo postal"]);
             $txt12 = new SelectCountries(['tabindex' => 11, 'label' => 'Pais', 'name' => 'pais']);
             ?>
+        </fieldset>
     </form>
     <form controller="config" action="save" class="input-group">
+        <fieldset>
             <legend>Datos aplicación</legend>
             <?php
             new InputHidden(['name' => 'id', 'value => 1']);
             $txt13 = new InputText(['tabindex' => 12, 'label' => '% Iva aplicado', 'name' => 'iva']);
             $txt14 = new InputText(['tabindex' => 13, 'label' => 'Dias cheque regalo', 'name' => 'dias']);
             ?>
+        </fieldset>
     </form>
     <?php include_once \VIEWS\ADMIN\FORMS . '/user.phtml' ?>
+    <form controller="promos" action="save" class="input-group">
+        <fieldset>
+            <legend>Promociones</legend>
+            <?php
+            $txt00 = new InputHidden(['label' => 'Id', 'name' => 'id']);
+            $txt01 = new InputText(['label' => 'Nombre', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la promoción", 'required' => true]);
+            $txt02 = new InputText(['label' => 'Total de dias', 'name' => 'valor']);
+            $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name' => 'dto']);
+            ?>
+        </fieldset>
+    </form>
 </section>
 <style lang="less">
-    #id5dbabeadbd4ed{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr}@media (max-width:650px){#id5dbabeadbd4ed{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}}#id5dbabeadbd4ed form{height:min-content}#id5dbabeadbd4ed form:first-of-type{grid-row-start:1;grid-row-end:-1}
+    #id5dbadc056c5e9{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5dbadc056c5e9{grid-template-columns:1fr 1fr}}#id5dbadc056c5e9 form{height:min-content;border:none;padding:0}#id5dbadc056c5e9 form:first-of-type{grid-row-start:1;grid-row-end:-1}
 </style>
 <script>
     // Cargamos los datos de la base de datos 
     app.conf = {
         buttons: [],
         id_user: null,
-        form    : {
-            company : document.getElementById('id5dbabeadbd4ed').getElementsByTagName('form')[0],
-            conf    : document.getElementById('id5dbabeadbd4ed').getElementsByTagName('form')[1],
-            user    : document.getElementById('id5dbabeadbd4ed').getElementsByTagName('form')[2]
+        form: {
+            company : document.getElementById('id5dbadc056c5e9').getElementsByTagName('form')[0],
+            conf    : document.getElementById('id5dbadc056c5e9').getElementsByTagName('form')[1],
+            user    : document.getElementById('id5dbadc056c5e9').getElementsByTagName('form')[2],
+            promos  : document.getElementById('id5dbadc056c5e9').getElementsByTagName('form')[3],
         },
-        table       : {
-            company : 'empresa',
-            conf    : 'config',
-            users   : 'usuarios',
+        table: {
+            company: 'empresa',
+            conf: 'config',
+            users: 'usuarios',
         },
         load() {
+            // Cargamos los datos promociones
+            DB.get('promos')
+                .then(d => d[0])
+                .then(d => app.loadDataToForm(d, this.form.promos))
+
             let f = this.form.user,
                 buttons = f.getElementsByTagName('button')
 
@@ -63,7 +84,7 @@
                 .then(d => {
                     app.loadDataToForm(d, this.form.company)
                 })
-            DB.get('config')               
+            DB.get('config')
                 .then(d => d[0])
                 .then(d => {
                     app.loadDataToForm(d, this.form.conf)
@@ -85,6 +106,12 @@
             this.save_user({
                 ...app.formToObject(this.form.user),
                 nivel: 2
+            })
+
+            // Guardamos promociones
+            DB.post('promos','save', {
+                ...app.formToObject(this.form), 
+                id: -1
             })
         },
         save_user(data) {

@@ -5,13 +5,13 @@ use app\core\Data;
  */
 class Component{
     protected $type, $id, $idObj, $name, $label, $class, $required, $pattern, $tittle, $minlength, $maxlength, $prefix,
-    $COLLAPSE = false,
-    $MINLENGTH = 1, 
-    $MAXLENGTH = 255;
+        $COLLAPSE = false,
+        $MINLENGTH = 1, 
+        $MAXLENGTH = 255;
 
     const PREFIX_CONTAINER = 'container_'; 
     const PREFIX_ELEMENT = 'el_';
-    const PREFIX_OBJECT = 'ob';
+    const PREFIX_OBJECT = 'ob_';
         
     function __construct(Array $data = []){
 
@@ -19,7 +19,7 @@ class Component{
             $this->{$key} = $val??null;
         }
         $this->id = ($this->id)??$this->randomid();
-        $this->idCon = 'container' . $this->id; 
+        $this->idCon = self::PREFIX_CONTAINER . $this->id; 
         $this->idObj = self::PREFIX_OBJECT . $this->id;
     }
     /** Imprime ĺa vista 
@@ -27,12 +27,12 @@ class Component{
     * $Data => Objeto Data para pasar datos a la vista [opcional]
     */
     function print(string $file, Data $Data = null){
-
         // Variables no obligatorias (Elemtos especificos) 
         foreach($this as $key => $value){
             ${$key} = $value;
-            @${'attr_'.$key} = "$key = '$value'";      
+            @${'attr_'.$key} = "$key = '$value'";     
         }        
+
         // Variables obligatorias para usos generales
         $class = $this->class($this->COLLAPSE);
         $prefix_element = self::PREFIX_ELEMENT; 
