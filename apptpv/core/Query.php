@@ -256,14 +256,14 @@ class Query extends Conn
     // setter genérico para la inserción de datos en los atributos de la clase hija
     function loadData($data)
     {
-
         if (!$data) return false;
         // Normalización de los datos para direfentes casos de uso
         if (is_object($data)) $data = (array) $data;
         if (isset($data[0])) $data = $data[0];
         // Agregacion de los datos a los atributos de clase
+        $public_props = $this->getVars();
         foreach ($data as $key => $val) {
-            if (property_exists($this, $key)) {
+            if (array_key_exists($key, $public_props)) {
                 $this->{$key} = $val ?? null;
             }
         }

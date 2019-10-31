@@ -155,9 +155,9 @@
             this.cantidad = cantidad || 0;
             this.precio = precio || 0;
             this.dto = dto || 0;
-            this.amo = this.total();
+            this.amo = this.setTotal();
         };
-        total() {
+        setTotal() {
             return (this.cantidad * this.precio * (1 - this.dto / 100)).toFixed(2);
         };
     };
@@ -170,7 +170,9 @@
             this.fecha = null;
 
             this.estado = 1;
-            this.iva = null
+            this.iva = null;
+
+            this.total = 0.00; 
 
             if (data != undefined) {
                 this.id = data.id;
@@ -180,6 +182,7 @@
                 this.iva = data.iva;
                 this.estado = (data.estado != undefined) ? data.estado : 1;
                 this.addLines(data.lines);
+                this.setTotal()
             };
         };
         addLines(dataLines) {
@@ -196,13 +199,12 @@
 
             return newLine
         }
-        total() {
-            let total = 0.00
+        setTotal() {
             for (let i in this.lines) {
                 const l = this.lines[i]
-                total += parseFloat(l.amo || l.cantidad * l.precio * (1 - l.dto / 100))
+                this.total += parseFloat(l.amo || l.cantidad * l.precio * (1 - l.dto / 100))
             }
-            return total.toFixed(2)
+            return this.total.toFixed(2)
         }
         validate() {
             if (
@@ -219,6 +221,11 @@
         }
         getLine(index) {
             return this.lines.filter(e => e.id == index)[0]
+        }
+        sendData(){
+            let props = this
+            delete props.total
+            return props
         }
 
     }
@@ -345,7 +352,7 @@
             this.selEmp.reset()
         },
         printTotal() {
-            this.total = this.Ticket.total()
+            this.total = this.Ticket.setTotal()
             this.$total.val(this.total)
         },
         addLine() {
@@ -486,7 +493,7 @@
                 this.selEmp.option(data.id_usuario)
                 this.selCli.option(data.id_cliente)
 
-                this.total.value = this.Ticket.total()
+                this.total.value = this.Ticket.setTotal()
                 this.date.value = app.date.format(data.fecha, 'short')
                 this.hour.value = app.date.format(data.fecha, 'hour')
 

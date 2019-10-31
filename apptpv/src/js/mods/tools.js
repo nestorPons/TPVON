@@ -1,6 +1,6 @@
 // Funciones para desarrollo
-var echo = function () { 
-    for(let i in arguments) console.log(arguments[i]); 
+var echo = function () {
+    for (let i in arguments) console.log(arguments[i]);
 };
 // Funcion para recorrer dom al estilo jq
 var $y = function ($arg) {
@@ -11,22 +11,22 @@ var $y = function ($arg) {
         ? selected
         : selected[0];
 };
-var exist = function(arg = undefined){
-    return arg != undefined && arg != null 
+var exist = function (arg = undefined) {
+    return arg != undefined && arg != null
 }
-var remove = function(arr = []){
-    do{
+var remove = function (arr = []) {
+    do {
         let b = arr[0]
         if (b) b.remove()
-    } while(arr.length > 0)
+    } while (arr.length > 0)
 }
-var isset = function(arg = undefined){
+var isset = function (arg = undefined) {
     return typeof arg == undefined || arg == null || arg == false || arg == 0
 }
-var isEmpty = function(arg = undefined){
+var isEmpty = function (arg = undefined) {
     return typeof arg == undefined || arg == null || arg == false || arg == 0 || arg == ''
 }
-var isTrue = function(arg = null){
+var isTrue = function (arg = null) {
     return arg === true
 }
 var sha256 = function (ascii) {
@@ -118,22 +118,22 @@ var sha256 = function (ascii) {
 // Método get js 
 var $_GET = {}
 document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
-	function _decode(s) {
-		return decodeURIComponent(s.split("+").join(" "));
-	}
-	$_GET[_decode(arguments[1])] = _decode(arguments[2]);
- });
+    function _decode(s) {
+        return decodeURIComponent(s.split("+").join(" "));
+    }
+    $_GET[_decode(arguments[1])] = _decode(arguments[2]);
+});
 // ***  
 
 var mns = {
-    error(mns){
+    error(mns) {
         alert(mns)
     },
-    success(mns){
+    success(mns) {
         alert(mns)
     }
 }
-function imprimirElemento(elemento, estilos){
+function imprimirElemento(elemento, estilos) {
     let ventana = window.open('', '_blank', '');
     ventana.document.write('<html><head><title>' + document.title + '</title>');
     ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
@@ -144,4 +144,22 @@ function imprimirElemento(elemento, estilos){
     ventana.focus();
     ventana.print();
     ventana.close();
-  }
+}
+function OrdenarPorClave(arr) {
+    // Inicializamos los arrays
+    var sortedKeys = new Array();
+    var sortedObj = {};
+
+    // Separamos la clave en un solo array
+    for (var i in arr) {
+        sortedKeys.push(i);
+    }
+    // Ordenamos dicha clave
+    sortedKeys.sort();
+
+    // Reconstruimos el array asociativo con la clave ordenada
+    for (var i in sortedKeys) {
+        sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
+    }
+    return sortedObj;
+}

@@ -6,7 +6,6 @@
     ]);
     $form = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/family.phtml'], false);
     ?>
-
 </section>
 <style lang="less" >
     #families{display:grid}#families #<?=$table->id() ?>{max-height:80vh;grid-row:2}
@@ -20,7 +19,6 @@
         Form: new Modal('<?= $form->id() ?>'),
         // Método inializador
         open() {
-            echo('open')
         },
         async load() {
             // Solicitud de datos al servidor
@@ -62,7 +60,6 @@
                     this.Table.delLine(this.currentId)
                     // Cerramos formulario
                     this.Form.close()
-
                     app.tpv.loadServ()
                 })
         },

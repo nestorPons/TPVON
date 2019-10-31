@@ -272,7 +272,7 @@
             this.selEmp.reset()
         },
         printTotal() {
-            this.total = this.Ticket.total()
+            this.total = this.Ticket.setTotal()
             this.$total.val(this.total)
         },
         addLine() {
@@ -413,7 +413,7 @@
                 this.selEmp.option(data.id_usuario)
                 this.selCli.option(data.id_cliente)
 
-                this.total.value = this.Ticket.total()
+                this.total.value = this.Ticket.setTotal()
                 this.date.value = app.date.format(data.fecha, 'short')
                 this.hour.value = app.date.format(data.fecha, 'hour')
 

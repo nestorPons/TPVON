@@ -1,10 +1,10 @@
 const app = {
-    timeZone    : Intl.DateTimeFormat().resolvedOptions().timeZone, 
-    GET         : $_GET,
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    GET: $_GET,
     // Peticiones con datos 
-    post (data, callback, error = true) {
-        if (typeof data.controller === 'undefined'){ 
-            this.mens.error({success :false, error: 'No se ha asignado  controlador'})
+    post(data, callback, error = true) {
+        if (typeof data.controller === 'undefined') {
+            this.mens.error({ success: false, error: 'No se ha asignado  controlador' })
             return false
         }
         if (typeof data.db === 'undefined') data.db = $_GET['db']
@@ -17,32 +17,32 @@ const app = {
                 data = JSON.parse(respond);
                 // la respuesta es JSON
                 console.log(data)
-                
+
                 // Imprimimos mensaje de error si lo hay 
-                if(error)
-                if( (isEmpty(data.success) || 
-                    data.success == false || 
-                    data.success == 0 ) && 
-                    exist(data.mens)) {
-                        this.mens.error(data.mens||'No se ha podido rehalizar la petición!')
+                if (error)
+                    if ((isEmpty(data.success) ||
+                        data.success == false ||
+                        data.success == 0) &&
+                        exist(data.mens)) {
+                        this.mens.error(data.mens || 'No se ha podido rehalizar la petición!')
                         return false
-                    }    
-            } catch(e) {
+                    }
+            } catch (e) {
                 echo('carga html')
                 // la respuesta es HTML
                 html = $(respond)
                 app.sections.load(html.attr('id'), html)
 
             } finally {
-                let resp = data ? data.data : null, 
+                let resp = data ? data.data : null,
                     state = data ? data.success : false
                 typeof callback == "function" && callback(resp, state)
             }
         })
-        .fail(fn => {
-            this.mens.error( "Fallo de conexión \n No se pudo guardar los datos" );
-            typeof callback == "function" && callback(null, 0)
-          })
+            .fail(fn => {
+                this.mens.error("Fallo de conexión \n No se pudo guardar los datos");
+                typeof callback == "function" && callback(null, 0)
+            })
     },
     // Carga de zonas por método get
     // data => {controller : ... , action: (view), data : ....}
@@ -50,7 +50,7 @@ const app = {
     //      (true) => carga y muestra componente/seccion además carga inicializador
     //       false => Carga el componente pero no lo muestra
     //  }
-    get (data, load = true, callback) {
+    get(data, load = true, callback) {
         if (typeof data.controller === 'undefined') return false;
 
         for (let i in this.GET) data[i] = this.GET[i]
@@ -58,27 +58,27 @@ const app = {
         $.get('index.php', data, (html, respond) => {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
             $container = ($('main').length != 0) ? $('main') : $('body')
-            if(load){
+            if (load) {
                 $container
-                .find('section').hide().end()
-                .append(html)
+                    .find('section').hide().end()
+                    .append(html)
                 // Inicializamos el método inicializador del objeto
-                if(app[data.controller] != undefined )
-                    if(exist(app[data.controller].load)) app[data.controller].load()
-                this.sections.inicialize(data.controller) 
+                if (app[data.controller] != undefined)
+                    if (exist(app[data.controller].load)) app[data.controller].load()
+                this.sections.inicialize(data.controller)
             } else {
                 $container.append(html)
             }
             typeof callback == 'function' && callback(html)
         }, 'html');
     },
-    loadSync (name, callback) {
+    loadSync(name, callback) {
         var s = document.createElement("script");
         s.onload = callback;
         s.src = name;
         document.querySelector("body").appendChild(s);
     },
-    loadAsync (src, callback) {
+    loadAsync(src, callback) {
         if (callback === void 0) { callback = null; }
         var script = document.createElement('script');
         script.src = src;
@@ -100,54 +100,54 @@ const app = {
         document.getElementsByTagName('body')[0].appendChild(script);
     },
     mens: {
-        error(mens){
+        error(mens) {
             alert('ERROR!! \n' + mens);
         },
-        confirm(mens){
-            return confirm(mens) 
+        confirm(mens) {
+            return confirm(mens)
         }
     },
     sections: {
-        active  :  null,
-        last    : null,
+        active: null,
+        last: null,
         toggle(section, callback) {
 
-            if ($('section#'+section).is(':visible')) return false;
+            if ($('section#' + section).is(':visible')) return false;
 
             let $mainSection = $('section')
-            if($('#appadmin').length || $('#appuser').length ){
+            if ($('#appadmin').length || $('#appuser').length) {
                 $mainSection = $('section').find('section')
-            } 
+            }
             $mainSection.fadeOut('fast')
 
             $('section#' + section).fadeIn()
             typeof callback === 'function' && callback()
             this.inicialize(section)
-            
+
         },
-        load(section = '', html = jQuery){
-            try{
+        load(section = '', html = jQuery) {
+            try {
                 // Comprueba que  la seccion existe o no 
-                if($('section#' + section).length){
-                   // Si existe oculta todas menos la solicitada
-                   this.toggle(section);
-               }else{
-                   // Cargammos el codigo html
-                   this.toggle(section, function(){
-                       html.appendTo('body')
-                   })
-               }  
-            } catch(error) {
+                if ($('section#' + section).length) {
+                    // Si existe oculta todas menos la solicitada
+                    this.toggle(section);
+                } else {
+                    // Cargammos el codigo html
+                    this.toggle(section, function () {
+                        html.appendTo('body')
+                    })
+                }
+            } catch (error) {
                 console.info(error)
-            }   
+            }
         },
-        show(section){
+        show(section) {
             this.last = this.active
             // Comprueba que  la seccion existe o no 
-            if($('section#' + section).length){
+            if ($('section#' + section).length) {
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section)
-            }else{
+            } else {
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
@@ -159,47 +159,47 @@ const app = {
             this.onblur()
         },
         // Comportamiento de la sección activa al cargarse 
-        inicialize(section){
+        inicialize(section) {
             if (section == 'appadmin') section = 'tpv'
             this.active = section
-            
+
             let activeZone = app[this.active]
-            if(activeZone){
+            if (activeZone) {
                 // Cargamos los botones de herramientas
                 typeof activeZone.buttons != 'undefined' &&
-                typeof activeZone.buttons == 'object' && 
-                menu.buttons.show(activeZone.buttons)
-    
+                    typeof activeZone.buttons == 'object' &&
+                    menu.buttons.show(activeZone.buttons)
+
                 // Se cargan 
                 typeof activeZone.open != 'undefined' &&
-                typeof activeZone.open == 'function' && 
-                activeZone.open()
+                    typeof activeZone.open == 'function' &&
+                    activeZone.open()
             }
         },
         // Comportamiento de los botones de herramientas según la seccion que esté activa
-        next(){
+        next() {
             typeof app[this.active].next == 'function' && app[this.active].next()
         },
-        prev(){
+        prev() {
             typeof app[this.active].prev == 'function' && app[this.active].prev()
         },
-        del(){
+        del() {
             typeof app[this.active].del == 'function' && app[this.active].del()
         },
-        add(){
+        add() {
             typeof app[this.active].add == 'function' && app[this.active].add()
         },
-        print(){
+        print() {
             typeof app[this.active].print == 'function' && app[this.active].print()
         },
-        filter(){
+        filter() {
             typeof app[this.active].filter == 'function' && app[this.active].filter()
-        },       
-        search(){
+        },
+        search() {
 
         },
-        onblur(){
-            if(app[this.last] != undefined && typeof app[this.last].onblur == 'function'){
+        onblur() {
+            if (app[this.last] != undefined && typeof app[this.last].onblur == 'function') {
                 app[this.last].onblur(f => {
                     app[this.last].change = false
                 })
@@ -208,41 +208,41 @@ const app = {
     },
     form: {
         // Verificamo y si es erroneo nos muestra un mensaje con el atributo tile-error o un mensaje por defecto
-        verify($this){
+        verify($this) {
             var $this = $this
-            let type  = $this.get(0).tagName, 
-                _verify = function($this){
+            let type = $this.get(0).tagName,
+                _verify = function ($this) {
                     let mens = '', r = true
-                    if($('#' + $this.attr('for')).val() != $this.val()){
-                       mens = $this.attr('tile-error') || "¡Los campos no coinciden!"
-                       r = false
-                    } 
+                    if ($('#' + $this.attr('for')).val() != $this.val()) {
+                        mens = $this.attr('tile-error') || "¡Los campos no coinciden!"
+                        r = false
+                    }
 
                     $this.get(0).setCustomValidity(mens)
                     return r
                 }
-            switch(type){
+            switch (type) {
                 case 'INPUT': return _verify($this)
-                case 'FORM': 
+                case 'FORM':
                     // Vrerificamos si es un formulario
                     let success = true
-                    $this.find('.verify').each(function(){
-                        if(!_verify($(this))){
+                    $this.find('.verify').each(function () {
+                        if (!_verify($(this))) {
                             $(this).get(0).reportValidity()
                             success = false
-                        } 
+                        }
                     })
                     return success
             }
         }
     },
-    formToObject (form){
+    formToObject(form) {
         var obj = {};
         var elements = form.querySelectorAll("input, select, textarea")
         for (let i = 0; i < elements.length; ++i) {
             var element = elements[i],
                 name = element.name,
-                value = (element.type == 'checkbox' || element.type == 'radio' )
+                value = (element.type == 'checkbox' || element.type == 'radio')
                     ? ((element.checked) ? element.value : element.getAttribute('default') || 0)
                     : element.value
 
@@ -250,166 +250,166 @@ const app = {
         }
         return obj
     },
-    formToJSONString (form){
+    formToJSONString(form) {
         return JSON.stringify(this.formToObject(form));
     },
-    clock(){ 
-        momentoActual = new Date() 
-        hora = momentoActual.getHours() 
-        minuto = momentoActual.getMinutes() 
-        segundo = momentoActual.getSeconds() 
+    clock() {
+        momentoActual = new Date()
+        hora = momentoActual.getHours()
+        minuto = momentoActual.getMinutes()
+        segundo = momentoActual.getSeconds()
 
-        str_segundo = new String (segundo) 
-        if (str_segundo.length == 1) 
-            segundo = "0" + segundo 
+        str_segundo = new String(segundo)
+        if (str_segundo.length == 1)
+            segundo = "0" + segundo
 
-        str_minuto = new String (minuto) 
-        if (str_minuto.length == 1) 
-            minuto = "0" + minuto 
+        str_minuto = new String(minuto)
+        if (str_minuto.length == 1)
+            minuto = "0" + minuto
 
-        str_hora = new String (hora) 
-        if (str_hora.length == 1) 
-            hora = "0" + hora 
+        str_hora = new String(hora)
+        if (str_hora.length == 1)
+            hora = "0" + hora
 
-        horaImprimible = hora + " : " + minuto  
+        horaImprimible = hora + " : " + minuto
 
-        $('.clock').val(horaImprimible) 
+        $('.clock').val(horaImprimible)
 
         //setTimeout("app.clock()",1000) 
     },
-    loadDataToForm(data, form){
-        if(data == undefined) return false
+    loadDataToForm(data, form) {
+        if (data == undefined) return false
         var els = form.getElementsByTagName('input')
-        for(const el of els){
-            if(el.attributes != undefined && el.hasAttribute('name')) {
-                if(el.type == 'checkbox') {
-                    el.checked = data[el.attributes.name.value] > el.getAttribute('default') 
+        for (const el of els) {
+            if (el.attributes != undefined && el.hasAttribute('name')) {
+                if (el.type == 'checkbox') {
+                    el.checked = data[el.attributes.name.value] > el.getAttribute('default')
                 } else el.value = data[el.attributes.name.value]
             }
         }
         els = form.getElementsByTagName('select')
-        for(let i in els){
+        for (let i in els) {
             const el = els[i]
-            if(el.attributes != undefined) el.value = data[el.attributes.name.value]
+            if (el.attributes != undefined) el.value = data[el.attributes.name.value]
         }
         return form
-    }, 
-    date : {
-        date : new Date(),
-        current(){
+    },
+    date: {
+        date: new Date(),
+        current() {
             let f = new Date();
             return this.actual() + ' ' + f.getHours() + ':' + f.getMinutes() + ':' + f.getSeconds()
-        }, 
-        actual(){
+        },
+        actual() {
             let f = new Date();
-            return(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
-        },  
-        now(arg = ''){
-            let f = new Date(), 
-                d = f.getDate().toString().padStart(2, '0'), 
-                m = (f.getMonth() +1).toString().padStart(2, '0'),
+            return (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear());
+        },
+        now(arg = '') {
+            let f = new Date(),
+                d = f.getDate().toString().padStart(2, '0'),
+                m = (f.getMonth() + 1).toString().padStart(2, '0'),
                 y = f.getFullYear().toString(),
                 h = f.getHours().toString().padStart(2, '0'),
                 n = f.getMinutes().toString().padStart(2, '0'),
                 s = f.getSeconds().toString().padStart(2, '0')
-                
-            switch(arg){
-                case 'date': 
+
+            switch (arg) {
+                case 'date':
                     return d + "/" + m + "/" + y
                 case 'hour':
                     return h + ":" + n
                 case 'sql':
                     return y + '-' + m + '-' + d + ' ' + h + ':' + n + ':' + s
-                default: 
+                default:
                     return d + "/" + m + "/" + y + ' ' + h + ":" + n
             }
         },
-        format(date, format){
-            if(date){
-                let d, m , a , h, n, s
-                if(typeof date === 'string') {
+        format(date, format) {
+            if (date) {
+                let d, m, a, h, n, s
+                if (typeof date === 'string') {
                     let f = date.split(' '),
                         fecha = f[0],
                         horario = f[1]
-        
+
                     // Si tiene horas ... 
-                    if(horario){   
+                    if (horario) {
                         let x = horario.split(':')
                         h = x[0]
                         min = x[1]
                         s = x[2]
                     }
-                    if (fecha.indexOf("/")>0){
+                    if (fecha.indexOf("/") > 0) {
                         let arr = fecha.split('/');
-                        d = ("0" + arr[0]).slice (-2);
-                        m = ("0" + arr[1]).slice (-2);
+                        d = ("0" + arr[0]).slice(-2);
+                        m = ("0" + arr[1]).slice(-2);
                         a = arr[2];
-                    }else if(fecha.indexOf("-")>0){
-                        let arr  = fecha.split('-');
-                        d = ("0" + arr[2]).slice (-2);
-                        m = ("0" + arr[1]).slice (-2);
+                    } else if (fecha.indexOf("-") > 0) {
+                        let arr = fecha.split('-');
+                        d = ("0" + arr[2]).slice(-2);
+                        m = ("0" + arr[1]).slice(-2);
                         a = arr[0];
-                    }else if(fecha.length==4){
+                    } else if (fecha.length == 4) {
                         d = fecha.substr(2);
-                        m = fecha.substr(0,2);
-                        a =  fechaActual('y');
-                    }else if(fecha.length==8){
-                        d = fecha.substr(6,2);
-                        m = fecha.substr(4,2);
-                        a = fecha.substr(0,4);
+                        m = fecha.substr(0, 2);
+                        a = fechaActual('y');
+                    } else if (fecha.length == 8) {
+                        d = fecha.substr(6, 2);
+                        m = fecha.substr(4, 2);
+                        a = fecha.substr(0, 4);
                     }
-                } else  if(typeof date === 'object') {
-                    d = date.getDate().toString().padStart(2 , '0')
-                    m = (date.getMonth()+ 1).toString().padStart(2 , '0')
+                } else if (typeof date === 'object') {
+                    d = date.getDate().toString().padStart(2, '0')
+                    m = (date.getMonth() + 1).toString().padStart(2, '0')
                     a = date.getFullYear().toString()
-                    h = date.getHours().toString().padStart(2 , '0')
-                    n = date.getMinutes().toString().padStart(2 , '0')
-                    s = date.getSeconds().toString().padStart(2 , '0')
+                    h = date.getHours().toString().padStart(2, '0')
+                    n = date.getMinutes().toString().padStart(2, '0')
+                    s = date.getSeconds().toString().padStart(2, '0')
                 } else return false
-                switch(format) {
-                    case 'sql'      : return a + '-' + m + '-' + d
-                    case 'datetime' : return a + '-' + m + '-' + d + ' ' + h + ':' + min
-                    case 'short'    : return d + '/' + m + '/' + a
-                    case 'md'       : return m + d 
-                    case 'id'       : return a + m + d
-                    case 'day'      : return d
-                    case 'month'    : return m
-                    case 'year'     : return a
-                    case 'hour'     : return h + ':' + min || false
-                    case 'long'     : 
+                switch (format) {
+                    case 'sql': return a + '-' + m + '-' + d
+                    case 'datetime': return a + '-' + m + '-' + d + ' ' + h + ':' + min
+                    case 'short': return d + '/' + m + '/' + a
+                    case 'md': return m + d
+                    case 'id': return a + m + d
+                    case 'day': return d
+                    case 'month': return m
+                    case 'year': return a
+                    case 'hour': return h + ':' + min || false
+                    case 'long':
                         let month = ''
                         switch (m) {
-                            case '1' : month = 'Enero'; break;
-                            case '2' : month = 'Febrero'; break;
-                            case '3' : month = 'Marzo'; break;
-                            case '4' : month = 'Abril'; break;
-                            case '5' : month = 'Mayo'; break;
-                            case '6' : month = 'Junio'; break;
-                            case '7' : month = 'Julio'; break;
-                            case '8' : month = 'Agosto'; break;
-                            case '9' : month = 'Septiembre'; break;
-                            case '10' : month = 'Octubre'; break;
-                            case '11' : month = 'Noviembre'; break;
-                            case '12' : month = 'Diciembre'; break;
+                            case '1': month = 'Enero'; break;
+                            case '2': month = 'Febrero'; break;
+                            case '3': month = 'Marzo'; break;
+                            case '4': month = 'Abril'; break;
+                            case '5': month = 'Mayo'; break;
+                            case '6': month = 'Junio'; break;
+                            case '7': month = 'Julio'; break;
+                            case '8': month = 'Agosto'; break;
+                            case '9': month = 'Septiembre'; break;
+                            case '10': month = 'Octubre'; break;
+                            case '11': month = 'Noviembre'; break;
+                            case '12': month = 'Diciembre'; break;
                         }
                         return `${d} de ${month} del ${a}`
-    
-                    default         : return new Date(a, m-1, d, h, min, s)
+
+                    default: return new Date(a, m - 1, d, h, min, s)
                 }
             } return null
         },
-        diff(f1,f2){
-            
-            let d1 = new Date(this.format(f1,'sql')).getTime(),
-                d2 = new Date(this.format(f2,'sql')).getTime(),
+        diff(f1, f2) {
+
+            let d1 = new Date(this.format(f1, 'sql')).getTime(),
+                d2 = new Date(this.format(f2, 'sql')).getTime(),
                 diff = d2 - d1;
 
-                return (diff/(1000*60*60*24) );
+            return (diff / (1000 * 60 * 60 * 24));
         },
-        add (strDate, value, unity, format = null){
-            const   date = new Date(this.format(strDate, 'sql')),
-                    v = parseInt(value)
-            switch(unity){
+        add(strDate, value, unity, format = null) {
+            const date = new Date(this.format(strDate, 'sql')),
+                v = parseInt(value)
+            switch (unity) {
                 case 'days':
                     date.setDate(date.getDate() + v)
                     break
@@ -418,52 +418,52 @@ const app = {
                     break
                 case 'year':
                     date.setFullYear(date.getFullYear() + v)
-                }
-            if(format) return this.format(date, format)
+            }
+            if (format) return this.format(date, format)
             else return date
         }
     }
 }
 const DB = {
-    storage : [],
-    current : 0, 
-    table   : null,
-    key(table, key, value){
+    storage: [],
+    current: 0,
+    table: null,
+    key(table, key, value) {
         this.get(table)
-        .then(d => {    
-            
-        });
+            .then(d => {
+
+            });
     },
     // Consultar datos de la bd local
-    get(table = this.table , key, value, filter){
+    get(table = this.table, key, value, filter) {
         return new Promise((resolve, reject) => {
-            const _equalValues = function(el){
+            const _equalValues = function (el) {
                 let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
                     v = (typeof value === 'string') ? value.toLowerCase().trim() : value
 
-                if(k) return typeof k === 'number' ? k == v : k.includes(v);
+                if (k) return typeof k === 'number' ? k == v : k.includes(v);
                 else return false;
             }
-            if(table == undefined){
+            if (table == undefined) {
                 // Si no le paso un indice me devuelve todos los nombres de tablas
                 resolve(this.storage);
-            }else{
+            } else {
                 // Si no se pasan key o value devolvemos todos los registros            
-                if((key == undefined || value == undefined) && filter == undefined) resolve(this.storage[table]);
+                if ((key == undefined || value == undefined) && filter == undefined) resolve(this.storage[table]);
                 else resolve(this.storage[table].filter((el) => {
                     if (filter) {
-                        if(filter.indexOf('==') != -1){
+                        if (filter.indexOf('==') != -1) {
                             let arr = filter.split('==');
                             return _equalValues(el) && el[arr[0].trim()] == arr[1].trim();
                         }
-                        else if(filter.indexOf('>') != -1){
+                        else if (filter.indexOf('>') != -1) {
                             let arr = filter.split('>');
-                            return _equalValues(el) && el[arr[0].trim()] > arr[1].trim();       
+                            return _equalValues(el) && el[arr[0].trim()] > arr[1].trim();
                         }
-                        else if(filter.indexOf('<') != -1){
+                        else if (filter.indexOf('<') != -1) {
                             let arr = filter.split('<');
-                            return _equalValues(el) && el[arr[0].trim()] < arr[1].trim();                    
-                        };      
+                            return _equalValues(el) && el[arr[0].trim()] < arr[1].trim();
+                        };
                     }
                     else return _equalValues(el);
                 })) || reject(false);
@@ -471,46 +471,64 @@ const DB = {
         });
     },
     // Añade datos a la tabla
-    set(table = this.table, data, key, value){
-        return new Promise( (resolve, reject) => {
-            if(key){
-                let i = this.storage[table].findIndex(el=>{
+    set(table = this.table, data, key, value) {
+        return new Promise((resolve, reject) => {
+            if (key) {
+                let i = this.storage[table].findIndex(el => {
                     return el[key] == value
                 })
-                if(i == -1)
+                if (i == -1)
                     this.storage[table].push(data)
                 else
                     this.storage[table][i] = data
             } else {
                 //inicializa
-                if ( typeof this.storage[table] == 'undefined') this.storage[table] = []
+                if (typeof this.storage[table] == 'undefined') this.storage[table] = []
                 // Guarda datos en formato array
-                for(let i in data){
+                for (let i in data) {
                     this.storage[table].push(data[i])
-                } 
+                }
             }
             resolve(this.storage[table]);
         })
     },
-    last(table = this.table){
-        return this.get(table).then( d => d[d['length'] - 1 ]);
+    last(table = this.table) {
+        return this.get(table).then(d => d[d['length'] - 1]);
     },
-    lastId(table = this.table){
-        return this.get(table).then( d => d[d['length'] -1 ].id);
+    lastId(table = this.table) {
+        return this.get(table).then(d => d[d['length'] - 1].id);
     },
-    loadIndex(index){
-        if( this.storage[index] != undefined ){
+    loadIndex(index) {
+        if (this.storage[index] != undefined) {
             this.current = index;
             return this.storage[index];
         };
     },
-    next(){
+    next() {
         return this.loadIndex(this.current + 1);
     },
-    prev(){
+    prev() {
         return this.loadIndex(this.current - 1);
     },
-    exist(table = this.table){
-        return  typeof this.storage[table] != 'undefined' 
+    exist(table = this.table) {
+        return typeof this.storage[table] != 'undefined'
+    },
+    post(controller, action, data) {
+        return new Promise((resolve, reject) => {
+            // Guardamos en remoto
+            app.post({
+                controller: controller,
+                action: action, 
+                data: data
+            }, (d, r) => {
+                if(r) {
+                    if (this.exist('controller')){
+                        this.set(controller, data.concat(d))
+                    }
+                    resolve(d)
+                }
+                else reject(d)
+            })
+        })
     }
 }

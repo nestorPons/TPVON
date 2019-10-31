@@ -1,32 +1,15 @@
 <section id="chart">
     <canvas id="myChart" width="400px" height="400px"></canvas>
     <script>
-        function OrdenarPorClave(arr)
-        {
-            // Inicializamos los arrays
-            var sortedKeys = new Array();
-            var sortedObj = {};
- 
-            // Separamos la clave en un solo array
-            for (var i in arr){
-                sortedKeys.push(i);
-            }
-            // Ordenamos dicha clave
-            sortedKeys.sort();
- 
-            // Reconstruimos el array asociativo con la clave ordenada
-            for (var i in sortedKeys){
-                sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
-            }
-            return sortedObj;
-        }
         app.chart = {
+            buttons : [], 
             load() {
                 app.post({
                     controller: 'tickets',
                     action: 'getAll',
                     data: null
                 }, data => {
+                    DB.set('tickets', data)
                     let arr = [],
                         labels = [],
                         datas = [];
@@ -43,8 +26,6 @@
                     // Se ordena el array por fecha
                     let a = OrdenarPorClave(arr)
 
-echo(a)
-// Aki ordenando por clave (organizar el codigo)
                     // Se dividen los datos en dos arrays
                     for (let i in a) {
                         labels.push(i)
