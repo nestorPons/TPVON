@@ -293,6 +293,7 @@ class Prepocessor{
     }
     private function isModified($file){
         return true;
+        
         if($this->cacheable){
             // Comprobamos si han habido modificaciones
             if (!isset($this->cache[$file]) || $this->cache[$file] != filectime($file)){
