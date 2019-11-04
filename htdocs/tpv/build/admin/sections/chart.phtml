@@ -9,6 +9,28 @@
                     action: 'getAll',
                     data: null
                 }, data => {
+                    let _mySort = arr => {
+                        // Inicializamos los arrays
+                        let sortedKeys = new Array();
+                        let sortedObj = {};
+
+                        // Separamos la clave en un solo array
+                        for (let i in arr) {
+                            sortedKeys.push(i);
+                        }
+                        // Ordenamos dicha clave
+                        sortedKeys.sort(function(a, b){
+                            dateA = date.sql(a)
+                            dateB = date.sql(b)
+                            return new Date(dateA) - new Date(dateB);
+                        });
+
+                        // Reconstruimos el array asociativo con la clave ordenada
+                        for (let i in sortedKeys) {
+                            sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
+                        }
+                        return sortedObj;
+                    }
                     DB.set('tickets', data)
                     let arr = [],
                         labels = [],
@@ -18,13 +40,13 @@
                     for (let i in data) {
                         const d = data[i]
                         if (d) {
-                            const date = app.date.format(d.fecha, 'short')
-                            if (arr[date] != undefined) arr[date] += d.total
-                            else arr[date] = d.total
+                            const k = date.short(d.fecha)
+                            if (arr[k] != undefined) arr[k] += d.total
+                            else arr[k] = d.total
                         }
                     }
                     // Se ordena el array por fecha
-                    let a = OrdenarPorClave(arr)
+                    let a = _mySort(arr)
 
                     // Se dividen los datos en dos arrays
                     for (let i in a) {

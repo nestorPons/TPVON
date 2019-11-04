@@ -61,8 +61,8 @@
                 controller: 'tickets',
                 action: 'getBetween',
                 data: {
-                    f1: app.date.format(this.txtFrom.value, 'sql'),
-                    f2: app.date.format(this.txtTo.value, 'sql'),
+                    f1: date.format(this.txtFrom.value, 'sql'),
+                    f2: date.format(this.txtTo.value, 'sql'),
                     u: this.SelUser.value()
                 }
             })
@@ -75,8 +75,8 @@
                         if (d.estado == 1) this.Table.addLine(null,
                             [
                                 d.id,
-                                app.date.format(d.fecha, 'short'),
-                                app.date.format(d.fecha, 'hour'),
+                                date.format(d.fecha, 'short'),
+                                date.format(d.fecha, 'hour'),
                                 l.articulo,
                                 l.precio,
                                 l.cantidad,

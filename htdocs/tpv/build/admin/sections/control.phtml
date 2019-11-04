@@ -56,7 +56,7 @@
                 p.clear()
                 //Cargamos los datos en la vista
                 p.description(arr);
-                p.date = new Date(app.date.format(this.txtFechaV.value, 'sql'))
+                p.date = new Date(date.format(this.txtFechaV.value, 'sql'))
 
                 ventana.document.write('<html><head><title>' + document.title + '</title>');
                 ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
@@ -102,8 +102,8 @@
             // Cargamos datos vista id 
             this.txtTicket.value = data.id;
 
-            this.txtFecha.value = app.date.format(data.fecha, 'short')
-            this.txtFechaV.value = app.date.format(data.fecha_vencimiento, 'short')
+            this.txtFecha.value = date.format(data.fecha, 'short')
+            this.txtFechaV.value = date.format(data.fecha_vencimiento, 'short')
 
             DB.get('usuarios', 'id', data.id_cliente)
                 .then(d => d[0])
@@ -117,7 +117,7 @@
                     .then(d => d[0])
                     .then(ser => {
 
-                        let date = (line.fecha_regalo != null) ? app.date.format(line.fecha_regalo, 'datetime') + this.btnDel : this.btnAdd
+                        let date = (line.fecha_regalo != null) ? date.format(line.fecha_regalo, 'datetime') + this.btnDel : this.btnAdd
 
                         this.Table.addLine(
                             line.id,
@@ -142,7 +142,7 @@
             let $el = $(e),
                 $parent = $el.parents('tr'),
                 id = $parent.attr('idline'),
-                date = app.date.format(app.date.now(), 'datetime')
+                date = date.format(date.now(), 'datetime')
 
             app.post({
                 controller: 'present',
@@ -176,7 +176,7 @@
                     action      : 'expiration',
                     data        : {
                         id      : this.txtTicket.value,
-                        fecha_vencimiento   : app.date.format(this.txtFechaV.value, 'sql')
+                        fecha_vencimiento   : date.format(this.txtFechaV.value, 'sql')
                     }
                 }, d => {
                     echo('Guardado fecha ticket regalo ...')

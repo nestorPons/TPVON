@@ -199,12 +199,12 @@
                     this.Table.total(this.Ticket.setTotal())
 
                     // Añadimos una fecha standar a la casilla
-                    this.end_date.value = app.date.add(app.tpv.date.value, dias, 'days', 'sql')
+                    this.end_date.value = date.add(app.tpv.date.value, dias, 'days', 'sql')
                 })
         },
         async put(sendMail = false, callback) {
             if(this.Ticket.new){
-                this.Ticket.fecha = app.date.now('sql')
+                this.Ticket.fecha = date.now('sql')
                 this.Ticket.estado = 1
                 this.Ticket.regalo = this.present.checked | 0
                 this.Ticket.fecha_vencimiento = this.end_date.value

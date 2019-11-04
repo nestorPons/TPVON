@@ -129,7 +129,7 @@
 
             // Guardamos promociones
             DB.post('promos','save', {
-                ...app.formToObject(this.form), 
+                ...app.formToObject(this.form.promos), 
                 id: -1
             })
         },

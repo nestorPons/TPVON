@@ -304,8 +304,8 @@
         async reset() {
             DB.get('empresa').then(d => {
                 this.Ticket = new Ticket()
-                this.date.value = app.date.now('date')
-                this.hour.value = app.date.now('hour')
+                this.date.value = date.now('date')
+                this.hour.value = date.now('hour')
                 this.dto.value = 0
                 this.selCli.value(0)
                 this.clearLine()
@@ -382,7 +382,7 @@
                         // Aplicamos la promocion si el último ticket esta dentro del periodo establecido como valido
                         if (this.client.lastTicket &&
                             promo &&
-                            app.date.diff(this.client.lastTicket, app.date.actual()) <= promo.valor) this.dto.value = promo.dto
+                            date.diff(this.client.lastTicket, date.actual()) <= promo.valor) this.dto.value = promo.dto
                         callback()
                     })
             } else {
@@ -462,7 +462,7 @@
                     estado: 1,
                     id_usuario: 0,
                     id_cliente: 0,
-                    fecha: app.date.current(),
+                    fecha: date.current(),
                     lines: []
                 })
             })
@@ -499,8 +499,8 @@
                 this.selCli.option(data.id_cliente)
 
                 this.total.value = this.Ticket.setTotal()
-                this.date.value = app.date.format(data.fecha, 'short')
-                this.hour.value = app.date.format(data.fecha, 'hour')
+                this.date.value = date.format(data.fecha, 'short')
+                this.hour.value = date.format(data.fecha, 'hour')
 
                 // Cargamos el id del ticket actual
                 this.currentId = data.id

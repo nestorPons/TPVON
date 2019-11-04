@@ -136,7 +136,7 @@ var mns = {
 function imprimirElemento(elemento, estilos) {
     let ventana = window.open('Print', '', '');
     ventana.document.write('<html><head><title>' + document.title + '</title>');
-    ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
+    if(estilos) ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
     ventana.document.write(`</head><body id="${elemento.id}">`);
     ventana.document.write(elemento.innerHTML);
     ventana.document.write('</body></html>');
@@ -144,22 +144,4 @@ function imprimirElemento(elemento, estilos) {
     ventana.focus();
     ventana.print();
     ventana.close();
-}
-function OrdenarPorClave(arr) {
-    // Inicializamos los arrays
-    var sortedKeys = new Array();
-    var sortedObj = {};
-
-    // Separamos la clave en un solo array
-    for (var i in arr) {
-        sortedKeys.push(i);
-    }
-    // Ordenamos dicha clave
-    sortedKeys.sort();
-
-    // Reconstruimos el array asociativo con la clave ordenada
-    for (var i in sortedKeys) {
-        sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
-    }
-    return sortedObj;
 }
