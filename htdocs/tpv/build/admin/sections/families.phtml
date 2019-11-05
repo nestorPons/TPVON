@@ -7,94 +7,23 @@
     $form = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/family.phtml'], false);
     ?>
 </section>
-<style lang="less" >
-    #families{display:grid}#families #<?=$table->id() ?>{max-height:80vh;grid-row:2}
-</style>
-<script>
-    'use strict'
-    app.families = {
-        table: 'familias',
-        buttons: ['add'],
-        Table: new Table('<?= $table->idEl() ?>'),
-        Form: new Modal('<?= $form->id() ?>'),
-        // Método inializador
-        open() {
-        },
-        async load() {
-            // Solicitud de datos al servidor
-            await DB.get(this.table)
-                .then(data => {
-                    for (let i in data) {
-                        var d = data[i]
-                        // Listamos las familias activas solamente
-                        if (d.estado == 1)
-                            this.Table.addLine(d.id, [d.id, d.nombre])
-                    }
-                })
-
-        },
-        // Validacion del campo codigo
-        async validation(e) {
-            echo('validation code ...')
-            const el = e.target,
-                value = el.value,
-                ser = await DB.get('servicios', 'codigo', value).then(d => d[0])
-            if (this.Form.state() == 'new') {
-                // Validamos si creamos un codigo nuevo
-                if (ser != undefined) el.setCustomValidity("Codigo existente")
-                else el.setCustomValidity('')
-            } else {
-                // Valida si editamos el codigo
-                if (ser && this.Form.data.id != ser.id) el.setCustomValidity("Codigo existente")
-                else el.setCustomValidity('')
-            }
-        },
-        del() {
-            // Eliminamos de la bd local
-            DB.get(this.table, 'id', this.currentId)
-                .then(d => d[0])
-                .then(d => {
-                    d.estado = 0
-                    DB.set(this.table, d, 'id', d.id)
-                    // Eliminamos de la tabla 
-                    this.Table.delLine(this.currentId)
-                    // Cerramos formulario
-                    this.Form.close()
-                    app.tpv.loadServ()
-                })
-        },
-        add() {
-            let data = {
-                id: -1,
-                estado: 1
-            }
-            this.Form
-                .state('new')
-                .clear()
-                .open(data)
-                .setTile('Nuevo A/S')
-
-        },
-        addLine(data) {
-            this.Table.addLine(data.id, [data.id, data.nombre])
-        },
-        updateLine(data) {
-            this.Table.updateLine(data.id, [data.id, data.nombre])
-        },
-        save(data) {
-            data.estado = 1
-            DB.set(this.table, data, 'id', data.id)
-
-            if (this.currentId == -1) this.addLine(data)
-            else this.updateLine(data)
-            this.Form.close()
-
-            app.tpv.loadServ()
-        },
-        show(e) {
-            this.currentId = e.path[1].attributes.idline.value
-            DB.get(this.table, 'id', this.currentId)
-                .then(data => this.Form.state('edit').open(data).setTile('Edición A/S'))
-        }
-    }
-</script>
+<style lang="less" >#families{display:grid}#families #<?=$table->id() ?>{max-height:80vh;grid-row:2}</style>
+<script>'use strict'
+app.families={table:'familias',buttons:['add'],Table:new Table('<?= $table->idEl() ?>'),Form:new Modal('<?= $form->id() ?>'),open(){},async load(){await DB.get(this.table).then(data=>{for(let i in data){var d=data[i]
+if(d.estado==1)
+this.Table.addLine(d.id,[d.id,d.nombre])}})},async validation(e){echo('validation code ...')
+const el=e.target,value=el.value,ser=await DB.get('servicios','codigo',value).then(d=>d[0])
+if(this.Form.state()=='new'){if(ser!=undefined)el.setCustomValidity("Codigo existente")
+else el.setCustomValidity('')}else{if(ser&&this.Form.data.id!=ser.id)el.setCustomValidity("Codigo existente")
+else el.setCustomValidity('')}},del(){DB.get(this.table,'id',this.currentId).then(d=>d[0]).then(d=>{d.estado=0
+DB.set(this.table,d,'id',d.id)
+this.Table.delLine(this.currentId)
+this.Form.close()
+app.tpv.loadServ()})},add(){let data={id:-1,estado:1}
+this.Form.state('new').clear().open(data).setTile('Nuevo A/S')},addLine(data){this.Table.addLine(data.id,[data.id,data.nombre])},updateLine(data){this.Table.updateLine(data.id,[data.id,data.nombre])},save(data){data.estado=1
+DB.set(this.table,data,'id',data.id)
+if(this.currentId==-1)this.addLine(data)
+else this.updateLine(data)
+this.Form.close()
+app.tpv.loadServ()},show(e){this.currentId=e.path[1].attributes.idline.value
+DB.get(this.table,'id',this.currentId).then(data=>this.Form.state('edit').open(data).setTile('Edición A/S'))}}</script>

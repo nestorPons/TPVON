@@ -12,95 +12,13 @@
         <li><a href="chart"><i class="lnr lnr-chart-bars"></i><span>Gráficas</span></a></li>
     </ul>
 </nav>
-<style>
-    :root{
-        --nav-initial-width: 55px;
-        --nav-max-width: 145px;
-    }
-    nav#navBar{
-        margin: 0;
-        overflow: hidden;
-        transition: width 1s ease;
-        background: var(--main-color);
-        color: var(--nav-font-color);
-        width: var(--nav-initial-width);
-     }
-    nav#navbar * {
-       margin: 0;
-       padding: 0;
-     }
-    nav#navBar ul{
-        margin: 10px 5px;
-        padding: 0;
-        list-style:none;
-     }
-    nav#navBar li{
-        margin: 10px 0;
-        padding: 0;
-     }
-    nav#navBar li a{
-        background: none;
-        font-size: 0.8rem;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-        width: min-content;
-        color: inherit;
-        transition: color 0.7s ease-out;
-     }
-     nav#navBar li a:active{
-        color: var(--nav-link-color);
-     }
-     nav#navBar li a:hover{
-        transform: var(--effect-transform-hover);
-     }  
-    nav#navBar li a i{
-        font-size: 1.5rem;
-     }
-    #navBar a, #navBar a:hover, #navBar a:link, #navBar a:visited{
-        color: var(--nav-font-color);
-    }
-    #icon-menu{
-        position: fixed; 
-        cursor: pointer;
-        top: 6px;
-        left: 1px;
-        font-size: 2em;
-     }
-     nav#navBar.menu-close{
-        width: 0px;    
-     }
-     nav#navBar.menu-max{
-         max-width: min-content;
-         width: var(--nav-max-width);
-     }
-     nav#navBar.menu-initial{
-        width: var(--nav-initial-width);
-     }
-
-</style>
-<script>
-    // · estados del menu initial, short, long 
-    if(!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
-    var navbar = {
-        toggle(change = true){
-                let menuWidth = localStorage.getItem('menuWidth')
-                
-                let varClass =  (menuWidth == 'menu-initial')
-                    ? 'menu-max'  
-                    : 'menu-initial'
-                
-                navbar.addClass(varClass) 
-                if(change) localStorage.setItem('menuWidth', varClass)
-            },
-            addClass(varclass){
-                $('#navBar').removeClass().addClass(varclass)
-                if(varclass == 'menu-max') $('.label').show('slow') 
-                else $('.label').hide('slow')   
-            }
-        }
-    $('#icon-menu').click(navbar.toggle)
-    $(function(){
-        navbar.addClass(localStorage.getItem('menuWidth'))
-    })
-</script>
+<style>:root{--nav-initial-width:55px;--nav-max-width:145px}nav#navBar{margin:0;overflow:hidden;transition:width 1s ease;background:var(--main-color);color:var(--nav-font-color);width:var(--nav-initial-width)}nav#navbar *{margin:0;padding:0}nav#navBar ul{margin:10px 5px;padding:0;list-style:none}nav#navBar li{margin:10px 0;padding:0}nav#navBar li a{background:none;font-size:.8rem;margin:0;padding:0;text-decoration:none;width:min-content;color:inherit;transition:color 0.7s ease-out}nav#navBar li a:active{color:var(--nav-link-color)}nav#navBar li a:hover{transform:var(--effect-transform-hover)}nav#navBar li a i{font-size:1.5rem}#navBar a,#navBar a:hover,#navBar a:link,#navBar a:visited{color:var(--nav-font-color)}#icon-menu{position:fixed;cursor:pointer;top:6px;left:1px;font-size:2em}nav#navBar.menu-close{width:0}nav#navBar.menu-max{max-width:min-content;width:var(--nav-max-width)}nav#navBar.menu-initial{width:var(--nav-initial-width)}</style>
+<script>if(!exist(localStorage.menuWidth))localStorage.setItem('menuWidth','initial')
+var navbar={toggle(change=!0){let menuWidth=localStorage.getItem('menuWidth')
+let varClass=(menuWidth=='menu-initial')?'menu-max':'menu-initial'
+navbar.addClass(varClass)
+if(change)localStorage.setItem('menuWidth',varClass)},addClass(varclass){$('#navBar').removeClass().addClass(varclass)
+if(varclass=='menu-max')$('.label').show('slow')
+else $('.label').hide('slow')}}
+$('#icon-menu').click(navbar.toggle)
+$(function(){navbar.addClass(localStorage.getItem('menuWidth'))})</script>

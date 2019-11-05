@@ -1,4 +1,4 @@
-<?php namespace app\controllers\components?><section id="id5dc15dcfd0822">
+<?php namespace app\controllers\components?><section id="id5dc16dbec391c">
     <form controller="company" action="save" class="input-group">
         <fieldset>
             <legend>Datos empresa</legend>
@@ -42,101 +42,22 @@
         </fieldset>
     </form>
 </section>
-<style lang="less">
-    #id5dc15dcfd0822{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5dc15dcfd0822{grid-template-columns:1fr 1fr}}#id5dc15dcfd0822>*{height:min-content;border:none;padding:0}#id5dc15dcfd0822>*:first-of-type{grid-row-start:1;grid-row-end:-1}
-</style>
-<script>
-    // Cargamos los datos de la base de datos 
-    app.conf = {
-        buttons: [],
-        id_user: null,
-        form: {
-            company: document.getElementById('id5dc15dcfd0822').getElementsByTagName('form')[0],
-            conf: document.getElementById('id5dc15dcfd0822').getElementsByTagName('form')[1],
-            user: document.getElementById('id5dc15dcfd0822').getElementsByTagName('form')[2],
-            promos: document.getElementById('id5dc15dcfd0822').getElementsByTagName('form')[3],
-        },
-        table: {
-            company: 'empresa',
-            conf: 'config',
-            users: 'usuarios',
-        },
-        load() {
-            // Cargamos los datos promociones
-            DB.get('promos')
-                .then(d => d[0])
-                .then(d => app.loadDataToForm(d, this.form.promos))
-
-            let f = this.form.user,
-                buttons = f.getElementsByTagName('button')
-
-            remove(buttons)
-            this.form.user.getElementsByTagName('legend')[0].innerHTML = 'Datos administrador'
-            DB.get('usuarios', 'nivel', 2)
-                .then(d => d[0])
-                .then(d => {
-                    // Cargamos los datos
-                    this.id_user = d.id
-
-                    app.loadDataToForm(d, this.form.user)
-                })
-            DB.get('empresa')
-                .then(d => d[0])
-                .then(d => {
-                    app.loadDataToForm(d, this.form.company)
-                })
-            DB.get('config')
-                .then(d => d[0])
-                .then(d => {
-                    app.loadDataToForm(d, this.form.conf)
-                })
-            this.form.user
-        },
-        onblur(callback) {
-            this.save()
-        },
-        save() {
-            // Guardamos empresa
-            DB.set(this.table.company, app.formToObject(this.form.company), 'id', 1)
-            $(this.form.company).submit()
-            // Guardamos datos aplicación
-            DB.set(this.table.conf, app.formToObject(this.form.conf), 'id', 1)
-            $(this.form.conf).submit()
-
-            // Guardamos datos usuario administrador
-            this.save_user({
-                ...app.formToObject(this.form.user),
-                nivel: 2
-            })
-
-            // Guardamos promociones
-            DB.post('promos', 'save', {
-                ...app.formToObject(this.form.promos),
-                id: -1
-            })
-        },
-        save_user(data) {
-
-            if (data && data.id) {
-                delete data['noAuth']
-                app.post({
-                    controller: this.table.users,
-                    action: 'save',
-                    data: data
-                }, (d) => {
-                    DB.set(this.table.users, {
-                        ...data,
-                        estado: 1
-                    }, 'id', this.id_user)
-                    if (app.users) {
-                        if (app.users.currentId == -1) app.users.addLine(data)
-                        else app.users.updateLine(data)
-                    }
-                    app.tpv.loadUsers()
-                })
-            } else {
-                app.mens.error('El registro no pudo ser guardado!! \n ' + this.error.mens)
-            }
-        }
-    }
-</script>
+<style lang="less">#id5dc16dbec391c{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5dc16dbec391c{grid-template-columns:1fr 1fr}}#id5dc16dbec391c>*{height:min-content;border:none;padding:0}#id5dc16dbec391c>*:first-of-type{grid-row-start:1;grid-row-end:-1}</style>
+<script>app.conf={buttons:[],id_user:null,form:{company:document.getElementById('id5dc16dbec391c').getElementsByTagName('form')[0],conf:document.getElementById('id5dc16dbec391c').getElementsByTagName('form')[1],user:document.getElementById('id5dc16dbec391c').getElementsByTagName('form')[2],promos:document.getElementById('id5dc16dbec391c').getElementsByTagName('form')[3],},table:{company:'empresa',conf:'config',users:'usuarios',},load(){DB.get('promos').then(d=>d[0]).then(d=>app.loadDataToForm(d,this.form.promos))
+let f=this.form.user,buttons=f.getElementsByTagName('button')
+remove(buttons)
+this.form.user.getElementsByTagName('legend')[0].innerHTML='Datos administrador'
+DB.get('usuarios','nivel',2).then(d=>d[0]).then(d=>{this.id_user=d.id
+app.loadDataToForm(d,this.form.user)})
+DB.get('empresa').then(d=>d[0]).then(d=>{app.loadDataToForm(d,this.form.company)})
+DB.get('config').then(d=>d[0]).then(d=>{app.loadDataToForm(d,this.form.conf)})
+this.form.user},onblur(callback){this.save()},save(){DB.set(this.table.company,app.formToObject(this.form.company),'id',1)
+$(this.form.company).submit()
+DB.set(this.table.conf,app.formToObject(this.form.conf),'id',1)
+$(this.form.conf).submit()
+this.save_user({...app.formToObject(this.form.user),nivel:2})
+DB.post('promos','save',{...app.formToObject(this.form.promos),id:-1})},save_user(data){if(data&&data.id){delete data.noAuth
+app.post({controller:this.table.users,action:'save',data:data},(d)=>{DB.set(this.table.users,{...data,estado:1},'id',this.id_user)
+if(app.users){if(app.users.currentId==-1)app.users.addLine(data)
+else app.users.updateLine(data)}
+app.tpv.loadUsers()})}else{app.mens.error('El registro no pudo ser guardado!! \n '+this.error.mens)}}}</script>

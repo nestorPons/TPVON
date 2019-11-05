@@ -33,8 +33,8 @@
     #tpv {
         align-items: flex-start;
         display: grid;
-        grid-template-rows: auto [table] 400px auto auto auto;
-        grid-template-columns: [first] 1fr 1fr 1fr 1fr 1fr 1fr [prelast] 7rem [last] 2rem;
+        grid-template-rows: auto 400px auto auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 7rem 2rem;
         grid-row-gap: 5px;
     }
 
@@ -43,17 +43,19 @@
     }
 
     #tpv table {
-        grid-row: table;
-        grid-column: 1/-1;
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: -1;
     }
 
     #tpv #<?= $id->id() ?> {
-        grid-area: 1/1;
+        grid-row: 1;
+        grid-column: 1;
     }
 
     #tpv #<?= $hour->id() ?> {
         grid-row: 1;
-        grid-column: prelast;
+        grid-column: 7;
     }
 
     #tpv #<?= $date->id() ?> {
@@ -64,10 +66,13 @@
 
     #tpv #<?= $hour->idEl()?> {
         text-align: center;
+        grid-row: 1;
+        grid-column: 8;
     }
 
     #tpv #<?=$code->idCon()?> {
-        grid-area: 3/1;
+        grid-row: 3;
+        grid-column: 1;
     }
 
     #tpv #<?= $des->id() ?> {
@@ -86,20 +91,23 @@
     }
 
     #tpv #<?= $quan->id() ?> {
-        grid-area: 3/4;
+        grid-row: 3;
+        grid-column: 4;
     }
 
     #tpv #<?= $pric->id() ?> {
-        grid-area: 3/5;
+        grid-row: 3;
+        grid-column: 5 ;
     }
 
     #tpv #<?= $dto->id() ?> {
-        grid-area: 3/6;
+        grid-row: 3;
+        grid-column: 6;
     }
 
     #tpv #<?= $amo->id() ?> {
         grid-row: 3;
-        grid-column: prelast;
+        grid-column: 7;
     }
 
     #tpv .Descripción {
@@ -107,10 +115,11 @@
     }
 
     /* TXT TOTAL */
-    #tpv #<?= $txtTotal->id() ?> {
-        grid-row: 5;
-        grid-column: first;
-        transform: translateY(-15px);
+    #tpv #<?=$txtTotal->id()?> {
+        grid-row: 4;
+        grid-column: 1;;
+        transform: translate(15px, 15px) scale(1.4);
+        font-weight: bold;
     }
 
     #tpv #<?= $txtTotal->id() ?>input {
@@ -125,8 +134,8 @@
     }
 
     #tpv #<?= $btnTicket->id() ?> {
-        grid-row: 5;
-        grid-column: prelast / span 2;
+        grid-row: 4;
+        grid-column: 5 / span 2;
     }
 
     #tpv .Importe {
@@ -135,12 +144,12 @@
 
     #tpv #<?= $btnOk->id() ?> {
         grid-row: 4;
-        grid-column: prelast / span 2;
+        grid-column: 7 / span 2;
     }
 
     #tpv #<?= $btnClear->id() ?> {
         grid-row: 3;
-        grid-column: last;
+        grid-column: 8;
     }
 
     #<?= $modTicket->idEl() ?> {
@@ -454,7 +463,7 @@
             })
         },
         add() {
-            this.request('last', this.currentId, d => {
+            this.request('8', this.currentId, d => {
                 // Si es el primer registro lo inicializamos a 1
                 let id = (d) ? parseInt(d.id) + 1 : 1
                 this.loadDataTicket({

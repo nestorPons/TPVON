@@ -11,32 +11,7 @@
         </fieldset>
     </form>
 </section>
-<script> 
-app.promos = {
-    table   : 'promos',
-    el      : document.getElementById('promos'),
-    form    : document.getElementById('promos').getElementsByTagName('form')[0],
-    buttons : [],
-    change  : false,
-    load(){
-        DB.get('promos')
-            .then(d => d[0])
-            .then(d => app.loadDataToForm(d, this.form))
-    },
-    onblur(callback){
-        this.save()
-        typeof callback == 'function' && callback()
-    },
-    save(){
-        let data = app.formToObject(this.form)
-        if(data.id == '') data.id = -1
-        app.post({
-                controller: 'promos',
-                action: 'save',
-                data: data 
-            }, d => {
-                DB.set(this.table, app.formToObject(this.form), 'id' , 1)   
-            })
-    },
-}
-</script>
+<script>app.promos={table:'promos',el:document.getElementById('promos'),form:document.getElementById('promos').getElementsByTagName('form')[0],buttons:[],change:!1,load(){DB.get('promos').then(d=>d[0]).then(d=>app.loadDataToForm(d,this.form))},onblur(callback){this.save()
+typeof callback=='function'&&callback()},save(){let data=app.formToObject(this.form)
+if(data.id=='')data.id=-1
+app.post({controller:'promos',action:'save',data:data},d=>{DB.set(this.table,app.formToObject(this.form),'id',1)})},}</script>

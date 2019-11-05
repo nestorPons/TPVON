@@ -68,8 +68,8 @@ class Prepocessor{
         $code = preg_replace($search, $replace, $code);
         return $code;
     }
-    // Solo extrae el primer tag
-    private function extract($tag){
+    // Extrae el tag del html (Solo el primero)
+    private function extract($tag): Array {
         $attr = []; 
         $pos_tag_open       = strpos($this->content, "<$tag"); 
         $pos_tag_open_end   = strpos($this->content, ">",$pos_tag_open);
@@ -99,7 +99,7 @@ class Prepocessor{
             $this->content = str_replace($search, $replace, $this->content);
         };  
     }
-    private function getContent(String $file){
+    private function getContent(String $file) : String{
         return $this->content = file_get_contents($file);
     }
     private function less(String $content){
@@ -113,6 +113,7 @@ class Prepocessor{
         $content_min = $minifier->minify();
 
         $this->content = str_replace($content, $content_min, $this->content);
+
     }  
     // Generador de ids únicos
     private function uniqid(){
@@ -124,7 +125,7 @@ class Prepocessor{
     private function sintax(){
         $this->autoId();
         $this->style_scoped();
-        $this->script_scoped();
+        $this->script_scoped(); 
     }
     // Comando --id -> Genera un id único para todo el documento.
     private function autoId() : string{
@@ -132,7 +133,29 @@ class Prepocessor{
         $this->content = str_ireplace('--id', $id, $this->content);
         return $this->content;
     }
-    
+    // Minificamos el contenido de los tags script 
+    private function minify_script() : void{
+        $has_script = preg_match_all('/<script[^>]*>(.*?)<\/script>/si', $this->content, $matches);
+        if($has_script){
+            foreach ($matches[1] as $key => $value) {
+                // MINIMIFICAMOS JS
+                $minifier = new Minify\JS;
+                $minifier->add($value);
+                $minified = $minifier->minify();
+                // Reemplazamos el contenido
+                $this->content = str_ireplace($value, $minified, $this->content);
+            }
+        }
+    }
+        // Minificamos el contenido de los tags script 
+    private function minify_style() : void{
+        $has_style = preg_match_all('/<style[^>]*>(.*?)<\/style>/si', $this->content, $matches);
+        if($has_style){
+            foreach ($matches[1] as $key => $value) {
+               $this->less($value);
+            }
+        }
+    }
     //  Comportamiento scoped para script-> individualiza el style en el objeto contenedor
     private function script_scoped() : string{
         $has_scoped = preg_match_all('/<script[^>]*scoped>(.*?)<\/script>/si', $this->content, $matches);
@@ -201,9 +224,11 @@ class Prepocessor{
                     // Transformamos la nueva sintaxis en las vistas
                     $this->sintax();
 
+                    // Se comprimen las etiquetas script y style
+                    $this->minify_script();
+                    $this->minify_style();
+
                     $a = $this->args('style');
-          
-                    //$this->include();
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
                         $this->less( $this->extract('style')['content'] );
