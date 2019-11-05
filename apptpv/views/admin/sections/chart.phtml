@@ -1,5 +1,16 @@
 <section id="chart">
-    <canvas id="myChart" width="400px" height="400px"></canvas>
+    <?php 
+    new MenuSquare([
+        'tile' => 'Gráfica Iconos', 
+        'content' => '<canvas id="myChart" width="600px" height="600px"></canvas>'
+        ])
+    ?>
+        <?php 
+    new MenuSquare([
+        'tile' => 'Gráfica Iconos 2', 
+        'content' => '<canvas id="myChart" width="400px" height="400px"></canvas>'
+        ])
+    ?>
     <script>
         app.chart = {
             buttons : [], 
@@ -98,3 +109,4 @@
         };
     </script>
 </section>
+

@@ -18,6 +18,7 @@
             ?>
         </fieldset>
     </form>
+
     <form controller="config" action="save" class="input-group">
         <fieldset>
             <legend>Datos aplicación</legend>
@@ -51,7 +52,7 @@
             grid-template-columns: 1fr 1fr;
         }
 
-        form {
+        &>* {
             height: min-content;
             border: none;
             padding: 0;
@@ -61,6 +62,7 @@
                 grid-row-end: -1;
             }
         }
+
     }
 </style>
 <script>
@@ -69,10 +71,10 @@
         buttons: [],
         id_user: null,
         form: {
-            company : document.getElementById('--id').getElementsByTagName('form')[0],
-            conf    : document.getElementById('--id').getElementsByTagName('form')[1],
-            user    : document.getElementById('--id').getElementsByTagName('form')[2],
-            promos  : document.getElementById('--id').getElementsByTagName('form')[3],
+            company: document.getElementById('--id').getElementsByTagName('form')[0],
+            conf: document.getElementById('--id').getElementsByTagName('form')[1],
+            user: document.getElementById('--id').getElementsByTagName('form')[2],
+            promos: document.getElementById('--id').getElementsByTagName('form')[3],
         },
         table: {
             company: 'empresa',
@@ -128,8 +130,8 @@
             })
 
             // Guardamos promociones
-            DB.post('promos','save', {
-                ...app.formToObject(this.form.promos), 
+            DB.post('promos', 'save', {
+                ...app.formToObject(this.form.promos),
                 id: -1
             })
         },

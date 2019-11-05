@@ -15,6 +15,14 @@ function prs(...$args){
     }
     die();
 }
+function prsh(...$args){
+    foreach($args as $arr){
+        echo('<pre>');
+        htmlspecialchars($arr);
+        echo('</pre>');
+    }
+    die();
+}
 function included($path, $data){
     include $path;
 }

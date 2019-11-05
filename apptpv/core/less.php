@@ -24,10 +24,11 @@ function compileFolder($inputDir, $outputDir){
         reset($filename);
         $filename = $filename[0];
         // Carga de de cache (anulada)
-        //autoCompileLess($inputDir . $filename . ".less", $outputDir . $filename . ".css");
+        autoCompileLess($inputDir . $filename . ".less", $outputDir . $filename . ".css");
         }
 }
 function autoCompileLess($inputFile, $outputFile) {
+    global $less;
     // load the cache
     $cacheFile = $inputFile.".cache";
     
@@ -35,7 +36,7 @@ function autoCompileLess($inputFile, $outputFile) {
         ? unserialize(file_get_contents($cacheFile))
         : $inputFile;
     
-    $newCache = $this->cachedCompile($cache);
+    $newCache = $less->cachedCompile($cache);
     
     if (!is_array($cache) || $newCache["updated"] > $cache["updated"]) {
         file_put_contents($cacheFile, serialize($newCache));

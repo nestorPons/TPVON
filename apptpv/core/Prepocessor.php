@@ -122,12 +122,39 @@ class Prepocessor{
     // Funcion que aplica una sintaxis propia  a las vistas
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
-        // Comando --id -> Genera un id único para todo el documento.
+        $this->autoId();
+        $this->style_scoped();
+        $this->script_scoped();
+    }
+    // Comando --id -> Genera un id único para todo el documento.
+    private function autoId() : string{
         $id = $this->uniqid();
         $this->content = str_ireplace('--id', $id, $this->content);
-
-        // Comando scoped -> individualiza el style en el objeto contenedor
-        $has_scoped = preg_match('/scoped[^<]*>/', $this->content, $matches);
+        return $this->content;
+    }
+    
+    //  Comportamiento scoped para script-> individualiza el style en el objeto contenedor
+    private function script_scoped() : string{
+        $has_scoped = preg_match_all('/<script[^>]*scoped>(.*?)<\/script>/si', $this->content, $matches);
+        if($has_scoped){
+            // Quitar los scopes 
+            foreach ($matches[0] as $key => $value) {
+                // Quitamos el comando scope
+                $noscope = str_replace(' scoped', '', $value); 
+                $this->content = str_replace($value, $noscope, $this->content);
+            }
+            foreach ($matches[1] as $key => $value) {
+                // encapsular en contenido en una funcion autoejecutable js
+                $content =  '(function(){'. $value .'})();'; 
+                $this->content = str_replace($value, $content, $this->content);
+            }
+        }
+        return $this->content;
+    }
+    // Comando scoped para style-> individualiza el style en el objeto contenedor
+    private function style_scoped() : string{
+       
+        $has_scoped = preg_match('/<style(.)*?scoped[^<]*>/', $this->content, $matches);
 
         if($has_scoped) {
             // Comprobamos si es un componente o una sección
@@ -149,6 +176,7 @@ class Prepocessor{
             // Se coloca el id a los estilos 
             $this->content = str_replace($content, "#{$id}{{$content}}", $this->content);
         };
+        return $this->content;
     }
     private function showFiles(String $path){
     

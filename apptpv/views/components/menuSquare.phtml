@@ -1,0 +1,60 @@
+<component id="--id" class="menu-square">
+    <label for="--id" class="active"> <?= $tile ?></label>
+    <content class="">
+        <?= $content ?>
+        <i class="lnr lnr-cross-circle icon-close"></i>
+    </content>
+</component>
+<style lang="less">
+    .menu-square {
+        /* transition: display 2s linear; */
+        transition: all 1.5s ease 0.5s;
+
+        label {
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            height: 200px;
+            width: 200px;
+
+            border: 1px solid var(--main-color);
+            color: var(--main-color);
+            border-radius: var(--universal-border-radius);
+        }
+
+        content {
+            i {
+                position: relative;
+                top: 21px;
+                right: 10px;
+                font-size: 1.2rem;
+            }
+        }
+
+        label,
+        content {
+            display: none;
+        }
+
+        .active {
+            display: inline-flex !important;
+        }
+
+    }
+</style>
+<script scoped>
+    let el = document.getElementById('--id')
+    el.onclick = element => {
+        alert()
+        let attr = el.getAttribute('active'),
+            lbl = element.target,
+            cnt = el.querySelector('content')
+
+        if (lbl.classList.contains('active')) {
+            lbl.classList.remove('active')
+            cnt.classList.add('active')
+        } else {
+            e.setAttribute('active', 'label')
+        }
+    }
+</script>
