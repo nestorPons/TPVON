@@ -16,7 +16,14 @@ class Component{
     function __construct(Array $data = []){
 
         foreach($data as $key => $val){
-            $this->{$key} = $val??null;
+            if($val){
+                if($key == 'required') $val = 'required';
+                if($key == 'disabled') $val = 'disabled';
+                if($key == 'readonly') $val = 'readonly';
+                if($key == 'checked')  $val = 'checked';
+
+                $this->{$key} = $val??null;                
+            }
         }
         $this->id = ($this->id)??$this->randomid();
         $this->idCon = self::PREFIX_CONTAINER . $this->id; 
@@ -41,43 +48,55 @@ class Component{
         $idContainer = self::PREFIX_CONTAINER . $id;
         $idElement = $this->idEl(); 
         $idObj = $this->idObj;
-
-        $disabled = (isset($this->disabled))?'disabled':null;
-        $readonly = (isset($this->readonly))?'readonly':null;
-        $checked = (isset($this->checked))?'checked':null;
-        $placeholder = (isset($this->placeholder))?"placeholder = '{$this->placeholder}'":null;
-        $body = $this->body??null;
-        $name = $this->printName(); 
-        $title = $this->printTitle();
-        $required = $this->printRequired();
-        $label = $this->printLabel();
-        $minlength = $this->printMinlength($this->MINLENGTH);
-        $maxlength = $this->printMaxlength($this->MAXLENGTH);
-        $pattern = $this->printPattern();
-        $for = $this->printFor();
-        $value = $this->printValue();
-        $list = $this->printList();
-        $spinner = $this->spinner??null;
-        $caption = $this->caption??null;
-        $columns = $this->columns??null;
-        $iconlast = isset($this->iconlast)?'iconlast='.$this->iconlast:null; 
-        $tabindex = isset($this->tabindex)?'tabindex='.$this->tabindex:null; 
-        $onclick = isset($this->onclick)?'onclick='.$this->onclick:null;
-        $ondblclick = isset($this->ondblclick)?'ondblclick='.$this->ondblclick:null;
-        $onblur = isset($this->onblur)?'onblur='.$this->onblur:null;
-        $onfocus = isset($this->onfocus)?'onfocus='.$this->onfocus:null;
-        $onload = isset($this->onload)?'onload='.$this->onload:null;
-        $onchange = isset($this->onchange)?'onchange='.$this->onchange:null;
-        $onkeypress = isset($this->onkeypress)?'onkeypress='.$this->onkeypress:null;
-        $onkeydown = isset($this->onkeydown)?'onkeydown='.$this->onkeydown:null;
-        $onkeyup = isset($this->onkeyup)?'onkeyup='.$this->onkeyup:null;
-        $icon = isset($this->icon)?$this->icon:false;
-        $printName = $this->printName();
-        $options = $this->options??null;
-        $printTitle = $this->printTitle();
-        $selected = $this->selected??null; 
         
+        ob_start();
         include \VIEWS\COMPONENTS . "$file.phtml";
+        $this->file = ob_get_contents();
+        $this->sintax(); 
+        ob_end_clean();
+        echo $this->file;
+    }
+    // Procesa la sintaxis de la plantillas
+    private function sintax() : void{
+
+        // Imprimiendo las variables de la clase a plantilla 
+        foreach($this as $key => $value){
+            $this->file = str_ireplace("--$key", $value, $this->file);    
+        }
+        // Eliminamos las variables vacias
+        $this->file = preg_replace('/(\s)*--[A-Za-z]+(\s)*/i','', $this->file);
+        // Procesando condicional if
+        $this->file = $this->sintax_if($this->file);
+    }
+    private function sintax_if(string $text) : string {
+        $regex_conditional = '/@if(\s)*?\((.)*?\)(.)*?@endif/sim'; 
+        $start_condition = '/@if(\s)*?\((.)*?\)/sim';
+        $end_condition = '/@endif/i'; 
+        $has = preg_match_all($regex_conditional, $text, $matches);
+        if($has){
+            foreach ($matches[0] as $key => $value) {
+                // Se obtiene la condición
+                if(preg_match($start_condition, $value, $matches)){
+                    $condition = preg_replace('/@if(\s)*?\(/sim','',$matches[0]);
+                    $condition = preg_replace('/\)$/','',$condition);
+                    if(empty($condition)) $condition = null;
+                    $valcon = false; 
+                    eval('if ($condition) { $valcon = true; }');
+
+                   if($valcon){
+                       // Imprimimos el contenido dentro del condicional
+                        $replace = preg_replace($start_condition,'',$value); 
+                        $replace = preg_replace($end_condition,'',$replace);
+                        $text = str_replace($value, $replace, $text);
+                    } else {
+                        // Eliminamos todo el condicional 
+                        $text = str_replace($value, '', $text);
+                    }
+                }
+              
+            } 
+        }
+        return $text;
     }
     protected function getnameclass(){
         $arr_controller= explode('\\',get_class($this));
@@ -94,41 +113,7 @@ class Component{
         $class .= $collapse ? ' collapse' : null; 
         return $class;
     }
-    protected function printRequired(){
-        return  ($this->required)? 'required' : null;
-    }
-    protected function printClass(){
-        return  (empty($this->class))? null : "class='{$this->class}'";
-    }
-    protected function printValue(){
-        return  (!isset($this->value) || is_null($this->value))? null : "value='{$this->value}'";
-    }
-    protected function printName(){
-        return  (empty($this->name))? null : "name='{$this->name}'";
-    }
-    protected function printLabel(){
-        return  (empty($this->label))? null : $this->label;
-    }
-    protected function printPattern(){
-        return  (empty($this->pattern))? null : "pattern='{$this->pattern}'";
-    }
-    protected function printTitle(){
-        return  (empty($this->title))? null : "title='{$this->title}'";
-    }
-    protected function printFor(){
-        return  (empty($this->for))? null : "for='{$this->for}'";
-    }
-    protected function printList(){
-        return  (empty($this->list))? null : "list='{$this->list}'";
-    }
-    protected function printMinlength($min = null){
-        if($min) $this->minlength = $min; 
-        return  (empty($this->minlength))? null : "minlength='{$this->minlength}'";
-    }
-    protected function printMaxlength($max = null){
-        if($max) $this->maxlength = $max; 
-        return  (empty($this->maxlength))? null : "maxlength='{$this->maxlength}'";
-    }
+
     protected function printView($file){
         foreach((array)$this as $key => $val){
             if(strpos($key, '*')){
@@ -139,7 +124,7 @@ class Component{
 
         include \VIEWS\COMPONENTS . "$file.phtml";
     }
-    // getters y setters
+    // getters y setters genéricos
     function id(int $arg = null){
         if($arg) $this->{__FUNCTION__} = $arg; 
         return $this->{__FUNCTION__}; 

@@ -1,111 +1,113 @@
-<table id="<?= $idElement ?>" class="<?= $class ?>">
-    <thead>
-        <?php foreach ($columns as $key => $val) : ?>
-            <th class="<?= $val ?>"><?= $val ?></th>
-        <?php endforeach ?>
-    </thead>
-    <tbody>
-    </tbody>
-    <tfoot>
-        <?php if ($total) : ?>
+<mytable>
+    <table id="--idElement" class="--class">
+        <thead>
+            <?php foreach ($columns as $key => $val) : ?>
+                <th class="<?= $val ?>"><?= $val ?></th>
+            <?php endforeach ?>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            @if (--total)
             <tr>
                 <td>TOTAL: <span class="id_total"></span> </td>
             </tr>
-        <?php endif ?>
-    </tfoot>
-</table>
-<template id="template_<?= $id ?>">
-    <tr <?= $onclick ?> <?= $ondblclick ?>>
-        <?php foreach ($columns as $key => $val) : ?>
-            <td class="<?= $val ?>" data-label=""></td>
-        <?php endforeach ?>
-    </tr>
-</template>
-<style lang="less">
-    #<?= $idElement ?> {
-        margin: 5px 0;
+            @endif
+        </tfoot>
+    </table>
+    <template id="template_<?= $id ?>">
+        <tr onclick="--onclick" ondblclick="--ondblclick">
+            <?php foreach ($columns as $key => $val) : ?>
+                <td class="<?= $val ?>" data-label=""></td>
+            <?php endforeach ?>
+        </tr>
+    </template>
+    <style lang="less">
+        #--idElement {
+            margin: 5px 0;
 
-        tfoot {
-            order: 3;
-            width: 100%;
+            tfoot {
+                order: 3;
+                width: 100%;
 
-            tr {
-                text-align: right;
+                tr {
+                    text-align: right;
+                }
+            }
+
+            &.hoverable tbody {
+                cursor: pointer;
             }
         }
-
-        &.hoverable tbody {
-            cursor: pointer;
-        }
-    }
-</style>
-<script>
-    class Table {
-        constructor(id) {
-            this.el = document.getElementById(id)
-            this.$table = $('#' + id)
-            this.$template = $($('#template_' + id)[0].innerHTML)
-            this.data = []
-        }
-        line() {
-            return parseInt(this.el.rows.length)
-        }
-        /**
-         * arrData = array de datos en orden de salida
-         */
-        addLine(id, arrData) {
-            // Cargamos los datos en una variable para posteriores consultas (getData(){})
-            this.data.push(arrData)
-            return this.$template
-                .clone()
-                .attr('idline', id || this.$table.find('tr').length)
-                .find('td').each(function(i, el) {
-                    $(this)
-                        .html(arrData[i])
-                        .attr('data-label', arrData[i])
-                })
-                .end()
-                .prependTo(this.$table.find('tbody'))
-        }
-        endScroll() {
-            this.$table.animate({
-                scrollTop: this.$table.height()
-            }, 100);
-        }
-        clearLines() {
-            this.$table.find('tbody').find('tr').remove()
-        }
-        clear() {
-            this.data = []
-            this.clearLines()
-        }
-        showLines(exp) {
-            this.$table.find(exp).show()
-        }
-        hideLines() {
-            this.$table.find('tbody').find('tr').hide()
-        }
-        delLine(id) {
-            this.$table.find(`[idline="${id}"]`).remove()
-        }
-        updateLine(id, data) {
-            this.delLine(id)
-            return this.addLine(id, data)
-        }
-        total(arg) {
-            const total = this.el.getElementsByClassName('id_total')[0]
-            if (arg) total.innerHTML = arg
-            return total.innerHTML
-        }
-        hoverable(value) {
-            if (value != undefined) {
-                if (value) this.el.classList.add('hoverable')
-                else this.el.classList.remove('hoverable')
+    </style>
+    <script>
+        class Table {
+            constructor(id) {
+                this.el = document.getElementById(id)
+                this.$table = $('#' + id)
+                this.$template = $($('#template_' + id)[0].innerHTML)
+                this.data = []
             }
-            return this.el.classList.contains('hoverable')
+            line() {
+                return parseInt(this.el.rows.length)
+            }
+            /**
+             * arrData = array de datos en orden de salida
+             */
+            addLine(id, arrData) {
+                // Cargamos los datos en una variable para posteriores consultas (getData(){})
+                this.data.push(arrData)
+                return this.$template
+                    .clone()
+                    .attr('idline', id || this.$table.find('tr').length)
+                    .find('td').each(function(i, el) {
+                        $(this)
+                            .html(arrData[i])
+                            .attr('data-label', arrData[i])
+                    })
+                    .end()
+                    .prependTo(this.$table.find('tbody'))
+            }
+            endScroll() {
+                this.$table.animate({
+                    scrollTop: this.$table.height()
+                }, 100);
+            }
+            clearLines() {
+                this.$table.find('tbody').find('tr').remove()
+            }
+            clear() {
+                this.data = []
+                this.clearLines()
+            }
+            showLines(exp) {
+                this.$table.find(exp).show()
+            }
+            hideLines() {
+                this.$table.find('tbody').find('tr').hide()
+            }
+            delLine(id) {
+                this.$table.find(`[idline="${id}"]`).remove()
+            }
+            updateLine(id, data) {
+                this.delLine(id)
+                return this.addLine(id, data)
+            }
+            total(arg) {
+                const total = this.el.getElementsByClassName('id_total')[0]
+                if (arg) total.innerHTML = arg
+                return total.innerHTML
+            }
+            hoverable(value) {
+                if (value != undefined) {
+                    if (value) this.el.classList.add('hoverable')
+                    else this.el.classList.remove('hoverable')
+                }
+                return this.el.classList.contains('hoverable')
+            }
+            html() {
+                return this.el.innerHTML
+            }
         }
-        html() {
-            return this.el.innerHTML
-        }
-    }
-</script>
+    </script>
+</mytable>

@@ -40,3 +40,9 @@ namespace PUBLICF;
 
 namespace URL;
     const COMPANIES              =  'companies/';
+
+namespace APP; 
+    const VIEWS                  = \FOLDERS\APP . 'views/';
+
+namespace APP\VIEWS;
+    const COMPONENTS            = \APP\VIEWS . 'components/';

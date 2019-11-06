@@ -1,38 +1,18 @@
-<?php namespace app\controllers\components?><div class="<?=$row??''?> <?=$hidden??''?>" id="<?=$id?>">
+<?php namespace app\controllers\components?><div class="--row --hidden" id="--id">  
+    <input 
+        type = "--type" 
+        id="--idElement"  class="--class" placeholder=" "
+        style = "--style" name = "--name" tile = "--tile"
+        @if (--pattern) pattern = "--pattern" @endif
+        @if (--for) for = "--for" @endif 
+        @if (--maxlength) maxlength = "--maxlength" @endif
+        @if (--minlength) minlength = "--minlength" @endif
 
-        <input 
-            type = "<?=$type?>" 
-            id = "<?=$idElement?>"
-            class = "<?=$class?>"
-            placeholder=" "
-            style = "<?=$style??''?>"
-            <?=$placeholder?>
-            <?=$name?>
-            <?=$title?>
-            <?=$minlength?>
-            <?=$maxlength?>
-            <?=$pattern?>
-            <?=$for?>
-            <?=$required?> 
-            <?=$value?> 
-            <?=$list?>
-            <?=$disabled?>
-            <?=$tabindex?>
-            <?=$onfocus?>
-            <?=$onblur?>
-            <?=$onclick?>
-            <?=$onkeypress?>
-            <?=$onkeydown?>
-            <?=$onkeyup?>
-            <?=$onchange?>
-            <?=$onload?>
-            <?=$readonly?>
-            <?=$checked?>
-            <?=@$attr_default?>
-        />
-        <label for="<?=$idElement?>" class="<?=$classLabel?>"><?=$label?></label>
-        <?php if($iconlast):?>
-            <i id="<?=$id?>" class="lnr lnr-<?=$icon?>"></i>
-        <?php endif?>
-
+        value = "--value" list = "--list" tabindex = "--tabindex" 
+        onfocus = "--onfocus" onblur = "--onblur" onclick = "--onclick"
+        onkeypress = "--onkeypress" onkeydown = "--onkeydown" onkeyup = "--onkeyup"
+        onchange = "--onchange" --require --disabled --readonly --checked  
+    />
+    <label for="--idElement" class="--classLabel">--label</label>
+    @if (--icon) <i id="--id" class="lnr lnr---icon"></i> @endif
 </div>

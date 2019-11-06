@@ -19,6 +19,7 @@ class Prepocessor{
         $loadeds = []; 
     
     function __construct(bool $cacheable = true){
+        
         $this->queue = "<script src='./build/".\FILE\JS."'></script>";
         $this->cache_class_js = $_SESSION['cache_class_js']??null;
         $this->cacheable = $cacheable;
@@ -32,6 +33,37 @@ class Prepocessor{
         // Inicia compilacion de los archivos
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
         $this->cache_record($this->cache);
+    }
+    private function sintax_if(string $text) : string {
+        $regex_conditional = '/@if(\s)*?\((.)*?\)(.)*?@endif/i'; 
+        $start_condition = '/@if(\s)*?\((.)*?\)/i';
+        $end_condition = '/@endif/i'; 
+        $has = preg_match_all($regex_conditional, $text, $matches);
+ 
+        if($has){
+            foreach ($matches[0] as $key => $value) {
+                // Se obtiene la condición
+                if(preg_match($start_condition, $value, $matches)){
+                    $condition = preg_replace('/@if(\s)*?\(/i','',$matches[0]);
+                    $condition = preg_replace('/\)$/','',$condition);
+                    if(empty($condition)) $condition = null;
+                    $con = false; 
+                    eval('if ($condition) { $con = true; }');
+
+                   if($con){
+                       // Imprimimos el contenido dentro del condicional
+                        $replace = preg_replace($start_condition,'',$value); 
+                        $replace = preg_replace($end_condition,'',$replace);
+                        $text = str_replace($value, $replace, $text);
+                    } else {
+                        // Eliminamos todo el condicional 
+                        $text = str_replace($value, '', $text);
+                    }
+                }
+              
+            } 
+        }
+        return $text;
     }
     private function args(String $tag){
         $return = [];
@@ -124,6 +156,7 @@ class Prepocessor{
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
         $this->autoId();
+        $this->content = $this->sintax_if($this->content);
         $this->style_scoped();
         $this->script_scoped(); 
     }
@@ -204,7 +237,6 @@ class Prepocessor{
     private function showFiles(String $path){
     
         $dir = opendir($path);
-
         // Lee archivos de directorios y los directorios anidados
         while ($current = readdir($dir)){
             if( $current != "." && $current != "..") {
@@ -220,9 +252,9 @@ class Prepocessor{
                 } else {
                     // ARCHIVOS
                     $this->getContent($file);
-
-                    // Transformamos la nueva sintaxis en las vistas
-                    $this->sintax();
+                    // Transformamos la nueva sintaxis en las vistas 
+                    // No se la aplicamos a los componentes para que mantengan la encapsulación
+                    if($path != \APP\VIEWS\COMPONENTS) $this->sintax();
 
                     // Se comprimen las etiquetas script y style
                     $this->minify_script();

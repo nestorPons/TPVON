@@ -1,8 +1,10 @@
 <section id="tpv">
+   
     <?php
     $table = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
-        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)'
+        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)',
+        'total' => true
     ]);
     $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
     $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
@@ -42,7 +44,7 @@
         height: 60px;
     }
 
-    #tpv table {
+    #tpv mytable {
         grid-row-start: 2;
         grid-column-start: 1;
         grid-column-end: -1;

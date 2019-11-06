@@ -4,7 +4,12 @@
         <fieldset class="container">
             <legend>Login</legend>
             <?php
-            new InputText(['label' => 'Email del usuario', 'name' => 'email', 'required' => false, 'value' => 'nestorpons@gmail.com']);
+            new InputText([
+                'type'=>'email', 
+                'label' => 'Email del usuario', 
+                'name' => 'email', 
+                'required' => true, 
+                'value' => 'nestorpons@gmail.com']);
             new InputPass(['label' => 'Contraseña', 'name' => 'password', 'required' => true, 'value' => '123456'])
             ?>
         </fieldset>
