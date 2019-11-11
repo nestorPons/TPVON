@@ -9,7 +9,7 @@
 </section>
 <style>#services{display:grid;grid-template-rows:2}#<?=$table->id()?>{max-height:80vh;grid-row:2}</style>
 <script>'use strict'
-app.services={table:'servicios',buttons:['add','search'],currentId:null,Table:new Table('<?=$table->idEl()?>'),Form:new Modal('<?=$form->id()?>'),$table:$('#<?=$table->id()?>').find('tbody'),async valCode(e){echo('validation code ...')
+app.services={table:'servicios',buttons:['add','search'],currentId:null,Table:new Table('<?=$table->id()?>'),Form:new Modal('<?=$form->id()?>'),$table:$('#<?=$table->id()?>').find('tbody'),async valCode(e){echo('validation code ...')
 const el=e.target,value=el.value,ser=await DB.get('servicios','codigo',value).then(d=>d[0])
 if(this.Form.state()=='new'){if(ser!=undefined)el.setCustomValidity("Codigo existente")
 else el.setCustomValidity('')}else{if(ser&&this.Form.data.id!=ser.id)el.setCustomValidity("Codigo existente")
@@ -23,7 +23,7 @@ DB.set(this.table,d,'id',d.id)
 this.Table.delLine(this.currentId)
 this.Form.close()
 app.tpv.loadServ()})},add(){let data={id:-1,estado:1}
-this.Form.state('new').clear().open(data).setTile('Nuevo A/S')},addLine(data){this.Table.addLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())},updateLine(data){this.Table.updateLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())},save(data){data.estado=1
+this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())},updateLine(data){this.Table.updateLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())},save(data){data.estado=1
 DB.set(this.table,data,'id',data.id)
 if(this.currentId==-1)this.addLine(data)
 else this.updateLine(data)

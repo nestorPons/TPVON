@@ -1,29 +1,33 @@
 <?php namespace app\controllers\components?><section id="chart">
-    <?php 
+    <?php
     new MenuSquare([
-        'tile' => 'Gráfica Iconos', 
-        'content' => '<canvas id="myChart" width="600px" height="600px"></canvas>'
-        ])
+        'tile' => 'Gráfica ingresos dia',
+        'content' => '<canvas id="chartDays" width="600px" height="600px"></canvas>'
+    ])
     ?>
-        <?php 
+    <?php
     new MenuSquare([
-        'tile' => 'Gráfica Iconos 2', 
-        'content' => '<canvas id="myChart" width="400px" height="400px"></canvas>'
-        ])
+        'tile' => 'Gráfica ingresos mes',
+        'content' => '<canvas id="chartMonth" width="400px" height="400px"></canvas>'
+    ])
     ?>
-    <script>app.chart={buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},data=>{let _mySort=arr=>{let sortedKeys=new Array();let sortedObj={};for(let i in arr){sortedKeys.push(i)}
+    <script>app.chart={data:{model1:{x:[],y:[]},model2:{x:[],y:[]}},color:{current:{body:'rgba(40, 184, 53, 0.21)',border:'rgba(40, 184, 53, 0.41)',},predict:{body:'rgba(40, 42, 40, 0.21)',border:'rgba(40, 42, 40, 0.41)',}},tf:{epochs:50,},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},data=>{let _mySort=arr=>{let sortedKeys=new Array();let sortedObj={};for(let i in arr){sortedKeys.push(i)}
 sortedKeys.sort(function(a,b){dateA=date.sql(a)
 dateB=date.sql(b)
 return new Date(dateA)-new Date(dateB)});for(let i in sortedKeys){sortedObj[sortedKeys[i]]=arr[sortedKeys[i]]}
-return sortedObj}
-DB.set('tickets',data)
-let arr=[],labels=[],datas=[];for(let i in data){const d=data[i]
+return sortedObj},_groupformonth=array=>{const resultado=[],months=[],totals=[];array.reduce(function(res,value){let mes=new Date(value.fecha).getMonth()+1;if(!res[mes]){res[mes]={mes:mes};Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]=0}})
+resultado.push(res[mes])}
+Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]+=value[key]}})
+return res},{});for(const i in resultado){months.push(resultado[i].mes)
+totals.push(resultado[i].total.toFixed(2))}
+return[months,totals]}
+const arr=[],labels=[],datas=[];for(const i in data){const d=data[i]
 if(d){const k=date.short(d.fecha)
 if(arr[k]!=undefined)arr[k]+=d.total
 else arr[k]=d.total}}
-let a=_mySort(arr)
-for(let i in a){labels.push(i)
-datas.push(arr[i])}
-let ctx=document.getElementById('myChart');let myChart=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[{label:'Ingresos por día',data:datas,backgroundColor:['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)'],borderColor:['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)'],borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}})})}}</script>
+const a=_mySort(arr)
+for(const i in a){this.data.model1.x.push(i)
+this.data.model1.y.push(arr[i])}
+const cd=document.getElementById('chartDays'),chartdays=new Chart(cd,{type:'bar',data:{labels:this.data.model1.x,datasets:[{label:'Ingresos por día',data:this.data.model1.y,backgroundColor:this.color.current.body,borderColor:this.color.current.border,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}});const dataMonth=_groupformonth(data),chart2=new Chart(document.getElementById('chartMonth'),{type:'bar',data:{labels:dataMonth[0],datasets:[{label:'Ingresos por día',data:dataMonth[1],backgroundColor:this.color.current.body,borderColor:this.color.current.border,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}});this.learnLinear(dataMonth[0],dataMonth[1],dataMonth[0].length+1)
+this.addData(chart2,4,1200)})},addData(chart,label,data){chart.data.labels.push(label);chart.data.datasets.forEach((dataset)=>{dataset.data.push(data)});chart.update()},async learnLinear(valX,valY,newVal){const model=tf.sequential();model.add(tf.layers.dense({units:1,inputShape:[1]}));model.compile({loss:'meanSquaredError',optimizer:'sgd'});const xs=tf.tensor2d(valX,[valX.length,1],'float32');const ys=tf.tensor2d(valY,[valY.length,1],'float32');await model.fit(xs,ys,{epochs:this.tf.epochs});return model.predict(tf.tensor2d([newVal],[1,1])).dataSync()[0]}}</script>
 </section>
-

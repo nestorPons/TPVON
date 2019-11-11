@@ -1,18 +1,17 @@
-<div class="--row --hidden" id="--id">  
+<component class="--row --hidden" id="--id">  
     <input 
         type = "--type" 
-        id="--idElement"  class="--class" placeholder=" "
+        class="--class" placeholder=" "
         style = "--style" name = "--name" tile = "--tile"
         @if (--pattern) pattern = "--pattern" @endif
         @if (--for) for = "--for" @endif 
         @if (--maxlength) maxlength = "--maxlength" @endif
         @if (--minlength) minlength = "--minlength" @endif
-
         value = "--value" list = "--list" tabindex = "--tabindex" 
         onfocus = "--onfocus" onblur = "--onblur" onclick = "--onclick"
         onkeypress = "--onkeypress" onkeydown = "--onkeydown" onkeyup = "--onkeyup"
         onchange = "--onchange" --require --disabled --readonly --checked  
     />
-    <label for="--idElement" class="--classLabel">--label</label>
+    <label for="--id" class="--classLabel">--label</label>
     @if (--icon) <i id="--id" class="lnr lnr---icon"></i> @endif
-</div>
+</component>

@@ -1,15 +1,13 @@
 <?php namespace app\controllers\components?><section id="tpv">
     <?php
-    $table = new Table([
+    $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
-        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)',
-        'total' => true
-    ]);
-    $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
-    $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
-    $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
-    $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1], false);
-    $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()'], false);
+        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)']);
+    $id     = new InputRead(['label' => 'Id'],  false);
+    $date   = new InputRead(['label' => 'Fecha']);
+    $hour   = new InputRead(['label' => 'Hora', 'class' => 'clock'],  false);
+    $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1], false);
+    $cli    = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()'], false);
 
     // Linea
     $code = new Select([
@@ -22,7 +20,7 @@
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => 7, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value' => '0'], false);
     $btnOk = new ButtonSuccess(['tabindex' => 8, 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
-    $btnClear = new ButtonCancel(['caption' => '', 'onclick' => 'app.tpv.clearLine()', 'icon' => 'cross']);
+    $btnClear = new ButtonCancel(['caption' => false, 'onclick' => 'app.tpv.clearLine()', 'icon' => 'cross']);
 
     $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
     $btnTicket = new ButtonSuccess(['onclick' => 'app.tpv.create()', 'caption' => 'Ticket']);
@@ -30,9 +28,10 @@
     $modTicket = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company->data());
     ?>
 </section>
-<style>#tpv{align-items:flex-start;display:grid;grid-template-rows:auto 400px auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 7rem 2rem;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv mytable{grid-row-start:2;grid-column-start:1;grid-column-end:-1}#tpv #<?=$id->id() ?>{grid-row:1;grid-column:1}#tpv #<?=$hour->id() ?>{grid-row:1;grid-column:7}#tpv #<?=$date->id() ?>{grid-row:1;grid-column:6;text-align:center}#tpv #<?=$hour->idEl()?>{text-align:center;grid-row:1;grid-column:8}#tpv #<?=$code->idCon()?>{grid-row:3;grid-column:1}#tpv #<?=$des->id() ?>{grid-row:3;grid-column:2 / span 2}#tpv #<?=$emp->id() ?>{grid-row:1;grid-column:2 / span 2}#tpv #<?=$cli->id() ?>{grid-row:1;grid-column:4 / span 2}#tpv #<?=$quan->id() ?>{grid-row:3;grid-column:4}#tpv #<?=$pric->id() ?>{grid-row:3;grid-column:5}#tpv #<?=$dto->id() ?>{grid-row:3;grid-column:6}#tpv #<?=$amo->id() ?>{grid-row:3;grid-column:7}#tpv .Descripción{width:40%}#tpv #<?=$txtTotal->id()?>{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #<?=$txtTotal->id() ?>input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #<?=$txtTotal->id() ?>label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:5 / span 2}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:7 / span 2}#tpv #<?=$btnClear->id() ?>{grid-row:3;grid-column:8}#<?=$modTicket->idEl() ?>{max-height:80vh}</style>
+<style>#tpv{align-items:flex-start;display:grid;grid-template-rows:auto 400px auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 7rem 2rem;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id()?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv #<?=$id->id() ?>{grid-row:1;grid-column:1}#tpv #<?=$date->id() ?>{grid-row:1;grid-column:6;text-align:center}#tpv #<?=$hour->id()?>{text-align:center;grid-row:1;grid-column:7}#tpv #<?=$code->id()?>{grid-row:3;grid-column:1}#tpv #<?=$des->id() ?>{grid-row:3;grid-column:2 / span 2}#tpv #<?=$emp->id() ?>{grid-row:1;grid-column:2 / span 2}#tpv #<?=$cli->id() ?>{grid-row:1;grid-column:4 / span 2}#tpv #<?=$quan->id() ?>{grid-row:3;grid-column:4}#tpv #<?=$pric->id() ?>{grid-row:3;grid-column:5}#tpv #<?=$dto->id() ?>{grid-row:3;grid-column:6}#tpv #<?=$amo->id() ?>{grid-row:3;grid-column:7}#tpv .Descripción{flex-basis:25%}#tpv #<?=$txtTotal->id()?>{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #<?=$txtTotal->id() ?>input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #<?=$txtTotal->id() ?>label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:5 / span 2}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:7 / span 2}#tpv #<?=$btnClear->id() ?>{grid-row:3;grid-column:8}#<?=$modTicket->id() ?>{max-height:80vh}</style>
 <script></script>
-<script>app.tpv={buttons:['add','prev','next','del'],total:0,client:null,currentId:<?=$tickets_new_id?>,lastId:<?=$tickets_new_id?>,Ticket:new Ticket(),Table:new Table('<?= $table->idEl() ?>'),Modal:new Modal('<?= $modTicket->id() ?>'),selCode:new Select(<?=$code->id()?>),selEmp:new Select(<?=$emp->id()?>),selCli:new Select(<?=$cli->id()?>),dto:document.getElementById('<?= $dto->idEl() ?>'),amount:document.getElementById('<?= $amo->idEl() ?>'),total:document.getElementById('<?= $txtTotal->idEl() ?>'),txtId:<?=$id->idEl()?>,date:<?=$date->idEl()?>,hour:<?=$hour->idEl()?>,$description:$('#<?= $des->idEl() ?>'),$employees:$('#<?= $emp->id() ?>'),$client:$('#<?= $cli->id() ?>'),$hour:$('#<?= $hour->idEl() ?>'),$quantity:$('#<?= $quan->idEl() ?>'),$price:$('#<?= $pric->idEl() ?>'),$btnOk:$('#<?= $btnOk->idEl() ?>'),$btnClear:$('#<?= $btnClear->idEl() ?>'),$total:$('#<?= $txtTotal->idEl() ?>'),open(){this.selEmp.el.focus()},loadClient(){this.client=new User(this.selCli.value())},load(){this.reset()
+<script>app.tpv={buttons:['add','prev','next','del'],total:0,client:null,currentId:<?=$tickets_new_id?>,lastId:<?=$tickets_new_id?>,Ticket:new Ticket(),Table:new Table('<?=$table->id()?>'),Modal:new Modal('<?= $modTicket->id()?>'),selCode:new Select(<?=$code->id()?>),selEmp:new Select(<?=$emp->id()?>),selCli:new Select(<?=$cli->id()?>),dto:<?=$dto->id()?>.querySelector('input'),amount:<?=$amo->id()?>.querySelector('input'),txtTotal:<?=$txtTotal->id()?>.querySelector('input'),txtId:<?=$id->id()?>.querySelector('input'),date:<?=$date->id()?>.querySelector('input'),hour:<?=$hour->id()?>.querySelector('input'),description:<?=$des->id()?>.querySelector('input'),quantity:<?=$quan->id()?>.querySelector('input'),price:<?=$pric->id()?>.querySelector('input'),open(){this.selEmp.el.focus()},loadClient(){this.client=new User(this.selCli.value())},load(){this.reset()
+this.add()
 this.loadUsers()
 this.loadServ()},loadUsers(){this.selEmp.clear()
 this.selCli.clear()
@@ -56,16 +55,16 @@ this.Ticket.fecha=new Date
 this.Ticket.id=this.currentId
 this.Ticket.iva=await DB.get('config').then(d=>d[0].iva)
 if(this.Ticket.validate()){await this.loadClient()
-this.openTicket()}else mns.error('Faltan datos para crear el ticket')},calculate(){let amount=this.$quantity.val()*this.$price.val(),dto=this.dto.value*amount/100,total=amount-dto
+this.openTicket()}else mns.error('Faltan datos para crear el ticket')},calculate(){let amount=this.quantity.value*this.price.value,dto=this.dto.value*amount/100,total=amount-dto
 return this.amount.value=total.toFixed(2)},clearLine(){this.selCode.default()
-this.$description.val('')
-this.$quantity.val(1)
-this.$price.val(0)
+this.description.value=''
+this.quantity.value=1
+this.price.value=0
 this.amount.value=0},clearLines(){this.Table.clearLines()},clearUsers(){echo('ClearUsers...')
 this.selCli.reset()
 this.selEmp.reset()},printTotal(){this.total=this.Ticket.setTotal()
-this.$total.val(this.total)},addLine(){this.calculate()
-var line=this.Ticket.addLine(this.Table.line()+1,this.selCode.value(),this.$quantity.val(),this.$price.val(),this.dto.value)
+this.txtTotal.value=this.total},addLine(){this.calculate()
+var line=this.Ticket.addLine(this.Table.line()+1,this.selCode.value(),this.quantity.value,this.price.value,this.dto.value)
 if(line.articulo)
 this.addLineTable(line.id,line.articulo,line.cantidad,line.precio,line.dto,line.amo)
 else this.selCode.el.focus},addPromo(callback){if(this.client&&this.client.promos){DB.get('promos').then(d=>d[0]).then(promo=>{if(this.client.lastTicket&&promo&&date.diff(this.client.lastTicket,date.actual())<=promo.valor)this.dto.value=promo.dto
@@ -73,19 +72,22 @@ callback()})}else{callback()}},async addLineTable(id,idArticulo,cantidad,precio,
 this.Table.addLine(id,[a[0].codigo,a[0].descripcion,cantidad,precio,dto,amo||cantidad*precio*(1-dto/100)])
 this.clearLine()
 this.printTotal()},loadLine(){const id=this.selCode.value()
-this.addPromo(_=>{if(id){DB.get('servicios','id',id).then(d=>d[0]).then(el=>{this.$description.val(el.descripcion)
-this.$price.val(el.precio)})}})},loadLineFromTable(e){if(this.Table.hoverable()){const idLine=e.path[1].attributes.idline.value
+this.addPromo(_=>{if(id){DB.get('servicios','id',id).then(d=>d[0]).then(el=>{this.description.value=el.descripcion
+this.price.value=el.precio
+this.quantity.value=1
+this.dto.value=0
+this.calculate()})}})},loadLineFromTable(e){if(this.Table.hoverable()){const idLine=e.path[1].attributes.idline.value
 let line=this.Ticket.getLine(idLine)
 this.Ticket.deleteLine(idLine)
 DB.get('servicios','id',line.articulo).then(d=>d[0]).then(d=>{this.selCode.option(line.articulo)
-this.$description.val(d.descripcion)
-this.$quantity.val(line.cantidad)
-this.$price.val(line.precio)
+this.description.value=d.descripcion
+this.quantity.value=line.cantidad
+this.price.value=line.precio
 this.dto.value=line.dto
 this.amount.value=this.calculate()
 this.Table.delLine(e.path[1].attributes.idline.value)
 this.printTotal()})}},del(){this.request('del',this.currentId,(respond,status)=>this.next())},next(){this.request('next',this.currentId,(d,s)=>{if(s)this.loadDataTicket(d)
-else this.add()})},prev(){this.request('prev',this.currentId,(d,s)=>{if(d)this.loadDataTicket(d)})},add(){this.request('8',this.currentId,d=>{let id=(d)?parseInt(d.id)+1:1
+else this.add()})},prev(){this.request('prev',this.currentId,(d,s)=>{if(d)this.loadDataTicket(d)})},add(){this.request('last',this.currentId,d=>{let id=(d)?parseInt(d.id)+1:1
 this.loadDataTicket({id:id,estado:1,id_usuario:0,id_cliente:0,fecha:date.current(),lines:[]})})},request(action,id,callback){let self=this,data={controller:'tickets',action:action,data:{id:id}}
 app.post(data,function(d,s){typeof callback=='function'&&callback(d,s)},!1)},async loadDataTicket(data){let t=0
 await this.reset()

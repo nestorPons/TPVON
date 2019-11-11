@@ -34,13 +34,16 @@ clear(){this.description.innerHTML=''
 this.day.innerHTML=''
 this.month.innerHTML=''
 this.year.innerHTML=''
-this.desc.innerHTML=''}}class Table{constructor(id){this.el=document.getElementById(id)
-this.$table=$('#'+id)
-this.$template=$($('#template_'+id)[0].innerHTML)
+this.desc.innerHTML=''}}class Table{constructor(id){this.el=document.getElementById(id).querySelector('table')
+this.template=document.getElementById(id).querySelector('template')
+this.$table=$('#'+id).find('table')
+this.$template=$(`#${id}`).find('template')
 this.data=[]}
 line(){return parseInt(this.el.rows.length)}
 addLine(id,arrData){this.data.push(arrData)
-return this.$template.clone().attr('idline',id||this.$table.find('tr').length).find('td').each(function(i,el){$(this).html(arrData[i]).attr('data-label',arrData[i])}).end().prependTo(this.$table.find('tbody'))}
+const c=this.$template.clone().html()
+$(c).attr('idline',id||this.$table.find('tr').length).find('td').each(function(i,el){$(this).html(arrData[i]).attr('data-label',arrData[i])}).end().prependTo(this.$table.find('tbody'))
+return $(c)}
 endScroll(){this.$table.animate({scrollTop:this.$table.height()},100)}
 clearLines(){this.$table.find('tbody').find('tr').remove()}
 clear(){this.data=[]
@@ -57,7 +60,7 @@ hoverable(value){if(value!=undefined){if(value)this.el.classList.add('hoverable'
 else this.el.classList.remove('hoverable')}
 return this.el.classList.contains('hoverable')}
 html(){return this.el.innerHTML}}class Select extends Component{constructor(id){super()
-if(typeof id=='string'){this.el=document.getElementById(id).getElementsByTagName('select')[0]}else{this.el=id}
+if(typeof id=='string'){this.el=document.getElementById(id).getElementsByTagName('select')[0]}else{this.el=id.getElementsByTagName('select')[0]}
 this.o=this.el.getElementsByTagName('option')
 this.CLASS_SELECTED='valid'
 this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}

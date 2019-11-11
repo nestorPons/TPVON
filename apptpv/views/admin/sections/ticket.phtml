@@ -24,7 +24,7 @@
         <hr>
     </div>
     <?php
-    $table = new Table(['columns' => ['Unidad', 'Servicio', 'DTO%', 'Importe'], 'total' => true]);
+    $table = new Table(['columns' => ['Unidad', 'Servicio', 'DTO%', 'Importe'], 'total' => 'true']);
     ?>
     <br>
     <p>
@@ -39,7 +39,7 @@
         grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr 1fr 1fr;
 
-        #<?= $txt00->idEl() ?> {
+        #<?= $txt00->id() ?> {
             transition: opacity 1s ease-out;
         }
 
@@ -142,9 +142,9 @@
 <script>
     app.ticket = {
         Ticket: null,
-        present: <?= $present->idEl() ?>,
+        present: <?= $present->id() ?>,
         cont_end_date: <?= $txt00->id() ?>,
-        end_date: <?= $txt00->idEl() ?>,
+        end_date: <?= $txt00->id() ?>,
         frm: {
             nombre: document.getElementById('ticket_nombre_empresa'),
             admin: document.getElementById('ticket_admin'),
@@ -155,7 +155,7 @@
             nif: document.getElementById('ticket_nif'),
             iva: document.getElementById('ticket_iva')
         },
-        Table: new Table('<?= $table->idEl() ?>'),
+        Table: new Table('<?= $table->id() ?>'),
         print(callback) {
             this.put(false, _ => {
                 imprimirElemento(
@@ -221,16 +221,16 @@
                 })
         },
         async put(sendMail = false, callback) {
-            if(this.Ticket.new){
+            if (this.Ticket.new) {
                 this.Ticket.fecha = date.now('sql')
                 this.Ticket.estado = 1
                 this.Ticket.regalo = this.present.checked | 0
                 this.Ticket.fecha_vencimiento = this.end_date.value
-               
+
                 // Guardamos los datos 
                 let data = await DB.post('tickets', 'new', this.Ticket.sendData())
                 this.lastId = this.Ticket.id = data.id
-    
+
                 if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket)
                 app.tpv.add()
             }

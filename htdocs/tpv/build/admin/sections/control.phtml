@@ -3,15 +3,14 @@
     $txt01 = new InputRead(['label' => 'Ticket']);
     $txt02 = new InputRead(['label' => 'Cliente']);
     $txt03 = new InputRead(['label' => 'Fecha']);
-    $txt04 = new InputText(['label' => 'Fecha vencimiento', 'onchange' => 'app.control.savedate(window.event.target)']);
+    $txt04 = new InputText(['label' => 'Vencimiento', 'onchange' => 'app.control.savedate(window.event.target)']);
     $table = new Table([
         'columns' => ['id_linea', 'Nombre', 'Descripcion', 'fecha'],
         'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
     ]);
     ?>
-</section>
-<style lang="less" >#control{display:grid;grid-template-columns:5fr 1fr 1fr 1fr}#control table{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}</style>
-<script>app.control={table:'present',buttons:['prev','next','search','print','conf'],data:null,Table:new Table('<?= $table->idEl() ?>'),txtTicket:<?=$txt01->idEl()?>,txtCli:<?=$txt02->idEl()?>,txtFecha:<?=$txt03->idEl()?>,txtFechaV:<?=$txt04->idEl()?>,btnDel:' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',btnAdd:' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',load(){app.post({controller:this.table,action:'get',data:{}},data=>{DB.set(this.table,data).then(_=>DB.last(this.table)).then(lst=>{this.loadTable(lst)})})},print(){if(app.present){let p=app.present,t=this.Table,elemento=p.el,estilos=p.style,ventana=window.open('','','PRINT'),arr=[]
+    <style lang="less" >#control{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}#control c-table{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}</style>
+    <script>app.control={table:'present',buttons:['prev','next','search','print','conf'],data:null,Table:new Table('<?= $table->id() ?>'),txtTicket:<?=$txt01->id()?>.querySelector('input'),txtCli:<?=$txt02->id()?>.querySelector('input'),txtFecha:<?=$txt03->id()?>.querySelector('input'),txtFechaV:<?=$txt04->id()?>.querySelector('input'),btnDel:' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',btnAdd:' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',load(){app.post({controller:this.table,action:'get',data:{}},data=>{DB.set(this.table,data).then(_=>DB.last(this.table)).then(lst=>{this.loadTable(lst)})})},print(){if(app.present){let p=app.present,t=this.Table,elemento=p.el,estilos=p.style,ventana=window.open('','','PRINT'),arr=[]
 for(let i in t.data){arr.push(t.data[i][2])}
 p.clear()
 p.description(arr);p.date=new Date(date.format(this.txtFechaV.value,'sql'))
@@ -28,3 +27,4 @@ this.Table.addLine(line.id,[line.id,ser.nombre,ser.descripcion,date])})}},search
 else app.mens.error('No se ha podido encontrar el registro')})}else{echo('AKI:: Funcion no definida')}},addDate(e){let $el=$(e),$parent=$el.parents('tr'),id=$parent.attr('idline'),date=date.format(date.now(),'datetime')
 app.post({controller:'present',action:'addDate',data:{id:id,fecha:date}},d=>{$el.parents('tr').find('.fecha').html(date+this.btnDel)})},delDate(e){let $el=$(e),$parent=$el.parents('tr'),id=$parent.attr('idline')
 app.post({controller:'present',action:'delete',data:{id:id}},d=>{$el.parent().html(this.btnAdd)})},savedate(el){if(el.value){app.post({controller:'present',action:'expiration',data:{id:this.txtTicket.value,fecha_vencimiento:date.format(this.txtFechaV.value,'sql')}},d=>{echo('Guardado fecha ticket regalo ...')})}else{app.mens.error('Tiene que haber una caducidad!!')}}}</script>
+</section>

@@ -13,7 +13,4 @@ class ButtonSuccess extends Component{
         parent::__construct($data);
         $this->print('button');
     }
-    function idEl(){
-        return $this->id;
-    }
 }

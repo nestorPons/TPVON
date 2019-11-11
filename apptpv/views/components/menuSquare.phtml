@@ -1,4 +1,4 @@
-<component id="--id" class="menu-square">
+<c-chart id="--id" class="menu-square">
     <label for="--id" class="active"> <?= $tile ?></label>
     <content class="">
         <?= $content ?>
@@ -7,7 +7,8 @@
     <style lang="less">
         .menu-square {
             /* transition: display 2s linear; */
-            transition: all 1.5s ease 0.5s;
+            transition: all 2.5s ease 0.5s;
+            transition: display 2.5s ease 0.5s;
 
             label {
                 align-items: center;
@@ -34,27 +35,39 @@
             content {
                 display: none;
             }
-
             .active {
                 display: inline-flex !important;
+            }
+            &.close-menu {
+                display: none !important;
             }
         }
     </style>
     <script scoped>
-        let el = document.getElementById('--id'),
+        const el = document.getElementById('--id'),
             ic = el.querySelector('.icon-close'),
             cnt = el.querySelector('content'),
-            lbl = el.querySelector('label')
+            lbl = el.querySelector('label'),
+            menus = document.getElementsByClassName('menu-square')
 
         el.onclick = e => {
             e.stopPropagation()
+            // Al abrir un menu ocultamos todos los demás
+            for(const m of menus){
+                m.classList.add('close-menu')
+            }
+            lbl.parentNode.classList.remove('close-menu')
+            // Abrimos el contenido del menú
             lbl.classList.remove('active')
             cnt.classList.add('active')
         }
         ic.onclick = e => {
             e.stopPropagation()
+            for(const m of menus){
+                m.classList.remove('close-menu')
+            }
             cnt.classList.remove('active')
             lbl.classList.add('active')
         }
     </script>
-</component>
+</c-chart>

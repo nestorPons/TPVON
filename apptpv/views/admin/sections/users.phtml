@@ -4,7 +4,7 @@
     $abc = new ListABC($table->id());
     $editUser = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
     ?>
-</section>
+
 <style lang="less">
     #users {
         display: grid;
@@ -24,9 +24,9 @@
     app.users = {
         table: 'usuarios',
         buttons: ['add', 'search'],
-        currentId: null,
-        Table       : new Table('<?= $table->idEl() ?>'),
-        Form        : new Modal('<?= $editUser->id() ?>'),
+        currentId : null,
+        Table       : new Table('<?=$table->id()?>'),
+        Form        : new Modal('<?=$editUser->id()?>'),
         $table      : $('#<?= $table->id() ?>').find('tbody'),
         validation(callback) {
             let f = this.Form.getData()
@@ -35,16 +35,19 @@
                     for (i in usuarios) {
                         let u = usuarios[i]
 
-                        if (!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) this.error = {
-                            success: false,
-                            code: 'dni',
-                            mens: 'Error dni duplicado'
-                        }
-                        else if (!isEmpty(f.email) && u.email == f.email && u.id != f.id) this.error = {
-                            success: false,
-                            code: 'email',
-                            mens: 'Error email duplicado'
-                        }
+                        if (!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id){
+                            this.error = {
+                                success: false,
+                                code: 'dni',
+                                mens: 'Error dni duplicado'
+                            }
+                        }else if (!isEmpty(f.email) && u.email == f.email && u.id != f.id){
+                            this.error = {
+                                success: false,
+                                code: 'email',
+                                mens: 'Error email duplicado'
+                            }
+                        } 
                     }
                     callback(this.error || {
                         success: true
@@ -143,3 +146,4 @@
         }
     }
 </script>
+</section>

@@ -1,16 +1,13 @@
 <section id="tpv">
-   
     <?php
-    $table = new Table([
+    $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
-        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)',
-        'total' => true
-    ]);
-    $id = new InputRead(['value' => $tickets_new_id, 'label' => 'Id'],  false);
-    $date = new InputRead(['value' => $today, 'label' => 'Fecha']);
-    $hour = new InputRead(['value' => $tickets_hora, 'label' => 'Hora', 'class' => 'clock'],  false);
-    $emp = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1], false);
-    $cli = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()'], false);
+        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)']);
+    $id     = new InputRead(['label' => 'Id'],  false);
+    $date   = new InputRead(['label' => 'Fecha']);
+    $hour   = new InputRead(['label' => 'Hora', 'class' => 'clock'],  false);
+    $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1], false);
+    $cli    = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()'], false);
 
     // Linea
     $code = new Select([
@@ -23,7 +20,7 @@
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => 7, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value' => '0'], false);
     $btnOk = new ButtonSuccess(['tabindex' => 8, 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
-    $btnClear = new ButtonCancel(['caption' => '', 'onclick' => 'app.tpv.clearLine()', 'icon' => 'cross']);
+    $btnClear = new ButtonCancel(['caption' => false, 'onclick' => 'app.tpv.clearLine()', 'icon' => 'cross']);
 
     $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
     $btnTicket = new ButtonSuccess(['onclick' => 'app.tpv.create()', 'caption' => 'Ticket']);
@@ -44,20 +41,15 @@
         height: 60px;
     }
 
-    #tpv mytable {
-        grid-row-start: 2;
+    #tpv #<?=$table->id()?> {
+        grid-row: 2;
         grid-column-start: 1;
         grid-column-end: -1;
     }
 
-    #tpv #<?= $id->id() ?> {
+    #tpv #<?=$id->id() ?> {
         grid-row: 1;
         grid-column: 1;
-    }
-
-    #tpv #<?= $hour->id() ?> {
-        grid-row: 1;
-        grid-column: 7;
     }
 
     #tpv #<?= $date->id() ?> {
@@ -66,13 +58,13 @@
         text-align: center;
     }
 
-    #tpv #<?= $hour->idEl()?> {
+    #tpv #<?= $hour->id()?> {
         text-align: center;
         grid-row: 1;
-        grid-column: 8;
+        grid-column: 7;
     }
 
-    #tpv #<?=$code->idCon()?> {
+    #tpv #<?=$code->id()?> {
         grid-row: 3;
         grid-column: 1;
     }
@@ -113,7 +105,7 @@
     }
 
     #tpv .Descripción {
-        width: 40%;
+        flex-basis: 25%;
     }
 
     /* TXT TOTAL */
@@ -154,7 +146,7 @@
         grid-column: 8;
     }
 
-    #<?= $modTicket->idEl() ?> {
+    #<?= $modTicket->id() ?> {
         max-height: 80vh;
     }
 </style>
@@ -205,6 +197,7 @@
             return true
         }
         addLine(id, articulo, cantidad, precio, dto) {
+            
             let newLine = new Line(id, articulo, cantidad, precio, dto)
 
             this.lines.push(newLine)
@@ -245,32 +238,26 @@
 </script>
 <script>
     app.tpv = {
-        buttons: ['add', 'prev', 'next', 'del'],
-        total: 0,
-        client: null,
-        currentId: <?= $tickets_new_id ?>,
-        lastId: <?= $tickets_new_id ?>,
-        Ticket: new Ticket(),
-        Table: new Table('<?= $table->idEl() ?>'),
-        Modal: new Modal('<?= $modTicket->id() ?>'),
-        selCode: new Select(<?=$code->id()?>),
-        selEmp: new Select(<?= $emp->id() ?>),
-        selCli: new Select(<?= $cli->id() ?>),
-        dto: document.getElementById('<?= $dto->idEl() ?>'),
-        amount: document.getElementById('<?= $amo->idEl() ?>'),
-        total: document.getElementById('<?= $txtTotal->idEl() ?>'),
-        txtId   : <?= $id->idEl() ?>,  
-        date: <?= $date->idEl() ?>,
-        hour: <?= $hour->idEl() ?>,
-        $description: $('#<?= $des->idEl() ?>'),
-        $employees: $('#<?= $emp->id() ?>'),
-        $client: $('#<?= $cli->id() ?>'),
-        $hour: $('#<?= $hour->idEl() ?>'),
-        $quantity: $('#<?= $quan->idEl() ?>'),
-        $price: $('#<?= $pric->idEl() ?>'),
-        $btnOk: $('#<?= $btnOk->idEl() ?>'),
-        $btnClear: $('#<?= $btnClear->idEl() ?>'),
-        $total: $('#<?= $txtTotal->idEl() ?>'),
+        buttons     : ['add', 'prev', 'next', 'del'],
+        total       : 0,
+        client      : null,
+        currentId   : <?= $tickets_new_id ?>,
+        lastId      : <?= $tickets_new_id ?>,
+        Ticket      : new Ticket(),
+        Table       : new Table('<?=$table->id()?>'),
+        Modal       : new Modal('<?= $modTicket->id()?>'),
+        selCode     : new Select(<?=$code->id()?>),
+        selEmp      : new Select(<?= $emp->id()?>),
+        selCli      : new Select(<?= $cli->id()?>),
+        dto         : <?= $dto->id() ?>.querySelector('input'),
+        amount      : <?= $amo->id() ?>.querySelector('input'),
+        txtTotal    : <?= $txtTotal->id() ?>.querySelector('input'),
+        txtId       : <?=$id->id()?>.querySelector('input'),  
+        date        : <?= $date->id() ?>.querySelector('input'),
+        hour        : <?= $hour->id() ?>.querySelector('input'),
+        description : <?=$des->id()?>.querySelector('input'),
+        quantity    : <?= $quan->id() ?>.querySelector('input'),
+        price       : <?= $pric->id() ?>.querySelector('input'),
         open() {
             this.selEmp.el.focus()
         },
@@ -279,6 +266,7 @@
         },
         load() {
             this.reset()
+            this.add()
             this.loadUsers()
             this.loadServ()
         },
@@ -342,7 +330,7 @@
 
         },
         calculate() {
-            let amount = this.$quantity.val() * this.$price.val(),
+            let amount = this.quantity.value * this.price.value,
                 dto = this.dto.value * amount / 100,
                 total = amount - dto
             return this.amount.value = total.toFixed(2)
@@ -350,9 +338,9 @@
         },
         clearLine() {
             this.selCode.default()
-            this.$description.val('')
-            this.$quantity.val(1)
-            this.$price.val(0)
+            this.description.value = ''
+            this.quantity.value = 1
+            this.price.value = 0
             this.amount.value = 0
             //this.selCode.el.focus()
         },
@@ -366,16 +354,17 @@
         },
         printTotal() {
             this.total = this.Ticket.setTotal()
-            this.$total.val(this.total)
+            this.txtTotal.value = this.total
         },
         addLine() {
             this.calculate()
 
+            // Añadimos la linea al ticket
             var line = this.Ticket.addLine(
                 this.Table.line() + 1,
                 this.selCode.value(),
-                this.$quantity.val(),
-                this.$price.val(),
+                this.quantity.value ,
+                this.price.value,
                 this.dto.value
             )
 
@@ -418,8 +407,11 @@
                     DB.get('servicios', 'id', id)
                         .then(d => d[0])
                         .then(el => {
-                            this.$description.val(el.descripcion)
-                            this.$price.val(el.precio)
+                            this.description.value = el.descripcion
+                            this.price.value = el.precio
+                            this.quantity.value = 1
+                            this.dto.value = 0 
+                            this.calculate()
                         })
                 }
             })
@@ -438,9 +430,9 @@
                     .then(d => d[0])
                     .then(d => {
                         this.selCode.option(line.articulo)
-                        this.$description.val(d.descripcion)
-                        this.$quantity.val(line.cantidad)
-                        this.$price.val(line.precio)
+                        this.description.value = d.descripcion
+                        this.quantity.value = line.cantidad
+                        this.price.value = line.precio
                         this.dto.value = line.dto
                         this.amount.value = this.calculate()
 
@@ -465,7 +457,7 @@
             })
         },
         add() {
-            this.request('8', this.currentId, d => {
+            this.request('last', this.currentId, d => {
                 // Si es el primer registro lo inicializamos a 1
                 let id = (d) ? parseInt(d.id) + 1 : 1
                 this.loadDataTicket({

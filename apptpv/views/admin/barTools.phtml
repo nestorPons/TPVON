@@ -1,5 +1,6 @@
 <header id="bartools">
     <div id="bartools-actions">
+        <!-- <icon class="plus-circle" onclick = "app.sections.add()" label = "Nuevo">Interior de matches</icon> -->
         <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
         <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()', 'label' => 'Eliminar'])?>
         <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()', 'label' => 'Anterior'])?>
@@ -66,7 +67,7 @@
         display: flex; 
         align-items: center;  
     }
-    #bartools #<?=$txtSearch->idEl()?>{
+    #bartools #<?=$txtSearch->id()?>{
         width: 300px;
         background-color: var(--form-back-color);
     }
@@ -91,7 +92,7 @@
         },
         search          : {
             $search     : $('#<?= $txtSearch->id()?>'), 
-            $txtSearch  : $('#<?= $txtSearch->idEl()?>'),
+            $txtSearch  : $('#<?= $txtSearch->id()?>'),
             distance    : 3000, 
             velocity    : 500,
             state       : 0,

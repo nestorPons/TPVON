@@ -1,21 +1,21 @@
-<mytable>
-    <table id="--idElement" class="--class">
+<c-table id="--id">
+    <table class="--class">
         <thead>
             <?php foreach ($columns as $key => $val) : ?>
                 <th class="<?= $val ?>"><?= $val ?></th>
             <?php endforeach ?>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
+        @if (--total)
         <tfoot>
-            @if (--total)
             <tr>
-                <td>TOTAL: <span class="id_total"></span> </td>
+                <td>TOTAL: </td>
+                <td><span class="id_total"></span></td>
             </tr>
-            @endif
         </tfoot>
+        @endif
     </table>
-    <template id="template_<?= $id ?>">
+    <template>
         <tr onclick="--onclick" ondblclick="--ondblclick">
             <?php foreach ($columns as $key => $val) : ?>
                 <td class="<?= $val ?>" data-label=""></td>
@@ -23,29 +23,38 @@
         </tr>
     </template>
     <style lang="less">
-        #--idElement {
-            margin: 5px 0;
+        #--id {
+            height          : 100%; 
+            width           : 100%;
+            margin          : 5px 0;
 
             tfoot {
-                order: 3;
-                width: 100%;
+                order       : 3;
+                width       : 100%;
 
                 tr {
                     text-align: right;
                 }
             }
-
+            table{ 
+                margin      : 5px;
+                max-height  : 375px;
+            }
             &.hoverable tbody {
-                cursor: pointer;
+                cursor      : pointer;
+            }
+            tbody{
+                
             }
         }
     </style>
     <script>
         class Table {
             constructor(id) {
-                this.el = document.getElementById(id)
-                this.$table = $('#' + id)
-                this.$template = $($('#template_' + id)[0].innerHTML)
+                this.el = document.getElementById(id).querySelector('table')
+                this.template = document.getElementById(id).querySelector('template')
+                this.$table = $('#' + id).find('table')
+                this.$template = $(`#${id}`).find('template')
                 this.data = []
             }
             line() {
@@ -55,18 +64,20 @@
              * arrData = array de datos en orden de salida
              */
             addLine(id, arrData) {
+
                 // Cargamos los datos en una variable para posteriores consultas (getData(){})
                 this.data.push(arrData)
-                return this.$template
-                    .clone()
+                const c =  this.$template.clone().html()
+                    $(c)
                     .attr('idline', id || this.$table.find('tr').length)
-                    .find('td').each(function(i, el) {
-                        $(this)
-                            .html(arrData[i])
-                            .attr('data-label', arrData[i])
-                    })
+                        .find('td').each(function(i, el) {
+                            $(this)
+                                .html(arrData[i])
+                                .attr('data-label', arrData[i])
+                        })
                     .end()
                     .prependTo(this.$table.find('tbody'))
+                return $(c)
             }
             endScroll() {
                 this.$table.animate({
@@ -110,4 +121,4 @@
             }
         }
     </script>
-</mytable>
+</c-table>

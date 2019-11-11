@@ -89,7 +89,7 @@ class Prepocessor{
 
         return $return;
     }
-    private function compress_code($code){
+    private function compress_code($code){  
         $search = array(
         '/\>[^\S ]+/s',  // remove whitespaces after tags
         '/[^\S ]+\</s',  // remove whitespaces before tags
@@ -260,6 +260,9 @@ class Prepocessor{
                     $this->minify_script();
                     $this->minify_style();
 
+                    // Seccion componentes personales
+                    $this->components();
+
                     $a = $this->args('style');
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
@@ -268,16 +271,43 @@ class Prepocessor{
                     $this->build_js( $this->extract('script')['content'] );
                     
                     if( $file == self::MAIN_PAGE ) $this->queue();
-                    // Compresión salida html
-                    //$this->content  = $this->compress_code($this->content);
 
                     //Añadimos nombre de espacio a todos los archivos 
                     $this->add_name_space();
+
+                    // Compresión salida html
+                    //$this->content  = $this->compress_code($this->content);
                     
                     file_put_contents($file_build, $this->content, LOCK_EX  );
                 }
             }
         } 
+    }
+    // Busca y trata componentes personalizados en las plantillas 
+    private function components(){
+        // Guardar en variable que componentes tenemos
+        if(!isset($this->components)){
+            $str = "";
+            $this->components = []; 
+            $route = \APP\VIEWS\COMPONENTS;
+            $gestor = opendir($route);
+            $regex_components = ''; 
+            while (($file = readdir($gestor)) !== false)  {
+                if ($file != "." && $file != "..") {
+                    $arr = explode('.', $file);
+                    $this->components[] = $arr[0];
+                    $str .= $arr[0] . '|';
+                    $this->regcomponents = trim($str, '|'); 
+                }
+            }
+        }
+
+        // Buscar componentes existentes en el archivo
+        $regex = "/<(\s)*($this->regcomponents){1}?[^>]*>(.*)<\/($this->regcomponents){1}?>/";
+        $count = preg_match_all($regex, $this->content, $matches);
+
+        // Cambiar los componentes por las instancias de clase
+// AKI :: Acabar componentes
     }
     private function add_name_space(){
         $this->content = "<?php namespace " . self::NAMESPACE_COMPONENTS ."?>" . $this->content; 

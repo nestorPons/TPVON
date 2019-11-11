@@ -6,7 +6,7 @@ class InputRead extends Input{
     function __construct(Array $data = [],  bool $collapse = true){
         $this->type = 'text';
         $this->style = "border: none; cursor: default;"; 
-        $this->readonly = true;
+        $this->readonly = 'readonly';
         parent::__construct($data);
     }
 }

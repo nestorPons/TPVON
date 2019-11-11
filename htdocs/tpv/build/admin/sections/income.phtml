@@ -6,9 +6,8 @@
     $total      = new InputRead(['label' => 'Total', 'iconlast' => '', 'class' => 'text-right']);
     $table      = new Table(['columns' => ['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
     ?>
-</section>
-<style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income table{grid-row:2;grid-column:1 / span 3}#income table *{padding:2px}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}</style>
-<script>app.income={buttons:['print','filter','search'],txtFrom:<?=$from->id()?>,txtTo:<?=$to->id()?>,txtTotal:<?=$total->idEl()?>,SelUser:new Select(<?=$seluser->id()?>),Table:new Table('<?= $table->id() ?>'),load(){this.loadUsers()
+    <style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income c-table{grid-row:2;grid-column:1 / span 3}#income c-table *{padding:2px}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}</style>
+    <script>app.income={buttons:['print','filter','search'],txtFrom:<?=$from->id()?>,txtTo:<?=$to->id()?>,txtTotal:<?=$total->id()?>,SelUser:new Select(<?=$seluser->id()?>),Table:new Table('<?= $table->id() ?>'),load(){this.loadUsers()
 this.filter()},loadUsers(){let el=this.SelUser
 DB.get('usuarios').then(users=>{for(let u of users){const discharged=(u.estado!=1)?'red':null;el.addOption(u.id,u.nombre,discharged)}})},filter(){this.Table.clear()
 this.getData({controller:'tickets',action:'getBetween',data:{f1:date.format(this.txtFrom.value,'sql'),f2:date.format(this.txtTo.value,'sql'),u:this.SelUser.value()}})},getData(data){app.post(data,(data,success)=>{let _loadData=d=>{for(let x in d.lineas){let l=d.lineas[x]
@@ -23,3 +22,4 @@ this.txtTotal.value=x.toFixed(2)}})},print(){let printContents=`<h1> Listado de 
                 <table> ${this.Table.html()} </table>
                 <h4>Total: <b>${this.txtTotal.value}</b></h4>`;imprimirElemento(printContents)},search(value){this.Table.clear()
 this.getData({controller:'tickets',action:'get',data:{id:value}})},}</script>
+</section>

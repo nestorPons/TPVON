@@ -10,7 +10,4 @@ class ButtonCloseApp extends Component{
         parent::__construct();
         $this->print('closeapp');
     }
-    function idEl(){
-        return $this->id;
-    }
 }

@@ -24,7 +24,7 @@ app.ivas = {
     table: 'ivas',
     buttons: ['add', 'search'],
     currentId: null, 
-    Table: new Table('<?=$table->idEl()?>'),
+    Table: new Table('<?=$table->id()?>'),
     Form : new Modal('<?=$form->id()?>'),
     $table: $('#<?=$table->id()?>').find('tbody'),
     validation(){

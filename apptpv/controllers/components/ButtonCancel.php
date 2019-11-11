@@ -6,13 +6,11 @@ class ButtonCancel extends Component{
         $spinner = false,
         $mainclass = 'secondary',
         $type = 'button',
-        $caption = 'Cancelar';
+        $caption;
 
     function __construct(Array $data = []){
+        $this->caption = $data['caption']??'Cancelar';
         parent::__construct($data);
         $this->print('button');
-    }
-    function idEl(){
-        return $this->id;
     }
 }

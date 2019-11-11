@@ -1,19 +1,42 @@
 <section id="chart">
-    <?php 
+    <?php
     new MenuSquare([
-        'tile' => 'Gráfica Iconos', 
-        'content' => '<canvas id="myChart" width="600px" height="600px"></canvas>'
-        ])
+        'tile' => 'Gráfica ingresos dia',
+        'content' => '<canvas id="chartDays" width="600px" height="600px"></canvas>'
+    ])
     ?>
-        <?php 
+    <?php
     new MenuSquare([
-        'tile' => 'Gráfica Iconos 2', 
-        'content' => '<canvas id="myChart" width="400px" height="400px"></canvas>'
-        ])
+        'tile' => 'Gráfica ingresos mes',
+        'content' => '<canvas id="chartMonth" width="400px" height="400px"></canvas>'
+    ])
     ?>
     <script>
         app.chart = {
-            buttons : [], 
+            data: {
+                model1: {
+                    x: [],
+                    y: []
+                },
+                model2: {
+                    x: [],
+                    y: []
+                }
+            },
+            color: {
+                current: {
+                    body: 'rgba(40, 184, 53, 0.21)',
+                    border: 'rgba(40, 184, 53, 0.41)',
+                },
+                predict: {
+                    body: 'rgba(40, 42, 40, 0.21)',
+                    border: 'rgba(40, 42, 40, 0.41)',
+                }
+            },
+            tf: {
+                epochs: 50,
+            },
+            buttons: [],
             load() {
                 app.post({
                     controller: 'tickets',
@@ -21,34 +44,77 @@
                     data: null
                 }, data => {
                     let _mySort = arr => {
-                        // Inicializamos los arrays
-                        let sortedKeys = new Array();
-                        let sortedObj = {};
+                            // Inicializamos los arrays
+                            let sortedKeys = new Array();
+                            let sortedObj = {};
 
-                        // Separamos la clave en un solo array
-                        for (let i in arr) {
-                            sortedKeys.push(i);
-                        }
-                        // Ordenamos dicha clave
-                        sortedKeys.sort(function(a, b){
-                            dateA = date.sql(a)
-                            dateB = date.sql(b)
-                            return new Date(dateA) - new Date(dateB);
-                        });
+                            // Separamos la clave en un solo array
+                            for (let i in arr) {
+                                sortedKeys.push(i);
+                            }
+                            // Ordenamos dicha clave
+                            sortedKeys.sort(function(a, b) {
+                                dateA = date.sql(a)
+                                dateB = date.sql(b)
+                                return new Date(dateA) - new Date(dateB);
+                            });
 
-                        // Reconstruimos el array asociativo con la clave ordenada
-                        for (let i in sortedKeys) {
-                            sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
+                            // Reconstruimos el array asociativo con la clave ordenada
+                            for (let i in sortedKeys) {
+                                sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
+                            }
+                            return sortedObj;
+                        },
+                        // Agrupa los datos por meses
+                        _groupformonth = array => {
+                            // Construcción del nuevo array:
+
+                            const resultado = [],
+                                months = [],
+                                totals = [];
+                            array.reduce(function(res, value) {
+
+                                // Creamos la posición del array para cada mes
+                                let mes = new Date(value.fecha).getMonth() + 1;
+                                if (!res[mes]) {
+                                    res[mes] = {
+                                        mes: mes
+                                    };
+
+                                    // Inicializamos a 0 el valor de cada key
+                                    Object.keys(value).forEach(function(key) {
+                                        if (key != 'fecha') {
+                                            res[mes][key] = 0;
+                                        }
+                                    })
+
+                                    resultado.push(res[mes])
+                                }
+
+                                // Sumamos el valor de cada clave dentro de un bucle
+                                Object.keys(value).forEach(function(key) {
+                                    if (key != 'fecha') {
+                                        res[mes][key] += value[key];
+                                    }
+                                })
+
+                                return res;
+                            }, {});
+
+                            // Resultado en dos arrays
+                            for (const i in resultado) {
+                                months.push(resultado[i].mes)
+                                totals.push(resultado[i].total.toFixed(2))
+                            }
+                            return [months, totals]
                         }
-                        return sortedObj;
-                    }
-                    DB.set('tickets', data)
-                    let arr = [],
+
+                    const arr = [],
                         labels = [],
                         datas = [];
 
                     // Ponemos los datos en un array
-                    for (let i in data) {
+                    for (const i in data) {
                         const d = data[i]
                         if (d) {
                             const k = date.short(d.fecha)
@@ -56,57 +122,108 @@
                             else arr[k] = d.total
                         }
                     }
+
                     // Se ordena el array por fecha
-                    let a = _mySort(arr)
+                    const a = _mySort(arr)
 
                     // Se dividen los datos en dos arrays
-                    for (let i in a) {
-                        labels.push(i)
-                        datas.push(arr[i])
+                    for (const i in a) {
+                        this.data.model1.x.push(i)
+                        this.data.model1.y.push(arr[i])
                     }
-
-                    let ctx = document.getElementById('myChart');
-                    let myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels : labels,
-                            datasets: [{
-                                label: 'Ingresos por día',
-                                data: datas,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: false,
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+                    // Grafica por dias
+                    const cd = document.getElementById('chartDays'),
+                        chartdays = new Chart(cd, {
+                            type: 'bar',
+                            data: {
+                                labels: this.data.model1.x,
+                                datasets: [{
+                                    label: 'Ingresos por día',
+                                    data: this.data.model1.y,
+                                    backgroundColor: this.color.current.body,
+                                    borderColor: this.color.current.border,
+                                    borderWidth: 1
                                 }]
+                            },
+                            options: {
+                                responsive: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
                             }
-                        }
-                    });
-                })
+                        });
 
+                    // Grafica por meses
+                    // Agrupamos array por meses
+                    const dataMonth = _groupformonth(data),
+                        chart2 = new Chart(document.getElementById('chartMonth'), {
+                            type: 'bar',
+                            data: {
+                                labels: dataMonth[0],
+                                datasets: [{
+                                    label: 'Ingresos por día',
+                                    data: dataMonth[1],
+                                    backgroundColor: this.color.current.body,
+                                    borderColor: this.color.current.border,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    this.learnLinear(dataMonth[0], dataMonth[1], dataMonth[0].length + 1)
+AKI :: Añadir la prediccion al grafico
+                    this.addData(chart2, 4, 1200 )
+                })
+            },
+            // Añade datos a la grafica
+            addData(chart, label, data) {
+                chart.data.labels.push(label);
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(data);
+                });
+                chart.update();
+            },
+            //Creamos una funcion asincrona (para que se active hasta que termine de cargar la pagina)
+            async learnLinear(valX, valY, newVal) {
+                //Definimos el modelo que sera de regresion lineal
+                const model = tf.sequential();
+                //Agregamos una capa densa porque todos los nodos estan conectado entre si
+                model.add(tf.layers.dense({
+                    units: 1,
+                    inputShape: [1]
+                }));
+
+                // Compilamos el modelo con un sistema de perdida de cuadratico y optimizamos con sdg
+                model.compile({
+                    loss: 'meanSquaredError',
+                    optimizer: 'sgd'
+                });
+
+                // Creamos los tensores para x y para y
+                const xs = tf.tensor2d(valX, [valX.length, 1], 'float32');
+                const ys = tf.tensor2d(valY, [valY.length, 1], 'float32');
+
+                // entrenamos 
+                await model.fit(xs, ys, {
+                    epochs: this.tf.epochs
+                });
+                // Predicción
+
+                return model.predict(tf.tensor2d([newVal], [1, 1])).dataSync()[0];
             }
         };
     </script>
 </section>
-

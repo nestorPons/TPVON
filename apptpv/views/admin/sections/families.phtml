@@ -20,7 +20,7 @@
     app.families = {
         table: 'familias',
         buttons: ['add'],
-        Table: new Table('<?= $table->idEl() ?>'),
+        Table: new Table('<?= $table->id() ?>'),
         Form: new Modal('<?= $form->id() ?>'),
         // Método inializador
         open() {
@@ -77,7 +77,7 @@
                 .state('new')
                 .clear()
                 .open(data)
-                .setTile('Nuevo A/S')
+                .setTile('Nuevo servicio')
 
         },
         addLine(data) {
@@ -99,7 +99,7 @@
         show(e) {
             this.currentId = e.path[1].attributes.idline.value
             DB.get(this.table, 'id', this.currentId)
-                .then(data => this.Form.state('edit').open(data).setTile('Edición A/S'))
+                .then(data => this.Form.state('edit').open(data).setTile('Edición servicio'))
         }
     }
 </script>

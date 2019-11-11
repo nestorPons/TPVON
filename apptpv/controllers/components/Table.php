@@ -5,13 +5,11 @@ class Table extends Component{
     protected $type = 'table';
     
     function __construct(Array $data = []){
+
         if(!(isset($data['columns']))) die("Faltan datos para construir el objeto select");
         $this->total = false;
         $this->type = 'table';
-        parent::__construct($data);        
+        parent::__construct($data);       
         $this->print('table');
-    }
-    function idEl(){
-        return $this->id;
     }
 }
