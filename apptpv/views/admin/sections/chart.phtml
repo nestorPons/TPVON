@@ -13,28 +13,15 @@
     ?>
     <script>
         app.chart = {
-            data: {
-                model1: {
-                    x: [],
-                    y: []
-                },
-                model2: {
-                    x: [],
-                    y: []
-                }
-            },
             color: {
                 current: {
-                    body: 'rgba(40, 184, 53, 0.21)',
-                    border: 'rgba(40, 184, 53, 0.41)',
+                    body: 'rgba(40, 184, 53, 0.41)',
+                    border: 'rgba(40, 184, 53, 0.61)',
                 },
                 predict: {
-                    body: 'rgba(40, 42, 40, 0.21)',
-                    border: 'rgba(40, 42, 40, 0.41)',
+                    body: 'rgba(88, 88, 88, 0.21)',
+                    border: 'rgba(88, 88, 88, 0.31)',
                 }
-            },
-            tf: {
-                epochs: 50,
             },
             buttons: [],
             load() {
@@ -42,73 +29,8 @@
                     controller: 'tickets',
                     action: 'getAll',
                     data: null
-                }, data => {
-                    let _mySort = arr => {
-                            // Inicializamos los arrays
-                            let sortedKeys = new Array();
-                            let sortedObj = {};
-
-                            // Separamos la clave en un solo array
-                            for (let i in arr) {
-                                sortedKeys.push(i);
-                            }
-                            // Ordenamos dicha clave
-                            sortedKeys.sort(function(a, b) {
-                                dateA = date.sql(a)
-                                dateB = date.sql(b)
-                                return new Date(dateA) - new Date(dateB);
-                            });
-
-                            // Reconstruimos el array asociativo con la clave ordenada
-                            for (let i in sortedKeys) {
-                                sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
-                            }
-                            return sortedObj;
-                        },
-                        // Agrupa los datos por meses
-                        _groupformonth = array => {
-                            // Construcción del nuevo array:
-
-                            const resultado = [],
-                                months = [],
-                                totals = [];
-                            array.reduce(function(res, value) {
-
-                                // Creamos la posición del array para cada mes
-                                let mes = new Date(value.fecha).getMonth() + 1;
-                                if (!res[mes]) {
-                                    res[mes] = {
-                                        mes: mes
-                                    };
-
-                                    // Inicializamos a 0 el valor de cada key
-                                    Object.keys(value).forEach(function(key) {
-                                        if (key != 'fecha') {
-                                            res[mes][key] = 0;
-                                        }
-                                    })
-
-                                    resultado.push(res[mes])
-                                }
-
-                                // Sumamos el valor de cada clave dentro de un bucle
-                                Object.keys(value).forEach(function(key) {
-                                    if (key != 'fecha') {
-                                        res[mes][key] += value[key];
-                                    }
-                                })
-
-                                return res;
-                            }, {});
-
-                            // Resultado en dos arrays
-                            for (const i in resultado) {
-                                months.push(resultado[i].mes)
-                                totals.push(resultado[i].total.toFixed(2))
-                            }
-                            return [months, totals]
-                        }
-
+                }, async data => {
+                    // Agrupa los datos por meses
                     const arr = [],
                         labels = [],
                         datas = [];
@@ -122,83 +44,91 @@
                             else arr[k] = d.total
                         }
                     }
-
+AKI :: solucionar problema grafico por dias
                     // Se ordena el array por fecha
-                    const a = _mySort(arr)
-
                     // Se dividen los datos en dos arrays
-                    for (const i in a) {
-                        this.data.model1.x.push(i)
-                        this.data.model1.y.push(arr[i])
-                    }
-                    // Grafica por dias
-                    const cd = document.getElementById('chartDays'),
-                        chartdays = new Chart(cd, {
-                            type: 'bar',
-                            data: {
-                                labels: this.data.model1.x,
-                                datasets: [{
-                                    label: 'Ingresos por día',
-                                    data: this.data.model1.y,
-                                    backgroundColor: this.color.current.body,
-                                    borderColor: this.color.current.border,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: false,
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
+                    const
+                        dOrder = this.orderDataByDate(arr),
+                        daysXY = this.twoArrays(dOrder, 'date', 'value');
 
-                    // Grafica por meses
-                    // Agrupamos array por meses
-                    const dataMonth = _groupformonth(data),
-                        chart2 = new Chart(document.getElementById('chartMonth'), {
-                            type: 'bar',
-                            data: {
-                                labels: dataMonth[0],
-                                datasets: [{
-                                    label: 'Ingresos por día',
-                                    data: dataMonth[1],
-                                    backgroundColor: this.color.current.body,
-                                    borderColor: this.color.current.border,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: false,
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                    this.learnLinear(dataMonth[0], dataMonth[1], dataMonth[0].length + 1)
-AKI :: Añadir la prediccion al grafico
-                    this.addData(chart2, 4, 1200 )
+                    // Crea grafica dias
+                    this.create('chartDays', daysXY, 'Ingresos Dias', 'rgba(40, 184, 53, 0.41)', 'rgba(40, 184, 53, 0.61)')
+                    
+                    // Se agrupa los datos por meses
+                    let dataMonth = await this.groupformonth(dOrder)
+                    // Crear grafica mes
+                    this.create('chartMonth', dataMonth, 'Ingresos Mes', 'rgba(40, 184, 53, 0.41)', 'rgba(40, 184, 53, 0.61)')
+
                 })
+            },
+            // Crea un gráfico
+            async create(name, data, labelBar, color, borderColor) {
+
+                const
+                    colorBars = [],
+                    colorBorders = [],
+                    el = document.getElementById(name)
+
+                for (let i in data[0]) {
+                    colorBars.push(color)
+                    colorBorders.push(borderColor)
+                }
+                // Gráfica
+                const
+                    chart = new Chart(el, {
+                        type: 'bar',
+                        data: {
+                            labels: data[0],
+                            datasets: [{
+                                label: labelBar,
+                                data: data[1],
+                                backgroundColor: colorBars,
+                                borderColor: colorBorders,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    })
+                // Predicciones
+
+                const y = await this.learnLinear(data, data[1].length);
+
+                this.addData(chart, 'previsión', y);
+                return chart;
             },
             // Añade datos a la grafica
             addData(chart, label, data) {
                 chart.data.labels.push(label);
                 chart.data.datasets.forEach((dataset) => {
                     dataset.data.push(data);
+                    dataset.backgroundColor.push(this.color.predict.body);
+                    dataset.borderColor.push(this.color.predict.border);
                 });
                 chart.update();
             },
+            twoArrays(obj, prop1, prop2) {
+                const a = [],
+                    b = [];
+                for (const i in obj) {
+                    a.push(obj[i][prop1])
+                    b.push(obj[i][prop2])
+                }
+                return [a, b]
+            },
             //Creamos una funcion asincrona (para que se active hasta que termine de cargar la pagina)
-            async learnLinear(valX, valY, newVal) {
+            async learnLinear(val, newVal) {
+
                 //Definimos el modelo que sera de regresion lineal
+                const epochs = 50;
                 const model = tf.sequential();
                 //Agregamos una capa densa porque todos los nodos estan conectado entre si
                 model.add(tf.layers.dense({
@@ -213,17 +143,77 @@ AKI :: Añadir la prediccion al grafico
                 });
 
                 // Creamos los tensores para x y para y
-                const xs = tf.tensor2d(valX, [valX.length, 1], 'float32');
-                const ys = tf.tensor2d(valY, [valY.length, 1], 'float32');
+                const xs = tf.tensor2d(val[0], [val[0].length, 1], 'float32');
+                const ys = tf.tensor2d(val[1], [val[1].length, 1], 'float32');
 
                 // entrenamos 
                 await model.fit(xs, ys, {
-                    epochs: this.tf.epochs
+                    epochs: epochs
                 });
                 // Predicción
 
                 return model.predict(tf.tensor2d([newVal], [1, 1])).dataSync()[0];
-            }
+            },
+            groupformonth(array) {
+                // Construcción del nuevo array:
+
+                const resultado = [],
+                    months = [],
+                    totals = [];
+                array.reduce(function(res, value) {
+                    // Creamos la posición del array para cada mes
+                    let mes = new Date(date.sql(value.date)).getMonth() + 1;
+                        
+                    if (!res[mes]) {
+                        res[mes] = {
+                            month: mes
+                        };
+
+                        // Inicializamos a 0 el valor de cada key
+                        Object.keys(value).forEach(function(key) {
+                            if (key != 'date') {
+                                res[mes][key] = 0;
+                            }
+                        })
+                        resultado.push(res[mes])
+                    }
+
+                    // Sumamos el valor de cada clave dentro de un bucle
+                    Object.keys(value).forEach(function(key) {
+                        if (key != 'fecha') {
+                            res[mes][key] += value[key];
+                        }
+                    })
+                    return res;
+                }, {});
+
+                return this.twoArrays(resultado, 'month', 'value')
+            },
+            orderDataByDate(arr) {
+                // Inicializamos los arrays
+                let sortedKeys = new Array();
+                let sortedObj = [];
+
+                // Separamos la clave en un solo array
+                for (let i in arr) {
+                    sortedKeys.push(i);
+                }
+                // Ordenamos dicha clave
+                sortedKeys.sort(function(a, b) {
+                    dateA = date.sql(a)
+                    dateB = date.sql(b)
+                    return new Date(dateA) - new Date(dateB);
+                });
+
+                // Reconstruimos el array asociativo con la clave ordenada
+                for (let i in sortedKeys) {
+                    sortedObj.push({
+                        date: sortedKeys[i],
+                        value: arr[sortedKeys[i]]
+                    })
+                }
+                return sortedObj;
+            },
         };
     </script>
 </section>

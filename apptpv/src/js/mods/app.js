@@ -518,9 +518,11 @@ const date =  {
 
         return (diff / (1000 * 60 * 60 * 24));
     },
-    add(strDate, value, unity, format = null) {
-        const date = new Date(this.format(strDate, 'sql')),
-            v = parseInt(value)
+    add(argdate, value, unity, format = null) {
+         
+        const date = (typeof argdate !== 'object') ? new Date(this.format(argdate, 'sql')) : argdate; 
+        const v = parseInt(value);
+        
         switch (unity) {
             case 'days':
                 date.setDate(date.getDate() + v)

@@ -11,23 +11,25 @@
         'content' => '<canvas id="chartMonth" width="400px" height="400px"></canvas>'
     ])
     ?>
-    <script>app.chart={data:{model1:{x:[],y:[]},model2:{x:[],y:[]}},color:{current:{body:'rgba(40, 184, 53, 0.21)',border:'rgba(40, 184, 53, 0.41)',},predict:{body:'rgba(40, 42, 40, 0.21)',border:'rgba(40, 42, 40, 0.41)',}},tf:{epochs:50,},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},data=>{let _mySort=arr=>{let sortedKeys=new Array();let sortedObj={};for(let i in arr){sortedKeys.push(i)}
-sortedKeys.sort(function(a,b){dateA=date.sql(a)
-dateB=date.sql(b)
-return new Date(dateA)-new Date(dateB)});for(let i in sortedKeys){sortedObj[sortedKeys[i]]=arr[sortedKeys[i]]}
-return sortedObj},_groupformonth=array=>{const resultado=[],months=[],totals=[];array.reduce(function(res,value){let mes=new Date(value.fecha).getMonth()+1;if(!res[mes]){res[mes]={mes:mes};Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]=0}})
-resultado.push(res[mes])}
-Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]+=value[key]}})
-return res},{});for(const i in resultado){months.push(resultado[i].mes)
-totals.push(resultado[i].total.toFixed(2))}
-return[months,totals]}
-const arr=[],labels=[],datas=[];for(const i in data){const d=data[i]
+    <script>app.chart={color:{current:{body:'rgba(40, 184, 53, 0.41)',border:'rgba(40, 184, 53, 0.61)',},predict:{body:'rgba(88, 88, 88, 0.21)',border:'rgba(88, 88, 88, 0.31)',}},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},async data=>{const arr=[],labels=[],datas=[];for(const i in data){const d=data[i]
 if(d){const k=date.short(d.fecha)
 if(arr[k]!=undefined)arr[k]+=d.total
 else arr[k]=d.total}}
-const a=_mySort(arr)
-for(const i in a){this.data.model1.x.push(i)
-this.data.model1.y.push(arr[i])}
-const cd=document.getElementById('chartDays'),chartdays=new Chart(cd,{type:'bar',data:{labels:this.data.model1.x,datasets:[{label:'Ingresos por día',data:this.data.model1.y,backgroundColor:this.color.current.body,borderColor:this.color.current.border,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}});const dataMonth=_groupformonth(data),chart2=new Chart(document.getElementById('chartMonth'),{type:'bar',data:{labels:dataMonth[0],datasets:[{label:'Ingresos por día',data:dataMonth[1],backgroundColor:this.color.current.body,borderColor:this.color.current.border,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}});this.learnLinear(dataMonth[0],dataMonth[1],dataMonth[0].length+1)
-this.addData(chart2,4,1200)})},addData(chart,label,data){chart.data.labels.push(label);chart.data.datasets.forEach((dataset)=>{dataset.data.push(data)});chart.update()},async learnLinear(valX,valY,newVal){const model=tf.sequential();model.add(tf.layers.dense({units:1,inputShape:[1]}));model.compile({loss:'meanSquaredError',optimizer:'sgd'});const xs=tf.tensor2d(valX,[valX.length,1],'float32');const ys=tf.tensor2d(valY,[valY.length,1],'float32');await model.fit(xs,ys,{epochs:this.tf.epochs});return model.predict(tf.tensor2d([newVal],[1,1])).dataSync()[0]}}</script>
+const dataDayX=[],dataDayY=[],dOrder=this.orderDataByDate(arr),daysXY=this.twoArrays(dOrder,'date','value');this.create('chartDays',daysXY,'Ingresos Dias','rgba(40, 184, 53, 0.41)','rgba(40, 184, 53, 0.61)')
+let dataMonth=await this.groupformonth(dOrder)
+this.create('chartMonth',dataMonth,'Ingresos Mes','rgba(40, 184, 53, 0.41)','rgba(40, 184, 53, 0.61)')})},async create(name,data,labelBar,color,borderColor){const
+colorBars=[],colorBorders=[],el=document.getElementById(name)
+for(let i in data[0]){colorBars.push(color)
+colorBorders.push(borderColor)}
+const chart=new Chart(el,{type:'bar',data:{labels:data[0],datasets:[{label:labelBar,data:data[1],backgroundColor:colorBars,borderColor:colorBorders,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}})
+const y=await this.learnLinear(data,data[1].length);this.addData(chart,'previsión',y);return chart},addData(chart,label,data){chart.data.labels.push(label);chart.data.datasets.forEach((dataset)=>{dataset.data.push(data);dataset.backgroundColor.push(this.color.predict.body);dataset.borderColor.push(this.color.predict.border)});chart.update()},twoArrays(obj,prop1,prop2){const a=[],b=[];for(const i in obj){a.push(obj[i][prop1])
+b.push(obj[i][prop2])}
+return[a,b]},async learnLinear(val,newVal){const epochs=100;const model=tf.sequential();model.add(tf.layers.dense({units:1,inputShape:[1]}));model.compile({loss:'meanSquaredError',optimizer:'sgd'});const xs=tf.tensor2d(val[0],[val[0].length,1],'float32');const ys=tf.tensor2d(val[1],[val[1].length,1],'float32');await model.fit(xs,ys,{epochs:epochs});return model.predict(tf.tensor2d([newVal],[1,1])).dataSync()[0]},groupformonth(array){const resultado=[],months=[],totals=[];array.reduce(function(res,value){let mes=new Date(date.sql(value.date)).getMonth()+1;if(!res[mes]){res[mes]={month:mes};Object.keys(value).forEach(function(key){if(key!='date'){res[mes][key]=0}})
+resultado.push(res[mes])}
+Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]+=value[key]}})
+return res},{});return this.twoArrays(resultado,'month','value')},orderDataByDate(arr){let sortedKeys=new Array();let sortedObj=[];for(let i in arr){sortedKeys.push(i)}
+sortedKeys.sort(function(a,b){dateA=date.sql(a)
+dateB=date.sql(b)
+return new Date(dateA)-new Date(dateB)});for(let i in sortedKeys){sortedObj.push({date:sortedKeys[i],value:arr[sortedKeys[i]]})}
+return sortedObj},}</script>
 </section>
