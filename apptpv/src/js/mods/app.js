@@ -541,6 +541,8 @@ const date =  {
     },
     short(param = this.date){
         return this.format(param, 'short')
-    }
-
+    },
+    hour(param = this.date){
+        return this.format(param, 'hour')
+    },
 }

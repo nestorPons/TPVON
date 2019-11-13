@@ -3,13 +3,16 @@
     new MenuSquare([
         'tile' => 'Gráfica ingresos dia',
         'content' => '<canvas id="chartDays" width="600px" height="600px"></canvas>'
-    ])
-    ?>
-    <?php
+    ]);
+
     new MenuSquare([
         'tile' => 'Gráfica ingresos mes',
         'content' => '<canvas id="chartMonth" width="400px" height="400px"></canvas>'
-    ])
+    ]);
+    new MenuSquare([
+        'tile' => 'Gráfica ingresos años',
+        'content' => '<canvas id="chartYear" width="400px" height="400px"></canvas>'
+    ]);
     ?>
     <script>
         app.chart = {
@@ -30,39 +33,88 @@
                     action: 'getAll',
                     data: null
                 }, async data => {
-                    // Agrupa los datos por meses
-                    const arr = [],
-                        labels = [],
-                        datas = [];
 
-                    // Ponemos los datos en un array
-                    for (const i in data) {
-                        const d = data[i]
-                        if (d) {
-                            const k = date.short(d.fecha)
-                            if (arr[k] != undefined) arr[k] += d.total
-                            else arr[k] = d.total
-                        }
-                    }
-AKI :: solucionar problema grafico por dias
-                    // Se ordena el array por fecha
-                    // Se dividen los datos en dos arrays
-                    const
-                        dOrder = this.orderDataByDate(arr),
-                        daysXY = this.twoArrays(dOrder, 'date', 'value');
-
+                    // Preparamos los datos
+                    const ordata = this.prepare(data)
+                    // Totalizamos los dias 
+                    const daydata = this.groupDataDays(ordata)
+                    // Convertimos las propiedades en arrays 
+                    const arrdaydata = this.toArrays(daydata)
                     // Crea grafica dias
-                    this.create('chartDays', daysXY, 'Ingresos Dias', 'rgba(40, 184, 53, 0.41)', 'rgba(40, 184, 53, 0.61)')
-                    
-                    // Se agrupa los datos por meses
-                    let dataMonth = await this.groupformonth(dOrder)
-                    // Crear grafica mes
-                    this.create('chartMonth', dataMonth, 'Ingresos Mes', 'rgba(40, 184, 53, 0.41)', 'rgba(40, 184, 53, 0.61)')
+                    this.create('chartDays', arrdaydata, 'Ingresos Dias');
+
+                    // Crea grafica agrupacion por meses
+                    this.create(
+                        'chartMonth',
+                        this.toArrays(this.groupDataMonths(ordata)),
+                        'Ingresos Mes')
+                    // Crea grafica agrupacion por años
+                    this.create(
+                        'chartYear',
+                        this.toArrays(this.groupDataYears(ordata)),
+                        'Ingresos Mes')
 
                 })
             },
+            // Crea un array de objetos para poder tratar los datos
+            prepare(data) {
+                const ordata = []
+
+                // Se ordena el array por fecha                       
+                data.sort(function(a, b) {
+                    dateA = date.sql(a.fecha)
+                    dateB = date.sql(b.fecha)
+                    return new Date(dateA) - new Date(dateB);
+                });
+
+                // Ponemos los datos en un array
+                for (const i in data) {
+                    const d = data[i]
+                    if (d) {
+                        const
+                            dt = +new Date(date.sql(d.fecha)).getTime(),
+                            ts = Math.floor(dt / 1000);
+
+                        ordata.push({
+                            id: i,
+                            date: date.short(d.fecha),
+                            hour: date.hour(d.fecha),
+                            value: d.total,
+                            timestamp: ts
+                        })
+                    }
+                }
+                return ordata;
+            },
+            groupDataDays(array) {
+                return this.groupData(array, 0)
+            },
+            groupDataMonths(array) {
+                return this.groupData(array, 3)
+            },
+            groupDataYears(array) {
+                return this.groupData(array, 6)
+            },
+            groupData(array, slice) {
+                return array.reduce(function(groups, item, index) {
+                    const i = item['date'].slice(slice)
+                    groups[i] = groups[i] || {
+                        date: i,
+                        value: 0,
+                        count: 0,
+                        timestamp: 0,
+                    };
+
+                    groups[i].value += item.value;
+                    groups[i].count = index;
+                    groups[i].timestamp = item.timestamp;
+
+                    return groups;
+                }, {});
+            },
             // Crea un gráfico
-            async create(name, data, labelBar, color, borderColor) {
+            async create(name, data, labelBar, color = null, borderColor = null) {
+
 
                 const
                     colorBars = [],
@@ -70,15 +122,15 @@ AKI :: solucionar problema grafico por dias
                     el = document.getElementById(name)
 
                 for (let i in data[0]) {
-                    colorBars.push(color)
-                    colorBorders.push(borderColor)
+                    colorBars.push(color || this.color.current.body)
+                    colorBorders.push(borderColor || this.color.current.border)
                 }
                 // Gráfica
                 const
                     chart = new Chart(el, {
                         type: 'bar',
                         data: {
-                            labels: data[0],
+                            labels: data[3],
                             datasets: [{
                                 label: labelBar,
                                 data: data[1],
@@ -99,10 +151,18 @@ AKI :: solucionar problema grafico por dias
                         }
                     })
                 // Predicciones
+                const
+                    date = new Date(data[0][data[0].length - 1] * 1000)
 
-                const y = await this.learnLinear(data, data[1].length);
+                date.setDate(date.getDate() + 1)
+                const
+                    dt = date.getTime(),
+                    ts = Math.floor(dt / 1000);
 
-                this.addData(chart, 'previsión', y);
+                const pred = Math.max(...data[2]) + 1
+                const y = await this.learnLinear(data, pred);
+                echo(y)
+                this.addData(chart, 'previsión', y.toFixed(2));
                 return chart;
             },
             // Añade datos a la grafica
@@ -115,40 +175,56 @@ AKI :: solucionar problema grafico por dias
                 });
                 chart.update();
             },
-            twoArrays(obj, prop1, prop2) {
-                const a = [],
-                    b = [];
-                for (const i in obj) {
-                    a.push(obj[i][prop1])
-                    b.push(obj[i][prop2])
+            toArrays(obj) {
+                const o = Object.values(obj),
+                    a = [],
+                    b = [],
+                    c = [],
+                    d = [];
+
+                for (const p of o) {
+                    a.push(p.timestamp)
+                    b.push(p.value)
+                    c.push(p.count)
+                    d.push(p.date)
                 }
-                return [a, b]
+                return [a, b, c, d]
             },
             //Creamos una funcion asincrona (para que se active hasta que termine de cargar la pagina)
             async learnLinear(val, newVal) {
-
                 //Definimos el modelo que sera de regresion lineal
-                const epochs = 50;
+                const batchSize = 32;
+                const epochs = 100;
                 const model = tf.sequential();
+                // Add a single hidden layer
+                model.add(tf.layers.dense({
+                    inputShape: [1],
+                    units: 1,
+                    useBias: true
+                }));
                 //Agregamos una capa densa porque todos los nodos estan conectado entre si
                 model.add(tf.layers.dense({
                     units: 1,
-                    inputShape: [1]
+                    useBias: true
                 }));
 
                 // Compilamos el modelo con un sistema de perdida de cuadratico y optimizamos con sdg
                 model.compile({
-                    loss: 'meanSquaredError',
-                    optimizer: 'sgd'
+                    loss: tf.losses.meanSquaredError,
+                    optimizer: tf.train.adam(),
+                    metrics: ['mse'],
                 });
 
                 // Creamos los tensores para x y para y
-                const xs = tf.tensor2d(val[0], [val[0].length, 1], 'float32');
-                const ys = tf.tensor2d(val[1], [val[1].length, 1], 'float32');
+
+                const inputs = tf.tensor2d(val[2], [val[0].length, 1], 'float32');
+                const labels = tf.tensor2d(val[1], [val[0].length, 1], 'float32');
 
                 // entrenamos 
-                await model.fit(xs, ys, {
-                    epochs: epochs
+                await model.fit(inputs, labels, {
+                    batchSize,
+                    epochs,
+                    shuffle: true,
                 });
                 // Predicción
 
@@ -163,7 +239,7 @@ AKI :: solucionar problema grafico por dias
                 array.reduce(function(res, value) {
                     // Creamos la posición del array para cada mes
                     let mes = new Date(date.sql(value.date)).getMonth() + 1;
-                        
+
                     if (!res[mes]) {
                         res[mes] = {
                             month: mes
@@ -188,31 +264,6 @@ AKI :: solucionar problema grafico por dias
                 }, {});
 
                 return this.twoArrays(resultado, 'month', 'value')
-            },
-            orderDataByDate(arr) {
-                // Inicializamos los arrays
-                let sortedKeys = new Array();
-                let sortedObj = [];
-
-                // Separamos la clave en un solo array
-                for (let i in arr) {
-                    sortedKeys.push(i);
-                }
-                // Ordenamos dicha clave
-                sortedKeys.sort(function(a, b) {
-                    dateA = date.sql(a)
-                    dateB = date.sql(b)
-                    return new Date(dateA) - new Date(dateB);
-                });
-
-                // Reconstruimos el array asociativo con la clave ordenada
-                for (let i in sortedKeys) {
-                    sortedObj.push({
-                        date: sortedKeys[i],
-                        value: arr[sortedKeys[i]]
-                    })
-                }
-                return sortedObj;
             },
         };
     </script>
