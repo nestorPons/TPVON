@@ -32,7 +32,13 @@
                     controller: 'tickets',
                     action: 'getAll',
                     data: null
-                }, async data => {
+                }, async post => {
+                    const data = [];
+
+                    // Quitamos los tickets eliminados 
+                    for (let i in post) {
+                        if (post[i]) data.push(post[i])
+                    }
 
                     // Preparamos los datos
                     const ordata = this.prepare(data)
@@ -114,8 +120,6 @@
             },
             // Crea un gráfico
             async create(name, data, labelBar, color = null, borderColor = null) {
-
-
                 const
                     colorBars = [],
                     colorBorders = [],
@@ -152,17 +156,20 @@
                     })
                 // Predicciones
                 const
-                    date = new Date(data[0][data[0].length - 1] * 1000)
+                    date = new Date(data[0][data[0].length - 1] * 1000),
+                    X = []
 
                 date.setDate(date.getDate() + 1)
+                
+                for(let k of data[1].keys()) X.push(k)
+           
                 const
-                    dt = date.getTime(),
-                    ts = Math.floor(dt / 1000);
+                    pred =X[X.length - 1 ] + 1, 
+                    Y = data[1],
+                    prediction = await this.learnLinear([X, Y], pred);
 
-                const pred = Math.max(...data[2]) + 1
-                const y = await this.learnLinear(data, pred);
-                echo(y)
-                this.addData(chart, 'previsión', y.toFixed(2));
+                echo('PRED=>' + prediction)
+                this.addData(chart, 'previsión', +prediction.toFixed(2));
                 return chart;
             },
             // Añade datos a la grafica
@@ -191,43 +198,39 @@
                 return [a, b, c, d]
             },
             //Creamos una funcion asincrona (para que se active hasta que termine de cargar la pagina)
-            async learnLinear(val, newVal) {
+            async learnLinear(data, newVal) {
                 //Definimos el modelo que sera de regresion lineal
                 const batchSize = 32;
-                const epochs = 100;
+                const epochs = 60;
                 const model = tf.sequential();
-                // Add a single hidden layer
-                model.add(tf.layers.dense({
-                    inputShape: [1],
-                    units: 1,
-                    useBias: true
-                }));
+                const trainingsize = 70;
+
                 //Agregamos una capa densa porque todos los nodos estan conectado entre si
                 model.add(tf.layers.dense({
                     units: 1,
-                    useBias: true
+                    inputShape: [1]
                 }));
 
                 // Compilamos el modelo con un sistema de perdida de cuadratico y optimizamos con sdg
                 model.compile({
-                    loss: tf.losses.meanSquaredError,
                     optimizer: tf.train.adam(),
-                    metrics: ['mse'],
+                    loss: 'meanSquaredError'
                 });
 
-                // Creamos los tensores para x y para y
+                let X = data[0].slice(0, Math.floor(trainingsize / 100 * data[0].length));
+                let Y = data[1].slice(0, Math.floor(trainingsize / 100 * data[1].length));
 
-                const inputs = tf.tensor2d(val[2], [val[0].length, 1], 'float32');
-                const labels = tf.tensor2d(val[1], [val[0].length, 1], 'float32');
+                const xs = tf.tensor2d(X, [X.length, 1], 'float32').div(tf.scalar(10));
+                const ys = tf.tensor2d(Y, [Y.length, 1], 'float32').reshape([Y.length, 1]).div(tf.scalar(10));
 
                 // entrenamos 
-                await model.fit(inputs, labels, {
+                await model.fit(ys, xs, {
                     batchSize,
                     epochs,
                     shuffle: true,
                 });
+                
                 // Predicción
-
                 return model.predict(tf.tensor2d([newVal], [1, 1])).dataSync()[0];
             },
             groupformonth(array) {

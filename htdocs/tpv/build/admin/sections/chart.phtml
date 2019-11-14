@@ -14,7 +14,8 @@
         'content' => '<canvas id="chartYear" width="400px" height="400px"></canvas>'
     ]);
     ?>
-    <script>app.chart={color:{current:{body:'rgba(40, 184, 53, 0.41)',border:'rgba(40, 184, 53, 0.61)',},predict:{body:'rgba(88, 88, 88, 0.21)',border:'rgba(88, 88, 88, 0.31)',}},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},async data=>{const ordata=this.prepare(data)
+    <script>app.chart={color:{current:{body:'rgba(40, 184, 53, 0.41)',border:'rgba(40, 184, 53, 0.61)',},predict:{body:'rgba(88, 88, 88, 0.21)',border:'rgba(88, 88, 88, 0.31)',}},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},async post=>{const data=[];for(let i in post){if(post[i])data.push(post[i])}
+const ordata=this.prepare(data)
 const daydata=this.groupDataDays(ordata)
 const arrdaydata=this.toArrays(daydata)
 this.create('chartDays',arrdaydata,'Ingresos Dias');this.create('chartMonth',this.toArrays(this.groupDataMonths(ordata)),'Ingresos Mes')
@@ -30,15 +31,15 @@ colorBars=[],colorBorders=[],el=document.getElementById(name)
 for(let i in data[0]){colorBars.push(color||this.color.current.body)
 colorBorders.push(borderColor||this.color.current.border)}
 const chart=new Chart(el,{type:'bar',data:{labels:data[3],datasets:[{label:labelBar,data:data[1],backgroundColor:colorBars,borderColor:colorBorders,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}})
-const date=new Date(data[0][data[0].length-1]*1000)
+const date=new Date(data[0][data[0].length-1]*1000),X=[]
 date.setDate(date.getDate()+1)
-const dt=date.getTime(),ts=Math.floor(dt/1000);const pred=Math.max(...data[2])+1
-const y=await this.learnLinear(data,pred);echo(y)
-this.addData(chart,'previsión',y.toFixed(2));return chart},addData(chart,label,data){chart.data.labels.push(label);chart.data.datasets.forEach((dataset)=>{dataset.data.push(data);dataset.backgroundColor.push(this.color.predict.body);dataset.borderColor.push(this.color.predict.border)});chart.update()},toArrays(obj){const o=Object.values(obj),a=[],b=[],c=[],d=[];for(const p of o){a.push(p.timestamp)
+for(let k of data[1].keys())X.push(k)
+const pred=X[X.length-1]+1,Y=data[1],prediction=await this.learnLinear([X,Y],pred);echo('PRED=>'+prediction)
+this.addData(chart,'previsión',+prediction.toFixed(2));return chart},addData(chart,label,data){chart.data.labels.push(label);chart.data.datasets.forEach((dataset)=>{dataset.data.push(data);dataset.backgroundColor.push(this.color.predict.body);dataset.borderColor.push(this.color.predict.border)});chart.update()},toArrays(obj){const o=Object.values(obj),a=[],b=[],c=[],d=[];for(const p of o){a.push(p.timestamp)
 b.push(p.value)
 c.push(p.count)
 d.push(p.date)}
-return[a,b,c,d]},async learnLinear(val,newVal){const batchSize=32;const epochs=100;const model=tf.sequential();model.add(tf.layers.dense({inputShape:[1],units:1,useBias:!0}));model.add(tf.layers.dense({units:1,useBias:!0}));model.compile({loss:tf.losses.meanSquaredError,optimizer:tf.train.adam(),metrics:['mse'],});const inputs=tf.tensor2d(val[2],[val[0].length,1],'float32');const labels=tf.tensor2d(val[1],[val[0].length,1],'float32');await model.fit(inputs,labels,{batchSize,epochs,shuffle:!0,});return model.predict(tf.tensor2d([newVal],[1,1])).dataSync()[0]},groupformonth(array){const resultado=[],months=[],totals=[];array.reduce(function(res,value){let mes=new Date(date.sql(value.date)).getMonth()+1;if(!res[mes]){res[mes]={month:mes};Object.keys(value).forEach(function(key){if(key!='date'){res[mes][key]=0}})
+return[a,b,c,d]},async learnLinear(data,newVal){const batchSize=32;const epochs=60;const model=tf.sequential();const trainingsize=70;model.add(tf.layers.dense({units:1,inputShape:[1]}));model.compile({optimizer:tf.train.adam(),loss:'meanSquaredError'});let X=data[0].slice(0,Math.floor(trainingsize/100*data[0].length));let Y=data[1].slice(0,Math.floor(trainingsize/100*data[1].length));const xs=tf.tensor2d(X,[X.length,1],'float32').div(tf.scalar(10));const ys=tf.tensor2d(Y,[Y.length,1],'float32').reshape([Y.length,1]).div(tf.scalar(10));await model.fit(ys,xs,{batchSize,epochs,shuffle:!0,});return model.predict(tf.tensor2d([newVal],[1,1])).dataSync()[0]},groupformonth(array){const resultado=[],months=[],totals=[];array.reduce(function(res,value){let mes=new Date(date.sql(value.date)).getMonth()+1;if(!res[mes]){res[mes]={month:mes};Object.keys(value).forEach(function(key){if(key!='date'){res[mes][key]=0}})
 resultado.push(res[mes])}
 Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]+=value[key]}})
 return res},{});return this.twoArrays(resultado,'month','value')},}</script>
