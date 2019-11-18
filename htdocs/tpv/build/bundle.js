@@ -42,8 +42,7 @@ this.data=[]}
 line(){return parseInt(this.el.rows.length)}
 addLine(id,arrData){this.data.push(arrData)
 const c=this.$template.clone().html()
-$(c).attr('idline',id||this.$table.find('tr').length).find('td').each(function(i,el){$(this).html(arrData[i]).attr('data-label',arrData[i])}).end().prependTo(this.$table.find('tbody'))
-return $(c)}
+return $(c).attr('idline',id||this.$table.find('tr').length).find('td').each(function(i,el){$(this).html(arrData[i]).attr('data-label',arrData[i])}).end().prependTo(this.$table.find('tbody'))}
 endScroll(){this.$table.animate({scrollTop:this.$table.height()},100)}
 clearLines(){this.$table.find('tbody').find('tr').remove()}
 clear(){this.data=[]
@@ -59,11 +58,7 @@ return total.innerHTML}
 hoverable(value){if(value!=undefined){if(value)this.el.classList.add('hoverable')
 else this.el.classList.remove('hoverable')}
 return this.el.classList.contains('hoverable')}
-html(){return this.el.innerHTML}}class Select extends Component{constructor(id){super()
-if(typeof id=='string'){this.el=document.getElementById(id).getElementsByTagName('select')[0]}else{this.el=id.getElementsByTagName('select')[0]}
-this.o=this.el.getElementsByTagName('option')
-this.CLASS_SELECTED='valid'
-this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
+html(){return this.el.innerHTML}}class Select extends Component{constructor(id){super();this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
 addClass(myclass){this.el.classList.add(myclass)
 return this}
 addOption(value,text){let opt=document.createElement('option')
@@ -87,8 +82,7 @@ for(let option of this.o){if(option.getAttribute('value')==data){option.selected
 optionselected=!0
 break}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
-else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}}class Modal{constructor(id){this.el=document.getElementById(id)
-this.$el=$('#'+id)
+else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}}class Modal{constructor(id){this.el=document.getElementById(id).querySelector(`.card`);this.$el=$('#'+id).find('.card')
 this.$switch=$('#control_'+id)
 this.$el.keyup(e=>(e.key==='Escape')&&this.close())
 this.attrState=!1

@@ -13,11 +13,11 @@
         $tip = new Select([
             'label' => 'Tipo producto', 'tabindex' => 6, 'name' => 'tipo', 'class' => 'valid',
             'options' => [1 => 'Servicio', 2 => 'Producto'], 'selected' => 1, 'required' => true
-        ], true);
+        ]);
         $sel02 = new Select([
             'label' => 'Familia', 'tabindex' => 7, 'name' => 'id_familia', 'class' => 'valid',
             'selected' => 1, 'required' => true
-        ], true);
+        ]);
         $btnSave = new ButtonSuccess(['caption' => 'Guardar', 'tabindex' => 8]);
         $btnDel = new ButtonCancel(['caption' => 'Eliminar', 'tabindex' => 9, 'class' => 'fnDelete']);
         ?>

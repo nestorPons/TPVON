@@ -1,9 +1,16 @@
-<?php namespace app\controllers\components?><input type="checkbox" id="control_--id" class="modal">
-<div>
-  <div class="card card-modal" id="--id">
-    <label for="control_--id" class="modal-close"></label>
-    <h1 id="tileModal--id" class="tile"></h1>
-    <?php include($body) ?>
+<?php namespace app\controllers\components?><m-modal>
+  <!--Sistema de activacion/cierre de la ventana -->
+  <input type="checkbox" id="control_--id" class="modal">
+  <div>
+    <div class="card card-modal" id="card--id">
+      <!-- icono de cierre de ventana -->
+      <label for="control_--id" class="lnr lnr-cross-circle icon-close"></label>
+      <!--Titulo de la ventana -->
+      <h1 id="tileModal--id" class="tile"></h1>
+      <!--Cuerpo de la ventana -->
+      <?php include($body) ?>
+    </div>
   </div>
-</div>
-<script></script>
+  <style scoped>.icon-close{position:absolute;right:0;font-size:1.5rem;top:0;background:var(--back-color);z-index:1000}h1{text-align:center}</style>
+  <script></script>
+  <m-modal>

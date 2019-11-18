@@ -26,7 +26,6 @@
         #--id {
             height          : 100%; 
             width           : 100%;
-            margin          : 5px 0;
 
             tfoot {
                 order       : 3;
@@ -37,8 +36,8 @@
                 }
             }
             table{ 
-                margin      : 5px;
-                max-height  : 375px;
+                margin      : 2px;
+                max-height  : 75vh;
             }
             &.hoverable tbody {
                 cursor      : pointer;
@@ -62,13 +61,14 @@
             }
             /**
              * arrData = array de datos en orden de salida
+             * retorna la dila en objeto jq
              */
             addLine(id, arrData) {
 
                 // Cargamos los datos en una variable para posteriores consultas (getData(){})
                 this.data.push(arrData)
                 const c =  this.$template.clone().html()
-                    $(c)
+                return $(c)
                     .attr('idline', id || this.$table.find('tr').length)
                         .find('td').each(function(i, el) {
                             $(this)
@@ -77,7 +77,7 @@
                         })
                     .end()
                     .prependTo(this.$table.find('tbody'))
-                return $(c)
+
             }
             endScroll() {
                 this.$table.animate({

@@ -145,3 +145,6 @@ function imprimirElemento(elemento, estilos) {
    // ventana.print();
     //ventana.close();
 }
+function clone(src) {
+    return JSON.parse(JSON.stringify(src));
+  }

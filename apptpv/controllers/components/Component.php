@@ -26,7 +26,7 @@ class Component{
                 if($key == 'checked')  $val = 'checked';
 
                 // Resto atributos
-                $this->{$key} = $val??null;                
+                $this->{$key} = $val??null;               
             }
         }
         $this->id = ($this->id)??uniqid($this->type);
@@ -46,7 +46,17 @@ class Component{
         ob_start();
             include \VIEWS\COMPONENTS . "$file.phtml";
             $this->file = ob_get_contents();
+            
+            // Buscamos el id del elemento contenedor
+            // Si no tiene id se crea uno 
+            $id = $this->extract('component|m-(.+)?', $this->file)['attr']['id'] ?? null;
+            if(!$id){
+                $this->id = uniqid('auto');
+                $this->file = $this->addAttr('component|m-(.+)?', 'id', $this->id, $this->file);
+            }
+
             $this->file = $this->style_scoped($this->file);
+
             $this->file = $this->script_scoped($this->file);
             $this->sintax(); 
         ob_end_clean();
@@ -159,27 +169,29 @@ class Component{
         };  
         return $content;
     }
+    // Añade atributos a la primera etiqueta del componente
+    private function addParent($tag, $attr, $value, string $content) : string{
+        $regex = "/<\s*{$tag}.*?>/";
+        if(preg_match($regex, $content, $matches)){
+            $search = substr($matches[0], 0 ,-1); 
+            $replace = "{$search} {$attr}='{$value}'";
+            $content = str_replace($search, $replace, $content);
+        };  
+        return $content;
+    }
     private function style_scoped($content) : string{
-        $has_scoped = preg_match('/<style.*?scoped[^<]*?>(.*?)<\/style>/mis', $content, $matches);
 
+        $has_scoped = preg_match('/<style.*?scoped[^<]*?>(.*?)<\/style>/mis', $content, $matches);
         if($has_scoped) {
             // Quitamos el comando scope
             $tagstyle = str_replace('scoped','',$matches[0]);
-
-            // Buscamos el id del elemento contenedor, o es un componente o una sectión
-            // Si no tiene id se crea uno y se coloca al style y al componente 
-            $id = $this->extract('component', $content)['attr']['id'] ?? null;
-            if(!$id){
-                $id = $this->uniqid('style_');
-                $content = $this->addAttr('component','id',$id, $content);    
-            }
             // Quitamos las reglas principales
             $tagstyle = preg_replace('/@import.*?;/', '', $tagstyle);  
             $tagstyle = preg_replace('/@charser.*?;/', '', $tagstyle);  
             
             // Se coloca el id a los estilos 
             $less = new \lessc;
-            $content_less = $less->compile('#'.$id.'{'.$matches[1].'}'); 
+            $content_less = $less->compile('#'.$this->id.'{'.$matches[1].'}'); 
             
             $tagstyle = str_replace($matches[1], $content_less, $tagstyle);
             $content = str_replace($matches[0], $tagstyle, $content);

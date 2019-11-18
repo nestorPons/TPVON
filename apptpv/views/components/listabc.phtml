@@ -1,7 +1,7 @@
-<component id="<?=$id?>" class="row col-sm-12 col-md-12">
+<component id="--id" class="row col-sm-12 col-md-12">
     <ul>
         <?php foreach ($arrABC as $l): ?>
-            <li onclick="<?=$id?>.sel(window.event)" value=<?=$l?> ><?=$l?></li>
+            <li onclick="--id.sel(window.event)" value=<?=$l?> ><?=$l?></li>
         <?php endforeach?>
     </ul>
     <style scoped>
@@ -25,11 +25,11 @@
         }
     </style>
     <script>
-        const <?=$id?> = {
+        const --id = {
             sel(el){
-                const val = el.path[0].attributes.value.value.toLowerCase(),
-                $t = $('#<?=$table?>')
-
+                const 
+                    val = el.path[0].attributes.value.value.toLowerCase(),
+                    $t = $('#<?=$table?>').find('table')
                 $t.find('tbody tr').hide(function(){
                         $t.find(`.${val}`).show()
                     })

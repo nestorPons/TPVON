@@ -9,10 +9,9 @@
         <?php $conf         = new Icon('cod',                   ['onclick'=>'app.sections.conf()', 'label' => 'Configurar'])?>
         <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
         <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
-        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'], false)?>
+        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'])?>
     </div>
-    <div id="bartools-central">
-        
+    <div id="bartools-central"> 
     </div>  
     <div id="bartools-general">
         <?php $help         = new Icon('question-circle',       ['onclick'=>'app.help()', 'label'=> 'Ayuda'])?>
@@ -39,12 +38,14 @@
     }
     #bartools > div{
         flex-grow: 1;
+        display: flex;
+        align-items: inherit;
     }
     #bartools > div:nth-child(2){
         text-align: center;
     }
     #bartools > div:last-child{
-        text-align: right;
+        justify-content: flex-end;
     }
     #bartools .lnr{
         display: inline-block;
@@ -56,7 +57,7 @@
         transform: var(--effect-transform-hover);
     }
     #bartools #<?=$txtSearch->id()?>{
-        position: absolute;
+        position: relative;
         background: var(--main-color);
         top: 0;
         left: 3204px;
@@ -70,6 +71,10 @@
     #bartools #<?=$txtSearch->id()?>{
         width: 300px;
         background-color: var(--form-back-color);
+    }
+    #bartools #<?=$txtSearch->id()?>>input{
+        position: absolute;
+        width: 97%;
     }
 </style>
 <script>
@@ -90,32 +95,40 @@
                 }
             }
         },
-        search          : {
+        search  : {
             $search     : $('#<?= $txtSearch->id()?>'), 
-            $txtSearch  : $('#<?= $txtSearch->id()?>'),
-            distance    : 3000, 
+            $txtSearch  : $('#<?= $txtSearch->id()?>').find('input'),
+            $label      : $('#<?= $search->id()?>').find('.label'), 
+            $icon       : $('#<?= $search->id()?>'),
             velocity    : 500,
-            state       : 0,
+            isOpen      : false,
             open(){
-                this.state = 1
-                $this = this
-                $this.$txtSearch.val('')
+                this.isOpen = true
+                this.$txtSearch.val('')
+                this.$label.text('Cerrar')
+                
+                this.$icon
+                    .removeClass('lnr-magnifier')
+                    .addClass('lnr-cross')
+
                 this.$search.animate({
-                    left: this.$search.position().left - this.distance
-                }, this.velocity, function(){
-                    $this.$txtSearch.focus()
+                    left:  0
+                }, this.velocity, fn => {
+                    this.$txtSearch.focus()
                 })
             },
             close(){
-                this.state = 0
+                this.isOpen = false
+                this.$label.text('Buscar')
+                this.$icon
+                    .removeClass('lnr-cross')
+                    .addClass('lnr-magnifier')
                 this.$search.animate({
-                    left: this.$search.position().left + this.distance
-                }, this.velocity, function(){
-
-                })    
+                    left: window.innerWidth + 1000
+                }, this.velocity)    
             },
             toggle(){
-                if( this.$search.position().left < this.distance) this.close()
+                if( this.isOpen ) this.close()
                 else this.open()
                 
             },

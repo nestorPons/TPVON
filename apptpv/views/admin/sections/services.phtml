@@ -7,15 +7,17 @@
     ?>
 
 </section>
-<style>
+<style lang="less">
     #services{
+        height: 100%;
         display: grid;
-        grid-template-rows: 2; 
-    }
+        grid-template-rows: auto 1fr;
 
-    #<?=$table->id()?>{
-        max-height: 80vh ;
-        grid-row: 2;
+        #<?=$table->id()?>{
+            max-height: 100% ;
+            grid-row: 2;
+            
+        }
     }
 
 </style>
@@ -30,7 +32,6 @@ app.services = {
     $table      : $('#<?=$table->id()?>').find('tbody'),
     // Validacion del campo codigo
     async valCode(e){
-        echo('validation code ...')
         const   el = e.target, 
                 value = el.value,
                 ser = await DB.get('servicios', 'codigo', value).then( d => d[0])
@@ -44,8 +45,8 @@ app.services = {
             else el.setCustomValidity('')
         }
     },
-    async load(){
-        this.selFam = new Select(this.Form.el.querySelector('[name="id_familia"]'))
+    load(){
+        this.selFam = new Select(this.Form.el.querySelector('[name="id_familia"]').parentNode)
 
         DB.get(this.table)
             .then( data => {
