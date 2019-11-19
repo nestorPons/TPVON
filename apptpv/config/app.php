@@ -1,4 +1,8 @@
 <?php namespace CONFIG; 
+// Zona horaria
+date_default_timezone_set("UTC");
+date_default_timezone_set("Europe/Madrid");
+
 // Entorno de desarrollo 
 define('ENV', TRUE);
 define('SEND_MAIL', TRUE);

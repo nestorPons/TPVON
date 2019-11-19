@@ -8,7 +8,7 @@ class Checkbox extends Component{
         $this->type = 'checkbox';
         $this->row = '';
         $this->style = "vertical-align: bottom";
-    
+
         parent::__construct($data);
         $this->print('input');
     }

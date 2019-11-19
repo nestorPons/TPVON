@@ -14,15 +14,18 @@ if(this.Form.state()=='new'){if(ser!=undefined)el.setCustomValidity("Codigo exis
 else el.setCustomValidity('')}else{if(ser&&this.Form.data.id!=ser.id)el.setCustomValidity("Codigo existente")
 else el.setCustomValidity('')}},load(){this.selFam=new Select(this.Form.el.querySelector('[name="id_familia"]').parentNode)
 DB.get(this.table).then(data=>{for(let i in data){var d=data[i]
-if(d.estado==1){this.Table.addLine(d.id,[d.id,d.codigo,d.nombre,d.descripcion,d.precio]).addClass(d.codigo[0].toLowerCase())}}})},async open(){const families=await DB.get('familias',undefined,undefined,'estado==1')
+if(d.estado==1){this.Table.addLine(d.id,[d.id,d.codigo,d.nombre,d.descripcion,d.precio]).addClass(d.codigo[0].toLowerCase())}}})},async open(){const families=await DB.get('familias',null,null,'estado==1')
 this.selFam.clear().addClass('valid')
-for(let f of families){if(f)
-this.selFam.addOption(f.id,f.nombre)}},del(){DB.get(this.table,'id',this.currentId).then(d=>d[0]).then(d=>{d.estado=0
+for(let f of families){if(f)this.selFam.addOption(f.id,f.nombre)}},del(){DB.get(this.table,'id',this.currentId).then(d=>d[0]).then(d=>{d.estado=0
 DB.set(this.table,d,'id',d.id)
 this.Table.delLine(this.currentId)
 this.Form.close()
 app.tpv.loadServ()})},add(){let data={id:-1,estado:1}
-this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())},updateLine(data){this.Table.updateLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())},save(data){data.estado=1
+this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())
+return this},updateLine(data){this.Table.updateLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())
+return this},async save(rsp){let data=await this.Form.getData(rsp)
+data.estado=1
+data={...data,...rsp}
 DB.set(this.table,data,'id',data.id)
 if(this.currentId==-1)this.addLine(data)
 else this.updateLine(data)

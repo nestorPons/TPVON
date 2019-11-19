@@ -67,6 +67,7 @@
 
                 // Cargamos los datos en una variable para posteriores consultas (getData(){})
                 this.data.push(arrData)
+
                 const c =  this.$template.clone().html()
                 return $(c)
                     .attr('idline', id || this.$table.find('tr').length)

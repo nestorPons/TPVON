@@ -142,8 +142,8 @@ function imprimirElemento(elemento, estilos) {
     ventana.document.write('</body></html>');
     ventana.document.close();
     ventana.focus();
-   // ventana.print();
-    //ventana.close();
+    ventana.print();
+    ventana.close();
 }
 function clone(src) {
     return JSON.parse(JSON.stringify(src));

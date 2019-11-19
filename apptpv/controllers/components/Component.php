@@ -5,9 +5,10 @@ use MatthiasMullie\Minify;
  * Clase de madre de los componentes html
  */
 class Component{
-    protected $type, $tabindex, $onfocus, 
+    protected $type, $tabindex, $onfocus,
         $onclick, $ondblclick, $onkeydown, $disabled, 
         $checked, $onblur, $tile, $list,
+        $default, $placeholder, 
         $onkeyup, $onkeypress, $onchange, $for, 
         $id, $name, $value,$label, $class, $required, 
         $pattern, $tittle, $minlength, $maxlength, $prefix,

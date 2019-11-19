@@ -308,20 +308,21 @@ const DB = {
     // Consultar datos de la bd local
     get(table = this.table, key, value, filter) {
         return new Promise((resolve, reject) => {
-            const _equalValues = function (el) {
-                let k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
-                    v = (typeof value === 'string') ? value.toLowerCase().trim() : value
+            const _equalValues = function (el) { 
+                const 
+                    k = (typeof el[key] === 'string') ? el[key].toLowerCase().trim() : el[key],
+                    v = (typeof value === 'string') ? value.toLowerCase().trim() : value;
 
                 if (k) return typeof k === 'number' ? k == v : k.includes(v);
-                else return false;
-            }
+                else return true; 
+        }
             if (table == undefined) {
                 // Si no le paso un indice me devuelve todos los nombres de tablas
                 resolve(this.storage);
             } else {
                 // Si no se pasan key o value devolvemos todos los registros            
                 if ((key == undefined || value == undefined) && filter == undefined) resolve(this.storage[table]);
-                else resolve(this.storage[table].filter((el) => {
+                else resolve(this.storage[table].filter(el => {
                     if (filter) {
                         if (filter.indexOf('==') != -1) {
                             let arr = filter.split('==');
@@ -375,11 +376,30 @@ const DB = {
             return this.storage[index];
         };
     },
-    next() {
-        return this.loadIndex(this.current + 1);
+    async next(table = this.table, id) {
+        let last = null
+        const 
+            data = await this.get(table); 
+        // Recorremos el array al revés
+        for(let i = data.length - 1; i >= 0; i-- ){
+            const d = data[i]; 
+            if(d){
+                if(d.id == id) return last;
+                last = d;
+            } else return false;
+        }
+        return false
     },
-    prev() {
-        return this.loadIndex(this.current - 1);
+    async prev(table, id) {
+        let last = null
+        const data = await this.get(table)
+
+        for(const i in data){
+            const d = data[i]; 
+            if(d.id == id) return last
+            last = d
+        }
+        return false
     },
     exist(table = this.table) {
         return typeof this.storage[table] != 'undefined'
@@ -543,6 +563,9 @@ const date =  {
         return this.format(param, 'short')
     },
     hour(param = this.date){
-        return this.format(param, 'hour')
+        return this.format(param, 'hour');
+    },
+    datetime(param = this.date){
+        return this.format(param, 'datetime');
     },
 }

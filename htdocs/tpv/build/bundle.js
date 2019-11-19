@@ -103,10 +103,10 @@ this.data=d
 selects.each(function(){if(d.id!=-1)
 $(this).find('[selected]').attr('selected',!1).end().find('option[value="'+d[$(this).attr('name')]+'"]').attr('selected',!0)
 else $(this).find('[default]').attr('selected',!0)})
-inputs.each(function(){if($(this).attr('type')=='checkbox'||$(this).attr('type')=='radio'){if(d[$(this).attr('name')]==$(this).val())$(this).prop('checked',!0)
-else $(this).prop('checked',!1)}else $(this).val(d[$(this).attr('name')])})
+inputs.each(function(){if($(this).attr('type')=='checkbox'||$(this).attr('type')=='radio'){if(d.id==-1){if($(this).attr('default')==$(this).val())$(this).prop('checked',!0)}else{if(d[$(this).attr('name')]==$(this).val())$(this).prop('checked',!0)
+else $(this).prop('checked',!1)}}else $(this).val(d[$(this).attr('name')])})
 return this}
-getData(){return app.formToObject(this.el)}
+async getData(rsp){const r=await app.formToObject(this.el);return{r,...rsp}}
 state(value){if(value){this.attrState=value
 const el=this.el.querySelector(`[name="id"]`)
 if(el){if(value=='new')el.parentElement.classList.add('hidden')

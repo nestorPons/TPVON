@@ -20,10 +20,6 @@ DB.set(this.table,d,'id',d.id)
 this.Table.delLine(this.currentId)
 this.Form.close()
 app.tpv.loadServ()})},add(){let data={id:-1,estado:1}
-this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.nombre])},updateLine(data){this.Table.updateLine(data.id,[data.id,data.nombre])},save(data){data.estado=1
-DB.set(this.table,data,'id',data.id)
-if(this.currentId==-1)this.addLine(data)
-else this.updateLine(data)
-this.Form.close()
-app.tpv.loadServ()},show(e){this.currentId=e.path[1].attributes.idline.value
+this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.nombre])},updateLine(data){this.Table.updateLine(data.id,[data.id,data.nombre])},async save(rsp){let data=await this.Form.getData(rsp)
+data.estado=1;DB.set(this.table,data,'id',data.id);if(this.currentId==-1)this.addLine(data.id,data);else this.updateLine(data);this.Form.close();app.tpv.loadServ()},show(e){this.currentId=e.path[1].attributes.idline.value
 DB.get(this.table,'id',this.currentId).then(data=>this.Form.state('edit').open(data).setTile('Edición servicio'))}}</script>

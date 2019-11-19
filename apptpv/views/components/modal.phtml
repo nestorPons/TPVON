@@ -63,7 +63,6 @@
         this.data = d
 
         selects.each(function() {
-
           if (d.id != -1)
             $(this)
             .find('[selected]').attr('selected', false).end()
@@ -74,15 +73,21 @@
         })
         inputs.each(function() {
           if ($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio') {
-            if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
-            else $(this).prop('checked', false)
+            // Si es nuevo ponemos el estado por defecto 
+            if (d.id == -1){
+              if ($(this).attr('default') == $(this).val()) $(this).prop('checked', true)
+            } else {
+              if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
+              else $(this).prop('checked', false)
+            }
           } else $(this).val(d[$(this).attr('name')])
 
         })
         return this
       }
-      getData() {
-        return app.formToObject(this.el)
+      async getData(rsp) {
+        const r = await app.formToObject(this.el);
+        return { r, ...rsp};
       }
       state(value) {
         if (value) {

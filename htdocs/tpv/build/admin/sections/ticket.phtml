@@ -1,6 +1,6 @@
 <?php namespace app\controllers\components?><component id="buttonsTicket">
     <?php
-    $present        = new Checkbox(['label' => 'Regalo', 'name' => 'control', 'value' => 1, 'onclick' => 'app.ticket.toggle()']);
+    $present        = new Checkbox(['label' => 'Regalo', 'name' => 'control', 'value' => '1', 'onclick' => 'app.ticket.toggle()']);
     $txt00          = new InputDate(['label' => 'Fecha vencimiento', 'name' => 'fecha_vencimiento']);
     $btnPrTicket    = new ButtonSuccess(['onclick' => 'app.ticket.print()', 'caption' => 'Imprimir']);
     $btnSndTicket   = new ButtonSuccess(['onclick' => 'app.ticket.send()', 'caption' => 'Enviar']);

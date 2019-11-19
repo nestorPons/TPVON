@@ -86,13 +86,15 @@
         updateLine(data) {
             this.Table.updateLine(data.id, [data.id, data.nombre])
         },
-        save(data) {
-            data.estado = 1
-            DB.set(this.table, data, 'id', data.id)
+        async save(rsp) {
+            let data = await this.Form.getData(rsp)
+            data.estado = 1;
+            //Guardamos en base de datos local
+            DB.set(this.table, data, 'id', data.id);
 
-            if (this.currentId == -1) this.addLine(data)
-            else this.updateLine(data)
-            this.Form.close()
+            if (this.currentId == -1) this.addLine(data.id, data);
+            else this.updateLine(data);
+            this.Form.close();
 
             app.tpv.loadServ()
         },

@@ -53,6 +53,7 @@ class Error extends \Exception{
     const E051 = "No se encontro la base de datos";
     const E052 = "No se pudo conectar con la base de datos";
     const E053 = "Error guardando los datos";
+    const E054 = "Registro existente \n no se puede sobreescribir";
     
     // Clases
     const E060 = "No se han registrado los datos corretamente";

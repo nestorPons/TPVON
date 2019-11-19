@@ -22,7 +22,7 @@
     $btnOk = new ButtonSuccess(['tabindex' => 8, 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
     $btnClear = new ButtonCancel(['caption' => false, 'onclick' => 'app.tpv.clearLine()', 'icon' => 'cross']);
 
-    $txtTotal = new InputRead(['value' => 0, 'label' => 'Total'], false);
+    $txtTotal = new InputRead(['value' => '0', 'label' => 'Total'], false);
     $btnTicket = new ButtonSuccess(['onclick' => 'app.tpv.create()', 'caption' => 'Ticket']);
 
     $modTicket = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company->data());

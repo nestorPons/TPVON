@@ -101,7 +101,8 @@
             if (data.estado == 2) ob.addClass('alert')
             else ob.removeClass('alert')
         },
-        save(data) {
+        async save(rsp) {
+            let data = await this.Form.getData(rsp)
             if (data) {
                 DB.set(this.table, data, 'id', data.id)
 

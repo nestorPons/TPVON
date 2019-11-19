@@ -47,7 +47,6 @@ app.services = {
     },
     load(){
         this.selFam = new Select(this.Form.el.querySelector('[name="id_familia"]').parentNode)
-
         DB.get(this.table)
             .then( data => {
                 for( let i in data ){
@@ -63,14 +62,13 @@ app.services = {
                     }
                 }
             })
-        
     },
     async open(){
-        const families = await DB.get('familias', undefined, undefined,  'estado==1')
+        const families = await DB.get('familias', null, null,  'estado==1')
         this.selFam.clear().addClass('valid')
+
         for(let f of families){
-            if(f)
-            this.selFam.addOption(f.id, f.nombre)
+            if(f) this.selFam.addOption(f.id, f.nombre)
         }
     },
     del(){
@@ -102,13 +100,19 @@ app.services = {
     addLine(data){
         this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
             .addClass(data.codigo[0].toLowerCase())
+        return this
     },
     updateLine(data){
         this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
             .addClass(data.codigo[0].toLowerCase())
+        return this
     },
-    save(data){
+    async save(rsp){
+        let data = await this.Form.getData(rsp)
+        
         data.estado = 1
+        data = {...data, ...rsp} 
+
         DB.set(this.table, data , 'id', data.id)
 
         if (this.currentId == -1 ) this.addLine(data)
