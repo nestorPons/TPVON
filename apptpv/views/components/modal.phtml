@@ -73,13 +73,10 @@
         })
         inputs.each(function() {
           if ($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio') {
-            // Si es nuevo ponemos el estado por defecto 
-            if (d.id == -1){
-              if ($(this).attr('default') == $(this).val()) $(this).prop('checked', true)
-            } else {
+              // Si es nuevo ponemos el estado por defecto pasandolo en el parametro data
               if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
               else $(this).prop('checked', false)
-            }
+            
           } else $(this).val(d[$(this).attr('name')])
 
         })

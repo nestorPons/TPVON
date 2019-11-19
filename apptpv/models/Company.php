@@ -78,9 +78,14 @@ class Company extends Query{
         $Data->set('nivel', 2);
         $User = new User;
         if (!$User->new($Data)) throw new \Exception('E019');
-
         
-        //$this->add(['nombre' => $this->nombre, 'email' => $this->email]);
+        // Añadimos usuario cliente invitado por defecto 
+        $DataGuest = new Data; 
+        $DataGuest->set('nombre', 'invitado'); 
+        $DataGuest->set('nivel', 0);
+
+        $Guest = new User;
+        if (!$Guest->new($DataGuest)) throw new \Exception('E019');
   
     }
     private function createFolder(){

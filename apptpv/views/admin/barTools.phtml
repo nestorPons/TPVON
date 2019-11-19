@@ -33,8 +33,8 @@
     #bartools i:active{
         color: var(--nav-link-color);
     }
-    #bartools a, #bartools a:hover, #bartools a:link, #bartools a:visited{
-        color: var(--nav-font-color);
+    #bartools a, #bartools :hover, #bartools a:link, #bartools a:visited{
+        font-weight: bold;
     }
     #bartools > div{
         flex-grow: 1;
@@ -54,7 +54,7 @@
         margin: 2px 5px;
     }
     #bartools .lnr:hover{
-        transform: var(--effect-transform-hover);
+        font-weight: bold;
     }
     #bartools #<?=$txtSearch->id()?>{
         position: relative;
@@ -71,6 +71,7 @@
     #bartools #<?=$txtSearch->id()?>{
         width: 300px;
         background-color: var(--form-back-color);
+        margin-left: 5px ;
     }
     #bartools #<?=$txtSearch->id()?>>input{
         position: absolute;

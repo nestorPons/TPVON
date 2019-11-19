@@ -14,12 +14,16 @@
             grid-template-columns: repeat(3, 1fr);
             grid-row-gap: 5px;
 
-            c-table {
+            m-table {
                 grid-row: 2;
                 grid-column: 1 / span 3;
 
                 table {
                     max-height: 500px;
+
+                    th, td {
+                        padding: 0;
+                    }
                 }
             }
 
@@ -39,7 +43,7 @@
     </style>
     <script>
         app.income = {
-            buttons: ['print', 'filter', 'search'],
+            buttons: ['print', 'filter'],
             txtFrom: <?= $from->id() ?>,
             txtTo: <?= $to->id() ?>,
             txtTotal: <?= $total->id() ?>.querySelector('input'),
@@ -104,27 +108,16 @@
             },
             print() {
 
-                let printContents =
-                    `<h1> Listado de ingresos </h1>
-                <h2> Fecha inicio : ${this.txtFrom.value}</h2>
-                <h2> Fecha fin : ${this.txtTo.value}</h2>
+                const printContents = {
+                    innerHTML :
+                        `<h1> Listado de ingresos </h1>
+                        <h3> Fecha inicio   : ${this.txtFrom.value}</h3>
+                        <h3> Fecha fin      : ${this.txtTo.value}</h3>
 
-                <table> ${this.Table.html()} </table>
-                <h4>Total: <b>${this.txtTotal.value}</b></h4>`;
-
+                        <table> ${this.Table.html()} </table>
+                        <h4>Total: <b>${this.txtTotal.value}</b></h4>`;
+                };
                 imprimirElemento(printContents);
-
-            },
-            search(value) {
-
-                this.Table.clear()
-                this.getData({
-                    controller: 'tickets',
-                    action: 'get',
-                    data: {
-                        id: value
-                    }
-                })
 
             },
         }

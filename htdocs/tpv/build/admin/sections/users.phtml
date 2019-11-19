@@ -14,7 +14,7 @@ return{success:!0}},del(){DB.get(this.table,'id',this.currentId).then(d=>d[0]).t
 DB.set(this.table,d,'id',d.id)
 this.Table.delLine(this.currentId)
 this.Form.close()
-app.tpv.loadUsers()})},add(){let data={id:-1,estado:1}
+app.tpv.loadUsers()})},add(){let data={id:-1,estado:1,promos:1}
 this.Form.clear().open(data).setTile('Nuevo usuario')},addLine(data){const ob=this.Table.addLine(data.id,[data.id,data.nombre,data.obs,data.tel,data.email])
 this.loadClass(ob,data)},updateLine(data){const ob=this.Table.updateLine(data.id,[data.id,data.nombre,data.obs,data.tel,data.email])
 this.loadClass(ob,data)},loadClass(ob,data){ob.addClass(data.nombre[0].toLowerCase())

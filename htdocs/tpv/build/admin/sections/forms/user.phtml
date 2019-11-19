@@ -36,7 +36,7 @@
                 <div>
                     <?php
                     $status     = new Checkbox(['label' => 'Bloquear cuenta', 'tabindex' => 9, 'name' => 'estado', 'default' => '1', 'value' => '2']);
-                    $promos     = new Checkbox(['label' => 'Activar promociones', 'tabindex' => 10, 'name' => 'promos', 'default' => '1', 'value' => '1', 'checked'=>true]);
+                    $promos     = new Checkbox(['label' => 'Activar promociones', 'tabindex' => 10, 'name' => 'promos', 'value' => '1']);
                     ?>
                 </div>
             </div>
@@ -49,4 +49,4 @@
 
     </form>
 </component>
-<style lang="less">.editUser form{min-width:auto;padding:0;border:none}.editUser .collapse>:checked+label+div{max-height:inherit}</style>
+<style lang="less">.editUser form{min-width:auto;padding:0;border:none}.editUser form m-input{display:block}.editUser .collapse>:checked+label+div{max-height:inherit}</style>
