@@ -1,4 +1,4 @@
-<?php namespace app\controllers\components?><section id="id5dd3d15ee5076">
+<?php namespace app\controllers\components?><section id="id5dd3d3ec08751">
     <form controller="company" action="save" class="input-group">
         <fieldset>
             <legend>Datos empresa</legend>
@@ -42,8 +42,8 @@
         </fieldset>
     </form>
 </section>
-<style lang="less">#id5dd3d15ee5076{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5dd3d15ee5076{grid-template-columns:1fr 1fr}}#id5dd3d15ee5076>*{height:min-content;border:none;padding:0}#id5dd3d15ee5076>*:first-of-type{grid-row-start:1;grid-row-end:-1}</style>
-<script>app.conf={buttons:[],id_user:null,form:{company:document.getElementById('id5dd3d15ee5076').getElementsByTagName('form')[0],conf:document.getElementById('id5dd3d15ee5076').getElementsByTagName('form')[1],user:document.getElementById('id5dd3d15ee5076').getElementsByTagName('form')[2],promos:document.getElementById('id5dd3d15ee5076').getElementsByTagName('form')[3],},table:{company:'empresa',conf:'config',users:'usuarios',},load(){DB.get('promos').then(d=>d[0]).then(d=>app.loadDataToForm(d,this.form.promos))
+<style lang="less">#id5dd3d3ec08751{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5dd3d3ec08751{grid-template-columns:1fr 1fr}}#id5dd3d3ec08751>*{height:min-content;border:none;padding:0}#id5dd3d3ec08751>*:first-of-type{grid-row-start:1;grid-row-end:-1}</style>
+<script>app.conf={buttons:[],id_user:null,form:{company:document.getElementById('id5dd3d3ec08751').getElementsByTagName('form')[0],conf:document.getElementById('id5dd3d3ec08751').getElementsByTagName('form')[1],user:document.getElementById('id5dd3d3ec08751').getElementsByTagName('form')[2],promos:document.getElementById('id5dd3d3ec08751').getElementsByTagName('form')[3],},table:{company:'empresa',conf:'config',users:'usuarios',},load(){DB.get('promos').then(d=>d[0]).then(d=>app.loadDataToForm(d,this.form.promos))
 let f=this.form.user,buttons=f.getElementsByTagName('button')
 remove(buttons)
 this.form.user.getElementsByTagName('legend')[0].innerHTML='Datos administrador'
