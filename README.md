@@ -39,13 +39,25 @@ _Entre en la carpeta del proyecto_
 ```
 cd tpvonline
 ```
+Instale las dependencias con composer 
+``` 
+composer install
+``` 
+
+Otorgue permisos a todas las subcarpetas y archivos
+
+```
+sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./
+```
+
 #### Para desplegarlo en su hosting
 _Suba la carpeta descargada a su hosting mediante ftp o git._
 
 **La constante PUBLIC_FOLDER_ROOT declarada en apptpv/config/folders.php contiene la carpeta publica del servidor.**
-que por defecto es htdocs
+que por defecto es htdocs.
 
-#### Para desplegarlo en local
+
+#### Para desplegarlo en servidor local
 Si se desea se dispone de un contenedor docker con lamp instalado en el mismo proyecto
 Para construirlo por primera vez: 
 ```
@@ -62,7 +74,7 @@ Para pararlo:
 
 Desde el navegador acceda al localhost o su su hosting donde desplegó su aplicación.
 ```
-localhost/tpv o www.tuhosting.com/tpv
+localhost/tpv/index.php o www.tuhosting.com/tpv/index.php
 ``` 
 _Se inicia el configurado de la aplicación en su primer acceso._
 
