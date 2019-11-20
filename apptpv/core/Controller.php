@@ -1,5 +1,4 @@
-<?php 
-namespace app\controllers;
+<?php namespace app\core;
 use \app\models\Company;
 use \app\core\{Error, Data};
 /**
@@ -25,6 +24,7 @@ class Controller{
                         ? $this->{$this->action}($Data)
                         // Si no encuentra el métodod en el controlador los busca en el modelo
                         : $this->exec ($this->action, ''); 
+
         }
     protected function view($data = null){
         $arr_data = (is_object($data)) ? $data->toArray() : $data;
@@ -66,7 +66,6 @@ class Controller{
     }
     protected function printView(String $route, array $data = null){
 
-        $Company = new Company($this->db);
         if($data){
             foreach($data as $key => $val){
                 ${$key} = $val;

@@ -1,6 +1,6 @@
 <?php namespace app\controllers;
 use \app\models\Company as CompanyModel; 
-use \app\core\{Error, Data};
+use \app\core\{Error, Data, Controller};
 
 /**
  * Controla la vista y la recepción de los datos del formulario de login

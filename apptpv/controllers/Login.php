@@ -1,6 +1,6 @@
 <?php namespace app\controllers;
 use \app\models\{Tokens, User, Company, ZoneAdmin, ZoneUser, Tickets};
-use \app\core\{Error, Query, Data};
+use \app\core\{Error, Query, Data, Controller};
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
@@ -17,7 +17,7 @@ class Login extends Controller{
         $c = new Query(null, $this->db);
 
         if($c->isConnected()) {
-            $this->company = new Company();
+            $this->company = new Company(); 
             parent::__construct($action, null, $data);
         }
         else parent::__construct('view', 'index', ['page' => 'newcompany']);
@@ -97,8 +97,11 @@ class Login extends Controller{
     }
     protected function view( $data = null){
         // Valor predeterminado de la vista
+        if (!$data && !in_array('page', $data)) {
+            $data = $this->company->toArray();
+            $data['page'] = 'login'; 
+        };
 
-        if (!$data) $data = ['page' => 'login', 'data' =>  $this->company->toArray()];
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
     private function isActive(){

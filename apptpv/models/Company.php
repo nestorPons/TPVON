@@ -13,7 +13,9 @@ class Company extends Query{
         $db = CONN['db']; 
 
     function __construct(){ 
-        return !parent::__construct('empresa', $this->db);
+        $conn = parent::__construct('empresa', $this->db);
+        $this->loadData($this->getById(1));
+        return !$conn; 
     }
     function save(Data $Data){
         $this->loadData(get_object_vars($Data));

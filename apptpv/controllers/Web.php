@@ -1,4 +1,5 @@
 <?php namespace app\controllers; 
+use \app\core\{Controller};
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */

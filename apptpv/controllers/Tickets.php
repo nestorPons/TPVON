@@ -1,6 +1,6 @@
 <?php namespace app\controllers;
 use \app\models\Tickets as Model;
-use \app\core\{Query, Data};
+use \app\core\{Query, Data, Controller};
 
 /**
  * Controla la vista y la recepción de los datos del formulario de login

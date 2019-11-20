@@ -21,13 +21,13 @@ class Router{
         $action;
 
     function __construct($params = []){
-
         // Valores por defecto
         $this->db = CONN['db'];
+
         $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
         if      (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') $this->isPost($params);
-        elseif   (strtoupper($_SERVER['REQUEST_METHOD']) === 'GET')  $this->isGet();
+        elseif  (strtoupper($_SERVER['REQUEST_METHOD']) === 'GET')  $this->isGet();
 
         //$this->getParams($GET);       
         //$this->isView(); 
