@@ -14,7 +14,8 @@ class Company extends Query{
 
     function __construct(){ 
         $conn = parent::__construct('empresa', $this->db);
-        $this->loadData($this->getById(1));
+        $company = $this->isConnected() ? $this->getById(1) : false; 
+        $this->loadData($company);
         return !$conn; 
     }
     function save(Data $Data){

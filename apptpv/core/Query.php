@@ -58,6 +58,7 @@ class Query extends Conn
     public function getById($param, string $return = '*')
     {
         $id = $param['id'] ?? $param; 
+
         $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
         return $r ? $r[0] : null;
     }
@@ -256,18 +257,19 @@ class Query extends Conn
     // setter genérico para la inserción de datos en los atributos de la clase hija
     function loadData($data)
     {
-        if (!$data) return false;
-        // Normalización de los datos para direfentes casos de uso
-        if (is_object($data)) $data = (array) $data;
-        if (isset($data[0])) $data = $data[0];
-        // Agregacion de los datos a los atributos de clase
-        $public_props = $this->getVars();
-        foreach ($data as $key => $val) {
-            if (array_key_exists($key, $public_props)) {
-                $this->{$key} = $val ?? null;
+        if ($data) {
+            // Normalización de los datos para direfentes casos de uso
+            if (is_object($data)) $data = (array) $data;
+            if (isset($data[0])) $data = $data[0];
+            // Agregacion de los datos a los atributos de clase
+            $public_props = $this->getVars();
+            foreach ($data as $key => $val) {
+                if (array_key_exists($key, $public_props)) {
+                    $this->{$key} = $val ?? null;
+                }
             }
-        }
-        return true;
+            return true;
+        } return false;
     }
     function toArray(bool $nameSpace = false)
     {
