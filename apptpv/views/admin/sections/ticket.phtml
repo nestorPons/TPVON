@@ -171,7 +171,8 @@
             // Ocultamos campo fecha de vencimiento
             this.toggle()
             let dias = 0
-            const p1 = DB.get('empresa').then(d => d[0]),
+            const 
+                p1 = DB.get('empresa').then(d => d[0]),
                 p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0]),
                 p3 = DB.get('config').then(d => d[0]);
 

@@ -26,11 +26,9 @@ class Router{
 
         $this->controller =  ucfirst($params['controller'] ?? null); 
         $this->action =  strtolower($params['action'] ?? null); 
-        if      (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') $this->isPost($params);
-        elseif  (strtoupper($_SERVER['REQUEST_METHOD']) === 'GET')  $this->isGet();
 
-        //$this->getParams($GET);       
-        //$this->isView(); 
+        if      (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') $this->isPost($params);
+        elseif  (strtoupper($_SERVER['REQUEST_METHOD']) === 'GET')  $this->isGet(); 
             
     }
     private function isGet(){
@@ -81,7 +79,7 @@ class Router{
         $nameClass = '\\app\\controllers\\' . $this->controller;
         $cont = $this->isController($this->controller)
             ? new $nameClass($this->action, $this->data)
-            : new \app\controllers\Controller($this->action, $this->controller, $this->data);
+            : new \app\core\Controller($this->action, $this->controller, $this->data);
         return $cont->result; 
     }
     /**
