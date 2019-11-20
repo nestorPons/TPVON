@@ -96,8 +96,9 @@ class Login extends Controller{
         return $this->User->nivel() >= $this->level_user; 
     }
     protected function view( $data = null){
+
         // Valor predeterminado de la vista
-        if (!$data && !in_array('page', $data)) {
+        if (!$data['page']) {
             $data = $this->company->toArray();
             $data['page'] = 'login'; 
         };
