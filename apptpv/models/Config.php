@@ -11,6 +11,7 @@ class Config extends Query{
     function save(Data $Post){
         $this->loadData(get_object_vars($Post));
         $this->id = 1;
+
         return $this->saveById($this->toArray());
     }
 }

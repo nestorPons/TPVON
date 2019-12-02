@@ -123,7 +123,7 @@
   ALTER TABLE `articulos`
     ADD PRIMARY KEY (`id`),
     ADD UNIQUE KEY `codigo` (`codigo`),
-    ADD UNIQUE KEY `nombre` (`nombre`),
+    ADD KEY `nombre` (`nombre`),
     ADD KEY `id_familia` (`id_familia`);
 
   ALTER TABLE `lineas_regalo`
@@ -237,3 +237,5 @@ SELECT t.*, tr.fecha_vencimiento
 FROM tickets as t
 INNER JOIN tickets_regalo as tr ON t.id = tr.id
 WHERE t.estado = 1;
+
+INSERT INTO `config`(`id`, `iva`, `dias`) VALUES (1,21,365);

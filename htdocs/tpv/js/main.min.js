@@ -92,8 +92,11 @@ $(document)
     }
 })
 .on('change', 'input', function(e){
-    let p = $(this).parents('section').attr('id')
-    window[p].change = true
+    const 
+        p = $(this).parents('section').attr('id');
+    
+    window[p].change = true;
+
 })
 // Comportamiento general de los links 
 .on('click', 'a', function(e) {

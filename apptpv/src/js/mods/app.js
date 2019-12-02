@@ -28,7 +28,7 @@ const app = {
                         return false
                     }
             } catch (e) {
-                echo('carga html')
+    
                 // la respuesta es HTML
                 html = $(respond)
                 app.sections.load(html.attr('id'), html)
@@ -162,18 +162,22 @@ const app = {
         inicialize(section) {
             if (section == 'appadmin') section = 'tpv'
             this.active = section
-
+            
             let activeZone = app[this.active]
             if (activeZone) {
                 // Cargamos los botones de herramientas
                 typeof activeZone.buttons != 'undefined' &&
-                    typeof activeZone.buttons == 'object' &&
-                    menu.buttons.show(activeZone.buttons)
-
+                typeof activeZone.buttons == 'object' &&
+                menu.buttons.show(activeZone.buttons)
+                
                 // Se cargan 
                 typeof activeZone.open != 'undefined' &&
-                    typeof activeZone.open == 'function' &&
-                    activeZone.open()
+                typeof activeZone.open == 'function' &&
+                activeZone.open()
+                
+                // Carga del título de la sección
+                if(menu.tile) menu.tile.textContent = activeZone.name
+                
             }
         },
         // Comportamiento de los botones de herramientas según la seccion que esté activa

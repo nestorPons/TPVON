@@ -6,7 +6,7 @@
     ?>
 
 <style lang="less">#users{display:grid;grid-template-rows:2}#users #<?=$table->id() ?>{max-height:80vh;grid-row:2}#users .card{max-width:360px}</style>
-<script>app.users={table:'usuarios',buttons:['add','search'],currentId:null,Table:new Table('<?=$table->id()?>'),Form:new Modal('<?=$editUser->id()?>'),$table:$('#<?= $table->id() ?>').find('tbody'),validation(callback){let f=this.Form.getData()
+<script>app.users={name:'Usuarios',table:'usuarios',buttons:['add','search'],currentId:null,Table:new Table('<?=$table->id()?>'),Form:new Modal('<?=$editUser->id()?>'),$table:$('#<?= $table->id() ?>').find('tbody'),validation(callback){let f=this.Form.getData()
 DB.get(this.table).then(usuarios=>{for(i in usuarios){let u=usuarios[i]
 if(!isEmpty(f.dni)&&u.dni==f.dni&&u.id!=f.id){this.error={success:!1,code:'dni',mens:'Error dni duplicado'}}else if(!isEmpty(f.email)&&u.email==f.email&&u.id!=f.id){this.error={success:!1,code:'email',mens:'Error email duplicado'}}}
 callback(this.error||{success:!0})})

@@ -1,7 +1,7 @@
 <nav id="navBar" class="menu-initial">
     <i id="icon-menu" class="lnr lnr-menu"></i>
     <ul>
-        <li><a href="tpv"><i class="lnr lnr-laptop"></i><span>TPV</span></a></li>
+        <li><a href="tpv"><i class="lnr lnr-laptop" class="active"></i><span>TPV</span></a></li>
 		<li><a href="users"><i class="lnr lnr-users"></i><span>Usuarios</span></a></li>
         <li><a href="services"><i class="lnr lnr-briefcase"></i><span>Servicios</span></a></li>
         <li><a href="families"><i class="lnr lnr-bug"></i><span>Familias</span></a></li>
@@ -54,8 +54,11 @@
     nav#navBar li a i{
         font-size: 1.5rem;
      }
-    #navBar a, #navBar a:hover, #navBar a:link, #navBar a:visited{
+    #navBar a, #navBar a:hover, #navBar a:link, #navBar a:visited {
         color: var(--nav-font-color);
+    }
+    #navBar a.active *{
+        font-weight: bold ;
     }
     #icon-menu{
         position: fixed; 
@@ -81,11 +84,11 @@
     if(!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
     var navbar = {
         toggle(change = true){
-                let menuWidth = localStorage.getItem('menuWidth')
-                
-                let varClass =  (menuWidth == 'menu-initial')
+                const
+                    menuWidth = localStorage.getItem('menuWidth'),
+                    varClass =  (menuWidth == 'menu-initial')
                     ? 'menu-max'  
-                    : 'menu-initial'
+                    : 'menu-initial';
                 
                 navbar.addClass(varClass) 
                 if(change) localStorage.setItem('menuWidth', varClass)
@@ -99,5 +102,10 @@
     $('#icon-menu').click(navbar.toggle)
     $(function(){
         navbar.addClass(localStorage.getItem('menuWidth'))
+        $('#navBar a').click(function(){
+            echo($(this))
+            $('#navBar a.active').removeClass('active')
+            $(this).addClass('active')
+        })
     })
 </script>

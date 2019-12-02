@@ -14,7 +14,7 @@
         'content' => '<canvas id="chartYear" width="400px" height="400px"></canvas>'
     ]);
     ?>
-    <script>app.chart={color:{current:{body:'rgba(40, 184, 53, 0.41)',border:'rgba(40, 184, 53, 0.61)',},predict:{body:'rgba(88, 88, 88, 0.21)',border:'rgba(88, 88, 88, 0.31)',}},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},async post=>{const data=[];for(let i in post){if(post[i])data.push(post[i])}
+    <script>app.chart={name:'Gráficas',color:{current:{body:'rgba(40, 184, 53, 0.41)',border:'rgba(40, 184, 53, 0.61)',},predict:{body:'rgba(88, 88, 88, 0.21)',border:'rgba(88, 88, 88, 0.31)',}},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},async post=>{const data=[];for(let i in post){if(post[i])data.push(post[i])}
 const ordata=this.prepare(data)
 const daydata=this.groupDataDays(ordata)
 const arrdaydata=this.toArrays(daydata)

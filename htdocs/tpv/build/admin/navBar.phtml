@@ -1,7 +1,7 @@
 <?php namespace app\controllers\components?><nav id="navBar" class="menu-initial">
     <i id="icon-menu" class="lnr lnr-menu"></i>
     <ul>
-        <li><a href="tpv"><i class="lnr lnr-laptop"></i><span>TPV</span></a></li>
+        <li><a href="tpv"><i class="lnr lnr-laptop" class="active"></i><span>TPV</span></a></li>
 		<li><a href="users"><i class="lnr lnr-users"></i><span>Usuarios</span></a></li>
         <li><a href="services"><i class="lnr lnr-briefcase"></i><span>Servicios</span></a></li>
         <li><a href="families"><i class="lnr lnr-bug"></i><span>Familias</span></a></li>
@@ -12,13 +12,15 @@
         <li><a href="chart"><i class="lnr lnr-chart-bars"></i><span>Gráficas</span></a></li>
     </ul>
 </nav>
-<style>:root{--nav-initial-width:55px;--nav-max-width:145px}nav#navBar{margin:0;overflow:hidden;transition:width 1s ease;background:var(--main-color);color:var(--nav-font-color);width:var(--nav-initial-width)}nav#navbar *{margin:0;padding:0}nav#navBar ul{margin:10px 5px;padding:0;list-style:none}nav#navBar li{margin:10px 0;padding:0}nav#navBar li a{background:none;font-size:.8rem;margin:0;padding:0;text-decoration:none;width:min-content;color:inherit;transition:color 0.7s ease-out}nav#navBar li:active *,nav#navBar li:hover *{font-weight:700}nav#navBar li a i{font-size:1.5rem}#navBar a,#navBar a:hover,#navBar a:link,#navBar a:visited{color:var(--nav-font-color)}#icon-menu{position:fixed;cursor:pointer;top:6px;left:1px;font-size:2em}nav#navBar.menu-close{width:0}nav#navBar.menu-max{max-width:min-content;width:var(--nav-max-width)}nav#navBar.menu-initial{width:var(--nav-initial-width)}</style>
+<style>:root{--nav-initial-width:55px;--nav-max-width:145px}nav#navBar{margin:0;overflow:hidden;transition:width 1s ease;background:var(--main-color);color:var(--nav-font-color);width:var(--nav-initial-width)}nav#navbar *{margin:0;padding:0}nav#navBar ul{margin:10px 5px;padding:0;list-style:none}nav#navBar li{margin:10px 0;padding:0}nav#navBar li a{background:none;font-size:.8rem;margin:0;padding:0;text-decoration:none;width:min-content;color:inherit;transition:color 0.7s ease-out}nav#navBar li:active *,nav#navBar li:hover *{font-weight:700}nav#navBar li a i{font-size:1.5rem}#navBar a,#navBar a:hover,#navBar a:link,#navBar a:visited{color:var(--nav-font-color)}#navBar a.active *{font-weight:700}#icon-menu{position:fixed;cursor:pointer;top:6px;left:1px;font-size:2em}nav#navBar.menu-close{width:0}nav#navBar.menu-max{max-width:min-content;width:var(--nav-max-width)}nav#navBar.menu-initial{width:var(--nav-initial-width)}</style>
 <script>if(!exist(localStorage.menuWidth))localStorage.setItem('menuWidth','initial')
-var navbar={toggle(change=!0){let menuWidth=localStorage.getItem('menuWidth')
-let varClass=(menuWidth=='menu-initial')?'menu-max':'menu-initial'
-navbar.addClass(varClass)
+var navbar={toggle(change=!0){const
+menuWidth=localStorage.getItem('menuWidth'),varClass=(menuWidth=='menu-initial')?'menu-max':'menu-initial';navbar.addClass(varClass)
 if(change)localStorage.setItem('menuWidth',varClass)},addClass(varclass){$('#navBar').removeClass().addClass(varclass)
 if(varclass=='menu-max')$('.label').show('slow')
 else $('.label').hide('slow')}}
 $('#icon-menu').click(navbar.toggle)
-$(function(){navbar.addClass(localStorage.getItem('menuWidth'))})</script>
+$(function(){navbar.addClass(localStorage.getItem('menuWidth'))
+$('#navBar a').click(function(){echo($(this))
+$('#navBar a.active').removeClass('active')
+$(this).addClass('active')})})</script>

@@ -16,6 +16,7 @@
     ?>
     <script>
         app.chart = {
+            name : 'Gráficas', 
             color: {
                 current: {
                     body: 'rgba(40, 184, 53, 0.41)',
@@ -28,6 +29,7 @@
             },
             buttons: [],
             load() {
+               
                 app.post({
                     controller: 'tickets',
                     action: 'getAll',
