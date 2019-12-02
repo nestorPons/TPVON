@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use\app\core\{Query, Data, Error};
-use PHPMailer\PHPMailer\{PHPMailer,  Exception};
+use \app\core\{Query, Data, Error};
+use \PHPMailer\PHPMailer\{PHPMailer,  Exception};
 
 class User extends Query
 {
@@ -14,13 +14,13 @@ class User extends Query
         $nombre,
         $email,
         $fecha_nacimiento,
+        $fecha_alta,
+        $fecha_baja,
         $estado, 
         $nivel, 
         $password, 
-        $intentos, 
-        $company, 
-        $token, 
-        $telefonos,
+        $aplicar_promos, 
+        $enviar_emails,
         $obs;
     protected $table = 'usuarios';
     /**
@@ -38,6 +38,12 @@ class User extends Query
             else if (is_int($arg)) $this->searchById($arg);
             else if (is_string($arg) && strpos($arg, '@')) $this->searchByEmail($arg);
             else if (is_object($arg)) $this->searchById($arg->id);
+
+            $Conf = new Query('usuarios_config');
+            $config = $Conf->getById($this->id);
+            if($config){
+                $this->loadData($config);
+            }
         }
     }
     // Devolvemos todos los datos formateados   
@@ -82,8 +88,7 @@ class User extends Query
                     'fecha_nacimiento' => $this->fecha_nacimiento ?? '',
                     'estado' => $this->estado ?? 0,
                     'nivel' => $this->nivel ?? 0,
-                    'password' => $this->password_hash(),
-                    'intentos' => $this->intentos ?? 0
+                    'password' => $this->password_hash()
                 ])
             ) {
 
@@ -99,6 +104,7 @@ class User extends Query
             } else return Error::array('E022');
         } else throw new \Exception('E060');
     }
+
     function password_hash(string $pass = null)
     {
         $pass = $pass ?? $this->password();
@@ -127,6 +133,7 @@ class User extends Query
         $Token = new Tokens();
         $url = $_SERVER['HTTP_HOST'] . "/tpv/login/newpassword/{$Token->create($this)}";
         $body = $this->getFile(\VIEWS\LOGIN . 'mailresetpassword.phtml', new Data(['url' => $url]));
+
         return $this->sendMail($body, $this->company . ' nueva contraseña');
     }
     private function sendMail($body, string $subject)

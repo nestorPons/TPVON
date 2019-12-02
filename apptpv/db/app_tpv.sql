@@ -88,22 +88,35 @@
     `token` varchar(255) COLLATE utf8_spanish2_ci NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-  DROP TABLE IF EXISTS `usuarios`;
-  CREATE TABLE `usuarios` (
-    `id` int(11) UNSIGNED NOT NULL,
-    `codigo` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `dni` char(9) COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `nombre` varchar(90) COLLATE utf8_spanish2_ci NOT NULL,
-    `email` varchar(60) COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `tel` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `fecha_nacimiento` date DEFAULT NULL,
-    `estado` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 desactivado, 1 activo, 2 bloqueado',
-    `nivel` tinyint(1) NOT NULL DEFAULT '0' COMMENT '2 administrador, 1 usuario, 0 cliente',
-    `password` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `promos` tinyint(2) DEFAULT '0',
-    `intentos` tinyint(2) NOT NULL DEFAULT '0',
-    `obs` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+CREATE TABLE `usuarios` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `codigo` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `dni` char(9) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `nombre` varchar(90) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `email` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `fecha_alta` datetime DEFAULT NULL,
+  `fecha_baja` datetime DEFAULT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 desactivado, 1 activo, 2 bloqueado',
+  `nivel` tinyint(1) NOT NULL DEFAULT '0' COMMENT '2 administrador, 1 usuario, 0 cliente',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `obs` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+CREATE TABLE `accesos` (
+  `id` bigint(20) UNSIGNED ZEROFILL NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `intentos` int(11) NOT NULL,
+  `id_usuario` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `usuarios_config` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `aplicar_promos` tinyint(1) NOT NULL DEFAULT '1',
+  `enviar_emails` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
   DROP TABLE IF EXISTS `familias`;
   CREATE TABLE `familias` (
@@ -166,6 +179,13 @@
     ADD UNIQUE KEY `dni` (`dni`),
     ADD UNIQUE KEY `email` (`email`);
 
+  ALTER TABLE `accesos`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `usuario` (`id_usuario`);
+
+ALTER TABLE `usuarios_config`
+  ADD KEY `idusuario` (`id`);
+
   ALTER TABLE `familias`
     ADD PRIMARY KEY (`id`);
 
@@ -196,6 +216,9 @@
   ALTER TABLE `usuarios`
     MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
+  ALTER TABLE `accesos`
+    MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
   ALTER TABLE `familias`
     MODIFY `id` tinyint(2) NOT NULL AUTO_INCREMENT;
 
@@ -221,6 +244,12 @@
 
   ALTER TABLE `tokens`
     ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+  ALTER TABLE `accesos`
+    ADD CONSTRAINT `usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `usuarios_config`
+  ADD CONSTRAINT `idusuario` FOREIGN KEY (`id`) REFERENCES `usuarios` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 CREATE VIEW 
 vista_lineas_regalo AS 

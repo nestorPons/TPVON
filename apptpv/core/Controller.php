@@ -56,7 +56,7 @@ class Controller{
      * Método genérico para actualizar registros
      */
     protected function update(){
-        return $this->exec('save', 'saveById'); 
+        return $this->exec('save', 'saveById');
     }
     /**
      * Método por defecto de consulta de datos 
@@ -104,7 +104,7 @@ class Controller{
         // Si no llevamos datos, no pasamos el objeto data 
         // Para poder utilizar directamente con Query
         if($this->Data->isEmpty()){
-            if (method_exists($model, $method))return  $model->{$method}();
+            if (method_exists($model, $method))return $model->{$method}();
             else return $model->{$method_generic}();
         } else {
             if (method_exists($model, $method)) return  $model->{$method}($this->Data);

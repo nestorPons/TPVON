@@ -45,7 +45,9 @@ class Login extends Controller{
     */
     protected function activatePassword(Data $Data){
         $this->controller = 'user'; 
-        if($this->update($Data)){
+        $User = new User((int)$Data->id);
+        $Data->password = $User->password_hash($Data->password); 
+        if($User->saveById($Data->toArray())){
             return $this->printView($this->folders . 'passwordactivate.phtml', ['name_company' => $this->company->nombre()] );
         } else return false;
     }
