@@ -22,7 +22,7 @@ class User extends Query
         $aplicar_promos, 
         $enviar_emails,
         $obs;
-    protected $table = 'usuarios';
+    protected $table = 'vista_usuarios';
     /**
      * $arg puede ser un string email para buscar por email
      * integer buscar por id de usuario
@@ -39,8 +39,8 @@ class User extends Query
             else if (is_string($arg) && strpos($arg, '@')) $this->searchByEmail($arg);
             else if (is_object($arg)) $this->searchById($arg->id);
 
-            $Conf = new Query('usuarios_config');
-            $config = $Conf->getById($this->id);
+            $this->Conf = new Query('usuarios_config');
+            $config = $this->Conf->getById($this->id);
             if($config){
                 $this->loadData($config);
             }
@@ -71,7 +71,13 @@ class User extends Query
 
         $noAuth = $Data->use('noAuth');
         if ($this->id == -1) $this->id = $this->new($Data);
-        else if ($this->saveById($Data->toArray()));
+        else if ($this->saveById($Data->toArray())){
+            $this->Conf->saveById([
+                'id' => $this->id, 
+                'promos' => $this->promos, 
+                'emails' => $this->emails
+            ]);
+        };
 
         return $this->id;
     }
@@ -90,7 +96,8 @@ class User extends Query
                     'nivel' => $this->nivel ?? 0,
                     'password' => $this->password_hash()
                 ])
-            ) {
+            ) { 
+                $this->Conf->add(['id' => $this->id]);
 
                 // Varible para saltarse la activación del usuario
                 if (!isset($Data->noAuth)) {
