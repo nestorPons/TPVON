@@ -27,6 +27,7 @@
         open() {
         },
         async load() {
+            echo('LOAD')
             // Solicitud de datos al servidor
             await DB.get(this.table)
                 .then(data => {

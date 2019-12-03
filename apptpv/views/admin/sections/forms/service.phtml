@@ -6,10 +6,10 @@
             'label' => 'Código', 'tabindex' => 1, 'name' => 'codigo', 'title' => "Introduzca el código",
             'onchange' => 'app.services.valCode(window.event)', 'required' => true, 'pattern' => '\S{4,10}'
         ],  false);
-        $nom = new InputText(['label' => 'Nombre', 'tabindex' => 2, 'name' => 'nombre'],  false);
-        $des = new InputText(['label' => 'Descripción', 'tabindex' => 3, 'name' => 'descripcion'],  false);
-        $pri = new InputText(['label' => 'Precio', 'tabindex' => 4, 'name' => 'precio', 'required' => true],  false);
-        $cos = new InputText(['label' => 'Coste', 'tabindex' => 5, 'name' => 'coste'],  false);
+        $des = new InputText(['label' => 'Descripción', 'tabindex' => 2, 'name' => 'descripcion'],  false);
+        $pri = new InputText(['label' => 'Precio', 'tabindex' => 3, 'name' => 'precio', 'required' => true],  false);
+        $cos = new InputText(['label' => 'Coste', 'tabindex' => 4, 'name' => 'coste'],  false);
+        $nom = new InputText(['label' => 'Tiempo', 'tabindex' => 5, 'name' => 'tiempo'],  false);
         $tip = new Select([
             'label' => 'Tipo producto', 'tabindex' => 6, 'name' => 'tipo', 'class' => 'valid',
             'options' => [1 => 'Servicio', 2 => 'Producto'], 'selected' => 1, 'required' => true

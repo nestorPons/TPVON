@@ -142,6 +142,7 @@
                     })
             }
             this.Table.hideLines()
+            echo('AKI');
             if (/([0-9]){9,13}/.test(value)) _search('tel', value)
             else if (/[0-9]{8}[A-Za-z]{1}/.test(value)) _search('dni', value)
             else if (value.indexOf('@') != -1) _search('email', value)

@@ -2,7 +2,7 @@
 use \app\core\{Query, Data};
 
 class Items extends Query{
-    public $id, $codigo, $nombre, $descripcion, $precio, $coste, $tipo, $estado;
+    public $id, $codigo, $descripcion, $precio, $coste, $tipo, $estado;
     protected $table = 'articulos';
 
     function __construct($arg = null){

@@ -9,7 +9,8 @@
 </section>
 <style lang="less" >#families{display:grid}#families #<?=$table->id() ?>{max-height:80vh;grid-row:2}</style>
 <script>'use strict'
-app.families={name:'Familias',table:'familias',buttons:['add'],Table:new Table('<?= $table->id() ?>'),Form:new Modal('<?= $form->id() ?>'),open(){},async load(){await DB.get(this.table).then(data=>{for(let i in data){var d=data[i]
+app.families={name:'Familias',table:'familias',buttons:['add'],Table:new Table('<?= $table->id() ?>'),Form:new Modal('<?= $form->id() ?>'),open(){},async load(){echo('LOAD')
+await DB.get(this.table).then(data=>{for(let i in data){var d=data[i]
 if(d.estado==1)
 this.Table.addLine(d.id,[d.id,d.nombre])}})},async validation(e){echo('validation code ...')
 const el=e.target,value=el.value,ser=await DB.get('servicios','codigo',value).then(d=>d[0])
