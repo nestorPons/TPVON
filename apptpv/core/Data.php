@@ -104,11 +104,31 @@ class Data {
         $arg = ucwords($arg);
         return $arg; 
      }
-    function delete(string $arg){ 
-        if(property_exists($this, $arg)){
-            unset($this->{$arg});
-            return true; 
-        } else return false;
+    /* Eliminamos datos del objeto
+    * @param puede ser array de strings (elimina varios) o string elimina solo uno. 
+    * si es array retorna el numero de eliminados 
+    * si es string retorno booleano true si ha eliminado o false si no lo ha encontrado
+    */
+    function delete($arg){ 
+        if (is_array($arg)) {
+            $count = 0; 
+            foreach($arg as $a){
+                if(property_exists($this, $a)){
+                    unset($this->{$a});
+                    $count++; 
+                };
+            }
+            return $count; 
+        }
+        else if (is_string($arg)) {
+            if(property_exists($this, $arg)){
+                unset($this->{$arg});
+                return true; 
+            } else return false;
+        }
+        else {
+            return false;
+        }
     }
     // Usa un atributo y lo destruye 
     function use(string $arg){

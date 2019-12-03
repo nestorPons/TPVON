@@ -149,8 +149,11 @@ class Query extends Conn
     // Guarda registro mediante su id
     public function saveById(array $args = null)
     {
+        $id = array_key_exists('id', $args) ? $args['id'] : $this->id();
+        
         if(!$args) $args = $this->getVars();
-        $sql = $this->getSQLUpdate($args, "id=" . $this->id());
+        $sql = $this->getSQLUpdate($args, "id=" . $id);
+
         return $this->query($sql, $args);
     }
     /**

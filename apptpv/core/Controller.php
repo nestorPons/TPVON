@@ -97,9 +97,13 @@ class Controller{
             : '\\app\\core\\Query';
     }
     private function exec (String $method, String $method_generic){
-        
         $name_model = $this->getModel(); 
-        $model = new $name_model($this->controller);
+        // Si es geneal query pasamos solo el nombre de la tabla 
+        // En caso contratio pasamos al constructor todo los datos 
+        $model = ($name_model == '\app\core\Query')
+            ? new $name_model($this->controller)
+            : new $name_model($this->Data->toArray());
+
         $model->id = $this->Data->id ?? null;
         // Si no llevamos datos, no pasamos el objeto data 
         // Para poder utilizar directamente con Query

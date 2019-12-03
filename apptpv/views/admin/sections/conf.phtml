@@ -140,10 +140,11 @@
 
             if (data && data.id) {
                 delete data['noAuth']
+
                 app.post({
-                    controller: this.table.users,
+                    data: data,
+                    controller: 'user',
                     action: 'save',
-                    data: data
                 }, (d) => {
                     DB.set(this.table.users, {
                         ...data,

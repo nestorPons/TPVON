@@ -21,8 +21,12 @@ class User extends Query
         $password, 
         $aplicar_promos, 
         $enviar_emails,
-        $obs;
-    protected $table = 'vista_usuarios';
+        $obs, 
+        $promos, 
+        $emails;
+    protected $table = 'usuarios';
+    private $Conf; 
+
     /**
      * $arg puede ser un string email para buscar por email
      * integer buscar por id de usuario
@@ -38,18 +42,21 @@ class User extends Query
             else if (is_int($arg)) $this->searchById($arg);
             else if (is_string($arg) && strpos($arg, '@')) $this->searchByEmail($arg);
             else if (is_object($arg)) $this->searchById($arg->id);
-
             $this->Conf = new Query('usuarios_config');
             $config = $this->Conf->getById($this->id);
+          
             if($config){
                 $this->loadData($config);
             }
         }
+
     }
     // Devolvemos todos los datos formateados   
     function all()
-    {
-        $arr = $this->getAll();
+    {   
+        $View = new Query('vista_usuarios');
+        $arr = $View->getAll();
+
         foreach ($arr as $user) {
             unset($user['password']);
 
@@ -62,7 +69,9 @@ class User extends Query
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Data $Data)
     {
+        // Carga de datos al objeto
         $this->loadData($Data);
+
         if ((!$Data->isEmpty('fecha_nacimiento'))) {
             $date = str_replace('/', '-', $Data->fecha_nacimiento);
             $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
@@ -70,8 +79,11 @@ class User extends Query
         if (property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
 
         $noAuth = $Data->use('noAuth');
+        // Quitamos estos datos que no existen en la tabla usuarios para que no de error al guardar.
+        $Data->delete(['promos', 'emails']);
+
         if ($this->id == -1) $this->id = $this->new($Data);
-        else if ($this->saveById($Data->toArray())){
+        else {
             $this->Conf->saveById([
                 'id' => $this->id, 
                 'promos' => $this->promos, 
