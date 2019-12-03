@@ -55,7 +55,7 @@ class User extends Query
     function all()
     {   
         $View = new Query('vista_usuarios');
-        $arr = $View->getAll();
+        $arr = $View->getAll('*', 'nombre');
 
         foreach ($arr as $user) {
             unset($user['password']);

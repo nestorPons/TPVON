@@ -49,9 +49,9 @@ class Query extends Conn
         return $this->conn;
     }
     // Devuelve todos los registros de una tabla
-    public function getAll(string $return = '*', $desc = false)
+    public function getAll(string $return = '*', String $order = 'id')
     {
-        return $this->sendQuery("SELECT $return FROM {$this->table} order_by;", $desc);
+        return $this->sendQuery("SELECT $return FROM {$this->table} ORDER BY $order ASC;");
     }
     // Devuelve datos de una peticion por id
     // param puede ser array con una clave id o un integer que hace referencia a un id

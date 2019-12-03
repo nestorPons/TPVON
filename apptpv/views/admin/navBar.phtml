@@ -103,7 +103,6 @@
     $(function(){
         navbar.addClass(localStorage.getItem('menuWidth'))
         $('#navBar a').click(function(){
-            echo($(this))
             $('#navBar a.active').removeClass('active')
             $(this).addClass('active')
         })

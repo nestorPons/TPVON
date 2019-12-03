@@ -1,16 +1,17 @@
 <component id="--id" class="row col-sm-12 col-md-12">
     <ul>
-        <?php foreach ($arrABC as $l): ?>
-            <li onclick="--id.sel(window.event)" value=<?=$l?> ><?=$l?></li>
-        <?php endforeach?>
+        <?php foreach ($arrABC as $l) : ?>
+            <li onclick="--id.sel(window.event)" value=<?= $l ?>><?= $l ?></li>
+        <?php endforeach ?>
     </ul>
     <style scoped>
-        ul{
+        ul {
             width: 100%;
             display: flex;
             justify-content: space-evenly;
         }
-        ul li{
+
+        ul li {
             display: inline;
             padding-left: 3px;
             padding-right: 3px;
@@ -19,21 +20,30 @@
             border-radius: var(--universal-border-radius);
             padding: var(--universal-padding)
         }
-        ul li:hover{
+
+        ul li:hover {
             color: var(--blockquote-color);
             transform: scale(1.1)
         }
     </style>
     <script>
         const --id = {
-            sel(el){
-                const 
-                    val = el.path[0].attributes.value.value.toLowerCase(),
-                    $t = $('#<?=$table?>').find('table')
-                $t.find('tbody tr').hide(function(){
-                        $t.find(`.${val}`).show()
-                    })
+            sel(el) {
+                const
+                val = el.path[0].attributes.value.value.toLowerCase(),
+                table = <?= $table ?>, 
+                body = table.getElementsByTagName('tbody')[0],
+                tr = body.getElementsByTagName('tr'), 
+                find = table.getElementsByClassName(`${val}`);
+
+                for(const el of tr){
+                    el.classList.add('hidden');
                 }
+                for(const el of find){
+                    el.classList.remove('hidden');
+                }
+                
             }
+        }
     </script>
 </component>

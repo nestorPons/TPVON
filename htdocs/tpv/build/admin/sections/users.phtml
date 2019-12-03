@@ -1,6 +1,9 @@
 <?php namespace app\controllers\components?><section id="users">
     <?php
-    $table = new Table(['columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 'class' => 'hoverable', 'onclick' => 'app.users.show(window.event)']);
+    $table = new Table([
+        'columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 
+        'class' => 'hoverable', 
+        'onclick' => 'app.users.show(window.event)']);
     $abc = new ListABC($table->id());
     $editUser = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
     ?>
@@ -25,7 +28,7 @@ if(this.currentId==-1)this.addLine(data)
 else this.updateLine(data)
 this.Form.close()
 if(app.income)app.income.loadUsers()
-app.tpv.loadUsers()}else{app.mens.error('El registro no pudo ser guardado!! \n '+this.error.mens)}},load(){DB.get(this.table).then(users=>{for(i in users){var user=users[i]
+app.tpv.loadUsers()}else{app.mens.error('El registro no pudo ser guardado!! \n '+this.error.mens)}},load(){DB.get(this.table).then(users=>{for(i in users.reverse()){var user=users[i]
 if(user.estado>0)this.addLine(user)}})},show(e){this.currentId=e.path[1].attributes.idline.value
 DB.get(this.table,'id',this.currentId).then(data=>this.Form.open(data).setTile('Edicion usuario'))},search(value){let _search=(field,value)=>{DB.get(this.table,field,value,'estado>0').then(v=>{for(let i in v)this.Table.showLines(`[idline='${v[i].id}'`)})}
 this.Table.hideLines()

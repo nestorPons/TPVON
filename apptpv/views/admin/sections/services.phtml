@@ -50,7 +50,7 @@ app.services = {
         this.selFam = new Select(this.Form.el.querySelector('[name="id_familia"]').parentNode)
         DB.get(this.table)
             .then( data => {
-                for( let i in data ){
+                for( let i in data.reverse() ){
                     var d = data[i]
                     // Listamos los servicios activos solamente
                     if(d.estado == 1){

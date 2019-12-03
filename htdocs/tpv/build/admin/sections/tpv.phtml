@@ -15,7 +15,7 @@
         'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
         'tabindex' => 3, 'onblur' => 'app.tpv.loadLine()'
     ], false);
-    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut'],  false);
+    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut', 'onchange'=>'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => 5, 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => 6, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => 7, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -109,5 +109,5 @@ this.date.value=date.format(data.fecha,'short')
 this.hour.value=date.format(data.fecha,'hour')
 this.currentId=data.id
 for(let line of data.lines){this.addLineTable(line.id,line.articulo,line.cantidad,line.precio,line.dto)}}else{this.txtId.value=this.currentId
-return!1}},search(value){this.request('get',value,(d,s)=>{if(s)this.loadDataTicket(d)})},}
+return!1}},search(value){this.request('get',value,(d,s)=>{if(s)this.loadDataTicket(d)})},searchDescription(){const v=this.description.value;DB.get('servicios','descripcion',v.trim()).then(data=>{this.selCode.value(data[0].id)})}}
 $(function(){app.tpv.load()})</script>

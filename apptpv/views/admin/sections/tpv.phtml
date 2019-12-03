@@ -15,7 +15,7 @@
         'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
         'tabindex' => 3, 'onblur' => 'app.tpv.loadLine()'
     ], false);
-    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut'],  false);
+    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut', 'onchange'=>'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => 5, 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => 6, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => 7, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -565,6 +565,15 @@
                 if (s) this.loadDataTicket(d);
             })
         },
+        // Busqueda por descripción
+        searchDescription(){
+            const v = this.description.value; 
+ 
+            DB.get('servicios', 'descripcion', v.trim()).then( data => {
+                this.selCode.value(data[0].id)
+            })
+            
+        }
     }
     // Caso especial de carga de js por ser el formulario inicial
     // El resto se cargan con su funcion load()

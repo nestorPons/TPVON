@@ -1,6 +1,9 @@
 <section id="users">
     <?php
-    $table = new Table(['columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 'class' => 'hoverable', 'onclick' => 'app.users.show(window.event)']);
+    $table = new Table([
+        'columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 
+        'class' => 'hoverable', 
+        'onclick' => 'app.users.show(window.event)']);
     $abc = new ListABC($table->id());
     $editUser = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
     ?>
@@ -121,7 +124,7 @@
         load() {
             DB.get(this.table)
                 .then(users => {
-                    for (i in users) {
+                    for (i in users.reverse()) {
                         var user = users[i]
                         // Listamos los usuarios activos solamente
                         if (user.estado > 0) this.addLine(user)

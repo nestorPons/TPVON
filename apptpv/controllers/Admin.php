@@ -24,7 +24,7 @@ class Admin extends Controller{
         $data['tickets_hora'] = '';
         $data['today'] = date('d/m/Y'); 
         
-        $data['jsonServices'] = json_encode($Items->getAll()); // para js
+        $data['jsonServices'] = json_encode($Items->getAll('*','codigo')); // para js
         
         $data['Company'] = $Company;
         $data['data_company'] = json_encode($Company->getAll());
