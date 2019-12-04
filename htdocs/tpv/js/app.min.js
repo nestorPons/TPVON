@@ -141,19 +141,22 @@ const app = {
                 console.info(error)
             }
         },
-        show(section) {
+        show(section, callback) {
             this.last = this.active
             // Comprueba que  la seccion existe o no 
             if ($('section#' + section).length) {
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section)
+                typeof callback == 'function' && callback();
             } else {
+
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
                     action: 'view'
-                }, f => {
+                }, true,  fn => {
                     this.inicialize(section)
+                    typeof callback == "function" && callback();
                 })
             }
             this.onblur()
@@ -318,7 +321,7 @@ const DB = {
                     v = (typeof value === 'string') ? value.toLowerCase().trim() : value;
 
                 if (k) return typeof k === 'number' ? k == v : k.includes(v);
-                else return true; 
+                else return false; 
         }
             if (table == undefined) {
                 // Si no le paso un indice me devuelve todos los nombres de tablas

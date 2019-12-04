@@ -1,25 +1,23 @@
 <section id="services">
     <?php
-    $table = new Table(['columns'=>['id', 'Código', 'Nombre', 'Descripcion', 'Precio'], 'class'=>'hoverable', 
+    $table = new Table(['columns'=>['id', 'Código', 'Descripcion', 'Precio'], 'class'=>'hoverable', 
     'onclick'=>'app.services.show(window.event)']);
     $abc = new ListABC($table->id());
     $form = new Modal(['body'=> \VIEWS\ADMIN\SECTIONS . 'forms/service.phtml'], false);
     ?>
 
 </section>
-<style lang="less">
-    #services{
-        height: 100%;
-        display: grid;
-        grid-template-rows: auto 1fr;
+<style lang="less" scoped>
 
-        #<?=$table->id()?>{
-            max-height: 100% ;
-            grid-row: 2;
-            
-        }
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    #<?=$table->id()?>{
+        max-height: 100% ;
+        grid-row: 2;
     }
-
+    
 </style>
 <script>
 'use strict'
@@ -56,7 +54,7 @@ app.services = {
                     if(d.estado == 1){
                         this.Table.addLine(
                             d.id, 
-                            [d.id, d.codigo, d.nombre, d.descripcion, d.precio]
+                            [d.id, d.codigo, d.descripcion, d.precio]
                         )
                         .addClass(d.codigo[0].toLowerCase())
                         

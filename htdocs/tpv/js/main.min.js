@@ -110,7 +110,10 @@ $(document)
         let get = arr[1].split('=')
         location.href = "?" + get[0] + "=" + get[1];
     } else {
-        app.sections.show(section)
+        app.sections.show(section, fn => {
+            // Si esta activo algún spinner lo ocutamos
+            $(this).find('.spinner').addClass('hidden')
+        })
     }
     if (menu && menu.search.state == 1) menu.search.close()
 })

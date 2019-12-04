@@ -1,18 +1,52 @@
 <?php namespace app\controllers\components?><nav id="navBar" class="menu-initial">
     <i id="icon-menu" class="lnr lnr-menu"></i>
     <ul>
-        <li><a href="tpv"><i class="lnr lnr-laptop" class="active"></i><span>TPV</span></a></li>
-		<li><a href="users"><i class="lnr lnr-users"></i><span>Usuarios</span></a></li>
-        <li><a href="services"><i class="lnr lnr-briefcase"></i><span>Servicios</span></a></li>
-        <li><a href="families"><i class="lnr lnr-bug"></i><span>Familias</span></a></li>
-        <li><a href="control"><i class="lnr lnr-gift"></i><span>Regalo</span></a></li>
-        <li><a href="conf"><i class="lnr lnr-cog"></i><span>Config</span></a></li>
+        <li>
+            <a href="tpv" class="active">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-laptop"></i>
+                <span>TPV</span>
+            </a>
+        </li>
+        <li><a href="users">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-users"></i>
+                <span>Usuarios</span>
+            </a></li>
+        <li><a href="services">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-briefcase"></i>
+                <span>Servicios</span>
+            </a></li>
+        <li><a href="families">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-bug"></i>
+                <span>Familias</span>
+            </a></li>
+        <li><a href="control">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-gift"></i>
+                <span>Regalo</span>
+            </a></li>
+        <li><a href="conf">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-cog"></i>
+                <span>Config</span>
+            </a></li>
         <!-- <li><a href="promos"><i class="lnr lnr-diamond"></i><span>VIP</span></a></li> -->
-        <li><a href="income"><i class="lnr lnr-database"></i><span>Historial</span></a></li>
-        <li><a href="chart"><i class="lnr lnr-chart-bars"></i><span>Gráficas</span></a></li>
+        <li><a href="income">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-database"></i>
+                <span>Historial</span>
+            </a></li>
+        <li><a href="chart">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-chart-bars"></i>
+                <span>Gráficas</span>
+            </a></li>
     </ul>
 </nav>
-<style>:root{--nav-initial-width:55px;--nav-max-width:145px}nav#navBar{margin:0;overflow:hidden;transition:width 1s ease;background:var(--main-color);color:var(--nav-font-color);width:var(--nav-initial-width)}nav#navbar *{margin:0;padding:0}nav#navBar ul{margin:10px 5px;padding:0;list-style:none}nav#navBar li{margin:10px 0;padding:0}nav#navBar li a{background:none;font-size:.8rem;margin:0;padding:0;text-decoration:none;width:min-content;color:inherit;transition:color 0.7s ease-out}nav#navBar li:active *,nav#navBar li:hover *{font-weight:700}nav#navBar li a i{font-size:1.5rem}#navBar a,#navBar a:hover,#navBar a:link,#navBar a:visited{color:var(--nav-font-color)}#navBar a.active *{font-weight:700}#icon-menu{position:fixed;cursor:pointer;top:6px;left:1px;font-size:2em}nav#navBar.menu-close{width:0}nav#navBar.menu-max{max-width:min-content;width:var(--nav-max-width)}nav#navBar.menu-initial{width:var(--nav-initial-width)}</style>
+<style>:root{--nav-initial-width:55px;--nav-max-width:145px}nav#navBar{margin:0;overflow:hidden;transition:width 1s ease;background:var(--main-color);color:var(--nav-font-color);width:var(--nav-initial-width)}nav#navbar *{margin:0;padding:0}nav#navBar ul{margin:10px 5px;padding:0;list-style:none}nav#navBar li{margin:10px 0;padding:0}nav#navBar li a{position:relative;background:none;font-size:.8rem;margin:0;padding:0;text-decoration:none;width:max-content;color:inherit;transition:color 0.7s ease-out}nav#navBar li a *{vertical-align:middle}nav#navBar li:active *,nav#navBar li:hover *{font-weight:700}nav#navBar li a i{font-size:1.5rem}#navBar a,#navBar a:hover,#navBar a:link,#navBar a:visited{color:var(--nav-font-color)}#navBar a.active *{font-weight:700}#icon-menu{position:fixed;cursor:pointer;top:6px;left:1px;font-size:2em}nav#navBar.menu-close{width:0}nav#navBar.menu-max{max-width:min-content;width:var(--nav-max-width)}nav#navBar.menu-initial{width:var(--nav-initial-width)}nav#navBar .spinner{padding:0;height:1.9rem;width:1.9rem;border-color:var(--main-color);border-width:3px;border-top:2px solid var(--input-focus-color);border-left:2px solid var(--input-focus-color);position:absolute;margin:0;top:-5px;left:6px}</style>
 <script>if(!exist(localStorage.menuWidth))localStorage.setItem('menuWidth','initial')
 var navbar={toggle(change=!0){const
 menuWidth=localStorage.getItem('menuWidth'),varClass=(menuWidth=='menu-initial')?'menu-max':'menu-initial';navbar.addClass(varClass)
@@ -21,6 +55,6 @@ if(varclass=='menu-max')$('.label').show('slow')
 else $('.label').hide('slow')}}
 $('#icon-menu').click(navbar.toggle)
 $(function(){navbar.addClass(localStorage.getItem('menuWidth'))
-$('#navBar a').click(function(){echo($(this))
+$('#navBar a').click(function(){$(this).find('.spinner').removeClass('hidden')
 $('#navBar a.active').removeClass('active')
 $(this).addClass('active')})})</script>

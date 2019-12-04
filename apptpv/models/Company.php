@@ -19,6 +19,7 @@ class Company extends Query{
         return !$conn; 
     }
     function save(Data $Data){
+        $Data->id = 1;
         $this->loadData(get_object_vars($Data));
         $this->ultimo_acceso(date("Y-m-d H:i:s"));
         return $this->saveById($this->toArray());
