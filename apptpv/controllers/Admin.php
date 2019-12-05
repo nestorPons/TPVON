@@ -19,6 +19,9 @@ class Admin extends Controller{
         $Promos = new Query('promos'); 
         $Users  = new User;
         $Fam    = new Family;
+        
+        $data['admin']   =  $this->User->nivel > 1; 
+
         $data['config']  = json_encode($Config->getAll()); // para js
 
         $lastTicket = $Ticket->getLast();

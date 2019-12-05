@@ -34,36 +34,45 @@ class Prepocessor{
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
         $this->cache_record($this->cache);
     }
-    private function sintax_if(string $text) : string {
-        $regex_conditional = '/@if(\s)*?\((.)*?\)(.)*?@endif/i'; 
-        $start_condition = '/@if(\s)*?\((.)*?\)/i';
+    private function sintax_if() : object {
+        $condition = '/\((.*?)\)/sim';
         $end_condition = '/@endif/i'; 
-        $has = preg_match_all($regex_conditional, $text, $matches);
- 
+      
+        // Reemplazamos los if
+        $regex = '#@if(.+)\)#';
+        $has = preg_match_all($regex, $this->content, $matches);
         if($has){
             foreach ($matches[0] as $key => $value) {
                 // Se obtiene la condición
-                if(preg_match($start_condition, $value, $matches)){
-                    $condition = preg_replace('/@if(\s)*?\(/i','',$matches[0]);
-                    $condition = preg_replace('/\)$/','',$condition);
-                    if(empty($condition)) $condition = null;
-                    $con = false; 
-                    eval('if ($condition) { $con = true; }');
-
-                   if($con){
-                       // Imprimimos el contenido dentro del condicional
-                        $replace = preg_replace($start_condition,'',$value); 
-                        $replace = preg_replace($end_condition,'',$replace);
-                        $text = str_replace($value, $replace, $text);
-                    } else {
-                        // Eliminamos todo el condicional 
-                        $text = str_replace($value, '', $text);
-                    }
-                }
-              
+                if(preg_match($condition, $value, $matches)){
+                    $conditional = $matches[1];
+                    $strif = "<?php if($conditional):?>"; 
+                    $this->content = str_replace($value, $strif, $this->content);
+                }  
             } 
         }
-        return $text;
+
+        // Reemplazamos los @else:
+        $regex = '#@else#';
+        $replace = '<?php else: ?>';
+        $this->replace($regex, $replace);
+  
+        // Reemplazamos los @endif:
+        $regex = '#@endif#';
+        $replace = '<?php endif ?>';
+        $this->replace($regex, $replace);
+
+        return $this;
+    }
+    // Funcion auxiliar de reemplazo de content
+    private function replace ($regex, $replace) : object{
+        $has = preg_match_all($regex, $this->content, $matches);
+        if($has){
+            foreach ($matches[0] as $key => $value) {
+                $this->content = str_replace($value, $replace, $this->content);
+            } 
+        }
+        return $this;
     }
     private function args(String $tag){
         $return = [];
@@ -156,9 +165,22 @@ class Prepocessor{
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
         $this->autoId();
-        $this->content = $this->sintax_if($this->content);
+        //$this->sintax_vars();
+        $this->sintax_if();
         $this->style_scoped();
         $this->script_scoped(); 
+    }
+    // Busca sibolo $ para y lo reemplaza por variables php
+    private function sintax_vars(){
+        $con = $this->content; 
+        $has = preg_match_all('#\$\$(\w+)#is', $this->content, $matches);
+        if($has){
+            foreach ($matches[0] as $key => $value) {
+                $str = '<?=$' . trim($value, '\$') . '?>';
+                $this->content = str_replace($value, $str, $this->content);
+            }
+        }
+        return $con;
     }
     // Comando --id -> Genera un id único para todo el documento.
     private function autoId() : string{
@@ -196,7 +218,7 @@ class Prepocessor{
             // Quitar los scopes 
             foreach ($matches[0] as $key => $value) {
                 // Quitamos el comando scope
-                $noscope = str_replace(' scoped', '', $value); 
+                $noscope = str_replace(' scoped', '', $value);
                 $this->content = str_replace($value, $noscope, $this->content);
             }
             foreach ($matches[1] as $key => $value) {
