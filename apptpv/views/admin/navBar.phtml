@@ -171,8 +171,10 @@
     $('#icon-menu').click(navbar.toggle)
     $(function() {
         navbar.addClass(localStorage.getItem('menuWidth'))
+        // Acciones personalizadas al clickar en los enlaces
         $('#navBar a').click(function() {
-        $(this).find('.spinner').removeClass('hidden')
+            
+            $(this).find('.spinner').removeClass('hidden')
 
             $('#navBar a.active').removeClass('active')
             $(this).addClass('active')

@@ -101,7 +101,6 @@ $(document)
 // Comportamiento general de los links 
 .on('click', 'a', function(e) {
     e.preventDefault();
-
     let section = $(this).attr('href')
     // Comprobamos si tiene parametros get 
     // Significa que se solicita redirección
@@ -112,7 +111,7 @@ $(document)
     } else {
         app.sections.show(section, fn => {
             // Si esta activo algún spinner lo ocutamos
-            $(this).find('.spinner').addClass('hidden')
+            $(this).find('.spinner').addClass('hidden');
         })
     }
     if (menu && menu.search.state == 1) menu.search.close()

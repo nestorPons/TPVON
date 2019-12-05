@@ -105,6 +105,7 @@ select{
 }
 .row{
   position: relative;
+  margin-bottom: .5rem;
   label{
     z-index: 1;
     position: absolute;
@@ -127,6 +128,20 @@ select{
         transform: translateY(-1.6rem) scale(0.9);
       }
     }
+  }
+  input:not([type]), 
+  [type="text"], 
+  [type="email"], 
+  [type="number"], 
+  [type="search"], 
+  [type="password"], 
+  [type="url"], 
+  [type="tel"], 
+  [type="checkbox"], 
+  [type="radio"], 
+  textarea, 
+  select {
+    padding-bottom: inherit;
   }
 }
 .text-left{

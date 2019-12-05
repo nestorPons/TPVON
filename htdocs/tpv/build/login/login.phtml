@@ -9,9 +9,8 @@
                 'type'=>'email', 
                 'label' => 'Email del usuario', 
                 'name' => 'email', 
-                'required' => true, 
-                'value' => 'nestorpons@gmail.com']);
-            new InputPass(['label' => 'Contraseña', 'name' => 'password', 'required' => true, 'value' => '123456'])
+                'required' => true]);
+            new InputPass(['label' => 'Contraseña', 'name' => 'password', 'required' => true])
             ?>
         </fieldset>
         <?php new ButtonSuccess(['caption' => 'Acceder']); /* new ButtonCancel */ ?>

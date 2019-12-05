@@ -67,6 +67,7 @@
                 if (v != undefined) {
                     this.el.value = v
                     this.el.seletedIndex = v
+                    this.addClass('valid')
                 }
                 return this.el.value
             }
@@ -86,6 +87,10 @@
                     else if (this.el.hasAttribute('hidden')) this.el.classList.remove(this.CLASS_SELECTED)
                 }
                 /* return this.value() */
+            }
+            // Elimina la primera opcion en blanco
+            required(){
+                this.el.removeChild(this.o[0])
             }
         }
     </script>

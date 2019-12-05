@@ -13,22 +13,23 @@
 
   DROP TABLE IF EXISTS `empresa`;
   CREATE TABLE `empresa` (
-    `id` tinyint(1) UNSIGNED NOT NULL,
-    `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `nif` char(9) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `ultimo_acceso` datetime DEFAULT CURRENT_TIMESTAMP,
-    `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `telefono` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `calle` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `numero` smallint(6) DEFAULT NULL,
-    `piso` tinyint(4) DEFAULT NULL,
-    `escalera` varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `poblacion` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `CP` smallint(5) DEFAULT NULL,
-    `provincia` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
-    `pais` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `id` tinyint(1) UNSIGNED NOT NULL,
+  `nombre` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `nif` char(9) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `id_gerente` int(11) UNSIGNED NOT NULL,
+  `fecha` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ultimo_acceso` datetime DEFAULT CURRENT_TIMESTAMP,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `telefono` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `calle` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `numero` smallint(6) DEFAULT NULL,
+  `piso` tinyint(4) DEFAULT NULL,
+  `escalera` varchar(2) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `poblacion` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `CP` smallint(5) DEFAULT NULL,
+  `provincia` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `pais` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
   DROP TABLE IF EXISTS `historial`;
   CREATE TABLE `historial` (
@@ -133,6 +134,10 @@ CREATE TABLE `usuarios_config` (
     `dias` smallint(3) NOT NULL DEFAULT '365'
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_gerente`);
+
   ALTER TABLE `articulos`
     ADD PRIMARY KEY (`id`),
     ADD UNIQUE KEY `codigo` (`codigo`),
@@ -140,9 +145,6 @@ CREATE TABLE `usuarios_config` (
     ADD KEY `id_familia` (`id_familia`);
 
   ALTER TABLE `lineas_regalo`
-    ADD PRIMARY KEY (`id`);
-
-  ALTER TABLE `empresa`
     ADD PRIMARY KEY (`id`);
 
   ALTER TABLE `historial`
@@ -192,6 +194,7 @@ ALTER TABLE `usuarios_config`
   ALTER TABLE `config`
     ADD PRIMARY KEY (`id`);
 
+
   ALTER TABLE `articulos`
     MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
@@ -224,6 +227,9 @@ ALTER TABLE `usuarios_config`
 
   ALTER TABLE `articulos`
     ADD CONSTRAINT `art_ibfk_1` FOREIGN KEY (`id_familia`) REFERENCES `familias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  
+  ALTER TABLE `empresa`
+    ADD CONSTRAINT `id_user` FOREIGN KEY (`id_gerente`) REFERENCES `usuarios` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
   ALTER TABLE `lineas_regalo`
     ADD CONSTRAINT `lreg_ibfk_1` FOREIGN KEY (`id`) REFERENCES `lineas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

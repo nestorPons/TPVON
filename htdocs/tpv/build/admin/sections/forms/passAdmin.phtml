@@ -1,0 +1,14 @@
+<?php namespace app\controllers\components?>
+<component>
+    <form controller="user" action="authadmin">
+        <h1><?= $nombre?></h1>
+        <fieldset class="container">
+            <legend>Zona restringida</legend>
+            <?php
+            new InputHidden(['name' => 'email']);
+            new InputPass(['label' => 'Contraseña', 'name' => 'password', 'required' => true])
+            ?>
+        </fieldset>
+        <?php new ButtonSuccess(['caption' => 'Acceder']); /* new ButtonCancel */ ?>
+    </form>
+</component>

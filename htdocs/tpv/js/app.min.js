@@ -149,12 +149,12 @@ const app = {
                 app.sections.toggle(section)
                 typeof callback == 'function' && callback();
             } else {
-
                 // Manda una petición para la nueva vista
                 app.get({
                     controller: section,
                     action: 'view'
                 }, true,  fn => {
+                    // Activa el evento de inicialización de la sección
                     this.inicialize(section)
                     typeof callback == "function" && callback();
                 })

@@ -141,11 +141,15 @@
             let _search = (field, value) => {
                 DB.get(this.table, field, value, 'estado>0')
                     .then(v => {
-                        for (let i in v) this.Table.showLines(`[idline='${v[i].id}'`)
+                        if(v){
+                            for (let i in v) this.Table.showLine(`[idline='${v[i].id}']`)
+                        }
                     })
             }
-            this.Table.hideLines()
-            echo('AKI');
+            // Ocultamoso todas las lineas
+            this.Table.hiddenRows()
+            
+            // Busqueda segun criterios
             if (/([0-9]){9,13}/.test(value)) _search('tel', value)
             else if (/[0-9]{8}[A-Za-z]{1}/.test(value)) _search('dni', value)
             else if (value.indexOf('@') != -1) _search('email', value)

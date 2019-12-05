@@ -28,6 +28,7 @@ class Controller{
         }
     protected function view($data = null){
         $arr_data = (is_object($data)) ? $data->toArray() : $data;
+
         // Carpetas donde buscar las vistas
         $files[] = \FOLDERS\VIEWS . $this->controller . '.phtml'; 
         $files[] = \VIEWS\LOGIN . $this->controller . '.phtml';
@@ -64,6 +65,7 @@ class Controller{
     protected function get(){
         return $this->exec('get', 'getById');
     }
+
     protected function printView(String $route, array $data = null){
 
         if($data){
@@ -71,7 +73,7 @@ class Controller{
                 ${$key} = $val;
             }
         }
-
+        
         return require_once $route;
     }
     /**
@@ -98,10 +100,10 @@ class Controller{
     }
     private function exec (String $method, String $method_generic){
         $name_model = $this->getModel(); 
-        // Si es geneal query pasamos solo el nombre de la tabla 
-        // En caso contratio pasamos al constructor todo los datos 
         $model = ($name_model == '\app\core\Query')
+            // Si es genearl query pasamos solo el nombre de la tabla 
             ? new $name_model($this->controller)
+            // En caso contrario pasamos al constructor todo los datos 
             : new $name_model($this->Data->toArray());
 
         $model->id = $this->Data->id ?? null;

@@ -69,6 +69,7 @@ class User extends Query
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Data $Data)
     {
+
         // Carga de datos al objeto
         $this->loadData($Data);
 
@@ -84,6 +85,8 @@ class User extends Query
 
         if ($this->id == -1) $this->id = $this->new($Data);
         else {
+            $this->saveById($Data->toArray()); 
+
             $this->Conf->saveById([
                 'id' => $this->id, 
                 'promos' => $this->promos, 

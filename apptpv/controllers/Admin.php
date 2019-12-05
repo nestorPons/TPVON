@@ -6,8 +6,10 @@ use \app\core\{Query, Data, Controller};
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Admin extends Controller{
+    private $User; 
 
-    function __construct(){
+    function __construct($User){
+        $this->User = $User;
     }
     function loadView(){
         $Config = new Config();
@@ -15,7 +17,7 @@ class Admin extends Controller{
         $Ticket = new Tickets; 
         $Items  = new Items;
         $Promos = new Query('promos'); 
-        $User   = new User;
+        $Users  = new User;
         $Fam    = new Family;
         $data['config']  = json_encode($Config->getAll()); // para js
 
@@ -31,7 +33,7 @@ class Admin extends Controller{
         
         $data['promos'] = json_encode($Promos->getAll()); 
 
-        $data['Users'] = $User->all();
+        $data['Users'] = $Users->all();
         $data['jsonUsers'] = json_encode($data['Users']); // para js
 
         $data['families'] = json_encode($Fam->getAll());

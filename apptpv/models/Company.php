@@ -6,7 +6,8 @@ class Company extends Query{
 
     public 
         $id = 1, $nombre, $fecha, $ultimo_acceso, $nif,
-        $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais; 
+        $email, $telefono, $calle, $numero, $piso, $escalera, $poblacion, $CP, $provincia, $pais, 
+        $id_gerente; 
     protected 
         $data = null ,
         $table = 'empresa', 

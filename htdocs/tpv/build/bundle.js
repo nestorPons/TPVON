@@ -35,6 +35,7 @@ this.day.innerHTML=''
 this.month.innerHTML=''
 this.year.innerHTML=''
 this.desc.innerHTML=''}}class Table{constructor(id){this.el=document.getElementById(id).querySelector('table')
+this.body=this.el.getElementsByTagName('tbody')[0]
 this.template=document.getElementById(id).querySelector('template')
 this.$table=$('#'+id).find('table')
 this.$template=$(`#${id}`).find('template')
@@ -47,8 +48,10 @@ endScroll(){this.$table.animate({scrollTop:this.$table.height()},100)}
 clearLines(){this.$table.find('tbody').find('tr').remove()}
 clear(){this.data=[]
 this.clearLines()}
-showLines(exp){this.$table.find(exp).show()}
-hideLines(){this.$table.find('tbody').find('tr').hide()}
+showLine(exp){const e=this.el.querySelector(exp);echo(e)
+e.classList.remove('hidden');echo(e.className)
+return this}
+hiddenRows(){const trs=this.body.getElementsByTagName('tr');for(const tr of trs){tr.classList.add('hidden')}}
 delLine(id){this.$table.find(`[idline="${id}"]`).remove()}
 updateLine(id,data){this.delLine(id)
 return this.addLine(id,data)}
@@ -75,14 +78,16 @@ reset(){this.el.classList.remove(this.CLASS_SELECTED)
 let options=this.el.getElementsByTagName('option')
 for(let option of options){option.selected=!1}}
 value(v){if(v!=undefined){this.el.value=v
-this.el.seletedIndex=v}
+this.el.seletedIndex=v
+this.addClass('valid')}
 return this.el.value}
 option(data){if(data!=undefined){let optionselected=!1
 for(let option of this.o){if(option.getAttribute('value')==data){option.selected=!0
 optionselected=!0
 break}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
-else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}}class Modal{constructor(id){this.el=document.getElementById(id).querySelector(`.card`);this.$el=$('#'+id).find('.card')
+else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}
+required(){this.el.removeChild(this.o[0])}}class Modal{constructor(id){this.el=document.getElementById(id).querySelector(`.card`);this.$el=$('#'+id).find('.card')
 this.$switch=$('#control_'+id)
 this.$el.keyup(e=>(e.key==='Escape')&&this.close())
 this.attrState=!1

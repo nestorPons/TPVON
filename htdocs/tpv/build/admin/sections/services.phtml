@@ -31,6 +31,6 @@ if(this.currentId==-1)this.addLine(data)
 else this.updateLine(data)
 this.Form.close()
 app.tpv.loadServ()},show(e){this.currentId=e.path[1].attributes.idline.value
-DB.get(this.table,'id',this.currentId).then(data=>this.Form.state('edit').open(data).setTile('Edición A/S'))},async search(value){this.Table.hideLines()
+DB.get(this.table,'id',this.currentId).then(data=>this.Form.state('edit').open(data).setTile('Edición A/S'))},async search(value){this.Table.hiddenRows()
 await this.searchBy('codigo',value)||await this.searchBy('nombre',value)||await this.searchBy('descripcion',value)},searchBy(field,value){DB.get(this.table,field,value,'estado==1').then(d=>{if(d){for(let i in d)this.Table.showLines(`[idline='${d[i].id}'`)
 return!0}else return!1})}}</script>

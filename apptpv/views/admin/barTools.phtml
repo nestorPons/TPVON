@@ -9,7 +9,7 @@
         <?php $conf         = new Icon('cod',                   ['onclick'=>'app.sections.conf()', 'label' => 'Configurar'])?>
         <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
         <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
-        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1'])?>
+        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1', 'onblur'=>'menu.search.close()'])?>
     </div>
     <div id="bartools-central"> 
     </div>  

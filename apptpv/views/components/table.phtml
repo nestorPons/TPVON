@@ -55,6 +55,7 @@
         class Table {
             constructor(id) {
                 this.el = document.getElementById(id).querySelector('table')
+                this.body = this.el.getElementsByTagName('tbody')[0]
                 this.template = document.getElementById(id).querySelector('template')
                 this.$table = $('#' + id).find('table')
                 this.$template = $(`#${id}`).find('template')
@@ -96,11 +97,18 @@
                 this.data = []
                 this.clearLines()
             }
-            showLines(exp) {
-                this.$table.find(exp).show()
+            showLine(exp) {
+                const e = this.el.querySelector(exp);
+                echo(e)
+                e.classList.remove('hidden');
+                echo(e.className)
+                return this;
             }
-            hideLines() {
-                this.$table.find('tbody').find('tr').hide()
+            hiddenRows(){
+                const trs = this.body.getElementsByTagName('tr') ;
+                for( const tr of trs) {
+                    tr.classList.add('hidden')
+                }
             }
             delLine(id) {
                 this.$table.find(`[idline="${id}"]`).remove()

@@ -126,7 +126,7 @@ app.services = {
             .then( data => this.Form.state('edit').open(data).setTile('Edición A/S'))
     },
     async search(value){
-        this.Table.hideLines()
+        this.Table.hiddenRows()
         await this.searchBy('codigo', value) || 
         await this.searchBy('nombre', value) || 
         await this.searchBy('descripcion', value)

@@ -69,7 +69,7 @@ class Login extends Controller{
         if($this->verify($this->User->password())){
             if($this->isActive()){
                 if ($this->isAdmin()){
-                    $Admin = new Admin; 
+                    $Admin = new Admin($this->User); 
                     return $Admin->loadView();
                 } else if ($this->isUser()){
                     $Clients = new Clients; 
