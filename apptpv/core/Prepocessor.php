@@ -1,5 +1,4 @@
 <?php  namespace app\core;
-session_start();
 use MatthiasMullie\Minify;
 
 class Prepocessor{
@@ -11,7 +10,7 @@ class Prepocessor{
         NAMESPACE_COMPONENTS = 'app\controllers\components';
 
     private
-        $cache_class_js,  
+        $cache_class_js = null,  
         $cache,
         $isModified = false,
         $content,
@@ -21,7 +20,6 @@ class Prepocessor{
     function __construct(bool $cacheable = true){
         
         $this->queue = "<script src='./build/".\FILE\JS."'></script>";
-        $this->cache_class_js = $_SESSION['cache_class_js']??null;
         $this->cacheable = $cacheable;
         $this->cache = (file_exists(self::CACHE_FILE)) ? parse_ini_file(self::CACHE_FILE) : [];
 
@@ -165,8 +163,8 @@ class Prepocessor{
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
         $this->autoId();
-        //$this->sintax_vars();
         $this->sintax_if();
+        //$this->sintax_vars();
         $this->style_scoped();
         $this->script_scoped(); 
     }
@@ -329,7 +327,7 @@ class Prepocessor{
         $count = preg_match_all($regex, $this->content, $matches);
 
         // Cambiar los componentes por las instancias de clase
-// AKI :: Acabar componentes
+        // AKI :: Acabar componentes
     }
     private function add_name_space(){
         $this->content = "<?php namespace " . self::NAMESPACE_COMPONENTS ."?>" . $this->content; 

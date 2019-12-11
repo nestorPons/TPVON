@@ -1,6 +1,5 @@
 <?php namespace app\core;
 use \app\models\Company;
-use \app\core\{Error, Data};
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
  * Tiene lo mínimo para la creación de una subclase: 
@@ -9,16 +8,19 @@ use \app\core\{Error, Data};
  *  Método para añadir/editar/borrar datos a los modelos (abstracto)
  */
 class Controller{
-    protected $conn, $controller, $action, $data;
+    protected $conn, $controller, $action, $data, 
+        // Variable que indica si la zona necesita autentificación
+        // Hay que sobreescribirla en los controladores que no necesiten de la restricción
+        $restrict = true;
+
     public $result = null;
-    private $Model; 
-    private $db = CONN['db'];
+    private $Model, $db = CONN['db'];
     
     function __construct(String $action, $controller = null, $Data = null){
-        $this->action = strtolower($action);
+        // Obtenemos el controlador
         $this->controller =strtolower($controller ?? $this->getController());
+        $this->action = strtolower($action);
         $this->Data = $Data; 
-
         // Constructor alternativo básico
         $this->result = (method_exists($this, $this->action)) 
                         ? $this->{$this->action}($Data)

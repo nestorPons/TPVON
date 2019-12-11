@@ -30,14 +30,17 @@
 </style>
 <script>
     'use strict'
-    DB.set('servicios', <?=$jsonServices?>)      
-    DB.set('usuarios', <?=$jsonUsers?>)
-    DB.set('empresa', <?=$data_company?>)
-    DB.set('promos', <?=$promos?>)
-    DB.set('config', <?=$config?>)
-    DB.set('familias', <?=$families?>) 
+    DB.set('servicios', <?=$jsonServices?>);  
+    DB.set('usuarios', <?=$jsonUsers?>);
+    DB.set('empresa', <?=$data_company?>);
+    DB.set('promos', <?=$promos?>);
+    DB.set('config', <?=$config?>);
+    DB.set('familias', <?=$families?>);
     
-    app.clock()
+    app.clock();
+
+    // Guardamos el session storage el token de autentificación
+    sessionStorage.setItem('jwt', '<?=$jwt?>');
 
 </script>
 

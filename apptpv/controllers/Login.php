@@ -1,18 +1,22 @@
 <?php namespace app\controllers;
+use \app\libs\{Auth};
 use \app\models\{Tokens, User, Company, ZoneAdmin, ZoneUser, Tickets};
-use \app\core\{Error, Query, Data, Controller};
+use \app\core\{Error, Query, Data, Controller, Security};
 /**
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Login extends Controller{
+    protected $restrict = false;  
+
     private 
-        $company, $zone, $password, $email,  
+        $company, $password, $email,  
         $folders = \VIEWS\LOGIN, 
         $level_admin = LEVEL_ADMIN, 
         $level_user = LEVEL_USER,
         $db = CONN['db'];
 
     function __construct(String $action = null, $data){
+      
         // Comprobamos que la empresa existe si no enviamos el formulario de nueva empresa
         $c = new Query(null, $this->db);
 
@@ -68,8 +72,17 @@ class Login extends Controller{
 
         if($this->verify($this->User->password())){
             if($this->isActive()){
+                // Cargamos JWT para autentificación de la sesión
+                    $jwt = Auth::SignIn([
+                        'id' => $this->User->id,
+                        'access' => true
+                        ], 
+                        (60 * 12)
+                    );
+
                 if ($this->isAdmin()){
                     $Admin = new Admin($this->User); 
+                    $Admin->jwt($jwt); 
                     return $Admin->loadView();
                 } else if ($this->isUser()){
                     $Clients = new Clients; 
@@ -98,7 +111,6 @@ class Login extends Controller{
         return $this->User->nivel() >= $this->level_user; 
     }
     protected function view( $data = null){
-
         // Valor predeterminado de la vista
         if (!$data['page']) {
             $data = $this->company->toArray();

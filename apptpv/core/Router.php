@@ -72,10 +72,23 @@ class Router{
     private function isController(string $class){
         return (file_exists ( \FOLDERS\CONTROLLERS . $class . '.php'));
     }
-    // Carga controladores
+    // Carga controlador
     // Si se le pasa argumentos cambia el controlador asignado
     private function loadController(string $controller = null){
+        // Buscamos controlador
         if(!empty($controller)) $this->controller = ucwords($controller); 
+        // Antes de cargar el controlador se comprueba si tiene permsiso para la petición
+        if(Security::isRestrict($this->controller)){            
+            if ($token = Security::getJWT()){
+                $dataToken = Security::GetData($token);
+                if(!$dataToken->access) return false;
+            } else {
+                // Si no tiene permiso se devuelve al login
+                header("Refresh:0; url={$_SERVER['PHP_SELF']}");
+                return false;
+            }
+        };
+
         $nameClass = '\\app\\controllers\\' . $this->controller;
         $cont = $this->isController($this->controller)
             ? new $nameClass($this->action, $this->data)

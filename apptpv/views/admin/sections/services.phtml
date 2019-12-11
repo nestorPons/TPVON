@@ -63,7 +63,9 @@ app.services = {
             })
     },
     async open(){
-        const families = await DB.get('familias', null, null,  'estado==1')
+    
+        const families = await DB.get('familias', 'estado', 1)
+
         this.selFam.clear().addClass('valid')
 
         for(let f of families){
@@ -139,6 +141,6 @@ app.services = {
             }
             else return false
         })
-    }
+    },
 }
 </script>

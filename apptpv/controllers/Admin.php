@@ -6,11 +6,18 @@ use \app\core\{Query, Data, Controller};
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Admin extends Controller{
-    private $User; 
+
+    private $User, $jwt; 
 
     function __construct($User){
         $this->User = $User;
     }
+    
+    public function jwt(string $arg = null) : string {
+        if($arg) $this->jwt = $arg; 
+        return $this->jwt; 
+    }
+
     function loadView(){
         $Config = new Config();
         $Company= new Company();
@@ -20,9 +27,12 @@ class Admin extends Controller{
         $Users  = new User;
         $Fam    = new Family;
         
+        $data['jwt'] = $this->jwt;
+
         $data['admin']   =  $this->User->nivel > 1; 
 
         $data['config']  = json_encode($Config->getAll()); // para js
+
 
         $lastTicket = $Ticket->getLast();
         $data['tickets_new_id'] = $lastTicket['id'] + 1 ;

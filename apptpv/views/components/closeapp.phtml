@@ -4,6 +4,10 @@
 <script>
     $('#--id').click(function(){
         // Eliminamos las zonas abiertas
-        $('section:not("#login")').remove()
+        $('section:not("#login")').remove();
+        // Quitamos token de autentificación
+        sessionStorage.removeItem('jwt');
+        // Eliminamos la base de datos 
+        DB.remove();
     })
 </script>

@@ -1,3 +1,6 @@
+//Eliminamos el jwt al inicio para nueva sessión
+sessionStorage.removeItem('jwt');
+
 // Comportamientos generales de nuestros componentes de la aplicacion
 // Nuevo comportamiento de los links
 $(document)
@@ -30,6 +33,7 @@ $(document)
         })
      }
 })
+
 // Comportamiento general de envio de formulario al servidor
 .on('submit', 'form', function (e, i) {
     e.preventDefault()

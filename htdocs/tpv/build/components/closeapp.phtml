@@ -1,4 +1,4 @@
 <?php namespace app\controllers\components?><a href="login">
     <?php include \VIEWS\COMPONENTS . 'icon.phtml'; ?>
 </a>
-<script>$('#--id').click(function(){$('section:not("#login")').remove()})</script>
+<script>$('#--id').click(function(){$('section:not("#login")').remove();sessionStorage.removeItem('jwt');DB.remove()})</script>

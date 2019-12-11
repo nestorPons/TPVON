@@ -14,7 +14,7 @@ if(this.Form.state()=='new'){if(ser!=undefined)el.setCustomValidity("Codigo exis
 else el.setCustomValidity('')}else{if(ser&&this.Form.data.id!=ser.id)el.setCustomValidity("Codigo existente")
 else el.setCustomValidity('')}},load(){this.selFam=new Select(this.Form.el.querySelector('[name="id_familia"]').parentNode)
 DB.get(this.table).then(data=>{for(let i in data.reverse()){var d=data[i]
-if(d.estado==1){this.Table.addLine(d.id,[d.id,d.codigo,d.descripcion,d.precio]).addClass(d.codigo[0].toLowerCase())}}})},async open(){const families=await DB.get('familias',null,null,'estado==1')
+if(d.estado==1){this.Table.addLine(d.id,[d.id,d.codigo,d.descripcion,d.precio]).addClass(d.codigo[0].toLowerCase())}}})},async open(){const families=await DB.get('familias','estado',1)
 this.selFam.clear().addClass('valid')
 for(let f of families){if(f)this.selFam.addOption(f.id,f.nombre)}},del(){DB.get(this.table,'id',this.currentId).then(d=>d[0]).then(d=>{d.estado=0
 DB.set(this.table,d,'id',d.id)
@@ -33,4 +33,4 @@ this.Form.close()
 app.tpv.loadServ()},show(e){this.currentId=e.path[1].attributes.idline.value
 DB.get(this.table,'id',this.currentId).then(data=>this.Form.state('edit').open(data).setTile('Edición A/S'))},async search(value){this.Table.hiddenRows()
 await this.searchBy('codigo',value)||await this.searchBy('nombre',value)||await this.searchBy('descripcion',value)},searchBy(field,value){DB.get(this.table,field,value,'estado==1').then(d=>{if(d){for(let i in d)this.Table.showLines(`[idline='${d[i].id}'`)
-return!0}else return!1})}}</script>
+return!0}else return!1})},}</script>

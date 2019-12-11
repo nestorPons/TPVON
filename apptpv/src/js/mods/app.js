@@ -7,9 +7,9 @@ const app = {
             this.mens.error({ success: false, error: 'No se ha asignado  controlador' })
             return false
         }
-        if (typeof data.db === 'undefined') data.db = $_GET['db']
+        if (typeof data.db === 'undefined') data.db = $_GET['db']; 
 
-        $.post('index.php', data, (respond, status, xhr, dataType) => {
+        this.ajax('post', data, (respond, status, xhr, dataType) => {
             let data = null
             // La respuesta puede ser json o html 
             try {
@@ -38,11 +38,7 @@ const app = {
                     state = data ? data.success : false
                 typeof callback == "function" && callback(resp, state)
             }
-        })
-            .fail(fn => {
-                this.mens.error("Fallo de conexión \n No se pudo guardar los datos");
-                typeof callback == "function" && callback(null, 0)
-            })
+        });
     },
     // Carga de zonas por método get
     // data => {controller : ... , action: (view), data : ....}
@@ -53,9 +49,9 @@ const app = {
     get(data, load = true, callback) {
         if (typeof data.controller === 'undefined') return false;
 
-        for (let i in this.GET) data[i] = this.GET[i]
+        for (let i in this.GET) data[i] = this.GET[i];
 
-        $.get('index.php', data, (html, respond) => {
+        this.ajax('get', data, (html, respond) => {
             // Cargamos la seccion en diferentes lugares dependiendo en que zona nos encontramos
             $container = ($('main').length != 0) ? $('main') : $('body')
             if (load) {
@@ -71,6 +67,28 @@ const app = {
             }
             typeof callback == 'function' && callback(html)
         }, 'html');
+
+    },
+    ajax(type, data, callback, dataType){
+        const 
+            jwt = sessionStorage.getItem('jwt'), 
+            my_header = (jwt) ? {jwt: jwt} : {} ; 
+        
+        $.ajax({
+            url: 'index.php',
+            type: type,
+            data: data,
+            headers: my_header,
+            dataType: dataType, 
+            success: (respond, status, xhr, dataType) => {
+                typeof callback == "function" && callback(respond, status, xhr, dataType)
+            },
+            error : (xhr,status,error) => {
+                this.mens.error("Fallo de conexión \n No se pudo enviar los datos");
+                echo (xhr,status,error)
+                typeof callback == "function" && callback(null, 0)
+            }
+        });
     },
     loadSync(name, callback) {
         var s = document.createElement("script");
@@ -431,6 +449,11 @@ const DB = {
                 else reject(d)
             })
         })
+    },
+    remove(){
+        this.storage = [];
+        this.current = 0; 
+        this.table = null;
     }
 }
 const date =  {
