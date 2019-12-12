@@ -22,32 +22,43 @@
             <?php endforeach ?>
         </tr>
     </template>
-    <style lang="less">
-        #--id {
-            height          : 100%; 
-            width           : 100%;
+    <style lang="less" scoped>
+        height : 100%;
+        width : 100%;
 
-            tfoot {
-                order       : 3;
-                width       : 100%;
+        tfoot {
+            order: 3;
+            width: 100%;
 
-                tr {
-                    text-align: right;
-                }
+            tr {
+                text-align: right;
             }
-            table{ 
-                margin      : 2px;
-                max-height  : 75vh;
-               
+        }
+
+        table {
+            max-height: 75vh;
+        }
+
+        &.hoverable tbody {
+            cursor: pointer;
+        }
+
+        .id {
+            max-width: 6ch;
+        }
+
+        @media (max-width: 997px) {
+            table {
+                max-height: 65vh;
             }
-            &.hoverable tbody {
-                cursor      : pointer;
+
+            th,
+            td {
+                padding: 0;
             }
-            tbody{
-                
-            }
-            .id{
-                max-width: 6ch;
+
+            thead {
+                height: inherit !important;
             }
         }
     </style>
@@ -73,14 +84,14 @@
                 // Cargamos los datos en una variable para posteriores consultas (getData(){})
                 this.data.push(arrData)
 
-                const c =  this.$template.clone().html()
+                const c = this.$template.clone().html()
                 return $(c)
                     .attr('idline', id || this.$table.find('tr').length)
-                        .find('td').each(function(i, el) {
-                            $(this)
-                                .html(arrData[i])
-                                .attr('data-label', arrData[i])
-                        })
+                    .find('td').each(function(i, el) {
+                        $(this)
+                            .html(arrData[i])
+                            .attr('data-label', arrData[i])
+                    })
                     .end()
                     .prependTo(this.$table.find('tbody'))
 
@@ -99,14 +110,12 @@
             }
             showLine(exp) {
                 const e = this.el.querySelector(exp);
-                echo(e)
                 e.classList.remove('hidden');
-                echo(e.className)
                 return this;
             }
-            hiddenRows(){
-                const trs = this.body.getElementsByTagName('tr') ;
-                for( const tr of trs) {
+            hiddenRows() {
+                const trs = this.body.getElementsByTagName('tr');
+                for (const tr of trs) {
                     tr.classList.add('hidden')
                 }
             }

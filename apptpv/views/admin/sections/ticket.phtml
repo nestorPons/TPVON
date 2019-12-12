@@ -3,7 +3,7 @@
     $present        = new Checkbox(['label' => 'Regalo', 'name' => 'control', 'value' => '1', 'onclick' => 'app.ticket.toggle()']);
     $txt00          = new InputDate(['label' => 'Fecha vencimiento', 'name' => 'fecha_vencimiento']);
     $btnPrTicket    = new ButtonSuccess(['onclick' => 'app.ticket.print()', 'caption' => 'Imprimir']);
-    $btnSndTicket   = new ButtonSuccess(['onclick' => 'app.ticket.send()', 'caption' => 'Enviar']);
+    $btnSndTicket   = new ButtonSuccess(['onclick' => '', 'caption' => 'Enviar']);
     ?>
 </component>
 <component id="ticket" class="hidden">
@@ -143,9 +143,9 @@
     app.ticket = {
         name : 'Tickets',
         Ticket: null,
-        present: <?= $present->id() ?>,
-        cont_end_date: <?= $txt00->id() ?>,
-        end_date: <?= $txt00->id() ?>,
+        present: <?= $present->id() ?>.getElementsByTagName('input')[0],
+        cont_end_date: <?=$txt00->id()?>,
+        txtExpire: <?=$txt00->id()?>.getElementsByTagName('input')[0],
         frm: {
             nombre: document.getElementById('ticket_nombre_empresa'),
             admin: document.getElementById('ticket_admin'),
@@ -168,10 +168,8 @@
             })
         },
         open(Ticket) {
-
             // Ocultamos campo fecha de vencimiento
             this.toggle()
-            let dias = 0
             const 
                 p1 = DB.get('empresa').then(d => d[0]),
                 p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0]),
@@ -191,14 +189,14 @@
                     this.frm.tel.innerHTML = e.telefono
                     this.frm.nif.innerHTML = e.nif
                     this.frm.iva.innerHTML = c.iva
-
-                    dias = c.dias
-
-                    return true;
+                    return c.dias;
                 })
-                .then(async _ => {
+                .then(async dias => {
+                    // Añadimos una fecha standar a la casilla
+                    this.txtExpire.value = date.add(app.tpv.date.value, dias, 'days', 'sql')
+
                     // Reseteamos valor de la casilla regalo
-                    this.present.checked = 0
+                    this.present.checked = false
                     this.Table.clear()
 
                     this.Ticket = Ticket
@@ -218,17 +216,14 @@
                     }
                     this.Table.total(this.Ticket.setTotal())
 
-                    // Añadimos una fecha standar a la casilla
-                    this.end_date.value = date.add(app.tpv.date.value, dias, 'days', 'sql')
                 })
         },
         async put(sendMail = false, callback) {
             if (this.Ticket.new) {
                 this.Ticket.fecha = date.now('sql')
                 this.Ticket.estado = 1
-                this.Ticket.regalo = this.present.checked | 0
-                this.Ticket.fecha_vencimiento = this.end_date.value
-
+                this.Ticket.regalo = this.present.checked ? 1 : 0 
+                this.Ticket.fecha_vencimiento = this.txtExpire.value
                 // Guardamos los datos 
                 let data = await DB.post('tickets', 'new', this.Ticket.sendData())
                 this.lastId = this.Ticket.id = data.id

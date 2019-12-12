@@ -14,7 +14,7 @@
     $code = new Select([
         'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
         'tabindex' => 3, 'onblur' => 'app.tpv.loadLine()'
-    ], false);
+    ]);
     $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut', 'onchange'=>'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => 5, 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => 6, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -33,7 +33,7 @@
     #tpv {
         align-items: flex-start;
         display: grid;
-        grid-template-rows: auto 400px auto auto;
+        grid-template-rows: auto 53vh auto auto;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 7rem 2rem;
         grid-row-gap: 5px;
     }
@@ -60,14 +60,16 @@
 
     #tpv #<?= $date->id() ?> {
         grid-row: 1;
-        grid-column: 6;
+        grid-column: 6 / span 2;
         text-align: center;
     }
 
     #tpv #<?= $hour->id() ?> {
         text-align: center;
         grid-row: 1;
-        grid-column: 7;
+        grid-column: 7 / span 2;
+        width: 50%; 
+        margin: 0 1rem;
     }
 
     #tpv #<?= $code->id() ?> {
@@ -273,7 +275,6 @@
             this.client = new User(this.selCli.value())
         },
         load() {
-            this.reset()
             this.add()
             this.loadUsers()
             this.loadServ()
@@ -525,7 +526,6 @@
         },
         // Cargamos los datos del ticket actual
         async loadDataTicket(data) {
-
             let t = 0
             await this.reset()
 

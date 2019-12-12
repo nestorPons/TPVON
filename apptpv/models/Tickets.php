@@ -25,12 +25,11 @@ class Tickets extends Query{
         return $data;
     }
     function new(Data $Post){
-
         //Comprobamos si existe
         if($Post->id == -1 || !$this->getById($Post->id)){
             $lines = $Post->lines; 
             $end_date = $Post->fecha_vencimiento; 
-            $isPresent = !empty($Post->fecha_vencimiento); 
+            $isPresent = boolval($Post->regalo); 
 
             // Limpiamos post de datos indeseados
             $Post->filter(new Tickets);
@@ -39,27 +38,24 @@ class Tickets extends Query{
             // Guardamos el id generado 
 
             $this->id = $this->add($Post->toArray(['lines']));
-                // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
-                if($isPresent) {
-                    $Present = new Present;
-                    $Present->addTicket($this->id, $end_date);              
-
-                foreach($lines as $line){
-                    $Line = new Lines;
-                    $idLine = $Line->add([
-                        'id_ticket' => $this->id,
-                        'articulo'  => intval($line['articulo']),
-                        'precio'    => floatval($line['precio']),
-                        'cantidad'  => intval($line['cantidad']), 
-                        'dto'       => floatval($line['dto'])
-                    ]);
-                    if($isPresent) $Present->addLine($idLine);                     
-                }  
-                return ['id' => $this->id]; 
-            } else throw new Error('E053');
-
-        }
-        
+            // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
+            if($isPresent) {
+                $Present = new Present;
+                $Present->addTicket($this->id, $end_date);              
+            }
+            foreach($lines as $line){
+                $Line = new Lines;
+                $idLine = $Line->add([
+                    'id_ticket' => $this->id,
+                    'articulo'  => intval($line['articulo']),
+                    'precio'    => floatval($line['precio']),
+                    'cantidad'  => intval($line['cantidad']), 
+                    'dto'       => floatval($line['dto'])
+                ]);
+                if($isPresent) $Present->addLine($idLine);                     
+            }  
+            return ['id' => $this->id]; 
+        } else return ['success' => '0', 'mns' => 'Error registro duplicado!!'];
     }
     // Método genérico de captura de tickets con sus lineas
     // Data puede ser el id o un objeto con el id

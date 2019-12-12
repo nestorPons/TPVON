@@ -51,7 +51,7 @@
             menus = document.getElementsByClassName('menu-square')
 
         el.onclick = e => {
-            e.stopPropagation()
+            e.stopPropagation();
             // Al abrir un menu ocultamos todos los demás
             for(const m of menus){
                 m.classList.add('close-menu')

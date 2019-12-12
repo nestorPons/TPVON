@@ -136,11 +136,12 @@ const app = {
             if ($('#appadmin').length || $('#appuser').length) {
                 $mainSection = $('section').find('section')
             }
-            $mainSection.fadeOut('fast')
+            $mainSection.fadeOut('fast', _=>{
+                $('section#' + section).fadeIn()
+                typeof callback === 'function' && callback()
+                this.inicialize(section)
+            })
 
-            $('section#' + section).fadeIn()
-            typeof callback === 'function' && callback()
-            this.inicialize(section)
 
         },
         load(section = '', html = jQuery) {
@@ -497,9 +498,9 @@ const date =  {
                 // Si tiene horas ... 
                 if (horario) {
                     let x = horario.split(':')
-                    h = x[0]
-                    min = x[1]
-                    s = x[2]
+                    h = x[0].padStart(2, '0')
+                    min = x[1].padStart(2, '0')
+                    s = x[2].padStart(2, '0')
                 }
                 if (fecha.indexOf("/") > 0) {
                     let arr = fecha.split('/');

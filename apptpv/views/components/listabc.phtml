@@ -8,17 +8,22 @@
         ul {
             width: 100%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
         ul li {
-            display: inline;
+            display: table;
             padding-left: 3px;
             padding-right: 3px;
             cursor: pointer;
             border: 1px solid var(--a-link-color);
             border-radius: var(--universal-border-radius);
-            padding: var(--universal-padding)
+            padding: var(--universal-padding);
+            width: 1.2ch;
+            height:1.2ch;
+            text-align: center;
+            vertical-align: middle;
         }
 
         ul li:hover {

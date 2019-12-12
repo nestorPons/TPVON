@@ -8,8 +8,11 @@
         <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()', 'label' => 'Imprimir'])?>
         <?php $conf         = new Icon('cod',                   ['onclick'=>'app.sections.conf()', 'label' => 'Configurar'])?>
         <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
-        <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
-        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1', 'onblur'=>'menu.search.close()'])?>
+        <div id="search" onblur="menu.search.close()">
+            <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
+            <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 
+                                                'tabindex' => '-1', 'title'=>'Pulse Enter para realizar la búsqueda.'])?>
+        </div>
     </div>
     <div id="bartools-central"> 
     </div>  
@@ -80,6 +83,20 @@
         position: absolute;
         width: 97%;
     }
+    #bartools #search{
+        display: inherit; 
+        align-items: center;
+    }
+    #bartools #search .row{
+        background: transparent;
+    }
+    #bartools #search .row input, ::placeholder{
+        color: inherit;
+    }
+    #bartools #search .row ::placeholder{
+        color: #aaa;
+    }
+    
 </style>
 <script>
     var menu = {
@@ -108,9 +125,8 @@
             velocity    : 500,
             isOpen      : false,
             open(){
-                this.isOpen = true
-                this.$txtSearch.val('')
-                this.$label.text('Cerrar')
+                this.$txtSearch.val('');
+                this.$label.text('Cerrar');
                 
                 this.$icon
                     .removeClass('lnr-magnifier')
@@ -121,27 +137,42 @@
                 }, this.velocity, fn => {
                     this.$txtSearch.focus()
                 })
+                this.isOpen = true;
+                return this;
             },
             close(){
-                this.isOpen = false
-                this.$label.text('Buscar')
+                this.$label.text('Buscar');
+                // Icono buscar
                 this.$icon
                     .removeClass('lnr-cross')
-                    .addClass('lnr-magnifier')
+                    .addClass('lnr-magnifier');
+
+                // Cerrar inputtext
                 this.$search.animate({
                     left: window.innerWidth + 1000
-                }, this.velocity)    
+                }, this.velocity)
+                this.isOpen = false;
+                return this;     
             },
             toggle(){
+                event.stopPropagation();
                 if( this.isOpen ) this.close()
-                else this.open()
-                
+                else this.open();
+                return this;
             },
             keypress(e){
-                if(e.key == 'Enter')
-                    typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val())
+                if(e.key == 'Enter') this.search();
+            },
+            search(){
+                typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val()); 
+                return this;
+            },
+            placerholder(param = null){
+                if(param) $txtSearch.attr('placeholder', param);
+                return $txtSearch.attr('placeholder');
             }
         },
+
         del(){
             if(app.mens.confirm('¿Desea eliminar el registro?'))
                 app.sections.del()

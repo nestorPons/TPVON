@@ -88,7 +88,7 @@ app.services = {
             })
     },
     add(){
-        let data = {    
+        const data = {    
             id: -1,
             estado: 1
         }
@@ -99,12 +99,12 @@ app.services = {
             .setTile('Nuevo servicio')
     },
     addLine(data){
-        this.Table.addLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
+        this.Table.addLine(data.id, [data.id, data.codigo, data.descripcion, data.precio])
             .addClass(data.codigo[0].toLowerCase())
         return this
     },
     updateLine(data){
-        this.Table.updateLine(data.id, [data.id, data.codigo, data.nombre, data.descripcion, data.precio])
+        this.Table.updateLine(data.id, [data.id, data.codigo, data.descripcion, data.precio])
             .addClass(data.codigo[0].toLowerCase())
         return this
     },
@@ -114,6 +114,7 @@ app.services = {
         data.estado = 1
         data = {...data, ...rsp} 
 
+        // Guardamos en la base de datos local
         DB.set(this.table, data , 'id', data.id)
 
         if (this.currentId == -1 ) this.addLine(data)
@@ -136,7 +137,7 @@ app.services = {
     searchBy(field, value){
         DB.get(this.table, field, value, 'estado==1').then( d => {
             if (d){
-                for(let i in d) this.Table.showLines(`[idline='${d[i].id}'`)
+                for(let i in d) this.Table.showLine(`[idline='${d[i].id}'`)
                 return true
             }
             else return false

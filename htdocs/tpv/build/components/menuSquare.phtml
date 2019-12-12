@@ -6,8 +6,7 @@
     </content>
     <style lang="less">.menu-square{transition:all 2.5s ease 0.5s;transition:display 2.5s ease 0.5s}.menu-square label{align-items:center;justify-content:center;cursor:pointer;height:200px;width:200px;border:1px solid var(--main-color);color:var(--main-color);border-radius:var(--universal-border-radius)}.menu-square content i{position:relative;top:21px;right:10px;font-size:1.2rem}.menu-square label,.menu-square content{display:none}.menu-square .active{display:inline-flex!important}.menu-square.close-menu{display:none!important}</style>
     <script scoped>const el=document.getElementById('--id'),ic=el.querySelector('.icon-close'),cnt=el.querySelector('content'),lbl=el.querySelector('label'),menus=document.getElementsByClassName('menu-square')
-el.onclick=e=>{e.stopPropagation()
-for(const m of menus){m.classList.add('close-menu')}
+el.onclick=e=>{e.stopPropagation();for(const m of menus){m.classList.add('close-menu')}
 lbl.parentNode.classList.remove('close-menu')
 lbl.classList.remove('active')
 cnt.classList.add('active')}

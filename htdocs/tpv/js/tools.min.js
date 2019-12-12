@@ -2,15 +2,6 @@
 var echo = function () {
     for (let i in arguments) console.log(arguments[i]);
 };
-// Funcion para recorrer dom al estilo jq
-var $y = function ($arg) {
-    if ($arg === void 0) { $arg = ''; }
-    // $('.mi').style.background = '#000'
-    var selected = document.querySelectorAll($arg);
-    return (selected.length > 1)
-        ? selected
-        : selected[0];
-};
 var exist = function (arg = undefined) {
     return arg != undefined && arg != null
 }

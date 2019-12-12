@@ -48,9 +48,7 @@ endScroll(){this.$table.animate({scrollTop:this.$table.height()},100)}
 clearLines(){this.$table.find('tbody').find('tr').remove()}
 clear(){this.data=[]
 this.clearLines()}
-showLine(exp){const e=this.el.querySelector(exp);echo(e)
-e.classList.remove('hidden');echo(e.className)
-return this}
+showLine(exp){const e=this.el.querySelector(exp);e.classList.remove('hidden');return this}
 hiddenRows(){const trs=this.body.getElementsByTagName('tr');for(const tr of trs){tr.classList.add('hidden')}}
 delLine(id){this.$table.find(`[idline="${id}"]`).remove()}
 updateLine(id,data){this.delLine(id)

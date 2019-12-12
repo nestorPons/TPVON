@@ -20,9 +20,9 @@ for(let f of families){if(f)this.selFam.addOption(f.id,f.nombre)}},del(){DB.get(
 DB.set(this.table,d,'id',d.id)
 this.Table.delLine(this.currentId)
 this.Form.close()
-app.tpv.loadServ()})},add(){let data={id:-1,estado:1}
-this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())
-return this},updateLine(data){this.Table.updateLine(data.id,[data.id,data.codigo,data.nombre,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())
+app.tpv.loadServ()})},add(){const data={id:-1,estado:1}
+this.Form.state('new').clear().open(data).setTile('Nuevo servicio')},addLine(data){this.Table.addLine(data.id,[data.id,data.codigo,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())
+return this},updateLine(data){this.Table.updateLine(data.id,[data.id,data.codigo,data.descripcion,data.precio]).addClass(data.codigo[0].toLowerCase())
 return this},async save(rsp){let data=await this.Form.getData(rsp)
 data.estado=1
 data={...data,...rsp}
@@ -32,5 +32,5 @@ else this.updateLine(data)
 this.Form.close()
 app.tpv.loadServ()},show(e){this.currentId=e.path[1].attributes.idline.value
 DB.get(this.table,'id',this.currentId).then(data=>this.Form.state('edit').open(data).setTile('Edición A/S'))},async search(value){this.Table.hiddenRows()
-await this.searchBy('codigo',value)||await this.searchBy('nombre',value)||await this.searchBy('descripcion',value)},searchBy(field,value){DB.get(this.table,field,value,'estado==1').then(d=>{if(d){for(let i in d)this.Table.showLines(`[idline='${d[i].id}'`)
+await this.searchBy('codigo',value)||await this.searchBy('nombre',value)||await this.searchBy('descripcion',value)},searchBy(field,value){DB.get(this.table,field,value,'estado==1').then(d=>{if(d){for(let i in d)this.Table.showLine(`[idline='${d[i].id}'`)
 return!0}else return!1})},}</script>

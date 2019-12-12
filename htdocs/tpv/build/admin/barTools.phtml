@@ -8,8 +8,11 @@
         <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()', 'label' => 'Imprimir'])?>
         <?php $conf         = new Icon('cod',                   ['onclick'=>'app.sections.conf()', 'label' => 'Configurar'])?>
         <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
-        <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
-        <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 'tabindex' => '-1', 'onblur'=>'menu.search.close()'])?>
+        <div id="search" onblur="menu.search.close()">
+            <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
+            <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 
+                                                'tabindex' => '-1', 'title'=>'Pulse Enter para realizar la búsqueda.'])?>
+        </div>
     </div>
     <div id="bartools-central"> 
     </div>  
@@ -18,16 +21,11 @@
         <?php new ButtonCloseApp?>
     </div>
 </header>
-<style>#bartools{background-color:var(--main-color);color:var(--nav-font-color);padding:0 20px 0 60px;display:flex;align-items:center;overflow-x:visible;overflow-y:visible;height:auto}#bartools i:active{color:var(--nav-link-color)}#bartools a,#bartools a:hover,#bartools a:link,#bartools a:visited{color:inherit}#bartools a:hover{font-weight:700}#bartools>div{flex-grow:1;display:flex;align-items:inherit}#bartools>div:nth-child(2){text-align:center}#bartools>div:last-child{justify-content:flex-end}#bartools .lnr{display:inline-block;font-size:1.4rem;cursor:pointer;margin:2px 5px}#bartools .lnr:hover{font-weight:700}#bartools #<?=$txtSearch->id()?>{position:relative;background:var(--main-color);top:0;left:3204px;width:100%;height:58px;z-index:1;text-align:left;display:flex;align-items:center}#bartools #<?=$txtSearch->id()?>{width:300px;background-color:var(--form-back-color);margin-left:5px}#bartools #<?=$txtSearch->id()?>>input{position:absolute;width:97%}</style>
+<style>#bartools{background-color:var(--main-color);color:var(--nav-font-color);padding:0 20px 0 60px;display:flex;align-items:center;overflow-x:visible;overflow-y:visible;height:auto}#bartools i:active{color:var(--nav-link-color)}#bartools a,#bartools a:hover,#bartools a:link,#bartools a:visited{color:inherit}#bartools a:hover{font-weight:700}#bartools>div{flex-grow:1;display:flex;align-items:inherit}#bartools>div:nth-child(2){text-align:center}#bartools>div:last-child{justify-content:flex-end}#bartools .lnr{display:inline-block;font-size:1.4rem;cursor:pointer;margin:2px 5px}#bartools .lnr:hover{font-weight:700}#bartools #<?=$txtSearch->id()?>{position:relative;background:var(--main-color);top:0;left:3204px;width:100%;height:58px;z-index:1;text-align:left;display:flex;align-items:center}#bartools #<?=$txtSearch->id()?>{width:300px;background-color:var(--form-back-color);margin-left:5px}#bartools #<?=$txtSearch->id()?>>input{position:absolute;width:97%}#bartools #search{display:inherit;align-items:center}#bartools #search .row{background:transparent}#bartools #search .row input,::placeholder{color:inherit}#bartools #search .row ::placeholder{color:#aaa}</style>
 <script>var menu={tile:document.getElementById('bartools-name-sections'),buttons:{$next:$('#<?= $next->id()?>'),$prev:$('#<?= $prev->id()?>'),$add:$('#<?= $add->id()?>'),$del:$('#<?= $del->id()?>'),$search:$('#<?= $search->id()?>'),$print:$('#<?= $print->id()?>'),$conf:$('#<?= $conf->id()?>'),$filter:$('#<?= $filter->id()?>'),show(arr=[]){$('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
-for(i in arr){menu.buttons['$'+arr[i]].show()}}},search:{$search:$('#<?= $txtSearch->id()?>'),$txtSearch:$('#<?= $txtSearch->id()?>').find('input'),$label:$('#<?= $search->id()?>').find('.label'),$icon:$('#<?= $search->id()?>'),velocity:500,isOpen:!1,open(){this.isOpen=!0
-this.$txtSearch.val('')
-this.$label.text('Cerrar')
-this.$icon.removeClass('lnr-magnifier').addClass('lnr-cross')
-this.$search.animate({left:0},this.velocity,fn=>{this.$txtSearch.focus()})},close(){this.isOpen=!1
-this.$label.text('Buscar')
-this.$icon.removeClass('lnr-cross').addClass('lnr-magnifier')
-this.$search.animate({left:window.innerWidth+1000},this.velocity)},toggle(){if(this.isOpen)this.close()
-else this.open()},keypress(e){if(e.key=='Enter')
-typeof app[app.sections.active].search=='function'&&app[app.sections.active].search(this.$txtSearch.val())}},del(){if(app.mens.confirm('¿Desea eliminar el registro?'))
+for(i in arr){menu.buttons['$'+arr[i]].show()}}},search:{$search:$('#<?= $txtSearch->id()?>'),$txtSearch:$('#<?= $txtSearch->id()?>').find('input'),$label:$('#<?= $search->id()?>').find('.label'),$icon:$('#<?= $search->id()?>'),velocity:500,isOpen:!1,open(){this.$txtSearch.val('');this.$label.text('Cerrar');this.$icon.removeClass('lnr-magnifier').addClass('lnr-cross')
+this.$search.animate({left:0},this.velocity,fn=>{this.$txtSearch.focus()})
+this.isOpen=!0;return this},close(){this.$label.text('Buscar');this.$icon.removeClass('lnr-cross').addClass('lnr-magnifier');this.$search.animate({left:window.innerWidth+1000},this.velocity)
+this.isOpen=!1;return this},toggle(){event.stopPropagation();if(this.isOpen)this.close()
+else this.open();return this},keypress(e){if(e.key=='Enter')this.search()},search(){typeof app[app.sections.active].search=='function'&&app[app.sections.active].search(this.$txtSearch.val());return this},placerholder(param=null){if(param)$txtSearch.attr('placeholder',param);return $txtSearch.attr('placeholder')}},del(){if(app.mens.confirm('¿Desea eliminar el registro?'))
 app.sections.del()}}</script>
