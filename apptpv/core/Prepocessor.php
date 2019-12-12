@@ -72,14 +72,13 @@ class Prepocessor{
         }
         return $this;
     }
-    private function args(String $tag){
+    private function arg(String $tag){
         $return = [];
 
         $pos_tag_open = strpos($this->content, "<$tag");  
         $pos_end_tag_open = strpos($this->content, '>',$pos_tag_open);
         $tag_style_open = substr($this->content, $pos_tag_open, $pos_end_tag_open - $pos_tag_open); 
         
-
         $args = str_replace("<$tag", '', $tag_style_open); 
         $args = explode(' ',$args);
         foreach($args as $value){
@@ -162,11 +161,35 @@ class Prepocessor{
     // Funcion que aplica una sintaxis propia  a las vistas
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
+        $this->includes();
         $this->autoId();
         $this->sintax_if();
         //$this->sintax_vars();
         $this->style_scoped();
         $this->script_scoped(); 
+    }
+    // Devuelve todos los argumentos de un tag
+    private function args($tag){
+        $return = []; 
+        $regex = '#(\w)+="(.*?)"#';
+        $has = preg_match_all($regex, $tag, $matches);
+        foreach($matches[0] as $value ){
+            $arr = explode('=',$value); 
+            $return[$arr[0]] = trim( $arr[1], '"');    
+        }
+        return $return;
+    }
+    private function includes(){
+        $regex = '#<include(.)*?[^<]*>#';
+        $has = preg_match_all($regex, $this->content, $matches);
+        if($has){
+            foreach($matches[0] as $value ){
+                $args = $this->args($value);
+                $str = "<?php include({$args['src']})?>";
+                $this->content = str_replace($value,$str,$this->content);
+            }
+        }
+        return $has;
     }
     // Busca sibolo $ para y lo reemplaza por variables php
     private function sintax_vars(){
@@ -283,7 +306,7 @@ class Prepocessor{
                     // Seccion componentes personales
                     $this->components();
 
-                    $a = $this->args('style');
+                    $a = $this->arg('style');
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
                         $this->less( $this->extract('style')['content'] );
