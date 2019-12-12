@@ -42,7 +42,6 @@
         <fieldset>
             <legend>Promociones</legend>
             <?php
-            $txt00 = new InputHidden(['label' => 'Id', 'name' => 'id']);
             $txt01 = new InputText(['label' => 'Nombre', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la promoción", 'required' => true]);
             $txt02 = new InputText(['label' => 'Total de dias', 'name' => 'valor']);
             $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name' => 'dto']);
@@ -150,7 +149,7 @@
             // Guardamos promociones
             DB.post('promos', 'save', {
                 ...app.formToObject(this.form.promos),
-                id: -1
+                id: 1
             })
         },
     }
