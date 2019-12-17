@@ -14,15 +14,21 @@
   <style lang="less" scoped>
     .icon-close {
       position: absolute;
-      right: -22px;
-      font-size: 1.5rem;
-      top: -17px;
-      background: transparent;
+      right: -12px;
+      font-size: 26px;
+      top: -13px;
+      background: white;
       z-index: 1000;
+      border-radius: 87%;
+      width: 6px;
+      height: 14px;
+      text-align: center;
+      vertical-align: middle;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &::before{
         content: "\e880";
-        background: radial-gradient(var(--back-color), transparent);
-        border-radius: 50%;
       }
       @media(max-width: 375px){
         top: 0; 
