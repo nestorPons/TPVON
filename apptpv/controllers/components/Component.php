@@ -19,16 +19,16 @@ class Component{
 
     function __construct(Array $data = []){
         foreach($data as $key => $val){
-             if($val){
-                // Atributos booleanos
-                if($key == 'required') $val = 'required';
-                if($key == 'disabled') $val = 'disabled';
-                if($key == 'readonly') $val = 'readonly';
-                if($key == 'checked')  $val = 'checked';
-
-                // Resto atributos
-                $this->{$key} = $val??null;               
-            }
+           
+            // Atributos booleanos
+            if($key == 'required') $val = 'required';
+            if($key == 'disabled') $val = 'disabled';
+            if($key == 'readonly') $val = 'readonly';
+            if($key == 'checked')  $val = 'checked';
+            
+            // Resto atributos
+            $this->{$key} = $val??null;       
+            
         }
         $this->id = ($this->id)??uniqid($this->type);
         $this->id_container = self::PREFIX_CONTAINER . $this->id;
@@ -91,7 +91,6 @@ class Component{
                     if(empty($condition)) $condition = null;
                     $valcon = false; 
                     eval('if ($condition) { $valcon = true; }');
-
                    if($valcon){
                        // Imprimimos el contenido dentro del condicional
                         $replace = preg_replace($start_condition,'',$value); 

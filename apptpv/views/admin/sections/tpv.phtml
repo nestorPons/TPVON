@@ -4,11 +4,11 @@
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
         'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)'
     ]);
-    $id     = new InputRead(['label' => 'Id'],  false);
+    $id     = new InputRead(['label' => 'Id']);
     $date   = new InputRead(['label' => 'Fecha']);
-    $hour   = new InputRead(['label' => 'Hora', 'class' => 'clock'],  false);
-    $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1], false);
-    $cli    = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()'], false);
+    $hour   = new InputRead(['label' => 'Hora', 'class' => 'clock']);
+    $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1]);
+    $cli    = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()']);
 
     // Linea
     $code = new Select([
