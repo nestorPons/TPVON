@@ -11,16 +11,26 @@
       <?php include($body) ?>
     </div>
   </div>
-  <style scoped>
+  <style lang="less" scoped>
     .icon-close {
       position: absolute;
-      right: 0;
+      right: -22px;
       font-size: 1.5rem;
-      top: 0;
-      background: var(--back-color);
+      top: -17px;
+      background: transparent;
       z-index: 1000;
+      &::before{
+        content: "\e880";
+        background: var(--back-color);
+        border-radius: 50%;
+      }
+      @media(max-width: 375px){
+        top: 0; 
+        right: 0; 
+      }
     }
-    h1{
+
+    h1 {
       text-align: center;
     }
   </style>
@@ -73,10 +83,10 @@
         })
         inputs.each(function() {
           if ($(this).attr('type') == 'checkbox' || $(this).attr('type') == 'radio') {
-              // Si es nuevo ponemos el estado por defecto pasandolo en el parametro data
-              if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
-              else $(this).prop('checked', false)
-            
+            // Si es nuevo ponemos el estado por defecto pasandolo en el parametro data
+            if (d[$(this).attr('name')] == $(this).val()) $(this).prop('checked', true)
+            else $(this).prop('checked', false)
+
           } else $(this).val(d[$(this).attr('name')])
 
         })
@@ -84,7 +94,10 @@
       }
       async getData(rsp) {
         const r = await app.formToObject(this.el);
-        return { r, ...rsp};
+        return {
+          r,
+          ...rsp
+        };
       }
       state(value) {
         if (value) {

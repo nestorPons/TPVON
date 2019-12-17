@@ -38,7 +38,7 @@ class Component{
     * $file => Nombre de la vista a imprimir 
     * $Data => Objeto Data para pasar datos a la vista [opcional]
     */
-    function print(string $file, Data $Data = null){
+    function print(string $file, $Data = null){
         // Variables no obligatorias (Elemtos especificos) 
         foreach($this as $key => $value){
             ${$key} = $value;

@@ -5,9 +5,9 @@ use \app\core\Data;
  */
 class Modal extends Component{
 
-    function __construct(Array $args = [],  bool $collapse = true, Data $Data = null){
+    function __construct(Array $args = [],  bool $collapse = true, $data = null){
         $this->type = 'modal';
         parent::__construct($args);
-        $this->print($this->type, $Data);
+        $this->print($this->type, $data);
     }
 }

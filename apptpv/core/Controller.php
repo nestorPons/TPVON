@@ -1,5 +1,6 @@
 <?php namespace app\core;
 use \app\models\Company;
+
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
  * Tiene lo mínimo para la creación de una subclase: 
@@ -37,7 +38,6 @@ class Controller{
         $files[] = \VIEWS\ADMIN . $this->controller . '.phtml';
         $files[] = \VIEWS\USERS . $this->controller . '.phtml';
         $files[] = \VIEWS\ADMIN\SECTIONS . $this->controller . '.phtml';
-
         foreach($files as $file){
             if(file_exists($file)) return $this->printView($file, $arr_data);
         }        
@@ -46,6 +46,8 @@ class Controller{
      * Método genérico para guardar registros comprueba que es nuevo o edicion y envia los datos al metodo apropiado
      */
     protected function save(Data $Data){
+        // Quitamos los datos inecesarios
+        $Data->delete('idadmin');
         if($Data->id == -1 ) return $this->new($Data);
         else return $this->update($Data);
     }
@@ -69,13 +71,11 @@ class Controller{
     }
 
     protected function printView(String $route, array $data = null){
-
         if($data){
             foreach($data as $key => $val){
                 ${$key} = $val;
             }
         }
-        
         return require_once $route;
     }
     /**
@@ -101,6 +101,7 @@ class Controller{
             : '\\app\\core\\Query';
     }
     private function exec (String $method, String $method_generic){
+
         $name_model = $this->getModel(); 
         $model = ($name_model == '\app\core\Query')
             // Si es genearl query pasamos solo el nombre de la tabla 

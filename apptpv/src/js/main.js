@@ -45,9 +45,9 @@ $(document)
                 action: $this.attr('action'),
                 data: data
             },
-            function(id){
+            function(id, success){
                 data.id = id // Se usa para nuevos registros con id autoincremental
-                if(c = $this.attr('callback')) eval(c)
+                if(success && (c = $this.attr('callback'))) eval(c)
                 _hideSpiner()
             } 
         )
@@ -80,7 +80,9 @@ $(document)
             } 
         }
         eval(fn)
-    } else _send(data)
+    } else {
+        _send(data)
+    }
 
 })
 // FIN DE FORMULARIOS

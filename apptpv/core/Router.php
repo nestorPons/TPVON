@@ -1,4 +1,5 @@
 <?php namespace app\core; 
+use \app\core\{Security};
 
 /***  
  * Clase controlador principal.
@@ -21,6 +22,8 @@ class Router{
         $action;
 
     function __construct($params = []){
+
+        $this->data = new \app\core\Data;
         // Valores por defecto
         $this->db = CONN['db'];
 
@@ -53,14 +56,15 @@ class Router{
         // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
 
         // Pasamos los datos de json a objeto Data
-        $this->data = new \app\core\Data($params['data'] ?? null);
+        $this->data->addItems($params['data'] ?? null);
     
         $respond = $this->loadController(); 
  
         // Siempre se devuelve un objeto json con un success de respuesta
         if(!(is_array($respond) && isset($respond['success'])))
-            $respond = ($respond == true || $respond == 1) ? ['success'=> 1, 'data' => $respond] : ['success'=> 0]; 
-
+            $respond = ($respond == true || $respond == 1) 
+                ? ['success'=> true, 'data' => $respond] 
+                : ['success'=> false]; 
         /* ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :
         ['success' => 1, 'data' => $respond]); */
 
@@ -82,13 +86,13 @@ class Router{
             if ($token = Security::getJWT()){
                 $dataToken = Security::GetData($token);
                 if(!$dataToken->access) return false;
+                $this->data->addItem($dataToken->id, 'idadmin');
             } else {
                 // Si no tiene permiso se devuelve al login
                 header("Refresh:0; url={$_SERVER['PHP_SELF']}");
                 return false;
             }
         };
-
         $nameClass = '\\app\\controllers\\' . $this->controller;
         $cont = $this->isController($this->controller)
             ? new $nameClass($this->action, $this->data)

@@ -24,9 +24,10 @@ const app = {
                         data.success == false ||
                         data.success == 0) &&
                         exist(data.mens)) {
-                        this.mens.error(data.mens || 'No se ha podido rehalizar la petición!')
-                        return false
-                    }
+                            console.error('Error en la respuesta!!');
+                            this.mens.error(data.mens || 'No se ha podido rehalizar la petición!')
+                            return false
+                        }
             } catch (e) {
     
                 // la respuesta es HTML
@@ -35,8 +36,8 @@ const app = {
 
             } finally {
                 let resp = data ? data.data : null,
-                    state = data ? data.success : false
-                typeof callback == "function" && callback(resp, state)
+                    state = data && data.mens ? false : true;
+                    typeof callback == "function" && callback(resp, state)
             }
         });
     },

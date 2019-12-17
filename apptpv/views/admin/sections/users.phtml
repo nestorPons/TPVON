@@ -1,11 +1,11 @@
 <section id="users">
     <?php
-    $table = new Table([
+    $table      = new Table([
         'columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 
         'class' => 'hoverable', 
         'onclick' => 'app.users.show(window.event)']);
-    $abc = new ListABC($table->id());
-    $editUser = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false);
+    $abc        = new ListABC($table->id());
+    $editUser   = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false, $data);
     ?>
 
     <style lang="less">

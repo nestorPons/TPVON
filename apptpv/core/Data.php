@@ -23,6 +23,13 @@ class Data {
             else return $this->{$value} = trim($value);
         } 
     }
+    function addItems(array $params = null){
+        if($params){
+            foreach($params as $key => $value) 
+                $this->addItem($value, $key); 
+        }
+        return $this; 
+    }
     function set($arg1, $arg2 = null){
         if($arg2) return $this->addItem($arg2, $arg1);
         else return $this->addItem($arg1);

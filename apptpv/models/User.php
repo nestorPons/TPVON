@@ -1,8 +1,6 @@
-<?php
+<?php namespace app\models;
 
-namespace app\models;
-
-use \app\core\{Query, Data, Error};
+use \app\core\{Query, Data, Error, Security};
 use \PHPMailer\PHPMailer\{PHPMailer,  Exception};
 
 class User extends Query
@@ -25,7 +23,7 @@ class User extends Query
         $promos, 
         $emails;
     protected $table = 'usuarios';
-    private $Conf; 
+    private $Conf;
 
     /**
      * $arg puede ser un string email para buscar por email
@@ -69,32 +67,41 @@ class User extends Query
     // Funcion que realiza el nuevo registro o la edicion según corresponda
     function save(Data $Data)
     {
+        // Recuperamos datos del usuario que genera la acción
+        $token = Security::getJWT();
+        $dataToken = Security::GetData($token); 
+        $User = new User($dataToken->id);
 
-        // Carga de datos al objeto
-        $this->loadData($Data);
+        // Si intenta cambiar el nivel a uno superior se deniega el registro 
+        if($Data->nivel > $User->nivel){
+            return ['success'=>false, 'mens'=>'Error no tiene permiso para realizar la operación'];
+        } else {
+            // Carga de datos al objeto
+            $this->loadData($Data);
 
-        if ((!$Data->isEmpty('fecha_nacimiento'))) {
-            $date = str_replace('/', '-', $Data->fecha_nacimiento);
-            $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
+            if ((!$Data->isEmpty('fecha_nacimiento'))) {
+                $date = str_replace('/', '-', $Data->fecha_nacimiento);
+                $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
+            }
+            if (property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
+
+            $noAuth = $Data->use('noAuth');
+            // Quitamos estos datos que no existen en la tabla usuarios para que no de error al guardar.
+            $Data->delete(['promos', 'emails']);
+
+            if ($this->id == -1) $this->id = $this->new($Data);
+            else {
+                $this->saveById($Data->toArray()); 
+
+                $this->Conf->saveById([
+                    'id' => $this->id, 
+                    'promos' => $this->promos, 
+                    'emails' => $this->emails
+                ]);
+            };
+
+            return $this->id;
         }
-        if (property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
-
-        $noAuth = $Data->use('noAuth');
-        // Quitamos estos datos que no existen en la tabla usuarios para que no de error al guardar.
-        $Data->delete(['promos', 'emails']);
-
-        if ($this->id == -1) $this->id = $this->new($Data);
-        else {
-            $this->saveById($Data->toArray()); 
-
-            $this->Conf->saveById([
-                'id' => $this->id, 
-                'promos' => $this->promos, 
-                'emails' => $this->emails
-            ]);
-        };
-
-        return $this->id;
     }
     // Nuevos registros
     function new(Data $Data)
@@ -196,7 +203,9 @@ class User extends Query
         ob_end_clean(); # cierre de bufer
         return $htmlStrig;
     }
-
+    public function isAdmin(){
+        return $this->nivel >= 2; 
+    }
     //getters setterS
     function id(int $arg = null)
     {

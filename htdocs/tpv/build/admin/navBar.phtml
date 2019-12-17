@@ -20,7 +20,7 @@
             </a></li>
         <li><a href="families">
             <div class="spinner primary hidden"></div>
-            <i class="lnr lnr-bug"></i>
+            <i class="lnr lnr-text-size"></i>
             <span>Familias</span>
         </a></li>
         <li><a href="control">
@@ -28,6 +28,7 @@
             <i class="lnr lnr-gift"></i>
             <span>Regalo</span>
         </a></li>
+        <?php if($admin):?>
         <li><a href="conf">
             <div class="spinner primary hidden"></div>
             <i class="lnr lnr-cog"></i>
@@ -39,7 +40,6 @@
             <i class="lnr lnr-database"></i>
             <span>Historial</span>
         </a></li>
-        <?php if($admin):?>
         <li><a href="chart">
             <div class="spinner primary hidden"></div>
             <i class="lnr lnr-chart-bars"></i>

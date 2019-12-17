@@ -112,7 +112,7 @@ class Login extends Controller{
     }
     protected function view( $data = null){
         // Valor predeterminado de la vista
-        if (!$data['page']) {
+        if ($data->isEmpty('page')) {
             $data = $this->company->toArray();
             $data['page'] = 'login'; 
         };

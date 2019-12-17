@@ -1,15 +1,18 @@
 <component class="editUser">
     <form controller="user" action="save" validation="app.users.validation(callback)" callback="app.users.save(data)">
         <fieldset>
-
             <legend></legend>
             <?php
             $name       = new InputText(['label' => 'Nombre', 'tabindex' => 1, 'name' => 'nombre', 'required' => true]);
-            $level  = new Select([
+            $o = ($Data['admin']) 
+                ? [0 => 'Cliente', 1 => 'Usuario' , 2 => 'Administrador']
+                : [0 => 'Cliente', 1 => 'Usuario']; 
+            $level      = new Select([
                 'label' => 'Tipo usuario', 'tabindex' => 8, 'name' => 'nivel', 'class' => 'valid',
-                'options' => [0 => 'Cliente', 1 => 'Usuario', 2 => 'Administrador'], 'selected' => '0', 'required' => true,
+                'options' => $o, 'selected' => '0', 'required' => true,
             ]);
             ?>
+
             <div class="collapse">
                 <input type="checkbox" id="editUser_main" aria-hidden="true">
                 <label for="editUser_main" aria-hidden="true" class="collapse">
@@ -66,3 +69,6 @@
         }
     }
 </style>
+<script scoped>
+   
+</script>
