@@ -10,8 +10,8 @@
     <img src="/tpv/companies/logo.png" alt="Logotipo">
     <div class="data">
         <div>TICKET DE VENTA</div>
-        <div><span id="ticket_nombre_empresa"></span></div>
         <hr>
+        <div><span id="ticket_nombre_empresa"></span></div>
         <div id="ticket_razon_social">
             <div><span id="ticket_admin"></span></div>
             <div>Dir: <span id="ticket_dir"></span></div>
@@ -78,8 +78,8 @@
 
     #ticket img {
         max-width: 200px;
-        height: 100px;
-        width: 100px;
+        height: 200px;
+        width: 200px;
     }
 
     #<?= $table->id() ?> {
@@ -102,13 +102,13 @@
         }
 
         img {
-            max-width: 60mm;
+            max-width: 160mm;
             margin: 10px;
         }
 
         @page {
-            /* AKI:: En tintero cambiar el tamaño del papel del ticket*/
-            size: 80mm 190mm;
+            margin: 0; 
+            size: 80mm 110mm;
         }
 
         table thead {
@@ -215,7 +215,6 @@
                         this.Table.addLine(line.id, [line.cantidad, nombre, line.dto, `${line.amo}€`])
                     }
                     this.Table.total(this.Ticket.setTotal())
-
                 })
         },
         async put(sendMail = false, callback) {
@@ -232,7 +231,7 @@
                 app.tpv.add()
             }
 
-            callback()
+            callback();
         },
         toggle(e) {
             this.cont_end_date.classList.toggle('hidden')

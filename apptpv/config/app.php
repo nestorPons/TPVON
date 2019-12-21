@@ -7,7 +7,6 @@ date_default_timezone_set("Europe/Madrid");
 define('ENV', TRUE);
 define('SEND_MAIL', TRUE);
 
-
 // Comprobamos si se han proporcionado los datos para la conexión
 // Si no existe el archivo configuracion se crea uno
 // INSTALACIÓN

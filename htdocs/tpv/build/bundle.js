@@ -4,9 +4,8 @@ return!0}
 addLine(id,articulo,cantidad,precio,dto){let newLine=new Line(id,articulo,cantidad,precio,dto)
 this.lines.push(newLine)
 return newLine}
-setTotal(){for(let i in this.lines){const l=this.lines[i]
-this.total+=parseFloat(l.amo||l.cantidad*l.precio*(1-l.dto/100))}
-return this.total.toFixed(2)}
+setTotal(){let t=0;for(let i in this.lines){const l=this.lines[i];t+=parseFloat(l.amo||l.cantidad*l.precio*(1-l.dto/100))}
+this.total=t;return this.total.toFixed(2)}
 validate(){if(this.lines.length&&this.id_usuario&&this.id_cliente&&this.fecha)return!0
 else return!1}
 deleteLine(index){this.lines=this.lines.filter(e=>e.id!=index)

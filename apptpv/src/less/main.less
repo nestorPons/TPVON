@@ -8,6 +8,7 @@
   --nav-font-color: contrast(@main-color);
   --effect-transform-hover: scale(1.2);
   --color-red: #f00; 
+  --border-radius: 5px;
 }
 *{
   -moz-user-select: none; 
@@ -128,6 +129,12 @@ select{
         transform: translateY(-1.6rem) scale(0.9);
       }
     }
+  }
+  :hover, :active, :focus{
+    //background: rgba(150,150,150,0.3);
+    //background: linear-gradient(360deg, rgba(255,175,0,0.2), transparent);
+    border-bottom-width: 2px;
+    border-bottom-style: dotted;
   }
 }
 .text-left{

@@ -7,34 +7,34 @@
     $id     = new InputRead(['label' => 'Id']);
     $date   = new InputRead(['label' => 'Fecha']);
     $hour   = new InputRead(['label' => 'Hora', 'class' => 'clock']);
-    $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => 1]);
-    $cli    = new Select(['label' => 'Cliente', 'tabindex' => 2, 'onchange' => 'app.tpv.loadClient()']);
+    $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => '1']);
+    $cli    = new Select(['label' => 'Cliente', 'tabindex' => '2', 'onchange' => 'app.tpv.loadClient()']);
 
     // Linea
     $code = new Select([
         'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
-        'tabindex' => 3, 'onblur' => 'app.tpv.loadLine()'
+        'tabindex' => '4', 'onblur' => 'app.tpv.loadLine()'
     ]);
-    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => 4, 'class' => 'keyEnterOut', 'onchange'=>'app.tpv.searchDescription()'],  false);
-    $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => 5, 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
-    $pric = new InputNumber(['label' => 'Precio', 'tabindex' => 6, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
-    $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => 7, 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
+    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => '6', 'class' => 'keyEnterOut', 'onchange'=>'app.tpv.searchDescription()'],  false);
+    $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => '7', 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
+    $pric = new InputNumber(['label' => 'Precio', 'tabindex' => '8', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
+    $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => '9', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $amo = new InputRead(['id' => 'amount', 'label' => 'Importe', 'value' => '0'], false);
-    $btnOk = new ButtonSuccess(['tabindex' => 8, 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
+    $btnOk = new ButtonSuccess(['tabindex' => '5', 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
     $btnClear = new ButtonCancel(['caption' => false, 'onclick' => 'app.tpv.clearLine()', 'icon' => 'cross']);
 
     $txtTotal = new InputRead(['value' => '0', 'label' => 'Total'], false);
-    $btnTicket = new ButtonSuccess(['onclick' => 'app.tpv.create()', 'caption' => 'Ticket']);
+    $btnTicket = new ButtonSuccess(['onclick' => 'app.tpv.create()', 'caption' => 'Ticket', 'tabindex' => '10']);
 
     $modTicket = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company->data());
     ?>
 </section>
-<style>
+<style lang="less">
     #tpv {
         align-items: flex-start;
         display: grid;
         grid-template-rows: auto 53vh auto auto;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 7rem 2rem;
+        grid-template-columns: repeat(7, 1fr);
         grid-row-gap: 5px;
     }
 
@@ -60,26 +60,20 @@
 
     #tpv #<?= $date->id() ?> {
         grid-row: 1;
-        grid-column: 6 / span 2;
+        grid-column: 6 ;
         text-align: center;
     }
 
     #tpv #<?= $hour->id() ?> {
         text-align: center;
         grid-row: 1;
-        grid-column: 7 / span 2;
-        width: 50%; 
+        grid-column: 7;
         margin: 0 1rem;
     }
 
     #tpv #<?= $code->id() ?> {
         grid-row: 3;
         grid-column: 1;
-    }
-
-    #tpv #<?= $des->id() ?> {
-        grid-row: 3;
-        grid-column: 2 / span 2;
     }
 
     #tpv #<?= $emp->id() ?> {
@@ -92,24 +86,29 @@
         grid-column: 4 / span 2;
     }
 
+    #tpv #<?= $des->id() ?> {
+        grid-row: 4;
+        grid-column: 1;
+    }
+
     #tpv #<?= $quan->id() ?> {
-        grid-row: 3;
-        grid-column: 4;
+        grid-row: 4;
+        grid-column: 2;
     }
 
     #tpv #<?= $pric->id() ?> {
-        grid-row: 3;
-        grid-column: 5;
+        grid-row: 4;
+        grid-column: 3;
     }
 
     #tpv #<?= $dto->id() ?> {
-        grid-row: 3;
-        grid-column: 6;
+        grid-row: 4;
+        grid-column: 4;
     }
 
     #tpv #<?= $amo->id() ?> {
-        grid-row: 3;
-        grid-column: 7;
+        grid-row: 4;
+        grid-column: 5;
     }
 
     #tpv .Descripción {
@@ -118,27 +117,24 @@
 
     /* TXT TOTAL */
     #tpv #<?= $txtTotal->id() ?> {
-        grid-row: 4;
-        grid-column: 1;
-        ;
+        grid-row: 3;
+        grid-column: 7;
         transform: translate(15px, 15px) scale(1.4);
         font-weight: bold;
-    }
-
-    #tpv #<?= $txtTotal->id() ?>input {
-        font-size: 1.2rem;
-        transform: translateY(15px);
-        font-weight: 900;
-    }
-
-    #tpv #<?= $txtTotal->id() ?>label {
-        font-size: await.2rem;
-        color: var(await-fore-color);
+        input {
+            font-size: 1.2rem;
+            transform: translateY(15px);
+            font-weight: 900;
+        }
+        label {
+            font-size: await.2rem;
+            color: var(await-fore-color);
+        }
     }
 
     #tpv #<?= $btnTicket->id() ?> {
         grid-row: 4;
-        grid-column: 5 / span 2;
+        grid-column: 7;
     }
 
     #tpv .Importe {
@@ -146,13 +142,13 @@
     }
 
     #tpv #<?= $btnOk->id() ?> {
-        grid-row: 4;
-        grid-column: 7 / span 2;
+        grid-row: 3;
+        grid-column: 2;
     }
 
     #tpv #<?= $btnClear->id() ?> {
-        grid-row: 3;
-        grid-column: 8;
+        grid-row: 4;
+        grid-column: 6;
     }
 
     #<?= $modTicket->id() ?> {
@@ -214,10 +210,12 @@
             return newLine
         }
         setTotal() {
+            let t = 0; 
             for (let i in this.lines) {
-                const l = this.lines[i]
-                this.total += parseFloat(l.amo || l.cantidad * l.precio * (1 - l.dto / 100))
+                const l = this.lines[i];
+                t += parseFloat(l.amo || l.cantidad * l.precio * (1 - l.dto / 100)); 
             }
+            this.total = t;
             return this.total.toFixed(2)
         }
         validate() {
@@ -526,39 +524,40 @@
         },
         // Cargamos los datos del ticket actual
         async loadDataTicket(data) {
-            let t = 0
-            await this.reset()
-
-            this.Ticket = new Ticket(data)
-
-            // Si tiene lineas es antiguo y no se puede editar más
-            if (data.lines.length > 0) this.Ticket.new = false
-
-            if (data.estado != undefined) {
-                // Si es un antiguo ticket, las lineas no se pueden seleccionar
-                if (data.id_usuario) this.Table.hoverable(false)
-                this.txtId.value = data.id
-                this.selEmp.option(data.id_usuario)
-                this.selCli.option(data.id_cliente)
-
-                this.total.value = this.Ticket.setTotal()
-                this.date.value = date.format(data.fecha, 'short')
-                this.hour.value = date.format(data.fecha, 'hour')
-
-                // Cargamos el id del ticket actual
-                this.currentId = data.id
-
-                // Cargamos las lineas 
-                for (let line of data.lines) {
-                    this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto)
-                }
+            if (!data) {
+                this.add();
             } else {
-                this.txtId.value = this.currentId
-                return false
+                let t = 0
+                await this.reset()
+
+                this.Ticket = new Ticket(data)
+
+                // Si tiene lineas es antiguo y no se puede editar más
+                if (data.lines.length > 0) this.Ticket.new = false
+
+                if (data.estado != undefined) {
+                    // Si es un antiguo ticket, las lineas no se pueden seleccionar
+                    if (data.id_usuario) this.Table.hoverable(false)
+                    this.txtId.value = data.id
+                    this.selEmp.option(data.id_usuario)
+                    this.selCli.option(data.id_cliente)
+
+                    this.total.value = this.Ticket.setTotal()
+                    this.date.value = date.format(data.fecha, 'short')
+                    this.hour.value = date.format(data.fecha, 'hour')
+
+                    // Cargamos el id del ticket actual
+                    this.currentId = data.id
+
+                    // Cargamos las lineas 
+                    for (let line of data.lines) {
+                        this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto)
+                    }
+                } else {
+                    this.txtId.value = this.currentId
+                    return false
+                }
             }
-
-
-
         },
         search(value) {
             this.request('get', value, (d, s) => {

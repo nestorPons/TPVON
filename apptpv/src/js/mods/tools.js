@@ -132,6 +132,7 @@ function imprimirElemento(elemento, estilos) {
     ventana.document.write(elemento.innerHTML);
     ventana.document.write('</body></html>');
     ventana.document.close();
+
     ventana.focus();
     ventana.print();
     ventana.close();

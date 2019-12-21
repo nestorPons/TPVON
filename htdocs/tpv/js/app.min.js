@@ -1,4 +1,5 @@
 const app = {
+    ver : '1.1', 
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     GET: $_GET,
     // Peticiones con datos 
@@ -121,9 +122,14 @@ const app = {
     mens: {
         error(mens) {
             alert('ERROR!! \n' + mens);
+            return this;
         },
         confirm(mens) {
-            return confirm(mens)
+            return confirm(mens);
+        },
+        info(mens){
+            alert(`mens`);
+            return this;
         }
     },
     sections: {
@@ -320,6 +326,9 @@ const app = {
             if (el.attributes != undefined) el.value = data[el.attributes.name.value]
         }
         return form
+    },
+    help(){
+        this.mens.info(`v.${this.ver}`);
     }
 }
 const DB = {
