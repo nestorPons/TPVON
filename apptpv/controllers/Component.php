@@ -1,4 +1,4 @@
-<?php namespace app\controllers\components;
+<?php namespace app\controllers;
 use app\core\Data;
 use MatthiasMullie\Minify;
 /**
@@ -17,7 +17,7 @@ class Component{
     const PREFIX_CONTAINER = 'container_'; 
     const PREFIX_COMPONENT = 'component_'; 
 
-    function __construct(Array $data = []){
+    function __construct($type, Array $data = null){
         foreach($data as $key => $val){
            
             // Atributos booleanos
@@ -33,6 +33,8 @@ class Component{
         $this->id = ($this->id)??uniqid($this->type);
         $this->id_container = self::PREFIX_CONTAINER . $this->id;
         $this->id_component = self::PREFIX_COMPONENT . $this->id;
+
+        $this->print($type);
 
     }
     /** Imprime ĺa vista 

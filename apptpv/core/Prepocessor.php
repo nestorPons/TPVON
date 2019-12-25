@@ -15,9 +15,12 @@ class Prepocessor{
         $isModified = false,
         $content,
         $queue,
-        $loadeds = []; 
+        $loadeds = [],
+        $components = null; 
     
     function __construct(bool $cacheable = true){
+        // Guardar en variable que componentes tenemos
+        $this->searchComponents();
         
         $this->queue = "<script src='./build/".\FILE\JS."'></script>";
         $this->cacheable = $cacheable;
@@ -61,6 +64,17 @@ class Prepocessor{
         $this->replace($regex, $replace);
 
         return $this;
+    }
+    // Funcion que aplica una sintaxis propia  a las vistas
+    // Todos los comandos de las vista deben enpezar por --
+    private function sintax(){
+        $this->includes();
+        $this->autoId();
+        $this->sintax_if();
+        //$this->sintax_vars();
+        $this->style_scoped();
+        $this->script_scoped(); 
+        $this->components();
     }
     // Funcion auxiliar de reemplazo de content
     private function replace ($regex, $replace) : object{
@@ -140,6 +154,10 @@ class Prepocessor{
     private function getContent(String $file) : String{
         return $this->content = file_get_contents($file);
     }
+    // Elimina los comentarios html
+    function removeHTMLComments() : String{
+        return $this->content = preg_replace('/<!--(.|\s)*?-->/', '', $this->content);
+    }
     private function less(String $content){
         //COMPILAMOS LESS
         $less = new \lessc;
@@ -157,16 +175,6 @@ class Prepocessor{
     private function uniqid(){
         // Se le añade unprefijo para que siempre empieze por una letra
         return uniqid('id');
-    }
-    // Funcion que aplica una sintaxis propia  a las vistas
-    // Todos los comandos de las vista deben enpezar por --
-    private function sintax(){
-        $this->includes();
-        $this->autoId();
-        $this->sintax_if();
-        //$this->sintax_vars();
-        $this->style_scoped();
-        $this->script_scoped(); 
     }
     // Devuelve todos los argumentos de un tag
     private function args($tag){
@@ -295,6 +303,10 @@ class Prepocessor{
                 } else {
                     // ARCHIVOS
                     $this->getContent($file);
+                    
+                    // Quitamos los comentarios 
+                    $this->removeHTMLComments();
+
                     // Transformamos la nueva sintaxis en las vistas 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     if($path != \APP\VIEWS\COMPONENTS) $this->sintax();
@@ -302,9 +314,6 @@ class Prepocessor{
                     // Se comprimen las etiquetas script y style
                     $this->minify_script();
                     $this->minify_style();
-
-                    // Seccion componentes personales
-                    $this->components();
 
                     $a = $this->arg('style');
 
@@ -326,31 +335,53 @@ class Prepocessor{
             }
         } 
     }
-    // Busca y trata componentes personalizados en las plantillas 
-    private function components(){
-        // Guardar en variable que componentes tenemos
-        if(!isset($this->components)){
-            $str = "";
-            $this->components = []; 
-            $route = \APP\VIEWS\COMPONENTS;
-            $gestor = opendir($route);
-            $regex_components = ''; 
-            while (($file = readdir($gestor)) !== false)  {
-                if ($file != "." && $file != "..") {
-                    $arr = explode('.', $file);
-                    $this->components[] = $arr[0];
-                    $str .= $arr[0] . '|';
-                    $this->regcomponents = trim($str, '|'); 
-                }
+    // Carga de los componentes creados en la carpeta
+    private function searchComponents(){
+        $str = "";
+        $this->components = []; 
+        $route = \VIEWS\MYCOMPONENTS;
+        $gestor = opendir($route);
+        $regex_components = ''; 
+        // Busca los componentes en la carpeta de vistas componentes
+        while (($file = readdir($gestor)) !== false)  {
+            if ($file != "." && $file != "..") {
+                $arr = explode('.', $file);
+                $this->components[] = $arr[0];
+                $str .= $arr[0] . '|';
+                $this->regcomponents = trim($str, '|'); 
             }
         }
+    }
+    // Busca y trata componentes personalizados en las plantillas 
+    private function components(){
 
-        // Buscar componentes existentes en el archivo
-        $regex = "/<(\s)*($this->regcomponents){1}?[^>]*>(.*)<\/($this->regcomponents){1}?>/";
+        // Buscar componentes existentes en el directorio componentes
+        $regex = "/<($this->regcomponents){1}?\s+([^>]*)(>(.*)<\/($this->regcomponents){1}?>|\/>)/";
         $count = preg_match_all($regex, $this->content, $matches);
 
-        // Cambiar los componentes por las instancias de clase
-        // AKI :: Acabar componentes
+        if($count){
+            // Si encuentra alguno lo transforma en una clase componente
+            $len = count($matches[0]); 
+            for($i = 0; $i < $len; $i++){
+
+                // Combertimos la cadena en arreglos para pasar los datos al componente
+                $regex = '#(.+?)\s*=\s*"(.+?)"(\s|$)+?#';
+                $count = preg_match_all($regex, $matches[2][$i], $matches_component);
+                $str_data = '';
+                if($count){
+                     $len_c = count($matches_component[0]); 
+                    for($j = 0; $j < $len_c; $j++){
+                        $str_data .= "'". trim($matches_component[1][$j]) . "'=>'". trim($matches_component[2][$j]) . "',";  
+                    }
+                 }
+                $str_data = trim($str_data, ',');
+                // Creamos la la instancia de clase 
+                $typeComponent = $matches[1][$i]; 
+                $arg_data = ($str_data != '') ? ", Array($str_data)" : '';  
+                $replace = "<?php new \app\controllers\Component('$typeComponent' $arg_data) ;?>";
+                $this->content = str_replace($matches[0][$i], $replace, $this->content); 
+            }
+        }
     }
     private function add_name_space(){
         $this->content = "<?php namespace " . self::NAMESPACE_COMPONENTS ."?>" . $this->content; 

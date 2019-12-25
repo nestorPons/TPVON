@@ -1,0 +1,27 @@
+<?php namespace app\controllers\components?><m-table id="--id">
+    <table class="--class">
+        <thead>
+            <?php foreach ($columns as $key => $val) : ?>
+                <th class="<?= $val ?>"><?= $val ?></th>
+            <?php endforeach ?>
+        </thead>
+        <tbody></tbody>
+        @if (--total)
+        <tfoot>
+            <tr>
+                <td>TOTAL: </td>
+                <td><span class="id_total"></span></td>
+            </tr>
+        </tfoot>
+        @endif
+    </table>
+    <template>
+        <tr onclick="--onclick" ondblclick="--ondblclick">
+            <?php foreach ($columns as $key => $val) : ?>
+                <td class="<?= $val ?>" data-label=""></td>
+            <?php endforeach ?>
+        </tr>
+    </template>
+    <style lang="less" scoped>height:100%;width:100%;tfoot{order:3;width:100%}tfoot tr{text-align:right}table{max-height:75vh}.hoverable tbody{cursor:pointer}.id{max-width:6ch}@media (max-width:997px){table{max-height:65vh}th,td{padding:0}thead{height:inherit!important}}</style>
+    <script></script>
+</m-table>

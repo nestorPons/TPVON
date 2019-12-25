@@ -1,6 +1,6 @@
 <header id="bartools">
     <div id="bartools-actions">
-        <!-- <m-icon class="plus-circle" onclick = "app.sections.add()" label = "Nuevo" accesskey="a" title="alt+a">Interior de matches</m-icon> -->
+        <?php $add1         = new Component('plus-circle',      ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
         <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
         <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()', 'label' => 'Eliminar'])?>
         <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()', 'label' => 'Anterior'])?>

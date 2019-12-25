@@ -23,6 +23,7 @@ const HTDOCS                        = ROOT . PUBLIC_FOLDER; // Carpeta pública
 
 namespace VIEWS; 
     const COMPONENTS            = \FOLDERS\VIEWS . 'components/';
+    const MYCOMPONENTS          = \FOLDERS\VIEWS . 'mycomponents/';
     const ADMIN                 = \FOLDERS\VIEWS . 'admin/';
     const USERS                 = \FOLDERS\VIEWS . 'users/';
     const LOGIN                 = \FOLDERS\VIEWS . 'login/';

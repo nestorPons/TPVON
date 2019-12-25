@@ -1,4 +1,29 @@
-class Line{constructor(id,articulo,cantidad,precio,dto){this.id=id;this.articulo=articulo;this.cantidad=cantidad||0;this.precio=precio||0;this.dto=dto||0;this.amo=this.setTotal()};setTotal(){return(this.cantidad*this.precio*(1-this.dto/100)).toFixed(2)}};class Ticket{constructor(data){this.id=null;this.lines=[];this.id_usuario=null;this.id_cliente=null;this.fecha=null;this.estado=1;this.iva=null;this.total=0.00;this.new=!0;if(data!=undefined){this.id=data.id;this.id_usuario=data.id_usuario;this.id_cliente=data.id_cliente;this.fecha=data.fecha;this.iva=data.iva;this.estado=(data.estado!=undefined)?data.estado:1;this.addLines(data.lines);this.setTotal()}};addLines(dataLines){for(let i in dataLines){const d=dataLines[i]
+class Table{constructor(id){this.el=document.getElementById(id).querySelector('table')
+this.body=this.el.getElementsByTagName('tbody')[0]
+this.template=document.getElementById(id).querySelector('template')
+this.$table=$('#'+id).find('table')
+this.$template=$(`#${id}`).find('template')
+this.data=[]}
+line(){return parseInt(this.el.rows.length)}
+addLine(id,arrData){this.data.push(arrData)
+const c=this.$template.clone().html()
+return $(c).attr('idline',id||this.$table.find('tr').length).find('td').each(function(i,el){$(this).html(arrData[i]).attr('data-label',arrData[i])}).end().prependTo(this.$table.find('tbody'))}
+endScroll(){this.$table.animate({scrollTop:this.$table.height()},100)}
+clearLines(){this.$table.find('tbody').find('tr').remove()}
+clear(){this.data=[]
+this.clearLines()}
+showLine(exp){const e=this.el.querySelector(exp);e.classList.remove('hidden');return this}
+hiddenRows(){const trs=this.body.getElementsByTagName('tr');for(const tr of trs){tr.classList.add('hidden')}}
+delLine(id){this.$table.find(`[idline="${id}"]`).remove()}
+updateLine(id,data){this.delLine(id)
+return this.addLine(id,data)}
+total(arg){const total=this.el.getElementsByClassName('id_total')[0]
+if(arg)total.innerHTML=arg
+return total.innerHTML}
+hoverable(value){if(value!=undefined){if(value)this.el.classList.add('hoverable')
+else this.el.classList.remove('hoverable')}
+return this.el.classList.contains('hoverable')}
+html(){return this.el.innerHTML}}class Line{constructor(id,articulo,cantidad,precio,dto){this.id=id;this.articulo=articulo;this.cantidad=cantidad||0;this.precio=precio||0;this.dto=dto||0;this.amo=this.setTotal()};setTotal(){return(this.cantidad*this.precio*(1-this.dto/100)).toFixed(2)}};class Ticket{constructor(data){this.id=null;this.lines=[];this.id_usuario=null;this.id_cliente=null;this.fecha=null;this.estado=1;this.iva=null;this.total=0.00;this.new=!0;if(data!=undefined){this.id=data.id;this.id_usuario=data.id_usuario;this.id_cliente=data.id_cliente;this.fecha=data.fecha;this.iva=data.iva;this.estado=(data.estado!=undefined)?data.estado:1;this.addLines(data.lines);this.setTotal()}};addLines(dataLines){for(let i in dataLines){const d=dataLines[i]
 this.addLine(d.id,d.articulo,d.cantidad,d.precio,d.dto)}
 return!0}
 addLine(id,articulo,cantidad,precio,dto){let newLine=new Line(id,articulo,cantidad,precio,dto)
@@ -33,32 +58,7 @@ clear(){this.description.innerHTML=''
 this.day.innerHTML=''
 this.month.innerHTML=''
 this.year.innerHTML=''
-this.desc.innerHTML=''}}class Table{constructor(id){this.el=document.getElementById(id).querySelector('table')
-this.body=this.el.getElementsByTagName('tbody')[0]
-this.template=document.getElementById(id).querySelector('template')
-this.$table=$('#'+id).find('table')
-this.$template=$(`#${id}`).find('template')
-this.data=[]}
-line(){return parseInt(this.el.rows.length)}
-addLine(id,arrData){this.data.push(arrData)
-const c=this.$template.clone().html()
-return $(c).attr('idline',id||this.$table.find('tr').length).find('td').each(function(i,el){$(this).html(arrData[i]).attr('data-label',arrData[i])}).end().prependTo(this.$table.find('tbody'))}
-endScroll(){this.$table.animate({scrollTop:this.$table.height()},100)}
-clearLines(){this.$table.find('tbody').find('tr').remove()}
-clear(){this.data=[]
-this.clearLines()}
-showLine(exp){const e=this.el.querySelector(exp);e.classList.remove('hidden');return this}
-hiddenRows(){const trs=this.body.getElementsByTagName('tr');for(const tr of trs){tr.classList.add('hidden')}}
-delLine(id){this.$table.find(`[idline="${id}"]`).remove()}
-updateLine(id,data){this.delLine(id)
-return this.addLine(id,data)}
-total(arg){const total=this.el.getElementsByClassName('id_total')[0]
-if(arg)total.innerHTML=arg
-return total.innerHTML}
-hoverable(value){if(value!=undefined){if(value)this.el.classList.add('hoverable')
-else this.el.classList.remove('hoverable')}
-return this.el.classList.contains('hoverable')}
-html(){return this.el.innerHTML}}class Select extends Component{constructor(id){super();this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
+this.desc.innerHTML=''}}class Select extends Component{constructor(id){super();this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
 addClass(myclass){this.el.classList.add(myclass)
 return this}
 addOption(value,text){let opt=document.createElement('option')
