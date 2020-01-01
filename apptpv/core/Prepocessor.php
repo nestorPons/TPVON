@@ -35,7 +35,36 @@ class Prepocessor{
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
         $this->cache_record($this->cache);
     }
-    private function sintax_if() : object {
+    private function sintax_if() : void {
+        $regex_conditional = '/@if(\s)*?\((.)*?\)(.)*?@endif/sim'; 
+        $start_condition = '/@if(\s)*?\((.)*?\)/sim';
+        $end_condition = '/@endif/i'; 
+        $has = preg_match_all($regex_conditional, $this->content, $matches);
+
+        if($has){
+            foreach ($matches[0] as $key => $value) {
+                // Se obtiene la condición
+                if(preg_match($start_condition, $value, $matches)){
+                    $condition = preg_replace('/@if(\s)*?\(/sim','',$matches[0]);
+                    $condition = preg_replace('/\)$/','',$condition);
+                    if(empty($condition)) $condition = null;
+                    $valcon = false; 
+                    eval('if ($condition) { $valcon = true; }');
+                   if($valcon){
+                       // Imprimimos el contenido dentro del condicional
+                        $replace = preg_replace($start_condition,'',$value); 
+                        $replace = preg_replace($end_condition,'',$replace);
+                        $this->content = str_replace($value, $replace, $this->content);
+                    } else {
+                        // Eliminamos todo el condicional 
+                        $this->content = str_replace($value, '', $this->content);
+                    }
+                }
+              
+            } 
+        }
+    }
+/*     private function sintax_if() : object {
         $condition = '/\((.*?)\)/sim';
         $end_condition = '/@endif/i'; 
       
@@ -64,14 +93,14 @@ class Prepocessor{
         $this->replace($regex, $replace);
 
         return $this;
-    }
+    } */
     // Funcion que aplica una sintaxis propia  a las vistas
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
-        $this->includes();
         $this->autoId();
+        $this->includes();
         $this->sintax_if();
-        //$this->sintax_vars();
+        $this->sintax_vars();
         $this->style_scoped();
         $this->script_scoped(); 
         $this->components();
@@ -204,12 +233,11 @@ class Prepocessor{
         $con = $this->content; 
         $has = preg_match_all('#\$\$(\w+)#is', $this->content, $matches);
         if($has){
-            foreach ($matches[0] as $key => $value) {
-                $str = '<?=$' . trim($value, '\$') . '?>';
-                $this->content = str_replace($value, $str, $this->content);
+            for($i = 0; $i < count($matches[0]); $i++) {
+                $str = '<?=$' . trim($matches[1][$i], '\$') . '?>';
+                $this->content = str_replace($matches[0][$i], $str, $this->content);
             }
         }
-        return $con;
     }
     // Comando --id -> Genera un id único para todo el documento.
     private function autoId() : string{
@@ -306,10 +334,10 @@ class Prepocessor{
                     
                     // Quitamos los comentarios 
                     $this->removeHTMLComments();
-
                     // Transformamos la nueva sintaxis en las vistas 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
-                    if($path != \APP\VIEWS\COMPONENTS) $this->sintax();
+                    if($path != \APP\VIEWS\COMPONENTS && $path != \APP\VIEWS\MYCOMPONENTS) $this->sintax();
+                    
 
                     // Se comprimen las etiquetas script y style
                     $this->minify_script();
@@ -339,8 +367,9 @@ class Prepocessor{
     private function searchComponents(){
         $str = "";
         $this->components = []; 
-        $route = \VIEWS\MYCOMPONENTS;
-        $gestor = opendir($route);
+        $folder = \VIEWS\MYCOMPONENTS;
+        if (!file_exists($folder)) mkdir($folder, 0777, true);
+        $gestor = opendir($folder);
         $regex_components = ''; 
         // Busca los componentes en la carpeta de vistas componentes
         while (($file = readdir($gestor)) !== false)  {
@@ -358,14 +387,12 @@ class Prepocessor{
         // Buscar componentes existentes en el directorio componentes
         $regex = "/<($this->regcomponents){1}?\s+([^>]*)(>(.*)<\/($this->regcomponents){1}?>|\/>)/";
         $count = preg_match_all($regex, $this->content, $matches);
-
         if($count){
             // Si encuentra alguno lo transforma en una clase componente
             $len = count($matches[0]); 
             for($i = 0; $i < $len; $i++){
-
-                // Combertimos la cadena en arreglos para pasar los datos al componente
-                $regex = '#(.+?)\s*=\s*"(.+?)"(\s|$)+?#';
+                // Convertimos la cadena en arreglos para pasar los datos al componente
+                $regex = '#(.+?)\s*=\s*["\'](.+?)["\'](\s|$)+?#';
                 $count = preg_match_all($regex, $matches[2][$i], $matches_component);
                 $str_data = '';
                 if($count){
@@ -377,7 +404,8 @@ class Prepocessor{
                 $str_data = trim($str_data, ',');
                 // Creamos la la instancia de clase 
                 $typeComponent = $matches[1][$i]; 
-                $arg_data = ($str_data != '') ? ", Array($str_data)" : '';  
+                $arg_data = ($str_data != '') ? ", Array($str_data)" : '';
+
                 $replace = "<?php new \app\controllers\Component('$typeComponent' $arg_data) ;?>";
                 $this->content = str_replace($matches[0][$i], $replace, $this->content); 
             }

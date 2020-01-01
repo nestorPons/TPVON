@@ -1,6 +1,5 @@
 <?php namespace app\controllers;
 use app\core\Data;
-use MatthiasMullie\Minify;
 /**
  * Clase de madre de los componentes html
  */
@@ -19,23 +18,15 @@ class Component{
 
     function __construct($type, Array $data = null){
         foreach($data as $key => $val){
-           
             // Atributos booleanos
             if($key == 'required') $val = 'required';
             if($key == 'disabled') $val = 'disabled';
             if($key == 'readonly') $val = 'readonly';
             if($key == 'checked')  $val = 'checked';
-            
             // Resto atributos
-            $this->{$key} = $val??null;       
-            
+            $this->{$key} = $val??null;     
         }
-        $this->id = ($this->id)??uniqid($this->type);
-        $this->id_container = self::PREFIX_CONTAINER . $this->id;
-        $this->id_component = self::PREFIX_COMPONENT . $this->id;
-
         $this->print($type);
-
     }
     /** Imprime ĺa vista 
     * $file => Nombre de la vista a imprimir 
@@ -47,67 +38,55 @@ class Component{
             ${$key} = $value;
             @${'attr_'.$key} = "$key = '$value'";     
         }        
+        $this->file = file_get_contents(\VIEWS\MYCOMPONENTS . "$file.phtml");
+        $this->autoId($file);
+        // Buscamos el id del elemento contenedor
+        // Si no tiene id se crea uno 
+
+        $this->file = $this->style_scoped($this->file);
+
+        $this->file = $this->script_scoped($this->file);
+        $this->sintax(); 
         ob_start();
-            include \VIEWS\COMPONENTS . "$file.phtml";
-            $this->file = ob_get_contents();
-            
-            // Buscamos el id del elemento contenedor
-            // Si no tiene id se crea uno 
-            $id = $this->extract('component|m-(.+)?', $this->file)['attr']['id'] ?? null;
-            if(!$id){
-                $this->id = uniqid('auto');
-                $this->file = $this->addAttr('component|m-(.+)?', 'id', $this->id, $this->file);
-            }
-
-            $this->file = $this->style_scoped($this->file);
-
-            $this->file = $this->script_scoped($this->file);
-            $this->sintax(); 
-        ob_end_clean();
-        echo $this->file;
+            echo ($this->file);
+        ob_end_flush();
+    }
+    private function autoId($type){
+        $this->id = ($this->id)??uniqid($type);
+        $this->id_container = self::PREFIX_CONTAINER . $this->id;
+        $this->id_component = self::PREFIX_COMPONENT . $this->id;
+        $this->file = str_ireplace('--id', $this->id, $this->file);
     }
     // Procesa la sintaxis de la plantillas
     private function sintax() : void{
-        // Imprimiendo las variables de la clase a plantilla 
-        foreach($this as $key => $value){
-            $regex = "/--$key\b/";
-            if(is_string($value) || is_null($value) || empty($value))
-                $this->file = preg_replace($regex, $value, $this->file);    
-        }
-        // Eliminamos las variables vacias
-        //$this->file = preg_replace('/--[\w]+\b/i','', $this->file);
-
         // Procesando condicional if
-        $this->file = $this->sintax_if($this->file);
-    }
-    private function sintax_if(string $text) : string {
-        $regex_conditional = '/@if(\s)*?\((.)*?\)(.)*?@endif/sim'; 
-        $start_condition = '/@if(\s)*?\((.)*?\)/sim';
-        $end_condition = '/@endif/i'; 
-        $has = preg_match_all($regex_conditional, $text, $matches);
+        $this->sintax_if();
+        // Imprimiendo las variables de la clase a plantilla 
+        $has = preg_match_all('#\$\$(\w+)#is', $this->file, $matches);
+       
         if($has){
-            foreach ($matches[0] as $key => $value) {
-                // Se obtiene la condición
-                if(preg_match($start_condition, $value, $matches)){
-                    $condition = preg_replace('/@if(\s)*?\(/sim','',$matches[0]);
-                    $condition = preg_replace('/\)$/','',$condition);
-                    if(empty($condition)) $condition = null;
-                    $valcon = false; 
-                    eval('if ($condition) { $valcon = true; }');
-                   if($valcon){
-                       // Imprimimos el contenido dentro del condicional
-                        $replace = preg_replace($start_condition,'',$value); 
-                        $replace = preg_replace($end_condition,'',$replace);
-                        $text = str_replace($value, $replace, $text);
-                    } else {
-                        // Eliminamos todo el condicional 
-                        $text = str_replace($value, '', $text);
-                    }
-                }
-              
-            } 
+            for($i = 0; $i < count($matches[0]); $i++) {
+                $value = $this->{$matches[1][$i]} ?? '';
+                $this->file = str_replace($matches[0][$i], $value, $this->file);
+            }
         }
-        return $text;
+    }
+    private function sintax_if() {
+        $regex_conditional = '/@if\s*?\((.*?)\)(.*?)@endif/sim'; 
+        $has = preg_match_all($regex_conditional, $this->file, $matches);
+        if($has){
+            for($i = 0; $i < count($matches[0]) ; $i++){
+                $condition = $this->{trim($matches[1][$i], '$$')};
+                $valcon = false;
+                eval('if ($condition) { $valcon = true; }');
+                $this->file = ($valcon) 
+                    ? str_replace($matches[0][$i], $matches[2][$i], $this->file)
+                    : str_replace($matches[0][$i], '' , $this->file);
+
+                // Quitamos los espacios en blanco
+                $this->file = preg_replace("[\n|\r|\n\r]", "", $this->file);
+            }
+        }
     }
     protected function getnameclass(){
         $arr_controller= explode('\\',get_class($this));

@@ -1,15 +1,16 @@
 <header id="bartools">
     <div id="bartools-actions">
-        <?php $add1         = new Component('plus-circle',      ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
-        <?php $add          = new Icon('plus-circle',           ['onclick'=>'app.sections.add()', 'label' => 'Nuevo'])?>
-        <?php $del          = new Icon('cross-circle',          ['onclick'=>'menu.del()', 'label' => 'Eliminar'])?>
-        <?php $prev         = new Icon('chevron-left-circle',   ['onclick'=>'app.sections.prev()', 'label' => 'Anterior'])?>
-        <?php $next         = new Icon('chevron-right-circle',  ['onclick'=>'app.sections.next()', 'label' => 'Siguiente'])?>
-        <?php $print        = new Icon('printer',               ['onclick'=>'app.sections.print()', 'label' => 'Imprimir'])?>
-        <?php $conf         = new Icon('cod',                   ['onclick'=>'app.sections.conf()', 'label' => 'Configurar'])?>
-        <?php $filter       = new Icon('funnel',                ['onclick'=>'app.sections.filter()', 'label' => 'Filtrar'])?>
+        <m-icon  id='--id_add' class="menu-buttons" style="color:red" icon='plus-circle' onclick='app.sections.add()' label='Nuevo'/>
+        <m-icon  id='--id_del' class="menu-buttons" icon='cross-circle' onclick='menu.del()' label='Eliminar'/>
+        <m-icon  id='--id_prev' class="menu-buttons" icon='chevron-left-circle' onclick='app.sections.prev()' label='Anterior'/>
+        <m-icon  id='--id_next' class="menu-buttons" icon='chevron-right-circle' onclick='app.sections.next()' label='Siguiente'/>
+        <m-icon  id='--id_print' class="menu-buttons" icon='printer' onclick='app.sections.print()' label='Imprimir'/>
+        <m-icon  id='--id_conf' class="menu-buttons" icon='cog' onclick='app.sections.conf()' label='Configurar'/>
+        <m-icon  id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filter'/>
+
         <div id="search" onblur="menu.search.close()">
-            <?php $search       = new Icon('magnifier',             ['onclick'=>'menu.search.toggle()', 'label' => 'Buscar'])?>
+            <m-icon  id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar'/>
+            
             <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 
                                                 'tabindex' => '-1', 'title'=>'Pulse Enter para realizar la búsqueda.'])?>
         </div>
@@ -103,16 +104,17 @@
     var menu = {
         tile    : document.getElementById('bartools-name-sections'),
         buttons : {
-            $next       : $('#<?= $next->id()?>'),
-            $prev       : $('#<?= $prev->id()?>'),
-            $add        : $('#<?= $add->id()?>'),
-            $del        : $('#<?= $del->id()?>'),
-            $search     : $('#<?= $search->id()?>'),
-            $print      : $('#<?= $print->id()?>'),
-            $conf       : $('#<?= $conf->id()?>'),
-            $filter     : $('#<?= $filter->id()?>'),
+            $add        : $('#--id_add'),
+            $del        : $('#--id_del'),
+            $next       : $('#--id_next'),
+            $prev       : $('#--id_prev'),
+            $search     : $('#--id_search'),
+            $print      : $('#--id_print'),
+            $conf       : $('#--id_conf'),
+            $filter     : $('#--id_filter'),
             show(arr = []){               
                 $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
+        echo(arr)
                 for(i in arr){
                     menu.buttons['$'+arr[i]].show()
                 }
@@ -121,8 +123,8 @@
         search  : {
             $search     : $('#<?= $txtSearch->id()?>'), 
             $txtSearch  : $('#<?= $txtSearch->id()?>').find('input'),
-            $label      : $('#<?= $search->id()?>').find('.label'), 
-            $icon       : $('#<?= $search->id()?>'),
+            $label      : $('#--id_search').find('.label'), 
+            $icon       : $('#--id_search'),
             velocity    : 500,
             isOpen      : false,
             open(){

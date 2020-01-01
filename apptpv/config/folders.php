@@ -47,3 +47,4 @@ namespace APP;
 
 namespace APP\VIEWS;
     const COMPONENTS            = \APP\VIEWS . 'components/';
+    const MYCOMPONENTS            = \APP\VIEWS . 'mycomponents/';

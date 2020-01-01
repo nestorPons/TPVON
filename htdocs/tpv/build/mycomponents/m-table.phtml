@@ -1,4 +1,4 @@
-<?php namespace app\controllers\components?><component id="id5e0340b3d966e">
+<?php namespace app\controllers\components?><component id="--id">
     <table class="--class">
         <thead>
             <?php foreach ($columns as $key => $val) : ?>
@@ -6,14 +6,14 @@
             <?php endforeach ?>
         </thead>
         <tbody></tbody>
-        <?php if(--total):?>
+        @if (--total)
         <tfoot>
             <tr>
                 <td>TOTAL: </td>
                 <td><span class="id_total"></span></td>
             </tr>
         </tfoot>
-        <?php endif ?>
+        @endif
     </table>
     <template>
         <tr onclick="--onclick" ondblclick="--ondblclick">
@@ -22,6 +22,6 @@
             <?php endforeach ?>
         </tr>
     </template>
-    <style lang="less" >#id5e0340b3d966e{height:100%;width:100%}#id5e0340b3d966e tfoot{order:3;width:100%}#id5e0340b3d966e tfoot tr{text-align:right}#id5e0340b3d966e table{max-height:75vh}#id5e0340b3d966e.hoverable tbody{cursor:pointer}#id5e0340b3d966e .id{max-width:6ch}@media (max-width:997px){#id5e0340b3d966e table{max-height:65vh}#id5e0340b3d966e th,#id5e0340b3d966e td{padding:0}#id5e0340b3d966e thead{height:inherit!important}}</style>
+    <style lang="less" scoped>height:100%;width:100%;tfoot{order:3;width:100%}tfoot tr{text-align:right}table{max-height:75vh}.hoverable tbody{cursor:pointer}.id{max-width:6ch}@media (max-width:997px){table{max-height:65vh}th,td{padding:0}thead{height:inherit!important}}</style>
     <script></script>
 </component>

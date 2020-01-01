@@ -13,7 +13,6 @@ else $less->setVariables(array(parse_ini_file(\FILE\CONFIG_TEMPLATE))[0]);
     
 compileFolder(\FOLDERS\LESS, \PUBLICF\CSS);
 
-
 // Funciones *************
 function compileFolder($inputDir, $outputDir){
     $files = $files = glob($inputDir . '*.{less}', GLOB_BRACE);
