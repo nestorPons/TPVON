@@ -14,7 +14,7 @@
             grid-template-columns: repeat(3, 1fr);
             grid-row-gap: 5px;
 
-            <?= $table->id?> {
+            #<?= $table->id()?> {
                 grid-row: 2;
                 grid-column: 1 / span 3;
 
@@ -95,7 +95,7 @@
                         }
                         return parseFloat(d.total)
                     }
-                    if (success && data.id) {
+                    if (success && data && data.id) {
                         this.txtTotal.value = _loadData(data[i]).toFixed(2)
                     } else {
                         let x = 0

@@ -10,15 +10,13 @@
 
         <div id="search" onblur="menu.search.close()">
             <m-icon  id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar'/>
-            
-            <?php $txtSearch    = new InputText(['placeholder'=>'Escribe tu búsqueda', 'onkeyup'=>'menu.search.keypress(event)', 
-                                                'tabindex' => '-1', 'title'=>'Pulse Enter para realizar la búsqueda.'])?>
+            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup = 'menu.search.keypress(event)' tabindex = '-1' title = 'Pulse Enter para realizar la búsqueda.'/>
         </div>
     </div>
     <div id="bartools-central"> 
     </div>  
     <div id="bartools-general">
-        <?php $help         = new Icon('question-circle', ['onclick'=>'app.help()', 'label'=> 'Ayuda'])?>
+        <m-icon  id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Filter' label='Acerca de'/>
         <?php new ButtonCloseApp?>
     </div>
 </header>
@@ -64,24 +62,20 @@
     #bartools .lnr:hover{
         font-weight: bold;
     }
-    #bartools #<?=$txtSearch->id()?>{
+    #bartools #--id_txtSearch{
         position: relative;
-        background: var(--main-color);
         top: 0;
         left: 3204px;
-        width: 100%;
         height: 58px;
         z-index: 1;
         text-align: left;
         display: flex; 
         align-items: center;  
-    }
-    #bartools #<?=$txtSearch->id()?>{
         width: 300px;
         background-color: var(--form-back-color);
         margin-left: 5px ;
     }
-    #bartools #<?=$txtSearch->id()?>>input{
+    #bartools #--id_txtSearch>input{
         position: absolute;
         width: 97%;
     }
@@ -114,15 +108,14 @@
             $filter     : $('#--id_filter'),
             show(arr = []){               
                 $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
-        echo(arr)
                 for(i in arr){
                     menu.buttons['$'+arr[i]].show()
                 }
             }
         },
         search  : {
-            $search     : $('#<?= $txtSearch->id()?>'), 
-            $txtSearch  : $('#<?= $txtSearch->id()?>').find('input'),
+            $search     : $('#--id_txtSearch'), 
+            $txtSearch  : $('#--id_txtSearch').find('input'),
             $label      : $('#--id_search').find('.label'), 
             $icon       : $('#--id_search'),
             velocity    : 500,

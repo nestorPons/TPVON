@@ -6,14 +6,14 @@
     $total      = new InputRead(['label' => 'Total', 'iconlast' => '', 'class' => 'text-right']);
     $table      = new Table(['columns' => ['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']]);
     ?>
-    <style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income <?=$table->id?>{grid-row:2;grid-column:1 / span 3}#income <?=$table->id?>table{max-height:500px}#income <?=$table->id?>table th,#income <?=$table->id?>table td{padding:0}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}#income #<?=$total->id() ?>input,#income #<?=$total->id() ?>label{font-weight:bold!important;font-size:2rem!important}</style>
+    <style lang="less">#income{align-items:flex-start;display:grid;grid-template-rows:auto auto 1fr auto;grid-template-columns:repeat(3,1fr);grid-row-gap:5px}#income #<?=$table->id()?>{grid-row:2;grid-column:1 / span 3}#income #<?=$table->id()?>table{max-height:500px}#income #<?=$table->id()?>table th,#income #<?=$table->id()?>table td{padding:0}#income .Importe{text-align:right}#income #<?=$total->id() ?>{grid-column:3}#income #<?=$total->id() ?>input,#income #<?=$total->id() ?>label{font-weight:bold!important;font-size:2rem!important}</style>
     <script>app.income={name:'Ingresos',buttons:['print','filter'],txtFrom:<?=$from->id()?>,txtTo:<?=$to->id()?>,txtTotal:<?=$total->id()?>.querySelector('input'),SelUser:new Select(<?=$seluser->id()?>),Table:new Table('<?= $table->id() ?>'),load(){this.loadUsers()
 this.filter()},loadUsers(){let el=this.SelUser
 DB.get('usuarios').then(users=>{for(let u of users){const discharged=(u.estado!=1)?'red':null;el.addOption(u.id,u.nombre,discharged)}})},filter(){this.Table.clear()
 this.getData({controller:'tickets',action:'getBetween',data:{f1:date.format(this.txtFrom.value,'sql'),f2:date.format(this.txtTo.value,'sql'),u:this.SelUser.value()}})},getData(data){app.post(data,(data,success)=>{let _loadData=d=>{for(let x in d.lineas){let l=d.lineas[x]
 if(d.estado==1)this.Table.addLine(null,[d.id,date.format(d.fecha,'short'),date.format(d.fecha,'hour'),l.articulo,l.precio,l.cantidad,l.dto,l.importe.toFixed(2)])}
 return parseFloat(d.total)}
-if(success&&data.id){this.txtTotal.value=_loadData(data[i]).toFixed(2)}else{let x=0
+if(success&&data&&data.id){this.txtTotal.value=_loadData(data[i]).toFixed(2)}else{let x=0
 for(let i in data){x+=_loadData(data[i])}
 this.txtTotal.value=x.toFixed(2)}})},print(){const printContents={innerHTML:`<h1> Listado de ingresos </h1>
                         <h3> Fecha inicio   : ${this.txtFrom.value}</h3>

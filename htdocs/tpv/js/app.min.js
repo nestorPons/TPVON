@@ -128,7 +128,7 @@ const app = {
             return confirm(mens);
         },
         info(mens){
-            alert(`mens`);
+            alert(mens);
             return this;
         }
     },
@@ -328,7 +328,13 @@ const app = {
         return form
     },
     help(){
-        this.mens.info(`v.${this.ver}`);
+        this.mens.info(`
+            TPVOnline 
+            v.${this.ver}
+            Autor : Néstor Pons Portolés
+            Email : nestorpons@gmail.com
+            Licencia : MIT 2019
+        `);
     }
 }
 const DB = {
