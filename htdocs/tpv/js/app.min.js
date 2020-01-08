@@ -25,7 +25,7 @@ const app = {
                         data.success == false ||
                         data.success == 0) &&
                         exist(data.mens)) {
-                            console.error('Error en la respuesta!!');
+                            console.log('Error en la respuesta!!');
                             this.mens.error(data.mens || 'No se ha podido rehalizar la petición!')
                             return false
                         }

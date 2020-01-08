@@ -1,6 +1,6 @@
 <?php namespace app\controllers\components?><section id="login" style="width: 420px;">
     <form controller="login" action="auth">
-        <h1><?= $nombre?></h1>
+        <h1 translate="no"><?= $nombre?></h1>
         <fieldset class="container">
             <legend>Login</legend> 
             <?php new \app\controllers\Component('m-input' , Array('type'=>'email','label'=>'Email del usuario','name'=>'email','required'=>'true')) ;?>

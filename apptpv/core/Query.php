@@ -1,15 +1,21 @@
-<?php
-
-namespace app\core;
+<?php namespace app\core;
 
 /**
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
-class Query extends Conn
+class Query
 {
-    protected
-        $conn,
-        $table;
+    protected 
+        $conn, 
+        $pdo, 
+        $sqlPrepare,
+        $sql,
+        $credentials,
+        $params = [], 
+        $user,
+        $db,
+        $table,
+        $error;
 
     function __construct(string $table = null, string $db = null, string $user = null)
     {
@@ -29,12 +35,108 @@ class Query extends Conn
             return false;
         }
     }
+    private function init($sql, $params = null){
+
+        // pr('SQL', $sql, $params);
+        // pr($this->pdo);  
+         try {
+            $this->sqlPrepare = $this->pdo->prepare($sql);
+            $this->bindMore($params);
+            
+            if (!empty($this->params)) {
+                foreach ($this->params as $param => $value) {
+                    if(is_numeric($value[1])) {
+                        $type = \PDO::PARAM_INT;
+                    } else if(is_bool($value[1])) {
+                        $type = \PDO::PARAM_BOOL;
+                    } else if(is_null($value[1]) || $value[1] == '') {
+                        $value[1] = null;
+                        $type = \PDO::PARAM_NULL;
+                    } else {
+                        $type = \PDO::PARAM_STR;
+                    }
+
+                    $this->sqlPrepare->bindValue($value[0], $value[1], $type);
+                    }
+            }
+           return $this->sqlPrepare->execute();
+        }
+        catch (\PDOException $e) {
+            die ($e->getMessage());
+        }
+        
+        $this->params = [];
+    }
+    /**
+     *	@void
+     *	
+     *	Agrega más parámetros al arreglo de parámetros
+     *	@param array $parray
+     */
+    private function bindMore($parray){
+        if (is_array($parray)) {
+            $columns = array_keys($parray);
+            foreach ($columns as $i => &$column) {
+               $this->params[sizeof($this->params)] = [":" . $column, $parray[$column]];
+            }
+        }
+    }
+    /**
+     *  Si la consulta SQL contiene un SELECT o SHOW, devolverá un arreglo conteniendo todas las filas del resultado
+     *	Si la consulta SQL es un DELETE, INSERT o UPDATE, retornará el número de filas afectadas
+     *
+     *  @param  string $sql
+     *	@param  array  $params
+     *	@param  int    $fetchmode
+     *	@return mixed
+     */
+    
+    public function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
+
+        $this->sql = trim(str_replace("\r", " ", $sql)); 
+
+        $respond = $this->init($this->sql, $params);
+        $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
+        # Determina el tipo de SQL 
+        $statement = strtolower($rawStatement[0]); 
+        
+        if ($statement === 'select' || $statement === 'show') {
+            return $this->sqlPrepare->fetchAll($fetchmode);
+        } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
+            return $this->sqlPrepare->rowCount();
+        } else {
+            return $respond;
+        }
+    }
+    /**
+     *	Genera la conexión a a la base de datos
+     */
+    protected function connect($dsn, $pass)
+    {
+        try {
+            $this->pdo = new \PDO(
+                    $dsn, 
+                    $this->user, 
+                    $pass,  
+                    [
+                        \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
+                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
+                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
+                    ]
+                );
+           return $this->pdo; 
+        }
+        catch (\PDOException $e){ 
+            throw new \PDOException($e->getMessage());
+        }
+    }
     function __destruct()
     {
         $this->conn = null;
     }
     /**
-     * Prepara el string sql para enviar a hacer la consulta 
+     * Prepara el string sql para enviar a crear la consulta 
      * añadimos si queremos que sean ordenados de forma inversa
      */
     private function sendQuery(String $sql, bool $desc = false)
@@ -42,11 +144,6 @@ class Query extends Conn
         $order = $desc ? 'ORDER BY id DESC' : '';
         $sql = str_replace('order_by', $order, $sql);
         return $this->query($sql);
-    }
-    // Devolvemos la conexión
-    public function getConnect()
-    {
-        return $this->conn;
     }
     // Devuelve todos los registros de una tabla
     public function getAll(string $return = '*', String $order = 'id')
@@ -86,6 +183,7 @@ class Query extends Conn
     // Devuelve un solo registro de una peticion por campo del registro
     public function getOneBy(array $params, string $return = '*', bool $desc = false)
     {
+
         $column = key($params);
         $value = $params[$column];
         return $this->sendQuery(
@@ -123,7 +221,7 @@ class Query extends Conn
     public function count()
     {
         $this->query("SELECT * FROM {$this->table}");
-        return $this->rowCount();
+        return $this->sqlPrepare->rowCount();
     }
     // Añadimos un registro devuelve el id del registro
     public function add(array $params, $del_id = true)
@@ -139,7 +237,7 @@ class Query extends Conn
         $strPre = trim($strPre, ',');
 
         if ($this->query("INSERT INTO {$this->table} ($strCol) VALUES ($strPre);", $params)) {
-            return $this->lastInsertId();
+            return (int)$this->pdo->lastInsertId();
         } else return false;
     }
     // Funcion para mostrar solo los atributos publicos desde dentro de la clase
