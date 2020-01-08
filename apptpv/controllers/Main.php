@@ -16,7 +16,7 @@ class Main extends Controller{
     }
     private function getCompanies(){
         $Companies = new \app\models\Company;
-        return $this->companies($Companies->getAll('nombre'));
+        return $this->companies($Companies->return('nombre')->getAll());
     }
     function companies ($arg = null){
         if($arg) $this->companies = $arg;

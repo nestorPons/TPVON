@@ -85,7 +85,7 @@ class Tickets extends Query{
         else return false; 
     }
     function getLastUser(Data $Data){
-        return $this->getOneBy(['id_cliente'=>$Data->id], 'fecha', true);
+        return $this->return('fecha')->getOneBy(['id_cliente'=>$Data->id], true);
     }
     // Método get de obtención por rando de fechas
     function between(Data $Data){

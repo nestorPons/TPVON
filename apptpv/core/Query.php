@@ -4,43 +4,63 @@
  * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
  */
 class Query
-{
-    protected 
-        $conn, 
-        $pdo, 
-        $sqlPrepare,
+{   
+    private 
+        $params = [],
         $sql,
-        $credentials,
-        $params = [], 
+        $sqlPrepare,
+        $return = '*',
+        $order;
+
+    protected 
+        $pdo, 
         $user,
         $db,
-        $table,
-        $error;
+        $table;
 
     function __construct(string $table = null, string $db = null, string $user = null)
     {
-
-        // Parametros predeterminados para la conexión
+        // Parametros predeterminados para la conexión desde
         $credentials = parse_ini_file(\FILE\CONN);
         if ($table) $this->table = $table;
 
-        $this->db = $db ?? CONN['db'];
+        $this->db = $db ?? $credentials['db'];
         $this->user = $user ?? $credentials['user'];
         $dsn = 'mysql:dbname=' . $this->db . ';host=' . $credentials["host"] . ';port=' . $credentials["port"];
 
         try {
-            $this->conn = $this->connect($dsn, $credentials[$this->user]);
-            return gettype($this->conn) === 'object';
+            $this->connect($dsn, $credentials[$this->user]);
+            return gettype($this->pdo) === 'object';
         } catch (\Exception $e) {
             return false;
         }
     }
-    private function init($sql, $params = null){
-
-        // pr('SQL', $sql, $params);
-        // pr($this->pdo);  
-         try {
-            $this->sqlPrepare = $this->pdo->prepare($sql);
+    /**
+     *	Genera la conexión a a la base de datos
+     */
+    protected function connect($dsn, $pass) : void
+    {
+        try {
+            $this->pdo = new \PDO(
+                    $dsn, 
+                    $this->user, 
+                    $pass,  
+                    [
+                        \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
+                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
+                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
+                    ]
+                ); 
+        }
+        catch (\PDOException $e){ 
+            throw new \PDOException($e->getMessage());
+        }
+    }
+    // Prepara una sentencia para su ejecución
+    private function init(array $params = null) : bool {
+        try {
+            $this->sqlPrepare = $this->pdo->prepare($this->sql);
             $this->bindMore($params);
             
             if (!empty($this->params)) {
@@ -73,11 +93,11 @@ class Query
      *	Agrega más parámetros al arreglo de parámetros
      *	@param array $parray
      */
-    private function bindMore($parray){
-        if (is_array($parray)) {
+    private function bindMore(array $parray = null) : void {
+        if($parray){
             $columns = array_keys($parray);
             foreach ($columns as $i => &$column) {
-               $this->params[sizeof($this->params)] = [":" . $column, $parray[$column]];
+                $this->params[sizeof($this->params)] = [":" . $column, $parray[$column]];
             }
         }
     }
@@ -91,17 +111,19 @@ class Query
      *	@return mixed
      */
     
-    public function query($sql, $params = null, $fetchmode = \PDO::FETCH_ASSOC){
+    public function query(string $sql, $params = null){
 
         $this->sql = trim(str_replace("\r", " ", $sql)); 
 
-        $respond = $this->init($this->sql, $params);
+        // Prepara la sentencia con sus parametros y la inicia
+        $respond = $this->init($params);
+
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]); 
         
         if ($statement === 'select' || $statement === 'show') {
-            return $this->sqlPrepare->fetchAll($fetchmode);
+            return $this->sqlPrepare->fetchAll(\PDO::FETCH_ASSOC);
         } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {
             return $this->sqlPrepare->rowCount();
         } else {
@@ -109,59 +131,37 @@ class Query
         }
     }
     /**
-     *	Genera la conexión a a la base de datos
-     */
-    protected function connect($dsn, $pass)
-    {
-        try {
-            $this->pdo = new \PDO(
-                    $dsn, 
-                    $this->user, 
-                    $pass,  
-                    [
-                        \PDO::ATTR_PERSISTENT => false, //sirve para usar conexiones persistentes https://es.stackoverflow.com/a/50097/29967
-                        \PDO::ATTR_EMULATE_PREPARES => false, //Se usa para desactivar emulación de consultas preparadas
-                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, //correcto manejo de las excepciones https://es.stackoverflow.com/a/53280/29967
-                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'" //establece el juego de caracteres a utf8mb4 https://es.stackoverflow.com/a/59510/29967
-                    ]
-                );
-           return $this->pdo; 
-        }
-        catch (\PDOException $e){ 
-            throw new \PDOException($e->getMessage());
-        }
-    }
-    function __destruct()
-    {
-        $this->conn = null;
-    }
-    /**
      * Prepara el string sql para enviar a crear la consulta 
      * añadimos si queremos que sean ordenados de forma inversa
      */
-    private function sendQuery(String $sql, bool $desc = false)
+    private function sendQuery(String $sql)
     {
-        $order = $desc ? 'ORDER BY id DESC' : '';
-        $sql = str_replace('order_by', $order, $sql);
+        $sql = str_replace('order_by', $this->order, $sql);
+        
+        // una vez creado el query string se resetean parametreos por si se hace otra consulta distinta
+        $this->return = '*';
+        
         return $this->query($sql);
     }
     // Devuelve todos los registros de una tabla
-    public function getAll(string $return = '*', String $order = 'id')
+    public function getAll(String $order = 'id')
     {
-        return $this->sendQuery("SELECT $return FROM {$this->table} ORDER BY $order ASC;");
+        return $this->sendQuery("SELECT $this->return FROM {$this->table} ORDER BY $order ASC;");
     }
-    // Devuelve datos de una peticion por id
-    // param puede ser array con una clave id o un integer que hace referencia a un id
-    public function getById($param, string $return = '*')
+    /** Devuelve datos de una peticion por id
+    * param puede ser array con una clave id o un integer que hace referencia a un id
+    * @param Puede ser un array con un id o un id
+    */
+    public function getById($param)
     {
         $id = $param['id'] ?? $param; 
 
-        $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE id = $id LIMIT 1;");
+        $r = $this->sendQuery("SELECT $this->return FROM {$this->table} WHERE id = $id LIMIT 1;");
         return $r ? $r[0] : null;
     }
     // Devuelve datos de una peticion por algun campo del registro
     // Args puede ser String (1.1) o un array clave =>valor (1.0)
-    public function getBy($args, string $return = '*', bool $unique = false,  bool $desc = false)
+    public function getBy($args)
     {
         $filters = '';
 
@@ -172,56 +172,36 @@ class Query
             }
             $filters = trim($filters, "AND ");
         }
-        $r = $this->sendQuery("SELECT $return FROM {$this->table} WHERE $filters  order_by;", $desc);
-        return   $unique ? $r[0] : $r;
-    }
-    // Devuelve datos de una peticion por una consulta sql
-    public function getBySQL(string $sql, bool $desc = false)
-    {
-        return $this->sendQuery("SELECT * FROM {$this->table} WHERE $sql order_by", $desc);
+        
+        return $this->sendQuery("SELECT $this->return FROM {$this->table} WHERE $filters  order_by;");
     }
     // Devuelve un solo registro de una peticion por campo del registro
-    public function getOneBy(array $params, string $return = '*', bool $desc = false)
+    public function getOneBy(array $params)
     {
-
         $column = key($params);
         $value = $params[$column];
-        return $this->sendQuery(
-            "SELECT $return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;",
-            $desc
-        )[0] ?? false;
+        return 
+            $this->sendQuery("SELECT $this->return FROM {$this->table} WHERE $column = '$value' order_by LIMIT 1;")[0] 
+            ?? false;
+    }
+    // Devuelve datos de una peticion por una consulta sql
+    public function getBySQL(string $sql)
+    {
+        return $this->sendQuery("SELECT * FROM {$this->table} WHERE $sql order_by");
     }
     // Devuelve el último registro
     public function getLast()
     {
-        $r = $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;", true);
+        $this->desc();
+        $r = $this->sendQuery("SELECT * FROM {$this->table} order_by LIMIT 1;");
         return $r ? $r[0] : null;
     }
     // Devuelve los registros con el valor entre los dos valores proporcionados de un campo
-    public function getBetween(string $column, $val1, $val2, string $args = null, bool $desc = false)
+    public function getBetween(string $column, $val1, $val2, string $filters = null)
     {
         return $this->sendQuery(
-            "SELECT * FROM {$this->table} WHERE $column BETWEEN '$val1' AND '$val2' $args order_by;",
-            $desc
+            "SELECT * FROM {$this->table} WHERE $column BETWEEN '$val1' AND '$val2' $filters order_by;"
         );
-    }
-    // Carga el siguiente registro
-    function getNext(int $arg = null)
-    {
-        $id = $arg ?? $this->id;
-        return $this->getBySQL("id>$id DESC LIMIT 1", true);
-    }
-    // Carga el siguiente registro
-    function getPrev(int $arg = null, $filter = '')
-    {
-        $id = $arg ?? $this->id;
-        return $this->getBySQL("id<$id $filter ORDER BY id DESC LIMIT 1");
-    }
-    // Cuenta los registros de la tabla
-    public function count()
-    {
-        $this->query("SELECT * FROM {$this->table}");
-        return $this->sqlPrepare->rowCount();
     }
     // Añadimos un registro devuelve el id del registro
     public function add(array $params, $del_id = true)
@@ -241,7 +221,7 @@ class Query
         } else return false;
     }
     // Funcion para mostrar solo los atributos publicos desde dentro de la clase
-    public function getVars(){
+    public function getVars() : array {
         return array_diff_key(get_object_vars($this), get_class_vars(get_parent_class($this)));
     }
     // Guarda registro mediante su id
@@ -285,9 +265,9 @@ class Query
         return $this->query($this->getSQLUpdate($args), $args);
     }
     // Eliminamos mediante id
-    public function deleteById(array $data)
+    public function deleteById($id)
     {
-        $id = $data['id'];
+        $id = $data['id'] ?? $data;
 
         return $this->query("DELETE FROM {$this->table} WHERE id = $id;");
     }
@@ -297,36 +277,6 @@ class Query
         $prepared = $this->getPrepareParams($params);
         return $this->query("DELETE FROM {$this->table} WHERE $prepared;", $params);
     }
-    /*   public function copyTableById($new_table, $id){
-        $cols = '';
-        $sql = "SELECT * FROM {$this->table}";    
-        $query = $this->conn->query($sql) ;
-        $info = $query->fetch_fields();
-        foreach ($info as $val) {
-            $cols .= $val->name . ',' ;
-        }
-        $cols = trim($cols,',');
-         
-        $this->sql .= "INSERT INTO $new_table ($cols) SELECT $cols FROM {$this->table} WHERE id = $id;";
-        if(!$this->multi_query)
-           return $this->query();
-     }
-    public function copyTableBy($new_table , $column , $value ){
-        $cols = '';
-        $sql = "SELECT * FROM {$this->table};";
-        
-        $query = $this->conn->query($sql) ;
-        $info = $query->fetch_fields();
-        foreach ($info as $val) {
-            $cols .= $val->name . ',' ;
-         }
-        $cols = trim($cols,',');
-         
-        $this->sql .= "INSERT INTO $new_table ($cols) SELECT $cols FROM {$this->table} WHERE $column = $value;";
-        if(!$this->multi_query)
-           return $this->query();
-        
-     } */
     private function getSQLUpdate(array $args, String $filter = '')
     {
         $params = $this->getPrepareParams($args);
@@ -339,21 +289,6 @@ class Query
             $sql .= $key . '= :' . $key . ',';
         }
         return trim($sql, ',');
-    }
-    //getters setters
-    function db(string $arg = null)
-    {
-        if ($arg) {
-            $this->loadCredentials();
-            $this->{__FUNCTION__} = $this->credentials['prefix'] . $arg;
-        }
-        return $this->{__FUNCTION__};
-    }
-    //getters setters
-    function table(string $arg = null)
-    {
-        if ($arg) $this->{__FUNCTION__} = $arg;
-        return $this->{__FUNCTION__};
     }
     // setter genérico para la inserción de datos en los atributos de la clase hija
     function loadData($data)
@@ -372,7 +307,7 @@ class Query
             return true;
         } return false;
     }
-    function toArray(bool $nameSpace = false)
+    function toArray(bool $nameSpace = false) : array
     {
         $prefix = ($nameSpace) ? $this->table . '_' : '';
         $arr = [];
@@ -384,12 +319,6 @@ class Query
         }
         return $arr;
     }
-    // getter generico
-    function id(int $arg = null)
-    {
-        if ($arg) $this->id = $arg;
-        return $this->id;
-    }
     // El método de eliminación genérico para las clases hijas
     // Método genérico de eliminación de registros
     function del()
@@ -398,6 +327,22 @@ class Query
     }
     function isConnected()
     {
-        return !is_null($this->conn);
+        return !is_null($this->pdo);
+    }
+    // Indicamos los parametros que queremos que nos devuelva la futura consulta
+    public function return(string $arg = '*') : self 
+    {
+        $this->return = $arg; 
+        return $this; 
+    } 
+    // Accion que ordena de forma descendiente la futura consulta
+    public function desc () : self 
+    {
+        $this->order = 'ORDER BY id DESC';
+        return $this; 
+    }
+    function __destruct()
+    {
+        $this->pdo = null;
     }
 }

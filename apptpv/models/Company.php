@@ -105,7 +105,7 @@ class Company extends Query{
         $credentials = parse_ini_file(\FILE\CONN);
         $dsn =  'mysql:host=' . $credentials["host"] . ';port='. $credentials["port"];
         // Creamos la conexión
-        $this->conn = $this->connect($dsn, $credentials[$this->user]);
+        $this->connect($dsn, $credentials[$this->user]);
         if(!$this->query("CREATE DATABASE $db COLLATE utf8_spanish2_ci;")) throw new Error('E013');
         else return true;  
     }
