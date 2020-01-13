@@ -64,36 +64,7 @@ class Prepocessor{
             } 
         }
     }
-/*     private function sintax_if() : object {
-        $condition = '/\((.*?)\)/sim';
-        $end_condition = '/@endif/i'; 
-      
-        // Reemplazamos los if
-        $regex = '#@if(.+)\)#';
-        $has = preg_match_all($regex, $this->content, $matches);
-        if($has){
-            foreach ($matches[0] as $key => $value) {
-                // Se obtiene la condición
-                if(preg_match($condition, $value, $matches)){
-                    $conditional = $matches[1];
-                    $strif = "<?php if($conditional):?>"; 
-                    $this->content = str_replace($value, $strif, $this->content);
-                }  
-            } 
-        }
 
-        // Reemplazamos los @else:
-        $regex = '#@else#';
-        $replace = '<?php else: ?>';
-        $this->replace($regex, $replace);
-  
-        // Reemplazamos los @endif:
-        $regex = '#@endif#';
-        $replace = '<?php endif ?>';
-        $this->replace($regex, $replace);
-
-        return $this;
-    } */
     // Funcion que aplica una sintaxis propia  a las vistas
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
@@ -376,8 +347,6 @@ class Prepocessor{
             if ($file != "." && $file != "..") {
                 $arr = explode('.', $file);
                 $this->components[] = $arr[0];
-                $str .= $arr[0] . '|';
-                $this->regcomponents = trim($str, '|'); 
             }
         }
     }
@@ -385,29 +354,32 @@ class Prepocessor{
     private function components(){
 
         // Buscar componentes existentes en el directorio componentes
-        $regex = "/<($this->regcomponents){1}?\s+([^>]*)(>(.*)<\/($this->regcomponents){1}?>|\/>)/";
-        $count = preg_match_all($regex, $this->content, $matches);
-        if($count){
-            // Si encuentra alguno lo transforma en una clase componente
-            $len = count($matches[0]); 
-            for($i = 0; $i < $len; $i++){
-                // Convertimos la cadena en arreglos para pasar los datos al componente
-                $regex = '#(.+?)\s*=\s*["\'](.+?)["\'](\s|$)+?#';
-                $count = preg_match_all($regex, $matches[2][$i], $matches_component);
-                $str_data = '';
-                if($count){
-                     $len_c = count($matches_component[0]); 
-                    for($j = 0; $j < $len_c; $j++){
-                        $str_data .= "'". trim($matches_component[1][$j]) . "'=>'". trim($matches_component[2][$j]) . "',";  
-                    }
-                 }
-                $str_data = trim($str_data, ',');
-                // Creamos la la instancia de clase 
-                $typeComponent = $matches[1][$i]; 
-                $arg_data = ($str_data != '') ? ", Array($str_data)" : '';
 
-                $replace = "<?php new \app\controllers\Component('$typeComponent' $arg_data) ;?>";
-                $this->content = str_replace($matches[0][$i], $replace, $this->content); 
+        foreach($this->components as $component ){
+            $regex = "/<($component){1}?\s+([^>]*)(>(.*)<\/($component){1}?>|\/>)/";
+            $count = preg_match_all($regex, $this->content, $matches);
+            if($count){
+                // Si encuentra alguno lo transforma en una clase componente
+                $len = count($matches[0]); 
+                for($i = 0; $i < $len; $i++){
+                    // Convertimos la cadena en arreglos para pasar los datos al componente
+                    $regex = '#(.+?)\s*=\s*["\'](.+?)["\'](\s|$)+?#';
+                    $count = preg_match_all($regex, $matches[2][$i], $matches_component);
+                    $str_data = '';
+                    if($count){
+                        $len_c = count($matches_component[0]); 
+                        for($j = 0; $j < $len_c; $j++){
+                            $str_data .= "'". trim($matches_component[1][$j]) . "'=>'". trim($matches_component[2][$j]) . "',";  
+                        }
+                    }
+                    $str_data = trim($str_data, ',');
+                    // Creamos la la instancia de clase 
+                    $typeComponent = $matches[1][$i]; 
+                    $arg_data = ($str_data != '') ? ", Array($str_data)" : '';
+
+                    $replace = "<?php new \app\core\Components('$typeComponent' $arg_data) ;?>";
+                    $this->content = str_replace($matches[0][$i], $replace, $this->content); 
+                }
             }
         }
     }

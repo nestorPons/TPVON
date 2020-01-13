@@ -22,7 +22,7 @@ class User extends Query
         $obs, 
         $promos, 
         $emails;
-    protected $table = 'usuarios';
+
     private $Conf;
 
     /**
@@ -32,6 +32,7 @@ class User extends Query
      */
     function __construct($arg = null, bool $conn = true)
     {
+        $this->table = 'usuarios';
         $C = new Company;
         $this->company = $C->nombre();
         if ($conn) parent::__construct();
@@ -50,7 +51,7 @@ class User extends Query
 
     }
     // Devolvemos todos los datos formateados   
-    function all()
+    function all() : array
     {   
         $View = new Query('vista_usuarios');
         $arr = $View->getAll('nombre');
@@ -133,22 +134,23 @@ class User extends Query
             } else return Error::array('E022');
         } else throw new \Exception('E060');
     }
-
+    // Codifica el password 
     function password_hash(string $pass = null)
     {
         $pass = $pass ?? $this->password();
         return $pass ? password_hash($pass, PASSWORD_DEFAULT) : null;
     }
-    function searchById(int $arg)
+    // Buscamos usuario por id 
+    function searchById(int $id) : bool
     {
-        $data = $this->getById($arg);
+        $data = $this->getById($id);
         if ($data) return  $this->loadData($data);
         // en caso que no lo encuentre
         Error::die('E025');
     }
-    function searchByEmail(string $arg)
+    function searchByEmail(string $email)
     {
-        $data = $this->getBy(['email' => $arg]);
+        $data = $this->getBy(['email' => $email]);
         if ($data) return  $this->loadData($data);
         // en caso que no lo encuentre
         else Error::die('E025');
@@ -165,8 +167,7 @@ class User extends Query
 
         return $this->sendMail($body, $this->company . ' nueva contraseña');
     }
-    private function sendMail($body, string $subject)
-    {
+    private function sendMail( String $body, String $subject) : boolean    {
         $mail = new PHPMailer(true);
         // Configuración para mandar emails
         try {
@@ -192,7 +193,7 @@ class User extends Query
             return false;
         }
     }
-    private function getFile(String $file, Data $Data = null)
+    private function getFile(string $file, Data $Data = null) : string 
     {
         foreach ($Data->getAll() as $key => $val) {
             ${$key} = $val;
@@ -203,7 +204,8 @@ class User extends Query
         ob_end_clean(); # cierre de bufer
         return $htmlStrig;
     }
-    public function isAdmin(){
+    public function isAdmin() : bool
+    {
         return $this->nivel >= 2; 
     }
     //getters setterS

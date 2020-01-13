@@ -403,6 +403,11 @@ const DB = {
                     this.storage[table].push(data[i])
                 }
             }
+            // actualiza todos los elementos con data-...
+            echo(`[data-${table}]`);
+            document.querySelectorAll(`[data-${table}]`).forEach(e => {
+                echo(e)
+            })
             resolve(this.storage[table]);
         })
     },

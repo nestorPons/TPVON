@@ -9,7 +9,6 @@
     $hour   = new InputRead(['label' => 'Hora', 'class' => 'clock']);
     $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => '1']);
     $cli    = new Select(['label' => 'Cliente', 'tabindex' => '2', 'onchange' => 'app.tpv.loadClient()']);
-
     // Linea
     $code = new Select([
         'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',

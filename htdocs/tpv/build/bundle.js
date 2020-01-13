@@ -1,4 +1,30 @@
-class MyTable{constructor(id){this.el=document.getElementById(id).querySelector('table')
+class MySelect{constructor(id){this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
+addClass(myclass){this.el.classList.add(myclass)
+return this}
+addOption(value,text){let opt=document.createElement('option')
+opt.appendChild(document.createTextNode(text))
+opt.value=value
+this.el.appendChild(opt)
+return this}
+default(){this.el.value=0}
+clear(){this.reset()
+let ops=this.el.querySelectorAll('option:not(:first-child)')
+for(let o of ops){if(o)this.el.removeChild(o)}
+return this}
+reset(){this.el.classList.remove(this.CLASS_SELECTED)
+let options=this.el.getElementsByTagName('option')
+for(let option of options){option.selected=!1}}
+value(v){if(v!=undefined){this.el.value=v
+this.el.seletedIndex=v
+this.addClass('valid')}
+return this.el.value}
+option(data){if(data!=undefined){let optionselected=!1
+for(let option of this.o){if(option.getAttribute('value')==data){option.selected=!0
+optionselected=!0
+break}else option.selected=!1}
+if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
+else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}
+required(){this.el.removeChild(this.o[0])}}class MyTable{constructor(id){this.el=document.getElementById(id).querySelector('table')
 this.body=this.el.getElementsByTagName('tbody')[0]
 this.template=document.getElementById(id).querySelector('template')
 this.$table=$('#'+id).find('table')

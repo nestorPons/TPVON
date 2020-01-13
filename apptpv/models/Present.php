@@ -6,7 +6,8 @@ class Present extends Query{
     protected $table = 'lineas_regalo';
     private $viewTickets, $Ticket, $viewLines; 
 
-    function __construct($args = null){
+    function __construct($args = null)
+    {
         $this->viewTickets = new Query('vista_tickets_regalo');
         $this->Ticket = new Query('tickets_regalo');
         $this->viewLines = new Query('vista_lineas_regalo');

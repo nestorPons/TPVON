@@ -1,7 +1,9 @@
 <?php namespace app\core;
 
 /**
- * Se crean todos los métodos necesarios para las diferentes peticiones a la base de datos 
+ * La clase maestra para el acceso a la base de datos 
+ * aquí se rehaliza la conexión y se dota de todos los atributos y métodos a las clases hijas  
+ * para la conexion y tratamiento de datos
  */
 class Query
 {   

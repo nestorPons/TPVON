@@ -12,7 +12,8 @@ class Component{
         $onkeyup, $onkeypress, $onchange, $for, 
         $id, $name, $value,$label, $class, $required, 
         $pattern, $tittle, $minlength, $maxlength, $prefix,
-        $collapse, $hidden, $icon, $style, $require, $readonly;
+        $collapse, $hidden, $icon, $style, $require, $readonly, 
+        $option_default, $data;
 
     const PREFIX_CONTAINER = 'container_'; 
     const PREFIX_COMPONENT = 'component_'; 
@@ -89,6 +90,7 @@ class Component{
                 if(preg_match($start_condition, $value, $matches)){
                     $condition = preg_replace('/@if(\s)*?\(/sim','',$matches[0]);
                     $condition = preg_replace('/\)$/','',$condition);
+
                     if(empty($condition)) $condition = null;
                     $valcon = false; 
                     eval('if ($condition) { $valcon = true; }');

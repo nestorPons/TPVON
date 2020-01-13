@@ -1,6 +1,6 @@
 <?php namespace app\controllers;
 use \app\libs\{Auth};
-use \app\models\{Tokens, User, Company, ZoneAdmin, ZoneUser, Tickets};
+use \app\models\{Tokens, User, Company, ZoneUser, Tickets};
 use \app\core\{Error, Query, Data, Controller, Security};
 /**
  * Controla la vista y la recepción de los datos del formulario de login

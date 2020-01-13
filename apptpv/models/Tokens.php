@@ -12,9 +12,6 @@ class Tokens extends \app\core\Query{
             if (is_int($args)) $this->searchById($args);
         }
     }
-    private function searchById(Data $data){
-        
-    }
     function create(User $User){
 
         $time = time();
