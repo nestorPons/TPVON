@@ -1,4 +1,14 @@
-<?php namespace app\controllers\components?><component id="--id" class="row col-sm-12 col-md-12">
+<?php namespace app\controllers\components?><?php 
+/**
+ * Componente select 
+ * Para nombrar options mediante html hay que incluir en el componente padre la opción options
+ * con un objeto JSON. Se puede añadir quitar opciones en tienpo de ejecución mediante la clase JS.  
+ * @autor   : Nestor Póns 
+ * @email   : nestorpons@gmail.com
+ * licencia : MIT 2020
+ */
+?>
+<component id="--id" class="row col-sm-12 col-md-12">
     <select  
         type="$$type" 
         id="el--id" 
@@ -21,6 +31,9 @@
         $$disabled 
         $$readonly 
         $$checked>
+        @for($$options)
+            <option value="$$key">$$value</option>
+        @endfor
     </select>
     <label for="el--id">$$label</label>
     <style lang="less">#--id{height:86%}#--id select{width:100%}</style>

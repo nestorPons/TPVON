@@ -8,14 +8,17 @@ class Components{
     const PREFIX_COMPONENT = 'component_'; 
 
     function __construct($type, Array $data = null){
-        foreach($data as $key => $val){
-            // Atributos booleanos
-            if($key == 'required') $val = 'required';
-            if($key == 'disabled') $val = 'disabled';
-            if($key == 'readonly') $val = 'readonly';
-            if($key == 'checked')  $val = 'checked';
-            // Resto atributos
-            $this->{$key} = $val??null;     
+        if($data){
+            foreach($data as $key => $val){
+
+                // Atributos booleanos
+                if($key == 'required') $val = 'required';
+                if($key == 'disabled') $val = 'disabled';
+                if($key == 'readonly') $val = 'readonly';
+                if($key == 'checked')  $val = 'checked';
+                // Resto atributos
+                $this->{$key} = $val??null;     
+            }
         }
         $this->print($type);
     }
@@ -53,6 +56,8 @@ class Components{
     private function sintax() : void{
         // Procesando condicional if
         $this->sintax_if();
+        // Bucle for 
+        $this->sintax_for();
         // Imprimiendo las variables de la clase a plantilla 
         $has = preg_match_all('#\$\$(\w+)#is', $this->file, $matches);
         // Modificando las propiedades o tags de los elementos html
@@ -67,6 +72,34 @@ class Components{
                     $regex = "#\w+?\s*=\s*[\"']\s*\\$\\$$prop\b\"#";
                     $this->file = preg_replace($regex, '', $this->file);
                     $this->file = str_replace("\$\$$prop", '', $this->file);
+                }
+            }
+        }
+    }
+    private function sintax_for(){
+        $regex_conditional = '/@for\s*?\((.*?)\)(.*?)@endfor/sim';
+        $has = preg_match_all($regex_conditional, $this->file, $matches);
+        if($has){
+    
+            for($i = 0; $i < count($matches[0]) ; $i++){
+                $prop = trim($matches[1][$i], '$$'); 
+                $content = '';
+
+                if(\property_exists($this, $prop)){
+                    // Convierto el valor en array 
+
+                    $arr = json_decode($this->{$prop});
+                    $cont = $matches[2][$i];
+                     
+                    foreach($arr as $key => $value){
+                        $c = str_replace('$$key', $key, $cont);
+                        $c = str_replace('$$value', $value, $c);
+                        $content .= $c;
+                    }
+                    $this->file = str_replace($matches[0][$i], $content, $this->file);
+                } else {
+                    // Si no existe la propiedad quitamos el elemento
+                    $this->file = str_replace($matches[0][$i], '' , $this->file);
                 }
             }
         }

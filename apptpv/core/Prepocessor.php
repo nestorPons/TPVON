@@ -376,7 +376,6 @@ class Prepocessor{
                     // Creamos la la instancia de clase 
                     $typeComponent = $matches[1][$i]; 
                     $arg_data = ($str_data != '') ? ", Array($str_data)" : '';
-
                     $replace = "<?php new \app\core\Components('$typeComponent' $arg_data) ;?>";
                     $this->content = str_replace($matches[0][$i], $replace, $this->content); 
                 }
