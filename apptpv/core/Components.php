@@ -22,11 +22,8 @@ class Components{
         }
         $this->print($type);
     }
-    /** Imprime ĺa vista 
-    * $file => Nombre de la vista a imprimir 
-    * $Data => Objeto Data para pasar datos a la vista [opcional]
-    */
-    function print(string $file, $Data = null){
+    // Imprimimos la vista
+    function print(string $file, $Data = null): void {
         // Variables no obligatorias (Elemtos especificos) 
         foreach($this as $key => $value){
             ${$key} = $value;
@@ -43,7 +40,7 @@ class Components{
             echo ($this->file);
         ob_end_flush();
     }
-    private function autoId($type){
+    private function autoId($type): void {
         $this->id = ($this->id)??uniqid($type);
         $this->id_container = self::PREFIX_CONTAINER . $this->id;
         $this->id_component = self::PREFIX_COMPONENT . $this->id;
@@ -105,11 +102,13 @@ class Components{
         }
     }
     private function sintax_if() {
+
         $regex_conditional = '/@if\s*?\((.*?)\)(.*?)@endif/sim'; 
         $has = preg_match_all($regex_conditional, $this->file, $matches);
         if($has){
             for($i = 0; $i < count($matches[0]) ; $i++){
                 $prop = trim($matches[1][$i], '$$'); 
+
                 if(\property_exists($this, $prop)){
                     $condition = $this->{$porp};
                     $valcon = false;

@@ -1,5 +1,6 @@
 <?php namespace app\controllers\components?><section id="login" style="width: 420px;">
     <form controller="login" action="auth">
+        <?php new \app\core\Components('m-select' , Array('options'=>'{"1":"Empleado del mes", "2":"caralu2", "3":"cosador"}')) ;?>
         <h1 translate="no"><?= $nombre?></h1>
         <fieldset class="container">
             <legend>Login</legend> 

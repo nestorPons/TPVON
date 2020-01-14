@@ -3,9 +3,9 @@
  * Componente select 
  * Para nombrar options mediante html hay que incluir en el componente padre la opción options
  * con un objeto JSON. Se puede añadir quitar opciones en tienpo de ejecución mediante la clase JS.  
- * @autor   : Nestor Póns 
- * @email   : nestorpons@gmail.com
- * licencia : MIT 2020
+ * autor   : Nestor Póns 
+ * email   : nestorpons@gmail.com
+ * licencia: MIT 2020
  */
 ?>
 <component id="--id" class="row col-sm-12 col-md-12">
@@ -31,17 +31,19 @@
         $$disabled 
         $$readonly 
         $$checked>
+        @if($$default)
+            <option value=""></option>
+        @endif
         @for($$options)
             <option value="$$key">$$value</option>
         @endfor
     </select>
     <label for="el--id">$$label</label>
-    <style lang="less">
-        #--id {
-            height: 86%;
-            select {
-                width: 100%;
-            }
+</component>
+    <style lang="less" scoped>
+        height: 86%;
+        select {
+            width: 100%;
         }
     </style>
     <script>
@@ -121,4 +123,3 @@
             }
         }
     </script>
-</component>
