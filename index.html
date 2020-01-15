@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Una aplicación para terminales de punto de software libre.">
+        <meta name="author" content="Néstor Pons">
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        
+        <title>TPVOn</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href=".">TPVOn</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href=".">Bienvenido a TPVOn</a>
+                            </li>
+                            <li >
+                                <a href="about/">Exanimis serpens</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="disabled">
+                                <a rel="next" >
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="about/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/nestorpons/TPVON/edit/master/docs/index.md"><i class="fa fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#bienvenido-a-tpvon">Bienvenido a TPVOn</a></li>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#comenzando">Comenzando</a></li>
+            <li><a href="#pre-requisitos">Pre-requisitos</a></li>
+            <li><a href="#instalacion">Instalación</a></li>
+            <li><a href="#deployment">Deployment</a></li>
+            <li><a href="#construido-con">Construido con</a></li>
+            <li><a href="#contribuyendo">Contribuyendo</a></li>
+            <li><a href="#conaciones">Conaciones</a></li>
+            <li><a href="#versionado">Versionado</a></li>
+            <li><a href="#licencia">Licencia</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="bienvenido-a-tpvon">Bienvenido a TPVOn</h1>
+<p><em>Una aplicación para terminales de punto de software libre.</em></p>
+<h3 id="inicio">Inicio</h3>
+<p>Tpv en linea dirigido a las micropymes del sector servicios.
+Proyecto desarrollado con una metodología de trabajo propia.
+Su sistema de objetos es sencillo y fácil de implementar y se puede crear y destruir partes de la aplicación fácilmente. 
+Su principales características son su sencillez de programar y velocidad de ejecución de la aplicación.</p>
+<h3 id="comenzando">Comenzando</h3>
+<p><em>Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.</em></p>
+<p>Mira <strong>Deployment</strong> para conocer como desplegar el proyecto.</p>
+<h3 id="pre-requisitos">Pre-requisitos</h3>
+<p><em>Disponer de un hosting o servidor LAMP local</em></p>
+<ul>
+<li>PHP 7.3.10 o superior </li>
+<li>MYSQL 8.0</li>
+<li>Docker y docker-compose - para ejecutarlo en local con el servidor que viene incorporado</li>
+<li>Navegador: <ul>
+<li>Chrome 41.0.2272.101 o superior</li>
+<li>Mozilla Firefox 57.0.3 o superior</li>
+<li>Microsoft Edge 41.16299.15.0 o superior</li>
+<li>Opera 50.0 o superior</li>
+<li>Safari 6.0.2 o superior </li>
+</ul>
+</li>
+</ul>
+<h3 id="instalacion">Instalación</h3>
+<p><em>Clone o descargue el proyecto</em></p>
+<pre><code>git clone https://github.com/nestorPons/tpv.git
+</code></pre>
+
+<p><em>Entre en la carpeta del proyecto</em> </p>
+<pre><code>cd tpvonline
+</code></pre>
+
+<p>Instale las dependencias con composer </p>
+<pre><code>composer install
+</code></pre>
+
+<p>Otorgue permisos a todas las subcarpetas y archivos</p>
+<pre><code>sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./
+</code></pre>
+
+<h4 id="para-desplegarlo-en-su-hosting">Para desplegarlo en su hosting</h4>
+<p><em>Suba la carpeta descargada a su hosting mediante ftp o git.</em></p>
+<p><strong>La constante PUBLIC_FOLDER_ROOT declarada en apptpv/config/folders.php contiene la carpeta publica del servidor.</strong>
+que por defecto es htdocs.</p>
+<h4 id="para-desplegarlo-en-servidor-local">Para desplegarlo en servidor local</h4>
+<p>Si se desea se dispone de un contenedor docker con lamp instalado en el mismo proyecto
+Para construirlo por primera vez: </p>
+<pre><code>.server/docker-compose build 
+</code></pre>
+
+<p>Para activalo:</p>
+<pre><code>.server/docker-compose up -d 
+</code></pre>
+
+<p>Para pararlo:</p>
+<pre><code>.server/docker-compose down
+</code></pre>
+
+<p>Desde el navegador acceda al localhost o su su hosting donde desplegó su aplicación.</p>
+<pre><code>localhost/tpv/index.php o www.tuhosting.com/tpv/index.php
+</code></pre>
+
+<p><em>Se inicia el configurado de la aplicación en su primer acceso.</em></p>
+<h2 id="deployment">Deployment</h2>
+<p>Consulte su hosting para saber que opciones le proporciona.
+Manualmente solo debe copiar la carpeta del prollecto en la localización deseada. </p>
+<h2 id="construido-con">Construido con</h2>
+<p><em>Herramientas</em></p>
+<ul>
+<li><a href="https://github.com/padrecedano/PHP-PDO">padrecedano</a> - Conexión base datos con pequeñas modificaciones en la clase.</li>
+<li><a href="https://github.com/jcavat/docker-lamp">jcavat</a> - Servidor docker con adaptaciones para el proyecto. </li>
+<li><a href="https://leafo.net/lessphp/">lessphp</a> - Compilador less con php. </li>
+<li><a href="https://linearicons.com/">linearicons</a> - Iconos de la aplicación.</li>
+<li><a href="https://cacoo.com">cacoo.com</a> - Diagramas </li>
+<li><a href="https://github.com/matthiasmullie/minify">Minify</a> - Minificador de codigo js y css en php</li>
+<li><a href="https://es.freelogodesign.org/">Freelogodesing</a> - Logotipo</li>
+<li><a href="https://github.com/nestorPons/tpv/wiki/Base-de-datos">PHPMailer</a> - Envios de email con php</li>
+<li><a href="https://minicss.org">Minicss</a> - Mini fraemwork css </li>
+</ul>
+<h2 id="contribuyendo">Contribuyendo</h2>
+<p>Toda ayuda es poca!! 
+Espero vuestras aportaciones. 
+Muchas gracias!!</p>
+<h2 id="conaciones">Conaciones</h2>
+<ul>
+<li><a href="paypal.me/reservatucita">Paypal</a></li>
+</ul>
+<h2 id="versionado">Versionado</h2>
+<p>Usamos <a href="http://semver.org/">SemVer</a> para el versionado. Para todas las versiones disponibles, mira los <a href="https://github.com/nestorpons/TPVON/tags">tags en este repositorio</a>.</p>
+<h2 id="licencia">Licencia</h2>
+<p>Este proyecto está bajo la Licencia (MIT) - mira el archivo <a href="LICENSE.md">LICENSE.md</a> para detalles</p>
+<hr />
+<p>⌨️ con ❤️ por <a href="https://github.com/nestorpons">Néstor Pons</a> 😊</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2020-01-15 11:08:45
+-->
