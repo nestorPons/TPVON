@@ -1,11 +1,7 @@
 # Bienvenido
-_Una aplicación para terminales de punto de software libre._
+_Una aplicación para terminales punto de venta de software libre._
 
-### Inicio
-Tpv en linea dirigido a las micropymes del sector servicios.
-Proyecto desarrollado con una metodología de trabajo propia.
-Su sistema de objetos es sencillo y fácil de implementar y se puede crear y destruir partes de la aplicación fácilmente. 
-Su principales características son su sencillez de programar y velocidad de ejecución de la aplicación.
+Tpv esta pensada y diseñada para las micropymes dirigidas primordialmente al sector servicios.
 
 ### Comenzando
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
@@ -32,24 +28,22 @@ _Clone o descargue el proyecto_
 git clone https://github.com/nestorPons/tpv.git
 ```
 
-_Entre en la carpeta del proyecto_ 
+Entre en la carpeta del proyecto
+```
+cd tpvon
+```
 
-```
-cd tpvonline
-```
 Instale las dependencias con composer 
 ``` 
 composer install
 ``` 
 
 Otorgue permisos a todas las subcarpetas y archivos
-
 ```
 sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./
 ```
 
 ### Configuración
-
 Después de su instalación deberemos configutar algunas opciones fundamentales. 
 
 
