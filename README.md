@@ -1,5 +1,7 @@
 <p align="center">
 <img src="htdocs/tpv/img/logo.png">
+### Una aplicación para terminales de punto de software libre. 
+
 </p>
 Tpv en linea dirigido a las micropymes del sector servicios.
 Proyecto desarrollado con una metodología de trabajo propia.
