@@ -1,4 +1,4 @@
-# Bienvenido a TPVOn
+# Bienvenido
 _Una aplicación para terminales de punto de software libre._
 
 ### Inicio
