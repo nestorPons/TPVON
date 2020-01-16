@@ -35,13 +35,14 @@ class User extends Query
         $this->table = 'usuarios';
         $C = new Company;
         $this->company = $C->nombre();
+        $this->Conf = new Query('usuarios_config');
+
         if ($conn) parent::__construct();
         if ($arg) {
             if (is_array($arg)) $this->loadData($arg);
             else if (is_int($arg)) $this->searchById($arg);
             else if (is_string($arg) && strpos($arg, '@')) $this->searchByEmail($arg);
             else if (is_object($arg)) $this->searchById($arg->id);
-            $this->Conf = new Query('usuarios_config');
             $config = $this->Conf->getById($this->id);
           
             if($config){
@@ -105,7 +106,7 @@ class User extends Query
         }
     }
     // Nuevos registros
-    function new(Data $Data)
+    function new(Data $Data, bool $noauth = false)
     {
         if ($this->id = $this->loadData($Data->getAll())) {
 
@@ -115,22 +116,16 @@ class User extends Query
                     'nombre' => $this->nombre,
                     'email' => $this->email ?? null,
                     'fecha_nacimiento' => $this->fecha_nacimiento ?? '',
-                    'estado' => $this->estado ?? 0,
+                    'estado' => $this->estado ?? 1,
                     'nivel' => $this->nivel ?? 0,
                     'password' => $this->password_hash()
                 ])
             ) { 
-                $this->Conf->add(['id' => $this->id]);
-
+                $this->Conf->add(['id' => $this->id], false);
                 // Varible para saltarse la activación del usuario
-                if (!isset($Data->noAuth)) {
-                    $Token = new Tokens();
-                    $url = $_SERVER['HTTP_HOST'] . "/tpv/login/confirmation/{$Token->create($this)}";
-                    $body = $this->getFile(\VIEWS\LOGIN . 'mailNewUser.phtml', new Data(['url' => $url]));
-                    return $this->sendMail($body, $this->company . 'Activacion de la cuenta en ' . $this->company);
-                } else {
-                    return $this->id;
-                }
+                // Eliminamos el envio de emails de activación en esta app no hay pq aplicarlo
+                return $this->id;
+                
             } else return Error::array('E022');
         } else throw new \Exception('E060');
     }
@@ -167,7 +162,7 @@ class User extends Query
 
         return $this->sendMail($body, $this->company . ' nueva contraseña');
     }
-    private function sendMail( String $body, String $subject) : boolean    {
+    public function sendMail( String $body, String $subject) : bool    {
         $mail = new PHPMailer(true);
         // Configuración para mandar emails
         try {
@@ -178,18 +173,15 @@ class User extends Query
                 $mail->AddAddress($this->email, $this->nombre);
                 //Definimos el tema del email
                 $mail->Subject = $subject;
-                $mail->Body = 'esto es el cuerpo de la prueba';
+                $mail->Body = 'esto es el cuerpo del mensaje';
                 //Para enviar un correo formateado en HTML lo cargamos con la siguiente función. Si no, puedes meterle directamente una cadena de texto.
-
                 $mail->MsgHTML($body, dirname(\FOLDERS\VIEWS));
-
                 //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano 
                 // (también será válida para lectores de pantalla)
                 $mail->AltBody =  $body;
                 return $mail->Send();
             } else return false;
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        } catch (\Exception $e) {
             return false;
         }
     }

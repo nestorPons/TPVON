@@ -99,7 +99,7 @@ CREATE TABLE `usuarios` (
   `fecha_nacimiento` date DEFAULT NULL,
   `fecha_alta` datetime DEFAULT NULL,
   `fecha_baja` datetime DEFAULT NULL,
-  `estado` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 desactivado, 1 activo, 2 bloqueado',
+  `estado` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0 desactivado, 1 activo, 2 bloqueado',
   `nivel` tinyint(1) NOT NULL DEFAULT '0' COMMENT '2 administrador, 1 usuario, 0 cliente',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
   `obs` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL
@@ -259,9 +259,10 @@ ALTER TABLE `usuarios_config`
 
 CREATE VIEW 
 vista_usuarios AS 
-SELECT u.*, uc.promos, uc.emails
+SELECT u.*, uc.promos, uc.enviar_emails
 FROM usuarios as u
 LEFT JOIN usuarios_config as uc ON u.id = uc.id
+WHERE u.estado = 1;
 
 CREATE VIEW 
 vista_lineas_regalo AS 

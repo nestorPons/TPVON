@@ -6,7 +6,7 @@ use \app\libs\{Auth};
  */
 class Security extends Auth{
     // Clases que están descartadas de la autentificación
-    private static $zones = ['Login']; 
+    private static $zones = ['Login', 'Company']; 
 
     static function getZones()
     {

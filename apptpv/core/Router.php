@@ -22,7 +22,6 @@ class Router{
         $action;
 
     function __construct($params = []){
-
         $this->data = new \app\core\Data;
         // Valores por defecto
         $this->db = CONN['db'];
@@ -50,37 +49,49 @@ class Router{
         exit ($this->loadController($this->controller));        
     }
     private function isPost($params){
-        // Método post recibe siempre 3 parametros 
-        // controller => Controlador
-        // action => Acción a realizar
-        // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
+        try
+        {
 
-        // Pasamos los datos de json a objeto Data
-        $this->data->addItems($params['data'] ?? null);
+            // Método post recibe siempre 3 parametros 
+            // controller => Controlador
+            // action => Acción a realizar
+            // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
+
+            // Pasamos los datos de json a objeto Data
+            $this->data->addItems($params['data'] ?? null);
+        
+            $respond = $this->loadController(); 
     
-        $respond = $this->loadController(); 
- 
-        // Siempre se devuelve un objeto json con un success de respuesta
-        if(!(is_array($respond) && isset($respond['success'])))
-            $respond = ($respond == true || $respond == 1) 
-                ? ['success'=> true, 'data' => $respond] 
-                : ['success'=> false]; 
-        /* ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :
-        ['success' => 1, 'data' => $respond]); */
+            // Siempre se devuelve un objeto json con un success de respuesta
+            if(!(is_array($respond) && isset($respond['success'])))
+                $respond = ($respond == true || $respond == 1) 
+                    ? ['success'=> true, 'data' => $respond] 
+                    : ['success'=> false]; 
+            /* ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :
+            ['success' => 1, 'data' => $respond]); */
 
-        // SALIDA 
-        exit (json_encode($respond, true));
+            // SALIDA 
+        
+            exit (json_encode($respond, true));
+        }
+        catch(\Exceptiion $e)
+        {
+             exit (json_encode(['success'=>'false', 'mens'=>'error: ' . $e->menssage()], true));
+        }
 
     }
     // Comprobamos que exista la clase controladora
     private function isController(string $class){
+
         return (file_exists ( \FOLDERS\CONTROLLERS . $class . '.php'));
     }
     // Carga controlador
     // Si se le pasa argumentos cambia el controlador asignado
     private function loadController(string $controller = null){
+
         // Buscamos controlador
         if(!empty($controller)) $this->controller = ucwords($controller); 
+
         // Antes de cargar el controlador se comprueba si tiene permsiso para la petición
         if(Security::isRestrict($this->controller)){            
             if ($token = Security::getJWT()){

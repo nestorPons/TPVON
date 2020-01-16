@@ -11,7 +11,6 @@ class Company extends Controller{
     }
     protected function new(Data $Data = null){
         $Model = new CompanyModel; 
-
         try {
             $Model->new($Data);
             return $this->printView(\VIEWS\LOGIN . 'newcompanycreated.phtml');

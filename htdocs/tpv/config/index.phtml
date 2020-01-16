@@ -2,7 +2,7 @@
 <form action="config/saveconfig.php">
 <fieldset>
   <legend>Base Datos</legend>
-  Nombre Base datos:<br>
+  Nombre de la Base datos a crear:<br>
   <input type="text" name="db" value="<?=CONN['db']?>">
   <br>
   Host:<br>
@@ -14,24 +14,24 @@
   Driver:<br>
   <input type="text" name="driver" value="<?=CONN['driver']?>">
   <br>
-  Nombre usuario base datos:<br>
+  Nombre usuario para acceder a la base de datos:<br>
   <input type="text" name="user" value="<?=CONN['user']?>">
   <br>
-  Contraseña usuario base datos:<br>
+  Contraseña usuario para acceder a la base datos:<br>
   <input type="text" name="password" value="<?=CONN[CONN['user']]?>">
 </fieldset>
 <fieldset>
-  <legend>Correo electronico</legend>
-  Host:<br>
+  <legend>Servidor de correo electronico</legend>
+  Host del servidor:<br>
   <input type="text" name="host_mail" value="<?=MAIL['host']?>">
   <br>
-  Nombre de usuario/email:<br>
+  Nombre de usuario/email de la cuenta del servidor:<br>
   <input type="text" name="username_mail" value="<?=MAIL['username']?>">
   <br>
-  Email:<br>
+  Email desde que se envian los correos:<br>
   <input type="text" name="fromname_mail" value="<?=MAIL['fromname']?>">
   <br>
-  Contraseña:<br>
+  Contraseña para acceder al servidor:<br>
   <input type="text" name="password_mail" value="<?=MAIL['password']?>">
   <br>
   Seguridad:<br>

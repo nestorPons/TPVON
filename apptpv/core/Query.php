@@ -116,7 +116,7 @@ class Query
     public function query(string $sql, $params = null){
 
         $this->sql = trim(str_replace("\r", " ", $sql)); 
-
+        // pr($this->sql, $params); 
         // Prepara la sentencia con sus parametros y la inicia
         $respond = $this->init($params);
 
@@ -311,15 +311,18 @@ class Query
     }
     function toArray(bool $nameSpace = false) : array
     {
+
+
         $prefix = ($nameSpace) ? $this->table . '_' : '';
         $arr = [];
-        foreach ((array) $this as $key => $val) {
+        return json_decode(json_encode($this), true);
+/*         foreach ((array) $this as $key => $val) {
             // No pasamos a array los objetos 
             if (!strpos($key, '*')) {
                 $arr[$prefix . $key] = $val;
             }
         }
-        return $arr;
+        return $arr; */
     }
     // El método de eliminación genérico para las clases hijas
     // Método genérico de eliminación de registros
