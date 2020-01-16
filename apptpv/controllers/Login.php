@@ -112,10 +112,12 @@ class Login extends Controller{
     }
     protected function view( $data = null){
         // Valor predeterminado de la vista
-        if ($data->isEmpty('page')) {
-            $data = $this->company->toArray();
-            $data['page'] = 'login'; 
-        };
+        if(!is_array($data)){
+            if ($data->isEmpty('page')) {
+                $data = $this->company->toArray();
+                $data['page'] = 'login'; 
+            }
+        }
 
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }

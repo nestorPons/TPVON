@@ -4,7 +4,7 @@ repo_url: https://nestorpons.github.io/TPVON/
 site_description: "Una aplicación para terminales de punto de software libre."
 site_author: Néstor Pons
 nav:
-- Introduccion: 'index.md'
+- Inicio: 'index.md'
 - Manual de usuario: 'manual.md'
 - Acerca de: 'about.md'
 theme: readthedocs

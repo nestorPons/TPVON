@@ -1,7 +1,7 @@
-# Bienvenido
-_Una aplicación para terminales punto de venta de software libre._
+# Introducción
+_TPVOn es una aplicación para terminales punto de venta de software libre._
 
-Tpv esta pensada y diseñada para las micropymes dirigidas primordialmente al sector servicios.
+Esta aplicación web esta pensada y diseñada para todas aquellas micropymes dirigidas primordialmente al sector servicios estéticas, peluquerias, centros de masaje, etc ... 
 
 ### Comenzando
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
@@ -45,7 +45,8 @@ sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./
 
 ### Configuración
 Después de su instalación deberemos configutar algunas opciones fundamentales. 
-
+La primera vez que se acceda a la aplicación, se accedera a la página de configuración de la aplicación. 
+A partir de este momento la aplicación ya esta lista para su uso. 
 
 #### Para desplegarlo en su hosting
 _Suba la carpeta descargada a su hosting mediante ftp o git._
@@ -80,8 +81,8 @@ Consulte su hosting para saber que opciones le proporciona.
 Manualmente solo debe copiar la carpeta del prollecto en la localización deseada. 
 
 ## Construido con
-_Herramientas_
-
+Herramientas:
+ 
 * [padrecedano](https://github.com/padrecedano/PHP-PDO) - Conexión base datos con pequeñas modificaciones en la clase.
 * [jcavat](https://github.com/jcavat/docker-lamp) - Servidor docker con adaptaciones para el proyecto. 
 * [lessphp](https://leafo.net/lessphp/) - Compilador less con php. 
@@ -91,6 +92,7 @@ _Herramientas_
 * [Freelogodesing](https://es.freelogodesign.org/) - Logotipo
 * [PHPMailer](https://github.com/nestorPons/tpv/wiki/Base-de-datos) - Envios de email con php
 * [Minicss](https://minicss.org) - Mini fraemwork css 
+* [MkDocs](https://www.mkdocs.org) - Documentación
 
 ## Contribuyendo
 Toda ayuda es poca!! 
