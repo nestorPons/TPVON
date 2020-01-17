@@ -1,5 +1,5 @@
 <h2>Configuración servidor tpv</h2>
-<form action="config/saveconfig.php">
+<form>
 <fieldset>
   <legend>Base Datos</legend>
   Nombre de la Base datos a crear:<br>
@@ -20,6 +20,7 @@
   Contraseña usuario para acceder a la base datos:<br>
   <input type="text" name="password" value="<?=CONN[CONN['user']]?>">
 </fieldset>
+
 <fieldset>
   <legend>Servidor de correo electronico</legend>
   Host del servidor:<br>
@@ -39,6 +40,11 @@
   <br>
   Puerto:<br>
   <input type="text" name="port_mail" value="<?=MAIL['port']?>">
+  <input type="button" value="Test" 
+    onClick="document.getElementsByTagName('form')[0].action='config/testconnection.php'; 
+    document.getElementsByTagName('form')[0].submit()"> 
 </fieldset>
-  <input type="submit" value="Submit">
+<input type="button" value="Guardar" 
+    onClick="document.getElementsByTagName('form')[0].action='config/saveconfig.php'; 
+    document.getElementsByTagName('form')[0].submit()"> 
 </form> 
