@@ -21,6 +21,7 @@ if(file_exists($file_conf) ){
     define('CONN', parse_ini_file(dirname(__DIR__) . '/config/conndefault.ini'));
     define('MAIL', parse_ini_file(dirname(__DIR__) . '/config/mail.ini'));
 
+    // Se muestra la vista de los formularios de configuración base de datos y email. 
     include_once 'config/index.phtml';
     exit;
 } 

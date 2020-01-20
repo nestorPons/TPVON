@@ -1,10 +1,27 @@
-site_name: TPVOn
-site_favicon: img/favicon.ico
-repo_url: https://nestorpons.github.io/TPVON/
+site_name: Documentación TPVOn
+repo_url: https://github.com/nestorPons/TPVON/
 site_description: "Una aplicación para terminales de punto de software libre."
 site_author: Néstor Pons
 nav:
-- Inicio: 'index.md'
-- Manual de usuario: 'manual.md'
-- Acerca de: 'about.md'
-theme: readthedocs
+  - Inicio: 'index.md'
+  - Manual de usuario: 'manual.md'
+  - Acerca de: 'about.md'
+theme:
+    name: material
+    logo:
+        icon: school
+    favicon: img/favicon.ico
+    language: es
+    palette:
+        primary: teal
+        accent: orange
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/nestorpons'
+markdown_extensions:
+  - codehilite
+  - admonition
+  - pymdownx.emoji:
+      emoji_index: !!python/name:pymdownx.emoji.twemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg

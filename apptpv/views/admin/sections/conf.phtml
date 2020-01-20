@@ -31,7 +31,7 @@
     </form>
     <form controller="" action="" class="input-group">
         <fieldset>
-            <legend>Datos gerente</legend>
+            <legend>Gerente</legend>
             <?php
             $sel01 = new Select(['label' => 'Gerente', 'required' => true, 'tabindex' => 14]);
             ?>
@@ -40,7 +40,7 @@
 
     <form controller="promos" action="save" class="input-group">
         <fieldset>
-            <legend>Promociones</legend>
+            <legend>Promocion fidelización</legend>
             <?php
             $txt01 = new InputText(['label' => 'Nombre', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la promoción", 'required' => true]);
             $txt02 = new InputText(['label' => 'Total de dias', 'name' => 'valor']);

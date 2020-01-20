@@ -1,140 +1,86 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Una aplicación para terminales de punto de software libre.">
-  <meta name="author" content="Néstor Pons">
-  <link rel="shortcut icon" href="img/favicon.ico">
-  
-  <title>Introduccion - TPVOn</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+<html>
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Introduccion";
-    var mkdocs_page_input_path = "index.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
-  
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Una aplicación para terminales de punto de software libre.">
+    <meta name="author" content="Néstor Pons">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>Inicio &mdash; Documentación TPVOn</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="assets/extra.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> TPVOn</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="." class="site-name"> Documentación TPVOn</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
 </div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href=".">Introduccion</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#bienvenido">Bienvenido</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#inicio">Inicio</a></li>
-        
-            <li><a class="toctree-l3" href="#comenzando">Comenzando</a></li>
-        
-            <li><a class="toctree-l3" href="#pre-requisitos">Pre-requisitos</a></li>
-        
-            <li><a class="toctree-l3" href="#instalacion">Instalación</a></li>
-        
-            <li><a class="toctree-l3" href="#configuracion">Configuración</a></li>
-        
-            <li><a class="toctree-l3" href="#deployment">Deployment</a></li>
-        
-            <li><a class="toctree-l3" href="#construido-con">Construido con</a></li>
-        
-            <li><a class="toctree-l3" href="#contribuyendo">Contribuyendo</a></li>
-        
-            <li><a class="toctree-l3" href="#conaciones">Conaciones</a></li>
-        
-            <li><a class="toctree-l3" href="#versionado">Versionado</a></li>
-        
-            <li><a class="toctree-l3" href="#licencia">Licencia</a></li>
-        
-        </ul>
-    
-
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="manual/">Manual de usuario</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="about/">Acerca de</a>
-	    </li>
-          
-        </ul>
-      </div>
-      &nbsp;
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">TPVOn</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
-    
-      
-    
-    <li>Introduccion</li>
-    <li class="wy-breadcrumbs-aside">
-      
-    </li>
-  </ul>
-  <hr/>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1 current"><a class="nav-item current" href=".">Introducción</a>
+<ul class="subnav">
+<li class="toctree-l2"><a class="nav-item toc" href="#comenzando">Comenzando</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#pre-requisitos">Pre-requisitos</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#instalacion">Instalación</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#inicio">Inicio</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#configuracion">Configuración</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#construido-con">Construido con</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#contribuyendo">Contribuyendo</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#conaciones">Conaciones</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#versionado">Versionado</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#licencia">Licencia</a></li>
+</ul></li>
+                    <li class="toctree-l1"><a class="nav-item" href="manual/">Nueva aplicación</a><a class="nav-item" href="manual/">Login</a><a class="nav-item" href="manual/">Dashboard</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="about/">Exanimis serpens</a></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="link">
+        <a href="https://github.com/nestorPons/TPVON/" class="fa fa-github"> GitHub</a>
+    </div>
+    <div class="next"><a href="manual/">Next &raquo;</a></div>
 </div>
-          <div role="main">
-            <div class="section">
-              
-                <h1 id="bienvenido">Bienvenido</h1>
-<p><em>Una aplicación para terminales de punto de software libre.</em></p>
-<h3 id="inicio">Inicio</h3>
-<p>Tpv en linea dirigido a las micropymes del sector servicios.
-Proyecto desarrollado con una metodología de trabajo propia.
-Su sistema de objetos es sencillo y fácil de implementar y se puede crear y destruir partes de la aplicación fácilmente. 
-Su principales características son su sencillez de programar y velocidad de ejecución de la aplicación.</p>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="." class="site-name"> Documentación TPVOn</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    
+</ul>
+</nav>
+                <div id="content"><h1 id="introduccion">Introducción</h1>
+<p><em>TPVOn es una aplicación para terminales punto de venta de software libre.</em></p>
+<p>Esta aplicación web esta pensada y diseñada para todas aquellas micropymes dirigidas primordialmente al sector servicios estéticas, peluquerias, centros de masaje, etc ... </p>
 <h3 id="comenzando">Comenzando</h3>
 <p><em>Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.</em></p>
 <p>Mira <strong>Deployment</strong> para conocer como desplegar el proyecto.</p>
@@ -155,23 +101,37 @@ Su principales características son su sencillez de programar y velocidad de eje
 </ul>
 <h3 id="instalacion">Instalación</h3>
 <p><em>Clone o descargue el proyecto</em></p>
-<pre><code>git clone https://github.com/nestorPons/tpv.git
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="err">git clone https://github.com/nestorPons/tpv.git</span>
+</pre></div>
 
-<p><em>Entre en la carpeta del proyecto</em> </p>
-<pre><code>cd tpvonline
-</code></pre>
 
-<p>Instale las dependencias con composer </p>
-<pre><code>composer install
-</code></pre>
+<ul>
+<li>Entre en la carpeta del proyecto</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="err">cd tpvon</span>
+</pre></div>
 
-<p>Otorgue permisos a todas las subcarpetas y archivos</p>
-<pre><code>sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./
-</code></pre>
 
+<ul>
+<li>Instale las dependencias con composer </li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="err">composer install</span>
+</pre></div>
+
+
+<ul>
+<li>Otorgue permisos a todas las subcarpetas y archivos</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="err">sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./</span>
+</pre></div>
+
+
+<h3 id="inicio">Inicio</h3>
+<p>Al acceder por primera vez al programa se visualizara una pantalla donde podremos configurar los datos necesarios para acceder a la base de datos (Requisito indispensable para el funcionamiento del programa) y lo datos necesarios para poder enviar emails (Indispensable para el buen funcionamiento del programa pero puede ser omitido a costa de perder algunas funcionalidades). </p>
 <h3 id="configuracion">Configuración</h3>
-<p>Después de su instalación deberemos configutar algunas opciones fundamentales. </p>
+<p>Después de su instalación deberemos configutar algunas opciones fundamentales. 
+La primera vez que se acceda a la aplicación, se accedera a la página de configuración de la aplicación. 
+A partir de este momento la aplicación ya esta lista para su uso. </p>
 <h4 id="para-desplegarlo-en-su-hosting">Para desplegarlo en su hosting</h4>
 <p><em>Suba la carpeta descargada a su hosting mediante ftp o git.</em></p>
 <p><strong>La constante PUBLIC_FOLDER_ROOT declarada en apptpv/config/folders.php contiene la carpeta publica del servidor.</strong>
@@ -179,27 +139,31 @@ que por defecto es htdocs.</p>
 <h4 id="para-desplegarlo-en-servidor-local">Para desplegarlo en servidor local</h4>
 <p>Si se desea se dispone de un contenedor docker con lamp instalado en el mismo proyecto
 Para construirlo por primera vez: </p>
-<pre><code>.server/docker-compose build 
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="na">.server</span><span class="err">/</span><span class="no">docker-compose</span> <span class="no">build</span> 
+</pre></div>
+
 
 <p>Para activalo:</p>
-<pre><code>.server/docker-compose up -d 
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="na">.server</span><span class="err">/</span><span class="no">docker-compose</span> <span class="no">up</span> <span class="p">-</span><span class="no">d</span> 
+</pre></div>
+
 
 <p>Para pararlo:</p>
-<pre><code>.server/docker-compose down
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="na">.server</span><span class="err">/</span><span class="no">docker-compose</span> <span class="no">down</span>
+</pre></div>
+
 
 <p>Desde el navegador acceda al localhost o su su hosting donde desplegó su aplicación.</p>
-<pre><code>localhost/tpv/index.php o www.tuhosting.com/tpv/index.php
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="err">localhost/tpv/index.php o www.tuhosting.com/tpv/index.php</span>
+</pre></div>
+
 
 <p><em>Se inicia el configurado de la aplicación en su primer acceso.</em></p>
 <h2 id="deployment">Deployment</h2>
 <p>Consulte su hosting para saber que opciones le proporciona.
 Manualmente solo debe copiar la carpeta del prollecto en la localización deseada. </p>
 <h2 id="construido-con">Construido con</h2>
-<p><em>Herramientas</em></p>
+<p>Herramientas:</p>
 <ul>
 <li><a href="https://github.com/padrecedano/PHP-PDO">padrecedano</a> - Conexión base datos con pequeñas modificaciones en la clase.</li>
 <li><a href="https://github.com/jcavat/docker-lamp">jcavat</a> - Servidor docker con adaptaciones para el proyecto. </li>
@@ -210,6 +174,7 @@ Manualmente solo debe copiar la carpeta del prollecto en la localización desead
 <li><a href="https://es.freelogodesign.org/">Freelogodesing</a> - Logotipo</li>
 <li><a href="https://github.com/nestorPons/tpv/wiki/Base-de-datos">PHPMailer</a> - Envios de email con php</li>
 <li><a href="https://minicss.org">Minicss</a> - Mini fraemwork css </li>
+<li><a href="https://www.mkdocs.org">MkDocs</a> - Documentación</li>
 </ul>
 <h2 id="contribuyendo">Contribuyendo</h2>
 <p>Toda ayuda es poca!! 
@@ -224,54 +189,26 @@ Muchas gracias!!</p>
 <h2 id="licencia">Licencia</h2>
 <p>Este proyecto está bajo la Licencia (MIT) - mira el archivo <a href="LICENSE.md">LICENSE.md</a> para detalles</p>
 <hr />
-<p>⌨️ con ❤️ por <a href="https://github.com/nestorpons">Néstor Pons</a> 😊</p>
-              
-            </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="manual/" class="btn btn-neutral float-right" title="Manual de usuario">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
+<p>⌨️ con ❤️ por <a href="https://github.com/nestorpons">Néstor Pons</a> 😊</p></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="next"><a href="manual/" title="Manual de usuario"><span>Next</span></a></div>
     </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-    
-  </div>
-
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
 </footer>
-      
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-      
-        <span style="margin-left: 15px"><a href="manual/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
-</div>
-    <script>var base_url = '.';</script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
-
+            </div>
+        </main>
+    </div>
+    <script>
+        var base_url = '.';
+    </script>
+    <script src="js/theme.js"></script>
+    <script src="search/main.js"></script>
 </body>
-</html>
 
-<!--
-MkDocs version : 1.0.4
-Build Date UTC : 2020-01-15 12:21:07
--->
+</html>

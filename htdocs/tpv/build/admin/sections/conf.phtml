@@ -1,4 +1,4 @@
-<?php namespace app\controllers\components?><section id="id5e2176d7e5345">
+<?php namespace app\controllers\components?><section id="id5e258888bc8ee">
     <form controller="company" action="save" class="input-group">
         <fieldset>
             <legend>Datos empresa</legend>
@@ -31,7 +31,7 @@
     </form>
     <form controller="" action="" class="input-group">
         <fieldset>
-            <legend>Datos gerente</legend>
+            <legend>Gerente</legend>
             <?php
             $sel01 = new Select(['label' => 'Gerente', 'required' => true, 'tabindex' => 14]);
             ?>
@@ -40,7 +40,7 @@
 
     <form controller="promos" action="save" class="input-group">
         <fieldset>
-            <legend>Promociones</legend>
+            <legend>Promocion fidelización</legend>
             <?php
             $txt01 = new InputText(['label' => 'Nombre', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la promoción", 'required' => true]);
             $txt02 = new InputText(['label' => 'Total de dias', 'name' => 'valor']);
@@ -49,8 +49,8 @@
         </fieldset>
     </form>
 </section>
-<style lang="less">#id5e2176d7e5345{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5e2176d7e5345{grid-template-columns:1fr 1fr}}#id5e2176d7e5345>*{height:min-content;border:none;padding:0}#id5e2176d7e5345>*:first-of-type{grid-row-start:1;grid-row-end:-1}</style>
-<script>app.conf={name:'Configuración',buttons:[],id_user:null,selUsers:new Select(<?=$sel01->id()?>),form:{company:document.getElementById('id5e2176d7e5345').getElementsByTagName('form')[0],conf:document.getElementById('id5e2176d7e5345').getElementsByTagName('form')[1],user:document.getElementById('id5e2176d7e5345').getElementsByTagName('form')[2],promos:document.getElementById('id5e2176d7e5345').getElementsByTagName('form')[3],},table:{company:'empresa',conf:'config',users:'usuarios',},async load(){DB.get('promos').then(d=>d[0]).then(d=>app.loadDataToForm(d,this.form.promos))
+<style lang="less">#id5e258888bc8ee{display:grid;grid-template-columns:minmax(300px,1fr) minmax(300px,1fr) minmax(300px,1fr);grid-template-rows:1fr 1fr 1fr}@media (max-width:650px){#id5e258888bc8ee{grid-template-columns:1fr 1fr}}#id5e258888bc8ee>*{height:min-content;border:none;padding:0}#id5e258888bc8ee>*:first-of-type{grid-row-start:1;grid-row-end:-1}</style>
+<script>app.conf={name:'Configuración',buttons:[],id_user:null,selUsers:new Select(<?=$sel01->id()?>),form:{company:document.getElementById('id5e258888bc8ee').getElementsByTagName('form')[0],conf:document.getElementById('id5e258888bc8ee').getElementsByTagName('form')[1],user:document.getElementById('id5e258888bc8ee').getElementsByTagName('form')[2],promos:document.getElementById('id5e258888bc8ee').getElementsByTagName('form')[3],},table:{company:'empresa',conf:'config',users:'usuarios',},async load(){DB.get('promos').then(d=>d[0]).then(d=>app.loadDataToForm(d,this.form.promos))
 DB.get('empresa').then(e=>e[0]).then(e=>{DB.get('usuarios','nivel',2,'estado==1').then(async d=>{this.selUsers.required()
 for(let u of d)this.selUsers.addOption(u.id,u.nombre);const n=e.id_gerente;this.selUsers.value(n);this.id_user=d.id})
 app.loadDataToForm(e,this.form.company)})

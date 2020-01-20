@@ -1,3 +1,7 @@
+# INICIO
+###### _Documento dirigido a los usuarios finales de TPVON._
+___
+
 # Introducción
 _TPVOn es una aplicación para terminales punto de venta de software libre._
 
@@ -28,20 +32,22 @@ _Clone o descargue el proyecto_
 git clone https://github.com/nestorPons/tpv.git
 ```
 
-Entre en la carpeta del proyecto
+* Entre en la carpeta del proyecto
 ```
 cd tpvon
 ```
 
-Instale las dependencias con composer 
+* Instale las dependencias con composer 
 ``` 
 composer install
 ``` 
 
-Otorgue permisos a todas las subcarpetas y archivos
+* Otorgue permisos a todas las subcarpetas y archivos
 ```
 sudo chown -R $(whoami):33 ./ | sudo chmod -R 0777 ./
 ```
+### Inicio 
+Al acceder por primera vez al programa se visualizara una pantalla donde podremos configurar los datos necesarios para acceder a la base de datos (Requisito indispensable para el funcionamiento del programa) y lo datos necesarios para poder enviar emails (Indispensable para el buen funcionamiento del programa pero puede ser omitido a costa de perder algunas funcionalidades). 
 
 ### Configuración
 Después de su instalación deberemos configutar algunas opciones fundamentales. 
@@ -94,16 +100,6 @@ Herramientas:
 * [Minicss](https://minicss.org) - Mini fraemwork css 
 * [MkDocs](https://www.mkdocs.org) - Documentación
 
-## Contribuyendo
-Toda ayuda es poca!! 
-Espero vuestras aportaciones. 
-Muchas gracias!!
-
-## Conaciones 
-* [Paypal](paypal.me/reservatucita)
-
-## Versionado
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/nestorpons/TPVON/tags).
 
 ## Licencia
 Este proyecto está bajo la Licencia (MIT) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
