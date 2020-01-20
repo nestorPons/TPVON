@@ -1,8 +1,11 @@
-# ACERCA DE  ...
+ # ACERCA DE  ...
 ###### _Proyecto documentado con Markdown_.
 ___
 ## Equipo de mantenimiento 
 * Néstor Pons 
+
+## Licencia 
+[MIT License](https://github.com/nestorPons/TPVON/blob/master/LICENSE)
 
 ## Notas de lanzamiento 
 Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, puedes ver los [tags en github](https://github.com/nestorpons/TPVON/tags).
