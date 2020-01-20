@@ -2,49 +2,49 @@
     <i id="icon-menu" class="lnr lnr-menu"></i>
     <ul>
         <li>
-            <a href="tpv" class="active" accesskey="v" title="alt+v">
+            <m-a href="tpv" class="active" accesskey="v" title="alt+v">
                 <div class="spinner primary hidden"></div>
                 <i class="lnr lnr-laptop"></i>
                 <span>TPV</span>
-            </a>
+            </m-a>
         </li>
-        <li><a href="users" accesskey="u" title="alt+u">
+        <li><m-a href="users" accesskey="u" title="alt+u">
                 <div class="spinner primary hidden"></div>
                 <i class="lnr lnr-users"></i>
                 <span>Usuarios</span>
-            </a></li>
-        <li><a href="services" accesskey="s" title="alt+s">
+            </m-a></li>
+        <li><m-a href="services" accesskey="s" title="alt+s">
                 <div class="spinner primary hidden"></div>
                 <i class="lnr lnr-briefcase"></i>
                 <span>Servicios</span>
-            </a></li>
-        <li><a href="families" accesskey="f" title="alt+f">
+            </m-a></li>
+        <li><m-a href="families" accesskey="f" title="alt+f">
             <div class="spinner primary hidden"></div>
             <i class="lnr lnr-text-size"></i>
             <span>Familias</span>
-        </a></li>
-        <li><a href="control" accesskey="c" title="alt+c">
+        </m-a></li>
+        <li><m-a href="control" accesskey="c" title="alt+c">
             <div class="spinner primary hidden"></div>
             <i class="lnr lnr-gift"></i>
             <span>Regalo</span>
-        </a></li>
+        </m-a></li>
         @if ($admin)
-        <li><a href="conf" accesskey="x" title="alt+x">
-            <div class="spinner primary hidden"></div>
-            <i class="lnr lnr-cog"></i>
-            <span>Config</span>
-        </a></li>
-        <!-- <li><a href="promos"><i class="lnr lnr-diamond"></i><span>VIP</span></a></li> -->
-        <li><a href="income" accesskey="i" title="alt+i">
-            <div class="spinner primary hidden"></div>
-            <i class="lnr lnr-database"></i>
-            <span>Historial</span>
-        </a></li>
-        <li><a href="chart" accesskey="q" title="alt+q">
-            <div class="spinner primary hidden"></div>
-            <i class="lnr lnr-chart-bars"></i>
-            <span>Gráficas</span>
-        </a></li>
+            <li><m-a href="conf" accesskey="x" title="alt+x">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-cog"></i>
+                <span>Config</span>
+            </m-a></li>
+            <!-- <li><a href="promos"><i class="lnr lnr-diamond"></i><span>VIP</span></a></li> -->
+            <li><m-a href="income" accesskey="i" title="alt+i">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-database"></i>
+                <span>Historial</span>
+            </m-a></li>
+            <li><m-a href="chart" accesskey="q" title="alt+q">
+                <div class="spinner primary hidden"></div>
+                <i class="lnr lnr-chart-bars"></i>
+                <span>Gráficas</span>
+            </m-a></li>
         @endif
     </ul>
 </nav>
@@ -79,7 +79,8 @@
         padding: 0;
     }
 
-    nav#navBar li a {
+    nav#navBar li m-a {
+        display: inline-block;
         position: relative;
         background: none;
         font-size: 0.8rem;
@@ -91,7 +92,7 @@
         transition: color 0.7s ease-out;
     }
 
-    nav#navBar li a * {
+    nav#navBar li m-a * {
         vertical-align: middle;
     }
 
@@ -100,18 +101,18 @@
         font-weight: bold;
     }
 
-    nav#navBar li a i {
+    nav#navBar li m-a i {
         font-size: 1.5rem;
     }
 
-    #navBar a,
-    #navBar a:hover,
-    #navBar a:link,
-    #navBar a:visited {
+    #navBar m-a,
+    #navBar m-a:hover,
+    #navBar m-a:link,
+    #navBar m-a:visited {
         color: var(--nav-font-color);
     }
 
-    #navBar a.active * {
+    #navBar m-a.active * {
         font-weight: bold;
     }
 
@@ -174,11 +175,11 @@
     $(function() {
         navbar.addClass(localStorage.getItem('menuWidth'))
         // Acciones personalizadas al clickar en los enlaces
-        $('#navBar a').click(function() {
+        $('#navBar m-a').click(function() {
             
             $(this).find('.spinner').removeClass('hidden')
 
-            $('#navBar a.active').removeClass('active')
+            $('#navBar m-a.active').removeClass('active')
             $(this).addClass('active')
         })
     })

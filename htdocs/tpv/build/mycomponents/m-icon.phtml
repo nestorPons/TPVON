@@ -1,7 +1,9 @@
 <?php namespace app\controllers\components?><component>
+    @if($$href) <a href="$$href" target="$$target"> @endif
     <i id="--id" class="lnr lnr-$$icon $$class" onclick="$$onclick">
         <span class="label">$$label</span>
     </i>
+    @if($$href) </a> @endif
     <style scoped>.label{font-size:.8rem;vertical-align:middle}</style>
 </component>
 

@@ -110,7 +110,7 @@ class Components{
                 $prop = trim($matches[1][$i], '$$'); 
 
                 if(\property_exists($this, $prop)){
-                    $condition = $this->{$porp};
+                    $condition = $this->{$prop};
                     $valcon = false;
                     eval('if ($condition) { $valcon = true; }');
                     $this->file = ($valcon) 

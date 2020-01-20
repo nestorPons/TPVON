@@ -1,4 +1,4 @@
- # ACERCA DE  ...
+# ACERCA DE  ...
 ###### _Proyecto documentado con Markdown_.
 ___
 ## Equipo de mantenimiento 
@@ -9,6 +9,10 @@ ___
 
 ## Notas de lanzamiento 
 Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, puedes ver los [tags en github](https://github.com/nestorpons/TPVON/tags).
+
+#### Versión 1.2 (próxima actualización)
+* Añadido label boton salir aplicación
+* Añadido boton acceso al manual
 
 #### Versión 1.1 (2020-01-20)
 * Reparación de errores.

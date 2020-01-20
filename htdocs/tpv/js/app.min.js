@@ -335,6 +335,15 @@ const app = {
             Email : nestorpons@gmail.com
             Licencia : MIT 2019
         `);
+    },
+    close(){
+        // Eliminamos las zonas abiertas
+        $('section:not("#login")').hide().remove();
+        $('section#login').show()
+        // Quitamos token de autentificación
+        sessionStorage.removeItem('jwt');
+        // Eliminamos la base de datos 
+        DB.remove();
     }
 }
 const DB = {

@@ -105,7 +105,7 @@ $(document)
 
 })
 // Comportamiento general de los links 
-.on('click', 'a', function(e) {
+.on('click', 'm-a', function(e) {
     e.preventDefault();
     let section = $(this).attr('href')
     // Comprobamos si tiene parametros get 
