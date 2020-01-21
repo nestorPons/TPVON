@@ -23,15 +23,20 @@ function compileFolder($inputDir, $outputDir){
         reset($filename);
         $filename = $filename[0];
         // Carga de de cache (anulada)
-        autoCompileLess($inputDir . $filename . ".less", $outputDir . $filename . ".css");
+        autoCompileLess($inputDir, $outputDir, $filename);
         }
 }
-function autoCompileLess($inputFile, $outputFile) {
+// Compila y cachea los archivos lessc
+function autoCompileLess($inputDir, $outputDir, $filename) {
     global $less;
+    $inputFile = $inputDir . $filename . ".less"; 
+    $outputFile =  $outputDir . $filename . ".css"; 
+    $cacheFolder = \FOLDERS\CACHES;
+
     // load the cache
-    $cacheFile = $inputFile.".cache";
+    $cacheFile = $cacheFolder.$filename.".cache";
     
-    $cache = (file_exists($cacheFile)) 
+    $cache = (file_exists($cacheFile) && !ENV) 
         ? unserialize(file_get_contents($cacheFile))
         : $inputFile;
     

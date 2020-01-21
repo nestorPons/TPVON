@@ -15,6 +15,7 @@ const APP                           = ROOT . 'apptpv/';
         const LESS                  = SRC . 'less/';
         const JS                    = SRC . 'js/';
     const DB                        = APP . 'db/';
+    const CACHES                    = APP . 'caches/';
     
 const HTDOCS                        = ROOT . PUBLIC_FOLDER; // Carpeta pública
     const NODE_MODULES              = HTDOCS . 'node_modules/';

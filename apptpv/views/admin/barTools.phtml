@@ -17,7 +17,7 @@
     </div>  
     <div id="bartools-general">
         <m-icon  id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Acerca de'/>
-        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/" label="Manual de usuario" target="_blank"/>
+        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank"/>
         <m-icon icon="power-switch" label="Salir" onclick="app.close()"/>
     </div>
 </header>
@@ -93,7 +93,6 @@
     #bartools #search .row ::placeholder{
         color: #aaa;
     }
-    
 </style>
 <script>
     var menu = {
@@ -113,7 +112,7 @@
                     menu.buttons['$'+arr[i]].show()
                 }
             }
-        },
+         },
         search  : {
             $search     : $('#--id_txtSearch'), 
             $txtSearch  : $('#--id_txtSearch').find('input'),
@@ -168,11 +167,10 @@
                 if(param) $txtSearch.attr('placeholder', param);
                 return $txtSearch.attr('placeholder');
             }
-        },
-
+         },
         del(){
             if(app.mens.confirm('¿Desea eliminar el registro?'))
                 app.sections.del()
-        }
+         }
     }
 </script>

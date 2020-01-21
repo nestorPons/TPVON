@@ -62,7 +62,7 @@ que por defecto es htdocs.
 
 
 #### Para desplegarlo en servidor local
-Si se desea se dispone de un contenedor docker con lamp instalado en el mismo proyecto
+Si se desea se dispone de un contenedor docker con LAMP instalado en el mismo proyecto
 Para construirlo por primera vez: 
 ```
 .server/docker-compose build 
@@ -78,9 +78,16 @@ Para pararlo:
 
 Desde el navegador acceda al localhost o su su hosting donde desplegó su aplicación.
 ```
-localhost/tpv/index.php o www.tuhosting.com/tpv/index.php
+localhost/tpv/index.php
 ``` 
-_Se inicia el configurado de la aplicación en su primer acceso._
+o 
+```
+www.tuhosting.com/tpv/index.php
+``` 
+Acceda a la base de datos mediante phpmyadmin: 
+```
+localhost:8080
+```
 
 ## Deployment
 Consulte su hosting para saber que opciones le proporciona.
