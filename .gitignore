@@ -6,4 +6,4 @@ htdocs/build
 server/logs
 apptpv/config/conn.ini
 apptpv/config/mail.ini
-apptpv/caches/*.*
+apptpv/caches/*.cache
