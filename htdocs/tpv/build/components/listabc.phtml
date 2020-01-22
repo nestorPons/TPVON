@@ -34,11 +34,11 @@
         const --id = {
             sel(el) {
                 const
-                val = el.path[0].attributes.value.value.toLowerCase(),
-                table = <?= $table ?>, 
-                body = table.getElementsByTagName('tbody')[0],
-                tr = body.getElementsByTagName('tr'), 
-                find = table.getElementsByClassName(`${val}`);
+                    val = el.target.attributes.value.value.toLowerCase(),
+                    table = <?= $table ?>, 
+                    body = table.getElementsByTagName('tbody')[0],
+                    tr = body.getElementsByTagName('tr'), 
+                    find = table.getElementsByClassName(`${val}`);
 
                 for(const el of tr){
                     el.classList.add('hidden');
@@ -46,7 +46,6 @@
                 for(const el of find){
                     el.classList.remove('hidden');
                 }
-                
             }
         }
     </script>

@@ -1,22 +1,22 @@
 <?php namespace app\controllers\components?><header id="bartools">
     <div id="bartools-actions">
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_add','class'=>'menu-buttons','style'=>'color:red','icon'=>'plus-circle','onclick'=>'app.sections.add()','label'=>'Nuevo')) ;?>
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_del','class'=>'menu-buttons','icon'=>'cross-circle','onclick'=>'menu.del()','label'=>'Eliminar')) ;?>
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_prev','class'=>'menu-buttons','icon'=>'chevron-left-circle','onclick'=>'app.sections.prev()','label'=>'Anterior')) ;?>
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_next','class'=>'menu-buttons','icon'=>'chevron-right-circle','onclick'=>'app.sections.next()','label'=>'Siguiente')) ;?>
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_print','class'=>'menu-buttons','icon'=>'printer','onclick'=>'app.sections.print()','label'=>'Imprimir')) ;?>
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_conf','class'=>'menu-buttons','icon'=>'cog','onclick'=>'app.sections.conf()','label'=>'Configurar')) ;?>
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_filter','class'=>'menu-buttons','icon'=>'funnel','onclick'=>'app.sections.filter()','label'=>'Filter')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_add','class'=>'menu-buttons','style'=>'color:red','icon'=>'plus-circle','onclick'=>'app.sections.add()','label'=>'Nuevo')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_del','class'=>'menu-buttons','icon'=>'cross-circle','onclick'=>'menu.del()','label'=>'Eliminar')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_prev','class'=>'menu-buttons','icon'=>'chevron-left-circle','onclick'=>'app.sections.prev()','label'=>'Anterior')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_next','class'=>'menu-buttons','icon'=>'chevron-right-circle','onclick'=>'app.sections.next()','label'=>'Siguiente')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_print','class'=>'menu-buttons','icon'=>'printer','onclick'=>'app.sections.print()','label'=>'Imprimir')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_conf','class'=>'menu-buttons','icon'=>'cog','onclick'=>'app.sections.conf()','label'=>'Configurar')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_filter','class'=>'menu-buttons','icon'=>'funnel','onclick'=>'app.sections.filter()','label'=>'Filter')) ;?>
 
         <div id="search" onblur="menu.search.close()">
-            <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_search','class'=>'menu-buttons','icon'=>'magnifier','onclick'=>'menu.search.toggle()','label'=>'Buscar')) ;?>
-            <?php new \app\core\Components('m-input' , Array('id'=>'id5e28557b5b6e2_txtSearch','placeholder'=>'Escribe tu búsqueda','onkeyup'=>'menu.search.keypress(event)','tabindex'=>'-1','title'=>'Pulse Enter para realizar la búsqueda.')) ;?>
+            <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_search','class'=>'menu-buttons','icon'=>'magnifier','onclick'=>'menu.search.toggle()','label'=>'Buscar')) ;?>
+            <?php new \app\core\Components('m-input' , Array('id'=>'id5e289c2dadcfd_txtSearch','placeholder'=>'Escribe tu búsqueda','onkeyup'=>'menu.search.keypress(event)','tabindex'=>'-1','title'=>'Pulse Enter para realizar la búsqueda.')) ;?>
         </div>
     </div>
     <div id="bartools-central"> 
     </div>  
     <div id="bartools-general">
-        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e28557b5b6e2_help','class'=>'menu-buttons','icon'=>'question-circle','onclick'=>'app.help()','label'=>'Acerca de')) ;?>
+        <?php new \app\core\Components('m-icon' , Array('id'=>'id5e289c2dadcfd_help','class'=>'menu-buttons','icon'=>'question-circle','onclick'=>'app.help()','label'=>'Acerca de')) ;?>
         <?php new \app\core\Components('m-icon' , Array('icon'=>'book','href'=>'https://nestorpons.github.io/TPVON/manual/','label'=>'Manual de usuario','target'=>'_blank')) ;?>
         <?php new \app\core\Components('m-icon' , Array('icon'=>'power-switch','label'=>'Salir','onclick'=>'app.close()')) ;?>
     </div>
@@ -63,7 +63,7 @@
     #bartools .lnr:hover{
         font-weight: bold;
     }
-    #bartools #id5e28557b5b6e2_txtSearch{
+    #bartools #id5e289c2dadcfd_txtSearch{
         position: relative;
         top: 0;
         left: 3204px;
@@ -76,7 +76,7 @@
         background-color: var(--form-back-color);
         margin-left: 5px ;
     }
-    #bartools #id5e28557b5b6e2_txtSearch>input{
+    #bartools #id5e289c2dadcfd_txtSearch>input{
         position: absolute;
         width: 97%;
     }
@@ -98,14 +98,14 @@
     var menu = {
         tile    : document.getElementById('bartools-name-sections'),
         buttons : {
-            $add        : $('#id5e28557b5b6e2_add'),
-            $del        : $('#id5e28557b5b6e2_del'),
-            $next       : $('#id5e28557b5b6e2_next'),
-            $prev       : $('#id5e28557b5b6e2_prev'),
-            $search     : $('#id5e28557b5b6e2_search'),
-            $print      : $('#id5e28557b5b6e2_print'),
-            $conf       : $('#id5e28557b5b6e2_conf'),
-            $filter     : $('#id5e28557b5b6e2_filter'),
+            $add        : $('#id5e289c2dadcfd_add'),
+            $del        : $('#id5e289c2dadcfd_del'),
+            $next       : $('#id5e289c2dadcfd_next'),
+            $prev       : $('#id5e289c2dadcfd_prev'),
+            $search     : $('#id5e289c2dadcfd_search'),
+            $print      : $('#id5e289c2dadcfd_print'),
+            $conf       : $('#id5e289c2dadcfd_conf'),
+            $filter     : $('#id5e289c2dadcfd_filter'),
             show(arr = []){               
                 $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
                 for(i in arr){
@@ -114,10 +114,10 @@
             }
          },
         search  : {
-            $search     : $('#id5e28557b5b6e2_txtSearch'), 
-            $txtSearch  : $('#id5e28557b5b6e2_txtSearch').find('input'),
-            $label      : $('#id5e28557b5b6e2_search').find('.label'), 
-            $icon       : $('#id5e28557b5b6e2_search'),
+            $search     : $('#id5e289c2dadcfd_txtSearch'), 
+            $txtSearch  : $('#id5e289c2dadcfd_txtSearch').find('input'),
+            $label      : $('#id5e289c2dadcfd_search').find('.label'), 
+            $icon       : $('#id5e289c2dadcfd_search'),
             velocity    : 500,
             isOpen      : false,
             open(){
