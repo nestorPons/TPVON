@@ -1,4 +1,5 @@
-class MySelect{constructor(id){this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
+class MyLabel{constructor(id){this.id=id;this.cont=document.getElementById(id);this.el=this.cont.getElementsByClassName('value')[0]}
+value(value=null){if(value)this.el.innerText=value;return this.el.innerText}}class MySelect{constructor(id){this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED))}
 addClass(myclass){this.el.classList.add(myclass)
 return this}
 addOption(value,text){let opt=document.createElement('option')
@@ -24,7 +25,10 @@ optionselected=!0
 break}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
 else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}
-required(){this.el.removeChild(this.o[0])}}class MyTable{constructor(id){this.el=document.getElementById(id).querySelector('table')
+required(){this.el.removeChild(this.o[0])}}class MyCheckbox{constructor(id){this.id=id;this.component=document.getElementById(id);this.el=this.component.getElementsByTagName('input')[0]}
+value(value=null){if(value!=null)this.el.value=value;return this.el.value}
+checked(value=null){if(value!=null)this.el.checked=value
+return this.el.checked}}class MyTable{constructor(id){this.el=document.getElementById(id).querySelector('table')
 this.body=this.el.getElementsByTagName('tbody')[0]
 this.template=document.getElementById(id).querySelector('template')
 this.$table=$('#'+id).find('table')
@@ -49,7 +53,8 @@ return total.innerHTML}
 hoverable(value){if(value!=undefined){if(value)this.el.classList.add('hoverable')
 else this.el.classList.remove('hoverable')}
 return this.el.classList.contains('hoverable')}
-html(){return this.el.innerHTML}}class Line{constructor(id,articulo,cantidad,precio,dto){this.id=id;this.articulo=articulo;this.cantidad=cantidad||0;this.precio=precio||0;this.dto=dto||0;this.amo=this.setTotal()};setTotal(){return(this.cantidad*this.precio*(1-this.dto/100)).toFixed(2)}};class Ticket{constructor(data){this.id=null;this.lines=[];this.id_usuario=null;this.id_cliente=null;this.fecha=null;this.estado=1;this.iva=null;this.total=0.00;this.new=!0;if(data!=undefined){this.id=data.id;this.id_usuario=data.id_usuario;this.id_cliente=data.id_cliente;this.fecha=data.fecha;this.iva=data.iva;this.estado=(data.estado!=undefined)?data.estado:1;this.addLines(data.lines);this.setTotal()}};addLines(dataLines){for(let i in dataLines){const d=dataLines[i]
+html(){return this.el.innerHTML}}class MyInput{constructor(id){this.id=id;this.component=document.getElementById(id);this.el=this.component.getElementsByTagName('input')[0]}
+value(value=null){if(value)this.el.value=value;return this.el.value}}class Line{constructor(id,articulo,cantidad,precio,dto){this.id=id;this.articulo=articulo;this.cantidad=cantidad||0;this.precio=precio||0;this.dto=dto||0;this.amo=this.setTotal()};setTotal(){return(this.cantidad*this.precio*(1-this.dto/100)).toFixed(2)}};class Ticket{constructor(data){this.id=null;this.lines=[];this.id_usuario=null;this.id_cliente=null;this.fecha=null;this.estado=1;this.iva=null;this.total=0.00;this.new=!0;if(data!=undefined){this.id=data.id;this.id_usuario=data.id_usuario;this.id_cliente=data.id_cliente;this.fecha=data.fecha;this.iva=data.iva;this.estado=(data.estado!=undefined)?data.estado:1;this.addLines(data.lines);this.setTotal()}};addLines(dataLines){for(let i in dataLines){const d=dataLines[i]
 this.addLine(d.id,d.articulo,d.cantidad,d.precio,d.dto)}
 return!0}
 addLine(id,articulo,cantidad,precio,dto){let newLine=new Line(id,articulo,cantidad,precio,dto)
@@ -118,9 +123,10 @@ opt.value=value
 this.el.appendChild(opt)
 return this}
 default(){this.el.value=0}
-clear(){this.reset()
+clear(callback){this.reset()
 let ops=this.el.querySelectorAll('option:not(:first-child)')
 for(let o of ops){if(o)this.el.removeChild(o)}
+typeof callback=='function'&&callback();echo('CLEAR SELECT')
 return this}
 reset(){this.el.classList.remove(this.CLASS_SELECTED)
 let options=this.el.getElementsByTagName('option')

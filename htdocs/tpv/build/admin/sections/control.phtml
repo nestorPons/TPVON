@@ -9,23 +9,186 @@
         'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
     ]);
     ?>
-    <style lang="less" >#control{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}#control #<?=$table->id()?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}</style>
-    <script>app.control={name:'Vales regalo',table:'present',buttons:['prev','next','search','print','conf'],data:null,Table:new Table('<?=$table->id()?>'),txtTicket:<?=$txt01->id()?>.querySelector('input'),txtCli:<?=$txt02->id()?>.querySelector('input'),txtFecha:<?=$txt03->id()?>.querySelector('input'),txtFechaV:<?=$txt04->id()?>.querySelector('input'),btnDel:' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',btnAdd:' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',load(){app.post({controller:this.table,action:'get',data:{}},data=>{DB.set(this.table,data).then(_=>DB.last(this.table)).then(lst=>{this.loadTable(lst)})})},print(){if(app.present){let p=app.present,t=this.Table,elemento=p.el,estilos=p.style,ventana=window.open('','','PRINT'),arr=[]
-for(let i in t.data){arr.push(t.data[i][2])}
-p.clear()
-p.description(arr);p.date=new Date(date.format(this.txtFechaV.value,'sql'))
-ventana.document.write('<html><head><title>'+document.title+'</title>');ventana.document.write(`<style type="text/css"></style>`);ventana.document.write(`</head><body id="${elemento.id}">`);ventana.document.write(elemento.innerHTML);ventana.document.write('</body></html>');ventana.document.close();ventana.focus()}else{app.get({controller:'present',action:'view',data:{}},!1,html=>{let h=document.createElement('div')
-h.innerHTML=html
-let el=h.getElementsByTagName('component')[0]
-app.present=new Present(el.id)
-this.print()})}},async next(){const d=await DB.next(this.table,this.data.id);this.loadTable(d);return this},async prev(){const d=await DB.prev(this.table,this.data.id);this.loadTable(d);return this},loadTable(data){if(data==undefined)return console.warn('NO se han mandadod datos a loadTable');this.Table.clear();this.data=data
-this.txtTicket.value=data.id;this.txtFecha.value=date.format(data.fecha,'short')
-this.txtFechaV.value=date.format(data.fecha_vencimiento,'short')
-DB.get('usuarios','id',data.id_cliente).then(d=>d[0]).then(({nombre})=>this.txtCli.value=nombre);for(let i in data.lines){let line=data.lines[i]
-DB.get('servicios','id',line.articulo).then(d=>d[0]).then(ser=>{let d=(line.fecha!=null)?date.format(line.fecha,'datetime')+this.btnDel:this.btnAdd
-this.Table.addLine(line.id,[line.id,ser.nombre,ser.descripcion,d])})}},search(value){if(!isNaN(value)){DB.get(this.table,'id',value).then(d=>d[0]).then(d=>{if(d!=undefined)this.loadTable(d)
-else app.mens.error('No se ha podido encontrar el registro')})}else{echo('AKI:: Funcion no definida')}},addDate(e){const
-$el=$(e),$parent=$el.parents('tr'),id=$parent.attr('idline'),d=date.datetime()
-app.post({controller:'present',action:'addDate',data:{id:id,fecha:d}},fn=>{$el.parents('tr').find('.fecha').html(d+this.btnDel)})},delDate(e){let $el=$(e),$parent=$el.parents('tr'),id=$parent.attr('idline')
-app.post({controller:'present',action:'delete',data:{id:id}},d=>{$el.parent().html(this.btnAdd)})},savedate(el){if(el.value){app.post({controller:'present',action:'expiration',data:{id:this.txtTicket.value,fecha_vencimiento:date.format(this.txtFechaV.value,'sql')}},d=>{echo('Guardado fecha ticket regalo ...')})}else{app.mens.error('Tiene que haber una caducidad!!')}}}</script>
+    <style lang="less" >
+        #control{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}#control #<?=$table->id()?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}
+    </style>
+    <script>
+        app.control = {
+            name : 'Vales regalo',
+            table: 'present',
+            buttons: ['prev', 'next', 'search', 'print', 'conf'],
+            data: null,
+            Table: new Table('<?=$table->id()?>'),
+            txtTicket: <?= $txt01->id() ?>.querySelector('input'),
+            txtCli: <?= $txt02->id() ?>.querySelector('input'),
+            txtFecha: <?= $txt03->id() ?>.querySelector('input'),
+            txtFechaV: <?= $txt04->id() ?>.querySelector('input'),
+            btnDel: ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
+            btnAdd: ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
+            load() {
+                app.post({
+                    controller: this.table,
+                    action: 'get',
+                    data: {}
+                }, data => {
+                    DB.set(this.table, data)
+                        .then(_ => DB.last(this.table))
+                        .then(lst => {
+                            this.loadTable(lst);
+                        });
+                })
+            },
+            // Impresion de los vales regalo
+            print() {
+                // Comprobamos que este cargado el módulo del vale regalo
+                if (app.present) {
+                    let p = app.present,
+                        t = this.Table,
+                        elemento = p.el,
+                        estilos = p.style,
+                        ventana = window.open('', '', 'PRINT'),
+                        arr = []
+
+                    for (let i in t.data) {
+                        arr.push(t.data[i][2])
+                    }
+
+                    p.clear()
+                    //Cargamos los datos en la vista
+                    p.description(arr);
+                    p.date = new Date(date.format(this.txtFechaV.value, 'sql'))
+
+                    ventana.document.write('<html><head><title>' + document.title + '</title>');
+                    ventana.document.write(`<style type="text/css">${estilos.innerHTML}</style>`);
+                    ventana.document.write(`</head><body id="${elemento.id}">`);
+                    ventana.document.write(elemento.innerHTML);
+                    ventana.document.write('</body></html>');
+                    ventana.document.close();
+                    ventana.focus();
+                } else {
+                    // Si no esta cargado lo cargamos pero no lo mostramos
+                    app.get({
+                        controller: 'present',
+                        action: 'view',
+                        data: {}
+                    }, false, html => {
+                        // Obtenemos el id del elemento
+                        let h = document.createElement('div')
+                        h.innerHTML = html
+                        let el = h.getElementsByTagName('component')[0]
+                        // Cargamos la clase
+                        app.present = new Present(el.id)
+                        this.print()
+                    })
+                }
+            },
+            async next() {
+                const d =  await DB.next(this.table, this.data.id); 
+                this.loadTable(d); 
+                return this; 
+            },
+            async prev() {
+                const d =  await DB.prev(this.table, this.data.id); 
+                this.loadTable(d); 
+                return this;
+            },
+            // Carga los datos en la tabla y demás controles 
+            loadTable(data) {
+
+                if (data == undefined) return console.warn('NO se han mandadod datos a loadTable');
+                this.Table.clear();
+
+                // Cargamos los datos  en el objeto 
+                this.data = data
+
+                // Cargamos datos vista id 
+                this.txtTicket.value = data.id;
+
+                this.txtFecha.value = date.format(data.fecha, 'short')
+                this.txtFechaV.value = date.format(data.fecha_vencimiento, 'short')
+
+                DB.get('usuarios', 'id', data.id_cliente)
+                    .then(d => d[0])
+                    .then(({
+                        nombre
+                    }) => this.txtCli.value = nombre);
+
+                for (let i in data.lines) {
+                    let line = data.lines[i]
+                    DB.get('servicios', 'id', line.articulo)
+                        .then(d => d[0])
+                        .then(ser => {
+
+                            let d = (line.fecha != null) ? date.format(line.fecha, 'datetime') + this.btnDel : this.btnAdd
+
+                            this.Table.addLine(
+                                line.id,
+                                [line.id, ser.nombre, ser.descripcion, d]
+                            )
+                        })
+                }
+            },
+            search(value) {
+                if (!isNaN(value)) {
+                    DB.get(this.table, 'id', value)
+                        .then(d => d[0])
+                        .then(d => {
+                            if (d != undefined) this.loadTable(d)
+                            else app.mens.error('No se ha podido encontrar el registro')
+                        })
+                } else {
+                    echo('AKI:: Funcion no definida')
+                }
+            },
+            addDate(e) {
+                const 
+                    $el = $(e),
+                    $parent = $el.parents('tr'),
+                    id = $parent.attr('idline'),
+                    d = date.datetime()
+
+                app.post({
+                    controller: 'present',
+                    action: 'addDate',
+                    data: {
+                        id: id,
+                        fecha: d
+                    }
+                }, fn => {
+                    $el.parents('tr').find('.fecha').html(d + this.btnDel)
+                })
+            },
+            delDate(e) {
+                let $el = $(e),
+                    $parent = $el.parents('tr'),
+                    id = $parent.attr('idline')
+                app.post({
+                    controller: 'present',
+                    action: 'delete',
+                    data: {
+                        id: id
+                    }
+                }, d => {
+                    $el.parent().html(this.btnAdd)
+                })
+            },
+            savedate(el) {
+                if (el.value) {
+                    app.post({
+                        controller: 'present',
+                        action: 'expiration',
+                        data: {
+                            id: this.txtTicket.value,
+                            fecha_vencimiento: date.format(this.txtFechaV.value, 'sql')
+                        }
+                    }, d => {
+                        echo('Guardado fecha ticket regalo ...')
+
+                    })
+                } else {
+                    app.mens.error('Tiene que haber una caducidad!!')
+                }
+            }
+        }
+    </script>
 </section>

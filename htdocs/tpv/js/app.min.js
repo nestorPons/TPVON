@@ -413,7 +413,6 @@ const DB = {
                 }
             }
             // actualiza todos los elementos con data-...
-            echo(`[data-${table}]`);
             document.querySelectorAll(`[data-${table}]`).forEach(e => {
                 echo(e)
             })

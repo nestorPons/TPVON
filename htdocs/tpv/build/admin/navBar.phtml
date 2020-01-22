@@ -48,15 +48,139 @@
         
     </ul>
 </nav>
-<style>:root{--nav-initial-width:55px;--nav-max-width:145px}nav#navBar{margin:0;overflow:hidden;transition:width 1s ease;background:var(--main-color);color:var(--nav-font-color);width:var(--nav-initial-width)}nav#navbar *{margin:0;padding:0}nav#navBar ul{margin:10px 5px;padding:0;list-style:none}nav#navBar li{margin:10px 0;padding:0}nav#navBar li m-a{display:inline-block;position:relative;background:none;font-size:.8rem;margin:0;padding:0;text-decoration:none;width:max-content;color:inherit;transition:color 0.7s ease-out}nav#navBar li m-a *{vertical-align:middle}nav#navBar li:active *,nav#navBar li:hover *{font-weight:700}nav#navBar li m-a i{font-size:1.5rem}#navBar m-a,#navBar m-a:hover,#navBar m-a:link,#navBar m-a:visited{color:var(--nav-font-color)}#navBar m-a.active *{font-weight:700}#icon-menu{position:fixed;cursor:pointer;top:6px;left:1px;font-size:2em}nav#navBar.menu-close{width:0}nav#navBar.menu-max{max-width:min-content;width:var(--nav-max-width)}nav#navBar.menu-initial{width:var(--nav-initial-width)}nav#navBar .spinner{padding:0;height:1.9rem;width:1.9rem;border-color:var(--main-color);border-width:3px;border-top:2px solid var(--input-focus-color);border-left:2px solid var(--input-focus-color);position:absolute;margin:0;top:-5px;left:6px}</style>
-<script>if(!exist(localStorage.menuWidth))localStorage.setItem('menuWidth','initial')
-var navbar={toggle(change=!0){const
-menuWidth=localStorage.getItem('menuWidth'),varClass=(menuWidth=='menu-initial')?'menu-max':'menu-initial';navbar.addClass(varClass)
-if(change)localStorage.setItem('menuWidth',varClass)},addClass(varclass){$('#navBar').removeClass().addClass(varclass)
-if(varclass=='menu-max')$('.label').show('slow')
-else $('.label').hide('slow')}}
-$('#icon-menu').click(navbar.toggle)
-$(function(){navbar.addClass(localStorage.getItem('menuWidth'))
-$('#navBar m-a').click(function(){$(this).find('.spinner').removeClass('hidden')
-$('#navBar m-a.active').removeClass('active')
-$(this).addClass('active')})})</script>
+<style>
+    :root {
+        --nav-initial-width: 55px;
+        --nav-max-width: 145px;
+    }
+
+    nav#navBar {
+        margin: 0;
+        overflow: hidden;
+        transition: width 1s ease;
+        background: var(--main-color);
+        color: var(--nav-font-color);
+        width: var(--nav-initial-width);
+    }
+
+    nav#navbar * {
+        margin: 0;
+        padding: 0;
+    }
+
+    nav#navBar ul {
+        margin: 10px 5px;
+        padding: 0;
+        list-style: none;
+    }
+
+    nav#navBar li {
+        margin: 10px 0;
+        padding: 0;
+    }
+
+    nav#navBar li m-a {
+        display: inline-block;
+        position: relative;
+        background: none;
+        font-size: 0.8rem;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        width: max-content;
+        color: inherit;
+        transition: color 0.7s ease-out;
+    }
+
+    nav#navBar li m-a * {
+        vertical-align: middle;
+    }
+
+    nav#navBar li:active *,
+    nav#navBar li:hover * {
+        font-weight: bold;
+    }
+
+    nav#navBar li m-a i {
+        font-size: 1.5rem;
+    }
+
+    #navBar m-a,
+    #navBar m-a:hover,
+    #navBar m-a:link,
+    #navBar m-a:visited {
+        color: var(--nav-font-color);
+    }
+
+    #navBar m-a.active * {
+        font-weight: bold;
+    }
+
+    #icon-menu {
+        position: fixed;
+        cursor: pointer;
+        top: 6px;
+        left: 1px;
+        font-size: 2em;
+    }
+
+    nav#navBar.menu-close {
+        width: 0px;
+    }
+
+    nav#navBar.menu-max {
+        max-width: min-content;
+        width: var(--nav-max-width);
+    }
+
+    nav#navBar.menu-initial {
+        width: var(--nav-initial-width);
+    }
+
+    nav#navBar .spinner {
+        padding: 0;
+        height: 1.9rem;
+        width: 1.9rem;
+        border-color: var(--main-color);
+        border-width: 3px;
+        border-top: 2px solid var(--input-focus-color);
+        border-left: 2px solid var(--input-focus-color);
+        position: absolute;
+        margin: 0;
+        top: -5px;
+        left: 6px;
+    }
+</style>
+<script>
+    // · estados del menu initial, short, long 
+    if (!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
+    var navbar = {
+        toggle(change = true) {
+            const
+                menuWidth = localStorage.getItem('menuWidth'),
+                varClass = (menuWidth == 'menu-initial') ?
+                'menu-max' :
+                'menu-initial';
+
+            navbar.addClass(varClass)
+            if (change) localStorage.setItem('menuWidth', varClass)
+        },
+        addClass(varclass) {
+            $('#navBar').removeClass().addClass(varclass)
+            if (varclass == 'menu-max') $('.label').show('slow')
+            else $('.label').hide('slow')
+        }
+    }
+    $('#icon-menu').click(navbar.toggle)
+    $(function() {
+        navbar.addClass(localStorage.getItem('menuWidth'))
+        // Acciones personalizadas al clickar en los enlaces
+        $('#navBar m-a').click(function() {
+            
+            $(this).find('.spinner').removeClass('hidden')
+
+            $('#navBar m-a.active').removeClass('active')
+            $(this).addClass('active')
+        })
+    })
+</script>

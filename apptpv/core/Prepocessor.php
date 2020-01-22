@@ -21,7 +21,7 @@ class Prepocessor{
     function __construct(bool $cacheable = true){
         // Guardar en variable que componentes tenemos
         $this->searchComponents();
-        
+
         $this->queue = "<script src='./build/".\FILE\JS."'></script>";
         $this->cacheable = $cacheable;
         $this->cache = (file_exists(self::CACHE_FILE)) ? parse_ini_file(self::CACHE_FILE) : [];
@@ -30,7 +30,7 @@ class Prepocessor{
         if(file_exists(\FILE\BUNDLE_JS)) unlink(\FILE\BUNDLE_JS);
 
         if(!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
- 
+
         // Inicia compilacion de los archivos
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
         $this->cache_record($this->cache);
@@ -64,7 +64,6 @@ class Prepocessor{
             } 
         }
     }
-
     // Funcion que aplica una sintaxis propia  a las vistas
     // Todos los comandos de las vista deben enpezar por --
     private function sintax(){
@@ -167,9 +166,7 @@ class Prepocessor{
         $minifier = new Minify\CSS;
         $minifier->add($content_less);
         $content_min = $minifier->minify();
-
         $this->content = str_replace($content, $content_min, $this->content);
-
     }  
     // Generador de ids únicos
     private function uniqid(){
@@ -201,7 +198,6 @@ class Prepocessor{
     }
     // Busca sibolo $ para y lo reemplaza por variables php
     private function sintax_vars(){
-        $con = $this->content; 
         $has = preg_match_all('#\$\$(\w+)#is', $this->content, $matches);
         if($has){
             for($i = 0; $i < count($matches[0]); $i++) {
@@ -215,29 +211,6 @@ class Prepocessor{
         $id = $this->uniqid();
         $this->content = str_ireplace('--id', $id, $this->content);
         return $this->content;
-    }
-    // Minificamos el contenido de los tags script 
-    private function minify_script() : void{
-        $has_script = preg_match_all('/<script[^>]*>(.*?)<\/script>/si', $this->content, $matches);
-        if($has_script){
-            foreach ($matches[1] as $key => $value) {
-                // MINIMIFICAMOS JS
-                $minifier = new Minify\JS;
-                $minifier->add($value);
-                $minified = $minifier->minify();
-                // Reemplazamos el contenido
-                $this->content = str_ireplace($value, $minified, $this->content);
-            }
-        }
-    }
-        // Minificamos el contenido de los tags script 
-    private function minify_style() : void{
-        $has_style = preg_match_all('/<style[^>]*>(.*?)<\/style>/si', $this->content, $matches);
-        if($has_style){
-            foreach ($matches[1] as $key => $value) {
-               $this->less($value);
-            }
-        }
     }
     //  Comportamiento scoped para script-> individualiza el style en el objeto contenedor
     private function script_scoped() : string{
@@ -259,7 +232,6 @@ class Prepocessor{
     }
     // Comando scoped para style-> individualiza el style en el objeto contenedor
     private function style_scoped() : string{
-       
         $has_scoped = preg_match('/<style(.)*?scoped[^<]*>/', $this->content, $matches);
 
         if($has_scoped) {
@@ -285,7 +257,6 @@ class Prepocessor{
         return $this->content;
     }
     private function showFiles(String $path){
-    
         $dir = opendir($path);
         // Lee archivos de directorios y los directorios anidados
         while ($current = readdir($dir)){
@@ -308,12 +279,7 @@ class Prepocessor{
                     // Transformamos la nueva sintaxis en las vistas 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     if($path != \APP\VIEWS\COMPONENTS && $path != \APP\VIEWS\MYCOMPONENTS) $this->sintax();
-                    
-
-                    // Se comprimen las etiquetas script y style
-                    $this->minify_script();
-                    $this->minify_style();
-
+                
                     $a = $this->arg('style');
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
@@ -327,9 +293,9 @@ class Prepocessor{
                     $this->add_name_space();
 
                     // Compresión salida html
-                    //$this->content  = $this->compress_code($this->content);
+                    if(!ENV) $this->content  = $this->compress_code($this->content);
                     
-                    file_put_contents($file_build, $this->content, LOCK_EX  );
+                    file_put_contents($file_build, $this->content, LOCK_EX);
                 }
             }
         } 
@@ -352,9 +318,7 @@ class Prepocessor{
     }
     // Busca y trata componentes personalizados en las plantillas 
     private function components(){
-
         // Buscar componentes existentes en el directorio componentes
-
         foreach($this->components as $component ){
             $regex = "/<($component){1}?\s+([^>]*)(>(.*)<\/($component){1}?>|\/>)/";
             $count = preg_match_all($regex, $this->content, $matches);
@@ -382,6 +346,8 @@ class Prepocessor{
             }
         }
     }
+    // Añade nombre de espacio componentes para no referenciarlos en la construcción
+    // (desuso) Eliminar en la version 2.0 
     private function add_name_space(){
         $this->content = "<?php namespace " . self::NAMESPACE_COMPONENTS ."?>" . $this->content; 
     }
@@ -412,7 +378,6 @@ class Prepocessor{
         $strFile = file_exists(\FILE\BUNDLE_JS) 
             ? \file_get_contents(\FILE\BUNDLE_JS) 
             : ''; 
-
         // Buscamos clases js en el archivo
         $regex = '/class [A-Za-z0-9]{1,150}/';
         if(preg_match($regex, $class_js, $r)){
@@ -434,16 +399,8 @@ class Prepocessor{
             $minifier = new Minify\JS;
             $minifier->add($class_js);
             $strFile .= $minifier->minify();
-            file_put_contents(\FILE\BUNDLE_JS, $strFile);
-/*             $folder = \FOLDERS\BUILD_JS;
-            file_put_contents($folder.$nameClass.'.js', $class_js); */
-            
-            // Eliminamos TODO EL BLOQUE JS del componente
-/*             
-            // Esta busqueda da error en algunas ocasiones se deja para su revision
-            $regex = '#\<script((.|\n)*)</script>#';
-            $this->content = preg_replace($regex, ' ', $this->content);
- */
+            file_put_contents(\FILE\BUNDLE_JS, $strFile);            
+                       
             // Eliminamos el tag script del documento
             $this->content = str_replace($class_js,'', $this->content);
 
@@ -466,8 +423,7 @@ class Prepocessor{
         $minifier = new Minify\JS;
         $minifier->add($class_js);
         $replace = $minifier->minify();
-
-        return str_replace($class_js, $replace, $this->content);
+        return  str_replace($class_js, $replace, $this->content);
     }
     private function cache_record(Array $cache){
         if($this->isModified){

@@ -32,9 +32,9 @@ class Components{
         $this->autoId($file);
         // Buscamos el id del elemento contenedor
         // Si no tiene id se crea uno 
+        $this->sintax(); 
         $this->style_scoped();
         $this->script_scoped();
-        $this->sintax(); 
         $this->clear();
         ob_start();
             echo ($this->file);
@@ -167,19 +167,43 @@ class Components{
         };  
         return $content;
     }
+    // Añade atributos a la etiqueta
+    private function addAttr($tag, $attr, $value){
+        $regex = "/<\s*{$tag}.*?>/";
+        if(preg_match($regex, $this->content, $matches)){
+            $search = substr($matches[0], 0 ,-1); 
+            $replace = "{$search} {$attr}='{$value}'";
+            $this->content = str_replace($search, $replace, $this->content);
+        };  
+    }
     private function style_scoped() : void{
-
-        $has_scoped = preg_match('/<style.*?scoped[^<]*?>(.*?)<\/style>/mis', $this->file, $matches);
-        if($has_scoped) {
+        
+        if(
+            preg_match('/<style.*?scoped[^<]*?>(.*?)<\/style>/mis', $this->file, $matches)
+        ){
             // Quitamos el comando scope
             $tagstyle = str_replace('scoped','',$matches[0]);
             // Quitamos las reglas principales
             $tagstyle = preg_replace('/@import.*?;/', '', $tagstyle);  
             $tagstyle = preg_replace('/@charser.*?;/', '', $tagstyle);  
-            
+
+            // Buscamos el id del componente padre
+            $regex = '#<([^?|>]+)?>#';
+            if(
+                preg_match($regex, $this->file, $match)
+            ){
+                // Buscamos el id del componente
+                $regex = '#id\s*=\s*["\'](.+?)["\'](\s|$)+?#';
+                if (
+                    !preg_match($regex, $match[1])
+                ){
+                    // Si no tiene id se añade al componente principal
+                    $this->file = str_replace($match[1], $match[1] . ' id="'.$this->id.'"', $this->file);
+                }
+            }
             // Se coloca el id a los estilos 
             $less = new \lessc;
-            $content_less = $less->compile('#'.$this->id.'{'.$matches[1].'}'); 
+            $content_less = $less->compile('#'.$this->id.'{'.$matches[1].'}');
             
             $tagstyle = str_replace($matches[1], $content_less, $tagstyle);
             $this->file = str_replace($matches[0], $tagstyle, $this->file);

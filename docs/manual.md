@@ -37,6 +37,14 @@ Zona principal donde se crean las facturas simplificadas de compra.
 En esta sección se pueden crear, eliminar y modificar los usuarios y los clientes. 
 Para crear y editar clientes se debe ser rol de usuario y para crear y editar usuarios se debe ser administrador que solo pueden ser creados por otro administrador.
 
+AL iniciarse la base de datos se crean dos usuarios por defecto: 
+
+* __El usuario administrador__, es el mismo con el que se ha registrado al crear el programa.
+* __Usuario invitado__, un usuario comodín.
+
+!!! Consejo tip
+    Se recomienda no borrar ni modificar el usuario invitado. 
+
 ### Servicios
 ###### Nivel de acceso: usuario.
 

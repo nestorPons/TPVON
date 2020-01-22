@@ -47,12 +47,14 @@
                 this.el.value = 0
             }
             // Elimina todas las opciones
-            clear() {
+            clear(callback) {
                 this.reset()
                 let ops = this.el.querySelectorAll('option:not(:first-child)')
                 for (let o of ops) {
                     if (o) this.el.removeChild(o)
                 }
+                typeof callback=='function' && callback();
+                echo('CLEAR SELECT')
                 return this
             }
             // Deselecciona todas las opciones

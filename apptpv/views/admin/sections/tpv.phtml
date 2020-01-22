@@ -265,6 +265,10 @@
         description: <?= $des->id() ?>.querySelector('input'),
         quantity: <?= $quan->id() ?>.querySelector('input'),
         price: <?= $pric->id() ?>.querySelector('input'),
+        default: {
+            client  : 2,
+            user    : 0
+        },
         open() {
             this.selEmp.el.focus()
         },
@@ -501,8 +505,8 @@
                 this.loadDataTicket({
                     id: id,
                     estado: 1,
-                    id_usuario: 0,
-                    id_cliente: 0,
+                    id_usuario: this.default.user,
+                    id_cliente: this.default.client,
                     fecha: date.current(),
                     lines: []
                 })

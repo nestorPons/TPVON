@@ -1,7 +1,7 @@
-<component id="--id" class="row $$hidden" >  
+<component id="--id" class="$$hidden" >  
     <input 
         id ="--id_input"
-        type = "$$type" 
+        type = "checkbox" 
         class="$$class" placeholder="$$placeholder"
         style = "$$style" name = "$$name" tile = "$$tile"
         @if ($$pattern) pattern = "$$pattern" @endif
@@ -17,20 +17,26 @@
     <label for="--id_input" class="$$classLabel">$$label</label>
     @if ($$icon) <i id="icon$$id" class="lnr lnr$$-icon"></i> @endif
     <style scoped>
+        display: flex; 
+        align-items: center;
         label {
             z-index: 101;
         }
     </style>
     <script>
-        class MyInput{
+        class MyCheckbox{
             constructor(id){
                 this.id = id; 
                 this.component = document.getElementById(id);
                 this.el = this.component.getElementsByTagName('input')[0]
             }
             value(value = null){
-                if (value) this.el.value = value ; 
+                if (value != null) this.el.value = value ; 
                 return this.el.value;
+            }
+            checked(value = null){
+                if(value != null) this.el.checked = value
+                return this.el.checked; 
             }
         }
     </script>

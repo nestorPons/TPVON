@@ -14,33 +14,262 @@
         'content' => '<canvas id="chartYear" width="400px" height="400px"></canvas>'
     ]);
     ?>
-    <script>app.chart={name:'Gráficas',color:{current:{body:'rgba(40, 184, 53, 0.41)',border:'rgba(40, 184, 53, 0.61)',},predict:{body:'rgba(88, 88, 88, 0.21)',border:'rgba(88, 88, 88, 0.31)',}},buttons:[],load(){app.post({controller:'tickets',action:'getAll',data:null},async post=>{const data=[];for(let i in post){if(post[i])data.push(post[i])}
-const ordata=this.prepare(data)
-const daydata=this.groupDataDays(ordata)
-const arrdaydata=this.toArrays(daydata)
-this.create('chartDays',arrdaydata,'Ingresos Dias');this.create('chartMonth',this.toArrays(this.groupDataMonths(ordata)),'Ingresos Mes')
-this.create('chartYear',this.toArrays(this.groupDataYears(ordata)),'Ingresos Mes')})},prepare(data){const ordata=[]
-data.sort(function(a,b){dateA=date.sql(a.fecha)
-dateB=date.sql(b.fecha)
-return new Date(dateA)-new Date(dateB)});for(const i in data){const d=data[i]
-if(d){const
-dt=+new Date(date.sql(d.fecha)).getTime(),ts=Math.floor(dt/1000);ordata.push({id:i,date:date.short(d.fecha),hour:date.hour(d.fecha),value:d.total,timestamp:ts})}}
-return ordata},groupDataDays(array){return this.groupData(array,0)},groupDataMonths(array){return this.groupData(array,3)},groupDataYears(array){return this.groupData(array,6)},groupData(array,slice){return array.reduce(function(groups,item,index){const i=item.date.slice(slice)
-groups[i]=groups[i]||{date:i,value:0,count:0,timestamp:0,};groups[i].value+=item.value;groups[i].count=index;groups[i].timestamp=item.timestamp;return groups},{})},async create(name,data,labelBar,color=null,borderColor=null){const
-colorBars=[],colorBorders=[],el=document.getElementById(name)
-for(let i in data[0]){colorBars.push(color||this.color.current.body)
-colorBorders.push(borderColor||this.color.current.border)}
-const chart=new Chart(el,{type:'bar',data:{labels:data[3],datasets:[{label:labelBar,data:data[1],backgroundColor:colorBars,borderColor:colorBorders,borderWidth:1}]},options:{responsive:!1,scales:{yAxes:[{ticks:{beginAtZero:!0}}]}}})
-const date=new Date(data[0][data[0].length-1]*1000),X=[]
-date.setDate(date.getDate()+1)
-for(let k of data[1].keys())X.push(k)
-const pred=X[X.length-1]+1,Y=data[1],prediction=await this.learnLinear([X,Y],pred);echo('PRED=>'+prediction)
-this.addData(chart,'previsión',+prediction.toFixed(2));return chart},addData(chart,label,data){chart.data.labels.push(label);chart.data.datasets.forEach((dataset)=>{dataset.data.push(data);dataset.backgroundColor.push(this.color.predict.body);dataset.borderColor.push(this.color.predict.border)});chart.update()},toArrays(obj){const o=Object.values(obj),a=[],b=[],c=[],d=[];for(const p of o){a.push(p.timestamp)
-b.push(p.value)
-c.push(p.count)
-d.push(p.date)}
-return[a,b,c,d]},async learnLinear(data,newVal){const batchSize=32;const epochs=60;const model=tf.sequential();const trainingsize=70;model.add(tf.layers.dense({units:1,inputShape:[1]}));model.compile({optimizer:tf.train.adam(),loss:'meanSquaredError'});let X=data[0].slice(0,Math.floor(trainingsize/100*data[0].length));let Y=data[1].slice(0,Math.floor(trainingsize/100*data[1].length));const xs=tf.tensor2d(X,[X.length,1],'float32').div(tf.scalar(10));const ys=tf.tensor2d(Y,[Y.length,1],'float32').reshape([Y.length,1]).div(tf.scalar(10));await model.fit(ys,xs,{batchSize,epochs,shuffle:!0,});return model.predict(tf.tensor2d([newVal],[1,1])).dataSync()[0]},groupformonth(array){const resultado=[],months=[],totals=[];array.reduce(function(res,value){let mes=new Date(date.sql(value.date)).getMonth()+1;if(!res[mes]){res[mes]={month:mes};Object.keys(value).forEach(function(key){if(key!='date'){res[mes][key]=0}})
-resultado.push(res[mes])}
-Object.keys(value).forEach(function(key){if(key!='fecha'){res[mes][key]+=value[key]}})
-return res},{});return this.twoArrays(resultado,'month','value')},}</script>
+    <script>
+        app.chart = {
+            name : 'Gráficas', 
+            color: {
+                current: {
+                    body: 'rgba(40, 184, 53, 0.41)',
+                    border: 'rgba(40, 184, 53, 0.61)',
+                },
+                predict: {
+                    body: 'rgba(88, 88, 88, 0.21)',
+                    border: 'rgba(88, 88, 88, 0.31)',
+                }
+            },
+            buttons: [],
+            load() {
+               
+                app.post({
+                    controller: 'tickets',
+                    action: 'getAll',
+                    data: null
+                }, async post => {
+                    const data = [];
+
+                    // Quitamos los tickets eliminados 
+                    for (let i in post) {
+                        if (post[i]) data.push(post[i])
+                    }
+
+                    // Preparamos los datos
+                    const ordata = this.prepare(data)
+                    // Totalizamos los dias 
+                    const daydata = this.groupDataDays(ordata)
+                    // Convertimos las propiedades en arrays 
+                    const arrdaydata = this.toArrays(daydata)
+                    // Crea grafica dias
+                    this.create('chartDays', arrdaydata, 'Ingresos Dias');
+
+                    // Crea grafica agrupacion por meses
+                    this.create(
+                        'chartMonth',
+                        this.toArrays(this.groupDataMonths(ordata)),
+                        'Ingresos Mes')
+                    // Crea grafica agrupacion por años
+                    this.create(
+                        'chartYear',
+                        this.toArrays(this.groupDataYears(ordata)),
+                        'Ingresos Mes')
+
+                })
+            },
+            // Crea un array de objetos para poder tratar los datos
+            prepare(data) {
+                const ordata = []
+
+                // Se ordena el array por fecha                       
+                data.sort(function(a, b) {
+                    dateA = date.sql(a.fecha)
+                    dateB = date.sql(b.fecha)
+                    return new Date(dateA) - new Date(dateB);
+                });
+
+                // Ponemos los datos en un array
+                for (const i in data) {
+                    const d = data[i]
+                    if (d) {
+                        const
+                            dt = +new Date(date.sql(d.fecha)).getTime(),
+                            ts = Math.floor(dt / 1000);
+
+                        ordata.push({
+                            id: i,
+                            date: date.short(d.fecha),
+                            hour: date.hour(d.fecha),
+                            value: d.total,
+                            timestamp: ts
+                        })
+                    }
+                }
+                return ordata;
+            },
+            groupDataDays(array) {
+                return this.groupData(array, 0)
+            },
+            groupDataMonths(array) {
+                return this.groupData(array, 3)
+            },
+            groupDataYears(array) {
+                return this.groupData(array, 6)
+            },
+            groupData(array, slice) {
+                return array.reduce(function(groups, item, index) {
+                    const i = item['date'].slice(slice)
+                    groups[i] = groups[i] || {
+                        date: i,
+                        value: 0,
+                        count: 0,
+                        timestamp: 0,
+                    };
+
+                    groups[i].value += item.value;
+                    groups[i].count = index;
+                    groups[i].timestamp = item.timestamp;
+
+                    return groups;
+                }, {});
+            },
+            // Crea un gráfico
+            async create(name, data, labelBar, color = null, borderColor = null) {
+                const
+                    colorBars = [],
+                    colorBorders = [],
+                    el = document.getElementById(name)
+
+                for (let i in data[0]) {
+                    colorBars.push(color || this.color.current.body)
+                    colorBorders.push(borderColor || this.color.current.border)
+                }
+                // Gráfica
+                const
+                    chart = new Chart(el, {
+                        type: 'bar',
+                        data: {
+                            labels: data[3],
+                            datasets: [{
+                                label: labelBar,
+                                data: data[1],
+                                backgroundColor: colorBars,
+                                borderColor: colorBorders,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    })
+                // Predicciones
+                const
+                    date = new Date(data[0][data[0].length - 1] * 1000),
+                    X = []
+
+                date.setDate(date.getDate() + 1)
+                
+                for(let k of data[1].keys()) X.push(k)
+           
+                const
+                    pred =X[X.length - 1 ] + 1, 
+                    Y = data[1],
+                    prediction = await this.learnLinear([X, Y], pred);
+
+                echo('PRED=>' + prediction)
+                this.addData(chart, 'previsión', +prediction.toFixed(2));
+                return chart;
+            },
+            // Añade datos a la grafica
+            addData(chart, label, data) {
+                chart.data.labels.push(label);
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(data);
+                    dataset.backgroundColor.push(this.color.predict.body);
+                    dataset.borderColor.push(this.color.predict.border);
+                });
+                chart.update();
+            },
+            toArrays(obj) {
+                const o = Object.values(obj),
+                    a = [],
+                    b = [],
+                    c = [],
+                    d = [];
+
+                for (const p of o) {
+                    a.push(p.timestamp)
+                    b.push(p.value)
+                    c.push(p.count)
+                    d.push(p.date)
+                }
+                return [a, b, c, d]
+            },
+            //Creamos una funcion asincrona (para que se active hasta que termine de cargar la pagina)
+            async learnLinear(data, newVal) {
+                //Definimos el modelo que sera de regresion lineal
+                const batchSize = 32;
+                const epochs = 60;
+                const model = tf.sequential();
+                const trainingsize = 70;
+
+                //Agregamos una capa densa porque todos los nodos estan conectado entre si
+                model.add(tf.layers.dense({
+                    units: 1,
+                    inputShape: [1]
+                }));
+
+                // Compilamos el modelo con un sistema de perdida de cuadratico y optimizamos con sdg
+                model.compile({
+                    optimizer: tf.train.adam(),
+                    loss: 'meanSquaredError'
+                });
+
+                let X = data[0].slice(0, Math.floor(trainingsize / 100 * data[0].length));
+                let Y = data[1].slice(0, Math.floor(trainingsize / 100 * data[1].length));
+
+                const xs = tf.tensor2d(X, [X.length, 1], 'float32').div(tf.scalar(10));
+                const ys = tf.tensor2d(Y, [Y.length, 1], 'float32').reshape([Y.length, 1]).div(tf.scalar(10));
+
+                // entrenamos 
+                await model.fit(ys, xs, {
+                    batchSize,
+                    epochs,
+                    shuffle: true,
+                });
+                
+                // Predicción
+                return model.predict(tf.tensor2d([newVal], [1, 1])).dataSync()[0];
+            },
+            groupformonth(array) {
+                // Construcción del nuevo array:
+
+                const resultado = [],
+                    months = [],
+                    totals = [];
+                array.reduce(function(res, value) {
+                    // Creamos la posición del array para cada mes
+                    let mes = new Date(date.sql(value.date)).getMonth() + 1;
+
+                    if (!res[mes]) {
+                        res[mes] = {
+                            month: mes
+                        };
+
+                        // Inicializamos a 0 el valor de cada key
+                        Object.keys(value).forEach(function(key) {
+                            if (key != 'date') {
+                                res[mes][key] = 0;
+                            }
+                        })
+                        resultado.push(res[mes])
+                    }
+
+                    // Sumamos el valor de cada clave dentro de un bucle
+                    Object.keys(value).forEach(function(key) {
+                        if (key != 'fecha') {
+                            res[mes][key] += value[key];
+                        }
+                    })
+                    return res;
+                }, {});
+
+                return this.twoArrays(resultado, 'month', 'value')
+            },
+        };
+    </script>
 </section>

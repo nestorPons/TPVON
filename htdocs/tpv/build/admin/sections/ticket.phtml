@@ -1,12 +1,21 @@
-<?php namespace app\controllers\components?><component id="buttonsTicket">
+<?php namespace app\controllers\components?><section id="buttonsTicket">
+    <div class="info">
+        <?php new \app\core\Components('m-label' , Array('id'=>'id5e28557b65479_total','label'=>'Total','value'=>'0','color'=>'var(--red-color)')) ;?>
+        <?php new \app\core\Components('m-label' , Array('id'=>'id5e28557b65479_return','label'=>'A devolver','value'=>'0','color'=>'var(--main-color)')) ;?>
+    </div>
+    <?php new \app\core\Components('m-input' , Array('id'=>'id5e28557b65479_pay','label'=>'Pago en efectivo','value'=>'0','onkeyup'=>'app.ticket.change()')) ;?>
+    <?php new \app\core\Components('m-checkbox' , Array('id'=>'id5e28557b65479_present','class'=>'isPresent','label'=>'Es regalo','name'=>'control','value'=>'1','onclick'=>'app.ticket.toggle()')) ;?>
+    <?php new \app\core\Components('m-input' , Array('id'=>'id5e28557b65479_date','type'=>'date','label'=>'Fecha vencimiento','name'=>'fecha_vencimiento')) ;?><br>
+
     <?php
-    $present        = new Checkbox(['label' => 'Regalo', 'name' => 'control', 'value' => '1', 'onclick' => 'app.ticket.toggle()']);
-    $txt00          = new InputDate(['label' => 'Fecha vencimiento', 'name' => 'fecha_vencimiento']);
     $btnPrTicket    = new ButtonSuccess(['onclick' => 'app.ticket.print()', 'caption' => 'Imprimir']);
     $btnSndTicket   = new ButtonSuccess(['onclick' => '', 'caption' => 'Enviar']);
     ?>
-</component>
-<component id="ticket" class="hidden">
+    <style lang="less" >
+        #buttonsTicket{padding:10px}#buttonsTicket .info{text-align:center;margin:10px 0}#buttonsTicket .info>*{margin:10px}#buttonsTicket .isPresent{margin:10px}
+    </style>
+</section>
+<section id="ticket" class="hidden">
     <img src="/tpv/companies/logo.png" alt="Logotipo">
     <div class="data">
         <div>TICKET DE VENTA</div>
@@ -32,34 +41,205 @@
         <div><span id="ticket_iva"></span>% de iva incluído</div>
         <div>¡GRACIAS POR SU VISITA!</div>
     </p>
-</component>
-<style lang="less">#buttonsTicket{display:grid;grid-template-columns:1fr 2fr;grid-template-rows:1fr 1fr 1fr}#buttonsTicket #<?=$txt00->id() ?>{transition:opacity 1s ease-out}#buttonsTicket #<?=$btnPrTicket->id() ?>{grid-row:2;grid-column:1 / span 2}#buttonsTicket #<?=$btnSndTicket->id() ?>{grid-row:3;grid-column:1 / span 2}</style>
-<style id='ticketStyle'>#ticket{transform:scale(.8);overflow:auto}#ticket *{padding:0}#ticket_razon_social *{text-align:left!important}#buttonsTicket{margin:1rem 0}#ticket .data{margin:5px auto}#ticket img{max-width:200px;height:200px;width:200px}#<?=$table->id() ?>{padding:5px}@media print{*{page-break-after:avoid;text-align:center}component{margin:0;padding:0}button{display:none!important}img{max-width:160mm;margin:10px}@page{margin:0;size:80mm 110mm}table thead{text-decoration:underline;border-bottom:1px solid #000}table td:first{border-top:1px solid #000}.break{page-break-after:always}table{margin-bottom:10px}table tfoot tr{position:absolute;left:170px}table tfoot td{font-weight:700;font-size:1.2rem}}</style>
-<script>app.ticket={name:'Tickets',Ticket:null,present:<?=$present->id()?>.getElementsByTagName('input')[0],cont_end_date:<?=$txt00->id()?>,txtExpire:<?=$txt00->id()?>.getElementsByTagName('input')[0],frm:{nombre:document.getElementById('ticket_nombre_empresa'),admin:document.getElementById('ticket_admin'),dir:document.getElementById('ticket_dir'),cp:document.getElementById('ticket_cp'),poblacion:document.getElementById('ticket_poblacion'),tel:document.getElementById('ticket_tel'),nif:document.getElementById('ticket_nif'),iva:document.getElementById('ticket_iva')},Table:new Table('<?= $table->id() ?>'),print(callback){this.put(!1,_=>{imprimirElemento(document.getElementById('ticket'),document.getElementById('ticketStyle'))
-typeof callback=='function'&&callback()})},open(Ticket){this.toggle()
-const p1=DB.get('empresa').then(d=>d[0]),p2=DB.get('usuarios','nivel',2).then(d=>d[0]),p3=DB.get('config').then(d=>d[0]);Promise.all([p1,p2,p3]).then(d=>{const e=d[0],u=d[1],c=d[2];this.frm.nombre.innerHTML=e.nombre
-this.frm.admin.innerHTML=u.nombre
-this.frm.dir.innerHTML=`${e.calle} ${e.numero}`
-this.frm.cp.innerHTML=e.CP
-this.frm.poblacion.innerHTML=e.poblacion
-this.frm.tel.innerHTML=e.telefono
-this.frm.nif.innerHTML=e.nif
-this.frm.iva.innerHTML=c.iva
-return c.dias}).then(async dias=>{this.txtExpire.value=date.add(app.tpv.date.value,dias,'days','sql')
-this.present.checked=!1
-this.Table.clear()
-this.Ticket=Ticket
-let numFra=this.Ticket.fecha.getFullYear().toString().substr(2)
-numFra+='/'+this.Ticket.id.toString().padStart(6,0)
-$('#ticket').find('#dateTicket').text(Ticket.fecha.toLocaleString()).end().find('#idFra').text(numFra).end()
-for(let i in Ticket.lines){const line=Ticket.lines[i],a=await DB.get('servicios','id',line.articulo),nombre=a?a[0]:'No encontrado'
-this.Table.addLine(line.id,[line.cantidad,nombre,line.dto,`${line.amo}€`])}
-this.Table.total(this.Ticket.setTotal())})},async put(sendMail=!1,callback){if(this.Ticket.new){this.Ticket.fecha=date.now('sql')
-this.Ticket.estado=1
-this.Ticket.regalo=this.present.checked?1:0
-this.Ticket.fecha_vencimiento=this.txtExpire.value
-let data=await DB.post('tickets','new',this.Ticket.sendData())
-this.lastId=this.Ticket.id=data.id
-if(this.Ticket.regalo&&typeof app.control!='undefined')app.control.add(this.Ticket)
-app.tpv.add()}
-callback()},toggle(e){this.cont_end_date.classList.toggle('hidden')}}</script>
+    <style id='ticketStyle'>
+        #ticket {
+            transform: scale(0.8);
+            overflow: auto;
+        }
+        
+        #ticket * {
+            padding: 0;
+        }
+        
+        #ticket_razon_social * {
+            text-align: left !important;
+        }
+        
+        #buttonsTicket {
+            margin: 1rem 0;
+        }
+        
+        #ticket .data {
+            margin: 5px auto;
+        }
+
+        #ticket img {
+            max-width: 200px;
+            height: 200px;
+            width: 200px;
+        }
+        
+        #<?= $table->id() ?> {
+            padding: 5px;
+        }
+        
+        @media print {
+            * {
+                page-break-after: avoid;
+                text-align: center;
+            }
+            
+            component {
+                margin: 0;
+                padding: 0;
+            }
+            
+            button {
+                display: none !important;
+            }
+            
+            img {
+                max-width: 160mm;
+                margin: 10px;
+            }
+            
+            @page {
+                margin: 0;
+                size: 80mm 110mm;
+            }
+            
+            table thead {
+                text-decoration: underline;
+                border-bottom: 1px solid black;
+            }
+            
+            table td:first {
+                border-top: 1px solid black;
+            }
+            
+            .break {
+                page-break-after: always;
+            }
+            
+            table {
+                margin-bottom: 10px;
+        }
+        
+        table tfoot tr {
+            position: absolute;
+            left: 170px;
+        }
+        
+        table tfoot td {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    }
+    </style>
+</section>
+<script>
+    app.ticket = {
+        name: 'Tickets',
+        Ticket: null,
+        present: new MyCheckbox('id5e28557b65479_present'),
+        txtExpire: document.getElementById('id5e28557b65479_date'),
+        lbltotal: new MyLabel('id5e28557b65479_total'),
+        lblreturn: new MyLabel('id5e28557b65479_return'),
+        inputpay : new MyInput('id5e28557b65479_pay'), 
+        change(){
+            let a = parseFloat(this.inputpay.value()), 
+                b = parseFloat(this.lbltotal.value()),
+                r = a - b; 
+echo(
+    a , 
+    b, 
+    r
+)
+            this.lblreturn.value(r.toFixed(2));     
+        },
+        frm: {
+            nombre: document.getElementById('ticket_nombre_empresa'),
+            admin: document.getElementById('ticket_admin'),
+            dir: document.getElementById('ticket_dir'),
+            cp: document.getElementById('ticket_cp'),
+            poblacion: document.getElementById('ticket_poblacion'),
+            tel: document.getElementById('ticket_tel'),
+            nif: document.getElementById('ticket_nif'),
+            iva: document.getElementById('ticket_iva'),
+            change: document.getElementById('id5e28557b65479_return_input'),
+        },
+        Table: new Table('<?= $table->id() ?>'),
+        print(callback) {
+            this.put(false, _ => {
+                imprimirElemento(
+                    document.getElementById('ticket'),
+                    document.getElementById('ticketStyle')
+                );
+
+                typeof callback === 'function' && callback();
+            })
+        },
+        open(Ticket) {
+            // Añadimos el total a la casilla total
+            this.lbltotal.value(Ticket.total);
+
+            // Ocultamos campo fecha de vencimiento
+            this.toggle();
+            const
+                p1 = DB.get('empresa').then(d => d[0]),
+                p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0]),
+                p3 = DB.get('config').then(d => d[0]);
+
+            Promise.all([p1, p2, p3]).then(d => {
+                    const e = d[0],
+                        u = d[1],
+                        c = d[2];
+
+                    // Cargamos los datos de la empresa
+                    this.frm.nombre.innerHTML = e.nombre;
+                    this.frm.admin.innerHTML = u.nombre;
+                    this.frm.dir.innerHTML = `${e.calle} ${e.numero}`;
+                    this.frm.cp.innerHTML = e.CP;
+                    this.frm.poblacion.innerHTML = e.poblacion;
+                    this.frm.tel.innerHTML = e.telefono;
+                    this.frm.nif.innerHTML = e.nif;
+                    this.frm.iva.innerHTML = c.iva;
+                    return c.dias;
+                })
+                .then(async dias => {
+                    // Añadimos una fecha standar a la casilla
+                    this.txtExpire.value = date.add(app.tpv.date.value, dias, 'days', 'sql');
+
+                    // Reseteamos valor de la casilla regalo
+                    this.present.checked(false);
+                    this.Table.clear();
+
+                    this.Ticket = Ticket;
+
+                    let numFra = this.Ticket.fecha.getFullYear().toString().substr(2);
+                    numFra += '/' + this.Ticket.id.toString().padStart(6, 0);
+                    $('#ticket')
+                        .find('#dateTicket').text(Ticket.fecha.toLocaleString()).end()
+                        .find('#idFra').text(numFra).end();
+
+                    for (let i in Ticket.lines) {
+                        const line = Ticket.lines[i],
+                            a = await DB.get('servicios', 'id', line.articulo),
+                            nombre = a ? a[0] : 'No encontrado';
+
+                        this.Table.addLine(line.id, [line.cantidad, nombre, line.dto, `${line.amo}€`]);
+                    }
+                    this.Table.total(this.Ticket.setTotal());
+                });
+        },
+        async put(sendMail = false, callback) {
+            if (this.Ticket.new) {
+                this.Ticket.fecha = date.now('sql');
+                this.Ticket.estado = 1;
+                this.Ticket.regalo = this.present.checked() ? 1 : 0;
+                this.Ticket.fecha_vencimiento = this.txtExpire.value;
+                // Guardamos los datos 
+                let data = await DB.post('tickets', 'new', this.Ticket.sendData());
+                this.lastId = this.Ticket.id = data.id;
+
+                if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket);
+                app.tpv.add();
+            }
+
+            typeof callback === 'function' && callback();
+        },
+        toggle(e) {
+            this.txtExpire.classList.toggle('hidden');
+        }
+    }
+</script>
