@@ -32,7 +32,6 @@ use \app\core\{
     Router,
     Prepocessor
 };
-
 define('ROOT' ,dirname(dirname(__DIR__)) . '/');
 require_once ROOT . '/apptpv/config/folders.php';
 require_once ROOT . '/apptpv/config/app.php';

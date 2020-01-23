@@ -86,17 +86,6 @@ $(document)
 
 })
 // FIN DE FORMULARIOS
-
-.on('keyup', '.keyEnterOut', function (e) {
-    e.preventDefault()
-    if(e.key == 'Enter') {
-        let ind = $(".keyEnterOut").index(this)
-        if($(".keyEnterOut").eq(ind + 1).lenght)
-            $(".keyEnterOut").eq(ind + 1).focus()
-        else
-            $(".keyEnterOut").eq(0).focus()
-    }
-})
 .on('change', 'input', function(e){
     const 
         p = $(this).parents('section').attr('id');
@@ -120,5 +109,5 @@ $(document)
             $(this).find('.spinner').addClass('hidden');
         })
     }
-    if (menu && menu.search.state == 1) menu.search.close()
+    if (typeof menu != 'undefined' && menu.search.state == 1) menu.search.close()
 })

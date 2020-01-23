@@ -18,6 +18,7 @@ class Controller{
     private $Model, $db = CONN['db'];
     
     function __construct(String $action, $controller = null, $Data = null){
+
         // Obtenemos el controlador
         $this->controller =strtolower($controller ?? $this->getController());
         $this->action = strtolower($action);
