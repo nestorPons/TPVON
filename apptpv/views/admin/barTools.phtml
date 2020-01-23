@@ -21,9 +21,13 @@
         <m-icon icon="power-switch" label="Salir" onclick="app.close()"/>
     </div>
 </header>
-<style>
+<style lang="less">
+    @color: var(--main-color);
     #bartools{
-        background-color: var(--main-color);
+        background: 
+            linear-gradient(217deg, @color, rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, @color, rgba(0,255,0,0) 70.71%),
+            linear-gradient(136deg, @color, rgba(0,0,255,0) 70.71%);
         color: var(--nav-font-color);
         padding: 0 20px 0 60px;
         display: grid;
@@ -98,14 +102,14 @@
     var menu = {
         tile    : document.getElementById('bartools-name-sections'),
         buttons : {
-            $add        : $('#--id_add'),
-            $del        : $('#--id_del'),
-            $next       : $('#--id_next'),
-            $prev       : $('#--id_prev'),
-            $search     : $('#--id_search'),
-            $print      : $('#--id_print'),
-            $conf       : $('#--id_conf'),
-            $filter     : $('#--id_filter'),
+            $add        : $('#--id_add').find('i'),
+            $del        : $('#--id_del').find('i'),
+            $next       : $('#--id_next').find('i'),
+            $prev       : $('#--id_prev').find('i'),
+            $search     : $('#--id_search').find('i'),
+            $print      : $('#--id_print').find('i'),
+            $conf       : $('#--id_conf').find('i'),
+            $filter     : $('#--id_filter').find('i'),
             show(arr = []){               
                 $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
                 for(i in arr){

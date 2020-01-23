@@ -198,7 +198,7 @@ const app = {
                 typeof activeZone.buttons != 'undefined' &&
                 typeof activeZone.buttons == 'object' &&
                 menu.buttons.show(activeZone.buttons)
-                
+            
                 // Se cargan 
                 typeof activeZone.open != 'undefined' &&
                 typeof activeZone.open == 'function' &&
