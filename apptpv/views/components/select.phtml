@@ -19,10 +19,9 @@
         }
     </style>
     <script>
-        class Select extends Component {
+        class Select {
             // Id del componente general no del select
             constructor(id) {
-                super();
                 this.el = (typeof id == 'string') ?
                     document.getElementById(id).querySelector('select') :
                     id.querySelector('select');
