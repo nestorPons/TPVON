@@ -44,7 +44,7 @@ class Components{
         $this->id = ($this->id)??uniqid($type);
         $this->id_container = self::PREFIX_CONTAINER . $this->id;
         $this->id_component = self::PREFIX_COMPONENT . $this->id;
-        $this->file = str_ireplace('--id', $this->id, $this->file);
+        $this->file = str_replace('--id', $this->id, $this->file);
     }
     private function clear(){
         $this->file = \preg_replace("/[\r\n|\n|\r|\s]+/", " ", $this->file);
@@ -56,7 +56,7 @@ class Components{
         // Bucle for 
         $this->sintax_for();
         // Imprimiendo las variables de la clase a plantilla 
-        $has = preg_match_all('#\$\$(\w+)#is', $this->file, $matches);
+        $has = preg_match_all('#\$\$(\w+\-?\w*)#is', $this->file, $matches);
         // Modificando las propiedades o tags de los elementos html
         if($has){
             for($i = 0; $i < count($matches[0]); $i++) {

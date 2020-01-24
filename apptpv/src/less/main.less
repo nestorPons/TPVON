@@ -20,6 +20,9 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+body * {
+  transition: all 0.7s ;
+}
 input {
   width: 100%;
 }
@@ -178,4 +181,8 @@ input[type="date"] {
   border-radius: var(--universal-border-radius);
   margin: calc(var(--universal-margin) / 2);
   padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+}
+.fade {
+  opacity: 0;
+  transition: none;
 }

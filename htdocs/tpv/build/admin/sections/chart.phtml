@@ -32,8 +32,7 @@
                
                 app.post({
                     controller: 'tickets',
-                    action: 'getAll',
-                    data: null
+                    action: 'getAll'
                 }, async post => {
                     const data = [];
 
@@ -170,7 +169,6 @@
                     Y = data[1],
                     prediction = await this.learnLinear([X, Y], pred);
 
-                echo('PRED=>' + prediction)
                 this.addData(chart, 'previsión', +prediction.toFixed(2));
                 return chart;
             },

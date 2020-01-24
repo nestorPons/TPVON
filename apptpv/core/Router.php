@@ -92,7 +92,7 @@ class Router{
         // Buscamos controlador
         if(!empty($controller)) $this->controller = ucwords($controller); 
         // Antes de cargar el controlador se comprueba si tiene permsiso para la petición
-        if(Security::isRestrict($this->controller)){            
+        if(Security::isRestrict($this->controller)){          
             if ($token = Security::getJWT()){
                 $dataToken = Security::GetData($token);
                 if(!$dataToken->access) return false;

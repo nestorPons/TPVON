@@ -31,6 +31,7 @@ class Controller{
 
         }
     protected function view($data = null){
+
         $arr_data = (is_object($data)) ? $data->toArray() : $data;
 
         // Carpetas donde buscar las vistas
@@ -74,7 +75,8 @@ class Controller{
     protected function printView(String $route, array $data = null){
         if($data){
             foreach($data as $key => $val){
-                ${$key} = $val;
+                $k = str_replace('-', '_', $key); 
+                ${$k} = $val;
             }
         }
         return require_once $route;

@@ -198,8 +198,11 @@ class Prepocessor{
     }
     // Busca sibolo $ para y lo reemplaza por variables php
     private function sintax_vars(){
-        $has = preg_match_all('#\$\$(\w+)#is', $this->content, $matches);
-        if($has){
+ 
+        if(
+            preg_match_all('#\$\$(\w+\-?\w*)#is', $this->content, $matches)
+        ){
+
             for($i = 0; $i < count($matches[0]); $i++) {
                 $str = '<?=$' . trim($matches[1][$i], '\$') . '?>';
                 $this->content = str_replace($matches[0][$i], $str, $this->content);
@@ -256,9 +259,10 @@ class Prepocessor{
         };
         return $this->content;
     }
+    // Funcion preprocesadora de los archivos
     private function showFiles(String $path){
-        $dir = opendir($path);
         // Lee archivos de directorios y los directorios anidados
+        $dir = opendir($path);
         while ($current = readdir($dir)){
             if( $current != "." && $current != "..") {
                 
@@ -272,14 +276,16 @@ class Prepocessor{
                     $this->showFiles($file.'/');
                 } else {
                     // ARCHIVOS
+                    // Obtenemos el ontenido del archivo
                     $this->getContent($file);
                     
                     // Quitamos los comentarios 
                     $this->removeHTMLComments();
-                    // Transformamos la nueva sintaxis en las vistas 
+
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     if($path != \APP\VIEWS\COMPONENTS && $path != \APP\VIEWS\MYCOMPONENTS) $this->sintax();
                 
+                    // Transformamos la nueva sintaxis en las vistas 
                     $a = $this->arg('style');
 
                     if(isset($a['lang']) && $a['lang'] == 'less') 
@@ -319,10 +325,16 @@ class Prepocessor{
     // Busca y trata componentes personalizados en las plantillas 
     private function components(){
         // Buscar componentes existentes en el directorio componentes
+
         foreach($this->components as $component ){
-            $regex = "/<($component){1}?\s+([^>]*)(>(.*)<\/($component){1}?>|\/>)/";
-            $count = preg_match_all($regex, $this->content, $matches);
-            if($count){
+
+            if(
+                preg_match_all(
+                    "/<($component){1}\s+(.*?)(>(.*)<\/($component){1}?>|\/>)/",
+                    $this->content, 
+                    $matches
+                )
+            ){
                 // Si encuentra alguno lo transforma en una clase componente
                 $len = count($matches[0]); 
                 for($i = 0; $i < $len; $i++){
@@ -333,14 +345,17 @@ class Prepocessor{
                     if($count){
                         $len_c = count($matches_component[0]); 
                         for($j = 0; $j < $len_c; $j++){
-                            $str_data .= "'". trim($matches_component[1][$j]) . "'=>'". trim($matches_component[2][$j]) . "',";  
+                            $str_data .= '"'. trim($matches_component[1][$j]) . '"=>"'. trim($matches_component[2][$j]) . '",';  
                         }
                     }
                     $str_data = trim($str_data, ',');
                     // Creamos la la instancia de clase 
                     $typeComponent = $matches[1][$i]; 
                     $arg_data = ($str_data != '') ? ", Array($str_data)" : '';
-                    $replace = "<?php new \app\core\Components('$typeComponent' $arg_data) ;?>";
+                    // Quitamos los tags de php pq no hace falta renombrar que estamos en php ya que es una clase de php
+                    $whithoutTags = preg_replace('#(\<\?\=\s*)|(\s*?\?\>)#', '',  $arg_data);
+                    // Instanciamos la clase de componentes
+                    $replace = "<?php new \app\core\Components('$typeComponent' $whithoutTags) ;?>";
                     $this->content = str_replace($matches[0][$i], $replace, $this->content); 
                 }
             }

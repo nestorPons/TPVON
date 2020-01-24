@@ -1,0 +1,41 @@
+<?php namespace app\controllers\components?><section id="styles">
+    <h1>Configuración de estilos</h1>
+    <form id="styles_form">
+        <?php new \app\core\Components('m-input' , Array("id"=>"id5e2b0043f0b01_f1","value"=>"$font1","label"=>"Fuente principal")) ;?>
+        <?php new \app\core\Components('m-input' , Array("id"=>"id5e2b0043f0b01_f2","value"=>"$font2","label"=>"Fuente secundaria")) ;?>
+        <?php new \app\core\Components('m-input' , Array("id"=>"id5e2b0043f0b01_c1","value"=>"$main_color","label"=>"Color principal")) ;?>
+        <?php new \app\core\Components('m-input' , Array("id"=>"id5e2b0043f0b01_c2","value"=>"$second_color","label"=>"Color secundario")) ;?>
+    </form>
+    <script>
+        app.styles = {
+            name : 'styles',
+            change: false,
+            form : document.getElementById('styles_form'), 
+            font1: new MyInput("id5e2b0043f0b01_f1"),
+            font2: new MyInput("id5e2b0043f0b01_f2"),
+            color1: new MyInput("id5e2b0043f0b01_c1"),
+            color2: new MyInput("id5e2b0043f0b01_c2"),
+            load(){
+                this.form.addEventListener('change', _=> this.change = true);
+            },
+            exit() {
+                if (this.change) this.save();
+            },
+            save() {
+                app.post({
+                    controller: this.name,
+                    action: 'save',
+                    data: {
+                        'idioma': 'es',
+                        'font1': this.font1.value(),
+                        'font2': this.font2.value(),
+                        'main-color': this.color1.value(),
+                        'second-color': this.color2.value()
+                    }
+                }, (r, s) => {
+                    ///document.getElementById('styles').href='/css/main.min.css';
+                });
+            }
+        }
+    </script>
+</section>

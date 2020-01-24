@@ -4,29 +4,32 @@ const app = {
     GET: $_GET,
     // Peticiones con datos 
     post(data, callback, error = true) {
+        // Si esta cargado el navbar poner el spinner en cada petición
+        if(typeof navbar != 'undefined') navbar.spinner.show(data.controller);
         if (typeof data.controller === 'undefined') {
             this.mens.error({ success: false, error: 'No se ha asignado  controlador' })
             return false
         }
         if (typeof data.db === 'undefined') data.db = $_GET['db']; 
-
+        
         this.ajax('post', data, (respond, status, xhr, dataType) => {
-            let data = null
+            if(typeof navbar != 'undefined') navbar.spinner.hide(data.controller);
+            let d = null
             // La respuesta puede ser json o html 
             try {
                 // comprobamos si es json
-                data = JSON.parse(respond);
+                d = JSON.parse(respond);
                 // la respuesta es JSON
-                console.log(data)
+                console.log(d)
 
                 // Imprimimos mensaje de error si lo hay 
                 if (error)
-                    if ((isEmpty(data.success) ||
-                        data.success == false ||
-                        data.success == 0) &&
-                        exist(data.mens)) {
+                    if ((isEmpty(d.success) ||
+                        d.success == false ||
+                        d.success == 0) &&
+                        exist(d.mens)) {
                             console.log('Error en la respuesta!!');
-                            this.mens.error(data.mens || 'No se ha podido rehalizar la petición!')
+                            this.mens.error(d.mens || 'No se ha podido rehalizar la petición!')
                             return false
                         }
             } catch (e) {
@@ -36,8 +39,8 @@ const app = {
                 app.sections.load(html.attr('id'), html)
 
             } finally {
-                let resp = data ? data.data : null,
-                    state = data && data.mens ? false : true;
+                let resp = d ? d.data : null,
+                    state = d && d.mens ? false : true;
                     typeof callback == "function" && callback(resp, state)
             }
         });
@@ -130,6 +133,9 @@ const app = {
         info(mens){
             alert(mens);
             return this;
+        },
+        success(mens){
+            alert(mens)
         }
     },
     sections: {
@@ -164,7 +170,7 @@ const app = {
                     })
                 }
             } catch (error) {
-                console.info(error)
+                console.warn(error)
             }
         },
         show(section, callback) {
@@ -185,7 +191,7 @@ const app = {
                     typeof callback == "function" && callback();
                 })
             }
-            this.onblur()
+            this.exit()
         },
         // Comportamiento de la sección activa al cargarse 
         inicialize(section) {
@@ -231,9 +237,9 @@ const app = {
         search() {
 
         },
-        onblur() {
-            if (app[this.last] != undefined && typeof app[this.last].onblur == 'function') {
-                app[this.last].onblur(f => {
+        exit() {
+            if (app[this.last] != undefined && typeof app[this.last].exit == 'function') {
+                app[this.last].exit(f => {
                     app[this.last].change = false
                 })
             }

@@ -1,50 +1,16 @@
 <nav id="navBar" class="menu-initial">
     <i id="icon-menu" class="lnr lnr-menu"></i>
     <ul>
-        <li>
-            <m-a href="tpv" class="active" accesskey="v" title="alt+v">
-                <div class="spinner primary hidden"></div>
-                <i class="lnr lnr-laptop"></i>
-                <span>TPV</span>
-            </m-a>
-        </li>
-        <li><m-a href="users" accesskey="u" title="alt+u">
-                <div class="spinner primary hidden"></div>
-                <i class="lnr lnr-users"></i>
-                <span>Usuarios</span>
-            </m-a></li>
-        <li><m-a href="services" accesskey="s" title="alt+s">
-                <div class="spinner primary hidden"></div>
-                <i class="lnr lnr-briefcase"></i>
-                <span>Servicios</span>
-            </m-a></li>
-        <li><m-a href="families" accesskey="f" title="alt+f">
-            <div class="spinner primary hidden"></div>
-            <i class="lnr lnr-text-size"></i>
-            <span>Familias</span>
-        </m-a></li>
-        <li><m-a href="control" accesskey="c" title="alt+c">
-            <div class="spinner primary hidden"></div>
-            <i class="lnr lnr-gift"></i>
-            <span>Regalo</span>
-        </m-a></li>
+        <m-nav href="tpv" accesskey="v" label="Venta" icon="laptop" class="active"/> 
+        <m-nav href="users" accesskey="u" label="Usuarios" icon="users"/> 
+        <m-nav href="services" accesskey="s" label="Servicios" icon="briefcase"/> 
+        <m-nav href="families" accesskey="f" label="Familias" icon="text-size"/>
+        <m-nav href="control" accesskey="r" label="Regalo" icon="gift"/>
         @if ($admin)
-            <li><m-a href="conf" accesskey="x" title="alt+x">
-                <div class="spinner primary hidden"></div>
-                <i class="lnr lnr-cog"></i>
-                <span>Config</span>
-            </m-a></li>
-            <!-- <li><a href="promos"><i class="lnr lnr-diamond"></i><span>VIP</span></a></li> -->
-            <li><m-a href="income" accesskey="i" title="alt+i">
-                <div class="spinner primary hidden"></div>
-                <i class="lnr lnr-database"></i>
-                <span>Historial</span>
-            </m-a></li>
-            <li><m-a href="chart" accesskey="q" title="alt+q">
-                <div class="spinner primary hidden"></div>
-                <i class="lnr lnr-chart-bars"></i>
-                <span>Gráficas</span>
-            </m-a></li>
+            <m-nav href="conf" accesskey="c" label="Config" icon="cog"/>
+            <m-nav href="income" accesskey="i" label="Historial" icon="database"/>
+            <m-nav href="chart" accesskey="g" label="Gráficas" icon="chart-bars"/>
+            <m-nav href="styles" accesskey="e" label="Estilos" icon="diamond"/>
         @endif
     </ul>
 </nav>
@@ -56,7 +22,6 @@
 
     nav#navBar {
         margin: 0;
-        overflow: hidden;
         transition: width 1s ease;
         background: var(--main-color);
         color: var(--nav-font-color);
@@ -155,6 +120,7 @@
     // · estados del menu initial, short, long 
     if (!exist(localStorage.menuWidth)) localStorage.setItem('menuWidth', 'initial')
     var navbar = {
+        active: 'tpv', 
         toggle(change = true) {
             const
                 menuWidth = localStorage.getItem('menuWidth'),
@@ -165,18 +131,31 @@
             navbar.addClass(varClass)
             if (change) localStorage.setItem('menuWidth', varClass)
         },
+        spinner : {
+            show(name){
+                let i = document.querySelector('[href="'+name+'"] .spinner')
+                if(i) i.classList.remove('hidden')
+            }, 
+            hide(name){
+                let i = document.querySelector('[href="'+name+'"] .spinner')
+                if(i) i.classList.add('hidden')
+            }
+        },
         addClass(varclass) {
             $('#navBar').removeClass().addClass(varclass)
             if (varclass == 'menu-max') $('.label').show('slow')
             else $('.label').hide('slow')
+        },
+        success(ob){
+            
         }
     }
     $('#icon-menu').click(navbar.toggle)
     $(function() {
         navbar.addClass(localStorage.getItem('menuWidth'))
         // Acciones personalizadas al clickar en los enlaces
-        $('#navBar m-a').click(function() {
-            
+            $('#navBar m-a').click(function() {
+                
             $(this).find('.spinner').removeClass('hidden')
 
             $('#navBar m-a.active').removeClass('active')
