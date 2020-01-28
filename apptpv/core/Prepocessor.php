@@ -353,9 +353,9 @@ class Prepocessor{
                     $typeComponent = $matches[1][$i]; 
                     $arg_data = ($str_data != '') ? ", Array($str_data)" : '';
                     // Quitamos los tags de php pq no hace falta renombrar que estamos en php ya que es una clase de php
-                    $whithoutTags = preg_replace('#(\<\?\=\s*)|(\s*?\?\>)#', '',  $arg_data);
+                    $whithoutTags = preg_replace('#"\s*(\<\?\=\s*)|(\s*?\?\>)s*"#', '',  $arg_data);
                     // Instanciamos la clase de componentes
-                    $replace = "<?php new \app\core\Components('$typeComponent' $whithoutTags) ;?>";
+                    $replace = "<?php new \app\core\Components('$typeComponent' $whithoutTags);?>";
                     $this->content = str_replace($matches[0][$i], $replace, $this->content); 
                 }
             }

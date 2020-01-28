@@ -55,13 +55,15 @@ class Components{
         $this->sintax_if();
         // Bucle for 
         $this->sintax_for();
+
         // Imprimiendo las variables de la clase a plantilla 
-        $has = preg_match_all('#\$\$(\w+\-?\w*)#is', $this->file, $matches);
         // Modificando las propiedades o tags de los elementos html
-        if($has){
+        if(
+            preg_match_all('#\$\$(\w+\-?\w*)#is', $this->file, $matches)
+        ){
             for($i = 0; $i < count($matches[0]); $i++) {
                 $prop = $matches[1][$i]; 
-                if(\property_exists($this, $prop)){
+                if(\property_exists($this, $prop)){           
                     $value = $this->{$matches[1][$i]} ?? '';
                     $this->file = str_replace($matches[0][$i], $value, $this->file);
                 } else {
@@ -75,25 +77,30 @@ class Components{
     }
     private function sintax_for(){
         $regex_conditional = '/@for\s*?\((.*?)\)(.*?)@endfor/sim';
-        $has = preg_match_all($regex_conditional, $this->file, $matches);
-        if($has){
-    
+        if( 
+            preg_match_all($regex_conditional, $this->file, $matches)
+        ){
             for($i = 0; $i < count($matches[0]) ; $i++){
+                // De momento solo para los m-select 
                 $prop = trim($matches[1][$i], '$$'); 
                 $content = '';
-
+                
                 if(\property_exists($this, $prop)){
-                    // Convierto el valor en array 
+                    // valor predeterminado
+                    $exist_val = \property_exists($this, $prop);
 
-                    $arr = json_decode($this->{$prop});
-                    $cont = $matches[2][$i];
-                     
-                    foreach($arr as $key => $value){
-                        $c = str_replace('$$key', $key, $cont);
-                        $c = str_replace('$$value', $value, $c);
-                        $content .= $c;
-                    }
-                    $this->file = str_replace($matches[0][$i], $content, $this->file);
+                    $arr = (!is_array($this->{$prop})) 
+                        // Se convierte el valor en un array
+                        ? json_decode($this->{$prop})
+                        : $this->{$prop}; 
+                        $cont = $matches[2][$i];
+                        foreach($arr as $key => $value){
+                            $option = str_replace('$$key', $key, $cont);
+                            if ($exist_val && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
+                            $option = str_replace('$$value', $value, $option);
+                            $content .= $option; 
+                        }                        
+                        $this->file = str_replace($matches[0][$i], $content, $this->file);
                 } else {
                     // Si no existe la propiedad quitamos el elemento
                     $this->file = str_replace($matches[0][$i], '' , $this->file);

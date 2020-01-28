@@ -1,4 +1,5 @@
-<?php use MatthiasMullie\Minify;
+<?php 
+use MatthiasMullie\Minify;
 // Script para comprimir los ficheros css y js
 // Carpetas de trabajo /htdocs/css y /htdocs/js
 // Carpeta con archivos compilados /htdocs/build

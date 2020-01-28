@@ -16,6 +16,7 @@ const APP                           = ROOT . 'apptpv/';
         const JS                    = SRC . 'js/';
     const DB                        = APP . 'db/';
     const CACHES                    = APP . 'caches/';
+    const HELPERS                   = APP . 'helpers/';
     
 const HTDOCS                        = ROOT . PUBLIC_FOLDER; // Carpeta pública
     const NODE_MODULES              = HTDOCS . 'node_modules/';

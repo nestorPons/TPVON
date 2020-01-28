@@ -1,25 +1,30 @@
 <section id="styles">
     <h1>Configuración de estilos</h1>
     <form id="styles_form">
-        <m-input id="--id_f1" value="$$font1" label="Fuente principal" />
-        <m-input id="--id_f2" value="$$font2" label="Fuente secundaria" />
-        <m-input id="--id_c1" value="$$main_color" label="Color principal" />
-        <m-input id="--id_c2" value="$$second_color" label="Color secundario" />
+        <m-select id="--id_f1" value="$$font1" label="Fuente principal" options="$$fonts" class="valid"/>
+        <m-select id="--id_f2" value="$$font2" label="Fuente secundaria" options="$$fonts" class="valid"/>
+        <m-input type="color" id="--id_c1" value="$$main_color" label="Color principal" />
+        <m-input type="color" id="--id_c2" value="$$second_color" label="Color secundario" />
     </form>
     <script>
         app.styles = {
-            name : 'styles',
+            buttons: [],
+            name: 'styles',
             change: false,
-            form : document.getElementById('styles_form'), 
-            font1: new MyInput("--id_f1"),
-            font2: new MyInput("--id_f2"),
+            css_file: 'css/main.css',
+            form: document.getElementById('styles_form'),
+            font1: new MySelect("--id_f1"),
+            font2: new MySelect("--id_f2"),
             color1: new MyInput("--id_c1"),
             color2: new MyInput("--id_c2"),
-            load(){
-                this.form.addEventListener('change', _=> this.change = true);
+            load() {
+                this.font1.change(_ => this.save());
+                this.font2.change(_ => this.save());
+                this.color1.change(_ => this.save());
+                this.color2.change(_ => this.save());
             },
             exit() {
-                if (this.change) this.save();
+                
             },
             save() {
                 app.post({
@@ -33,7 +38,13 @@
                         'second-color': this.color2.value()
                     }
                 }, (r, s) => {
-                    ///document.getElementById('styles').href='/css/main.min.css';
+                    if (s) {
+                        let fileref = document.createElement("link");
+                        fileref.setAttribute("rel", "stylesheet");
+                        fileref.setAttribute("type", "text/css");
+                        fileref.setAttribute("href", this.css_file);
+                        document.getElementsByTagName("head")[0].appendChild(fileref);
+                    }
                 });
             }
         }

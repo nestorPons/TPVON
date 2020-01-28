@@ -16,9 +16,13 @@
     />
     <label for="--id_input" class="$$classLabel">$$label</label>
     @if ($$icon) <i id="icon$$id" class="lnr lnr$$-icon"></i> @endif
-    <style scoped>
+    <style land="less" scoped>
         label {
             z-index: 101;
+        }
+        input[type="color"]{
+            width: 10ch;
+            margin-left: 13ch;
         }
     </style>
     <script>
@@ -31,6 +35,10 @@
             value(value = null){
                 if (value) this.el.value = value ; 
                 return this.el.value;
+            }
+            change(fn){
+                this.el.addEventListener('change', fn);
+                return this;
             }
         }
     </script>

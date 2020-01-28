@@ -3,8 +3,8 @@
        <h1 translate="no"><?= $nombre?></h1>
         <fieldset class="container">
             <legend>Login</legend> 
-            <?php new \app\core\Components('m-input' , Array("type"=>"email","label"=>"Email del usuario","name"=>"email","required"=>"true")) ;?>
-            <?php new \app\core\Components('m-input' , Array("type"=>"password","label"=>"Contraseña","name"=>"password","required"=>"true")) ;?>
+            <?php new \app\core\Components('m-input' , Array("type"=>"email","label"=>"Email del usuario","name"=>"email","required"=>"true"));?>
+            <?php new \app\core\Components('m-input' , Array("type"=>"password","label"=>"Contraseña","name"=>"password","required"=>"true"));?>
         </fieldset>
         <?php new ButtonSuccess(['caption' => 'Acceder']); /* new ButtonCancel */ ?>
     </form>

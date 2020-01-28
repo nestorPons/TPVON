@@ -5,10 +5,15 @@
   /* --spinner-fore-color: inherit; */
   --universal-border-radius: 5px;
   --main-color: @main-color;
+  --color-second: @second-color; 
+  --font-main: @font1;
+  --font-second: @font2;
+
   --nav-font-color: contrast(@main-color, #333333, #ffffff, 60%);
   --effect-transform-hover: scale(1.2);
   --color-red: #f00;
   --border-radius: 5px;
+
 }
 * {
   -moz-user-select: none;
@@ -21,6 +26,7 @@ body {
   overflow: hidden;
 }
 body * {
+  font-family: var(--font-main);  
   transition: all 0.7s ;
 }
 input {

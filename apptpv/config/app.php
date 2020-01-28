@@ -4,7 +4,7 @@ date_default_timezone_set("UTC");
 date_default_timezone_set("Europe/Madrid");
 
 // Entorno de desarrollo 
-define('ENV', TRUE);
+define('ENV', true);
 define('SEND_MAIL', TRUE);
 // Usuarios de la aplicacion con sus niveles
 define('LEVEL_USER', 0);

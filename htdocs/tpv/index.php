@@ -28,10 +28,8 @@
  * @license   https://opensource.org/licenses/MIT
  */
 
-use \app\core\{
-    Router,
-    Prepocessor
-};
+use \app\core\{Router, Prepocessor};
+use \app\controllers\{Styles}; 
 define('ROOT' ,dirname(dirname(__DIR__)) . '/');
 require_once ROOT . '/apptpv/config/folders.php';
 require_once ROOT . '/apptpv/config/app.php';
@@ -42,10 +40,9 @@ include \FOLDERS\CONFIG . 'files.php';
 if( ENV ){
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
-
-    require_once \FOLDERS\CORE  . 'dev.php';
-    require_once \FOLDERS\CORE  . 'less.php';
-    require_once \FOLDERS\CORE  . 'minify.php';
+    require_once \FOLDERS\HELPERS  . 'dev.php';
+    Styles::load();
+    require_once \FOLDERS\HELPERS  . 'minify.php';
     new Prepocessor(false);
 }
 

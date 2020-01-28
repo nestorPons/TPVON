@@ -12,7 +12,7 @@
     <select  
         type="$$type" 
         id="el--id" 
-        class="$$class $$default " 
+        class="$$class $$default" 
         placeholder=" " 
         style="$$style" 
         name="$$name" 
@@ -39,26 +39,29 @@
         @endfor
     </select>
     <label for="el--id">$$label</label>
-</component>
     <style lang="less" scoped>
         height: 86%;
         select {
             width: 100%;
         }
-    </style>
+        </style>
     <script>
         class MySelect {
             // Id del componente general no del select
             constructor(id) {
-
+                
                 this.el = (typeof id == 'string') ?
-                    document.getElementById(id).querySelector('select') :
-                    id.querySelector('select');
-
+                document.getElementById(id).querySelector('select') :
+                id.querySelector('select');
+                
                 this.o = this.el.getElementsByTagName('option');
                 this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
-
+                
                 this.el.addEventListener('change', fn => this.el.classList.add(this.CLASS_SELECTED));
+            }
+            change(fn){
+                this.el.addEventListener('change', fn);
+                return this;
             }
             addClass(myclass) {
                 this.el.classList.add(myclass)
@@ -87,7 +90,7 @@
             reset() {
                 this.el.classList.remove(this.CLASS_SELECTED)
                 let options = this.el.getElementsByTagName('option')
-
+                
                 for (let option of options) {
                     option.selected = false
                 }
@@ -104,7 +107,7 @@
             option(data) {
                 if (data != undefined) {
                     let optionselected = false
-
+                    
                     for (let option of this.o) {
                         if (option.getAttribute('value') == data) {
                             option.selected = true
@@ -122,4 +125,5 @@
                 this.el.removeChild(this.o[0])
             }
         }
-    </script>
+        </script>
+</component>

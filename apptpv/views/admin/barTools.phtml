@@ -1,33 +1,34 @@
 <header id="bartools">
     <div id="bartools-actions">
-        <m-icon  id='--id_add' class="menu-buttons" style="color:red" icon='plus-circle' onclick='app.sections.add()' label='Nuevo'/>
-        <m-icon  id='--id_del' class="menu-buttons" icon='cross-circle' onclick='menu.del()' label='Eliminar'/>
-        <m-icon  id='--id_prev' class="menu-buttons" icon='chevron-left-circle' onclick='app.sections.prev()' label='Anterior'/>
-        <m-icon  id='--id_next' class="menu-buttons" icon='chevron-right-circle' onclick='app.sections.next()' label='Siguiente'/>
-        <m-icon  id='--id_print' class="menu-buttons" icon='printer' onclick='app.sections.print()' label='Imprimir'/>
-        <m-icon  id='--id_conf' class="menu-buttons" icon='cog' onclick='app.sections.conf()' label='Configurar'/>
-        <m-icon  id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filter'/>
+        <m-icon id='--id_add' class="menu-buttons" style="color:red" icon='plus-circle' onclick='app.sections.add()' label='Nuevo' />
+        <m-icon id='--id_del' class="menu-buttons" icon='cross-circle' onclick='menu.del()' label='Eliminar' />
+        <m-icon id='--id_prev' class="menu-buttons" icon='chevron-left-circle' onclick='app.sections.prev()' label='Anterior' />
+        <m-icon id='--id_next' class="menu-buttons" icon='chevron-right-circle' onclick='app.sections.next()' label='Siguiente' />
+        <m-icon id='--id_print' class="menu-buttons" icon='printer' onclick='app.sections.print()' label='Imprimir' />
+        <m-icon id='--id_conf' class="menu-buttons" icon='cog' onclick='app.sections.conf()' label='Configurar' />
+        <m-icon id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filter' />
 
         <div id="search" onblur="menu.search.close()">
-            <m-icon  id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar'/>
-            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup = 'menu.search.keypress(event)' tabindex = '-1' title = 'Pulse Enter para realizar la búsqueda.'/>
+            <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' />
+            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' tabindex='-1' title='Pulse Enter para realizar la búsqueda.' />
         </div>
     </div>
-    <div id="bartools-central"> 
-    </div>  
+    <div id="bartools-central">
+    </div>
     <div id="bartools-general">
-        <m-icon  id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Acerca de'/>
-        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank"/>
-        <m-icon icon="power-switch" label="Salir" onclick="app.close()"/>
+        <m-icon id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Acerca de' />
+        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank" />
+        <m-icon icon="power-switch" label="Salir" onclick="app.close()" />
     </div>
 </header>
 <style lang="less">
     @color: var(--main-color);
-    #bartools{
-        background: 
-            linear-gradient(217deg, @color, rgba(255,0,0,0) 70.71%),
-            linear-gradient(127deg, @color, rgba(0,255,0,0) 70.71%),
-            linear-gradient(136deg, @color, rgba(0,0,255,0) 70.71%);
+
+    #bartools {
+        background:
+            linear-gradient(217deg, @color, rgba(255, 0, 0, 0) 70.71%),
+            linear-gradient(127deg, @color, rgba(0, 255, 0, 0) 70.71%),
+            linear-gradient(136deg, @color, rgba(0, 0, 255, 0) 70.71%);
         color: var(--nav-font-color);
         padding: 0 20px 0 60px;
         display: grid;
@@ -36,111 +37,132 @@
         overflow-x: visible;
         overflow-y: visible;
         height: auto;
-    
+
     }
-    #bartools i:active{
+
+    #bartools i:active {
         color: var(--nav-link-color);
     }
-    #bartools a, #bartools a:hover, #bartools a:link, #bartools a:visited{
+
+    #bartools a,
+    #bartools a:hover,
+    #bartools a:link,
+    #bartools a:visited {
         color: inherit;
     }
-    #bartools a:hover{
+
+    #bartools a:hover {
         font-weight: bold;
-    }   
-    #bartools > div{
+    }
+
+    #bartools>div {
         flex-grow: 1;
         display: flex;
         align-items: inherit;
     }
-    #bartools > div:nth-child(2){
+
+    #bartools>div:nth-child(2) {
         text-align: center;
     }
-    #bartools > div:last-child{
+
+    #bartools>div:last-child {
         justify-content: flex-end;
     }
-    #bartools .lnr{
+
+    #bartools .lnr {
         display: inline-block;
         font-size: 1.4rem;
         cursor: pointer;
         margin: 2px 5px;
     }
-    #bartools .lnr:hover{
+
+    #bartools .lnr:hover {
         font-weight: bold;
     }
-    #bartools #--id_txtSearch{
+
+    #bartools #--id_txtSearch {
         position: relative;
         top: 0;
         left: 3204px;
         height: 58px;
         z-index: 1;
         text-align: left;
-        display: flex; 
-        align-items: center;  
+        display: flex;
+        align-items: center;
         width: 300px;
         background-color: var(--form-back-color);
-        margin-left: 5px ;
+        margin-left: 5px;
     }
-    #bartools #--id_txtSearch>input{
+
+    #bartools #--id_txtSearch>input {
         position: absolute;
         width: 97%;
     }
-    #bartools #search{
-        display: inherit; 
+
+    #bartools #search {
+        display: inherit;
         align-items: center;
     }
-    #bartools #search .row{
+
+    #bartools #search .row {
         background: transparent;
     }
-    #bartools #search .row input, ::placeholder{
+
+    #bartools #search .row input,
+    ::placeholder {
         color: inherit;
     }
-    #bartools #search .row ::placeholder{
+
+    #bartools #search .row ::placeholder {
         color: #aaa;
     }
 </style>
 <script>
     var menu = {
-        tile    : document.getElementById('bartools-name-sections'),
-        buttons : {
-            $add        : $('#--id_add').find('i'),
-            $del        : $('#--id_del').find('i'),
-            $next       : $('#--id_next').find('i'),
-            $prev       : $('#--id_prev').find('i'),
-            $search     : $('#--id_search').find('i'),
-            $print      : $('#--id_print').find('i'),
-            $conf       : $('#--id_conf').find('i'),
-            $filter     : $('#--id_filter').find('i'),
-            show(arr = []){               
-                $('#bartools').find('#bartools-actions').find('.menu-buttons').hide()
-                for(i in arr){
-                    menu.buttons['$'+arr[i]].show()
+        tile: document.getElementById('bartools-name-sections'),
+        $add: $('#--id_add').find('i'),
+        $del: $('#--id_del').find('i'),
+        $next: $('#--id_next').find('i'),
+        $prev: $('#--id_prev').find('i'),
+        $search: $('#--id_search').find('i'),
+        $print: $('#--id_print').find('i'),
+        $conf: $('#--id_conf').find('i'),
+        $filter: $('#--id_filter').find('i'),
+        show(arr = []) {
+            $('#bartools').find('#bartools-actions').find('.menu-buttons').hide();
+            for (i in arr) {
+                let button = this['$' + arr[i]];
+                if (button != undefined) {
+                    button.show();
+                } else {
+                    console.error(`Botón ${arr[i]} no existe!!`);
                 }
             }
-         },
-        search  : {
-            $search     : $('#--id_txtSearch'), 
-            $txtSearch  : $('#--id_txtSearch').find('input'),
-            $label      : $('#--id_search').find('.label'), 
-            $icon       : $('#--id_search'),
-            velocity    : 500,
-            isOpen      : false,
-            open(){
+        },
+        search: {
+            $search: $('#--id_txtSearch'),
+            $txtSearch: $('#--id_txtSearch').find('input'),
+            $label: $('#--id_search').find('.label'),
+            $icon: $('#--id_search'),
+            velocity: 500,
+            isOpen: false,
+            open() {
                 this.$txtSearch.val('');
                 this.$label.text('Cerrar');
-                
+
                 this.$icon
                     .removeClass('lnr-magnifier')
-                    .addClass('lnr-cross')
+                    .addClass('lnr-cross');
 
                 this.$search.animate({
-                    left:  0
+                    left: 0
                 }, this.velocity, fn => {
-                    this.$txtSearch.focus()
+                    this.$txtSearch.focus();
                 })
                 this.isOpen = true;
                 return this;
             },
-            close(){
+            close() {
                 this.$label.text('Buscar');
                 // Icono buscar
                 this.$icon
@@ -152,29 +174,29 @@
                     left: window.innerWidth + 1000
                 }, this.velocity)
                 this.isOpen = false;
-                return this;     
+                return this;
             },
-            toggle(){
+            toggle() {
                 event.stopPropagation();
-                if( this.isOpen ) this.close()
+                if (this.isOpen) this.close()
                 else this.open();
                 return this;
             },
-            keypress(e){
-                if(e.key == 'Enter') this.search();
+            keypress(e) {
+                if (e.key == 'Enter') this.search();
             },
-            search(){
-                typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val()); 
+            search() {
+                typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val());
                 return this;
             },
-            placerholder(param = null){
-                if(param) $txtSearch.attr('placeholder', param);
+            placerholder(param = null) {
+                if (param) $txtSearch.attr('placeholder', param);
                 return $txtSearch.attr('placeholder');
             }
-         },
-        del(){
-            if(app.mens.confirm('¿Desea eliminar el registro?'))
+        },
+        del() {
+            if (app.mens.confirm('¿Desea eliminar el registro?'))
                 app.sections.del()
-         }
+        }
     }
 </script>
