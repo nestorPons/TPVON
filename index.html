@@ -402,7 +402,7 @@ A partir de este momento la aplicación ya esta lista para su uso. </p>
 <p><strong>La constante PUBLIC_FOLDER_ROOT declarada en apptpv/config/folders.php contiene la carpeta publica del servidor.</strong>
 que por defecto es htdocs.</p>
 <h4 id="para-desplegarlo-en-servidor-local">Para desplegarlo en servidor local</h4>
-<p>Si se desea se dispone de un contenedor docker con lamp instalado en el mismo proyecto
+<p>Si se desea se dispone de un contenedor docker con LAMP instalado en el mismo proyecto
 Para construirlo por primera vez: </p>
 <div class="codehilite"><pre><span></span><span class="na">.server</span><span class="err">/</span><span class="no">docker-compose</span> <span class="no">build</span> 
 </pre></div>
@@ -419,11 +419,20 @@ Para construirlo por primera vez: </p>
 
 
 <p>Desde el navegador acceda al localhost o su su hosting donde desplegó su aplicación.</p>
-<div class="codehilite"><pre><span></span><span class="err">localhost/tpv/index.php o www.tuhosting.com/tpv/index.php</span>
+<div class="codehilite"><pre><span></span><span class="err">localhost/tpv/index.php</span>
 </pre></div>
 
 
-<p><em>Se inicia el configurado de la aplicación en su primer acceso.</em></p>
+<p>o </p>
+<div class="codehilite"><pre><span></span><span class="err">www.tuhosting.com/tpv/index.php</span>
+</pre></div>
+
+
+<p>Acceda a la base de datos mediante phpmyadmin: </p>
+<div class="codehilite"><pre><span></span><span class="n">localhost</span><span class="o">:</span><span class="mi">8080</span>
+</pre></div>
+
+
 <h2 id="deployment">Deployment</h2>
 <p>Consulte su hosting para saber que opciones le proporciona.
 Manualmente solo debe copiar la carpeta del prollecto en la localización deseada. </p>
