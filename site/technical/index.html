@@ -89,7 +89,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#iformacion-tecnica" tabindex="1" class="md-skip">
+      <a href="#informacion-tecnica" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -277,8 +277,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#documento-dirigido-a-los-usuarios-desarrolladores" class="md-nav__link">
-    Documento dirigido a los usuarios desarrolladores.
+  <a href="#documento-dirigido-a-desarrolladores" class="md-nav__link">
+    Documento dirigido a desarrolladores.
   </a>
   
 </li>
@@ -358,8 +358,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#documento-dirigido-a-los-usuarios-desarrolladores" class="md-nav__link">
-    Documento dirigido a los usuarios desarrolladores.
+  <a href="#documento-dirigido-a-desarrolladores" class="md-nav__link">
+    Documento dirigido a desarrolladores.
   </a>
   
 </li>
@@ -390,54 +390,75 @@
                   <a href="https://github.com/nestorPons/TPVON/edit/master/docs/technical.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="iformacion-tecnica">IFORMACIÓN TÉCNICA</h1>
-<h6 id="documento-dirigido-a-los-usuarios-desarrolladores"><em>Documento dirigido a los usuarios desarrolladores.</em></h6>
+                <h1 id="informacion-tecnica">INFORMACIÓN TÉCNICA</h1>
+<h6 id="documento-dirigido-a-desarrolladores"><em>Documento dirigido a desarrolladores.</em></h6>
 <hr />
 <h3 id="listado-de-carpetas">Listado de carpetas</h3>
 <blockquote>
-<p><strong>apptpv</strong>   &ndash;&gt; aplicación TPVON.      </p>
+<p><strong>apptpv</strong> &rarr; <em>Aplicación TPVON.</em>      </p>
 <blockquote>
-<p>_caches -&gt; Contenedor de archivos de caché.       <br />
-config -&gt; Archivos de configuración de la aplicación.     </p>
+<p><strong>caches</strong> &rarr; <em>Contenedor de archivos de caché.</em>       <br />
+<strong>config</strong> &rarr; <em>Archivos de configuración de la aplicación.</em>     </p>
 <blockquote>
-<p>app.php -&gt; Configuración de la aplicació.     <br />
-conndefault -&gt; Datos predeterminados de la configuración.
-conn.ini -&gt; Configuración de la conexión.
-files.php -&gt; Constantes de direcciónes de archivos. 
-folders.php -&gt; Constantes de direcciones de carpetas. 
-mail.ini -&gt; Datos de configuración conexión email.
-mail.php -&gt; Configuración para la clase mail. </p>
+<p>app.php &rarr; <em>Archivo de configuración de la aplicación.</em>          <br />
+conndefault &rarr; <em>Datos predeterminados de la configuración.</em>
+conn.ini &rarr; <em>Configuración de la conexión.</em>
+files.php &rarr; <em>Constantes de direcciónes de archivos.</em>  <br />
+folders.php &rarr; <em>Constantes de direcciones de carpetas.</em> <br />
+mail.ini &rarr; <em>Datos de configuración conexión email.</em>     <br />
+mail.php &rarr; <em>Configuración para la clase mail.</em>      </p>
 </blockquote>
-<p>controllers -&gt; Clases controladoras.
-    │   ├── core
-    │   ├── db
-    │   ├── helpers
-    │   ├── libs
-    │   ├── models
-    │   ├── src
-    │   └── views
-│   ├── controllers   <br />
-│   ├── core      <br />
-│   ├── db    <br />
-│   ├── helpers   <br />
-│   ├── libs      <br />
-│   ├── models    <br />
-│   ├── src   <br />
-│   └── views     <br />
-├── docs      <br />
-│   ├── assets    <br />
-│   └── img   <br />
-├── htdocs    <br />
-│   └── tpv   <br />
-├── site      <br />
-│   ├── about     <br />
-│   ├── assets    <br />
-│   ├── img   <br />
-│   ├── manual    <br />
-│   └── search    <br />
-└── vendor      </p>
+<p><strong>controllers</strong> &rarr; <em>Clases controladoras.</em> <br />
+<strong>core</strong> &rarr; <em>Clases y archivos esenciales del fraemwork.</em> </p>
+<blockquote>
+<p>Components.php &rarr; <em>Clase que crea los componentes.</em>
+Controller.php &rarr; <em>Clase controladora principal.</em>  <br />
+Data.php &rarr; <em>Clase auxiliar de control de datos.</em> <br />
+Error.php &rarr; <em>Clase para el control de errores (deshuso).</em>    <br />
+Preprocessor.php &rarr; <em>Clase preprocesadora de las plantillas.</em>  <br />
+Query.php &rarr; <em>Clase de conexión a la base de datos.</em>
+Router.php &rarr; <em>Clase enrutadora.</em>
+Security.php &rarr; <em>Clase que se encarga de la seguridad de la aplicación.</em> </p>
+</blockquote>
+<p><strong>db</strong> &rarr; <em>Carpeta contenedora de los archivos SQL.</em><br />
+<strong>helpers</strong> &rarr; <em>Scripts de php.</em><br />
+<strong>libs</strong> &rarr; <em>Clases de terceros que no han sido cargadas con composer.</em> <br />
+<strong>models</strong> &rarr; <em>Clases modelo.</em>  <br />
+<strong>src</strong> &rarr; <em>Archivos y carpetas js y css para ser compilados.</em>    </p>
+<blockquote>
+<p><strong>js</strong> &rarr; <em>Archivos JS.</em> <br />
+<strong>less</strong> &rarr; <em>Archivos less sin compilar.</em>   </p>
+</blockquote>
+<p><strong>view</strong> &rarr; <em>Carpeta de las vistas.</em>      </p>
+<blockquote>
+<p><strong>mycomponents</strong> &rarr; <em>Carpeta donde se guardan los componentes creados.</em>  <br />
+<strong>admin</strong> &rarr; <em>Carpeta de las vistas de la zona de administrador.</em>
+<strong>components</strong> &rarr; <em>Versión 1.0 de los conmponentes (desuso).</em> <br />
+<strong>login</strong> &rarr; <em>Todas las vistas de la zona de login.</em>   <br />
+<strong>users</strong> &rarr; <em>Vistas de la zona de usuarios cliente (inactiva).</em></p>
+</blockquote>
+<p><strong>docs</strong> &rarr; <em>Carpeta de documentación creada por <a href="https://www.mkdocs.org/">MkDocs</a>.</em>  <br />
+<strong>htdocs</strong> &rarr; <em>Carpeta pública.</em></p>
+<blockquote>
+<p><strong>tpv</strong> &rarr; <em>Se usa una carpeta para añadir la aplicación en un host con otros elementos.</em></p>
+<blockquote>
+<p><strong>buid</strong> &rarr; <em>Se almacena el post-procesado de la aplicación.</em><br />
+<strong>companies</strong> &rarr; <em>Se guardan los archivos de configuración editables por el usuario.</em>   <br />
+<strong>config</strong> &rarr; <em>Scripts y htmls de configuración en la creación de la aplicación.</em>
+<strong>css</strong> &rarr; <em>Post-procesado de los archivos de estilos.</em>  <br />
+<strong>js</strong> &rarr; <em>Post-procesado de los archivos js.</em>
+<strong>node_modules</strong> &rarr; <em>Contiene los paquetes npm.</em> 
+index.php &rarr; <em>Puerta principal de enlace a la aplicación.</em></p>
 </blockquote>
 </blockquote>
+<p><strong>site</strong> &rarr; <em>Archivos compilados por <a href="https://www.mkdocs.org/">MkDocs</a>.</em>
+<strong>vendor</strong> &rarr; <em>Carpeta de almacenamiento de <a href="https://getcomposer.org//">Composer</a>.</em></p>
+</blockquote>
+</blockquote>
+<div class="admonition info note">
+<p class="admonition-title">Info</p>
+<p>Percatese que los nombres de archivos de clase se escriben con la primera letra en mayúsculas. </p>
+</div>
                 
                   
                 
