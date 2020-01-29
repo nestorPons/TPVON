@@ -1,12 +1,12 @@
 <?php namespace app\controllers\components?><section id="buttonsTicket">
     <h1>Factura simplificada</h1>
     <div class="info">
-        <?php new \app\core\Components('m-label' , Array("id"=>"id5e3015a074189_total","label"=>"Total","value"=>"0","color"=>"var(--red-color)"));?>
-        <?php new \app\core\Components('m-label' , Array("id"=>"id5e3015a074189_return","label"=>"A devolver","value"=>"0","color"=>"var(--main-color)"));?>
+        <?php new \app\core\Components('m-label' , Array("id"=>"id5e318dea43265_total","label"=>"Total","value"=>"0","color"=>"var(--red-color)"));?>
+        <?php new \app\core\Components('m-label' , Array("id"=>"id5e318dea43265_return","label"=>"A devolver","value"=>"0","color"=>"var(--main-color)"));?>
     </div>
-    <?php new \app\core\Components('m-input' , Array("id"=>"id5e3015a074189_pay","label"=>"Pago en efectivo","value"=>"0","onkeyup"=>"app.ticket.change()"));?>
-    <?php new \app\core\Components('m-checkbox' , Array("id"=>"id5e3015a074189_present","class"=>"isPresent","label"=>"Es regalo","name"=>"control","value"=>"1","onclick"=>"app.ticket.toggle()"));?>
-    <?php new \app\core\Components('m-input' , Array("id"=>"id5e3015a074189_date","type"=>"date","label"=>"Fecha vencimiento","name"=>"fecha_vencimiento"));?><br>
+    <?php new \app\core\Components('m-input' , Array("id"=>"id5e318dea43265_pay","label"=>"Pago en efectivo","value"=>"0","onkeyup"=>"app.ticket.change()"));?>
+    <?php new \app\core\Components('m-checkbox' , Array("id"=>"id5e318dea43265_present","class"=>"isPresent","label"=>"Es regalo","name"=>"control","value"=>"1","onclick"=>"app.ticket.toggle()"));?>
+    <?php new \app\core\Components('m-input' , Array("id"=>"id5e318dea43265_date","type"=>"date","label"=>"Fecha vencimiento","name"=>"fecha_vencimiento"));?><br>
 
     <?php
     $btnPrTicket    = new ButtonSuccess(['onclick' => 'app.ticket.print()', 'caption' => 'Imprimir']);
@@ -132,11 +132,11 @@
     app.ticket = {
         name: 'Tickets',
         Ticket: null,
-        present: new MyCheckbox('id5e3015a074189_present'),
-        txtExpire: document.getElementById('id5e3015a074189_date'),
-        lbltotal: new MyLabel('id5e3015a074189_total'),
-        lblreturn: new MyLabel('id5e3015a074189_return'),
-        inputpay : new MyInput('id5e3015a074189_pay'), 
+        present: new MyCheckbox('id5e318dea43265_present'),
+        txtExpire: document.getElementById('id5e318dea43265_date'),
+        lbltotal: new MyLabel('id5e318dea43265_total'),
+        lblreturn: new MyLabel('id5e318dea43265_return'),
+        inputpay : new MyInput('id5e318dea43265_pay'), 
         change(){
             let a = parseFloat(this.inputpay.value()), 
                 b = parseFloat(this.lbltotal.value()),
@@ -157,7 +157,7 @@ echo(
             tel: document.getElementById('ticket_tel'),
             nif: document.getElementById('ticket_nif'),
             iva: document.getElementById('ticket_iva'),
-            change: document.getElementById('id5e3015a074189_return_input'),
+            change: document.getElementById('id5e318dea43265_return_input'),
         },
         Table: new Table('<?= $table->id() ?>'),
         print(callback) {

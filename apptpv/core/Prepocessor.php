@@ -4,7 +4,7 @@ use MatthiasMullie\Minify;
 class Prepocessor{
     const 
         BUILD = \FOLDERS\HTDOCS . 'build/',
-        CACHE_FILE = \FOLDERS\CORE  . 'cache_views.ini',
+        CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
         MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml',
         NAMESPACE_COMPONENTS = 'app\controllers\components';

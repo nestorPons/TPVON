@@ -10,20 +10,6 @@ ___
 ## Notas de lanzamiento 
 Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, puedes ver los [tags en github](https://github.com/nestorpons/TPVON/tags).
 
-#### Versión 1.3 (Próxima)
-* 
-
-#### Versión 1.2 (28-01-20)
-* Añadida la sección estilos. 
-* Añadido el label botón salir aplicación.
-* Añadido el botón acceso al manual.
-
-#### Versión 1.1 (2020-01-20)
-* Reparación de errores.
-* Se añade la documentación de ayuda.
-#### Versión 1.0 (2020-01-14) 
-* Se crea la aplicación y se publica en github.
-
 ## Contribución
 El proyecto TPVOn acoge con beneplácito, y depende, de las contribuciones de los desarrolladores y usuarios de la comunidad de código abierto. Las contribuciones pueden hacerse de varias maneras, algunos ejemplos son:
 

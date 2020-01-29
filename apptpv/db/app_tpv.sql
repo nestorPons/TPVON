@@ -105,14 +105,6 @@ CREATE TABLE `usuarios` (
   `obs` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-CREATE TABLE `accesos` (
-  `id` bigint(20) UNSIGNED ZEROFILL NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `intentos` int(11) NOT NULL,
-  `id_usuario` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
 CREATE TABLE `usuarios_config` (
   `id` int(11) UNSIGNED NOT NULL,
   `promos` tinyint(1) NOT NULL DEFAULT '1',
@@ -181,10 +173,6 @@ ALTER TABLE `empresa`
     ADD UNIQUE KEY `dni` (`dni`),
     ADD UNIQUE KEY `email` (`email`);
 
-  ALTER TABLE `accesos`
-    ADD PRIMARY KEY (`id`),
-    ADD KEY `usuario` (`id_usuario`);
-
 ALTER TABLE `usuarios_config`
   ADD KEY `idusuario` (`id`);
 
@@ -219,9 +207,6 @@ ALTER TABLE `usuarios_config`
   ALTER TABLE `usuarios`
     MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
-  ALTER TABLE `accesos`
-    MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
   ALTER TABLE `familias`
     MODIFY `id` tinyint(2) NOT NULL AUTO_INCREMENT;
 
@@ -250,9 +235,6 @@ ALTER TABLE `usuarios_config`
 
   ALTER TABLE `tokens`
     ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-  ALTER TABLE `accesos`
-    ADD CONSTRAINT `usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `usuarios_config`
   ADD CONSTRAINT `idusuario` FOREIGN KEY (`id`) REFERENCES `usuarios` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

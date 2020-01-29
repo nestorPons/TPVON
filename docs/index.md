@@ -109,7 +109,7 @@ Herramientas:
 
 
 ## Licencia
-Este proyecto está bajo la Licencia (MIT) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia [MIT](https://opensource.org/licenses/MIT) - mira el archivo [LICENSE.md](license.md) para detalles
 
 ---
 ⌨️ con ❤️ por [Néstor Pons](https://github.com/nestorpons) 😊

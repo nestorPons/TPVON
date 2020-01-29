@@ -5,7 +5,10 @@ site_author: Néstor Pons
 nav:
   - Inicio: 'index.md'
   - Manual de usuario: 'manual.md'
+  - Información técnica: 'technical.md'
   - Acerca de: 'about.md'
+  - Versionado: 'version.md'
+  - Licencia: 'license.md'
 theme:
     name: material
     logo:
@@ -22,6 +25,7 @@ extra:
 markdown_extensions:
   - codehilite
   - admonition
+  - pymdownx.smartsymbols
   - pymdownx.emoji:
       emoji_index: !!python/name:pymdownx.emoji.twemoji
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
