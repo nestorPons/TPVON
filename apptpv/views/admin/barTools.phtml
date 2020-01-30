@@ -10,7 +10,7 @@
 
         <div id="search" onblur="menu.search.close()">
             <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' />
-            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' tabindex='-1' title='Pulse Enter para realizar la búsqueda.' />
+            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' onblur='menu.search.close()' tabindex='-1' title='Pulse Enter para realizar la búsqueda.' />
         </div>
     </div>
     <div id="bartools-central">
@@ -141,24 +141,25 @@
         },
         search: {
             $search: $('#--id_txtSearch'),
-            $txtSearch: $('#--id_txtSearch').find('input'),
+            $txtSearch: $('#--id_txtSearch_input'),
             $label: $('#--id_search').find('.label'),
-            $icon: $('#--id_search'),
+            $icon: $('#--id_search_icon'),
             velocity: 500,
             isOpen: false,
-            open() {
+            async open() {
                 this.$txtSearch.val('');
                 this.$label.text('Cerrar');
 
                 this.$icon
                     .removeClass('lnr-magnifier')
-                    .addClass('lnr-cross');
+                    .addClass('lnr-cross-circle');
 
                 this.$search.animate({
                     left: 0
-                }, this.velocity, fn => {
-                    this.$txtSearch.focus();
-                })
+                }, this.velocity)
+                await new Promise(r => setTimeout(r, this.velocity * 2));
+                this.$txtSearch.focus();
+
                 this.isOpen = true;
                 return this;
             },
@@ -166,7 +167,7 @@
                 this.$label.text('Buscar');
                 // Icono buscar
                 this.$icon
-                    .removeClass('lnr-cross')
+                    .removeClass('lnr-cross-circle')
                     .addClass('lnr-magnifier');
 
                 // Cerrar inputtext

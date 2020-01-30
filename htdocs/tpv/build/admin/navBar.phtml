@@ -12,6 +12,9 @@
             <?php new \app\core\Components('m-nav' , Array("href"=>"chart","accesskey"=>"g","label"=>"Gráficas","icon"=>"chart-bars"));?>
             <?php new \app\core\Components('m-nav' , Array("href"=>"styles","accesskey"=>"e","label"=>"Estilos","icon"=>"diamond"));?>
         
+        <footer>
+            <a href="mailto:nestorpons@gmail.com" target="_blank">by Néstor Pons</a>
+        </footer>
     </ul>
 </nav>
 <style>
@@ -19,7 +22,21 @@
         --nav-initial-width: 55px;
         --nav-max-width: 145px;
     }
+    nav#navBar footer{
+        position: absolute;
+        background: transparent;
+        bottom: 0; 
+        border: none; 
+    }
+    nav#navBar footer:hover, nav#navBar footer *:hover {
+       background: transparent;
+    }
+    nav#navBar footer * , nav#navBar footer *:visited{
+        font-size: 0.8rem; 
+        color: var(--back-color) !important;
+    }
 
+    
     nav#navBar {
         margin: 0;
         transition: width 1s ease;
@@ -143,8 +160,8 @@
         },
         addClass(varclass) {
             $('#navBar').removeClass().addClass(varclass)
-            if (varclass == 'menu-max') $('.label').show('slow')
-            else $('.label').hide('slow')
+            if (varclass == 'menu-max') $('.label, .footer').show('slow')
+            else $('.label, .footer').hide('slow')
         },
         success(ob){
             
