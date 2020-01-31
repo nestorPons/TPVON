@@ -23,11 +23,13 @@ class Styles extends Controller
     {
         $name_fonts = []; 
         // Buscamos fuentes en google
-        $fonts = $this->get_google_fonts(self::AMOUNT_FONTS); 
+        $fonts = file(\FILE\FONTS_GOOGLE); 
+
         // Extraemos el valor que nos interesa
         foreach($fonts as $k => $v){
-            $name_fonts[$v->family] = $v->family; 
+            $name_fonts[$v] = $v;
         }
+
         // Cargamos el archivo de configuración
         $this->vars = parse_ini_file(self::FILE);
         parent::view(array_merge($this->vars, ['fonts' => $name_fonts]));
@@ -109,7 +111,7 @@ class Styles extends Controller
         //File to cache the fonts list
         $fontFile = 'google-web-fonts.txt';
         //Replace by your public API Key
-        $APIKey = 'AIzaSyD7vFbMyyRlIycnq8-g16RNLv4dL8rJb_k';
+        $APIKey = 'TU_API_KEY';
         //Total time the file will be cached in seconds, set to a 30 days (86400 seonds is a day)
         $cachetime = 1;
 

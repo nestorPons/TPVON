@@ -160,8 +160,8 @@
         },
         addClass(varclass) {
             $('#navBar').removeClass().addClass(varclass)
-            if (varclass == 'menu-max') $('.label, .footer').show('slow')
-            else $('.label, .footer').hide('slow')
+            if (varclass == 'menu-max') $('.label, #navBar footer').show('slow')
+            else $('.label, #navBar footer').hide('slow')
         },
         success(ob){
             

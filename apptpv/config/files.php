@@ -9,5 +9,7 @@ const LOGO_TEMPLATE     = \PUBLICF\TEMPLATE . 'logo.png';
 const LOGO              = \PUBLICF\COMPANIES . 'logo.png';
 const JS                = 'bundle.js'; 
 const BUNDLE_JS         = \FOLDERS\VIEWS . JS ;
+const FONTS_GOOGLE      = \FOLDERS\HELPERS . 'fonts.json';
+
 define(__NAMESPACE__ . '\CONFIG_COMPANY', \PUBLICF\COMPANIES . '/config.ini');
 define(__NAMESPACE__ . '\TEMPLATE_CONFIG',  \PUBLICF\TEMPLATE . '/config.ini');
