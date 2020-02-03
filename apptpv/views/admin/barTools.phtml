@@ -11,6 +11,7 @@
         <div id="search" onblur="menu.search.close()">
             <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' />
             <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' onblur='menu.search.close()' tabindex='-1' title='Pulse Enter para realizar la búsqueda.' />
+            <m-icon  id='--id_search_icon_close' icon='cross'  label='cerrar' />
         </div>
     </div>
     <div id="bartools-central">
@@ -79,7 +80,10 @@
     #bartools .lnr:hover {
         font-weight: bold;
     }
-
+    #bartools #--id_search_icon_close{
+        position: relative;
+        left: 3204px;    
+    }
     #bartools #--id_txtSearch {
         position: relative;
         top: 0;
@@ -140,6 +144,7 @@
             }
         },
         search: {
+            $moveable : $('#--id_txtSearch, #--id_search_icon_close'),
             $search: $('#--id_txtSearch'),
             $txtSearch: $('#--id_txtSearch_input'),
             $label: $('#--id_search').find('.label'),
@@ -148,13 +153,7 @@
             isOpen: false,
             async open() {
                 this.$txtSearch.val('');
-                this.$label.text('Cerrar');
-
-                this.$icon
-                    .removeClass('lnr-magnifier')
-                    .addClass('lnr-cross-circle');
-
-                this.$search.animate({
+                this.$moveable.animate({
                     left: 0
                 }, this.velocity)
                 await new Promise(r => setTimeout(r, this.velocity * 2));
@@ -163,15 +162,9 @@
                 this.isOpen = true;
                 return this;
             },
-            close() {
-                this.$label.text('Buscar');
-                // Icono buscar
-                this.$icon
-                    .removeClass('lnr-cross-circle')
-                    .addClass('lnr-magnifier');
-
+            close() {   
                 // Cerrar inputtext
-                this.$search.animate({
+                this.$moveable.animate({
                     left: window.innerWidth + 1000
                 }, this.velocity)
                 this.isOpen = false;
