@@ -1,5 +1,6 @@
 <section id="tpv">
-    <m-select id="--id_sel1" label="codigo" name="servicio" required="true" class="keyEnterOut" tabindex="4" onblur="app.tpv.loadLine()" />
+    <m-search id="--id_sel1" label="Codigo" name="servicio" required="true" tabindex="4" onblur="app.tpv.loadLine()" />
+    <m-search id="--id_sel2" label="Descripción" tabindex="6" onchange="app.tpv.searchDescription()" />
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
@@ -11,8 +12,6 @@
     $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => '1']);
     $cli    = new Select(['label' => 'Cliente', 'tabindex' => '2', 'onchange' => 'app.tpv.loadClient()']);
     // Linea
-
-    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => '6', 'onchange' => 'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => '7', 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => '8', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => '9', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -71,7 +70,7 @@
             grid-row: 3;
             grid-column: 1;
         }
-        #<?= $des->id() ?> {
+        #--id_sel2 {
             grid-row: 3;
             grid-column: 2 / span 2; 
 
@@ -247,7 +246,8 @@
             Ticket: new Ticket(),
             Table: new Table('<?= $table->id() ?>'),
             Modal: new Modal('<?= $modTicket->id() ?>'),
-            selCode: new MySelect('--id_sel1'),
+            selCode: new MySearch('--id_sel1'),
+            selDes: new MySearch('--id_sel2'),
             selEmp: new Select(<?= $emp->id() ?>),
             selCli: new Select(<?= $cli->id() ?>),
             dto: <?= $dto->id() ?>.querySelector('input'),
@@ -256,7 +256,6 @@
             txtId: <?= $id->id() ?>.querySelector('input'),
             date: <?= $date->id() ?>.querySelector('input'),
             hour: <?= $hour->id() ?>.querySelector('input'),
-            description: <?= $des->id() ?>.querySelector('input'),
             quantity: <?= $quan->id() ?>.querySelector('input'),
             price: <?= $pric->id() ?>.querySelector('input'),
             default: {
@@ -326,6 +325,7 @@
                     .then(serv => {
                         for (s of serv) {
                             this.selCode.addOption(s.id, s.codigo)
+                            this.selDes.addOption(s.id, s.descripcion)
                         }
                     })
             },
@@ -374,7 +374,7 @@
             },
             clearLine() {
                 this.selCode.default()
-                this.description.value = ''
+                this.selDes.default()
                 this.quantity.value = 1
                 this.price.value = 0
                 this.amount.value = 0
@@ -384,7 +384,6 @@
                 this.Table.clearLines()
             },
             clearUsers() {
-                echo('ClearUsers...')
                 this.selCli.reset()
                 this.selEmp.reset()
             },
@@ -437,20 +436,26 @@
             },
             // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
             loadLine() {
-                const id = this.selCode.value()
-                this.addPromo(_ => {
-                    if (id) {
-                        DB.get('servicios', 'id', id)
-                            .then(d => d[0])
-                            .then(el => {
-                                this.description.value = el.descripcion
-                                this.price.value = el.precio
-                                this.quantity.value = 1
-                                this.dto.value = 0
-                                this.calculate()
-                            })
-                    }
-                })
+                // Comprobacion de que el codigo existe 
+                if(this.selCode.validate()){
+                    this.selCode.removeClass('invalid').addClass('valid');
+                    const id = this.selCode.value()
+                    this.addPromo(_ => {
+                        if (id) {
+                            DB.get('servicios', 'id', id)
+                                .then(d => d[0])
+                                .then(el => {
+                                    this.selDes.value(id)
+                                    this.price.value = el.precio
+                                    this.quantity.value = 1
+                                    this.dto.value = 0
+                                    this.calculate()
+                                })
+                        }
+                    })
+                } else {
+                    this.selCode.removeClass('valid').addClass('invalid');
+                }
             },
             // Para editar las lineas de las tablas
             loadLineFromTable(e) {
@@ -465,8 +470,8 @@
                     DB.get('servicios', 'id', line.articulo)
                         .then(d => d[0])
                         .then(d => {
-                            this.selCode.option(line.articulo)
-                            this.description.value = d.descripcion
+                            this.selCode.value(line.articulo)
+                            this.selDes.value(line.articulo)
                             this.quantity.value = line.cantidad
                             this.price.value = line.precio
                             this.dto.value = line.dto
@@ -563,7 +568,7 @@
             },
             // Busqueda por descripción
             searchDescription() {
-                const v = this.description.value;
+                const v = this.selDes.value()   ;
 
                 DB.get('servicios', 'descripcion', v.trim()).then(data => {
                     this.selCode.value(data[0].id)

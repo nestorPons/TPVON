@@ -78,7 +78,20 @@ break}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
 else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}
 required(){this.el.removeChild(this.o[0])}}class MyLabel{constructor(id){this.id=id;this.cont=document.getElementById(id);this.el=this.cont.getElementsByClassName('value')[0]}
-value(value=null){if(value)this.el.innerText=value;return this.el.innerText}}class MyTable{constructor(id){this.el=document.getElementById(id).querySelector('table')
+value(value=null){if(value)this.el.innerText=value;return this.el.innerText}}class MySearch{constructor(id){this.CLASS_SELECTED='valid';this.el=(typeof id=='string')?document.getElementById(id).querySelector('input'):id.querySelector('input');this.li=document.getElementById(id).querySelector('datalist');this.oo=this.li.getElementsByTagName('option');this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED));this.el.addEventListener('input',_=>{for(let o of this.oo){if(o.value==this.el.value){this.value(o.getAttribute('data-value'));break}}})}
+change(fn){this.el.addEventListener('change',fn);return this}
+addClass(myclass){this.el.classList.add(myclass);return this}
+removeClass(myclass){this.el.classList.remove(myclass);return this}
+addOption(value,text){let opt=document.createElement('option');opt.dataset.value=value;opt.value=text;this.li.appendChild(opt);return this}
+default(){this.el.value=''}
+clear(){this.reset();let ops=this.li.querySelectorAll('option:not(:first-child)');for(let o of ops){if(o)this.li.removeChild(o)}
+return this}
+reset(){this.el.classList.remove(this.CLASS_SELECTED)}
+value(v){if(v!=undefined){this.el.dataset.value=v;this.el.seletedIndex=v;this.el.value=this.li.querySelector(`[data-value="${v}"]`).value;this.addClass('valid')}
+return this.el.dataset.value}
+valueText(v){if(v!=undefined){let option=this.li.querySelector(`[data-value="${v}"]`);this.el.dataset.value=option.dataset.value;this.el.seletedIndex=option.dataset.value;this.el.value=option.value;this.addClass('valid')}
+return this.el.value}
+validate(){return this.li.querySelector(`[value="${this.el.value}"]`)!=null}}class MyTable{constructor(id){this.el=document.getElementById(id).querySelector('table')
 this.body=this.el.getElementsByTagName('tbody')[0]
 this.template=document.getElementById(id).querySelector('template')
 this.$table=$('#'+id).find('table')
@@ -110,7 +123,7 @@ return this.el.checked}}class MySelect{constructor(id){this.el=(typeof id=='stri
 change(fn){this.el.addEventListener('change',fn);return this}
 addClass(myclass){this.el.classList.add(myclass)
 return this}
-addOption(value,text){let opt=document.createElement('option');opt.appendChild(document.createTextNode(text));opt.value=value;this.li.appendChild(opt);return this}
+addOption(value,text){let opt=document.createElement('option');opt.appendChild(document.createTextNode(text));opt.value=value;this.el.appendChild(opt);return this}
 default(){this.el.value=0}
 clear(){this.reset()
 let ops=this.el.querySelectorAll('option:not(:first-child)')

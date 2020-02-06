@@ -1,5 +1,6 @@
 <?php namespace app\controllers\components?><section id="tpv">
-    <?php new \app\core\Components("m-select", Array("id"=>"id5e3c3ca0efed2_sel1","label"=>"codigo","name"=>"servicio","required"=>"true","class"=>"keyEnterOut","tabindex"=>"4","onblur"=>"app.tpv.loadLine()"));?>
+    <?php new \app\core\Components("m-search", Array("id"=>"id5e3c91e1c5df0_sel1","label"=>"Codigo","name"=>"servicio","required"=>"true","tabindex"=>"4","onblur"=>"app.tpv.loadLine()"));?>
+    <?php new \app\core\Components("m-search", Array("id"=>"id5e3c91e1c5df0_sel2","label"=>"Descripción","tabindex"=>"6","onchange"=>"app.tpv.searchDescription()"));?>
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
@@ -11,11 +12,6 @@
     $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => '1']);
     $cli    = new Select(['label' => 'Cliente', 'tabindex' => '2', 'onchange' => 'app.tpv.loadClient()']);
     // Linea
-    $code = new Select([
-        'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
-        'tabindex' => '4', 'onblur' => 'app.tpv.loadLine()'
-    ]);
-    $des = new InputText(['label' => 'Desctipcion', 'tabindex' => '6', 'onchange' => 'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => '7', 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => '8', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $dto = new InputNumber(['label' => 'Dto %', 'tabindex' => '9', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -30,7 +26,7 @@
     ?>
 
     <style lang="less" >
-        #tpv{align-items:flex-start;display:grid;grid-template-rows:auto 53vh auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id() ?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv table{height:initial}#tpv #<?=$id->id() ?>{grid-row:1;grid-column:1}#tpv #<?=$date->id() ?>{grid-row:1;grid-column:6;text-align:center}#tpv #<?=$hour->id() ?>{text-align:center;grid-row:1;grid-column:7;margin:0 1rem}#tpv #id5e3c3ca0efed2_sel1{grid-row:3;grid-column:1}#tpv #<?=$des->id() ?>{grid-row:3;grid-column:2 / span 2}#tpv #<?=$quan->id() ?>{grid-row:3;grid-column:4}#tpv #<?=$pric->id() ?>{grid-row:3;grid-column:5}#tpv #<?=$dto->id() ?>{grid-row:3;grid-column:6}#tpv #<?=$amo->id() ?>{grid-row:3;grid-column:7}#tpv #<?=$emp->id() ?>{grid-row:1;grid-column:2 / span 2}#tpv #<?=$cli->id() ?>{grid-row:1;grid-column:4 / span 2}#tpv .Descripción{flex-basis:25%}#tpv #<?=$txtTotal->id() ?>{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #<?=$txtTotal->id() ?>input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #<?=$txtTotal->id() ?>label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:7}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:5}#tpv #<?=$btnClear->id() ?>{grid-row:4;grid-column:6}#tpv #<?=$modTicket->id() ?>{max-height:80vh}
+        #tpv{align-items:flex-start;display:grid;grid-template-rows:auto 53vh auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id() ?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv table{height:initial}#tpv #<?=$id->id() ?>{grid-row:1;grid-column:1}#tpv #<?=$date->id() ?>{grid-row:1;grid-column:6;text-align:center}#tpv #<?=$hour->id() ?>{text-align:center;grid-row:1;grid-column:7;margin:0 1rem}#tpv #id5e3c91e1c5df0_sel1{grid-row:3;grid-column:1}#tpv #id5e3c91e1c5df0_sel2{grid-row:3;grid-column:2 / span 2}#tpv #<?=$quan->id() ?>{grid-row:3;grid-column:4}#tpv #<?=$pric->id() ?>{grid-row:3;grid-column:5}#tpv #<?=$dto->id() ?>{grid-row:3;grid-column:6}#tpv #<?=$amo->id() ?>{grid-row:3;grid-column:7}#tpv #<?=$emp->id() ?>{grid-row:1;grid-column:2 / span 2}#tpv #<?=$cli->id() ?>{grid-row:1;grid-column:4 / span 2}#tpv .Descripción{flex-basis:25%}#tpv #<?=$txtTotal->id() ?>{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #<?=$txtTotal->id() ?>input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #<?=$txtTotal->id() ?>label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:7}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:5}#tpv #<?=$btnClear->id() ?>{grid-row:4;grid-column:6}#tpv #<?=$modTicket->id() ?>{max-height:80vh}
     </style>
     <script>
         
@@ -46,7 +42,8 @@
             Ticket: new Ticket(),
             Table: new Table('<?= $table->id() ?>'),
             Modal: new Modal('<?= $modTicket->id() ?>'),
-            selCode: new MySelect('id5e3c3ca0efed2_sel1'),
+            selCode: new MySearch('id5e3c91e1c5df0_sel1'),
+            selDes: new MySearch('id5e3c91e1c5df0_sel2'),
             selEmp: new Select(<?= $emp->id() ?>),
             selCli: new Select(<?= $cli->id() ?>),
             dto: <?= $dto->id() ?>.querySelector('input'),
@@ -55,7 +52,6 @@
             txtId: <?= $id->id() ?>.querySelector('input'),
             date: <?= $date->id() ?>.querySelector('input'),
             hour: <?= $hour->id() ?>.querySelector('input'),
-            description: <?= $des->id() ?>.querySelector('input'),
             quantity: <?= $quan->id() ?>.querySelector('input'),
             price: <?= $pric->id() ?>.querySelector('input'),
             default: {
@@ -125,6 +121,7 @@
                     .then(serv => {
                         for (s of serv) {
                             this.selCode.addOption(s.id, s.codigo)
+                            this.selDes.addOption(s.id, s.descripcion)
                         }
                     })
             },
@@ -173,7 +170,7 @@
             },
             clearLine() {
                 this.selCode.default()
-                this.description.value = ''
+                this.selDes.default()
                 this.quantity.value = 1
                 this.price.value = 0
                 this.amount.value = 0
@@ -183,7 +180,6 @@
                 this.Table.clearLines()
             },
             clearUsers() {
-                echo('ClearUsers...')
                 this.selCli.reset()
                 this.selEmp.reset()
             },
@@ -236,20 +232,26 @@
             },
             // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
             loadLine() {
-                const id = this.selCode.value()
-                this.addPromo(_ => {
-                    if (id) {
-                        DB.get('servicios', 'id', id)
-                            .then(d => d[0])
-                            .then(el => {
-                                this.description.value = el.descripcion
-                                this.price.value = el.precio
-                                this.quantity.value = 1
-                                this.dto.value = 0
-                                this.calculate()
-                            })
-                    }
-                })
+                // Comprobacion de que el codigo existe 
+                if(this.selCode.validate()){
+                    this.selCode.removeClass('invalid').addClass('valid');
+                    const id = this.selCode.value()
+                    this.addPromo(_ => {
+                        if (id) {
+                            DB.get('servicios', 'id', id)
+                                .then(d => d[0])
+                                .then(el => {
+                                    this.selDes.value(id)
+                                    this.price.value = el.precio
+                                    this.quantity.value = 1
+                                    this.dto.value = 0
+                                    this.calculate()
+                                })
+                        }
+                    })
+                } else {
+                    this.selCode.removeClass('valid').addClass('invalid');
+                }
             },
             // Para editar las lineas de las tablas
             loadLineFromTable(e) {
@@ -264,8 +266,8 @@
                     DB.get('servicios', 'id', line.articulo)
                         .then(d => d[0])
                         .then(d => {
-                            this.selCode.option(line.articulo)
-                            this.description.value = d.descripcion
+                            this.selCode.value(line.articulo)
+                            this.selDes.value(line.articulo)
                             this.quantity.value = line.cantidad
                             this.price.value = line.precio
                             this.dto.value = line.dto
@@ -362,7 +364,7 @@
             },
             // Busqueda por descripción
             searchDescription() {
-                const v = this.description.value;
+                const v = this.selDes.value()   ;
 
                 DB.get('servicios', 'descripcion', v.trim()).then(data => {
                     this.selCode.value(data[0].id)

@@ -10,16 +10,14 @@
  */
 ?>
 <component id="--id" class="row col-sm-12 col-md-12">
-    <datalist id="--id_datalist">
+    <select type="search" id="el--id" list="--id_datalist" class="$$class $$default" placeholder=" " style="$$style" name="$$name" tile="$$tile" pattern="$$pattern" list="$$list" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick" onkeydown="$$onkeydown" onkeyup="$$onkeyup" onchange="$$onchange" onkeypress="$$onkeypress" $$required $$disabled $$readonly $$checked>
         @if($$default)
             <option value=""></option>
         @endif
         @for($$options)
             <option value="$$key">$$value</option>
         @endfor
-    </datalist>
-    <input type="search" id="el--id" list="--id_datalist" class="$$class $$default" placeholder=" " style="$$style" name="$$name" tile="$$tile" pattern="$$pattern" list="$$list" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick" onkeydown="$$onkeydown" onkeyup="$$onkeyup" onchange="$$onchange" onkeypress="$$onkeypress" $$required $$disabled $$readonly $$checked/>
-
+    </select>
     <label for="el--id">$$label</label>
     <style lang="less" scoped>
         height: 86%;
@@ -57,7 +55,7 @@
 
                 opt.appendChild(document.createTextNode(text));
                 opt.value = value;
-                this.li.appendChild(opt);
+                this.el.appendChild(opt);
                 return this;
             }
             default () {
