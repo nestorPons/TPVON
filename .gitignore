@@ -1,8 +1,9 @@
+htdocs/tpv/build/admin/
+htdocs/
 htdocs/tpv/js
 htdocs/tpv/css
 htdocs/tpv/companies
-!htdocs/companies/template
-htdocs/tpv/build/*
+
 server/logs
 apptpv/config/conn.ini
 apptpv/config/mail.ini
