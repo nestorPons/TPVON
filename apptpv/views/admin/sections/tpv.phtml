@@ -1,4 +1,5 @@
 <section id="tpv">
+    <m-select id="--id_sel1" label="codigo" name="servicio" required="true" class="keyEnterOut" tabindex="4" onblur="app.tpv.loadLine()" />
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
@@ -10,10 +11,7 @@
     $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => '1']);
     $cli    = new Select(['label' => 'Cliente', 'tabindex' => '2', 'onchange' => 'app.tpv.loadClient()']);
     // Linea
-    $code = new Select([
-        'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
-        'tabindex' => '4', 'onblur' => 'app.tpv.loadLine()'
-    ]);
+
     $des = new InputText(['label' => 'Desctipcion', 'tabindex' => '6', 'onchange' => 'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => '7', 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => '8', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -69,7 +67,7 @@
             margin: 0 1rem;
         }
 
-         #<?= $code->id() ?> {
+         #--id_sel1 {
             grid-row: 3;
             grid-column: 1;
         }
@@ -249,7 +247,7 @@
             Ticket: new Ticket(),
             Table: new Table('<?= $table->id() ?>'),
             Modal: new Modal('<?= $modTicket->id() ?>'),
-            selCode: new Select(<?= $code->id() ?>),
+            selCode: new MySelect('--id_sel1'),
             selEmp: new Select(<?= $emp->id() ?>),
             selCli: new Select(<?= $cli->id() ?>),
             dto: <?= $dto->id() ?>.querySelector('input'),

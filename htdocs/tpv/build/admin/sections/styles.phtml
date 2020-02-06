@@ -1,10 +1,10 @@
 <?php namespace app\controllers\components?><section id="styles">
     <h1>Configuración de estilos</h1>
     <form id="styles_form">
-        <?php new \app\core\Components("m-select", Array("id"=>"id5e3c1e8776369_f1","value"=>$font1,"label"=>"Fuente principal","options"=>$fonts,"class"=>"valid"));?>
-        <?php new \app\core\Components("m-select", Array("id"=>"id5e3c1e8776369_f2","value"=>$font2,"label"=>"Fuente secundaria","options"=>$fonts,"class"=>"valid"));?>
-        <?php new \app\core\Components("m-input", Array("type"=>"color","id"=>"id5e3c1e8776369_c1","value"=>$main_color,"label"=>"Color principal"));?>
-        <?php new \app\core\Components("m-input", Array("type"=>"color","id"=>"id5e3c1e8776369_c2","value"=>$second_color,"label"=>"Color secundario"));?>
+        <?php new \app\core\Components("m-select", Array("id"=>"id5e3c3ca0ef1e6_f1","value"=>$font1,"label"=>"Fuente principal","options"=>$fonts,"class"=>"valid"));?>
+        <?php new \app\core\Components("m-select", Array("id"=>"id5e3c3ca0ef1e6_f2","value"=>$font2,"label"=>"Fuente secundaria","options"=>$fonts,"class"=>"valid"));?>
+        <?php new \app\core\Components("m-input", Array("type"=>"color","id"=>"id5e3c3ca0ef1e6_c1","value"=>$main_color,"label"=>"Color principal"));?>
+        <?php new \app\core\Components("m-input", Array("type"=>"color","id"=>"id5e3c3ca0ef1e6_c2","value"=>$second_color,"label"=>"Color secundario"));?>
     </form>
     <script>
         app.styles = {
@@ -13,10 +13,10 @@
             change: false,
             css_file: 'css/main.css',
             form: document.getElementById('styles_form'),
-            font1: new MySelect("id5e3c1e8776369_f1"),
-            font2: new MySelect("id5e3c1e8776369_f2"),
-            color1: new MyInput("id5e3c1e8776369_c1"),
-            color2: new MyInput("id5e3c1e8776369_c2"),
+            font1: new MySelect("id5e3c3ca0ef1e6_f1"),
+            font2: new MySelect("id5e3c3ca0ef1e6_f2"),
+            color1: new MyInput("id5e3c3ca0ef1e6_c1"),
+            color2: new MyInput("id5e3c3ca0ef1e6_c2"),
             load() {
                 this.font1.change(_ => this.save());
                 this.font2.change(_ => this.save());

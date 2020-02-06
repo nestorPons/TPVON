@@ -5,6 +5,7 @@
     `nombre` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
     `descripcion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
     `precio` float NOT NULL,
+    `tiempo` int(4) NULL, 
     `coste` float DEFAULT NULL,
     `tipo` tinyint(1) NOT NULL,
     `id_familia` tinyint(2) NOT NULL DEFAULT '1',

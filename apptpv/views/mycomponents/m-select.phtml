@@ -12,10 +12,10 @@
 <component id="--id" class="row col-sm-12 col-md-12">
     <datalist id="--id_datalist">
         @if($$default)
-        <option value=""></option>
+            <option value=""></option>
         @endif
         @for($$options)
-        <option value="$$key">$$value</option>
+            <option value="$$key">$$value</option>
         @endfor
     </datalist>
     <input type="search" id="el--id" list="--id_datalist" class="$$class $$default" placeholder=" " style="$$style" name="$$name" tile="$$tile" pattern="$$pattern" list="$$list" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick" onkeydown="$$onkeydown" onkeyup="$$onkeyup" onchange="$$onchange" onkeypress="$$onkeypress" $$required $$disabled $$readonly $$checked/>
@@ -34,13 +34,15 @@
             constructor(id) {
 
                 this.el = (typeof id == 'string') ?
-                    document.getElementById(id).querySelector('select') :
-                    id.querySelector('select');
+                    document.getElementById(id).querySelector('input') :
+                    id.querySelector('input');
 
                 this.o = this.el.getElementsByTagName('option');
                 this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
 
                 this.el.addEventListener('change', fn => this.el.classList.add(this.CLASS_SELECTED));
+
+                this.li =document.getElementById(id).querySelector('datalist');
             }
             change(fn) {
                 this.el.addEventListener('change', fn);
@@ -51,11 +53,12 @@
                 return this
             }
             addOption(value, text) {
-                let opt = document.createElement('option')
-                opt.appendChild(document.createTextNode(text))
-                opt.value = value
-                this.el.appendChild(opt)
-                return this
+                let opt = document.createElement('option');
+
+                opt.appendChild(document.createTextNode(text));
+                opt.value = value;
+                this.li.appendChild(opt);
+                return this;
             }
             default () {
                 this.el.value = 0
