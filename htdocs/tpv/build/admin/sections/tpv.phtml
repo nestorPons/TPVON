@@ -1,4 +1,5 @@
 <?php namespace app\controllers\components?><section id="tpv">
+    <m-select id="id5e3c1e876ecd5_sel1" label='Codigo' name='servicio' required='true' class = 'keyEnterOut' tabindex="4" onblur="app.tpv.loadLine()">
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
@@ -10,10 +11,7 @@
     $emp    = new Select(['label' => 'Operador', 'required' => true, 'tabindex' => '1']);
     $cli    = new Select(['label' => 'Cliente', 'tabindex' => '2', 'onchange' => 'app.tpv.loadClient()']);
     // Linea
-    $code = new Select([
-        'label' => 'Codigo', 'name' => 'servicio', 'required' => true, 'class' => 'keyEnterOut',
-        'tabindex' => '4', 'onblur' => 'app.tpv.loadLine()'
-    ]);
+
     $des = new InputText(['label' => 'Desctipcion', 'tabindex' => '6', 'onchange' => 'app.tpv.searchDescription()'],  false);
     $quan = new InputNumber(['label' => 'Cantidad', 'tabindex' => '7', 'value' => '1', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
     $pric = new InputNumber(['label' => 'Precio', 'tabindex' => '8', 'value' => '0', 'onblur' => 'app.tpv.calculate()', 'class' => 'keyEnterOut'], false);
@@ -29,7 +27,7 @@
     ?>
 
     <style lang="less" >
-        #tpv{align-items:flex-start;display:grid;grid-template-rows:auto 53vh auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id() ?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv table{height:initial}#tpv #<?=$id->id() ?>{grid-row:1;grid-column:1}#tpv #<?=$date->id() ?>{grid-row:1;grid-column:6;text-align:center}#tpv #<?=$hour->id() ?>{text-align:center;grid-row:1;grid-column:7;margin:0 1rem}#tpv #<?=$code->id() ?>{grid-row:3;grid-column:1}#tpv #<?=$des->id() ?>{grid-row:3;grid-column:2 / span 2}#tpv #<?=$quan->id() ?>{grid-row:3;grid-column:4}#tpv #<?=$pric->id() ?>{grid-row:3;grid-column:5}#tpv #<?=$dto->id() ?>{grid-row:3;grid-column:6}#tpv #<?=$amo->id() ?>{grid-row:3;grid-column:7}#tpv #<?=$emp->id() ?>{grid-row:1;grid-column:2 / span 2}#tpv #<?=$cli->id() ?>{grid-row:1;grid-column:4 / span 2}#tpv .Descripción{flex-basis:25%}#tpv #<?=$txtTotal->id() ?>{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #<?=$txtTotal->id() ?>input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #<?=$txtTotal->id() ?>label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:7}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:5}#tpv #<?=$btnClear->id() ?>{grid-row:4;grid-column:6}#tpv #<?=$modTicket->id() ?>{max-height:80vh}
+        #tpv{align-items:flex-start;display:grid;grid-template-rows:auto 53vh auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id() ?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv table{height:initial}#tpv #<?=$id->id() ?>{grid-row:1;grid-column:1}#tpv #<?=$date->id() ?>{grid-row:1;grid-column:6;text-align:center}#tpv #<?=$hour->id() ?>{text-align:center;grid-row:1;grid-column:7;margin:0 1rem}#tpv #id5e3c1e876ecd5_sel1{grid-row:3;grid-column:1}#tpv #<?=$des->id() ?>{grid-row:3;grid-column:2 / span 2}#tpv #<?=$quan->id() ?>{grid-row:3;grid-column:4}#tpv #<?=$pric->id() ?>{grid-row:3;grid-column:5}#tpv #<?=$dto->id() ?>{grid-row:3;grid-column:6}#tpv #<?=$amo->id() ?>{grid-row:3;grid-column:7}#tpv #<?=$emp->id() ?>{grid-row:1;grid-column:2 / span 2}#tpv #<?=$cli->id() ?>{grid-row:1;grid-column:4 / span 2}#tpv .Descripción{flex-basis:25%}#tpv #<?=$txtTotal->id() ?>{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #<?=$txtTotal->id() ?>input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #<?=$txtTotal->id() ?>label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:7}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:5}#tpv #<?=$btnClear->id() ?>{grid-row:4;grid-column:6}#tpv #<?=$modTicket->id() ?>{max-height:80vh}
     </style>
     <script>
         
@@ -45,7 +43,7 @@
             Ticket: new Ticket(),
             Table: new Table('<?= $table->id() ?>'),
             Modal: new Modal('<?= $modTicket->id() ?>'),
-            selCode: new Select(<?= $code->id() ?>),
+            selCode: new MySelect('id5e3c1e876ecd5_sel1'),
             selEmp: new Select(<?= $emp->id() ?>),
             selCli: new Select(<?= $cli->id() ?>),
             dto: <?= $dto->id() ?>.querySelector('input'),

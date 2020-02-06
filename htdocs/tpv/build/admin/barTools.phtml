@@ -1,41 +1,41 @@
 <?php namespace app\controllers\components?><header id="bartools">
     <div id="bartools-actions">
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_add","class"=>"menu-buttons","style"=>"color:red","icon"=>"plus-circle","onclick"=>"app.sections.add()","label"=>"Nuevo"));?>
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_del","class"=>"menu-buttons","icon"=>"cross-circle","onclick"=>"menu.del()","label"=>"Eliminar"));?>
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_prev","class"=>"menu-buttons","icon"=>"chevron-left-circle","onclick"=>"app.sections.prev()","label"=>"Anterior"));?>
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_next","class"=>"menu-buttons","icon"=>"chevron-right-circle","onclick"=>"app.sections.next()","label"=>"Siguiente"));?>
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_print","class"=>"menu-buttons","icon"=>"printer","onclick"=>"app.sections.print()","label"=>"Imprimir"));?>
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_conf","class"=>"menu-buttons","icon"=>"cog","onclick"=>"app.sections.conf()","label"=>"Configurar"));?>
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_filter","class"=>"menu-buttons","icon"=>"funnel","onclick"=>"app.sections.filter()","label"=>"Filter"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_add","class"=>"menu-buttons","style"=>"color:red","icon"=>"plus-circle","onclick"=>"app.sections.add()","label"=>"Nuevo"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_del","class"=>"menu-buttons","icon"=>"cross-circle","onclick"=>"menu.del()","label"=>"Eliminar"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_prev","class"=>"menu-buttons","icon"=>"chevron-left-circle","onclick"=>"app.sections.prev()","label"=>"Anterior"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_next","class"=>"menu-buttons","icon"=>"chevron-right-circle","onclick"=>"app.sections.next()","label"=>"Siguiente"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_print","class"=>"menu-buttons","icon"=>"printer","onclick"=>"app.sections.print()","label"=>"Imprimir"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_conf","class"=>"menu-buttons","icon"=>"cog","onclick"=>"app.sections.conf()","label"=>"Configurar"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_filter","class"=>"menu-buttons","icon"=>"funnel","onclick"=>"app.sections.filter()","label"=>"Filter"));?>
 
         <div id="search" onblur="menu.search.close()">
-            <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_search","class"=>"menu-buttons","icon"=>"magnifier","onclick"=>"menu.search.toggle()","label"=>"Buscar"));?>
-            <?php new \app\core\Components('m-input' , Array("id"=>"id5e3c050e86f51_txtSearch","placeholder"=>"Escribe tu búsqueda","onkeyup"=>"menu.search.keypress(event)","onblur"=>"menu.search.close()","tabindex"=>"-1","title"=>"Pulse Enter para realizar la búsqueda."));?>
-            <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_search_icon_close","icon"=>"cross","label"=>"cerrar"));?>
+            <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_search","class"=>"menu-buttons","icon"=>"magnifier","onclick"=>"menu.search.toggle()","label"=>"Buscar"));?>
+            <?php new \app\core\Components("m-input", Array("id"=>"id5e3c1e876367b_txtSearch","placeholder"=>"Escribe tu búsqueda","onkeyup"=>"menu.search.keypress(event)","onblur"=>"menu.search.close()","tabindex"=>"-1","title"=>"Pulse Enter para realizar la búsqueda."));?>
+            <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_search_icon_close","icon"=>"cross","label"=>"cerrar"));?>
         </div>
     </div>
     <div id="bartools-central">
     </div>
     <div id="bartools-general">
-        <?php new \app\core\Components('m-icon' , Array("id"=>"id5e3c050e86f51_help","class"=>"menu-buttons","icon"=>"question-circle","onclick"=>"app.help()","label"=>"Acerca de"));?>
-        <?php new \app\core\Components('m-icon' , Array("icon"=>"book","href"=>"https://nestorpons.github.io/TPVON/manual/","label"=>"Manual de usuario","target"=>"_blank"));?>
-        <?php new \app\core\Components('m-icon' , Array("icon"=>"power-switch","label"=>"Salir","onclick"=>"app.close()"));?>
+        <?php new \app\core\Components("m-icon", Array("id"=>"id5e3c1e876367b_help","class"=>"menu-buttons","icon"=>"question-circle","onclick"=>"app.help()","label"=>"Acerca de"));?>
+        <?php new \app\core\Components("m-icon", Array("icon"=>"book","href"=>"https://nestorpons.github.io/TPVON/manual/","label"=>"Manual de usuario","target"=>"_blank"));?>
+        <?php new \app\core\Components("m-icon", Array("icon"=>"power-switch","label"=>"Salir","onclick"=>"app.close()"));?>
     </div>
 </header>
 <style lang="less">
-    #bartools{background:linear-gradient(217deg,var(--main-color),rgba(255,0,0,0) 70.71%),linear-gradient(127deg,var(--main-color),rgba(0,255,0,0) 70.71%),linear-gradient(136deg,var(--main-color),rgba(0,0,255,0) 70.71%);color:var(--nav-font-color);padding:0 20px 0 60px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;overflow-x:visible;overflow-y:visible;height:auto}#bartools i:active{color:var(--nav-link-color)}#bartools a,#bartools a:hover,#bartools a:link,#bartools a:visited{color:inherit}#bartools a:hover{font-weight:700}#bartools>div{flex-grow:1;display:flex;align-items:inherit}#bartools>div:nth-child(2){text-align:center}#bartools>div:last-child{justify-content:flex-end}#bartools .lnr{display:inline-block;font-size:1.4rem;cursor:pointer;margin:2px 5px}#bartools .lnr:hover{font-weight:700}#bartools #id5e3c050e86f51_search_icon_close{position:relative;left:3204px}#bartools #id5e3c050e86f51_txtSearch{position:relative;top:0;left:3204px;height:58px;z-index:1;text-align:left;display:flex;align-items:center;width:300px;background-color:var(--form-back-color);margin-left:5px}#bartools #id5e3c050e86f51_txtSearch>input{position:absolute;width:97%}#bartools #search{display:inherit;align-items:center}#bartools #search .row{background:transparent}#bartools #search .row input,::placeholder{color:inherit}#bartools #search .row ::placeholder{color:#aaa}
+    #bartools{background:linear-gradient(217deg,var(--main-color),rgba(255,0,0,0) 70.71%),linear-gradient(127deg,var(--main-color),rgba(0,255,0,0) 70.71%),linear-gradient(136deg,var(--main-color),rgba(0,0,255,0) 70.71%);color:var(--nav-font-color);padding:0 20px 0 60px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;overflow-x:visible;overflow-y:visible;height:auto}#bartools i:active{color:var(--nav-link-color)}#bartools a,#bartools a:hover,#bartools a:link,#bartools a:visited{color:inherit}#bartools a:hover{font-weight:700}#bartools>div{flex-grow:1;display:flex;align-items:inherit}#bartools>div:nth-child(2){text-align:center}#bartools>div:last-child{justify-content:flex-end}#bartools .lnr{display:inline-block;font-size:1.4rem;cursor:pointer;margin:2px 5px}#bartools .lnr:hover{font-weight:700}#bartools #id5e3c1e876367b_search_icon_close{position:relative;left:3204px}#bartools #id5e3c1e876367b_txtSearch{position:relative;top:0;left:3204px;height:58px;z-index:1;text-align:left;display:flex;align-items:center;width:300px;background-color:var(--form-back-color);margin-left:5px}#bartools #id5e3c1e876367b_txtSearch>input{position:absolute;width:97%}#bartools #search{display:inherit;align-items:center}#bartools #search .row{background:transparent}#bartools #search .row input,::placeholder{color:inherit}#bartools #search .row ::placeholder{color:#aaa}
 </style>
 <script>
     var menu = {
         tile: document.getElementById('bartools-name-sections'),
-        $add: $('#id5e3c050e86f51_add').find('i'),
-        $del: $('#id5e3c050e86f51_del').find('i'),
-        $next: $('#id5e3c050e86f51_next').find('i'),
-        $prev: $('#id5e3c050e86f51_prev').find('i'),
-        $search: $('#id5e3c050e86f51_search').find('i'),
-        $print: $('#id5e3c050e86f51_print').find('i'),
-        $conf: $('#id5e3c050e86f51_conf').find('i'),
-        $filter: $('#id5e3c050e86f51_filter').find('i'),
+        $add: $('#id5e3c1e876367b_add').find('i'),
+        $del: $('#id5e3c1e876367b_del').find('i'),
+        $next: $('#id5e3c1e876367b_next').find('i'),
+        $prev: $('#id5e3c1e876367b_prev').find('i'),
+        $search: $('#id5e3c1e876367b_search').find('i'),
+        $print: $('#id5e3c1e876367b_print').find('i'),
+        $conf: $('#id5e3c1e876367b_conf').find('i'),
+        $filter: $('#id5e3c1e876367b_filter').find('i'),
         show(arr = []) {
             $('#bartools').find('#bartools-actions').find('.menu-buttons').hide();
             for (i in arr) {
@@ -48,11 +48,11 @@
             }
         },
         search: {
-            $moveable : $('#id5e3c050e86f51_txtSearch, #id5e3c050e86f51_search_icon_close'),
-            $search: $('#id5e3c050e86f51_txtSearch'),
-            $txtSearch: $('#id5e3c050e86f51_txtSearch_input'),
-            $label: $('#id5e3c050e86f51_search').find('.label'),
-            $icon: $('#id5e3c050e86f51_search_icon'),
+            $moveable : $('#id5e3c1e876367b_txtSearch, #id5e3c1e876367b_search_icon_close'),
+            $search: $('#id5e3c1e876367b_txtSearch'),
+            $txtSearch: $('#id5e3c1e876367b_txtSearch_input'),
+            $label: $('#id5e3c1e876367b_search').find('.label'),
+            $icon: $('#id5e3c1e876367b_search_icon'),
             velocity: 500,
             isOpen: false,
             async open() {

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Componente select 
  * Para nombrar options mediante html hay que incluir en el componente padre la opción options
@@ -9,57 +10,39 @@
  */
 ?>
 <component id="--id" class="row col-sm-12 col-md-12">
-    <select  
-        type="$$type" 
-        id="el--id" 
-        class="$$class $$default" 
-        placeholder=" " 
-        style="$$style" 
-        name="$$name" 
-        tile="$$tile" 
-        pattern="$$pattern"
-        list="$$list" 
-        tabindex="$$tabindex" 
-        onfocus="$$onfocus" 
-        onblur="$$onblur" 
-        onclick="$$onclick"        
-        onkeydown="$$onkeydown" 
-        onkeyup="$$onkeyup" 
-        onchange="$$onchange" 
-        onkeypress="$$onkeypress"
-        $$required 
-        $$disabled 
-        $$readonly 
-        $$checked>
+    <datalist id="--id_datalist">
         @if($$default)
-            <option value=""></option>
+        <option value=""></option>
         @endif
         @for($$options)
-            <option value="$$key">$$value</option>
+        <option value="$$key">$$value</option>
         @endfor
-    </select>
+    </datalist>
+    <input type="search" id="el--id" list="--id_datalist" class="$$class $$default" placeholder=" " style="$$style" name="$$name" tile="$$tile" pattern="$$pattern" list="$$list" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick" onkeydown="$$onkeydown" onkeyup="$$onkeyup" onchange="$$onchange" onkeypress="$$onkeypress" $$required $$disabled $$readonly $$checked/>
+
     <label for="el--id">$$label</label>
     <style lang="less" scoped>
         height: 86%;
+
         select {
             width: 100%;
         }
-        </style>
+    </style>
     <script>
         class MySelect {
             // Id del componente general no del select
             constructor(id) {
-                
+
                 this.el = (typeof id == 'string') ?
-                document.getElementById(id).querySelector('select') :
-                id.querySelector('select');
-                
+                    document.getElementById(id).querySelector('select') :
+                    id.querySelector('select');
+
                 this.o = this.el.getElementsByTagName('option');
                 this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
-                
+
                 this.el.addEventListener('change', fn => this.el.classList.add(this.CLASS_SELECTED));
             }
-            change(fn){
+            change(fn) {
                 this.el.addEventListener('change', fn);
                 return this;
             }
@@ -90,7 +73,7 @@
             reset() {
                 this.el.classList.remove(this.CLASS_SELECTED)
                 let options = this.el.getElementsByTagName('option')
-                
+
                 for (let option of options) {
                     option.selected = false
                 }
@@ -107,7 +90,7 @@
             option(data) {
                 if (data != undefined) {
                     let optionselected = false
-                    
+
                     for (let option of this.o) {
                         if (option.getAttribute('value') == data) {
                             option.selected = true
@@ -121,9 +104,9 @@
                 /* return this.value() */
             }
             // Elimina la primera opcion en blanco
-            required(){
+            required() {
                 this.el.removeChild(this.o[0])
             }
         }
-        </script>
+    </script>
 </component>
