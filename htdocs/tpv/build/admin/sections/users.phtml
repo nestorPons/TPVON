@@ -8,9 +8,7 @@
     $editUser   = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false, $data);
     ?>
 
-    <style lang="less">
-        #users{display:grid;grid-template-rows:2}#users #<?=$table->id() ?>{max-height:80vh;grid-row:2}#users .card{max-width:360px}
-    </style>
+    <style lang="less">#users{display:grid;grid-template-rows:2}#users #<?=$table->id() ?>{max-height:80vh;grid-row:2}#users .card{max-width:360px}</style>
     <script>
         app.users = {
             name : 'Usuarios',

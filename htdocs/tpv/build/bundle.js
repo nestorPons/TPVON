@@ -78,11 +78,7 @@ break}else option.selected=!1}
 if(optionselected&&data!=0)this.el.classList.add(this.CLASS_SELECTED)
 else if(this.el.hasAttribute('hidden'))this.el.classList.remove(this.CLASS_SELECTED)}}
 required(){this.el.removeChild(this.o[0])}}class MyLabel{constructor(id){this.id=id;this.cont=document.getElementById(id);this.el=this.cont.getElementsByClassName('value')[0]}
-value(value=null){if(value)this.el.innerText=value;return this.el.innerText}}<button type="submit" id="--id_el" class="$$class collapse terniary" placeholder=" "
-name="$$name" tile="$$tile"
-value="$$value" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick"
-onkeypress="$$onkeypress" onkeydown="$$onkeydown" onkeyup="$$onkeyup"
-onchange="$$onchange" $$require $$disabled $$readonly $$checked><i class="spinner hidden"></i><i class="lnr lnr-$$icon"></i><span class="caption">$$caption</span><class MySearch{constructor(id){this.CLASS_SELECTED='valid';this.el=(typeof id=='string')?document.getElementById(id).querySelector('input'):id.querySelector('input');this.li=document.getElementById(id).querySelector('datalist');this.oo=this.li.getElementsByTagName('option');this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED));this.el.addEventListener('input',_=>{for(let o of this.oo){if(o.value==this.el.value){this.value(o.getAttribute('data-value'));break}}})}
+value(value=null){if(value)this.el.innerText=value;return this.el.innerText}}class MySearch{constructor(id){this.CLASS_SELECTED='valid';this.el=(typeof id=='string')?document.getElementById(id).querySelector('input'):id.querySelector('input');this.li=document.getElementById(id).querySelector('datalist');this.oo=this.li.getElementsByTagName('option');this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED));this.el.addEventListener('input',_=>{for(let o of this.oo){if(o.value==this.el.value){this.value(o.getAttribute('data-value'));break}}})}
 change(fn){this.el.addEventListener('change',fn);return this}
 addClass(myclass){this.el.classList.add(myclass);return this}
 removeClass(myclass){this.el.classList.remove(myclass);return this}

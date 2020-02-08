@@ -130,27 +130,36 @@ class Prepocessor
         $code = preg_replace($search, $replace, $code);
         return $code;
     }
-    // Extrae el tag del html (Solo el primero)
+    /**
+     * Extrae el tag del html (Solo el primero)
+     * @param tag html
+     * @return array[contenido , atributos[]]
+     */
     private function extract($tag): array
     {
-        $attr = [];
-        $pos_tag_open       = strpos($this->content, "<$tag");
-        $pos_tag_open_end   = strpos($this->content, ">", $pos_tag_open);
-        $pos_tag_close      = strpos($this->content, "</$tag>");
-        $pos_end_tag_open   = strpos($this->content, '>', $pos_tag_open);
-        $pos_end_tag_open += 1;
+        $attr = []; 
+        $regex = "#<$tag\s*([^>]*)>(.*?)<\/$tag>#s";
+        if (
+            preg_match($regex, $this->content, $matches)
+        ) {
+            $args = explode(" ", $matches[1]);
 
-        $str_tag = substr($this->content, $pos_tag_open, $pos_tag_open_end);
-        if (preg_match_all('/[A-Za-z]*\s*=\s*".*?"[\s]*?/', $str_tag, $matches)) {
-            foreach ($matches[0] as $match) {
-                $arr = explode('=', $match);
-                $a = trim($arr[1], '"');
-                $attr[$arr[0]] = trim($a, "'");
+            foreach ($args as $match) {
+                if($match){
+                    $arr = explode('=', $match);
+                    if (isset($arr[1])) {
+                        $a = trim($arr[1], '"');
+                        $attr[$arr[0]] = trim($a, "'");
+                    } else {
+                        $attr[$arr[0]] = true;
+                    }
+                }
             }
         }
+
         return [
-            'content' => trim(substr($this->content, $pos_end_tag_open, $pos_tag_close - $pos_end_tag_open)),
-            'attr'    => $attr
+            'content' => $matches[2] ?? null,
+            'attr'    => $attr ?? null
         ];
     }
     // Añade atributos a la etiqueta
@@ -218,7 +227,6 @@ class Prepocessor
     // Busca sibolo $ para y lo reemplaza por variables php
     private function sintax_vars()
     {
-
         if (
             preg_match_all('#\$\$(\w+\-?\w*)#is', $this->content, $matches)
         ) {
@@ -310,22 +318,24 @@ class Prepocessor
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
                     $this->sintax();
+
                     // Transformamos la nueva sintaxis en las vistas 
                     $a = $this->arg('style');
-                    
+
                     if (isset($a['lang']) && $a['lang'] == 'less')
-                    $this->less($this->extract('style')['content']);
-                    
+                        $this->less($this->extract('style')['content']);
+
+                    /* pr  ('AKI==>',$this->content);   
+pr('AKU==>',$this->extract('script')['content']);   */
                     $this->build_js($this->extract('script')['content']);
-                    
+                    /* pr  ('AKA==>',$this->content); */
                     if ($file == self::MAIN_PAGE) $this->queue();
-                    
                     //Añadimos nombre de espacio a todos los archivos (obsoleto)
                     if ($path != \APP\VIEWS\MYCOMPONENTS) $this->add_name_space();
 
                     // Compresión salida html
                     if (!ENV) $this->content  = $this->compress_code($this->content);
-                    
+
                     file_put_contents($file_build, $this->content, LOCK_EX);
                 }
             }
@@ -431,7 +441,6 @@ class Prepocessor
      */
     private function build_js($class_js)
     {
-
         $strFile = file_exists(\FILE\BUNDLE_JS)
             ? \file_get_contents(\FILE\BUNDLE_JS)
             : '';
@@ -515,5 +524,6 @@ class Prepocessor
             }
         }
         closedir($dh);
+        rmdir($dir);
     }
 }

@@ -9,9 +9,7 @@
         'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
     ]);
     ?>
-    <style lang="less" >
-        #control{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}#control #<?=$table->id()?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}
-    </style>
+    <style lang="less" >#control{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}#control #<?=$table->id()?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#control .fecha{text-align:center}#control .lnr{cursor:pointer;text-align:center;margin:auto}#control .lnr:hover{border-radius:25px}#control .lnr.lnr-cross-circle{color:red}#control .lnr.lnr-cross-circle:hover{background-color:red;color:#fff}#control .lnr.lnr-plus-circle{color:green}#control .lnr.lnr-plus-circle:hover{background-color:green;color:#fff}</style>
     <script>
         app.control = {
             name : 'Vales regalo',
