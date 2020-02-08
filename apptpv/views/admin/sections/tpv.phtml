@@ -14,13 +14,12 @@
     <m-btn-success id="--id_btn1" tabindex="5" onclick="app.tpv.addLine()"/>
     <m-btn-cancel id="--id_btn2" tabindex="10" onclick="app.tpv.clearLine()"/>primary
     <m-btn-cancel id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()"/>
+    
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
         'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)'
         ]);
-
-    // Linea
 
     $modTicket = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company->data());
     ?>
@@ -75,7 +74,7 @@
             grid-column: 2 / span 2; 
 
         }
-        #--id_input4 ?> {
+        #--id_input4 {
             grid-row: 3;
             grid-column: 4;
         }
@@ -122,7 +121,7 @@
             }
         }
 
-         #<?= $btnTicket->id() ?> {
+         #--id_btn3 {
             grid-row: 4;
             grid-column: 7;
         }

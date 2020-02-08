@@ -137,7 +137,7 @@ class Prepocessor
      */
     private function extract($tag): array
     {
-        $attr = []; 
+        $attr = [];
         $regex = "#<$tag\s*([^>]*)>(.*?)<\/$tag>#s";
         if (
             preg_match($regex, $this->content, $matches)
@@ -145,7 +145,7 @@ class Prepocessor
             $args = explode(" ", $matches[1]);
 
             foreach ($args as $match) {
-                if($match){
+                if ($match) {
                     $arr = explode('=', $match);
                     if (isset($arr[1])) {
                         $a = trim($arr[1], '"');
@@ -183,8 +183,10 @@ class Prepocessor
     }
     private function less(String $content)
     {
+
         //COMPILAMOS LESS
         $less = new \lessc;
+
         $content_less = $less->compile($content);
 
         // MINIMIFICAMOS
@@ -325,10 +327,8 @@ class Prepocessor
                     if (isset($a['lang']) && $a['lang'] == 'less')
                         $this->less($this->extract('style')['content']);
 
-                    /* pr  ('AKI==>',$this->content);   
-pr('AKU==>',$this->extract('script')['content']);   */
                     $this->build_js($this->extract('script')['content']);
-                    /* pr  ('AKA==>',$this->content); */
+
                     if ($file == self::MAIN_PAGE) $this->queue();
                     //Añadimos nombre de espacio a todos los archivos (obsoleto)
                     if ($path != \APP\VIEWS\MYCOMPONENTS) $this->add_name_space();
@@ -361,7 +361,8 @@ pr('AKU==>',$this->extract('script')['content']);   */
     private function search_components(&$content)
     {
         foreach ($this->components as $component) {
-            $regex = "#<($component)\s*([^>]*)>(.*?)<\/$component>#s";
+
+            $regex = "#<($component)(\s[^>\/]*)?>(.*?)<\/$component>#s";
             // Primero buscamos los que contienen tag de cierre ya que pueden contener otros elementos anidados
             if (
                 preg_match_all(
@@ -372,11 +373,10 @@ pr('AKU==>',$this->extract('script')['content']);   */
             ) {
                 $this->process_components($matches, $content);
             }
-
             // Después buscamos los que no tienen tag de cierre
             if (
                 preg_match_all(
-                    "#<($component)\s*(.*)/>#",
+                    "#<\s*($component)(\s.*|\s*)\/>#",
                     $this->content,
                     $matches
                 )
@@ -404,6 +404,7 @@ pr('AKU==>',$this->extract('script')['content']);   */
             $str_data = trim($str_data, ',');
             // Creamos la la instancia de clase 
             $typeComponent = $matches[1][$i];
+
             $arg_data = ($str_data != '') ? " Array($str_data)" : '';
             // Quitamos los tags de php pq no hace falta renombrar que estamos en php ya que es una clase de php
             $whithoutTags = preg_replace('#"\s*(\<\?\=\s*)|(\s*?\?\>)s*"#', '',  $arg_data);
@@ -417,7 +418,6 @@ pr('AKU==>',$this->extract('script')['content']);   */
                 $component_content = isset($matches[3]) ? '"' . $str . '"' : '';
                 // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
             }
-
             // Instanciamos la clase de componentes
             $replace = "<?php new \app\core\Components('$typeComponent',$whithoutTags, $component_content);?>";
             $content = str_replace($matches[0][$i], $replace, $content);
