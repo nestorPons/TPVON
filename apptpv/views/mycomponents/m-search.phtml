@@ -1,0 +1,108 @@
+<?php
+/**
+ * Componente select 
+ * Para nombrar options mediante html hay que incluir en el componente padre la opción options
+ * con un objeto JSON. Se puede añadir quitar opciones en tienpo de ejecución mediante la clase JS.  
+ * autor   : Nestor Póns 
+ * email   : nestorpons@gmail.com
+ * licencia: MIT 2020
+ */
+?>
+<component id="--id" class="row col-sm-12 col-md-12">
+    <datalist id="--id_datalist">
+        @for($$options)
+            <option data-value="$$key" value="$$value">
+        @endfor
+    </datalist>
+    <input type="search" id="el--id" list="--id_datalist" class="$$class $$default" placeholder=" " style="$$style" name="$$name" tile="$$tile" pattern="$$pattern" list="$$list" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick" onkeydown="$$onkeydown" onkeyup="$$onkeyup" onchange="$$onchange" onkeypress="$$onkeypress" $$required $$disabled $$readonly $$checked/>
+    <label for="el--id">$$label</label>
+    <style lang="less" scoped>
+        height: 86%;
+        input {
+            width: 100%;
+        }
+    </style>
+    <script>
+        class MySearch {
+            // Id del componente general no del select
+            constructor(id) {
+                this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
+
+                this.el = (typeof id == 'string') ?
+                    document.getElementById(id).querySelector('input') :
+                    id.querySelector('input');
+            
+                this.li = document.getElementById(id).querySelector('datalist');
+                this.oo = this.li.getElementsByTagName('option');
+                
+                this.el.addEventListener('change', fn=>this.el.classList.add(this.CLASS_SELECTED));
+                this.el.addEventListener('input', _=> {
+                    for(let o of this.oo ){
+                        if (o.value == this.el.value) {
+                            this.value (o.getAttribute('data-value'));
+                            break;
+                            }                    
+                    }
+                })
+            }
+            change(fn) {
+                this.el.addEventListener('change', fn);
+                return this;
+            }
+            addClass(myclass) {
+                this.el.classList.add(myclass);
+                return this;
+            }
+            removeClass(myclass) {
+                this.el.classList.remove(myclass);
+                return this;
+            }
+            addOption(value, text) {
+                let opt = document.createElement('option');
+
+                opt.dataset.value = value;
+                opt.value = text;
+                this.li.appendChild(opt);
+                return this;
+            }
+            default () {
+                this.el.value = '';
+            }
+            // Elimina todas las opciones
+            clear() {
+                this.reset();
+                let ops = this.li.querySelectorAll('option:not(:first-child)');
+                for (let o of ops) {
+                    if (o) this.li.removeChild(o);
+                }
+                return this;
+            }
+            // Deselecciona todas las opciones
+            reset() {
+                this.el.classList.remove(this.CLASS_SELECTED);
+            }
+            value(v) {
+                if (v != undefined) {
+                    this.el.dataset.value = v;
+                    this.el.seletedIndex = v;
+                    this.el.value = this.li.querySelector(`[data-value="${v}"]`).value;
+                    this.addClass('valid');
+                }
+                return this.el.dataset.value;
+            }
+            valueText(v){
+                if (v != undefined) {
+                    let option = this.li.querySelector(`[data-value="${v}"]`); 
+                    this.el.dataset.value = option.dataset.value;
+                    this.el.seletedIndex = option.dataset.value;
+                    this.el.value = option.value;
+                    this.addClass('valid');
+                }
+                return this.el.value;
+            }
+            validate(){
+                return this.li.querySelector(`[value="${this.el.value}"]`) != null;
+            }
+        }
+    </script>
+</component>
