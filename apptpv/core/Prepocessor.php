@@ -20,23 +20,27 @@ class Prepocessor
         $content,
         $queue,
         $loadeds = [];
-        
+
     protected
         $components = null;
 
     function __construct(bool $cacheable = true)
     {
+        // Se eliminan todos los archivos de la carpeta build (reinicializa)
+        $this->deleteDirectory(self::BUILD);
+
         // Guardar en variable que componentes tenemos
         $this->search_exist_components();
 
+        //Añade el link a bundle
         $this->queue = "<script src='./build/" . \FILE\JS . "'></script>";
+
         // Indicamos si cacheamos el proceso
         $this->cacheable = $cacheable;
         $this->cache = (file_exists(self::CACHE_FILE)) ? parse_ini_file(self::CACHE_FILE) : [];
 
         // Reseteamos el archivo de construccion build de js para agrupar todas las clases
         if (file_exists(\FILE\BUNDLE_JS)) unlink(\FILE\BUNDLE_JS);
-
         if (!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
 
         // Inicia compilacion de los archivos
@@ -72,16 +76,21 @@ class Prepocessor
             }
         }
     }
+
+    private function isComponent(): bool
+    {
+        return ($this->path == \APP\VIEWS\COMPONENTS || $this->path == \APP\VIEWS\MYCOMPONENTS);
+    }
     // Funcion que aplica una sintaxis propia  a las vistas
     // Todos los comandos de las vista deben enpezar por --
     private function sintax()
     {
-        $this->autoId();
+        if (!$this->isComponent()) $this->autoId();
         $this->includes();
         $this->sintax_if();
-        $this->sintax_vars();
-        $this->style_scoped();
-        $this->script_scoped();
+        if (!$this->isComponent()) $this->sintax_vars();
+        if (!$this->isComponent()) $this->style_scoped();
+        if (!$this->isComponent()) $this->script_scoped();
         $this->search_components($this->content);
     }
     private function arg(String $tag)
@@ -273,13 +282,13 @@ class Prepocessor
         return $this->content;
     }
     // Funcion preprocesadora de los archivos
+    // Lee archivos de directorios y los directorios anidados
     private function showFiles(String $path)
     {
-        // Lee archivos de directorios y los directorios anidados
         $dir = opendir($path);
+
         while ($current = readdir($dir)) {
             if ($current != "." && $current != "..") {
-
                 $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
                 $file = $path . $current;
                 $this->file = $file;
@@ -291,14 +300,15 @@ class Prepocessor
                 } else {
 
                     // ARCHIVOS
-                    // Obtenemos el ontenido del archivo
+                    // Obtenemos el ontenido del archivo (Se crea $this->content)
                     $this->getContent($file);
 
                     // Quitamos los comentarios 
                     $this->removeHTMLComments();
 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
-                    if ($path != \APP\VIEWS\COMPONENTS && $path != \APP\VIEWS\MYCOMPONENTS) $this->sintax();
+                    $this->path = $path;
+                    $this->sintax();
 
                     // Transformamos la nueva sintaxis en las vistas 
                     $a = $this->arg('style');
@@ -310,8 +320,8 @@ class Prepocessor
 
                     if ($file == self::MAIN_PAGE) $this->queue();
 
-                    //Añadimos nombre de espacio a todos los archivos 
-                    $this->add_name_space();
+                    //Añadimos nombre de espacio a todos los archivos (obsoleto)
+                    if ($path != \APP\VIEWS\MYCOMPONENTS) $this->add_name_space();
 
                     // Compresión salida html
                     if (!ENV) $this->content  = $this->compress_code($this->content);
@@ -325,7 +335,7 @@ class Prepocessor
     private function search_exist_components()
     {
         $this->components = [];
-        $folder = \VIEWS\MYCOMPONENTS;
+        $folder = \APP\VIEWS\MYCOMPONENTS;
         if (!file_exists($folder)) mkdir($folder, 0777, true);
         $gestor = opendir($folder);
         // Busca los componentes en la carpeta de vistas componentes
@@ -336,8 +346,8 @@ class Prepocessor
             }
         }
     }
-     // Buscar componentes existentes en el contenido 
-     // el parametro ha de ser enviado por referencia
+    // Buscar componentes existentes en el contenido 
+    // el parametro ha de ser enviado por referencia
     private function search_components(&$content)
     {
         foreach ($this->components as $component) {
@@ -347,20 +357,21 @@ class Prepocessor
                 preg_match_all(
                     $regex,
                     $content,
-                    $matches)
+                    $matches
+                )
             ) {
+
                 $this->process_components($matches, $content);
             }
 
             // Después buscamos los que no tienen tag de cierre
             if (
                 preg_match_all(
-                    "/<($component)\s+(.*?)\/>/s",
+                    "#<($component)\s*(.*)/>#",
                     $this->content,
                     $matches
                 )
             ) {
-/*                 prs($matches); */
                 $this->process_components($matches, $content);
             }
         }
@@ -387,17 +398,19 @@ class Prepocessor
             $arg_data = ($str_data != '') ? " Array($str_data)" : '';
             // Quitamos los tags de php pq no hace falta renombrar que estamos en php ya que es una clase de php
             $whithoutTags = preg_replace('#"\s*(\<\?\=\s*)|(\s*?\?\>)s*"#', '',  $arg_data);
+            $whithoutTags = ($whithoutTags) ? $whithoutTags : 'null'; 
+
             // Comprobamos si el componente alberga contenido
             // Si existe lo preprocesamos
             $component_content = null;
-            if(isset($matches[3])){
-                $str = str_replace('"', "'", $matches[3][$i]); 
-                $component_content = isset($matches[3]) ? ',"'.$str.'"' : ''; 
+            if (isset($matches[3])) {
+                $str = str_replace('"', "'", $matches[3][$i]);
+                $component_content = isset($matches[3]) ? '"' . $str . '"' : '';
                 // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
             }
 
             // Instanciamos la clase de componentes
-            $replace = '<?php new \app\core\Components("'.$typeComponent.'",'. $whithoutTags . ');?>';
+            $replace = "<?php new \app\core\Components('$typeComponent',$whithoutTags, $component_content);?>";
             $content = str_replace($matches[0][$i], $replace, $content);
         }
     }
@@ -492,5 +505,15 @@ class Prepocessor
                 return true;
             } else return false;
         } else return true;
+    }
+    private function deleteDirectory($dir) {
+        if(!$dh = @opendir($dir)) return;
+        while (false !== ($current = readdir($dh))) {
+            if($current != '.' && $current != '..') {
+                if (!@unlink($dir.'/'.$current)) 
+                    $this->deleteDirectory($dir.'/'.$current);
+            }       
+        }
+        closedir($dh);
     }
 }

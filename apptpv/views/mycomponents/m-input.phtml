@@ -15,7 +15,7 @@
         onchange = "$$onchange" $$required $$disabled $$readonly $$checked  
     />
     <label for="--id_input" class="$$classLabel">$$label</label>
-    @if ($$icon) <i id="icon$$id" class="lnr lnr$$-icon"></i> @endif
+    @if ($$icon) <i id="icon$$id" class="lnr lnr-$$icon"></i> @endif
     <style land="less" scoped>
         label {
             z-index: 101;
@@ -28,9 +28,9 @@
     <script>
         class MyInput{
             constructor(id){
-                this.id = id; 
+                this.id = id;
                 this.component = document.getElementById(id);
-                this.el = this.component.getElementsByTagName('input')[0]
+                this.el = this.component.getElementsByTagName('input')[0];
             }
             value(value = null){
                 if (value) this.el.value = value ; 

@@ -1,8 +1,8 @@
 <section id="buttonsTicket">
     <h1>Factura simplificada</h1>
     <div class="info">
-        <m-label id="--id_total" label="Total" value="0" color="var(--red-color)"/>
-        <m-label id="--id_return" label="A devolver" value="0" color="var(--main-color)"/>
+        <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)"/>
+        <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)"/>
     </div>
     <m-input id="--id_pay" label="Pago en efectivo" value="0" onkeyup="app.ticket.change()"/>
     <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1'  onclick='app.ticket.toggle()'/>
@@ -144,8 +144,8 @@
         Ticket: null,
         present: new MyCheckbox('--id_present'),
         txtExpire: document.getElementById('--id_date'),
-        lbltotal: new MyLabel('--id_total'),
-        lblreturn: new MyLabel('--id_return'),
+        lbltotal: new MyLabel('--id_lbl1'),
+        lblreturn: new MyLabel('--id_lbl2'),
         inputpay : new MyInput('--id_pay'), 
         change(){
             let a = parseFloat(this.inputpay.value()), 
@@ -167,7 +167,7 @@ echo(
             tel: document.getElementById('ticket_tel'),
             nif: document.getElementById('ticket_nif'),
             iva: document.getElementById('ticket_iva'),
-            change: document.getElementById('--id_return_input'),
+            change: document.getElementById('--id_lbl2_input'),
         },
         Table: new Table('<?= $table->id() ?>'),
         print(callback) {

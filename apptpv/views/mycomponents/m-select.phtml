@@ -30,10 +30,10 @@
         class MySelect {
             // Id del componente general no del select
             constructor(id) {
-
+   
                 this.el = (typeof id == 'string') ?
-                    document.getElementById(id).querySelector('input') :
-                    id.querySelector('input');
+                    document.getElementById(id).querySelector('select') :
+                    id.querySelector('select');
 
                 this.o = this.el.getElementsByTagName('option');
                 this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select

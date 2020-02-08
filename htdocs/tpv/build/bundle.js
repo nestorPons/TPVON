@@ -119,7 +119,7 @@ return this.el.classList.contains('hoverable')}
 html(){return this.el.innerHTML}}class MyCheckbox{constructor(id){this.id=id;this.component=document.getElementById(id);this.el=this.component.getElementsByTagName('input')[0]}
 value(value=null){if(value!=null)this.el.value=value;return this.el.value}
 checked(value=null){if(value!=null)this.el.checked=value
-return this.el.checked}}class MySelect{constructor(id){this.el=(typeof id=='string')?document.getElementById(id).querySelector('input'):id.querySelector('input');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED));this.li=document.getElementById(id).querySelector('datalist')}
+return this.el.checked}}class MySelect{constructor(id){this.el=(typeof id=='string')?document.getElementById(id).querySelector('select'):id.querySelector('select');this.o=this.el.getElementsByTagName('option');this.CLASS_SELECTED='valid';this.el.addEventListener('change',fn=>this.el.classList.add(this.CLASS_SELECTED));this.li=document.getElementById(id).querySelector('datalist')}
 change(fn){this.el.addEventListener('change',fn);return this}
 addClass(myclass){this.el.classList.add(myclass)
 return this}

@@ -7,7 +7,11 @@ class Components{
     const PREFIX_CONTAINER = 'container_'; 
     const PREFIX_COMPONENT = 'component_'; 
 
-    function __construct($type, Array $data = null){
+    private $content; 
+
+    function __construct($type, Array $data = null, $content = null){
+        //Archivo temporal con  el contenido
+        file_put_contents(\VIEWS\MYCOMPONENTS . "content.tmp.phtml",$content);
         if($data){
             foreach($data as $key => $val){
 
@@ -23,22 +27,28 @@ class Components{
         $this->print($type);
     }
     // Imprimimos la vista
-    function print(string $file, $Data = null): void {
-        // Variables no obligatorias (Elemtos especificos) 
-        foreach($this as $key => $value){
-            ${$key} = $value;
-        }        
-        $this->file = file_get_contents(\VIEWS\MYCOMPONENTS . "$file.phtml");
-        $this->autoId($file);
+    function print(string $type, $Data = null): void {
+        $this->file = file_get_contents(\VIEWS\MYCOMPONENTS . "$type.phtml");
+        $this->autoId($type);
+        $this->add_content();
         // Buscamos el id del elemento contenedor
         // Si no tiene id se crea uno 
         $this->sintax(); 
         $this->style_scoped();
         $this->script_scoped();
         $this->clear();
-        ob_start();
-            echo ($this->file);
-        ob_end_flush();
+        
+        // Variables no obligatorias (Elemtos especificos) 
+        foreach($this as $key => $value){
+            ${$key} = $value;
+        }        
+        file_put_contents(\VIEWS\MYCOMPONENTS . "component.tmp.phtml", $this->file);
+        include (\VIEWS\MYCOMPONENTS . "component.tmp.phtml");
+    }
+    private function add_content(){
+        $this->file = str_replace('--content',
+        "<?php include \VIEWS\MYCOMPONENTS . 'content.tmp.phtml' ?>"
+        ,$this->file);
     }
     private function autoId($type): void {
         $this->id = ($this->id)??uniqid($type);
@@ -96,7 +106,7 @@ class Components{
                         $cont = $matches[2][$i];
                         foreach($arr as $key => $value){
                             $option = str_replace('$$key', $key, $cont);
-                            if ($exist_val && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
+                            if ($exist_val && isset($this->value) && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
                             $option = str_replace('$$value', $value, $option);
                             $content .= $option; 
                         }                        
