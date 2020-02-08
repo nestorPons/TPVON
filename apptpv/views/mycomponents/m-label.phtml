@@ -34,8 +34,8 @@
                 this.cont = document.getElementById(id);
                 this.el = this.cont.getElementsByClassName('value')[0]
             }
-            value(value = null) {
-                if (value) this.el.innerText = value;
+            value(value) {
+                if (value != undefined) this.el.innerText = value;
                 return this.el.innerText;
             }
         }

@@ -32,8 +32,8 @@
                 this.component = document.getElementById(id);
                 this.el = this.component.getElementsByTagName('input')[0];
             }
-            value(value = null){
-                if (value) this.el.value = value ; 
+            value(value){
+                if (value != undefined) this.el.value = value ; 
                 return this.el.value;
             }
             change(fn){

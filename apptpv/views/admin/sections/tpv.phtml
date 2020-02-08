@@ -11,6 +11,9 @@
     <m-input id="--id_input6" type="number" label="Dto %" tabindex="9" value="0" onblur="app.tpv.calculate()"/>
     <m-input id="--id_input7" type="number" label="Importe" value="0" readonly="true"/>
     <m-input id="--id_input8" type="number" label="Total" value="0" readonly="true"/>
+    <m-btn-success id="--id_btn1" tabindex="5" onclick="app.tpv.addLine()"/>
+    <m-btn-cancel id="--id_btn2" tabindex="10" onclick="app.tpv.clearLine()"/>primary
+    <m-btn-cancel id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()"/>
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
@@ -18,11 +21,6 @@
         ]);
 
     // Linea
-   
-    $btnOk = new ButtonSuccess(['tabindex' => '5', 'onclick' => 'app.tpv.addLine()', 'class' => 'keyEnterOut']);
-    $btnClear = new ButtonCancel(['caption' => 'Borrar', 'onclick' => 'app.tpv.clearLine()']);
-
-    $btnTicket = new ButtonSuccess(['onclick' => 'app.tpv.create()', 'caption' => 'Ticket', 'tabindex' => '10']);
 
     $modTicket = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company->data());
     ?>
@@ -133,12 +131,12 @@
             text-align: right;
         }
 
-         #<?= $btnOk->id() ?> {
+         #--id_btn1 {
             grid-row: 4;
             grid-column: 5;
         }
 
-        #<?= $btnClear->id() ?> {
+        #--id_btn2 {
             grid-row: 4;
             grid-column: 6;
         }
@@ -380,6 +378,7 @@
                 this.price.value(0);
                 this.amount.value(0);
                 //this.selCode.el.focus()
+                return this;
             },
             clearLines() {
                 this.Table.clearLines()
