@@ -1,16 +1,16 @@
 <?php namespace app\controllers\components?><section id="tpv">
-    <?php new \app\core\Components('m-search', Array("id"=>"id5e3de6c81b6c2_sel1","label"=>"Codigo","name"=>"servicio","required"=>"true","tabindex"=>"4","onblur"=>"app.tpv.loadLine()"), );?>
-    <?php new \app\core\Components('m-search', Array("id"=>"id5e3de6c81b6c2_sel2","label"=>"Descripción","tabindex"=>"6","onchange"=>"app.tpv.searchDescription()"), );?>
-    <?php new \app\core\Components('m-select', Array("id"=>"id5e3de6c81b6c2_sel3","label"=>"Operador","name"=>"servicio","required"=>"true","tabindex"=>"1"), );?>
-    <?php new \app\core\Components('m-select', Array("id"=>"id5e3de6c81b6c2_sel4","label"=>"Cliente","name"=>"servicio","required"=>"true","tabindex"=>"2","onchange"=>"app.tpv.loadClient()"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input1","type"=>"text","label"=>"id","readonly"=>"true"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input2","type"=>"text","label"=>"Fecha","readonly"=>"true"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input3","type"=>"text","label"=>"Hora","readonly"=>"true"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input4","type"=>"number","label"=>"Cantidad","tabindex"=>"4","value"=>"1","onblur"=>"app.tpv.calculate()"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input5","type"=>"number","label"=>"Precio","tabindex"=>"8","value"=>"0","onblur"=>"app.tpv.calculate()"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input6","type"=>"number","label"=>"Dto %","tabindex"=>"9","value"=>"0","onblur"=>"app.tpv.calculate()"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input7","type"=>"number","label"=>"Importe","value"=>"0","readonly"=>"true"), );?>
-    <?php new \app\core\Components('m-input', Array("id"=>"id5e3de6c81b6c2_input8","type"=>"number","label"=>"Total","value"=>"0","readonly"=>"true"), );?>
+    <?php new \app\core\Components('m-search', Array("id"=>"id5e3e887f1f5fc_sel1","label"=>"Codigo","name"=>"servicio","required"=>"true","tabindex"=>"4","onblur"=>"app.tpv.loadLine()"), );?>
+    <?php new \app\core\Components('m-search', Array("id"=>"id5e3e887f1f5fc_sel2","label"=>"Descripción","tabindex"=>"6","onchange"=>"app.tpv.searchDescription()"), );?>
+    <?php new \app\core\Components('m-select', Array("id"=>"id5e3e887f1f5fc_sel3","label"=>"Operador","name"=>"servicio","required"=>"true","tabindex"=>"1"), );?>
+    <?php new \app\core\Components('m-select', Array("id"=>"id5e3e887f1f5fc_sel4","label"=>"Cliente","name"=>"servicio","required"=>"true","tabindex"=>"2","onchange"=>"app.tpv.loadClient()"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input1","type"=>"text","label"=>"id","readonly"=>"true"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input2","type"=>"text","label"=>"Fecha","readonly"=>"true"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input3","type"=>"text","label"=>"Hora","readonly"=>"true"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input4","type"=>"number","label"=>"Cantidad","tabindex"=>"4","value"=>"1","onblur"=>"app.tpv.calculate()"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input5","type"=>"number","label"=>"Precio","tabindex"=>"8","value"=>"0","onblur"=>"app.tpv.calculate()"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input6","type"=>"number","label"=>"Dto %","tabindex"=>"9","value"=>"0","onblur"=>"app.tpv.calculate()"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input7","type"=>"number","label"=>"Importe","value"=>"0","readonly"=>"true"), );?>
+    <?php new \app\core\Components('m-input', Array("id"=>"id5e3e887f1f5fc_input8","type"=>"number","label"=>"Total","value"=>"0","readonly"=>"true"), );?>
     <?php
     $table  = new Table([
         'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
@@ -28,7 +28,7 @@
     ?>
 
     <style lang="less" >
-        #tpv{align-items:flex-start;display:grid;grid-template-rows:auto 53vh auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id() ?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv table{height:initial}#tpv #id5e3de6c81b6c2_input1{grid-row:1;grid-column:1}#tpv #id5e3de6c81b6c2_input2{grid-row:1;grid-column:6;text-align:center}#tpv #id5e3de6c81b6c2_input3{text-align:center;grid-row:1;grid-column:7;margin:0 1rem}#tpv #id5e3de6c81b6c2_sel1{grid-row:3;grid-column:1}#tpv #id5e3de6c81b6c2_sel2{grid-row:3;grid-column:2 / span 2}#tpv #id5e3de6c81b6c2_input4 ?>{grid-row:3;grid-column:4}#tpv #id5e3de6c81b6c2_input5{grid-row:3;grid-column:5}#tpv #id5e3de6c81b6c2_input6{grid-row:3;grid-column:6}#tpv #-id_input7{grid-row:3;grid-column:7}#tpv #id5e3de6c81b6c2_sel3{grid-row:1;grid-column:2 / span 2}#tpv #id5e3de6c81b6c2_sel4{grid-row:1;grid-column:4 / span 2}#tpv .Descripción{flex-basis:25%}#tpv #-id_input8{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #-id_input8 input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #-id_input8 label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:7}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:5}#tpv #<?=$btnClear->id() ?>{grid-row:4;grid-column:6}#tpv #<?=$modTicket->id() ?>{max-height:80vh}
+        #tpv{align-items:flex-start;display:grid;grid-template-rows:auto 53vh auto auto;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;grid-row-gap:5px}#tpv table:not(.horizontal) thead{height:60px}#tpv #<?=$table->id() ?>{grid-row:2;grid-column-start:1;grid-column-end:-1}#tpv table{height:initial}#tpv #id5e3e887f1f5fc_input1{grid-row:1;grid-column:1}#tpv #id5e3e887f1f5fc_input2{grid-row:1;grid-column:6;text-align:center}#tpv #id5e3e887f1f5fc_input3{text-align:center;grid-row:1;grid-column:7;margin:0 1rem}#tpv #id5e3e887f1f5fc_sel1{grid-row:3;grid-column:1}#tpv #id5e3e887f1f5fc_sel2{grid-row:3;grid-column:2 / span 2}#tpv #id5e3e887f1f5fc_input4 ?>{grid-row:3;grid-column:4}#tpv #id5e3e887f1f5fc_input5{grid-row:3;grid-column:5}#tpv #id5e3e887f1f5fc_input6{grid-row:3;grid-column:6}#tpv #-id_input7{grid-row:3;grid-column:7}#tpv #id5e3e887f1f5fc_sel3{grid-row:1;grid-column:2 / span 2}#tpv #id5e3e887f1f5fc_sel4{grid-row:1;grid-column:4 / span 2}#tpv .Descripción{flex-basis:25%}#tpv #-id_input8{grid-row:4;grid-column:1;transform:translate(15px,15px) scale(1.4);font-weight:700}#tpv #-id_input8 input{font-size:1.2rem;transform:translateY(15px);font-weight:900}#tpv #-id_input8 label{font-size:await .2rem;color:var(await-fore-color)}#tpv #<?=$btnTicket->id() ?>{grid-row:4;grid-column:7}#tpv .Importe{text-align:right}#tpv #<?=$btnOk->id() ?>{grid-row:4;grid-column:5}#tpv #<?=$btnClear->id() ?>{grid-row:4;grid-column:6}#tpv #<?=$modTicket->id() ?>{max-height:80vh}
     </style>
     <script>
         
@@ -44,18 +44,18 @@
             Ticket  : new Ticket(),
             Table: new Table('<?= $table->id() ?>'),
             Modal: new Modal('<?= $modTicket->id() ?>'),
-            txtId: new MyInput('id5e3de6c81b6c2_input1'),
-            date:  new MyInput('id5e3de6c81b6c2_input2'),
-            hour: new MyInput('id5e3de6c81b6c2_input3'),
-            quantity: new MyInput('id5e3de6c81b6c2_input4'),
-            price: new MyInput('id5e3de6c81b6c2_input5'),
-            dto:  new MyInput('id5e3de6c81b6c2_input6'),
-            amount: new MyInput('id5e3de6c81b6c2_input7'),
-            txtTotal: new MyInput('id5e3de6c81b6c2_input8'),
-            selCode: new MySearch('id5e3de6c81b6c2_sel1'),
-            selDes: new MySearch('id5e3de6c81b6c2_sel2'),
-            selEmp: new MySelect('id5e3de6c81b6c2_sel3'),
-            selCli: new MySelect('id5e3de6c81b6c2_sel4'),
+            txtId: new MyInput('id5e3e887f1f5fc_input1'),
+            date:  new MyInput('id5e3e887f1f5fc_input2'),
+            hour: new MyInput('id5e3e887f1f5fc_input3'),
+            quantity: new MyInput('id5e3e887f1f5fc_input4'),
+            price: new MyInput('id5e3e887f1f5fc_input5'),
+            dto:  new MyInput('id5e3e887f1f5fc_input6'),
+            amount: new MyInput('id5e3e887f1f5fc_input7'),
+            txtTotal: new MyInput('id5e3e887f1f5fc_input8'),
+            selCode: new MySearch('id5e3e887f1f5fc_sel1'),
+            selDes: new MySearch('id5e3e887f1f5fc_sel2'),
+            selEmp: new MySelect('id5e3e887f1f5fc_sel3'),
+            selCli: new MySelect('id5e3e887f1f5fc_sel4'),
             default: {
                 client: 2,
                 user: 0

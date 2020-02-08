@@ -7,7 +7,7 @@
                 <?php new \app\core\Components('m-input', Array("type"=>"email","label"=>"Email del usuario","name"=>"email","required"=>"true"), );?>
                 <?php new \app\core\Components('m-input', Array("type"=>"password","label"=>"Contraseña","name"=>"password","required"=>"true"), );?>
             </fieldset>
-            <?php new ButtonSuccess(['caption' => 'Acceder']); /* new ButtonCancel */ ?>
+            <?php new \app\core\Components('m-btn-success', Array("type"=>"submit","class"=>"terniary","caption"=>"Acceder"), );?>
         </form>
         <m-a href="loginrememberpassword" class="float-right">Recordar contraseña</m-a>
     </div>

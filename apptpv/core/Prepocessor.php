@@ -45,6 +45,7 @@ class Prepocessor
 
         // Inicia compilacion de los archivos
         $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
+
         $this->cache_record($this->cache);
     }
     private function sintax_if(): void
@@ -309,23 +310,22 @@ class Prepocessor
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
                     $this->sintax();
-
                     // Transformamos la nueva sintaxis en las vistas 
                     $a = $this->arg('style');
-
+                    
                     if (isset($a['lang']) && $a['lang'] == 'less')
-                        $this->less($this->extract('style')['content']);
-
+                    $this->less($this->extract('style')['content']);
+                    
                     $this->build_js($this->extract('script')['content']);
-
+                    
                     if ($file == self::MAIN_PAGE) $this->queue();
-
+                    
                     //Añadimos nombre de espacio a todos los archivos (obsoleto)
                     if ($path != \APP\VIEWS\MYCOMPONENTS) $this->add_name_space();
 
                     // Compresión salida html
                     if (!ENV) $this->content  = $this->compress_code($this->content);
-
+                    
                     file_put_contents($file_build, $this->content, LOCK_EX);
                 }
             }
@@ -360,7 +360,6 @@ class Prepocessor
                     $matches
                 )
             ) {
-
                 $this->process_components($matches, $content);
             }
 
@@ -398,7 +397,7 @@ class Prepocessor
             $arg_data = ($str_data != '') ? " Array($str_data)" : '';
             // Quitamos los tags de php pq no hace falta renombrar que estamos en php ya que es una clase de php
             $whithoutTags = preg_replace('#"\s*(\<\?\=\s*)|(\s*?\?\>)s*"#', '',  $arg_data);
-            $whithoutTags = ($whithoutTags) ? $whithoutTags : 'null'; 
+            $whithoutTags = ($whithoutTags) ? $whithoutTags : 'null';
 
             // Comprobamos si el componente alberga contenido
             // Si existe lo preprocesamos
@@ -506,13 +505,14 @@ class Prepocessor
             } else return false;
         } else return true;
     }
-    private function deleteDirectory($dir) {
-        if(!$dh = @opendir($dir)) return;
+    private function deleteDirectory($dir)
+    {
+        if (!$dh = @opendir($dir)) return;
         while (false !== ($current = readdir($dh))) {
-            if($current != '.' && $current != '..') {
-                if (!@unlink($dir.'/'.$current)) 
-                    $this->deleteDirectory($dir.'/'.$current);
-            }       
+            if ($current != '.' && $current != '..') {
+                if (!@unlink($dir . '/' . $current))
+                    $this->deleteDirectory($dir . '/' . $current);
+            }
         }
         closedir($dh);
     }
