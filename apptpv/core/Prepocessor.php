@@ -376,7 +376,7 @@ class Prepocessor
             // Después buscamos los que no tienen tag de cierre
             if (
                 preg_match_all(
-                    "#<\s*($component)(\s.*|\s*)\/>#",
+                    "#<\s*($component)(\s.*|\s*)\/>#s",
                     $this->content,
                     $matches
                 )
@@ -388,17 +388,22 @@ class Prepocessor
     // Procesa los componentes personalizados de las plantillas 
     private function process_components($matches, &$content)
     {
+
         // Transforma en una clase componente
         $len = count($matches[0]);
         for ($i = 0; $i < $len; $i++) {
-            // Convertimos la cadena en arreglos para pasar los datos al componente
-            $regex = '#(.+?)\s*=\s*["\'](.+?)["\'](\s|$)+?#';
-            $count = preg_match_all($regex, $matches[2][$i], $matches_component);
             $str_data = '';
-            if ($count) {
+            // Convertimos la cadena en arreglos para pasar los datos al componente
+            $regex = '#(.+?)\s*=\s*(["\'])(.+?)\2(\s|$)+?#s';
+            if (
+                preg_match_all($regex, $matches[2][$i], $matches_component)
+                ) {
                 $len_c = count($matches_component[0]);
+                // Cambio de comillas para que se adecue a la sintaxis JSON
                 for ($j = 0; $j < $len_c; $j++) {
-                    $str_data .= '"' . trim($matches_component[1][$j]) . '"=>"' . trim($matches_component[2][$j]) . '",';
+                    $value = trim(str_replace("'", '"', $matches_component[2][$j]));
+                    $key = trim(str_replace("'", '"', $matches_component[1][$j]));
+                    $str_data .=  "'$key'=>'$value',";
                 }
             }
             $str_data = trim($str_data, ',');
@@ -419,6 +424,7 @@ class Prepocessor
                 // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
             }
             // Instanciamos la clase de componentes
+
             $replace = "<?php new \app\core\Components('$typeComponent',$whithoutTags, $component_content);?>";
             $content = str_replace($matches[0][$i], $replace, $content);
         }

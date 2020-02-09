@@ -2,18 +2,20 @@
     <form controller="company" action="save" class="input-group">
         <fieldset>
             <legend>Datos empresa</legend>
+            <m-input type="hidden" name="id" value="1"/>
+            <m-input type="text" tabindex="1" label="Nombre empresa" name="nombre" title="Introduzca el nombre de la empresa" required="true"/>
+            <m-input type="text" tabindex="2" label="Teléfono" name="telefono"/> 
+            <m-input type="text" tabindex="3" label="Email" name="email"/> 
+            <m-input type="text" tabindex="4" label="Calle" name="calle"/> 
+            <m-input type="text" tabindex="5" label="Numero" name="numero"/> 
+            <m-input type="text" tabindex="6" label="Escalera" name="escalera"/> 
+            <m-input type="text" tabindex="7" label="Piso" name="piso"/> 
+            <m-input type="text" tabindex="8" label="Población" name="poblacion"/> 
+            <m-input type="text" tabindex="9" label="Provincia" name="provincia"/> 
+            <m-input type="text" tabindex="10" label="Codigo postal" name="CP" title="Introduzca el codigo postal"/> 
+            <m-select-countries/>
             <?php
-            $txt00 = new InputHidden(['name' => 'id', 'value => 1']);
-            $txt01 = new InputText(['tabindex' => 1, 'label' => 'Nombre empresa', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la empresa", 'required' => true]);
-            $txt03 = new InputText(['tabindex' => 2, 'label' => 'Teléfono', 'name' => 'telefono']);
-            $txt04 = new InputText(['tabindex' => 3, 'label' => 'Email', 'name' => 'email']);
-            $txt05 = new InputText(['tabindex' => 4, 'label' => 'Calle', 'name' => 'calle']);
-            $txt06 = new InputText(['tabindex' => 5, 'label' => 'Numero', 'name' => 'numero']);
-            $txt07 = new InputText(['tabindex' => 6, 'label' => 'Escalera', 'name' => 'escalera']);
-            $txt08 = new InputText(['tabindex' => 7, 'label' => 'Piso', 'name' => 'piso']);
-            $txt09 = new InputText(['tabindex' => 8, 'label' => 'Población', 'name' => 'poblacion']);
-            $txt10 = new InputText(['tabindex' => 9, 'label' => 'Provincia', 'name' => 'provincia']);
-            $txt11 = new InputText(['tabindex' => 10, 'label' => 'Codigo postal', 'name' => 'CP', 'title' => "Introduzca el codigo postal"]);
+        
             $txt12 = new SelectCountries(['tabindex' => 11, 'label' => 'Pais', 'name' => 'pais']);
             ?>
         </fieldset>

@@ -100,26 +100,27 @@ class Components
             }
         }
     }
+    private function string_to_array($str){
+        
+    }
     private function sintax_for()
     {
         $regex_conditional = '/@for\s*?\((.*?)\)(.*?)@endfor/sim';
         if (
             preg_match_all($regex_conditional, $this->file, $matches)
-        ) {
+        ) { 
             for ($i = 0; $i < count($matches[0]); $i++) {
                 // De momento solo para los m-select 
                 $prop = trim($matches[1][$i], '$$');
                 $content = '';
-
+                // Lo convertimos en array;       
                 if (\property_exists($this, $prop)) {
                     // valor predeterminado
                     $exist_val = \property_exists($this, $prop);
 
-                    $arr = (!is_array($this->{$prop}))
-                        // Se convierte el valor en un array
-                        ? json_decode($this->{$prop})
-                        : $this->{$prop};
+                    $arr = json_decode($this->{$prop}, true);
                     $cont = $matches[2][$i];
+prs($this->{$prop}, $prop);
                     foreach ($arr as $key => $value) {
                         $option = str_replace('$$key', $key, $cont);
                         if ($exist_val && isset($this->value) && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);

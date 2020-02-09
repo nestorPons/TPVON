@@ -1,24 +1,25 @@
 <section id="buttonsTicket">
     <h1>Factura simplificada</h1>
     <div class="info">
-        <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)"/>
-        <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)"/>
+        <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)" />
+        <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)" />
     </div>
-    <m-input id="--id_pay" label="Pago en efectivo" value="0" onkeyup="app.ticket.change()"/>
-    <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1'  onclick='app.ticket.toggle()'/>
+    <m-input id="--id_pay" label="Pago en efectivo" value="0" onkeyup="app.ticket.change()" />
+    <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onclick='app.ticket.toggle()' />
     <m-input id="--id_date" type="date" label="Fecha vencimiento" name="fecha_vencimiento" /><br>
-
-
     <style lang="less" scoped>
         padding : 10px;
-        .info{
-            text-align: center; 
+
+        .info {
+            text-align: center;
             margin: 10px 0;
         }
-        .info > * {
+
+        .info>* {
             margin: 10px;
         }
-        .isPresent{
+
+        .isPresent {
             margin: 10px;
         }
     </style>
@@ -54,19 +55,19 @@
             transform: scale(0.8);
             overflow: auto;
         }
-        
+
         #ticket * {
             padding: 0;
         }
-        
+
         #ticket_razon_social * {
             text-align: left !important;
         }
-        
+
         #buttonsTicket {
             margin: 1rem 0;
         }
-        
+
         #ticket .data {
             margin: 5px auto;
         }
@@ -76,63 +77,63 @@
             height: 200px;
             width: 200px;
         }
-        
-        #<?= $table->id() ?> {
+
+        table {
             padding: 5px;
         }
-        
+
         @media print {
             * {
                 page-break-after: avoid;
                 text-align: center;
             }
-            
+
             component {
                 margin: 0;
                 padding: 0;
             }
-            
+
             button {
                 display: none !important;
             }
-            
+
             img {
                 max-width: 160mm;
                 margin: 10px;
             }
-            
+
             @page {
                 margin: 0;
                 size: 80mm 110mm;
             }
-            
+
             table thead {
                 text-decoration: underline;
                 border-bottom: 1px solid black;
             }
-            
+
             table td:first {
                 border-top: 1px solid black;
             }
-            
+
             .break {
                 page-break-after: always;
             }
-            
+
             table {
                 margin-bottom: 10px;
+            }
+
+            table tfoot tr {
+                position: absolute;
+                left: 170px;
+            }
+
+            table tfoot td {
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
         }
-        
-        table tfoot tr {
-            position: absolute;
-            left: 170px;
-        }
-        
-        table tfoot td {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-    }
     </style>
 </section>
 <script>
@@ -143,17 +144,12 @@
         txtExpire: document.getElementById('--id_date'),
         lbltotal: new MyLabel('--id_lbl1'),
         lblreturn: new MyLabel('--id_lbl2'),
-        inputpay : new MyInput('--id_pay'), 
-        change(){
-            let a = parseFloat(this.inputpay.value()), 
+        inputpay: new MyInput('--id_pay'),
+        change() {
+            let a = parseFloat(this.inputpay.value()),
                 b = parseFloat(this.lbltotal.value()),
-                r = a - b; 
-echo(
-    a , 
-    b, 
-    r
-)
-            this.lblreturn.value(r.toFixed(2));     
+                r = a - b;
+            this.lblreturn.value(r.toFixed(2));
         },
         frm: {
             nombre: document.getElementById('ticket_nombre_empresa'),
