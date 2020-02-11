@@ -1,19 +1,15 @@
 <section id="control">
-    <?php
-    $txt01 = new InputRead(['label' => 'Ticket']);
-    $txt02 = new InputRead(['label' => 'Cliente']);
-    $txt03 = new InputRead(['label' => 'Fecha']);
-    $txt04 = new InputText(['label' => 'Vencimiento', 'onchange' => 'app.control.savedate(window.event.target)']);
-    $table = new Table([
-        'columns' => ['id_linea', 'Nombre', 'Descripcion', 'fecha'],
-        'class' => 'hoverable', 'ondblclick' => 'app.control.addDate(event.target)'
-    ]);
-    ?>
+    <m-input-text id="--id_txt1" label="ticket" reandonly="true"/>
+    <m-input-text id="--id_txt2" label="Cliente" reandonly="true"/>
+    <m-input-text id="--id_txt3" label="Fecha" reandonly="true"/>
+    <m-input-text id="--id_txt4" label="Vencimiento" onchange="app.control.savedate(window.event.target)"/>
+    <m-table id="--id_table1"columns="['id_linea', 'Nombre', 'Descripcion', 'fecha']" class="hoverable" onclick="app.control.addDate(event.target)">
+
     <style lang="less" scoped>
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
 
-        #<?=$table->id()?> {
+        #--id_table1 {
             grid-row: 2;
             grid-column-start: 1;
             grid-column-end: -1;
@@ -57,11 +53,11 @@
             table: 'present',
             buttons: ['prev', 'next', 'search', 'print', 'conf'],
             data: null,
-            Table: new Table('<?=$table->id()?>'),
-            txtTicket: <?= $txt01->id() ?>.querySelector('input'),
-            txtCli: <?= $txt02->id() ?>.querySelector('input'),
-            txtFecha: <?= $txt03->id() ?>.querySelector('input'),
-            txtFechaV: <?= $txt04->id() ?>.querySelector('input'),
+            Table: new MyTable('--id_table1'),
+            txtTicket: --id_txt1.querySelector('input'),
+            txtCli: --id_txt2.querySelector('input'),
+            txtFecha: --id_txt3.querySelector('input'),
+            txtFechaV: --id_txt4.querySelector('input'),
             btnDel: ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
             btnAdd: ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
             load() {

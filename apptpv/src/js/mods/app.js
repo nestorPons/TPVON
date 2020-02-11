@@ -329,7 +329,10 @@ const app = {
         els = form.getElementsByTagName('select');
         for (let i in els) {
             const el = els[i];
-            if (el.attributes != undefined) el.value = data[el.attributes.name.value];
+            if (el.attributes != undefined) {
+                el.value = data[el.attributes.name.value];
+                el.classList.add('valid')
+            }
         }
         return form;
     },

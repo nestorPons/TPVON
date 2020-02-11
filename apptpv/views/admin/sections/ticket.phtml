@@ -41,9 +41,7 @@
         </div>
         <hr>
     </div>
-    <?php
-    $table = new Table(['columns' => ['Unidad', 'Servicio', 'DTO%', 'Importe'], 'total' => 'true']);
-    ?>
+    <m-table id="--id_table1" columns=" ['Unidad', 'Servicio', 'DTO%', 'Importe'], 'total' => 'true']"/>
     <br>
     <p>
         <hr>
@@ -145,6 +143,7 @@
         lbltotal: new MyLabel('--id_lbl1'),
         lblreturn: new MyLabel('--id_lbl2'),
         inputpay: new MyInput('--id_pay'),
+        Table: new MyTable('--id_table1'),
         change() {
             let a = parseFloat(this.inputpay.value()),
                 b = parseFloat(this.lbltotal.value()),
@@ -162,7 +161,6 @@
             iva: document.getElementById('ticket_iva'),
             change: document.getElementById('--id_lbl2_input'),
         },
-        Table: new Table('<?= $table->id() ?>'),
         print(callback) {
             this.put(false, _ => {
                 imprimirElemento(

@@ -11,17 +11,15 @@ class Components
 {
     const PREFIX_CONTAINER = 'container_';
     const PREFIX_COMPONENT = 'component_';
+    const KEY_CONTENT = '--content';
+    // En caso de que el componente contenga otros objetos se pueden extraer con esta variable
+    private $content_component;
 
-    private $content;
-
-    function __construct($type, array $data = null, $content = null)
-    {
-        //Archivo temporal con  el contenido
-        file_put_contents(\VIEWS\MYCOMPONENTS . "content.tmp.phtml", $content);
-
+    function __construct(String $type, array $data = null, string $content = null)
+    {   
+        $this->content = $content; 
         if ($data) {
             foreach ($data as $key => $val) {
-
                 // Atributos booleanos
                 if ($key == 'required') $val = 'required';
                 if ($key == 'disabled') $val = 'disabled';
@@ -34,12 +32,14 @@ class Components
         $this->print($type);
     }
     // Imprimimos la vista
-    function print(string $type, $Data = null): void
+    function print(string $type): void
     {
+        // Variables no obligatorias (Elemtos especificos) 
+        foreach ($this as $key => $value) {
+            ${$key} = $value;
+        }
         $this->file = file_get_contents(\VIEWS\MYCOMPONENTS . "$type.phtml");
-
         $this->autoId($type);
-        $this->add_content();
         // Buscamos el id del elemento contenedor
         // Si no tiene id se crea uno 
         $this->sintax();
@@ -47,20 +47,15 @@ class Components
         $this->script_scoped();
         $this->clear();
 
-        // Variables no obligatorias (Elemtos especificos) 
-        foreach ($this as $key => $value) {
-            ${$key} = $value;
-        }
-        file_put_contents(\VIEWS\MYCOMPONENTS . "component.tmp.phtml", $this->file);
-        include(\VIEWS\MYCOMPONENTS . "component.tmp.phtml");
-    }
-    private function add_content()
-    {
-        $this->file = str_replace(
-            '--content',
-            "<?php include \VIEWS\MYCOMPONENTS . 'content.tmp.phtml' ?>",
-            $this->file
-        );
+        ob_start();
+
+            // Buscamos la palabra reservada --content y la cambiamos por el contenido
+             
+            echo(
+                str_replace('--content', $this->content, $this->file )
+            );
+            
+        ob_end_flush();
     }
     private function autoId($type): void
     {
@@ -100,30 +95,29 @@ class Components
             }
         }
     }
-    private function string_to_array($str){
-        
-    }
     private function sintax_for()
     {
         $regex_conditional = '/@for\s*?\((.*?)\)(.*?)@endfor/sim';
         if (
             preg_match_all($regex_conditional, $this->file, $matches)
-        ) { 
+        ) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 // De momento solo para los m-select 
                 $prop = trim($matches[1][$i], '$$');
                 $content = '';
-                // Lo convertimos en array;       
+
                 if (\property_exists($this, $prop)) {
                     // valor predeterminado
                     $exist_val = \property_exists($this, $prop);
 
-                    $arr = json_decode($this->{$prop}, true);
+                    $arr = (!is_array($this->{$prop}))
+                        // Se convierte el valor en un array
+                        ? json_decode($this->{$prop})
+                        : $this->{$prop};
                     $cont = $matches[2][$i];
-prs($this->{$prop}, $prop);
                     foreach ($arr as $key => $value) {
                         $option = str_replace('$$key', $key, $cont);
-                        if ($exist_val && isset($this->value) && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
+                        if ($exist_val && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
                         $option = str_replace('$$value', $value, $option);
                         $content .= $option;
                     }

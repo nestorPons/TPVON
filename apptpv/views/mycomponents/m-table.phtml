@@ -1,12 +1,12 @@
 <component id="--id">
-    <table class="--class">
+    <table class="$$class">
         <thead>
             <?php foreach ($columns as $key => $val) : ?>
                 <th class="<?= $val ?>"><?= $val ?></th>
             <?php endforeach ?>
         </thead>
         <tbody></tbody>
-        @if (--total)
+        @if ($$total)
         <tfoot>
             <tr>
                 <td>TOTAL: </td>
@@ -16,7 +16,7 @@
         @endif
     </table>
     <template>
-        <tr onclick="--onclick" ondblclick="--ondblclick">
+        <tr onclick="$$onclick" ondblclick="$$ondblclick">
             <?php foreach ($columns as $key => $val) : ?>
                 <td class="<?= $val ?>" data-label=""></td>
             <?php endforeach ?>

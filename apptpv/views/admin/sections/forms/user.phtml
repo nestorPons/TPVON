@@ -35,10 +35,8 @@
             </div>
         </fieldset>
         <m-input type="hidden" name="noAuth" value="1" />
-        <?php
-        $btnSave    = new ButtonSuccess(['caption' => 'Guardar', 'tabindex' => 11]);
-        $btnDel     = new ButtonCancel(['caption' => 'Eliminar', 'tabindex' => 12, 'class' => 'fnDelete']);
-        ?>
+        <m-btn-success caption="Guardar" tabindex="11"/>
+        <m-btn-cancel caption="Eliminar" tabindex="12" class="fnDelete"/> 
 
     </form>
 </component>

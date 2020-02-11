@@ -1,19 +1,13 @@
 <section id="chart">
-    <?php
-    new MenuSquare([
-        'tile' => 'Gráfica ingresos dia',
-        'content' => '<canvas id="chartDays" width="600px" height="600px"></canvas>'
-    ]);
-
-    new MenuSquare([
-        'tile' => 'Gráfica ingresos mes',
-        'content' => '<canvas id="chartMonth" width="400px" height="400px"></canvas>'
-    ]);
-    new MenuSquare([
-        'tile' => 'Gráfica ingresos años',
-        'content' => '<canvas id="chartYear" width="400px" height="400px"></canvas>'
-    ]);
-    ?>
+    <m-square title="Gráfica de ingresos por dias">
+        <canvas id="chartDays" width="600px" height="600px"></canvas>
+    </m-square>
+    <m-square title="Gráfica de ingresos por mes">
+        <canvas id="chartMonth" width="600px" height="600px"></canvas>
+    </m-square>
+    <m-square title="Gráfica de ingresos por años">
+        <canvas id="chartYear" width="600px" height="600px"></canvas>
+    </m-square>
     <script>
         app.chart = {
             name : 'Gráficas', 

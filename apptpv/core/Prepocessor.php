@@ -44,7 +44,7 @@ class Prepocessor
         if (!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
 
         // Inicia compilacion de los archivos
-        $this->showFiles(self::FOLDERS_NATIVE_VIEWS);
+        $this->show_files(self::FOLDERS_NATIVE_VIEWS);
 
         $this->cache_record($this->cache);
     }
@@ -86,12 +86,12 @@ class Prepocessor
     // Todos los comandos de las vista deben enpezar por --
     private function sintax()
     {
-        if (!$this->isComponent()) $this->autoId();
+        $this->autoId();
         $this->includes();
         $this->sintax_if();
-        if (!$this->isComponent()) $this->sintax_vars();
-        if (!$this->isComponent()) $this->style_scoped();
-        if (!$this->isComponent()) $this->script_scoped();
+        $this->sintax_vars();
+        $this->style_scoped();
+        $this->script_scoped();
         $this->search_components($this->content);
     }
     private function arg(String $tag)
@@ -172,9 +172,10 @@ class Prepocessor
             $this->content = str_replace($search, $replace, $this->content);
         };
     }
-    private function getContent(String $file): String
+    private function get_content(String $file): String
     {
         return $this->content = file_get_contents($file);
+        
     }
     // Elimina los comentarios html
     function removeHTMLComments(): String
@@ -234,7 +235,7 @@ class Prepocessor
         ) {
 
             for ($i = 0; $i < count($matches[0]); $i++) {
-                $str = '<?=$' . trim($matches[1][$i], '\$') . '?>';
+                $str = '<?=$' . trim($matches[1][$i] ?? null, '\$') . '?>';
                 $this->content = str_replace($matches[0][$i], $str, $this->content);
             }
         }
@@ -294,7 +295,7 @@ class Prepocessor
     }
     // Funcion preprocesadora de los archivos
     // Lee archivos de directorios y los directorios anidados
-    private function showFiles(String $path)
+    private function show_files(String $path)
     {
         $dir = opendir($path);
 
@@ -307,19 +308,19 @@ class Prepocessor
                 if (is_dir($file)) {
                     // DIRECTORIOS 
                     if (!file_exists($file_build)) mkdir($file_build, 0775, true);
-                    $this->showFiles($file . '/');
+                    $this->show_files($file . '/');
                 } else {
 
                     // ARCHIVOS
                     // Obtenemos el ontenido del archivo (Se crea $this->content)
-                    $this->getContent($file);
+                    $this->get_content($file);
 
                     // Quitamos los comentarios 
                     $this->removeHTMLComments();
 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
-                    $this->sintax();
+                    if (!$this->isComponent())$this->sintax();
 
                     // Transformamos la nueva sintaxis en las vistas 
                     $a = $this->arg('style');
@@ -330,8 +331,6 @@ class Prepocessor
                     $this->build_js($this->extract('script')['content']);
 
                     if ($file == self::MAIN_PAGE) $this->queue();
-                    //Añadimos nombre de espacio a todos los archivos (obsoleto)
-                    if ($path != \APP\VIEWS\MYCOMPONENTS) $this->add_name_space();
 
                     // Compresión salida html
                     if (!ENV) $this->content  = $this->compress_code($this->content);
@@ -358,11 +357,11 @@ class Prepocessor
     }
     // Buscar componentes existentes en el contenido 
     // el parametro ha de ser enviado por referencia
-    private function search_components(&$content)
-    {
+    private function search_components(&$content) : void
+    { 
         foreach ($this->components as $component) {
 
-            $regex = "#<($component)(\s[^>\/]*)?>(.*?)<\/$component>#s";
+            $regex = "#<($component)(\s[^>\/]*)?>(.*?)<\/\g{1}>#s";
             // Primero buscamos los que contienen tag de cierre ya que pueden contener otros elementos anidados
             if (
                 preg_match_all(
@@ -376,58 +375,72 @@ class Prepocessor
             // Después buscamos los que no tienen tag de cierre
             if (
                 preg_match_all(
-                    "#<\s*($component)(\s.*|\s*)\/>#s",
+                    "/<\s*($component)(\s.*?|\s*?)\/>/s",
                     $this->content,
                     $matches
                 )
             ) {
-                $this->process_components($matches, $content);
+                $this->process_components($matches, $content); 
             }
         }
     }
-    // Procesa los componentes personalizados de las plantillas 
+    /**
+     * Procesa los componentes personalizados de las plantillas 
+     */
     private function process_components($matches, &$content)
     {
-
         // Transforma en una clase componente
         $len = count($matches[0]);
         for ($i = 0; $i < $len; $i++) {
-            $str_data = '';
             // Convertimos la cadena en arreglos para pasar los datos al componente
-            $regex = '#(.+?)\s*=\s*(["\'])(.+?)\2(\s|$)+?#s';
-            if (
-                preg_match_all($regex, $matches[2][$i], $matches_component)
-                ) {
-                $len_c = count($matches_component[0]);
-                // Cambio de comillas para que se adecue a la sintaxis JSON
-                for ($j = 0; $j < $len_c; $j++) {
-                    $value = trim(str_replace("'", '"', $matches_component[2][$j]));
-                    $key = trim(str_replace("'", '"', $matches_component[1][$j]));
-                    $str_data .=  "'$key'=>'$value',";
-                }
-            }
-            $str_data = trim($str_data, ',');
+            $argData = $this->args_to_array($matches[2][$i]);
             // Creamos la la instancia de clase 
             $typeComponent = $matches[1][$i];
-
-            $arg_data = ($str_data != '') ? " Array($str_data)" : '';
-            // Quitamos los tags de php pq no hace falta renombrar que estamos en php ya que es una clase de php
-            $whithoutTags = preg_replace('#"\s*(\<\?\=\s*)|(\s*?\?\>)s*"#', '',  $arg_data);
-            $whithoutTags = ($whithoutTags) ? $whithoutTags : 'null';
-
+  
             // Comprobamos si el componente alberga contenido
+
             // Si existe lo preprocesamos
-            $component_content = null;
             if (isset($matches[3])) {
-                $str = str_replace('"', "'", $matches[3][$i]);
-                $component_content = isset($matches[3]) ? '"' . $str . '"' : '';
                 // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
+                $str = str_replace('"', "'", $matches[3][$i]);
+                $component_content = ', '.  isset($matches[3]) ? '"' . $str . '"' : '';
+            } else {
+                $component_content = 'false'; 
             }
             // Instanciamos la clase de componentes
-
-            $replace = "<?php new \app\core\Components('$typeComponent',$whithoutTags, $component_content);?>";
+            $replace = "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>";
             $content = str_replace($matches[0][$i], $replace, $content);
+            
+            ob_start(); # apertura de bufer
+            file_put_contents(\VIEWS\MYCOMPONENTS . "content.tmp.phtml", $content);
+                    include(\VIEWS\MYCOMPONENTS . "content.tmp.phtml");
+
+                   $this->content = ob_get_contents();
+            ob_end_clean(); # cierre de bufer
+            $this->search_components($this->content);  
         }
+        return true; 
+    }
+    private function args_to_array($content){
+        $str_data = '';
+        $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
+        if (
+            preg_match_all($regex, $content, $matches_component)
+        ) {
+            $len_c = count($matches_component[0]);
+            // Cambio de comillas para que se adecue a la sintaxis JSON
+            for ($j = 0; $j < $len_c; $j++) {
+                $str_key = trim($matches_component[1][$j]);
+                $str_value = trim($matches_component[3][$j]);
+
+                $value = str_replace("'", '"', $str_value);
+                $key = trim(str_replace("'", '"', $str_key));
+                $str_data .=  "'$key'=>'$value',";
+            }
+        }
+
+        $str_data = trim($str_data, ',');
+        return " Array($str_data)";
     }
     // Añade nombre de espacio componentes para no referenciarlos en la construcción
     // (desuso) Eliminar en la version 2.0 

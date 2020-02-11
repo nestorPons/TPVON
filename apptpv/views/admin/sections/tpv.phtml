@@ -14,15 +14,9 @@
     <m-btn-success id="--id_btn1" tabindex="5" onclick="app.tpv.addLine()" />
     <m-btn-cancel id="--id_btn2" tabindex="10" onclick="app.tpv.clearLine()" />
     <m-btn id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()" class="primary" />
+    <m-table id="--id_table1" columns="['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €']" class="hoverable"
+     onclick="app.tpv.loadLineFromTable(window.event)"/>
 
-    <?php
-    $table  = new Table([
-        'columns' => ['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €'],
-        'class' => 'hoverable', 'onclick' => 'app.tpv.loadLineFromTable(window.event)'
-    ]);
-
-    $modTicket = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'ticket.phtml'], false, $Company->data());
-    ?>
 
     <style lang="less" scoped>
         align-items: flex-start;
@@ -36,7 +30,7 @@
             height: 60px;
         }
 
-        #<?= $table->id() ?> {
+        #--id_table1{
             grid-row: 2;
             grid-column-start: 1;
             grid-column-end: -1;
@@ -148,7 +142,7 @@
             grid-column: 6;
         }
 
-        #<?= $modTicket->id() ?> {
+        #--id_win1 {
             max-height: 80vh;
         }
     </style>
@@ -249,8 +243,8 @@
             currentId: <?= $tickets_new_id ?>,
             lastId: <?= $tickets_new_id ?>,
             Ticket: new Ticket(),
-            Table: new Table('<?= $table->id() ?>'),
-            Modal: new Modal('<?= $modTicket->id() ?>'),
+            Table: new MyTable('--id_table1'),
+            Modal: new MyWindow('--is_win1'),
             txtId: new MyInput('--id_input1'),
             date: new MyInput('--id_input2'),
             hour: new MyInput('--id_input3'),

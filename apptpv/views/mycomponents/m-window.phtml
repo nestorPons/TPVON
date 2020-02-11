@@ -1,4 +1,4 @@
-<m-modal>
+<component>
   <!--Sistema de activacion/cierre de la ventana -->
   <input type="checkbox" id="control_--id" class="modal">
   <div>
@@ -8,7 +8,7 @@
       <!--Titulo de la ventana -->
       <h1 id="tileModal--id" class="tile"></h1>
       <!--Cuerpo de la ventana -->
-      <?php include($body) ?>
+      --content
     </div>
   </div>
   <style lang="less" scoped>
@@ -27,12 +27,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      &::before{
+
+      &::before {
         content: "\e880";
       }
-      @media(max-width: 375px){
-        top: 0; 
-        right: 0; 
+
+      @media(max-width: 375px) {
+        top: 0;
+        right: 0;
       }
     }
 
@@ -41,7 +43,7 @@
     }
   </style>
   <script>
-    class Modal {
+    class MyWindow {
       constructor(id) {
         this.el = document.getElementById(id).querySelector(`.card`);
         this.$el = $('#' + id).find('.card')
@@ -122,4 +124,4 @@
       }
     }
   </script>
-  <m-modal>
+</component>

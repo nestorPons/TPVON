@@ -3,51 +3,41 @@
         <fieldset>
             <legend>Datos empresa</legend>
             <m-input type="hidden" name="id" value="1"/>
-            <m-input type="text" tabindex="1" label="Nombre empresa" name="nombre" title="Introduzca el nombre de la empresa" required="true"/>
-            <m-input type="text" tabindex="2" label="Teléfono" name="telefono"/> 
-            <m-input type="text" tabindex="3" label="Email" name="email"/> 
-            <m-input type="text" tabindex="4" label="Calle" name="calle"/> 
-            <m-input type="text" tabindex="5" label="Numero" name="numero"/> 
-            <m-input type="text" tabindex="6" label="Escalera" name="escalera"/> 
-            <m-input type="text" tabindex="7" label="Piso" name="piso"/> 
-            <m-input type="text" tabindex="8" label="Población" name="poblacion"/> 
-            <m-input type="text" tabindex="9" label="Provincia" name="provincia"/> 
-            <m-input type="text" tabindex="10" label="Codigo postal" name="CP" title="Introduzca el codigo postal"/> 
-            <m-select-countries/>
-            <?php
-        
-            $txt12 = new SelectCountries(['tabindex' => 11, 'label' => 'Pais', 'name' => 'pais']);
-            ?>
+            <m-input-text tabindex="1" label="Nombre empresa" name="nombre" title="Introduzca el nombre de la empresa" required="true"/>
+            <m-input-text tabindex="2" label="Teléfono" name="telefono"/> 
+            <m-input-text tabindex="3" label="Email" name="email"/> 
+            <m-input-text tabindex="4" label="Calle" name="calle"/> 
+            <m-input-text tabindex="5" label="Numero" name="numero"/> 
+            <m-input-text tabindex="6" label="Escalera" name="escalera"/> 
+            <m-input-text tabindex="7" label="Piso" name="piso"/> 
+            <m-input-text tabindex="8" label="Población" name="poblacion"/> 
+            <m-input-text tabindex="9" label="Provincia" name="provincia"/> 
+            <m-input-text tabindex="10" label="Codigo postal" name="CP" title="Introduzca el codigo postal"/> 
+            <m-select-countries tabindex="11" name="pais"/>
         </fieldset>
     </form>
 
     <form controller="config" action="save" class="input-group">
         <fieldset>
             <legend>Datos aplicación</legend>
-            <?php
-            new InputHidden(['name' => 'id', 'value => 1']);
-            $txt13 = new InputText(['tabindex' => 12, 'label' => '% Iva aplicado', 'name' => 'iva']);
-            $txt14 = new InputText(['tabindex' => 13, 'label' => 'Dias cheque regalo', 'name' => 'dias']);
-            ?>
+            <m-input type="hidden" name="id" value="1"/>
+            <m-input-text tabindex="12" label="% Iva aplicado" name="iva"/> 
+            <m-input-text tabindex="13" label="Dias cheque regalo" name="dias"/> 
         </fieldset>
     </form>
     <form controller="" action="" class="input-group">
         <fieldset>
             <legend>Gerente</legend>
-            <?php
-            $sel01 = new Select(['label' => 'Gerente', 'required' => true, 'tabindex' => 14]);
-            ?>
+            <m-select id="--id_sel1" label="Gerente" required="true" tabindex="14"/>
         </fieldset>
     </form>
 
     <form controller="promos" action="save" class="input-group">
         <fieldset>
             <legend>Promocion fidelización</legend>
-            <?php
-            $txt01 = new InputText(['label' => 'Nombre', 'name' => 'nombre', 'tabindex' => 1, 'title' => "Introduzca el nombre de la promoción", 'required' => true]);
-            $txt02 = new InputText(['label' => 'Total de dias', 'name' => 'valor']);
-            $txt03 = new InputText(['label' => 'DTO% a aplicar', 'name' => 'dto']);
-            ?>
+            <m-input-text tabindex="15" label="Nombre" name="nombre" title="Introduzca el nombre de la promoción"/>
+            <m-input-text tabindex="16" label="Total dias" name="valor"/>
+            <m-input-text tabindex="16" label="DTO% a aplicar" name="dto"/>
         </fieldset>
     </form>
 </section>
@@ -80,7 +70,7 @@
         name : 'Configuración',
         buttons: [],
         id_user: null,
-        selUsers : new Select(<?=$sel01->id()?>), 
+        selUsers : new Select('--id_sel1'), 
         form: {
             company: document.getElementById('--id').getElementsByTagName('form')[0],
             conf: document.getElementById('--id').getElementsByTagName('form')[1],

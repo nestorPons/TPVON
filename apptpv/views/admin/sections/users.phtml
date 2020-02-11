@@ -1,19 +1,28 @@
 <section id="users">
-    <?php
-    $table      = new Table([
-        'columns' => ['id', 'Nombre', 'Obs', 'Tel', 'Email'], 
-        'class' => 'hoverable', 
-        'onclick' => 'app.users.show(window.event)']);
-    $abc        = new ListABC($table->id());
-    $editUser   = new Modal(['body' => \VIEWS\ADMIN\SECTIONS . 'forms/user.phtml'], false, $data);
-    ?>
+    <m-list />
+    <m-table id="--id_table1" columns="['id', 'Nombre', 'Obs', 'Tel', 'Email']" class="hoverable" onclick="app.users.show(window.event)" />
+    <m-window id="--id_win1">
+        <form controller="items" action="save" callback="app.services.save(data)">
+            <m-input-text label="id" name="id" onlyread="true" />
+            <m-input-text label="codigo" name="codigo" tabindex="1" title="Introduzca el código" onlyread="true" onchange="app.services.valCode(window.event)" required="true" pattern="\S{4,10}" />
+            <m-input-text label="Descrición" name="descripcion" tabindex="2" />
+            <m-input-text label="Precio" name="precio" tabindex="3" required="true" />
+            <m-input-text label="Coste" name="coste" tabindex="4" />
+            <m-input-text label="Tiempo" name="tiempo" tabindex="5" required="true" />
+            <m-select id="--id_sel1" label="Tipo producto" name="tipo" class="valid" tabindex="6" options="['1':'Servicio', '2':'Producto']" selected="1" required="true" />
+            <m-select id="--id_sel2" label="Familia" name="id_familia" class="valid" tabindex="7" selected="1" required="true" />
 
+            <m-btn-success tabindex="8" caption="Guardar" />
+            <m-btn-cancel class="fnDelete" tabindex="9" caption="Eliminar" />
+
+        </form>
+    </m-window>
     <style lang="less">
         #users {
             display: grid;
             grid-template-rows: 2;
 
-            #<?= $table->id() ?> {
+            #--id_table1 {
                 max-height: 80vh;
                 grid-row: 2;
             }
@@ -25,13 +34,12 @@
     </style>
     <script>
         app.users = {
-            name : 'Usuarios',
+            name: 'Usuarios',
             table: 'usuarios',
             buttons: ['add', 'search'],
-            currentId : null,
-            Table       : new Table('<?=$table->id()?>'),
-            Form        : new Modal('<?=$editUser->id()?>'),
-            $table      : $('#<?= $table->id() ?>').find('tbody'),
+            currentId: null,
+            Table: new MyTable('--id_table1'),
+            Form: new MyWindow('--id_win1'),
             validation(callback) {
                 let f = this.Form.getData()
                 DB.get(this.table)
@@ -39,19 +47,19 @@
                         for (i in usuarios) {
                             let u = usuarios[i]
 
-                            if (!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id){
+                            if (!isEmpty(f.dni) && u.dni == f.dni && u.id != f.id) {
                                 this.error = {
                                     success: false,
                                     code: 'dni',
                                     mens: 'Error dni duplicado'
                                 }
-                            }else if (!isEmpty(f.email) && u.email == f.email && u.id != f.id){
+                            } else if (!isEmpty(f.email) && u.email == f.email && u.id != f.id) {
                                 this.error = {
                                     success: false,
                                     code: 'email',
                                     mens: 'Error email duplicado'
                                 }
-                            } 
+                            }
                         }
                         callback(this.error || {
                             success: true
@@ -79,9 +87,9 @@
             },
             add() {
                 let data = {
-                    id      : -1,
-                    estado  : 1,
-                    promos  : 1
+                    id: -1,
+                    estado: 1,
+                    promos: 1
                 }
                 this.Form.clear().open(data).setTile('Nuevo usuario')
             },
@@ -95,7 +103,7 @@
             },
             updateLine(data) {
                 const ob = this.Table.updateLine(
-                    data.id, 
+                    data.id,
                     [data.id, data.nombre, data.obs, data.tel, data.email]
                 )
                 this.loadClass(ob, data)
@@ -141,14 +149,14 @@
                 let _search = (field, value) => {
                     DB.get(this.table, field, value, 'estado>0')
                         .then(v => {
-                            if(v){
+                            if (v) {
                                 for (let i in v) this.Table.showLine(`[idline='${v[i].id}']`)
                             }
                         })
                 }
                 // Ocultamoso todas las lineas
                 this.Table.hiddenRows()
-                
+
                 // Busqueda segun criterios
                 if (/([0-9]){9,13}/.test(value)) _search('tel', value)
                 else if (/[0-9]{8}[A-Za-z]{1}/.test(value)) _search('dni', value)
