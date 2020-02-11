@@ -10,19 +10,7 @@
 │   │   ├── credentials.php
 │   │   ├── files.php
 │   │   ├── folders.php
-│   │   ├── mail.ini
 │   │   └── mail.php
-│   ├── controllers
-│   │   ├── Admin.php
-│   │   ├── Chart.php
-│   │   ├── Company.php
-│   │   ├── components
-│   │   ├── Login.php
-│   │   ├── Main.php
-│   │   ├── Styles.php
-│   │   ├── Tickets.php
-│   │   ├── Users.php
-│   │   └── Web.php
 │   ├── core
 │   │   ├── cache_views.ini
 │   │   ├── Components.php

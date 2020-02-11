@@ -1,10 +1,5 @@
 htdocs/tpv/build/admin/
-htdocs/tpv/js
-htdocs/tpv/css
-htdocs/tpv/companies
 htdocs/tpv/build
-
 server/logs
 apptpv/config/conn.ini
-apptpv/config/mail.ini
 apptpv/caches/*.cache

@@ -24,22 +24,22 @@
 <fieldset>
   <legend>Servidor de correo electronico</legend>
   Host del servidor:<br>
-  <input type="text" name="host_mail" value="<?=MAIL['host']?>">
+  <input type="text" name="host_mail" value="<?=CONN['hostemail']?>">
   <br>
   Nombre de usuario/email de la cuenta del servidor:<br>
-  <input type="text" name="username_mail" value="<?=MAIL['username']?>">
+  <input type="text" name="username_mail" value="<?=CONN['username']?>">
   <br>
   Email desde que se envian los correos:<br>
-  <input type="text" name="fromname_mail" value="<?=MAIL['fromname']?>">
+  <input type="text" name="fromname_mail" value="<?=CONN['fromname']?>">
   <br>
   Contraseña para acceder al servidor:<br>
-  <input type="text" name="password_mail" value="<?=MAIL['password']?>">
+  <input type="text" name="password_mail" value="<?=CONN['password']?>">
   <br>
   Seguridad:<br>
-  <input type="text" name="secure_mail" value="<?=MAIL['secure']?>">
+  <input type="text" name="secure_mail" value="<?=CONN['secure']?>">
   <br>
   Puerto:<br>
-  <input type="text" name="port_mail" value="<?=MAIL['port']?>">
+  <input type="text" name="port_mail" value="<?=CONN['portemail']?>">
   <input type="button" value="Test" 
     onClick="document.getElementsByTagName('form')[0].action='config/testconnection.php'; 
     document.getElementsByTagName('form')[0].submit()"> 

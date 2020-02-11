@@ -11,8 +11,7 @@ ___
 >>> conndefault --> _Datos predeterminados de la configuración._
 >>> conn.ini --> _Configuración de la conexión._
 >>> files.php --> _Constantes de direcciónes de archivos._    
->>> folders.php --> _Constantes de direcciones de carpetas._   
->>> mail.ini --> _Datos de configuración conexión email._       
+>>> folders.php --> _Constantes de direcciones de carpetas._      
 >>> mail.php --> _Configuración para la clase mail._      
 
 >> **controllers** --> _Clases controladoras._   
