@@ -92,10 +92,6 @@ class Login extends Controller{
         } else return Error::array('E026');
         
     }
-    private function zone(bool $admin){
-        $folder = ($admin)?\VIEWS\ADMIN : \FOLDERS\USER;
-        return $this->zone = $folder . 'index.phtml'; 
-    }
     protected function newuser(Data $Data){
         $User = new User; 
         $User->new($Data); 
@@ -118,7 +114,6 @@ class Login extends Controller{
                 $data['page'] = 'login'; 
             }
         }
-
         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
     private function isActive(){

@@ -9,7 +9,7 @@ ___
 >> **config** --> _Archivos de configuración de la aplicación._     
 >>> app.php --> _Archivo de configuración de la aplicación._            
 >>> conndefault --> _Datos predeterminados de la configuración._
->>> conn.ini --> _Configuración de la conexión._
+>>> conn.ini --> _Configuración del serrvidor y del servidor email._
 >>> files.php --> _Constantes de direcciónes de archivos._    
 >>> folders.php --> _Constantes de direcciones de carpetas._      
 >>> mail.php --> _Configuración para la clase mail._      

@@ -34,10 +34,6 @@ class Components
     // Imprimimos la vista
     function print(string $type): void
     {
-        // Variables no obligatorias (Elemtos especificos) 
-        foreach ($this as $key => $value) {
-            ${$key} = $value;
-        }
         $this->file = file_get_contents(\VIEWS\MYCOMPONENTS . "$type.phtml");
         $this->autoId($type);
         // Buscamos el id del elemento contenedor
@@ -46,6 +42,10 @@ class Components
         $this->style_scoped();
         $this->script_scoped();
         $this->clear();
+        // Variables no obligatorias (Elemtos especificos) 
+        foreach ($this as $key => $value) {
+            ${$key} = $value;
+        }
 
         ob_start();
 

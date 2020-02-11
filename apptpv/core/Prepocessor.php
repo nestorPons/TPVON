@@ -86,13 +86,13 @@ class Prepocessor
     // Todos los comandos de las vista deben enpezar por --
     private function sintax()
     {
+        $this->search_components($this->content);
         $this->autoId();
         $this->includes();
         $this->sintax_if();
         $this->sintax_vars();
         $this->style_scoped();
         $this->script_scoped();
-        $this->search_components($this->content);
     }
     private function arg(String $tag)
     {
@@ -175,7 +175,6 @@ class Prepocessor
     private function get_content(String $file): String
     {
         return $this->content = file_get_contents($file);
-        
     }
     // Elimina los comentarios html
     function removeHTMLComments(): String
@@ -320,7 +319,7 @@ class Prepocessor
 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
-                    if (!$this->isComponent())$this->sintax();
+                    if (!$this->isComponent()) $this->sintax();
 
                     // Transformamos la nueva sintaxis en las vistas 
                     $a = $this->arg('style');
@@ -357,8 +356,8 @@ class Prepocessor
     }
     // Buscar componentes existentes en el contenido 
     // el parametro ha de ser enviado por referencia
-    private function search_components(&$content) : void
-    { 
+    private function search_components(&$content): void
+    {
         foreach ($this->components as $component) {
 
             $regex = "#<($component)(\s[^>\/]*)?>(.*?)<\/\g{1}>#s";
@@ -380,7 +379,7 @@ class Prepocessor
                     $matches
                 )
             ) {
-                $this->process_components($matches, $content); 
+                $this->process_components($matches, $content);
             }
         }
     }
@@ -396,32 +395,33 @@ class Prepocessor
             $argData = $this->args_to_array($matches[2][$i]);
             // Creamos la la instancia de clase 
             $typeComponent = $matches[1][$i];
-  
+
             // Comprobamos si el componente alberga contenido
 
             // Si existe lo preprocesamos
             if (isset($matches[3])) {
                 // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
                 $str = str_replace('"', "'", $matches[3][$i]);
-                $component_content = ', '.  isset($matches[3]) ? '"' . $str . '"' : '';
+                $component_content = ', ' .  isset($matches[3]) ? '"' . $str . '"' : '';
             } else {
-                $component_content = 'false'; 
+                $component_content = 'false';
             }
             // Instanciamos la clase de componentes
             $replace = "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>";
             $content = str_replace($matches[0][$i], $replace, $content);
-            
+
             ob_start(); # apertura de bufer
             file_put_contents(\VIEWS\MYCOMPONENTS . "content.tmp.phtml", $content);
-                    include(\VIEWS\MYCOMPONENTS . "content.tmp.phtml");
+            include(\VIEWS\MYCOMPONENTS . "content.tmp.phtml");
 
-                   $this->content = ob_get_contents();
+            $this->content = ob_get_contents();
             ob_end_clean(); # cierre de bufer
-            $this->search_components($this->content);  
+            $this->search_components($this->content);
         }
-        return true; 
+        return true;
     }
-    private function args_to_array($content){
+    private function args_to_array($content)
+    {
         $str_data = '';
         $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
         if (
