@@ -153,7 +153,7 @@ class Prepocessor
     private function extract($tag): array
     {
         $attr = [];
-        $regex = "#<$tag\s*([^>]*)>(.*?)<\/$tag>#s";
+        $regex = "#<$tag\s*([^>]*)>(.*?)<\/\\1>#s";
         if (
             preg_match($regex, $this->content, $matches)
         ) {
@@ -199,7 +199,6 @@ class Prepocessor
     }
     private function less(String $content)
     {
-
         //COMPILAMOS LESS
         $less = new \lessc;
 
@@ -209,7 +208,8 @@ class Prepocessor
         $minifier = new Minify\CSS;
         $minifier->add($content_less);
         $content_min = $minifier->minify();
-        $this->content = str_replace($content, $content_min, $this->content);
+prs($content_min);
+        $this->replace($content, $content_min);
     }
     // Generador de ids únicos
     private function uniqid()
@@ -217,25 +217,37 @@ class Prepocessor
         // Se le añade unprefijo para que siempre empieze por una letra
         return uniqid('id');
     }
-    // Devuelve todos los argumentos de un tag
-    private function args($tag)
+    /**
+     *   Devuelve todos los argumentos de un tag
+     */
+    private function tags($tag) : array
     {
-        $args = [];
-        $regex = "/\<\s*$tag ([^>]*?)>/";
+        $regex = "/\<($tag) ([^>]*?)>(.*?)<\/\\1>/si";
+        /**
+         * 0 -> Todo
+         * 1 -> tag
+         * 2 -> args
+         * 3 -> cont
+         */
         if (
             $len = preg_match_all($regex, $this->content, $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
+                // ordena los argumentos en un array
+                $a[$i]['content'] = $matches[3][$i];
                 if (
-                    preg_match_all("/(.*?)(\s*=\"(.*?)\")+/i", $matches[1][$i], $match)
+                    preg_match_all("/([^\s]*)(\s*=\"(.*)?\")?/i", $matches[2][$i], $match)
                 ) {
-                    pr($match);
-                    $args[] = $match[0][$i];
+
+                    foreach(array_filter($match[0]) as $value){
+                        $ar = explode('=',trim($value, "'")); 
+                        $a[$i][$ar[0]] = isset($ar[1]) ? preg_replace('/[\'\"]/','', $ar[1]): true;
+                    }
                 }
             }
         }
 
-        return $args;
+        return $a??[];
     }
     private function includes()
     {
@@ -343,12 +355,12 @@ class Prepocessor
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
                     if (!$this->isComponent()) $this->sintax();
-
                     // Transformamos la nueva sintaxis en las vistas 
-                    $a = $this->args('style');
-                    pr($a);
-                    if (isset($a['lang']) && $a['lang'] == 'less')
-                        $this->less($this->extract('style')['content']);
+                    foreach($this->tags('style') as $k => $v){
+                        if (isset($v['lang']) && $v['lang'] == 'less'){
+                            $this->less($v['content']);
+                        }
+                    }
 
                     $this->build_js($this->extract('script')['content']);
 

@@ -17,6 +17,7 @@ class Components
 
     function __construct(String $type, array $data = null, string $content = null)
     {   
+        prs('CON');
         $this->content = $content; 
         if ($data) {
             foreach ($data as $key => $val) {
