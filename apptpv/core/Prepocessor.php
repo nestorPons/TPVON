@@ -68,10 +68,10 @@ class Prepocessor
                         // Imprimimos el contenido dentro del condicional
                         $replace = preg_replace($start_condition, '', $value);
                         $replace = preg_replace($end_condition, '', $replace);
-                        $this->content = str_replace($value, $replace, $this->content);
+                        $this->replace($value, $replace);
                     } else {
                         // Eliminamos todo el condicional 
-                        $this->content = str_replace($value, '', $this->content);
+                        $this->replace($value, '');
                     }
                 }
             }
@@ -95,64 +95,44 @@ class Prepocessor
         $this->sintax_for();
         $this->sintax_vars();
     }
+    /**
+     * Funcion auxiliar para reemplazar el contenido de la pagina
+     */
+    private function replace($arg, $val = null)
+    {
+        switch (gettype($arg)) {
+            case 'string':
+                $this->content = str_replace($arg, $val, $this->content);
+                break;
+            case 'array':
+                foreach ($arg as $key => $val) {
+                    $this->content = str_replace($key, $val, $this->content);
+                }
+                break;
+        }
+    }
     private function sintax_for()
     {
-        $cont = $this->content;
         if (
-            preg_match_all( '/@for\s*?\((.*?)\)(.*?)@endfor/sim', $cont, $matches)
+            $len = preg_match_all('/@for\s*\((.*?)\)(.*?)@endfor/sim', $this->content, $matches)
         ) {
-            for ($i = 0; $i < count($matches[0]); $i++) {
-                // De momento solo para los m-select 
-                $prop = trim($matches[1][$i], '$$');
-                $content = '';
+            for ($i = 0; $i < $len; $i++) {
+                $res = '';
+                $cond = $matches[1][$i];
+                $body = $matches[2][$i];
+                $struct = $matches[0][$i];
 
-                if (\property_exists($this, $prop)) {
-                    // valor predeterminado
-                    $exist_val = \property_exists($this, $prop);
+                if (is_string($cond)) $arr = json_decode($cond);
 
-                    $arr = (!is_array($this->{$prop}))
-                        // Se convierte el valor en un array
-                        ? json_decode($this->{$prop})
-                        : $this->{$prop};
-                    $cont = $matches[2][$i];
-                    foreach ($arr as $key => $value) {
-                        $option = str_replace('$$key', $key, $cont);
-                        if ($exist_val && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
-                        $option = str_replace('$$value', $value, $option);
-                        $content .= $option;
-                    }
-                    $this->content = str_replace($matches[0][$i], $content, $cont);
-                } else {
-                    // Si no existe la propiedad quitamos el elemento
-                    $this->content = str_replace($matches[0][$i], '', $cont);
+                foreach ($arr as $key => $value) {
+                    $str = str_replace('$$value', $value, $body);
+                    $res .= str_replace('$$key', $key, $str);
                 }
+                $this->replace($struct, $res);
             }
         }
     }
-    private function arg(String $tag)
-    {
-        $return = [];
 
-        $pos_tag_open = strpos($this->content, "<$tag");
-        $pos_end_tag_open = strpos($this->content, '>', $pos_tag_open);
-        $tag_style_open = substr($this->content, $pos_tag_open, $pos_end_tag_open - $pos_tag_open);
-
-        $args = str_replace("<$tag", '', $tag_style_open);
-        $args = explode(' ', $args);
-        foreach ($args as $value) {
-            if (!empty($value)) {
-                $arg = explode('=', $value);
-                if (!empty($arg[1])) {
-                    $v = trim($arg[1], '"');
-                    $v = trim($v, "'");
-                    $k = trim($arg[0]);
-                    $return[$k] = $v;
-                }
-            }
-        }
-
-        return $return;
-    }
     private function compress_code($code)
     {
         $search = array(
@@ -212,9 +192,10 @@ class Prepocessor
         return $this->content = file_get_contents($file);
     }
     // Elimina los comentarios html
-    function removeHTMLComments(): String
+    function remove_comments()
     {
-        return $this->content = preg_replace('/<!--(.|\s)*?-->/', '', $this->content);
+        $this->content = preg_replace('/<!--(.|\s)*?-->/', '', $this->content);
+        $this->content = preg_replace('/[^\:]\/\/(.*)/', '', $this->content);
     }
     private function less(String $content)
     {
@@ -239,21 +220,29 @@ class Prepocessor
     // Devuelve todos los argumentos de un tag
     private function args($tag)
     {
-        $return = [];
-        $regex = '#(\w)+="(.*?)"#';
-        $has = preg_match_all($regex, $tag, $matches);
-        foreach ($matches[0] as $value) {
-            $arr = explode('=', $value);
-            $return[$arr[0]] = trim($arr[1], '"');
+        $args = [];
+        $regex = "/\<\s*$tag ([^>]*?)>/";
+        if (
+            $len = preg_match_all($regex, $this->content, $matches)
+        ) {
+            for ($i = 0; $i < $len; $i++) {
+                if (
+                    preg_match_all("/(.*?)(\s*=\"(.*?)\")+/i", $matches[1][$i], $match)
+                ) {
+                    pr($match);
+                    $args[] = $match[0][$i];
+                }
+            }
         }
-        return $return;
+
+        return $args;
     }
     private function includes()
     {
-        $has = preg_match_all('/\@include\s*\((.*?)\)/', $this->content, $matches);
+        $has = preg_match_all('/\s\@include\s*\((.*?)\)\s/', $this->content, $matches);
         if ($has) {
             $len = count($matches[0]);
-            for($i = 0; $i < $len; $i++ ){
+            for ($i = 0; $i < $len; $i++) {
                 $str = "<?php include({$matches[1][$i]})?>";
                 $this->content = str_replace($matches[0][$i], $str, $this->content);
             }
@@ -349,15 +338,15 @@ class Prepocessor
                     $this->get_content($file);
 
                     // Quitamos los comentarios 
-                    $this->removeHTMLComments();
+                    $this->remove_comments();
 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
                     if (!$this->isComponent()) $this->sintax();
 
                     // Transformamos la nueva sintaxis en las vistas 
-                    $a = $this->arg('style');
-
+                    $a = $this->args('style');
+                    pr($a);
                     if (isset($a['lang']) && $a['lang'] == 'less')
                         $this->less($this->extract('style')['content']);
 

@@ -1,9 +1,10 @@
 <component id="--id">
+    <h1>--id</h1>
     <table class="$$class">
         <thead>
-            <?php foreach ($columns as $key => $val) : ?>
-                <th class="<?= $val ?>"><?= $val ?></th>
-            <?php endforeach ?>
+            @for($$columns)
+                <th class="$$value">$$value</th>
+            @endfor
         </thead>
         <tbody></tbody>
         @if ($$total)
@@ -17,9 +18,9 @@
     </table>
     <template>
         <tr onclick="$$onclick" ondblclick="$$ondblclick">
-            <?php foreach ($columns as $key => $val) : ?>
-                <td class="<?= $val ?>" data-label=""></td>
-            <?php endforeach ?>
+            @for($$columns)
+                <td class="$$value" data-label=""></td>
+            @endfor
         </tr>
     </template>
     <style lang="less" scoped>

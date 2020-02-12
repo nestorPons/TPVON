@@ -102,22 +102,21 @@ class Components
             preg_match_all($regex_conditional, $this->file, $matches)
         ) {
             for ($i = 0; $i < count($matches[0]); $i++) {
-                // De momento solo para los m-select 
+                //m-select m-table
                 $prop = trim($matches[1][$i], '$$');
                 $content = '';
 
                 if (\property_exists($this, $prop)) {
                     // valor predeterminado
-                    $exist_val = \property_exists($this, $prop);
-
                     $arr = (!is_array($this->{$prop}))
-                        // Se convierte el valor en un array
-                        ? json_decode($this->{$prop})
-                        : $this->{$prop};
+                    // Se convierte el valor en un array
+                    ? json_decode($this->{$prop})
+                    : $this->{$prop};
+
                     $cont = $matches[2][$i];
                     foreach ($arr as $key => $value) {
                         $option = str_replace('$$key', $key, $cont);
-                        if ($exist_val && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
+                        if (\property_exists($this, 'value') && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
                         $option = str_replace('$$value', $value, $option);
                         $content .= $option;
                     }
