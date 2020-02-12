@@ -86,13 +86,48 @@ class Prepocessor
     // Todos los comandos de las vista deben enpezar por --
     private function sintax()
     {
-        $this->search_components($this->content);
         $this->autoId();
         $this->includes();
-        $this->sintax_if();
-        $this->sintax_vars();
         $this->style_scoped();
         $this->script_scoped();
+        $this->search_components($this->content);
+        $this->sintax_if();
+        $this->sintax_for();
+        $this->sintax_vars();
+    }
+    private function sintax_for()
+    {
+        $cont = $this->content;
+        if (
+            preg_match_all( '/@for\s*?\((.*?)\)(.*?)@endfor/sim', $cont, $matches)
+        ) {
+            for ($i = 0; $i < count($matches[0]); $i++) {
+                // De momento solo para los m-select 
+                $prop = trim($matches[1][$i], '$$');
+                $content = '';
+
+                if (\property_exists($this, $prop)) {
+                    // valor predeterminado
+                    $exist_val = \property_exists($this, $prop);
+
+                    $arr = (!is_array($this->{$prop}))
+                        // Se convierte el valor en un array
+                        ? json_decode($this->{$prop})
+                        : $this->{$prop};
+                    $cont = $matches[2][$i];
+                    foreach ($arr as $key => $value) {
+                        $option = str_replace('$$key', $key, $cont);
+                        if ($exist_val && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
+                        $option = str_replace('$$value', $value, $option);
+                        $content .= $option;
+                    }
+                    $this->content = str_replace($matches[0][$i], $content, $cont);
+                } else {
+                    // Si no existe la propiedad quitamos el elemento
+                    $this->content = str_replace($matches[0][$i], '', $cont);
+                }
+            }
+        }
     }
     private function arg(String $tag)
     {
@@ -215,13 +250,12 @@ class Prepocessor
     }
     private function includes()
     {
-        $regex = '#<include(.)*?[^<]*>#';
-        $has = preg_match_all($regex, $this->content, $matches);
+        $has = preg_match_all('/\@include\s*\((.*?)\)/', $this->content, $matches);
         if ($has) {
-            foreach ($matches[0] as $value) {
-                $args = $this->args($value);
-                $str = "<?php include({$args['src']})?>";
-                $this->content = str_replace($value, $str, $this->content);
+            $len = count($matches[0]);
+            for($i = 0; $i < $len; $i++ ){
+                $str = "<?php include({$matches[1][$i]})?>";
+                $this->content = str_replace($matches[0][$i], $str, $this->content);
             }
         }
         return $has;
