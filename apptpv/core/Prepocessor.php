@@ -10,18 +10,16 @@ class Prepocessor
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
-        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml',
-        NAMESPACE_COMPONENTS = 'app\controllers\components';
+        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml';
 
     private
+        $element,
         $cache_class_js = null,
         $cache,
         $isModified = false,
         $content,
         $queue,
-        $loadeds = [];
-
-    protected
+        $loadeds = [],
         $components = null;
 
     function __construct(bool $cacheable = true)
@@ -88,12 +86,58 @@ class Prepocessor
     {
         $this->autoId();
         $this->includes();
-        $this->style_scoped();
-        $this->script_scoped();
         $this->search_components($this->content);
         $this->sintax_if();
         $this->sintax_for();
         $this->sintax_vars();
+        // Encapsulación de los estilos
+        foreach ($this->tags('style') as $tag) {
+            $this->add_style_scope($tag);
+
+            if ($tag->get('lang') == 'less') {
+                $this->less($tag->content());
+            }
+            // eliminamos el argumento scoped
+            $tag->del('scoped');
+            $tag->del('lang');
+        }
+        // Encapsulación de los scripts
+        foreach ($this->tags('script') as $tag) {
+            $this->add_script_scope($tag);
+            $tag->del('scoped');
+        }
+    }
+    private function add_script_scope(Tag $tag) : self
+    {
+        if ($tag->get('scoped')) {
+            $lastContent = $tag->content();
+            $tag->content(
+               "(function(){
+                   $lastContent
+               })()"
+            );
+            $this->replace($lastContent, $tag->content());        
+        }
+        return $this;
+    }
+    private function add_style_scope(Tag $tag): self
+    {
+        if ($tag->get('scoped')) {
+            $lastContent = $tag->content();
+            $nameTag = $this->search_first_tag();
+            $first = $this->tags($nameTag)[0];
+
+            // Quitamos las reglas principales
+            $content = $tag->content();
+            $content = preg_replace('/@import.*?;/', '', $content);
+            $content = preg_replace('/@charser.*?;/', '', $content);
+
+            // Se coloca el id a los estilos 
+            $tag->content("#{$first->id()}{{$content}}");
+
+            $this->replace($lastContent, $tag->content());
+        };
+        return $this;
     }
     /**
      * Funcion auxiliar para reemplazar el contenido de la pagina
@@ -132,7 +176,6 @@ class Prepocessor
             }
         }
     }
-
     private function compress_code($code)
     {
         $search = array(
@@ -177,19 +220,11 @@ class Prepocessor
             'attr'    => $attr ?? null
         ];
     }
-    // Añade atributos a la etiqueta
-    private function addAttr($tag, $attr, $value)
-    {
-        $regex = "/<\s*{$tag}.*?>/";
-        if (preg_match($regex, $this->content, $matches)) {
-            $search = substr($matches[0], 0, -1);
-            $replace = "{$search} {$attr}='{$value}'";
-            $this->content = str_replace($search, $replace, $this->content);
-        };
-    }
     private function get_content(String $file): String
     {
-        return $this->content = file_get_contents($file);
+        $this->content = file_get_contents($file);
+        $this->element = new Tag($this->content); 
+        return $this->content;
     }
     // Elimina los comentarios html
     function remove_comments()
@@ -208,7 +243,7 @@ class Prepocessor
         $minifier = new Minify\CSS;
         $minifier->add($content_less);
         $content_min = $minifier->minify();
-prs($content_min);
+
         $this->replace($content, $content_min);
     }
     // Generador de ids únicos
@@ -217,37 +252,33 @@ prs($content_min);
         // Se le añade unprefijo para que siempre empieze por una letra
         return uniqid('id');
     }
+    private function search_first_tag()
+    {
+        $regex = "/\<(\w*?) ([^>]*?)>(.*?)<\/\\1>/si";
+        preg_match($regex, $this->content, $matches);
+        return $matches[1] ?? false;
+    }
     /**
      *   Devuelve todos los argumentos de un tag
+     *  @return array de la clase Tag
      */
-    private function tags($tag) : array
+    private function tags(string $tag): array
     {
         $regex = "/\<($tag) ([^>]*?)>(.*?)<\/\\1>/si";
         /**
          * 0 -> Todo
          * 1 -> tag
-         * 2 -> args
-         * 3 -> cont
+         * 2 -> argimentos
+         * 3 -> contenido
          */
         if (
             $len = preg_match_all($regex, $this->content, $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
-                // ordena los argumentos en un array
-                $a[$i]['content'] = $matches[3][$i];
-                if (
-                    preg_match_all("/([^\s]*)(\s*=\"(.*)?\")?/i", $matches[2][$i], $match)
-                ) {
-
-                    foreach(array_filter($match[0]) as $value){
-                        $ar = explode('=',trim($value, "'")); 
-                        $a[$i][$ar[0]] = isset($ar[1]) ? preg_replace('/[\'\"]/','', $ar[1]): true;
-                    }
-                }
+                $a[$i] = new Tag($matches[0][$i]);
             }
         }
-
-        return $a??[];
+        return $a ?? [];
     }
     private function includes()
     {
@@ -281,52 +312,6 @@ prs($content_min);
         $this->content = str_ireplace('--id', $id, $this->content);
         return $this->content;
     }
-    //  Comportamiento scoped para script-> individualiza el style en el objeto contenedor
-    private function script_scoped(): string
-    {
-        $has_scoped = preg_match_all('/<script[^>]*scoped>(.*?)<\/script>/si', $this->content, $matches);
-        if ($has_scoped) {
-            // Quitar los scopes 
-            foreach ($matches[0] as $key => $value) {
-                // Quitamos el comando scope
-                $noscope = str_replace(' scoped', '', $value);
-                $this->content = str_replace($value, $noscope, $this->content);
-            }
-            foreach ($matches[1] as $key => $value) {
-                // encapsular en contenido en una funcion autoejecutable js
-                $content =  '(function(){' . $value . '})();';
-                $this->content = str_replace($value, $content, $this->content);
-            }
-        }
-        return $this->content;
-    }
-    // Comando scoped para style-> individualiza el style en el objeto contenedor
-    private function style_scoped(): string
-    {
-        $has_scoped = preg_match('/<style(.)*?scoped[^<]*>/', $this->content, $matches);
-
-        if ($has_scoped) {
-            // Comprobamos si es un componente o una sección
-            $tag = strpos($this->content, '<component') !== false ? 'component' : 'section';
-            // Quitamos el comando scope
-            $noscope = str_replace('scoped', '', $matches[0]);
-            $this->content = str_replace($matches[0], $noscope, $this->content);
-            // Buscamos el id del elemento contenedor, o es un componente o una sectión
-            // Si no tiene id se crea uno y se coloca al style y al componente
-            $id = $this->extract($tag)['attr']['id'] ?? null;
-            if (!$id) {
-                $id = $this->uniqid();
-                $this->addAttr($tag, 'id', $id);
-            }
-            // Quitamos las reglas principales
-            $content = $this->extract('style')['content'];
-            $content = preg_replace('/@import.*?;/', '', $content);
-            $content = preg_replace('/@charser.*?;/', '', $content);
-            // Se coloca el id a los estilos 
-            $this->content = str_replace($content, "#{$id}{{$content}}", $this->content);
-        };
-        return $this->content;
-    }
     // Funcion preprocesadora de los archivos
     // Lee archivos de directorios y los directorios anidados
     private function show_files(String $path)
@@ -340,9 +325,11 @@ prs($content_min);
                 $this->file = $file;
                 $file_build =  self::BUILD . $build_path;
                 if (is_dir($file)) {
+                    
                     // DIRECTORIOS 
                     if (!file_exists($file_build)) mkdir($file_build, 0775, true);
                     $this->show_files($file . '/');
+
                 } else {
 
                     // ARCHIVOS
@@ -354,15 +341,11 @@ prs($content_min);
 
                     // No se la aplicamos a los componentes para que mantengan la encapsulación
                     $this->path = $path;
-                    if (!$this->isComponent()) $this->sintax();
-                    // Transformamos la nueva sintaxis en las vistas 
-                    foreach($this->tags('style') as $k => $v){
-                        if (isset($v['lang']) && $v['lang'] == 'less'){
-                            $this->less($v['content']);
-                        }
-                    }
 
-                    $this->build_js($this->extract('script')['content']);
+                    if (!$this->isComponent()) $this->sintax();
+                    
+                    AKII :: 
+                    $this->build_js();
 
                     if ($file == self::MAIN_PAGE) $this->queue();
 
@@ -370,6 +353,7 @@ prs($content_min);
                     if (!ENV) $this->content  = $this->compress_code($this->content);
 
                     file_put_contents($file_build, $this->content, LOCK_EX);
+                
                 }
             }
         }
@@ -477,27 +461,34 @@ prs($content_min);
         $str_data = trim($str_data, ',');
         return " Array($str_data)";
     }
-    // Añade nombre de espacio componentes para no referenciarlos en la construcción
-    // (desuso) Eliminar en la version 2.0 
-    private function add_name_space()
-    {
-        $this->content = "<?php namespace " . self::NAMESPACE_COMPONENTS . "?>" . $this->content;
-    }
     private function queue()
     {
         $content = $this->content;
         $new_content = str_replace('</head>', $this->queue . '</head>', $content);
         $this->content = $new_content;
     }
+
     /**
      * Extraemos las clases de los componentes 
      * y las cargamos en un ambito global
      */
-    private function build_js($class_js)
+    private function build_js(){
+        prs($this->file);
+        $regex = '/class [\w+?](.*?)/si';
+        
+        foreach( $this->tags('script') as $tag ){
+            pr($tag->content());
+            if (preg_match_all($regex, $tag->content(), $matches)) {
+            prs('AKIIIIIIIIIIIIIIIIIIII', $matches);
+            }
+        }
+    }
+    private function build_js1($class_js)
     {
         $strFile = file_exists(\FILE\BUNDLE_JS)
             ? \file_get_contents(\FILE\BUNDLE_JS)
             : '';
+
         // Buscamos clases js en el archivo
         $regex = '/class [A-Za-z0-9]{1,150}/';
         if (preg_match($regex, $class_js, $r)) {
@@ -554,19 +545,6 @@ prs($content_min);
             file_put_contents(self::CACHE_FILE, $out, LOCK_EX);
             return true;
         } else return false;
-    }
-    private function isModified($file)
-    {
-        return true;
-
-        if ($this->cacheable) {
-            // Comprobamos si han habido modificaciones
-            if (!isset($this->cache[$file]) || $this->cache[$file] != filectime($file)) {
-                $this->isModified = true;
-                $this->cache[$file] = filectime($file);
-                return true;
-            } else return false;
-        } else return true;
     }
     private function deleteDirectory($dir)
     {
