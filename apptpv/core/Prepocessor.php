@@ -10,7 +10,8 @@ class Prepocessor
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
-        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml';
+        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml', 
+        FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS; // Carpeta contenedora de los componentes
 
     private
         $el, // clase Tag -> Elemento html del archivo procesado
@@ -43,6 +44,8 @@ class Prepocessor
         if (!file_exists(self::BUILD)) mkdir(self::BUILD, 0775, true);
 
         // Inicia compilacion de los archivos
+        // Primero aseguramos la carga de los componentes
+        $this->show_files(self::FOLDER_COMPONENTS);
         $this->show_files(self::FOLDERS_NATIVE_VIEWS);
 
         $this->cache_record($this->cache);
@@ -51,40 +54,27 @@ class Prepocessor
     // Lee archivos de directorios y los directorios anidados
     private function show_files(String $path)
     {
+        $dir = opendir($path);
         while ($current = readdir($dir)) {
             if ($current != "." && $current != "..") {
                 $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
                 $file = $path . $current;
                 $this->file = $file;
                 $file_build =  self::BUILD . $build_path;
-                $this->path = $path;
+                $this->path = $path;    
+                // Creamos carpeta si no existe         
+                $build_folder = self::BUILD . str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path);
+                if (!file_exists($build_folder)) mkdir($build_folder, 0775, true);
 
                 if (is_dir($file)) {
-
                     // DIRECTORIOS 
                     if (!file_exists($file_build)) mkdir($file_build, 0775, true);
                     $this->show_files($file . '/');
                 } else {
                     // ARCHIVOS
-
-                    // Obtenemos el ontenido del archivo se instancia Tag
-                    $this->get_content($file);
-
-                    // Quitamos los comentarios 
-                    $this->clear();
-
-                    // No se la aplicamos a los componentes para que mantengan la encapsulación
-                    if (!$this->isComponent()) $this->sintax();
-
-                    // Construimos el build.js con todos las clases
-                    $this->build_js();
-
-                    if ($file == self::MAIN_PAGE) $this->queue();
-
-                    // Compresión salida html
-                    if (!ENV) $this->compress_code();
-
-                    file_put_contents($file_build, $this->el->element());
+                    if(!file_exists($file_build)){
+                        $this->build($file, $file_build);
+                    }
                 }
             }
         }
@@ -92,8 +82,31 @@ class Prepocessor
         // Cargamos las clases js hijas que no se pudieron cargar anteriormente
         $this->load_class_childrens();
     }
-    private function load(){
+    /**
+     * Publica la aplicación en la carpeta build
+     */
+    private function build($file, $file_build) : self
+    {
+        // Obtenemos el ontenido del archivo se instancia Tag
+        $this->get_content($file);
 
+        // Quitamos los comentarios 
+        $this->clear();
+
+        // No se la aplicamos a los componentes para que mantengan la encapsulación
+        if (!$this->isComponent()) $this->sintax();
+
+        // Construimos el build.js con todos las clases
+        $this->build_js();
+
+        if ($file == self::MAIN_PAGE) $this->queue();
+
+        // Compresión salida html
+        if (!ENV) $this->compress_code();
+
+        file_put_contents($file_build, $this->el->element());
+        
+        return $this;
     }
     /**
      * Limpia el contenido de comentarios
@@ -375,18 +388,18 @@ class Prepocessor
                 $this
                     ->process_components($matches)
                     ->search_components();
-                }
-                // Después buscamos los que no tienen tag de cierre
-                if (
-                    preg_match_all(
-                        "/<\s*($component)(\s.*?|\s*?)\/>/s",
-                        $this->el->content(),
-                        $matches
-                        )
-                        ) {
-                            $this->process_components($matches, $this->el->content());
-                        }
-                    }
+            }
+            // Después buscamos los que no tienen tag de cierre
+            if (
+                preg_match_all(
+                    "/<\s*($component)(\s.*?|\s*?)\/>/s",
+                    $this->el->content(),
+                    $matches
+                )
+            ) {
+                $this->process_components($matches, $this->el->content());
+            }
+        }
         return $this;
     }
     /**
@@ -526,7 +539,7 @@ class Prepocessor
                 $minifier = new Minify\JS;
                 $minifier->add($class_js);
                 file_put_contents(\FILE\BUNDLE_JS, $minifier->minify(), FILE_APPEND);
-                
+
                 // Registramos la clase como cargada 
                 $this->loadeds[] = $matches[1];
             }
