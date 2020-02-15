@@ -51,14 +51,13 @@ class Prepocessor
     // Lee archivos de directorios y los directorios anidados
     private function show_files(String $path)
     {
-        $dir = opendir($path);
-
         while ($current = readdir($dir)) {
             if ($current != "." && $current != "..") {
                 $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
                 $file = $path . $current;
                 $this->file = $file;
                 $file_build =  self::BUILD . $build_path;
+                $this->path = $path;
 
                 if (is_dir($file)) {
 
@@ -67,7 +66,6 @@ class Prepocessor
                     $this->show_files($file . '/');
                 } else {
                     // ARCHIVOS
-                    $this->path = $path;
 
                     // Obtenemos el ontenido del archivo se instancia Tag
                     $this->get_content($file);
@@ -85,14 +83,17 @@ class Prepocessor
 
                     // Compresión salida html
                     if (!ENV) $this->compress_code();
-                    if($this->file == '/var/www/html/apptpv/views/admin/sections/tpv.phtml') prs($this->el->content());
-                    file_put_contents($file_build, $this->el->content());
+
+                    file_put_contents($file_build, $this->el->element());
                 }
             }
         }
 
         // Cargamos las clases js hijas que no se pudieron cargar anteriormente
         $this->load_class_childrens();
+    }
+    private function load(){
+
     }
     /**
      * Limpia el contenido de comentarios
@@ -491,7 +492,6 @@ class Prepocessor
                         $this->load_class_js($class_js);
                     }
                     // Eliminamos la clase del documento html
-                    pr($this->file);
                     $this->el->unset($tag);
                 }
             }
