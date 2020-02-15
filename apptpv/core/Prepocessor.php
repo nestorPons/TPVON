@@ -10,7 +10,7 @@ class Prepocessor
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
-        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml', 
+        MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml',
         FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS; // Carpeta contenedora de los componentes
 
     private
@@ -59,9 +59,10 @@ class Prepocessor
             if ($current != "." && $current != "..") {
                 $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
                 $file = $path . $current;
+//pr($file);
                 $this->file = $file;
                 $file_build =  self::BUILD . $build_path;
-                $this->path = $path;    
+                $this->path = $path;
                 // Creamos carpeta si no existe         
                 $build_folder = self::BUILD . str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path);
                 if (!file_exists($build_folder)) mkdir($build_folder, 0775, true);
@@ -72,7 +73,7 @@ class Prepocessor
                     $this->show_files($file . '/');
                 } else {
                     // ARCHIVOS
-                    if(!file_exists($file_build)){
+                    if (!file_exists($file_build)) {
                         $this->build($file, $file_build);
                     }
                 }
@@ -85,7 +86,7 @@ class Prepocessor
     /**
      * Publica la aplicación en la carpeta build
      */
-    private function build($file, $file_build) : self
+    private function build($file, $file_build): self
     {
         // Obtenemos el ontenido del archivo se instancia Tag
         $this->get_content($file);
@@ -103,9 +104,8 @@ class Prepocessor
 
         // Compresión salida html
         if (!ENV) $this->compress_code();
-
         file_put_contents($file_build, $this->el->element());
-        
+
         return $this;
     }
     /**
@@ -129,6 +129,7 @@ class Prepocessor
     {
         // Añadimos el id al documento
         $this->el->replace('--id', $this->el->id());
+
         $this
             ->sintax_if()
             ->sintax_for()
@@ -137,6 +138,7 @@ class Prepocessor
             ->sintax_vars();
         // Encapsulación de los estilos
         foreach ($this->tags('style') as $tag) {
+
             $this->add_style_scope($tag);
 
             if ($tag->get('lang') == 'less') {
@@ -211,8 +213,6 @@ class Prepocessor
     {
         if ($tag->get('scoped')) {
             $lastContent = $tag->content();
-            $nameTag = $this->search_first_tag();
-            $first = $this->tags($nameTag)[0];
 
             // Quitamos las reglas principales
             $content = $tag->content();
@@ -220,7 +220,7 @@ class Prepocessor
             $content = preg_replace('/@charser.*?;/', '', $content);
 
             // Se coloca el id a los estilos 
-            $tag->content("#{$first->id()}{{$content}}");
+            $tag->content("#{$this->el->id()}{{$content}}");
 
             $this->replace($lastContent, $tag->content());
         };
@@ -294,12 +294,6 @@ class Prepocessor
         $content_min = $minifier->minify();
 
         $this->replace($content, $content_min);
-    }
-    private function search_first_tag()
-    {
-        $regex = "/\<(\w*?) ([^>]*?)>(.*?)<\/\\1>/si";
-        preg_match($regex, $this->el->content(), $matches);
-        return $matches[1] ?? false;
     }
     /**
      *   Devuelve todos los argumentos de un tag

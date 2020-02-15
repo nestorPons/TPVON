@@ -120,6 +120,11 @@ class Tag
     public function replace($arg, $val = null): int
     {
         $this->element = str_replace($arg, $val, $this->element, $count);
+        if (
+            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*?)<\/\\1>/si", $this->element, $matches)
+        ) {
+            $this->content = $matches[3] ?? null;
+        }
         return $count;
     }
         /**
@@ -145,7 +150,6 @@ class Tag
     {
         if (!is_null($content)) {
             $this->replace($this->content, $content);
-            $this->content = $content;
         }
         return $this->content;
     }
