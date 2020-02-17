@@ -114,7 +114,8 @@ class Login extends Controller{
                 $data['page'] = 'login'; 
             }
         }
-        return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
+        $data['perro'] = ['animal', 'canino'];
+         return $this->printView( \FOLDERS\VIEWS. 'index.phtml', $data);
     }
     private function isActive(){
         return $this->User->estado() == 1; 

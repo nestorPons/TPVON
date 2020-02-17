@@ -59,6 +59,7 @@ class Components
     }
     private function autoId($type): void
     {
+        $prefix = preg_replace('([^A-Za-z0-9])', '', $type);
         $this->id = ($this->id) ?? uniqid($type);
         $this->id_container = self::PREFIX_CONTAINER . $this->id;
         $this->id_component = self::PREFIX_COMPONENT . $this->id;
@@ -71,11 +72,11 @@ class Components
     // Procesa la sintaxis de la plantillas 
     private function sintax(): void
     {
+
         // Procesando condicional if
         $this->sintax_if();
         // Bucle for 
         $this->sintax_for();
-
         // Imprimiendo las variables de la clase a plantilla 
         // Modificando las propiedades o tags de los elementos html
         if (
@@ -108,10 +109,10 @@ class Components
 
                 if (\property_exists($this, $prop)) {
                     // valor predeterminado
-                    $arr = (!is_array($this->{$prop}))
+                    $arr = (is_array($this->{$prop}))
                     // Se convierte el valor en un array
-                    ? json_decode($this->{$prop})
-                    : $this->{$prop};
+                    ? $this->{$prop}
+                    : json_decode($this->{$prop});
 
                     $cont = $matches[2][$i];
                     foreach ($arr as $key => $value) {

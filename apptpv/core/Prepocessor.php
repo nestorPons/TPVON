@@ -59,7 +59,7 @@ class Prepocessor
             if ($current != "." && $current != "..") {
                 $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
                 $file = $path . $current;
-//pr($file);
+                //pr($file);
                 $this->file = $file;
                 $file_build =  self::BUILD . $build_path;
                 $this->path = $path;
@@ -79,7 +79,6 @@ class Prepocessor
                 }
             }
         }
-
         // Cargamos las clases js hijas que no se pudieron cargar anteriormente
         $this->load_class_childrens();
     }
@@ -103,7 +102,7 @@ class Prepocessor
         if ($file == self::MAIN_PAGE) $this->queue();
 
         // Compresión salida html
-        if (!ENV) $this->compress_code();
+        $this->compress_code();
         file_put_contents($file_build, $this->el->element());
 
         return $this;
@@ -258,13 +257,17 @@ class Prepocessor
                 $struct = $matches[0][$i];
 
                 // Formato {"a":1,"b":2,"c":3,"d":4,"e":5} sin comillas exteriores
-                if (is_string($cond)) $arr = json_decode($cond);
 
-                foreach ($arr as $key => $value) {
-                    $str = str_replace('$$value', $value, $body);
-                    $res .= str_replace('$$key', $key, $str);
+                if (is_string($cond)) $arr = json_decode($cond);
+                if (is_array($arr) || is_object($arr)) {
+                    foreach ($arr as $key => $value) {
+                        $str = str_replace('$$value', $value, $body);
+                        $res .= str_replace('$$key', $key, $str);
+                    }
+                    $this->replace($struct, $res);
+                }else{
+                    pr('NO SE PUEDE ITINERAR',  $matches[1][$i]);
                 }
-                $this->replace($struct, $res);
             }
         }
         return $this;
@@ -335,7 +338,7 @@ class Prepocessor
         }
         return $this;
     }
-    // Busca sibolo $ para y lo reemplaza por variables php
+    // Busca sibolo $$ para y lo reemplaza por variables php
     private function sintax_vars(): self
     {
         $content = $this->el->content();

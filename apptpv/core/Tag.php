@@ -41,6 +41,7 @@ class Tag
         }
         $this->id = $this->attrs['id'] ?? uniqid('tag');
     }
+    
     /**
      * Obtiene los valiores de los atributos
      */

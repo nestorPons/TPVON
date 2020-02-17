@@ -1,8 +1,8 @@
 <component id="--id" class="">
     <ul>
-        <?php foreach (['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'] as $l) : ?>
-            <li onclick="--id.sel(window.event)" value=<?= $l ?>><?= $l ?></li>
-        <?php endforeach ?>
+        @for(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
+            <li onclick="--id_li.sel(window.event)" value="$$value">$$value</li>
+        @endfor
     </ul>
     <style scoped>
         ul {
@@ -31,11 +31,11 @@
         }
     </style>
     <script>
-        const --id = {
+        const --id_li = {
             sel(el) {
                 const
                     val = el.target.attributes.value.value.toLowerCase(),
-                    table = <?= $table ?>, 
+                    table = $$table 
                     body = table.getElementsByTagName('tbody')[0],
                     tr = body.getElementsByTagName('tr'), 
                     find = table.getElementsByClassName(`${val}`);
