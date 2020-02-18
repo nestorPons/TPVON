@@ -7,12 +7,14 @@ namespace app\core;
  */
 class Tag
 {
-    private $element, $content, $id, $attrs, $type;
+    private $element, $content, $id, $attrs, $type, $prefix = 'tag';
 
-    function __construct(string $element)
+    function __construct(string $element = null)
     {
-        $this->element = $element;
-        $this->load();
+        if(!is_null($element)){
+            $this->element = $element;
+            $this->load();
+        } 
     }
     /**
      * Carga de los componentes de la clase
@@ -30,7 +32,9 @@ class Tag
         ) {
             $this->content = null;
         }
+        // Valores por defecto
         $this->type = $matches[1];
+
         if (
             preg_match_all("/([^\s]*)(\s*=\"(.*)?\")?/i", $matches[2], $match)
         ) {
@@ -39,9 +43,11 @@ class Tag
                 $this->attrs[$ar[0]] = isset($ar[1]) ? preg_replace('/[\'\"]/', '', $ar[1]) : true;
             }
         }
-        $this->id = $this->attrs['id'] ?? uniqid('tag');
+        if(!isset($this->id)){
+            $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
+        }
     }
-    
+
     /**
      * Obtiene los valiores de los atributos
      */
@@ -128,7 +134,15 @@ class Tag
         }
         return $count;
     }
-        /**
+    /**
+     * Funcion auxiliar reemplazar por expresion regular
+     */
+    public function preg(string $regex, string $value): self
+    {
+        $this->element = preg_replace($regex, $value, $this->element);
+        return $this;
+    }
+    /**
      * Getters y setters
      */
     public function id(string $id = null): string
@@ -154,8 +168,16 @@ class Tag
         }
         return $this->content;
     }
-    public function element(): string
+    public function element(string $arg = null): string
     {
+        if (!is_null($arg)) {
+            $this->replace($this->element, $arg);
+        }
         return $this->element;
+    }
+    public function prefix(string $arg = null): string
+    {
+        if (!is_null($arg)) $this->prefix = $arg;
+        return $this->prefix;
     }
 }

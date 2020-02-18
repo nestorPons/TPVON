@@ -13,7 +13,6 @@ class Users extends Controller{
         $data['leveloptions'] =  $this->user->isAdmin()
             ? '{"0" : "Cliente", "1" : "Usuario", "2" : "Administrador"}'
             : '{"0" : "Cliente", "1" : "Usuario"}';
-        
         parent::view($data);        
     }
     

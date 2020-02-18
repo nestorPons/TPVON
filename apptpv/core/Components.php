@@ -26,7 +26,10 @@ class Components
                 if ($key == 'readonly') $val = 'readonly';
                 if ($key == 'checked')  $val = 'checked';
                 // Resto atributos
-                $this->{$key} = $val ?? null;
+                $val = ltrim($val, '<?=');
+                $val = rtrim($val, '?>');
+                
+                $this->{$key} =  $val ?? null;
             }
         }
         $this->print($type);

@@ -23,6 +23,7 @@ class Controller{
         $this->controller =strtolower($controller ?? $this->getController());
         $this->action = strtolower($action);
         $this->Data = $Data; 
+
         // Constructor alternativo básico
         $this->result = (method_exists($this, $this->action)) 
                         ? $this->{$this->action}($Data)
@@ -31,7 +32,7 @@ class Controller{
 
         }
     protected function view($data = null){
-
+  
         $arr_data = (is_object($data)) ? $data->toArray() : $data;
 
         // Carpetas donde buscar las vistas
@@ -71,14 +72,20 @@ class Controller{
     protected function get(){
         return $this->exec('get', 'getById');
     }
-
+    /**
+    * Prepara  las variables e imprime las vistas
+    */
     protected function printView(String $route, array $data = null){
         if($data){
             foreach($data as $key => $val){
                 $k = str_replace('-', '_', $key); 
+                if(is_array($val) || is_object($val)) {
+                    $val = json_encode($val);
+                }
                 ${$k} = $val;
             }
         }
+        
         return require_once $route;
     }
     /**

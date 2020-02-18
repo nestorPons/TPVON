@@ -257,17 +257,23 @@ class Prepocessor
                 $struct = $matches[0][$i];
 
                 // Formato {"a":1,"b":2,"c":3,"d":4,"e":5} sin comillas exteriores
+                // Si la condcion tiene $$valor transformarlo en $valor
 
-                if (is_string($cond)) $arr = json_decode($cond);
-                if (is_array($arr) || is_object($arr)) {
+                $s = preg_replace('/\@for\(.*?\)/i', '<?php foreach($' . ltrim($cond, '$') . ' as $key => $value):?>', $struct);
+                $s = str_replace('$$value', '<?=$value?>', $s);
+                $s = str_replace('$$key', '<?=$key?>', $s);
+                $s = str_replace('@endfor', '<?php endforeach?>', $s);
+                $this->replace($struct, $s);
+
+                /*                 if (is_array($arr) || is_object($arr)) {
                     foreach ($arr as $key => $value) {
                         $str = str_replace('$$value', $value, $body);
                         $res .= str_replace('$$key', $key, $str);
                     }
                     $this->replace($struct, $res);
-                }else{
+                } else {
                     pr('NO SE PUEDE ITINERAR',  $matches[1][$i]);
-                }
+                } */
             }
         }
         return $this;
@@ -377,25 +383,16 @@ class Prepocessor
             // Primero buscamos los que contienen tag de cierre ya que pueden contener otros elementos anidados
             if (
                 $len = preg_match_all(
-                    "#<($component)(\s[^>\/]*)?>(.*?)<\/\g{1}>#si",
+                    "/<($component)(\s[^>\/]*)?(>(.*?)<\/\\1|\/)>?/si",
                     $this->el->content(),
                     $matches
                 )
             ) {
+
                 $this
-                    ->process_components($matches)
-                    ->search_components();
+                    ->process_components($matches);
             }
-            // Después buscamos los que no tienen tag de cierre
-            if (
-                preg_match_all(
-                    "/<\s*($component)(\s.*?|\s*?)\/>/s",
-                    $this->el->content(),
-                    $matches
-                )
-            ) {
-                $this->process_components($matches, $this->el->content());
-            }
+
         }
         return $this;
     }
@@ -415,29 +412,40 @@ class Prepocessor
 
             // Comprobamos si el componente alberga contenido
 
-            // Si existe lo preprocesamos
-            if (isset($matches[3])) {
+            // Si existe NO lo preprocesamos  
+            $cont = $matches[4] ?? null; 
+            if ($cont) {
                 // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
-                $str = str_replace('"', "'", $matches[3][$i]);
-                $component_content = ', ' .  isset($matches[3]) ? '"' . $str . '"' : '';
+                $str = str_replace('"', "'", $cont[$i]);
+                $component_content = ', ' .  isset($cont) ? '"' . $str . '"' : '';
             } else {
                 $component_content = 'false';
             }
-            // Instanciamos la clase de componentes
+ 
+            $this->replace(
+                $matches[0][$i],
+                "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>",
+            );
 
+            /*             // Instanciamos la clase de componentes
             ob_start(); # apertura de bufer
             file_put_contents(
                 \FOLDERS\VIEWS . "tmp.phtml",
-                str_replace(
-                    $matches[0][$i],
-                    "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>",
-                    $this->el->content(),
-                    $count
-                )
+                "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>"
+
             );
             include(\FOLDERS\VIEWS . "tmp.phtml");
-            $this->el->content(ob_get_contents());
+            $r = ob_get_contents();
+
             ob_end_clean(); # cierre de bufer
+
+            $this->el->content(
+                str_replace(
+                    $matches[0][$i],
+                    $r,
+                    $this->el->content()
+                )
+            ); */
         }
         return $this;
     }
@@ -446,22 +454,27 @@ class Prepocessor
         $str_data = '';
         $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
         if (
-            preg_match_all($regex, $content, $matches_component)
+            $len = preg_match_all($regex, $content, $matches_component)
         ) {
-            $len_c = count($matches_component[0]);
             // Cambio de comillas para que se adecue a la sintaxis JSON
-            for ($j = 0; $j < $len_c; $j++) {
+            for ($j = 0; $j < $len; $j++) {
+
                 $str_key = trim($matches_component[1][$j]);
                 $str_value = trim($matches_component[3][$j]);
-
                 $value = str_replace("'", '"', $str_value);
                 $key = trim(str_replace("'", '"', $str_key));
-                $str_data .=  "'$key'=>'$value',";
+
+                // Si es una variable que me cambie las comillas 
+                // Si no que me mantenga la nomenclatura comilla simple para json
+                $str_data .= (preg_match('/\$\$/', $value))
+                    ? "'$key'=>\"$value\","
+                    : "'$key'=>'$value',";
             }
         }
 
         $str_data = trim($str_data, ',');
-        return " Array($str_data)";
+
+        return " Array($str_data) ";
     }
     private function queue(): self
     {
