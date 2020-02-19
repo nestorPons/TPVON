@@ -2,22 +2,15 @@
 
 namespace app\core;
 
-use app\core\Data;
-
 /**
  * Clase de madre de los componentes html
  */
-class Components
+class Components extends Tag
 {
-    const PREFIX_CONTAINER = 'container_';
-    const PREFIX_COMPONENT = 'component_';
-    const KEY_CONTENT = '--content';
-    // En caso de que el componente contenga otros objetos se pueden extraer con esta variable
-    private $content_component;
+    const FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS;
 
     function __construct(String $type, array $data = null, string $content = null)
-    {   
-        $this->content = $content; 
+    {
         if ($data) {
             foreach ($data as $key => $val) {
                 // Atributos booleanos
@@ -25,57 +18,43 @@ class Components
                 if ($key == 'disabled') $val = 'disabled';
                 if ($key == 'readonly') $val = 'readonly';
                 if ($key == 'checked')  $val = 'checked';
-                // Resto atributos
+
                 $val = ltrim($val, '<?=');
                 $val = rtrim($val, '?>');
-                
-                $this->{$key} =  $val ?? null;
+
+                $this->attrs([$key => $val]);
             }
         }
-        $this->print($type);
-    }
-    // Imprimimos la vista
-    function print(string $type): void
-    {
-        $this->file = file_get_contents(\VIEWS\MYCOMPONENTS . "$type.phtml");
-        $this->autoId($type);
-        // Buscamos el id del elemento contenedor
-        // Si no tiene id se crea uno 
-        $this->sintax();
-        $this->style_scoped();
-        $this->script_scoped();
-        $this->clear();
-        // Variables no obligatorias (Elemtos especificos) 
-        foreach ($this as $key => $value) {
-            ${$key} = $value;
-        }
+        $this->prefix = $type;
+        $this->type = $type;
 
-        ob_start();
+        // Obtenemos el componente en crudo
+        $this->element(file_get_contents(self::FOLDER_COMPONENTS . "$type.phtml"));
 
-            // Buscamos la palabra reservada --content y la cambiamos por el contenido
-             
-            echo(
-                str_replace('--content', $this->content, $this->file )
-            );
-            
-        ob_end_flush();
+        // añadimos el id al componente
+        $id = $this->attrs('id') ?? uniqid($this->prefix());
+        $this->id($id);
+
+        // Buscamos la palabra reservada --content y la cambiamos por el contenido 
+        $this->replace('--content', $content);
+        $this
+            ->sintax()
+            ->style_scoped()
+            ->script_scoped()
+            ->clear()
+            ->search_components();
+
+        echo ($this->element());
     }
-    private function autoId($type): void
+    private function clear(): self
     {
-        $prefix = preg_replace('([^A-Za-z0-9])', '', $type);
-        $this->id = ($this->id) ?? uniqid($type);
-        $this->id_container = self::PREFIX_CONTAINER . $this->id;
-        $this->id_component = self::PREFIX_COMPONENT . $this->id;
-        $this->file = str_replace('--id', $this->id, $this->file);
-    }
-    private function clear()
-    {
-        $this->file = \preg_replace("/[\r\n|\n|\r|\s]+/", " ", $this->file);
+        $this->preg("/[\r\n|\n|\r|\s]+/", " ");
+        return $this;
     }
     // Procesa la sintaxis de la plantillas 
-    private function sintax(): void
+    private function sintax(): self
     {
-
+        $this->replace('--id', $this->id());
         // Procesando condicional if
         $this->sintax_if();
         // Bucle for 
@@ -83,27 +62,28 @@ class Components
         // Imprimiendo las variables de la clase a plantilla 
         // Modificando las propiedades o tags de los elementos html
         if (
-            preg_match_all('#\$\$(\w+\-?\w*)#is', $this->file, $matches)
+            $len = preg_match_all('#\$\$(\w+\-?\w*)#is', $this->body(), $matches)
         ) {
-            for ($i = 0; $i < count($matches[0]); $i++) {
+            for ($i = 0; $i < $len; $i++) {
                 $prop = $matches[1][$i];
-                if (\property_exists($this, $prop)) {
-                    $value = $this->{$matches[1][$i]} ?? '';
-                    $this->file = str_replace($matches[0][$i], $value, $this->file);
+                if (!is_null($this->attrs($prop))) {
+                    $value = $this->attrs($prop) ?? '';
+                    $this->replace($prop, $value);
                 } else {
                     // En caso que no exista la propiedad la eliminamos 
                     $regex = "#\w+?\s*=\s*[\"']\s*\\$\\$$prop\b\"#";
-                    $this->file = preg_replace($regex, '', $this->file);
-                    $this->file = str_replace("\$\$$prop", '', $this->file);
+                    $this->preg($regex, '');
+                    $this->replace("\$\$$prop", '');
                 }
             }
         }
+        return $this;
     }
-    private function sintax_for()
+    private function sintax_for(): self
     {
         $regex_conditional = '/@for\s*?\((.*?)\)(.*?)@endfor/sim';
         if (
-            preg_match_all($regex_conditional, $this->file, $matches)
+            preg_match_all($regex_conditional, $this->body(), $matches)
         ) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 //m-select m-table
@@ -112,114 +92,62 @@ class Components
 
                 if (\property_exists($this, $prop)) {
                     // valor predeterminado
-                    $arr = (is_array($this->{$prop}))
-                    // Se convierte el valor en un array
-                    ? $this->{$prop}
-                    : json_decode($this->{$prop});
+                    $arr = (is_array($this->attrs($prop)))
+                        // Se convierte el valor en un array
+                        ? $this->attrs($prop)
+                        : json_decode($this->attrs($prop));
 
                     $cont = $matches[2][$i];
                     foreach ($arr as $key => $value) {
                         $option = str_replace('$$key', $key, $cont);
-                        if (\property_exists($this, 'value') && $this->value == $value) $option = preg_replace('#\>#', ' selected>', $option);
+                        if (!is_null($this->attrs($value)) && $this->attrs('value') == $value) {
+                            $option = preg_replace('#\>#', ' selected>', $option);
+                        }
                         $option = str_replace('$$value', $value, $option);
                         $content .= $option;
                     }
-                    $this->file = str_replace($matches[0][$i], $content, $this->file);
+                    $this->replace($matches[0][$i], $content);
                 } else {
                     // Si no existe la propiedad quitamos el elemento
-                    $this->file = str_replace($matches[0][$i], '', $this->file);
+                    $this->replace($matches[0][$i], '');
                 }
             }
         }
+        return $this;
     }
-    private function sintax_if()
+    private function sintax_if(): self
     {
-
         $regex_conditional = '/@if\s*?\((.*?)\)(.*?)@endif/sim';
-        $has = preg_match_all($regex_conditional, $this->file, $matches);
+        $has = preg_match_all($regex_conditional, $this->body(), $matches);
         if ($has) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $prop = trim($matches[1][$i], '$$');
 
                 if (\property_exists($this, $prop)) {
-                    $condition = $this->{$prop};
+                    $condition = $this->attrs($prop);
                     $valcon = false;
                     eval('if ($condition) { $valcon = true; }');
-                    $this->file = ($valcon)
-                        ? str_replace($matches[0][$i], $matches[2][$i], $this->file)
-                        : str_replace($matches[0][$i], '', $this->file);
+                    if ($valcon)
+                        $this->replace($matches[0][$i], $matches[2][$i]);
+                    else
+                        $this->replace($matches[0][$i], '');
 
                     // Quitamos los espacios en blanco
-                    $this->file = preg_replace("[\n|\r|\n\r]", "", $this->file);
+                    $this->replace("[\n|\r|\n\r]", "");
                 } else {
                     // Si no existe la propiedad quitamos el elemento
-                    $this->file = str_replace($matches[0][$i], '', $this->file);
+                    $this->replace($matches[0][$i], '');
                 }
             }
         }
-    }
-    protected function getnameclass()
-    {
-        $arr_controller = explode('\\', get_class($this));
-        $controller = end($arr_controller);
-        return strtolower($controller);
-    }
-    protected function class(bool $collapse = false, string $args = null)
-    {
-        $class = $this->mainclass ?? null;
-        $class .= ' ' . $this->class ?? null;
-        if ($args) $class .= ' ' . $args;
-        $class .= $collapse ? ' collapse' : null;
-        return $class;
-    }
-    protected function printView($file)
-    {
-        foreach ((array) $this as $key => $val) {
-            if (strpos($key, '*')) {
-                $key = substr($key, 3);
-            }
-            ${$key} = $val;
-        }
 
-        include \VIEWS\COMPONENTS . "$file.phtml";
+        return $this;
     }
-    // getters y setters genéricos
-    function id(string $arg = null): string
-    {
-        if ($arg) $this->{__FUNCTION__} = $arg;
-        return $this->{__FUNCTION__};
-    }
-    function id_container(string $arg = null): string
-    {
-        if ($arg) $this->{__FUNCTION__} = $arg;
-        return $this->{__FUNCTION__};
-    }
-    // Añade atributos a la primera etiqueta del componente
-    private function addParent($tag, $attr, $value, string $content): string
-    {
-        $regex = "/<\s*{$tag}.*?>/";
-        if (preg_match($regex, $content, $matches)) {
-            $search = substr($matches[0], 0, -1);
-            $replace = "{$search} {$attr}='{$value}'";
-            $content = str_replace($search, $replace, $content);
-        };
-        return $content;
-    }
-    // Añade atributos a la etiqueta
-    private function addAttr($tag, $attr, $value)
-    {
-        $regex = "/<\s*{$tag}.*?>/";
-        if (preg_match($regex, $this->content, $matches)) {
-            $search = substr($matches[0], 0, -1);
-            $replace = "{$search} {$attr}='{$value}'";
-            $this->content = str_replace($search, $replace, $this->content);
-        };
-    }
-    private function style_scoped(): void
-    {
 
+    private function style_scoped(): self
+    {
         if (
-            preg_match('/<style.*?scoped[^<]*?>(.*?)<\/style>/mis', $this->file, $matches)
+            preg_match('/<style.*?scoped[^<]*?>(.*?)<\/style>/mis', $this->body(), $matches)
         ) {
             // Quitamos el comando scope
             $tagstyle = str_replace('scoped', '', $matches[0]);
@@ -227,44 +155,112 @@ class Components
             $tagstyle = preg_replace('/@import.*?;/', '', $tagstyle);
             $tagstyle = preg_replace('/@charser.*?;/', '', $tagstyle);
 
-            // Buscamos el id del componente padre
-            $regex = '#<([^?|>]+)?>#';
-            if (
-                preg_match($regex, $this->file, $match)
-            ) {
-                // Buscamos el id del componente
-                $regex = '#id\s*=\s*["\'](.+?)["\'](\s|$)+?#';
-                if (
-                    !preg_match($regex, $match[1])
-                ) {
-                    // Si no tiene id se añade al componente principal
-                    $this->file = str_replace($match[1], $match[1] . ' id="' . $this->id . '"', $this->file);
-                }
-            }
             // Se coloca el id a los estilos 
             $less = new \lessc;
-            $content_less = $less->compile('#' . $this->id . '{' . $matches[1] . '}');
+            $content_less = $less->compile('#' . $this->id() . '{' . $matches[1] . '}');
 
             $tagstyle = str_replace($matches[1], $content_less, $tagstyle);
-            $this->file = str_replace($matches[0], $tagstyle, $this->file);
-        };
+            $this->replace($matches[0], $tagstyle);
+        }
+        return $this;
     }
     // Comportamiento scoped para script-> individualiza el style en el objeto contenedor
-    private function script_scoped(): void
+    private function script_scoped(): self
     {
-        $has_scoped = preg_match_all('/<script[^>]*scoped>(.*?)<\/script>/si', $this->file, $matches);
+        $has_scoped = preg_match_all('/<script[^>]*scoped>(.*?)<\/script>/si', $this->body(), $matches);
         if ($has_scoped) {
             // Quitar los scopes 
             foreach ($matches[0] as $key => $value) {
                 // Quitamos el comando scope
                 $noscope = str_replace(' scoped', '', $value);
-                $this->file = str_replace($value, $noscope, $this->file);
+                $this->replace($value, $noscope);
             }
             foreach ($matches[1] as $key => $value) {
                 // encapsular en contenido en una funcion autoejecutable js
                 $env =  '(function(){' . $value . '})();';
-                $this->file = str_replace($value, $env, $this->file);
+                $this->replace($value, $env);
             }
         }
+        return $this;
+    }
+    // Buscar componentes existentes en el contenido 
+    private function search_components(): self
+    {
+
+        
+        $components = [];
+        $folder = \APP\VIEWS\MYCOMPONENTS;
+        $gestor = opendir($folder);
+        // Busca los componentes en la carpeta de vistas componentes
+        while (($file = readdir($gestor)) !== false) {
+            if ($file != "." && $file != "..") {
+                $arr = explode('.', $file);
+                $components[] = $arr[0];
+            }
+        }
+
+        foreach ($components as $type) {
+            // Primero buscamos los que contienen tag de cierre ya que pueden contener otros elementos anidados
+            if (
+                $len = preg_match_all(
+                    "/<($type)(\s[^>\/]*)?(>(.*)<\/\\1|\/)>?/si",
+                    $this->body(),
+                    $matches
+                )
+            ) {
+                for ($i = 0; $i < $len; $i++) {
+                    $argData = $this->args_to_array($matches[2][$i]);
+                    $cont = $matches[4] ?? null;
+                    if ($cont) {
+                        // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
+                        $str = str_replace('"', "'", $cont[$i]);
+                        $content = ', ' .  isset($cont) ? '"' . $str . '"' : '';
+                    } else {
+                        $content = 'false';
+                    }
+
+                    // Se crea nuevo componente Y SE EJECUTA
+                    ob_start(); # apertura de bufer
+
+                    file_put_contents(
+                        \FOLDERS\VIEWS . "tmp.phtml",
+                        "<?php new \app\core\Components('$type',$argData, $content);?>"
+                    );
+
+                    include(\FOLDERS\VIEWS . "tmp.phtml");
+
+                    ob_end_clean(); # cierre de bufer
+                }
+            }
+        }
+    
+        return $this;
+    }
+    private function args_to_array($content)
+    {
+        $str_data = '';
+        $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
+        if (
+            $len = preg_match_all($regex, $content, $matches_component)
+        ) {
+            // Cambio de comillas para que se adecue a la sintaxis JSON
+            for ($j = 0; $j < $len; $j++) {
+
+                $str_key = trim($matches_component[1][$j]);
+                $str_value = trim($matches_component[3][$j]);
+                $value = str_replace("'", '"', $str_value);
+                $key = trim(str_replace("'", '"', $str_key));
+
+                // Si es una variable que me cambie las comillas 
+                // Si no que me mantenga la nomenclatura comilla simple para json
+                $str_data .= (preg_match('/\$\$/', $value))
+                    ? "'$key'=>\"$value\","
+                    : "'$key'=>'$value',";
+            }
+        }
+
+        $str_data = trim($str_data, ',');
+
+        return " Array($str_data) ";
     }
 }

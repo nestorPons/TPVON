@@ -2,18 +2,23 @@
 <html lang="es">
 
 <body>
-    <m-accordion id="--id_el">
-        <h3>Anidado</h3>
-
+    <m-accordion id="--id_el" class="1">
+        <h3>Anidado 1</h3>
+        <m-accordion id="--id_el_2" class="2">
+            <h4>Anidado 2</h4>
+            <m-accordion class="3">
+                <h4>Anidado 3</h4>
+            </m-accordion>
+        </m-accordion>
 
     </m-accordion>
 
     <style lang="less">
-        #--id_el{
+        #--id_el {
             background: blue;
             height: 50px;
         }
-        
+
         .red {
             background: red;
         }

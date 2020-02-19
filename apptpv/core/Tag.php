@@ -7,7 +7,13 @@ namespace app\core;
  */
 class Tag
 {
-    private $element, $content, $id, $attrs, $type, $prefix = 'tag';
+    private 
+        $element = '', 
+        $body = '', 
+        $id = '', 
+        $attrs = [], 
+        $type = '', 
+        $prefix = 'tag';
 
     function __construct(string $element = null)
     {
@@ -25,12 +31,12 @@ class Tag
         if (
             preg_match("/<([\w\-]+)\s*([^>]*?)>(.*?)<\/\\1>/si", $this->element, $matches)
         ) {
-            $this->content = $matches[3] ?? null;
+            $this->body = $matches[3] ?? null;
         } else if (
             // Segundo tipo de tag <tag/>
             preg_match("/<([\w\-]+)\s*([^>]*?)\/>/si", $this->element, $matches)
         ) {
-            $this->content = null;
+            $this->body = null;
         }
         // Valores por defecto
         $this->type = $matches[1];
@@ -43,11 +49,10 @@ class Tag
                 $this->attrs[$ar[0]] = isset($ar[1]) ? preg_replace('/[\'\"]/', '', $ar[1]) : true;
             }
         }
-        if(!isset($this->id)){
-            $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
-        }
-    }
 
+        $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
+        
+    }
     /**
      * Obtiene los valiores de los atributos
      */
@@ -105,7 +110,7 @@ class Tag
          * 3 -> contenido
          */
         if (
-            $len = preg_match_all($regex, $this->content, $matches)
+            $len = preg_match_all($regex, $this->body, $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $a[$i] = new Tag($matches[0][$i]);
@@ -119,7 +124,7 @@ class Tag
      */
     public function unset(Tag $tag): bool
     {
-        return $this->replace($tag->element, '', $this->content) > 0;
+        return $this->replace($tag->element, '', $this->body) > 0;
     }
     /**
      * Funcion auxiliar para reemplazar partes del elemento
@@ -130,7 +135,7 @@ class Tag
         if (
             preg_match("/<([\w\-]+)\s*([^>]*?)>(.*?)<\/\\1>/si", $this->element, $matches)
         ) {
-            $this->content = $matches[3] ?? null;
+            $this->body = $matches[3] ?? null;
         }
         return $count;
     }
@@ -143,12 +148,35 @@ class Tag
         return $this;
     }
     /**
+     *   Devuelve todos las etiquetas que contiene
+     *  @param tag de la clase de etiqueta
+     *  @return array de tags encontrados
+     */
+    public function tags(string $tag): array
+    {
+        /**
+         * 0 -> Todo
+         * 1 -> tag
+         * 2 -> argimentos
+         * 3 -> contenido
+         */
+        if (
+            $len = preg_match_all("/\<($tag) ([^>]*?)>(.*?)<\/\\1>/si", $this->body(), $matches)
+        ) {
+            for ($i = 0; $i < $len; $i++) {
+                $a[$i] = new Tag($matches[0][$i]);
+            }
+        }
+        return $a ?? [];
+    }
+    /**
      * Getters y setters
      */
     public function id(string $id = null): string
     {
         if (!is_null($id)) {
             $this->replace($this->id, $id);
+            $this->replace('--id', $id);
             $this->id = $id;
         }
         return $this->id;
@@ -161,17 +189,17 @@ class Tag
         }
         return $this->type;
     }
-    public function content(string $content = null): string
+    public function body(string $body = null): string
     {
-        if (!is_null($content)) {
-            $this->replace($this->content, $content);
+        if (!is_null($body)) {
+            $this->replace($this->body, $body);
         }
-        return $this->content;
+        return $this->body;
     }
     public function element(string $arg = null): string
     {
         if (!is_null($arg)) {
-            $this->replace($this->element, $arg);
+            $this->element = $arg;
         }
         return $this->element;
     }
@@ -179,5 +207,21 @@ class Tag
     {
         if (!is_null($arg)) $this->prefix = $arg;
         return $this->prefix;
+    }
+    /**
+     * Getter setter de los atributos del tag html 
+     * @param array setter [llave => valor] 
+     * @param string getter con valor a devolver 
+     * @param null getter sin argumento devuelve todos 
+     */
+    public function attrs($args = null){
+        if (!is_null($args)) {
+            if(is_array($args)){
+                $this->attrs = array_merge($this->attrs, $args);
+            } else {
+                return $this->attrs[$args] ?? null;
+            }
+        }
+        return $this->attrs ?? null;
     }
 }
