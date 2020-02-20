@@ -46,7 +46,7 @@ class Prepocessor
 
         // Inicia compilacion de los archivos
         // Primero aseguramos la carga de los componentes
-        
+
         $this->show_files(self::FOLDERS_NATIVE_VIEWS);
 
         $this->cache_record($this->cache);
@@ -55,7 +55,7 @@ class Prepocessor
     // Lee archivos de directorios y los directorios anidados
     private function show_files(String $path)
     {
-        if(!in_array($path, self::FOLDERS_EXCEPTIONS)){
+        if (!in_array($path, self::FOLDERS_EXCEPTIONS)) {
             $dir = opendir($path);
             while ($current = readdir($dir)) {
                 if ($current != "." && $current != "..") {
@@ -68,7 +68,7 @@ class Prepocessor
                     // Creamos carpeta si no existe         
                     $build_folder = self::BUILD . str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path);
                     if (!file_exists($build_folder)) mkdir($build_folder, 0775, true);
-    
+
                     if (is_dir($file)) {
                         // DIRECTORIOS 
                         if (!file_exists($file_build)) mkdir($file_build, 0775, true);
@@ -106,6 +106,7 @@ class Prepocessor
 
         // Compresión salida html
         //$this->compress_code();
+
         file_put_contents($file_build, $this->el->element());
 
         return $this;
@@ -131,12 +132,14 @@ class Prepocessor
         // Añadimos el id al documento
         $this->el->replace('--id', $this->el->id());
 
+
         $this
             ->sintax_if()
             ->sintax_for()
             ->includes()
-            ->search_components()
+            ->search_components($this->el->body())
             ->sintax_vars();
+
         // Encapsulación de los estilos
         foreach ($this->tags('style') as $tag) {
 
@@ -180,10 +183,10 @@ class Prepocessor
                         // Imprimimos el contenido dentro del condicional
                         $replace = preg_replace($start_condition, '', $value);
                         $replace = preg_replace($end_condition, '', $replace);
-                        $this->replace($value, $replace);
+                        $this->el->replace($value, $replace);
                     } else {
                         // Eliminamos todo el condicional 
-                        $this->replace($value, '');
+                        $this->el->replace($value, '');
                     }
                 }
             }
@@ -206,7 +209,7 @@ class Prepocessor
                    $lastContent
                })()"
             );
-            $this->replace($lastContent, $tag->body());
+            $this->el->replace($lastContent, $tag->body());
         }
         return $this;
     }
@@ -223,25 +226,8 @@ class Prepocessor
             // Se coloca el id a los estilos 
             $tag->body("#{$this->el->id()}{{$content}}");
 
-            $this->replace($lastContent, $tag->body());
+            $this->el->replace($lastContent, $tag->body());
         };
-        return $this;
-    }
-    /**
-     * Funcion auxiliar para reemplazar el contenido de la pagina
-     */
-    private function replace($arg, $val = null): self
-    {
-        switch (gettype($arg)) {
-            case 'string':
-                $this->el->body(str_replace($arg, $val, $this->el->body()));
-                break;
-            case 'array':
-                foreach ($arg as $key => $val) {
-                    $this->el->body(str_replace($key, $val, $this->el->body()));
-                }
-                break;
-        }
         return $this;
     }
     /**
@@ -265,17 +251,7 @@ class Prepocessor
                 $s = str_replace('$$value', '<?=$value?>', $s);
                 $s = str_replace('$$key', '<?=$key?>', $s);
                 $s = str_replace('@endfor', '<?php endforeach?>', $s);
-                $this->replace($struct, $s);
-
-                /*                 if (is_array($arr) || is_object($arr)) {
-                    foreach ($arr as $key => $value) {
-                        $str = str_replace('$$value', $value, $body);
-                        $res .= str_replace('$$key', $key, $str);
-                    }
-                    $this->replace($struct, $res);
-                } else {
-                    pr('NO SE PUEDE ITINERAR',  $matches[1][$i]);
-                } */
+                $this->el->replace($struct, $s);
             }
         }
         return $this;
@@ -304,7 +280,7 @@ class Prepocessor
         $minifier->add($content_less);
         $content_min = $minifier->minify();
 
-        $this->replace($content, $content_min);
+        $this->el->replace($content, $content_min);
     }
     /**
      *   Devuelve todos los argumentos de un tag
@@ -378,20 +354,18 @@ class Prepocessor
         }
     }
     // Buscar componentes existentes en el contenido 
-    private function search_components(): self
+    private function search_components($content): self
     {
         foreach ($this->components as $component) {
             if (
                 $len = preg_match_all(
                     "/<($component)(\s[^>\/]*)?(>(.*)<\/\\1|\/)>?/si",
-                    $this->el->body(),
+                    $content,
                     $matches
                 )
             ) {
-                $this
-                    ->process_components($matches);
+                $this->process_components($matches);
             }
-
         }
         return $this;
     }
@@ -402,35 +376,27 @@ class Prepocessor
     {
         // Transforma en una clase componente
         $len = count($matches[0]);
-
         for ($i = 0; $i < $len; $i++) {
             // Convertimos la cadena en arreglos para pasar los datos al componente
             $argData = $this->args_to_array($matches[2][$i]);
+
             // Creamos la la instancia de clase 
-            $typeComponent = $matches[1][$i];
+            $a = new \app\core\Components($matches[1][$i], $argData, $matches[4][$i]);
 
-            // Comprobamos si el componente alberga contenido
-
-            // Si existe NO lo preprocesamos  
-            $cont = $matches[4] ?? null; 
-            if ($cont) {
-                // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
-                $str = str_replace('"', "'", $cont[$i]);
-                $component_content = ', ' .  isset($cont) ? '"' . $str . '"' : '';
-            } else {
-                $component_content = 'false';
-            }
- 
-            $this->replace(
+            $this->el->replace(
                 $matches[0][$i],
-                "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>",
+                $a->element()
             );
+            if (!is_null($a->element())) {
+                $this->search_components($a->element());
+            }
         }
+
         return $this;
     }
     private function args_to_array($content)
     {
-        $str_data = '';
+        $arr = [];
         $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
         if (
             $len = preg_match_all($regex, $content, $matches_component)
@@ -445,19 +411,14 @@ class Prepocessor
 
                 // Si es una variable que me cambie las comillas 
                 // Si no que me mantenga la nomenclatura comilla simple para json
-                $str_data .= (preg_match('/\$\$/', $value))
-                    ? "'$key'=>\"$value\","
-                    : "'$key'=>'$value',";
+                $arr[$str_key] = $str_value;
             }
         }
-
-        $str_data = trim($str_data, ',');
-
-        return " Array($str_data) ";
+        return $arr;
     }
     private function queue(): self
     {
-        $this->replace('</head>', $this->queue . '</head>');
+        $this->el->replace('</head>', $this->queue . '</head>');
         return $this;
     }
     /**

@@ -41,10 +41,8 @@ class Components extends Tag
             ->sintax()
             ->style_scoped()
             ->script_scoped()
-            ->clear()
-            ->search_components();
+            ->clear();
 
-        echo ($this->element());
     }
     private function clear(): self
     {
@@ -182,85 +180,5 @@ class Components extends Tag
             }
         }
         return $this;
-    }
-    // Buscar componentes existentes en el contenido 
-    private function search_components(): self
-    {
-
-        
-        $components = [];
-        $folder = \APP\VIEWS\MYCOMPONENTS;
-        $gestor = opendir($folder);
-        // Busca los componentes en la carpeta de vistas componentes
-        while (($file = readdir($gestor)) !== false) {
-            if ($file != "." && $file != "..") {
-                $arr = explode('.', $file);
-                $components[] = $arr[0];
-            }
-        }
-
-        foreach ($components as $type) {
-            // Primero buscamos los que contienen tag de cierre ya que pueden contener otros elementos anidados
-            if (
-                $len = preg_match_all(
-                    "/<($type)(\s[^>\/]*)?(>(.*)<\/\\1|\/)>?/si",
-                    $this->body(),
-                    $matches
-                )
-            ) {
-                for ($i = 0; $i < $len; $i++) {
-                    $argData = $this->args_to_array($matches[2][$i]);
-                    $cont = $matches[4] ?? null;
-                    if ($cont) {
-                        // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
-                        $str = str_replace('"', "'", $cont[$i]);
-                        $content = ', ' .  isset($cont) ? '"' . $str . '"' : '';
-                    } else {
-                        $content = 'false';
-                    }
-
-                    // Se crea nuevo componente Y SE EJECUTA
-                    ob_start(); # apertura de bufer
-
-                    file_put_contents(
-                        \FOLDERS\VIEWS . "tmp.phtml",
-                        "<?php new \app\core\Components('$type',$argData, $content);?>"
-                    );
-
-                    include(\FOLDERS\VIEWS . "tmp.phtml");
-
-                    ob_end_clean(); # cierre de bufer
-                }
-            }
-        }
-    
-        return $this;
-    }
-    private function args_to_array($content)
-    {
-        $str_data = '';
-        $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
-        if (
-            $len = preg_match_all($regex, $content, $matches_component)
-        ) {
-            // Cambio de comillas para que se adecue a la sintaxis JSON
-            for ($j = 0; $j < $len; $j++) {
-
-                $str_key = trim($matches_component[1][$j]);
-                $str_value = trim($matches_component[3][$j]);
-                $value = str_replace("'", '"', $str_value);
-                $key = trim(str_replace("'", '"', $str_key));
-
-                // Si es una variable que me cambie las comillas 
-                // Si no que me mantenga la nomenclatura comilla simple para json
-                $str_data .= (preg_match('/\$\$/', $value))
-                    ? "'$key'=>\"$value\","
-                    : "'$key'=>'$value',";
-            }
-        }
-
-        $str_data = trim($str_data, ',');
-
-        return " Array($str_data) ";
     }
 }
