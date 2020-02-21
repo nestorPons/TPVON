@@ -6,6 +6,7 @@ use MatthiasMullie\Minify;
 
 class Prepocessor
 {
+    use Sintax, ToolsComponents;
     const
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
@@ -22,16 +23,12 @@ class Prepocessor
         $queue,
         $queueJS = [],
         $loadeds = [],
-        $components = null,
         $bc;                        // var de proteccion para bucles
 
     function __construct(bool $cacheable = true)
     {
         // Se eliminan todos los archivos de la carpeta build (reinicializa)
         $this->deleteDirectory(self::BUILD);
-
-        // Guardar en variable que componentes tenemos
-        $this->search_exist_components();
 
         //Añade el link a bundle
         $this->queue = "<script src='./build/" . \FILE\JS . "'></script>";
@@ -133,12 +130,12 @@ class Prepocessor
         $this->el->replace('--id', $this->el->id());
 
 
-        $this
-            ->sintax_if()
-            ->sintax_for()
-            ->includes()
-            ->search_components($this->el->body())
-            ->sintax_vars();
+        $this->sintax_if();
+        $this->sintax_for();
+        $this->includes();
+        // Busca componentes 1 nivel de anidamiento y remplaza
+        $this->declare_component();
+        $this->sintax_vars();
 
         // Encapsulación de los estilos
         foreach ($this->tags('style') as $tag) {
@@ -158,6 +155,19 @@ class Prepocessor
             $tag->del('scoped');
         }
     }
+    private function declare_component(){
+        foreach($this->search_components($this->el->body()) as $tag){
+            $t =$tag[0];
+            $occur = $tag[1];
+            $attrs = json_encode($t->attrs());
+            $content = $t->body() ?? 'null';
+            $this->el->replace(
+                $occur,
+                "<?php \$c = new \app\core\Component('{$t->type()}', '$attrs', '$content'); \$c->print();?>"
+            );
+        }
+    }
+
     /**
      * Sintaxis para @if() ... @endif
      */
@@ -256,7 +266,7 @@ class Prepocessor
         }
         return $this;
     }
-    private function compress_code(): self
+/*     private function compress_code(): self
     {
         $search = array(
             '/\>[^\S ]+/s',  // remove whitespaces after tags
@@ -267,7 +277,7 @@ class Prepocessor
         $replace = array('>', '<', '\\1');
         $this->el->element(preg_replace($search, $replace, $this->el->element()));
         return $this;
-    }
+    } */
     private function less(String $content)
     {
         //COMPILAMOS LESS
@@ -337,84 +347,6 @@ class Prepocessor
         }
 
         return $this;
-    }
-    // Carga de los componentes creados en la carpeta
-    private function search_exist_components()
-    {
-        $this->components = [];
-        $folder = \APP\VIEWS\MYCOMPONENTS;
-        if (!file_exists($folder)) mkdir($folder, 0777, true);
-        $gestor = opendir($folder);
-        // Busca los componentes en la carpeta de vistas componentes
-        while (($file = readdir($gestor)) !== false) {
-            if ($file != "." && $file != "..") {
-                $arr = explode('.', $file);
-                $this->components[] = $arr[0];
-            }
-        }
-    }
-    // Buscar componentes existentes en el contenido 
-    private function search_components($content): self
-    {
-        foreach ($this->components as $component) {
-            if (
-                $len = preg_match_all(
-                    "/<($component)(\s[^>\/]*)?(>(.*)<\/\\1|\/)>?/si",
-                    $content,
-                    $matches
-                )
-            ) {
-                $this->process_components($matches);
-            }
-        }
-        return $this;
-    }
-    /**
-     * Procesa los componentes personalizados de las plantillas 
-     */
-    private function process_components($matches): self
-    {
-        // Transforma en una clase componente
-        $len = count($matches[0]);
-        for ($i = 0; $i < $len; $i++) {
-            // Convertimos la cadena en arreglos para pasar los datos al componente
-            $argData = $this->args_to_array($matches[2][$i]);
-
-            // Creamos la la instancia de clase 
-            $a = new \app\core\Components($matches[1][$i], $argData, $matches[4][$i]);
-
-            $this->el->replace(
-                $matches[0][$i],
-                $a->element()
-            );
-            if (!is_null($a->element())) {
-                $this->search_components($a->element());
-            }
-        }
-
-        return $this;
-    }
-    private function args_to_array($content)
-    {
-        $arr = [];
-        $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
-        if (
-            $len = preg_match_all($regex, $content, $matches_component)
-        ) {
-            // Cambio de comillas para que se adecue a la sintaxis JSON
-            for ($j = 0; $j < $len; $j++) {
-
-                $str_key = trim($matches_component[1][$j]);
-                $str_value = trim($matches_component[3][$j]);
-                $value = str_replace("'", '"', $str_value);
-                $key = trim(str_replace("'", '"', $str_key));
-
-                // Si es una variable que me cambie las comillas 
-                // Si no que me mantenga la nomenclatura comilla simple para json
-                $arr[$str_key] = $str_value;
-            }
-        }
-        return $arr;
     }
     private function queue(): self
     {

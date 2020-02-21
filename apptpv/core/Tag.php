@@ -29,7 +29,7 @@ class Tag
     {
         // Primer tipo de tag <tag></tag>
         if (
-            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*?)<\/\\1>/si", $this->element, $matches)
+            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*)<\/\\1>/si", $this->element, $matches)
         ) {
             $this->body = $matches[3] ?? null;
         } else if (
@@ -134,7 +134,7 @@ class Tag
         $this->element = str_replace($arg, $val, $this->element, $count);
 
         if (
-            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*?)<\/\\1>/si", $this->element, $matches)
+            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*)<\/\\1>/si", $this->element, $matches)
         ) {
             $this->body = $matches[3] ?? null;
         }
@@ -224,5 +224,19 @@ class Tag
             }
         }
         return $this->attrs ?? null;
+    }
+    /**
+     * Comprime y formatea el codigo
+     */
+    public static function compress_code(string $code = null) : string
+    {
+        $search = array(
+            '/\>[^\S ]+/s',  // remove whitespaces after tags
+            '/[^\S ]+\</s',  // remove whitespaces before tags
+            '/(\s)+/s'       // remove multiple whitespace sequences
+        );
+
+        $replace = array('>', '<', '\\1');
+        return preg_replace($search, $replace, $code);
     }
 }
