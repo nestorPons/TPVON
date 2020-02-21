@@ -14,6 +14,7 @@ class Component extends Tag
     {
         if ($data) {
             if (is_string($data)) $data = json_decode($data);
+
             foreach ($data as $key => $val) {
                 // Atributos booleanos
                 if ($key == 'required') $val = 'required';
@@ -25,6 +26,7 @@ class Component extends Tag
                 $val = rtrim($val, '?>');
 
                 $this->attrs([$key => $val]);
+
             }
         }
         $this->prefix = $type;
@@ -45,9 +47,11 @@ class Component extends Tag
             ->script_scoped()
             ->clear();
 
+        // Buscamos componentes anidados
         foreach ($this->search_components($this->body()) as $tag) {
             $t = $tag[0];
             $occur = $tag[1];
+            
             $sub = new Component($t->type(), $t->attrs(), $t->body());
 
             $a2 = self::compress_code($occur);
@@ -67,13 +71,12 @@ class Component extends Tag
     // Procesa la sintaxis de la plantillas 
     private function sintax(): self
     {
+        // Añadimos el id a la plantilla si se pone --id
         $this->replace('--id', $this->id());
-        // Procesando condicional if
-        $this->sintax_if();
-        // Bucle for 
-        $this->sintax_for();
+
         // Imprimiendo las variables de la clase a plantilla 
         // Modificando las propiedades o tags de los elementos html
+
         if (
             $len = preg_match_all('#\$\$(\w+\-?\w*)#is', $this->body(), $matches)
         ) {
@@ -81,8 +84,10 @@ class Component extends Tag
                 $prop = $matches[1][$i];
                 if (!is_null($this->attrs($prop))) {
                     $value = $this->attrs($prop) ?? '';
-                    $this->replace($prop, $value);
+                    $this->replace('$$'. $prop, $value);
+
                 } else {
+
                     // En caso que no exista la propiedad la eliminamos 
                     $regex = "#\w+?\s*=\s*[\"']\s*\\$\\$$prop\b\"#";
                     $this->preg($regex, '');
@@ -90,6 +95,11 @@ class Component extends Tag
                 }
             }
         }
+
+        // Procesando condicional if
+        $this->sintax_if();
+        // Bucle for 
+        $this->sintax_for();
         return $this;
     }
 

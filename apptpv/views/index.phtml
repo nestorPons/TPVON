@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<body>
+<body id="--id">
+    <m-select options="['uno','dos']"/>
     <m-accordion id="--id_1" class="1">
-        <h3>Anidado 1</h3>
-        <m-accordion id="--id_2" class="2">
-            <h3>Anidado 2</h3>
-        </m-accordion>
-
+        <h1>Accordion</h1>
     </m-accordion>
 
 
-    <style lang="less">
-        #--id_el {
+    <style lang="less" scoped>
+        #--id_3 {
+            display: inline-block;
             background: blue;
             height: 50px;
         }

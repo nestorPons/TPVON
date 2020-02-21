@@ -32,16 +32,17 @@ trait Sintax
                 }
             }
         }
-
         return $this;
     }
     private function sintax_for(): self
     {
-        $regex_conditional = '/@for\s*?\((.*?)\)(.*?)@endfor/sim';
+
         if (
-            preg_match_all($regex_conditional, $this->body(), $matches)
+            $len = preg_match_all('/@for\s*?\((.*?)\)(.*?)@endfor/sim', $this->body(), $matches)
         ) {
-            for ($i = 0; $i < count($matches[0]); $i++) {
+AKI :: Esta buscando en la propiedad 
+            pr($matches, $this->element());
+            for ($i = 0; $i < $len; $i++) {
                 //m-select m-table
                 $prop = trim($matches[1][$i], '$$');
                 $content = '';

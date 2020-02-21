@@ -190,12 +190,12 @@ class Tag
         }
         return $this->type;
     }
-    public function body(string $body = null): string
+    public function body(string $body = null): ?string
     {
         if (!is_null($body)) {
             $this->replace($this->body, $body); 
         }
-        return $this->body;
+        return $this->body ?? null;
     }
     public function element(string $arg = null): string
     {
