@@ -158,12 +158,22 @@ class Prepocessor
     private function declare_component(){
         foreach($this->search_components($this->el->body()) as $tag){
             $t =$tag[0];
+
             $occur = $tag[1];
-            $attrs = json_encode($t->attrs());
+            
             $content = $t->body() ?? 'null';
+            $str_content = addslashes($content);
+
+            $arr =  [];
+            foreach($t->attrs() as $key => $value){
+                $arr[$key] = trim($value, '"'); 
+                $arr[$key] = trim($value, "'");
+            }
+            $str_at = addslashes(json_encode($arr)); 
+
             $this->el->replace(
                 $occur,
-                "<?php \$c = new \app\core\Component('{$t->type()}', '$attrs', '$content'); \$c->print();?>"
+                "<?php \$c = new \app\core\Component('{$t->type()}', '$str_at', '$str_content'); \$c->print();?>"
             );
         }
     }
@@ -340,7 +350,7 @@ class Prepocessor
             preg_match_all('#\$\$(\w+\-?\w*)#is', $content, $matches)
         ) {
             for ($i = 0; $i < count($matches[0]); $i++) {
-                $str = '<?=$' . trim($matches[1][$i] ?? null, '\$') . '?>';
+                $str = '<?=$_FILES["' . trim($matches[1][$i] ?? null, '\$') . '"]?>';
                 $content = str_replace($matches[0][$i], $str, $content);
             }
             $this->el->body($content);

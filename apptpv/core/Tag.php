@@ -42,11 +42,14 @@ class Tag
         $this->type = $matches[1];
 
         if (
-            preg_match_all("/([^\s]*)(\s*=\"(.*)?\")?/i", $matches[2], $match)
+            preg_match_all("/([^\s]*)(\s*=\s*([\"\'])(.*?)\\3)/i", $matches[2], $match)
         ) {
             foreach (array_filter($match[0]) as $value) {
-                $ar = explode('=', trim($value, "'"));
-                $this->attrs[$ar[0]] = isset($ar[1]) ? preg_replace('/[\'\"]/', '', $ar[1]) : true;
+          
+                $ar = explode('=', $value);
+                $a = trim($ar[1],"'");
+
+                $this->attrs[$ar[0]] = isset($a) ? $a : true;
             }
         }
 

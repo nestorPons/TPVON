@@ -82,7 +82,7 @@ class Controller{
                 if(is_array($val) || is_object($val)) {
                     $val = json_encode($val);
                 }
-                ${$k} = $val;
+                $_FILES[$k] = $val; 
             }
         }
         

@@ -74,9 +74,9 @@ class Router{
         
             exit (json_encode($respond, true));
         }
-        catch(\Exceptiion $e)
+        catch(\Exception $e)
         {
-             exit (json_encode(['success'=>'false', 'mens'=>'error: ' . $e->menssage()], true));
+             exit (json_encode(['success'=>'false', 'mens'=>'error: ' . $e->menssage], true));
         }
 
     }
@@ -108,21 +108,5 @@ class Router{
             ? new $nameClass($this->action, $this->data)
             : new \app\core\Controller($this->action, $this->controller, $this->data);
         return $cont->result; 
-    }
-    /**
-     * Comprueba que se pueda realizar la acción
-     */
-    private function isView(){
-        if ($this->action == 'view'){
-            if(file_exists(\FOLDERS\VIEWS . $this->controller . '.phtml')){
-                $this->loadController($this->controller);
-            } else {
-                $this->loadController($this->default['gate']);
-            }
-            return  true; 
-        } else {
-            return false;
-        }
-
     }
 }
