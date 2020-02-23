@@ -169,8 +169,8 @@ class Prepocessor
                 $arr[$key] = trim($value, '"'); 
                 $arr[$key] = trim($value, "'");
             }
-            $str_at = addslashes(json_encode($arr)); 
-
+            $str_at = json_encode($arr);
+            
             $this->el->replace(
                 $occur,
                 "<?php \$c = new \app\core\Component('{$t->type()}', '$str_at', '$str_content'); \$c->print();?>"
@@ -276,7 +276,7 @@ class Prepocessor
         }
         return $this;
     }
-/*     private function compress_code(): self
+    private function compress_code(): self
     {
         $search = array(
             '/\>[^\S ]+/s',  // remove whitespaces after tags
@@ -287,7 +287,7 @@ class Prepocessor
         $replace = array('>', '<', '\\1');
         $this->el->element(preg_replace($search, $replace, $this->el->element()));
         return $this;
-    } */
+    } 
     private function less(String $content)
     {
         //COMPILAMOS LESS

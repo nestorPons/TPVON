@@ -12,14 +12,13 @@ class Component extends Tag
 
     function __construct(string $type, $data = null, string $content = null)
     {
-
         if ($data) {
-            if (is_string($data)){
+            if (is_string($data)) {
                 // Tratamos el texto si lleva tags de php
+         
                 $data = self::search_globals_vars($data);
-                $data = json_decode(stripcslashes($data));
-            } 
-
+                $data = json_decode($data);
+            }
             foreach ($data as $key => $val) {
                 // Atributos booleanos
                 if ($key == 'required') $val = 'required';
@@ -27,17 +26,11 @@ class Component extends Tag
                 if ($key == 'readonly') $val = 'readonly';
                 if ($key == 'checked')  $val = 'checked';
 
-                // Variables de los controladores
-                if(
-                    preg_match('/<\?=(.*?)\?>/', $val, $matches)
-                )
-                {
-                    $val = trim($matches[1], '$'); 
-                    $val = $_POST[$val]; 
-                }
-                $attrs = [$key => trim($val,'"')]; 
+                $attrs = [$key => $val];
+
                 $this->attrs($attrs);
             }
+            pr($this->attrs());
         }
         $this->prefix = $type;
         $this->type = $type;
@@ -50,10 +43,11 @@ class Component extends Tag
         $this->id($id);
 
         // Tratamos el texto si lleva tags de php
+        $content = stripcslashes($content);
         $content = self::search_globals_vars($content);
 
         // Buscamos la palabra reservada --content y la cambiamos por el contenido 
-        $this->replace('--content', stripcslashes($content));
+        $this->replace('--content', $content);
         $this
             ->sintax()
             ->style_scoped()
@@ -64,7 +58,7 @@ class Component extends Tag
         foreach ($this->search_components($this->body()) as $tag) {
             $t = $tag[0];
             $occur = $tag[1];
-            
+
             $sub = new Component($t->type(), $t->attrs(), $t->body());
 
             $a2 = self::compress_code($occur);
@@ -91,7 +85,7 @@ class Component extends Tag
         // Modificando las propiedades o tags de los elementos html
 
         // Procesando condicional if
-        
+
         $this->sintax_if();
         // Bucle for 
         $this->sintax_for();
@@ -99,15 +93,13 @@ class Component extends Tag
         if (
             $len = preg_match_all('/\$\$(\w+\-?\w*)/is', $this->element(), $matches)
         ) {
-      
+
             for ($i = 0; $i < $len; $i++) {
                 $prop = $matches[1][$i];
                 if (!is_null($this->attrs($prop))) {
                     $value = $this->attrs($prop) ?? '';
-                    $this->replace('$$'. $prop, $value);
-
+                    $this->replace('$$' . $prop, $value);
                 } else {
-
                     // En caso que no exista la propiedad la eliminamos 
                     $regex = "/\w+?\s*=\s*[\"']\s*\\$\\$$prop\b\"/";
                     $this->preg($regex, '');
@@ -118,16 +110,26 @@ class Component extends Tag
         return $this;
     }
 
-    private static function search_globals_vars(string $txt = null) : ?string{
-        if(
+    private static function search_globals_vars(string $txt = null): ?string
+    {
+
+        if (
             $len = preg_match_all('/<\?=\$_FILES\[\"(.*?)\"\]\?>/', $txt, $matches)
-        ){
-            for($i = 0; $i < $len; $i++){ 
-                $val = $_FILES[$matches[1][$i]]; 
-                $txt = str_replace('<?=$_FILES["'.$matches[1][$i].'"]?>', $val, $txt);
+        ) {
+            for ($i = 0; $i < $len; $i++) {
+                $var = $_FILES[$matches[1][$i]];
+                $val = is_array($var) ? json_encode($var) : $var;
+                $txt = str_replace($matches[0][$i], $val, $txt);
+
+                // Quitar las comillas en los arrays y objetos json
+                $txt = str_replace('"[', '[', $txt);
+                $txt = str_replace(']"', ']', $txt);
+                $txt = str_replace('}"', '}', $txt);
+                $txt = str_replace('"{', '{', $txt);
             }
         }
-        return $txt; 
+
+        return $txt;
     }
 
     private function style_scoped(): self

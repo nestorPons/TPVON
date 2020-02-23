@@ -45,11 +45,11 @@ class Tag
             preg_match_all("/([^\s]*)(\s*=\s*([\"\'])(.*?)\\3)/i", $matches[2], $match)
         ) {
             foreach (array_filter($match[0]) as $value) {
-          
+         
                 $ar = explode('=', $value);
                 $a = trim($ar[1],"'");
 
-                $this->attrs[$ar[0]] = isset($a) ? $a : true;
+                $this->attrs[$ar[0]] = isset($a) ? trim($a, '"') : true;
             }
         }
 
