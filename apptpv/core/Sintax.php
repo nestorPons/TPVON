@@ -43,7 +43,7 @@ trait Sintax
                 $content = '';
                 $cond = $this->attrs(trim($matches[1][$i], '$$'));
                 $cont = $matches[2][$i];
-pr($matches);
+                
                 foreach ($cond as $key => $value) {
                     $option = str_replace('$$key', $key, $cont);
                     $option = str_replace('$$value', $value, $option);

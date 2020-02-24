@@ -12,10 +12,10 @@ class Component extends Tag
 
     function __construct(string $type, $data = null, string $content = null)
     {
+
         if ($data) {
             if (is_string($data)) {
                 // Tratamos el texto si lleva tags de php
-         
                 $data = self::search_globals_vars($data);
                 $data = json_decode($data);
             }
@@ -26,11 +26,8 @@ class Component extends Tag
                 if ($key == 'readonly') $val = 'readonly';
                 if ($key == 'checked')  $val = 'checked';
 
-                $attrs = [$key => $val];
-
-                $this->attrs($attrs);
+                $this->attrs($key, $val);
             }
-            pr($this->attrs());
         }
         $this->prefix = $type;
         $this->type = $type;
@@ -55,11 +52,11 @@ class Component extends Tag
             ->clear();
 
         // Buscamos componentes anidados
-        foreach ($this->search_components($this->body()) as $tag) {
-            $t = $tag[0];
-            $occur = $tag[1];
+        foreach ($this->search_components($this->body()) as $found) {
+            $tag = $found[0];
+            $occur = $found[1];
 
-            $sub = new Component($t->type(), $t->attrs(), $t->body());
+            $sub = new Component($tag->type(), $tag->attrs(), $tag->body());
 
             $a2 = self::compress_code($occur);
 
@@ -69,11 +66,6 @@ class Component extends Tag
     public function print(): void
     {
         print($this->element());
-    }
-    private function clear(): self
-    {
-        $this->preg("/[\r\n|\n|\r|\s]+/", " ");
-        return $this;
     }
     // Procesa la sintaxis de la plantillas 
     private function sintax(): self
@@ -109,10 +101,12 @@ class Component extends Tag
         }
         return $this;
     }
-
+    /**
+     * Busqueda de variables globales $_FILES que son cargadas en los controladores 
+     * para pasar variables a las vistas
+     */
     private static function search_globals_vars(string $txt = null): ?string
     {
-
         if (
             $len = preg_match_all('/<\?=\$_FILES\[\"(.*?)\"\]\?>/', $txt, $matches)
         ) {

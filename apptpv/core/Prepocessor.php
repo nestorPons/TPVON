@@ -91,7 +91,7 @@ class Prepocessor
         $this->get_content($file);
 
         // Quitamos los comentarios 
-        $this->clear();
+        $this->el->clear();
 
         // No se la aplicamos a los componentes para que mantengan la encapsulación
         if (!$this->isComponent()) $this->sintax();
@@ -106,14 +106,6 @@ class Prepocessor
 
         file_put_contents($file_build, $this->el->element());
 
-        return $this;
-    }
-    /**
-     * Limpia el contenido de comentarios
-     */
-    private function clear(): self
-    {
-        $this->el->preg('/(<!--(.|\s)*?-->|[^\:]\/\/(.*))/', '');
         return $this;
     }
     // Obtiene el contenido del archivo y crea el tag principal 
@@ -156,24 +148,24 @@ class Prepocessor
         }
     }
     private function declare_component(){
-        foreach($this->search_components($this->el->body()) as $tag){
-            $t =$tag[0];
+        foreach($this->search_components($this->el->body()) as $found){
+            $tag =$found[0];
+            $occur = $found[1];
 
-            $occur = $tag[1];
             
-            $content = $t->body() ?? 'null';
+            $content = $tag->body() ?? 'null';
             $str_content = addslashes($content);
 
             $arr =  [];
-            foreach($t->attrs() as $key => $value){
+            foreach($tag->attrs() as $key => $value){
                 $arr[$key] = trim($value, '"'); 
                 $arr[$key] = trim($value, "'");
             }
             $str_at = json_encode($arr);
-            
+
             $this->el->replace(
                 $occur,
-                "<?php \$c = new \app\core\Component('{$t->type()}', '$str_at', '$str_content'); \$c->print();?>"
+                "<?php \$c = new \app\core\Component('{$tag->type()}', '$str_at', '$str_content'); \$c->print();?>"
             );
         }
     }
