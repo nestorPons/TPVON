@@ -39,11 +39,10 @@ trait Sintax
             $len = preg_match_all('/@for\s*?\((.*?)\)(.*?)@endfor/sim', $this->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
-
                 $content = '';
                 $cond = $this->attrs(trim($matches[1][$i], '$$'));
                 $cont = $matches[2][$i];
-                
+           
                 foreach ($cond as $key => $value) {
                     $option = str_replace('$$key', $key, $cont);
                     $option = str_replace('$$value', $value, $option);

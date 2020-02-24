@@ -13,7 +13,8 @@ class Tag
         $id = '',
         $attrs = [],
         $type = '',
-        $prefix = 'tag';
+        $prefix = 'tag', 
+        $code = '';
 
     function __construct(string $element = null)
     {

@@ -147,11 +147,13 @@ class Prepocessor
             $tag->del('scoped');
         }
     }
+    /**
+     * Buscamos componentes principales en el html los posibles anidos se pasan por string al componente
+     */
     private function declare_component(){
         foreach($this->search_components($this->el->body()) as $found){
             $tag =$found[0];
             $occur = $found[1];
-
             
             $content = $tag->body() ?? 'null';
             $str_content = addslashes($content);
