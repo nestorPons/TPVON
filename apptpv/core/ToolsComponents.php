@@ -34,9 +34,10 @@ trait ToolsComponents
     {
         if (!isset($this->str_components))  $this->search_exist_components();
         // Buscar el primer componente
+
         if (
             preg_match(
-                "/(<({$this->str_components})(\s[^>\/]*)?(>|\/>)?)(.*)/si",
+                "/(<({$this->str_components})[^-_](\s[^>\/]*)?(>|\/>)?)(.*)/si",
                 $text_process,
                 $matches
             )
@@ -47,10 +48,12 @@ trait ToolsComponents
             $name_component = $matches[2];
             $simple_tag = $matches[4] == '/>';
             $text_process = $matches[5];
+            prs($matches);
 
             if ($simple_tag) {
                 $this->found_components[] = new Tag($tag_code);
             } else {
+
                 // Buscamos tanto aperturas como cierres
                 if (
                     $len  = preg_match_all(
@@ -70,7 +73,7 @@ trait ToolsComponents
                         } else {
                             if ($nested == 0) {
                                 // Tenemos el componente completo
-                                $rest = substr($text_process, 0, $pos); 
+                                $rest = substr($text_process, 0, $pos);
                                 $element = $tag_code . $rest;
                                 $this->found_components[] = new Tag($element);
                                 $text_process = \str_replace($rest, '', $text_process);
