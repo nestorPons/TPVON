@@ -6,12 +6,14 @@ use MatthiasMullie\Minify;
 
 class Prepocessor
 {
+    use Sintax, ToolsComponents;
     const
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
         MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml',
-        FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS; // Carpeta contenedora de los componentes
+        FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS, // Carpeta contenedora de los componentes
+        FOLDERS_EXCEPTIONS = [\APP\VIEWS\MYCOMPONENTS]; // Rutas excluidas del preprocesado
 
     private
         $el, // clase Tag -> Elemento html del archivo procesado
@@ -21,16 +23,12 @@ class Prepocessor
         $queue,
         $queueJS = [],
         $loadeds = [],
-        $components = null,
         $bc;                        // var de proteccion para bucles
 
     function __construct(bool $cacheable = true)
     {
         // Se eliminan todos los archivos de la carpeta build (reinicializa)
         $this->deleteDirectory(self::BUILD);
-
-        // Guardar en variable que componentes tenemos
-        $this->search_exist_components();
 
         //Añade el link a bundle
         $this->queue = "<script src='./build/" . \FILE\JS . "'></script>";
@@ -45,7 +43,7 @@ class Prepocessor
 
         // Inicia compilacion de los archivos
         // Primero aseguramos la carga de los componentes
-        $this->show_files(self::FOLDER_COMPONENTS);
+
         $this->show_files(self::FOLDERS_NATIVE_VIEWS);
 
         $this->cache_record($this->cache);
@@ -54,34 +52,35 @@ class Prepocessor
     // Lee archivos de directorios y los directorios anidados
     private function show_files(String $path)
     {
-        $dir = opendir($path);
-        while ($current = readdir($dir)) {
-            if ($current != "." && $current != "..") {
-                $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
-                $file = $path . $current;
-//pr($file);
-                $this->file = $file;
-                $file_build =  self::BUILD . $build_path;
-                $this->path = $path;
-                // Creamos carpeta si no existe         
-                $build_folder = self::BUILD . str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path);
-                if (!file_exists($build_folder)) mkdir($build_folder, 0775, true);
+        if (!in_array($path, self::FOLDERS_EXCEPTIONS)) {
+            $dir = opendir($path);
+            while ($current = readdir($dir)) {
+                if ($current != "." && $current != "..") {
+                    $build_path = str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path . $current);
+                    $file = $path . $current;
+                    //pr($file);
+                    $this->file = $file;
+                    $file_build =  self::BUILD . $build_path;
+                    $this->path = $path;
+                    // Creamos carpeta si no existe         
+                    $build_folder = self::BUILD . str_replace(self::FOLDERS_NATIVE_VIEWS, '', $path);
+                    if (!file_exists($build_folder)) mkdir($build_folder, 0775, true);
 
-                if (is_dir($file)) {
-                    // DIRECTORIOS 
-                    if (!file_exists($file_build)) mkdir($file_build, 0775, true);
-                    $this->show_files($file . '/');
-                } else {
-                    // ARCHIVOS
-                    if (!file_exists($file_build)) {
-                        $this->build($file, $file_build);
+                    if (is_dir($file)) {
+                        // DIRECTORIOS 
+                        if (!file_exists($file_build)) mkdir($file_build, 0775, true);
+                        $this->show_files($file . '/');
+                    } else {
+                        // ARCHIVOS
+                        if (!file_exists($file_build)) {
+                            $this->build($file, $file_build);
+                        }
                     }
                 }
             }
+            // Cargamos las clases js hijas que no se pudieron cargar anteriormente
+            $this->load_class_childrens();
         }
-
-        // Cargamos las clases js hijas que no se pudieron cargar anteriormente
-        $this->load_class_childrens();
     }
     /**
      * Publica la aplicación en la carpeta build
@@ -92,7 +91,7 @@ class Prepocessor
         $this->get_content($file);
 
         // Quitamos los comentarios 
-        $this->clear();
+        $this->el->clear();
 
         // No se la aplicamos a los componentes para que mantengan la encapsulación
         if (!$this->isComponent()) $this->sintax();
@@ -103,18 +102,10 @@ class Prepocessor
         if ($file == self::MAIN_PAGE) $this->queue();
 
         // Compresión salida html
-        if (!ENV) $this->compress_code();
+        //$this->compress_code();
+
         file_put_contents($file_build, $this->el->element());
 
-        return $this;
-    }
-    /**
-     * Limpia el contenido de comentarios
-     */
-    private function clear(): self
-    {
-        $con = $this->el->content();
-        $this->el->content(preg_replace('/(<!--(.|\s)*?-->|[^\:]\/\/(.*))/', '', $con));
         return $this;
     }
     // Obtiene el contenido del archivo y crea el tag principal 
@@ -130,19 +121,21 @@ class Prepocessor
         // Añadimos el id al documento
         $this->el->replace('--id', $this->el->id());
 
-        $this
-            ->sintax_if()
-            ->sintax_for()
-            ->includes()
-            ->search_components()
-            ->sintax_vars();
+
+        $this->sintax_if();
+        $this->sintax_for();
+        $this->includes();
+        // Busca componentes 1 nivel de anidamiento y remplaza
+        $this->declare_component();
+        $this->sintax_vars();
+
         // Encapsulación de los estilos
         foreach ($this->tags('style') as $tag) {
 
             $this->add_style_scope($tag);
 
             if ($tag->get('lang') == 'less') {
-                $this->less($tag->content());
+                $this->less($tag->body());
             }
             // eliminamos el argumento scoped
             $tag->del('scoped');
@@ -155,6 +148,29 @@ class Prepocessor
         }
     }
     /**
+     * Buscamos componentes principales en el html los posibles anidos se pasan por string al componente
+     */
+    private function declare_component(){
+        foreach($this->search_components($this->el->body()) as $tag){
+
+            $content = $tag->body() ?? 'null';
+            $str_content = addslashes($content);
+
+            $arr =  [];
+            foreach($tag->attrs() as $key => $value){
+                $arr[$key] = trim($value, '"'); 
+                $arr[$key] = trim($value, "'");
+            }
+            $str_at = json_encode($arr);
+
+            $this->el->replace(
+                $tag->code(),
+                "<?php \$c = new \app\core\Component('{$tag->type()}', '$str_at', '$str_content'); \$c->print();?>"
+            );
+        }
+    }
+
+    /**
      * Sintaxis para @if() ... @endif
      */
     private function sintax_if(): self
@@ -165,7 +181,7 @@ class Prepocessor
         $end_condition = '/@endif/i';;
 
         if (
-            preg_match_all($regex_conditional, $this->el->content(), $matches)
+            preg_match_all($regex_conditional, $this->el->body(), $matches)
         ) {
             foreach ($matches[0] as $value) {
                 // Se obtiene la condición
@@ -179,10 +195,10 @@ class Prepocessor
                         // Imprimimos el contenido dentro del condicional
                         $replace = preg_replace($start_condition, '', $value);
                         $replace = preg_replace($end_condition, '', $replace);
-                        $this->replace($value, $replace);
+                        $this->el->replace($value, $replace);
                     } else {
                         // Eliminamos todo el condicional 
-                        $this->replace($value, '');
+                        $this->el->replace($value, '');
                     }
                 }
             }
@@ -199,48 +215,31 @@ class Prepocessor
     private function add_script_scope(Tag $tag): self
     {
         if ($tag->get('scoped')) {
-            $lastContent = $tag->content();
-            $tag->content(
+            $lastContent = $tag->body();
+            $tag->body(
                 "(function(){
                    $lastContent
                })()"
             );
-            $this->replace($lastContent, $tag->content());
+            $this->el->replace($lastContent, $tag->body());
         }
         return $this;
     }
     private function add_style_scope(Tag $tag): self
     {
         if ($tag->get('scoped')) {
-            $lastContent = $tag->content();
+            $lastContent = $tag->body();
 
             // Quitamos las reglas principales
-            $content = $tag->content();
+            $content = $tag->body();
             $content = preg_replace('/@import.*?;/', '', $content);
             $content = preg_replace('/@charser.*?;/', '', $content);
 
             // Se coloca el id a los estilos 
-            $tag->content("#{$this->el->id()}{{$content}}");
+            $tag->body("#{$this->el->id()}{{$content}}");
 
-            $this->replace($lastContent, $tag->content());
+            $this->el->replace($lastContent, $tag->body());
         };
-        return $this;
-    }
-    /**
-     * Funcion auxiliar para reemplazar el contenido de la pagina
-     */
-    private function replace($arg, $val = null): self
-    {
-        switch (gettype($arg)) {
-            case 'string':
-                $this->el->content(str_replace($arg, $val, $this->el->content()));
-                break;
-            case 'array':
-                foreach ($arg as $key => $val) {
-                    $this->el->content(str_replace($key, $val, $this->el->content()));
-                }
-                break;
-        }
         return $this;
     }
     /**
@@ -249,7 +248,7 @@ class Prepocessor
     private function sintax_for(): self
     {
         if (
-            $len = preg_match_all('/@for\s*\((.*?)\)(.*?)@endfor/sim', $this->el->content(), $matches)
+            $len = preg_match_all('/@for\s*\((.*?)\)(.*?)@endfor/sim', $this->el->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $res = '';
@@ -258,13 +257,13 @@ class Prepocessor
                 $struct = $matches[0][$i];
 
                 // Formato {"a":1,"b":2,"c":3,"d":4,"e":5} sin comillas exteriores
-                if (is_string($cond)) $arr = json_decode($cond);
+                // Si la condcion tiene $$valor transformarlo en $valor
 
-                foreach ($arr as $key => $value) {
-                    $str = str_replace('$$value', $value, $body);
-                    $res .= str_replace('$$key', $key, $str);
-                }
-                $this->replace($struct, $res);
+                $s = preg_replace('/\@for\(.*?\)/i', '<?php foreach($' . ltrim($cond, '$') . ' as $key => $value):?>', $struct);
+                $s = str_replace('$$value', '<?=$value?>', $s);
+                $s = str_replace('$$key', '<?=$key?>', $s);
+                $s = str_replace('@endfor', '<?php endforeach?>', $s);
+                $this->el->replace($struct, $s);
             }
         }
         return $this;
@@ -280,7 +279,7 @@ class Prepocessor
         $replace = array('>', '<', '\\1');
         $this->el->element(preg_replace($search, $replace, $this->el->element()));
         return $this;
-    }
+    } 
     private function less(String $content)
     {
         //COMPILAMOS LESS
@@ -293,7 +292,7 @@ class Prepocessor
         $minifier->add($content_less);
         $content_min = $minifier->minify();
 
-        $this->replace($content, $content_min);
+        $this->el->replace($content, $content_min);
     }
     /**
      *   Devuelve todos los argumentos de un tag
@@ -309,7 +308,7 @@ class Prepocessor
          * 3 -> contenido
          */
         if (
-            $len = preg_match_all($regex, $this->el->content(), $matches)
+            $len = preg_match_all($regex, $this->el->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $a[$i] = new Tag($matches[0][$i]);
@@ -321,148 +320,39 @@ class Prepocessor
     private function includes(): self
     {
         if (
-            $len = preg_match_all('/\s\@include\s*\((.*?)\)\s/', $this->el->content(), $matches)
+            $len = preg_match_all('/\s\@include\s*\((.*?)\)\s/', $this->el->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
-                $this->el->content(
+                $this->el->body(
                     str_replace(
                         $matches[0][$i],
                         "<?php include({$matches[1][$i]})?>",
-                        $this->el->content()
+                        $this->el->body()
                     )
                 );
             }
         }
         return $this;
     }
-    // Busca sibolo $ para y lo reemplaza por variables php
+    // Busca sibolo $$ para y lo reemplaza por variables php
     private function sintax_vars(): self
     {
-        $content = $this->el->content();
+        $content = $this->el->body();
         if (
             preg_match_all('#\$\$(\w+\-?\w*)#is', $content, $matches)
         ) {
             for ($i = 0; $i < count($matches[0]); $i++) {
-                $str = '<?=$' . trim($matches[1][$i] ?? null, '\$') . '?>';
+                $str = '<?=$_FILES["' . trim($matches[1][$i] ?? null, '\$') . '"]?>';
                 $content = str_replace($matches[0][$i], $str, $content);
             }
-            $this->el->content($content);
+            $this->el->body($content);
         }
 
         return $this;
-    }
-    // Carga de los componentes creados en la carpeta
-    private function search_exist_components()
-    {
-        $this->components = [];
-        $folder = \APP\VIEWS\MYCOMPONENTS;
-        if (!file_exists($folder)) mkdir($folder, 0777, true);
-        $gestor = opendir($folder);
-        // Busca los componentes en la carpeta de vistas componentes
-        while (($file = readdir($gestor)) !== false) {
-            if ($file != "." && $file != "..") {
-                $arr = explode('.', $file);
-                $this->components[] = $arr[0];
-            }
-        }
-    }
-    // Buscar componentes existentes en el contenido 
-    // el parametro ha de ser enviado por referencia
-    private function search_components(): self
-    {
-        foreach ($this->components as $component) {
-            // Primero buscamos los que contienen tag de cierre ya que pueden contener otros elementos anidados
-            if (
-                $len = preg_match_all(
-                    "#<($component)(\s[^>\/]*)?>(.*?)<\/\g{1}>#si",
-                    $this->el->content(),
-                    $matches
-                )
-            ) {
-                $this
-                    ->process_components($matches)
-                    ->search_components();
-            }
-            // Después buscamos los que no tienen tag de cierre
-            if (
-                preg_match_all(
-                    "/<\s*($component)(\s.*?|\s*?)\/>/s",
-                    $this->el->content(),
-                    $matches
-                )
-            ) {
-                $this->process_components($matches, $this->el->content());
-            }
-        }
-        return $this;
-    }
-    /**
-     * Procesa los componentes personalizados de las plantillas 
-     */
-    private function process_components($matches): self
-    {
-        // Transforma en una clase componente
-        $len = count($matches[0]);
-
-        for ($i = 0; $i < $len; $i++) {
-            // Convertimos la cadena en arreglos para pasar los datos al componente
-            $argData = $this->args_to_array($matches[2][$i]);
-            // Creamos la la instancia de clase 
-            $typeComponent = $matches[1][$i];
-
-            // Comprobamos si el componente alberga contenido
-
-            // Si existe lo preprocesamos
-            if (isset($matches[3])) {
-                // Si encuentra contenido en el componente comprueba que si tiene componentes anidados
-                $str = str_replace('"', "'", $matches[3][$i]);
-                $component_content = ', ' .  isset($matches[3]) ? '"' . $str . '"' : '';
-            } else {
-                $component_content = 'false';
-            }
-            // Instanciamos la clase de componentes
-
-            ob_start(); # apertura de bufer
-            file_put_contents(
-                \FOLDERS\VIEWS . "tmp.phtml",
-                str_replace(
-                    $matches[0][$i],
-                    "<?php new \app\core\Components('$typeComponent',$argData, $component_content);?>",
-                    $this->el->content(),
-                    $count
-                )
-            );
-            include(\FOLDERS\VIEWS . "tmp.phtml");
-            $this->el->content(ob_get_contents());
-            ob_end_clean(); # cierre de bufer
-        }
-        return $this;
-    }
-    private function args_to_array($content)
-    {
-        $str_data = '';
-        $regex = '#(.+?)\s*=\s*(["\'])(.+?)\g{2}#s';
-        if (
-            preg_match_all($regex, $content, $matches_component)
-        ) {
-            $len_c = count($matches_component[0]);
-            // Cambio de comillas para que se adecue a la sintaxis JSON
-            for ($j = 0; $j < $len_c; $j++) {
-                $str_key = trim($matches_component[1][$j]);
-                $str_value = trim($matches_component[3][$j]);
-
-                $value = str_replace("'", '"', $str_value);
-                $key = trim(str_replace("'", '"', $str_key));
-                $str_data .=  "'$key'=>'$value',";
-            }
-        }
-
-        $str_data = trim($str_data, ',');
-        return " Array($str_data)";
     }
     private function queue(): self
     {
-        $this->replace('</head>', $this->queue . '</head>');
+        $this->el->replace('</head>', $this->queue . '</head>');
         return $this;
     }
     /**
@@ -476,7 +366,7 @@ class Prepocessor
             $tags = $this->el->search('script')
         ) {
             foreach ($tags as $tag) {
-                $class_js = $tag->content();
+                $class_js = $tag->body();
                 // Si contiene alguna clase la enviamos al archivo bundle.js
                 if (preg_match_all('/ class (\w*?).*{/i', $class_js, $matches)) {
                     if (
