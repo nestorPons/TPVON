@@ -12,7 +12,6 @@ class Component extends Tag
 
     function __construct(string $type, $data = null, string $content = null)
     {
-
         if ($data) {
             if (is_string($data)) {
                 // Tratamos el texto si lleva tags de php
@@ -52,15 +51,9 @@ class Component extends Tag
             ->clear();
 
         // Buscamos componentes anidados
-        foreach ($this->search_components($this->body()) as $found) {
-            $tag = $found[0];
-            $occur = $found[1];
-
-            $sub = new Component($tag->type(), $tag->attrs(), $tag->body());
-
-            $a2 = self::compress_code($occur);
-
-            $this->replace($a2, $sub->element());
+        foreach ($this->search_components($this->body()) as $tag) {
+            $nested = new Component($tag->type(), $tag->attrs(), $tag->body());
+            $this->replace($tag->code(), $nested->element());
         }
     }
     public function print(): void

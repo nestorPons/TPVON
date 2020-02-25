@@ -13,12 +13,13 @@ class Tag
         $id = '',
         $attrs = [],
         $type = '',
-        $prefix = 'tag', 
+        $prefix = 'tag',
         $code = '';
 
     function __construct(string $element = null)
     {
         if (!is_null($element)) {
+            $this->code = $element;
             $this->element = $element;
             $this->load();
         }
@@ -32,7 +33,7 @@ class Tag
         $this->clear();
         // Primer tipo de tag <tag></tag>
         if (
-            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*)<\/\\1>/si", $this->element, $matches)
+            preg_match("/<([\w\-]+)\s*([^>]*?)>(.*)<\/\\1(>|\s[^>]*?>)/si", $this->element, $matches)
         ) {
             $this->body = $matches[3] ?? null;
         } else if (
@@ -41,7 +42,6 @@ class Tag
         ) {
             $this->body = null;
         }
-
         // Valores por defecto
         $this->type = $matches[1];
 
@@ -54,11 +54,10 @@ class Tag
             for ($i = 0; $i < $len; $i++) {
                 $name_attr = $matches[1][$i];
                 $value = $matches[2][$i] ?? true;
-                if(is_string($value)) $value = json_decode($value);
+                if (is_string($value)) $value = json_decode($value);
 
-                $this->attrs($name_attr , $value);
+                $this->attrs($name_attr, $value);
             }
-
         }
         $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
     }
@@ -218,6 +217,10 @@ class Tag
         if (!is_null($arg)) $this->prefix = $arg;
         return $this->prefix;
     }
+    public function code()
+    {
+        return $this->code;
+    }
     /**
      * Getter setter de los atributos del tag html 
      * @param array setter [llave => valor] 
@@ -227,7 +230,7 @@ class Tag
     public function attrs($arg = null, $val = null)
     {
         if (!is_null($arg)) {
-            if(!is_null($val)){
+            if (!is_null($val)) {
                 $this->attrs = array_merge($this->attrs, [$arg => $val]);
             }
             return $this->attrs[$arg] ?? null;
@@ -248,7 +251,7 @@ class Tag
         $replace = array('>', '<', '\\1');
         return preg_replace($search, $replace, $code);
     }
-        /**
+    /**
      * Limpia el contenido de comentarios
      */
     public function clear(): self

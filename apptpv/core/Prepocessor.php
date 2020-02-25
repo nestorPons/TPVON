@@ -151,10 +151,8 @@ class Prepocessor
      * Buscamos componentes principales en el html los posibles anidos se pasan por string al componente
      */
     private function declare_component(){
-        foreach($this->search_components($this->el->body()) as $found){
-            $tag =$found[0];
-            $occur = $found[1];
-            
+        foreach($this->search_components($this->el->body()) as $tag){
+
             $content = $tag->body() ?? 'null';
             $str_content = addslashes($content);
 
@@ -166,7 +164,7 @@ class Prepocessor
             $str_at = json_encode($arr);
 
             $this->el->replace(
-                $occur,
+                $tag->code(),
                 "<?php \$c = new \app\core\Component('{$tag->type()}', '$str_at', '$str_content'); \$c->print();?>"
             );
         }
