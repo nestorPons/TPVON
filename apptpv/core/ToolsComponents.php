@@ -51,7 +51,6 @@ trait ToolsComponents
             if ($simple_tag) {
                 $this->found_components[] = new Tag($tag_code);
             } else {
-
                 // Buscamos tanto aperturas como cierres
                 if (
                     $len  = preg_match_all(

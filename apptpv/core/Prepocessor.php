@@ -150,15 +150,16 @@ class Prepocessor
     /**
      * Buscamos componentes principales en el html los posibles anidos se pasan por string al componente
      */
-    private function declare_component(){
-        foreach($this->search_components($this->el->body()) as $tag){
+    private function declare_component()
+    {
+        foreach ($this->search_components($this->el->body()) as $tag) {
 
             $content = $tag->body() ?? 'null';
             $str_content = addslashes($content);
 
             $arr =  [];
-            foreach($tag->attrs() as $key => $value){
-                $arr[$key] = trim($value, '"'); 
+            foreach ($tag->attrs() as $key => $value) {
+                $arr[$key] = trim($value, '"');
                 $arr[$key] = trim($value, "'");
             }
             $str_at = json_encode($arr);
@@ -279,7 +280,7 @@ class Prepocessor
         $replace = array('>', '<', '\\1');
         $this->el->element(preg_replace($search, $replace, $this->el->element()));
         return $this;
-    } 
+    }
     private function less(String $content)
     {
         //COMPILAMOS LESS
@@ -323,10 +324,18 @@ class Prepocessor
             $len = preg_match_all('/\s\@include\s*\((.*?)\)\s/', $this->el->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
+                $body = $matches[1][$i];
+                if (
+                    $len = preg_match_all('/\$\$(\w+\-?\w*)/is', $body, $match)
+                ) {
+                    for ($j = 0; $j < $len; $j++) {
+                        $body = str_replace($match[0][$j],"\$_FILES['{$match[1][$j]}']",$body);
+                    }
+                }
                 $this->el->body(
                     str_replace(
                         $matches[0][$i],
-                        "<?php include({$matches[1][$i]})?>",
+                        "<?php include($body)?>",
                         $this->el->body()
                     )
                 );
