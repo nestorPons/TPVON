@@ -159,17 +159,9 @@ class Component extends Tag
         if ($has) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $prop = trim($matches[1][$i], '$$');
-                if (!is_null($this->attrs($prop))) {
-                    $condition = $this->attrs($prop);
-                    $valcon = false;
-                    eval('if ($condition) { $valcon = true; }');
-                    if ($valcon)
-                        $this->replace($matches[0][$i], $matches[2][$i]);
-                    else
-                        $this->replace($matches[0][$i], '');
-
-                    // Quitamos los espacios en blanco
-                    $this->replace("[\n|\r|\n\r]", "");
+                
+                if ($this->attrs($prop)) {
+                    $this->replace($matches[0][$i], $matches[2][$i]);
                 } else {
                     // Si no existe la propiedad quitamos el elemento
                     $this->replace($matches[0][$i], '');
@@ -183,15 +175,20 @@ class Component extends Tag
         if (
             $len = preg_match_all('/@for\s*?\((.*?)\)(.*?)@endfor/sim', $this->body(), $matches)
         ) {
+            
             for ($i = 0; $i < $len; $i++) {
                 $content = '';
-                $cond = $this->attrs(trim($matches[1][$i], '$$'));
+                $attr = trim($matches[1][$i], '$$'); 
+                $cond = $this->attrs($attr);
                 $cont = $matches[2][$i];
-           
-                foreach ($cond as $key => $value) {
-                    $option = str_replace('$$key', $key, $cont);
-                    $option = str_replace('$$value', $value, $option);
-                    $content .= $option;
+                if(is_null($cond)) {
+                    $content = '';
+                } else {
+                    foreach ($cond as $key => $value) {
+                        $option = str_replace('$$key', $key, $cont);
+                        $option = str_replace('$$value', $value, $option);
+                        $content .= $option;
+                    }
                 }
                 $this->replace($matches[0][$i], $content);
             }
