@@ -6,7 +6,7 @@ use MatthiasMullie\Minify;
 
 class Prepocessor
 {
-    use Sintax, ToolsComponents;
+    use ToolsComponents;
     const
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
@@ -162,6 +162,7 @@ class Prepocessor
                 $arr[$key] = trim($value, "'");
             }
             $str_at = json_encode($arr);
+            $str_at = str_replace("'","\'",$str_at);
 
             $this->el->replace(
                 $tag->code(),
@@ -326,14 +327,15 @@ class Prepocessor
                 $body = $matches[1][$i];
                 // Sintaxis para las variable cargadas desde los controladores
                 if (
-                    $len = preg_match_all('/\$\$(\w+\-?\w*)/is', $body, $match)
-                    ) {
-                        for ($j = 0; $j < $len; $j++) {
-                            $body = str_replace($match[0][$j],"\$_FILES['{$match[1][$j]}']",$body);
-                        }
+                    $len2 = preg_match_all('/\$\$(\w+\-?\w*)/is', $body, $match)
+                ) {
+                    for ($j = 0; $j < $len2; $j++) {
+                        $body = str_replace($match[0][$j], "\$_FILES['{$match[1][$j]}']", $body);
                     }
-                    $this->el->replace( $matches[0][$i], "<?php include($body)?>" );
+                }
+                $this->el->replace($matches[0][$i], "<?php include($body)?>");
             }
+
         }
         return $this;
     }
