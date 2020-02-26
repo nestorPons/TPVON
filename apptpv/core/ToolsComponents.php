@@ -37,7 +37,7 @@ trait ToolsComponents
 
         if (
             preg_match(
-                "/(<({$this->str_components})[^-_](\s[^>\/]*)?(>|\/>)?)(.*)/si",
+                "/(<({$this->str_components})\s*([^>]*)\/?>)(.*)/si",
                 $text_process,
                 $matches
             )
@@ -46,9 +46,8 @@ trait ToolsComponents
             // Si encuentra 3 indices es simple si tiene 4 es compuesto
             $tag_code = $matches[1];
             $name_component = $matches[2];
-            $simple_tag = $matches[4] == '/>';
-            $text_process = $matches[5];
-            prs($matches);
+            $simple_tag = strpos($matches[1], '/>') != false;
+            $text_process = $matches[4];
 
             if ($simple_tag) {
                 $this->found_components[] = new Tag($tag_code);

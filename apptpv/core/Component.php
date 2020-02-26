@@ -8,7 +8,7 @@ namespace app\core;
 class Component extends Tag
 {
     use Sintax, ToolsComponents;
-    const FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS;
+    const FOLDER_COMPONENTS = \VIEWS\MYCOMPONENTS;
 
     function __construct(string $type, $data = null, string $content = null)
     {
