@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<body id="--id">
-    <m-btn-success/>
-    <m-accordion id="--id_1" class="cuadrado" value="">
-        <m-input class="red"/>
-        <m-accordion id="--id_1_1" class="cuadrado" value="">
-            <h3>TERCER</h3>
+    
+    <body id="--id">
+        <m-nav label="MY LABEL"/>
+        <m-input />
+        <m-accordion id="--id_1" class="cuadrado" value="">
+            <m-square title="CUADTRATO"/>
+            <m-checkbox label="check"/>
+            <m-input class="red"/>
+            <m-accordion id="--id_1_1" class="cuadrado" value="">
+                <h3>TERCER</h3>
+            </m-accordion>
         </m-accordion>
-    </m-accordion>
+        <m-btn-cancel/>
+        <m-btn-success/>
+            <m-window>
+                INTERIOR DE VENTANA
+            </m-window>
+    <m-btn caption="Hola"/>
     <m-accordion id="--id_2" class="cuadrado" value="">
         <h2>Segundo TAG</h2>
     </m-accordion> 
-    <m-input />
 
 
     <style lang="less" scoped>
-        #--id_3 {
-            display: inline-block;
+        #--id_1, #--id_2 {
+            display: inline-table;
+
             background: blue;
             height: 50px;
         }
