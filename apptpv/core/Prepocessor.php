@@ -6,14 +6,14 @@ use MatthiasMullie\Minify;
 
 class Prepocessor
 {
-    use Sintax, ToolsComponents;
+    use ToolsComponents;
     const
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,
         MAIN_PAGE = \FOLDERS\NATIVE_VIEWS . 'index.phtml',
         FOLDER_COMPONENTS = \APP\VIEWS\MYCOMPONENTS, // Carpeta contenedora de los componentes
-        FOLDERS_EXCEPTIONS = [\APP\VIEWS\MYCOMPONENTS]; // Rutas excluidas del preprocesado
+        FOLDERS_EXCEPTIONS = []; //[\APP\VIEWS\MYCOMPONENTS]; // Rutas excluidas del preprocesado
 
     private
         $el, // clase Tag -> Elemento html del archivo procesado
@@ -94,9 +94,9 @@ class Prepocessor
         $this->el->clear();
 
         // No se la aplicamos a los componentes para que mantengan la encapsulación
-        if (!$this->isComponent()) $this->sintax();
+        if (!$this->is_component()) $this->sintax();
 
-        // Construimos el build.js con todos las clases
+        // Construimos el build.js con todas las clases
         $this->build_js();
 
         if ($file == self::MAIN_PAGE) $this->queue();
@@ -120,7 +120,6 @@ class Prepocessor
     {
         // Añadimos el id al documento
         $this->el->replace('--id', $this->el->id());
-
 
         $this->sintax_if();
         $this->sintax_for();
@@ -150,18 +149,14 @@ class Prepocessor
     /**
      * Buscamos componentes principales en el html los posibles anidos se pasan por string al componente
      */
-    private function declare_component(){
-        foreach($this->search_components($this->el->body()) as $tag){
+    private function declare_component()
+    {
+        foreach ($this->search_components($this->el->body()) as $tag) {
 
             $content = $tag->body() ?? 'null';
             $str_content = addslashes($content);
-
-            $arr =  [];
-            foreach($tag->attrs() as $key => $value){
-                $arr[$key] = trim($value, '"'); 
-                $arr[$key] = trim($value, "'");
-            }
-            $str_at = json_encode($arr);
+            
+            $str_at = json_encode($tag->attrs());
 
             $this->el->replace(
                 $tag->code(),
@@ -208,7 +203,7 @@ class Prepocessor
     /**
      * Comprueba si es un componente comparando su ruta
      */
-    private function isComponent(): bool
+    private function is_component(): bool
     {
         return ($this->path == \APP\VIEWS\COMPONENTS || $this->path == \APP\VIEWS\MYCOMPONENTS);
     }
@@ -279,7 +274,7 @@ class Prepocessor
         $replace = array('>', '<', '\\1');
         $this->el->element(preg_replace($search, $replace, $this->el->element()));
         return $this;
-    } 
+    }
     private function less(String $content)
     {
         //COMPILAMOS LESS
@@ -320,17 +315,21 @@ class Prepocessor
     private function includes(): self
     {
         if (
-            $len = preg_match_all('/\s\@include\s*\((.*?)\)\s/', $this->el->body(), $matches)
+            $len = preg_match_all('/\@include\s*\((.*?)\)\s/', $this->el->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
-                $this->el->body(
-                    str_replace(
-                        $matches[0][$i],
-                        "<?php include({$matches[1][$i]})?>",
-                        $this->el->body()
-                    )
-                );
+                $body = $matches[1][$i];
+                // Sintaxis para las variable cargadas desde los controladores
+                if (
+                    $len2 = preg_match_all('/\$\$(\w+\-?\w*)/is', $body, $match)
+                ) {
+                    for ($j = 0; $j < $len2; $j++) {
+                        $body = str_replace($match[0][$j], "\$_FILES['{$match[1][$j]}']", $body);
+                    }
+                }
+                $this->el->replace($matches[0][$i], "<?php include($body)?>");
             }
+
         }
         return $this;
     }

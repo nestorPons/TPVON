@@ -231,7 +231,18 @@ class Tag
     {
         if (!is_null($arg)) {
             if (!is_null($val)) {
-                $this->attrs = array_merge($this->attrs, [$arg => $val]);
+                // Tratamos los strings por si se pasan objetos json
+                if(is_string($val)){
+                    // Quitar las comillas en los arrays y objetos json
+                    $json_val = str_replace('"[', '[', $val);
+                    $json_val = str_replace(']"', ']', $json_val);
+                    $json_val = str_replace('}"', '}', $json_val);
+                    $json_val = str_replace('"{', '{', $json_val);
+                    $json_val = str_replace("'", '"', $json_val);
+                    $json_val = json_decode($json_val); 
+                    if(!is_null($json_val)) $val = $json_val; 
+                }
+                $this->attrs = array_merge($this->attrs, [$arg => ($val)]);
             }
             return $this->attrs[$arg] ?? null;
         }

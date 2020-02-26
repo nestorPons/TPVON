@@ -92,4 +92,10 @@ trait ToolsComponents
         }
         return $this->found_components;
     }
+    // Prepara las cadenas de texto con atributos para que las reconozca json_encode
+    public static function prepare(string $str): string
+    {
+        $str = str_replace("'", '"', $str);
+
+    }
 }
