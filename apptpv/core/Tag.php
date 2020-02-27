@@ -55,7 +55,6 @@ class Tag
         $json_val = str_replace('}"', '}', $json_val);
         $json_val = str_replace('"{', '{', $json_val);
         $val = str_replace("'", '"', $json_val);
-        
         if (
             // Regex extrae atributos de una cadena como:
             // options1={"perro1":"de", "gato1":1} class="SOEL" REQUIRED 
@@ -63,9 +62,9 @@ class Tag
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $name_attr = $matches[1][$i];
-                $value = $matches[2][$i] ?? true;
+                $value = empty($matches[2][$i]) ? true : $matches[2][$i] ;
                 if (is_string($value)) $value = json_decode($value);
-
+                
                 $this->attrs($name_attr, $value);
             }
         }

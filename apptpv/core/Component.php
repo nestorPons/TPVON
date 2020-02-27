@@ -13,17 +13,10 @@ class Component extends Tag
     function __construct(string $type, $data = null, string $content = null)
     {
         if ($data) {
-            if (is_string($data)) {
-                // Tratamos el texto si lleva tags de php
                 $data = self::search_globals_vars($data);
-                $data = json_decode($data);
-            }
+prs($data);
             foreach ($data as $key => $val) {
                 // Atributos booleanos
-                if ($key == 'required') $val = 'required';
-                if ($key == 'disabled') $val = 'disabled';
-                if ($key == 'readonly') $val = 'readonly';
-                if ($key == 'checked')  $val = 'checked';
                 $this->attrs($key, $val);
             }
         }
@@ -104,8 +97,8 @@ class Component extends Tag
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $var = $_FILES[$matches[1][$i]];
-                $val = is_array($var) ? json_encode($var) : $var;
-                $txt = str_replace($matches[0][$i], $val, $txt);
+                //$val = is_array($var) ? json_encode($var) : $var;
+                $txt = str_replace($matches[0][$i], $var, $txt);
             }
         }
 
