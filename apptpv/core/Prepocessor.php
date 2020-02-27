@@ -98,14 +98,13 @@ class Prepocessor
 
         // Construimos el build.js con todas las clases
         $this->build_js();
-
         if ($file == self::MAIN_PAGE) $this->queue();
-
+        
         // Compresión salida html
         //$this->compress_code();
-
+        
+      
         file_put_contents($file_build, $this->el->element());
-
         return $this;
     }
     // Obtiene el contenido del archivo y crea el tag principal 
@@ -120,12 +119,13 @@ class Prepocessor
     {
         // Añadimos el id al documento
         $this->el->replace('--id', $this->el->id());
-
+        
         $this->sintax_if();
         $this->sintax_for();
         $this->includes();
         // Busca componentes 1 nivel de anidamiento y remplaza
         $this->declare_component();
+        
         $this->sintax_vars();
 
         // Encapsulación de los estilos
@@ -151,19 +151,15 @@ class Prepocessor
      */
     private function declare_component()
     {
+        
         foreach ($this->search_components($this->el->body()) as $tag) {
-
+            
             $content = $tag->body() ?? 'null';
+            
             $str_content = addslashes($content);
-
-            $arr =  [];
-            foreach ($tag->attrs() as $key => $value) {
-                $arr[$key] = trim($value, '"');
-                $arr[$key] = trim($value, "'");
-            }
-            $str_at = json_encode($arr);
-            $str_at = str_replace("'","\'",$str_at);
-
+            $str_at = json_encode($tag->attrs());
+    
+ 
             $this->el->replace(
                 $tag->code(),
                 "<?php \$c = new \app\core\Component('{$tag->type()}', '$str_at', '$str_content'); \$c->print();?>"
@@ -352,7 +348,6 @@ class Prepocessor
             }
             $this->el->body($content);
         }
-
         return $this;
     }
     private function queue(): self
