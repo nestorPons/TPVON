@@ -5,7 +5,8 @@
 
     <style lang="less" scoped>
         display: grid;
-        grid-template-areas: 'header header'
+        grid-template-areas: 
+        'header header'
         'menu main'
         'menu footer';
         grid-template-rows: 60px 1fr 60px;
@@ -30,17 +31,17 @@
     </style>
     <script>
         'use strict'
-        DB.set('servicios', <?= $jsonServices ?>);
-        DB.set('usuarios', <?= $jsonUsers ?>);
-        DB.set('empresa', <?= $data_company ?>);
-        DB.set('promos', <?= $promos ?>);
-        DB.set('config', <?= $config ?>);
-        DB.set('familias', <?= $families ?>);
+        DB.set('servicios', $$jsonServices);
+        DB.set('usuarios', $$jsonUsers);
+        DB.set('empresa', $$data_company);
+        DB.set('promos', $$promos);
+        DB.set('config', $$config);
+        DB.set('familias', $$families);
 
         app.clock();
 
         // Guardamos el session storage el token de autentificación
-        sessionStorage.setItem('jwt', '<?= $jwt ?>');
+        sessionStorage.setItem('jwt', '$$jwt');
     </script>
 
 </section>

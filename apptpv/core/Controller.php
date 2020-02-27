@@ -85,7 +85,6 @@ class Controller{
                 $_FILES[$k] = $val; 
             }
         }
-        $_FILES['data'] = ["perro", "gato"];    // AKI :: 
         return require_once $route;
     }
     /**

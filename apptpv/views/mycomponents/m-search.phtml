@@ -26,26 +26,31 @@
         class MySearch {
             // Id del componente general no del select
             constructor(id) {
-                this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
+                try{
 
-                this.el = (typeof id == 'string') ?
+                    this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
+                    
+                    this.el = (typeof id == 'string') ?
                     document.getElementById(id).querySelector('input') :
                     id.querySelector('input');
-            
-                this.li = document.getElementById(id).querySelector('datalist');
-                this.oo = this.li.getElementsByTagName('option');
-                
-                this.el.addEventListener('change', fn=>this.el.classList.add(this.CLASS_SELECTED));
-                this.el.addEventListener('input', _=> {
-                    for(let o of this.oo ){
-                        if (o.value == this.el.value) {
-                            this.value (o.getAttribute('data-value'));
-                            break;
+                    
+                    this.li = document.getElementById(id).querySelector('datalist');
+                    this.oo = this.li.getElementsByTagName('option');
+                    
+                    this.el.addEventListener('change', fn=>this.el.classList.add(this.CLASS_SELECTED));
+                    this.el.addEventListener('input', _=> {
+                        for(let o of this.oo ){
+                            if (o.value == this.el.value) {
+                                this.value (o.getAttribute('data-value'));
+                                break;
                             }                    
-                    }
-                })
-            }
-            change(fn) {
+                        }
+                    })
+                } catch (error){
+                    alert(error)
+                }
+                }
+                change(fn) {
                 this.el.addEventListener('change', fn);
                 return this;
             }

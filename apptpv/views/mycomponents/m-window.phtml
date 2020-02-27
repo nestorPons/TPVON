@@ -45,13 +45,19 @@
   <script>
     class MyWindow {
       constructor(id) {
-        this.el = document.getElementById(id).querySelector(`.card`);
-        this.$el = $('#' + id).find('.card')
-        this.$switch = $('#control_' + id)
-        this.$el.keyup(e => (e.key === 'Escape') && this.close())
-        // Variable de estado del formulario: nuevo, editanto
-        this.attrState = false
-        this.data = [];
+        try {
+
+          this.el = document.getElementById(id).querySelector(`.card`);
+          this.$el = $('#' + id).find('.card')
+          this.$switch = $('#control_' + id)
+          this.$el.keyup(e => (e.key === 'Escape') && this.close())
+          // Variable de estado del formulario: nuevo, editanto
+          this.attrState = false
+          this.data = [];
+        } catch (error) {
+          console.log('No se ha creado el componente ' + id);
+          console.log(error);
+        }
       }
       clear() {
         this.el.getElementsByTagName('form')[0].reset()
