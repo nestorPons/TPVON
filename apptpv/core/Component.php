@@ -12,11 +12,15 @@ class Component extends Tag
 
     function __construct(string $type, $data = null, string $content = null)
     {
+
         if ($data) {
+            if (is_string($data)) {
+                // Tratamos el texto si lleva tags de php
                 $data = self::search_globals_vars($data);
-prs($data);
+                $data = self::my_json_decode($data); // Retorna un tipo 
+            }
             foreach ($data as $key => $val) {
-                // Atributos booleanos
+                pr($key , $val);
                 $this->attrs($key, $val);
             }
         }
@@ -144,14 +148,14 @@ prs($data);
         }
         return $this;
     }
-        private function sintax_if(): self
+    private function sintax_if(): self
     {
         $has = preg_match_all('/@if\s*?\((.*?)\)(.*?)@endif/sim', $this->body(), $matches);
 
         if ($has) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $prop = trim($matches[1][$i], '$$');
-                
+
                 if ($this->attrs($prop)) {
                     $this->replace($matches[0][$i], $matches[2][$i]);
                 } else {
@@ -167,13 +171,13 @@ prs($data);
         if (
             $len = preg_match_all('/@for\s*?\((.*?)\)(.*?)@endfor/sim', $this->body(), $matches)
         ) {
-            
+
             for ($i = 0; $i < $len; $i++) {
                 $content = '';
-                $attr = trim($matches[1][$i], '$$'); 
+                $attr = trim($matches[1][$i], '$$');
                 $cond = $this->attrs($attr);
                 $cont = $matches[2][$i];
-                if(is_null($cond)) {
+                if (is_null($cond)) {
                     $content = '';
                 } else {
                     foreach ($cond as $key => $value) {

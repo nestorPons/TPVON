@@ -87,7 +87,7 @@ class Controller{
                 $_FILES[$k] = $val; 
             }
         }
-        prs($data);
+  
         return require_once $route;
     }
     /**
