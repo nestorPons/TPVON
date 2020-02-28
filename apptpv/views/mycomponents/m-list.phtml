@@ -46,7 +46,7 @@
             sel(el) {
                 const
                     val = el.target.attributes.value.value.toLowerCase(),
-                    table = "$$ref",
+                    table = $$ref,
                     body = table.getElementsByTagName('tbody')[0],
                     tr = body.getElementsByTagName('tr'),
                     find = table.getElementsByClassName(`${val}`);

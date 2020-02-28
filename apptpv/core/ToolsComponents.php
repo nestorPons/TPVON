@@ -30,7 +30,7 @@ trait ToolsComponents
      *  @param parte del código donde buscar
      *  @return Array de objetos Tag [ Componente en clase Tag ,  localización ]
      */
-    private function search_components($text_process): array
+    protected function search_components($text_process): array
     {
         if (!isset($this->str_components))  $this->search_exist_components();
         // Buscar el primer componente

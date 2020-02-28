@@ -461,8 +461,8 @@
             // Para editar las lineas de las tablas
             loadLineFromTable(e) {
                 if (this.Table.hoverable()) {
-
-                    const idLine = e.path[1].attributes.idline.value
+                    let path = e.path || (e.composedPath && e.composedPath());
+                    const idLine = path[1].attributes.idline.value
                     // Eliminamos la linea del objeto
                     let line = this.Ticket.getLine(idLine)
                     this.Ticket.deleteLine(idLine)
@@ -478,7 +478,7 @@
                             this.dto.value(line.dto);
                             this.amount.value(this.calculate());
 
-                            this.Table.delLine(e.path[1].attributes.idline.value);
+                            this.Table.delLine(path[1].attributes.idline.value);
 
                             this.printTotal();
                         })

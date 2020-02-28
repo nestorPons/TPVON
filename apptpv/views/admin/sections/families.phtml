@@ -29,7 +29,6 @@
         // Método inializador
         open() {},
         async load() {
-            echo('LOAD')
             // Solicitud de datos al servidor
             await DB.get(this.table)
                 .then(data => {
@@ -104,7 +103,8 @@
             app.tpv.loadServ()
         },
         show(e) {
-            this.currentId = e.path[1].attributes.idline.value
+            let path = e.path || (e.composedPath && e.composedPath());
+            this.currentId = path[1].attributes.idline.value
             DB.get(this.table, 'id', this.currentId)
                 .then(data => this.Form.state('edit').open(data).setTile('Edición servicio'))
         }

@@ -12,11 +12,12 @@ class Component extends Tag
 
     function __construct(string $type, $data = null, string $content = null)
     {
+
         if ($data) {
             if (is_string($data)) {
                 // Tratamos el texto si lleva tags de php
                 $data = self::search_globals_vars($data);
-                $data = json_decode($data);
+                $data = self::my_json_decode($data);
             }
             foreach ($data as $key => $val) {
                 $this->attrs($key, $val);
@@ -30,7 +31,7 @@ class Component extends Tag
 
         // añadimos el id al componente
         $id = $this->attrs('id') ?? uniqid($this->prefix());
-        
+
         $this->id($id);
 
         // Tratamos el texto si lleva tags de php
@@ -46,6 +47,7 @@ class Component extends Tag
             ->clear();
 
         // Buscamos componentes anidados
+
         foreach ($this->search_components($this->body()) as $tag) {
             $nested = new Component($tag->type(), $tag->attrs(), $tag->body());
             $this->replace($tag->code(), $nested->element());
@@ -100,7 +102,8 @@ class Component extends Tag
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $var = $_FILES[$matches[1][$i]];
-                $val = is_array($var) ? json_encode($var) : $var;
+
+                $val = is_array($var) ? json_encode($var) : $var; 
                 $txt = str_replace($matches[0][$i], $val, $txt);
             }
         }
@@ -177,21 +180,29 @@ class Component extends Tag
             for ($i = 0; $i < $len; $i++) {
                 $content = '';
                 $cont = $matches[2][$i];
+                $variable = $matches[1][$i]; 
 
-                $cond = (preg_match('/\$\$/', $matches[1][$i]))
-                    //Comprobamos si el argumento para el bucle es una variable
-                    ? $this->attrs(trim($matches[1][$i], '$$'))
-                    // Si no es una variable es un array json
-                    : self::my_json_decode($matches[1][$i]);
-
-
+                $cond = (preg_match('/\$\$/', $variable))
+                //Comprobamos si el argumento para el bucle es una variable
+                ? $this->attrs(trim($variable, '$$'))
+                // Si no es una variable es un array json
+                : self::my_json_decode($variable);
+                
+                
                 if (is_null($cond)) {
                     $content = '';
                 } else {
-                    foreach ($cond as $key => $value) {
-                        $option = str_replace('$$key', $key, $cont);
-                        $option = str_replace('$$value', $value, $option);
-                        $content .= $option;
+                    if (is_array($cond) || is_object($cond)) {
+                        foreach ($cond as $key => $value) {
+                            $option = str_replace('$$key', $key, $cont);
+                            $option = str_replace('$$value', $value, $option);
+                            $content .= $option;
+                        }
+                    } else {
+                        // Detectar errores
+                        pr('ERROR');
+                        pr($this->attrs());
+                        prs($cond, $variable);
                     }
                 }
                 $this->replace($matches[0][$i], $content);
