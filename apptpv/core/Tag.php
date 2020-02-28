@@ -58,7 +58,7 @@ class Tag
         if (
             // Regex extrae atributos de una cadena como:
             // options1={"perro1":"de", "gato1":1} class="SOEL" REQUIRED 
-            $len = preg_match_all("/(\w+)\s*=?\s*([\[\{](.*?)[\]\}]|([\'\"])(.*?)\\4)?/", $val, $matches)
+            $len = preg_match_all("/(\w+)\s*=?\s*([\[\{](.*?)[\]\}]|([\'\"])(.*?)\\4)?/sim", $val, $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $name_attr = $matches[1][$i];
@@ -68,7 +68,8 @@ class Tag
                 $this->attrs($name_attr, $value);
             }
         }
-        $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
+
+        $this->id = (!empty($this->attrs['id']) && $this->attrs['id'] != '--id') ? $this->attrs['id'] :  uniqid($this->prefix);
     }
     /**
      * Obtiene los valiores de los atributos
@@ -179,7 +180,7 @@ class Tag
          * 3 -> contenido
          */
         if (
-            $len = preg_match_all("/\<($tag) ([^>]*?)>(.*?)<\/\\1>/si", $this->body(), $matches)
+            $len = preg_match_all("/\<($tag) ([^>]*?)>(.*?)<\/\\1>/sim", $this->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $a[$i] = new Tag($matches[0][$i]);
@@ -270,7 +271,7 @@ class Tag
      */
     public function clear(): self
     {
-        $this->preg('/((<!--(.|\s)*?-->)|([^\:]\/\/(.*?)\n)|\/\*\*(.*?)\*\/)/s', '');
+        $this->preg('/((<!--(.|\s)*?-->)|(?<!:)\/\/.*?\n|\/\*\*(.*?)\*\/)/s', '');
         //$this->preg("/[\r\n|\n|\r|\s]+/", " ");
         return $this;
     }

@@ -55,8 +55,8 @@
           this.attrState = false
           this.data = [];
         } catch (error) {
-          console.log('No se ha creado el componente ' + id);
-          console.log(error);
+          console.warn('No se ha creado el componente ' + id);
+          console.error(error);
         }
       }
       clear() {

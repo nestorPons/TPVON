@@ -56,7 +56,7 @@ app.services = {
         }
     },
     load(){
-        this.selFam = new Select(this.Form.el.querySelector('[name="id_familia"]').parentNode)
+        this.selFam = new MySelect(this.Form.el.querySelector('[name="id_familia"]').parentNode)
         DB.get(this.table)
             .then( data => {
                 for( let i in data.reverse() ){

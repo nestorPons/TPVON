@@ -20,7 +20,6 @@ class Component extends Tag
                 $data = self::my_json_decode($data); // Retorna un tipo 
             }
             foreach ($data as $key => $val) {
-                pr($key , $val);
                 $this->attrs($key, $val);
             }
         }
