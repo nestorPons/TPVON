@@ -96,6 +96,21 @@ trait ToolsComponents
     public static function prepare(string $str): string
     {
         $str = str_replace("'", '"', $str);
+    }
 
+    /**
+     *  Prepara y decodifica una cadena json
+     * @param string json a decodificar
+     * @return array, objeto, string o nulo
+     */
+    public static function my_json_decode(string $str_json)
+    {
+        // Quitar las comillas en los arrays y objetos json
+        $json_val = str_replace("'", '"', $str_json);
+        $json_val = str_replace('"[', '[', $json_val);
+        $json_val = str_replace(']"', ']', $json_val);
+        $json_val = str_replace('}"', '}', $json_val);
+        $json_val = str_replace('"{', '{', $json_val);
+        return json_decode($json_val) ?? $json_val;
     }
 }

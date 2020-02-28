@@ -7,6 +7,7 @@ namespace app\core;
  */
 class Tag
 {
+    use ToolsComponents;
     private
         $element = '',
         $body = '',
@@ -18,7 +19,7 @@ class Tag
 
     function __construct(string $element = null)
     {
-        pr($element);
+        //pr($element);
         if (!is_null($element)) {
             $this->code = $element;
             $this->element = $element;
@@ -45,7 +46,6 @@ class Tag
         }
         // Valores por defecto
         $this->type = $matches[1];
-
         if (
             // Regex extrae atributos de una cadena como:
             // options1={"perro1":"de", "gato1":1} class="SOEL" REQUIRED 
@@ -53,11 +53,12 @@ class Tag
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $name_attr = $matches[1][$i];
-                $value = $matches[2][$i] ?? true;
+                $value = empty($matches[2][$i]) ? true : $matches[2][$i];
                 $this->attrs($name_attr, $value);
             }
         }
         $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
+
     }
     /**
      * Obtiene los valiores de los atributos
@@ -135,7 +136,7 @@ class Tag
     /**
      * Funcion auxiliar para reemplazar partes del elemento
      */
-    public function replace($arg, $val = null): int
+    public function replace($arg, $val = null, $count = -1): int
     {
         $this->element = str_replace($arg, $val, $this->element, $count);
 
@@ -231,15 +232,10 @@ class Tag
             if (!is_null($val)) {
                 // Tratamos los strings por si se pasan objetos json
                 if(is_string($val)){
-                    // Quitar las comillas en los arrays y objetos json
-                    $json_val = str_replace("'", '"', $val);
-                    $json_val = str_replace('"[', '[', $json_val);
-                    $json_val = str_replace(']"', ']', $json_val);
-                    $json_val = str_replace('}"', '}', $json_val);
-                    $json_val = str_replace('"{', '{', $json_val);
-                    $val = json_decode($json_val) ?? $json_val;  
+                    $val = self::my_json_decode($val);
                 }
                 $this->attrs = array_merge($this->attrs, [$arg => ($val)]);
+                
 
             }
             return $this->attrs[$arg] ?? null;

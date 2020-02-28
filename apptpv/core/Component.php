@@ -30,6 +30,7 @@ class Component extends Tag
 
         // añadimos el id al componente
         $id = $this->attrs('id') ?? uniqid($this->prefix());
+        
         $this->id($id);
 
         // Tratamos el texto si lleva tags de php
@@ -106,7 +107,9 @@ class Component extends Tag
 
         return $txt;
     }
-
+    /**
+     * Encapsula los estilos al 
+     */
     private function style_scoped(): self
     {
         if (
@@ -146,14 +149,14 @@ class Component extends Tag
         }
         return $this;
     }
-        private function sintax_if(): self
+    private function sintax_if(): self
     {
         $has = preg_match_all('/@if\s*?\((.*?)\)(.*?)@endif/sim', $this->body(), $matches);
 
         if ($has) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $prop = trim($matches[1][$i], '$$');
-                
+
                 if ($this->attrs($prop)) {
                     $this->replace($matches[0][$i], $matches[2][$i]);
                 } else {
@@ -164,18 +167,25 @@ class Component extends Tag
         }
         return $this;
     }
+    // Sintaxis for para los componentes
     private function sintax_for(): self
     {
+        // Buscamos sus argumentos para el bucle
         if (
             $len = preg_match_all('/@for\s*?\((.*?)\)(.*?)@endfor/sim', $this->body(), $matches)
         ) {
-            
             for ($i = 0; $i < $len; $i++) {
                 $content = '';
-                $attr = trim($matches[1][$i], '$$'); 
-                $cond = $this->attrs($attr);
                 $cont = $matches[2][$i];
-                if(is_null($cond)) {
+
+                $cond = (preg_match('/\$\$/', $matches[1][$i]))
+                    //Comprobamos si el argumento para el bucle es una variable
+                    ? $this->attrs(trim($matches[1][$i], '$$'))
+                    // Si no es una variable es un array json
+                    : self::my_json_decode($matches[1][$i]);
+
+
+                if (is_null($cond)) {
                     $content = '';
                 } else {
                     foreach ($cond as $key => $value) {

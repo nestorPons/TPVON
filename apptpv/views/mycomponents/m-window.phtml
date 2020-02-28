@@ -1,4 +1,4 @@
-<component>
+<component id="--id">
   <!--Sistema de activacion/cierre de la ventana -->
   <input type="checkbox" id="control_--id" class="modal">
   <div>
@@ -46,8 +46,11 @@
     class MyWindow {
       constructor(id) {
         try {
-
-          this.el = document.getElementById(id).querySelector(`.card`);
+          this.cont = (typeof id=='object')
+            ? id.querySelector  
+            : document.getElementById(id);
+          
+          this.el = this.cont.querySelector(`.card`);
           this.$el = $('#' + id).find('.card')
           this.$switch = $('#control_' + id)
           this.$el.keyup(e => (e.key === 'Escape') && this.close())

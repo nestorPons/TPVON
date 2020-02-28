@@ -1,5 +1,5 @@
 <section id="users">
-    <m-list />
+    <m-list ref="--id_table1"/>
     <m-table id="--id_table1" columns="['id', 'Nombre', 'Obs', 'Tel', 'Email']" class="hoverable" onclick="app.users.show(window.event)" />
     <m-window id="--id_win1">
         <form controller="items" action="save" callback="app.services.save(data)">
@@ -9,7 +9,7 @@
             <m-input-text label="Precio" name="precio" tabindex="3" required="true" />
             <m-input-text label="Coste" name="coste" tabindex="4" />
             <m-input-text label="Tiempo" name="tiempo" tabindex="5" required="true" />
-            <m-select id="--id_sel1" label="Tipo producto" name="tipo" class="valid" tabindex="6" options="['1':'Servicio', '2':'Producto']" selected="1" required="true" />
+            <m-select id="--id_sel1" label="Tipo producto" name="tipo" class="valid" tabindex="6" options="{'1':'Servicio', '2':'Producto'}" selected="1" required="true" />
             <m-select id="--id_sel2" label="Familia" name="id_familia" class="valid" tabindex="7" selected="1" required="true" />
 
             <m-btn-success tabindex="8" caption="Guardar" />

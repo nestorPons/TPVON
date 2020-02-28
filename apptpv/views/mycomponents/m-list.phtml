@@ -1,8 +1,19 @@
+/**
+* Componente MyList
+* Elemento que crea una lista alfabetica y que ejecuta una acción cuando se pulsa encima de sus letras.
+*
+* Requerimientos : necesita de un attributo $$ref para referenciar al objeto al cual debe de realizar la acción.
+*
+* autor : Nestor Póns
+* email : nestorpons@gmail.com
+* licencia: MIT 2020
+*/
+
 <component id="--id" class="">
     <ul>
-        <?php foreach (['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'] as $l) : ?>
-            <li onclick="--id.sel(window.event)" value=<?= $l ?>><?= $l ?></li>
-        <?php endforeach ?>
+        @for(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
+        <li onclick="--id.sel(window.event)" value="$$value">$$value</li>
+        @endfor
     </ul>
     <style scoped>
         ul {
@@ -20,7 +31,7 @@
             border-radius: var(--universal-border-radius);
             padding: var(--universal-padding);
             width: 1.2ch;
-            height:1.2ch;
+            height: 1.2ch;
             text-align: center;
             vertical-align: middle;
         }
@@ -35,15 +46,15 @@
             sel(el) {
                 const
                     val = el.target.attributes.value.value.toLowerCase(),
-                    table = <?= $table ?>, 
+                    table = "$$ref",
                     body = table.getElementsByTagName('tbody')[0],
-                    tr = body.getElementsByTagName('tr'), 
+                    tr = body.getElementsByTagName('tr'),
                     find = table.getElementsByClassName(`${val}`);
-
-                for(const el of tr){
+                
+                for (const el of tr) {
                     el.classList.add('hidden');
                 }
-                for(const el of find){
+                for (const el of find) {
                     el.classList.remove('hidden');
                 }
             }

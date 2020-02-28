@@ -222,7 +222,6 @@ class Prepocessor
     }
     private function add_style_scope(Tag $tag): self
     {
-pr($tag->get('scoped'));
         if ($tag->get('scoped')) {
             $lastContent = $tag->body();
 
