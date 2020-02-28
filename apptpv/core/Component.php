@@ -12,12 +12,11 @@ class Component extends Tag
 
     function __construct(string $type, $data = null, string $content = null)
     {
-
         if ($data) {
             if (is_string($data)) {
                 // Tratamos el texto si lleva tags de php
                 $data = self::search_globals_vars($data);
-                $data = self::my_json_decode($data); // Retorna un tipo 
+                $data = json_decode($data);
             }
             foreach ($data as $key => $val) {
                 $this->attrs($key, $val);
@@ -100,8 +99,8 @@ class Component extends Tag
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $var = $_FILES[$matches[1][$i]];
-                //$val = is_array($var) ? json_encode($var) : $var;
-                $txt = str_replace($matches[0][$i], $var, $txt);
+                $val = is_array($var) ? json_encode($var) : $var;
+                $txt = str_replace($matches[0][$i], $val, $txt);
             }
         }
 
@@ -147,14 +146,14 @@ class Component extends Tag
         }
         return $this;
     }
-    private function sintax_if(): self
+        private function sintax_if(): self
     {
         $has = preg_match_all('/@if\s*?\((.*?)\)(.*?)@endif/sim', $this->body(), $matches);
 
         if ($has) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $prop = trim($matches[1][$i], '$$');
-
+                
                 if ($this->attrs($prop)) {
                     $this->replace($matches[0][$i], $matches[2][$i]);
                 } else {
@@ -170,13 +169,13 @@ class Component extends Tag
         if (
             $len = preg_match_all('/@for\s*?\((.*?)\)(.*?)@endfor/sim', $this->body(), $matches)
         ) {
-
+            
             for ($i = 0; $i < $len; $i++) {
                 $content = '';
-                $attr = trim($matches[1][$i], '$$');
+                $attr = trim($matches[1][$i], '$$'); 
                 $cond = $this->attrs($attr);
                 $cont = $matches[2][$i];
-                if (is_null($cond)) {
+                if(is_null($cond)) {
                     $content = '';
                 } else {
                     foreach ($cond as $key => $value) {

@@ -76,9 +76,7 @@ class Controller{
     * Prepara  las variables e imprime las vistas
     */
     protected function printView(String $route, array $data = null){
-
         if($data){
-            $_FILES['data'] = $data;
             foreach($data as $key => $val){
                 $k = str_replace('-', '_', $key); 
                 if(is_array($val) || is_object($val)) {
@@ -87,7 +85,7 @@ class Controller{
                 $_FILES[$k] = $val; 
             }
         }
-  
+        $_FILES['data'] = ["perro", "gato"];    // AKI :: 
         return require_once $route;
     }
     /**

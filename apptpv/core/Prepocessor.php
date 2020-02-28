@@ -98,19 +98,19 @@ class Prepocessor
 
         // Construimos el build.js con todas las clases
         $this->build_js();
+
         if ($file == self::MAIN_PAGE) $this->queue();
 
         // Compresión salida html
         //$this->compress_code();
 
-
         file_put_contents($file_build, $this->el->element());
+
         return $this;
     }
     // Obtiene el contenido del archivo y crea el tag principal 
     private function get_content(String $file): self
     {
-
         $this->el = new Tag(file_get_contents($file));
         return $this;
     }
@@ -126,11 +126,11 @@ class Prepocessor
         $this->includes();
         // Busca componentes 1 nivel de anidamiento y remplaza
         $this->declare_component();
-
         $this->sintax_vars();
 
         // Encapsulación de los estilos
         foreach ($this->tags('style') as $tag) {
+
             $this->add_style_scope($tag);
 
             if ($tag->get('lang') == 'less') {
@@ -151,14 +151,12 @@ class Prepocessor
      */
     private function declare_component()
     {
-
         foreach ($this->search_components($this->el->body()) as $tag) {
 
             $content = $tag->body() ?? 'null';
-
             $str_content = addslashes($content);
+            
             $str_at = json_encode($tag->attrs());
-
 
             $this->el->replace(
                 $tag->code(),
@@ -172,14 +170,32 @@ class Prepocessor
      */
     private function sintax_if(): self
     {
+
+        $regex_conditional = '/@if(\s)*?\((.)*?\)(.)*?@endif/sim';
+        $start_condition = '/@if(\s)*?\((.)*?\)/sim';
+        $end_condition = '/@endif/i';;
+
         if (
-            $len = preg_match_all('/@if\s*\((.*?)\)(.*?)@endif/sim', $this->el->body(), $matches)
+            preg_match_all($regex_conditional, $this->el->body(), $matches)
         ) {
-            for ($i = 0; $i < $len; $i++) {
-                $condition = preg_replace('/\$\$(\w*)/', '\$_FILES["$1"]', $matches[1][$i]);
-                $content = preg_replace('/\$\$(\w*)/', '<?=$_FILES["$1"]?>', $matches[2][$i]);
-                $replace = "<?php if($condition):?>$content<?php endif;?>";
-                $this->el->replace($matches[0][$i], $replace);
+            foreach ($matches[0] as $value) {
+                // Se obtiene la condición
+                if (preg_match($start_condition, $value, $matches)) {
+                    $condition = preg_replace('/@if(\s)*?\(/sim', '', $matches[0]);
+                    $condition = preg_replace('/\)$/', '', $condition);
+                    if (empty($condition)) $condition = null;
+                    $valcon = false;
+                    eval('if ($condition) { $valcon = true; }');
+                    if ($valcon) {
+                        // Imprimimos el contenido dentro del condicional
+                        $replace = preg_replace($start_condition, '', $value);
+                        $replace = preg_replace($end_condition, '', $replace);
+                        $this->el->replace($value, $replace);
+                    } else {
+                        // Eliminamos todo el condicional 
+                        $this->el->replace($value, '');
+                    }
+                }
             }
         }
         return $this;
@@ -206,6 +222,7 @@ class Prepocessor
     }
     private function add_style_scope(Tag $tag): self
     {
+pr($tag->get('scoped'));
         if ($tag->get('scoped')) {
             $lastContent = $tag->body();
 
@@ -213,7 +230,6 @@ class Prepocessor
             $content = $tag->body();
             $content = preg_replace('/@import.*?;/', '', $content);
             $content = preg_replace('/@charser.*?;/', '', $content);
-
             // Se coloca el id a los estilos 
             $tag->body("#{$this->el->id()}{{$content}}");
 
@@ -229,24 +245,16 @@ class Prepocessor
         if (
             $len = preg_match_all('/@for\s*\((.*?)\)(.*?)@endfor/sim', $this->el->body(), $matches)
         ) {
-
             for ($i = 0; $i < $len; $i++) {
-
+                $res = '';
                 $cond = $matches[1][$i];
+                $body = $matches[2][$i];
                 $struct = $matches[0][$i];
 
                 // Formato {"a":1,"b":2,"c":3,"d":4,"e":5} sin comillas exteriores
                 // Si la condcion tiene $$valor transformarlo en $valor
 
-                
-                if (preg_match('/\[(.*)\]/',$cond)) {
-                    $str_cond = $cond;
-                } else {
-                    $str_cond = '$' . ltrim($cond, '$');
-                }
-
-                $s = preg_replace('/\@for\(.*?\)/i', '<?php foreach(' . $str_cond . ' as $key => $value):?>', $struct);
-
+                $s = preg_replace('/\@for\(.*?\)/i', '<?php foreach($' . ltrim($cond, '$') . ' as $key => $value):?>', $struct);
                 $s = str_replace('$$value', '<?=$value?>', $s);
                 $s = str_replace('$$key', '<?=$key?>', $s);
                 $s = str_replace('@endfor', '<?php endforeach?>', $s);
@@ -321,6 +329,7 @@ class Prepocessor
                 }
                 $this->el->replace($matches[0][$i], "<?php include($body)?>");
             }
+
         }
         return $this;
     }
@@ -337,6 +346,7 @@ class Prepocessor
             }
             $this->el->body($content);
         }
+
         return $this;
     }
     private function queue(): self

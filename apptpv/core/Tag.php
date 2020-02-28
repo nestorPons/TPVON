@@ -18,6 +18,7 @@ class Tag
 
     function __construct(string $element = null)
     {
+        pr($element);
         if (!is_null($element)) {
             $this->code = $element;
             $this->element = $element;
@@ -29,7 +30,6 @@ class Tag
      */
     private function load()
     {
-
         // Limpiamos el contenido de comentarios 
         $this->clear();
         // Primer tipo de tag <tag></tag>
@@ -46,30 +46,18 @@ class Tag
         // Valores por defecto
         $this->type = $matches[1];
 
-        // Preparamos el string para que sea reconocido los arrays json
-        $val = $matches[2];
-
-        // Quitar las comillas en los arrays y objetos json
-        $json_val = str_replace('"[', '[', $val);
-        $json_val = str_replace(']"', ']', $json_val);
-        $json_val = str_replace('}"', '}', $json_val);
-        $json_val = str_replace('"{', '{', $json_val);
-        $val = str_replace("'", '"', $json_val);
         if (
             // Regex extrae atributos de una cadena como:
             // options1={"perro1":"de", "gato1":1} class="SOEL" REQUIRED 
-            $len = preg_match_all("/(\w+)\s*=?\s*([\[\{](.*?)[\]\}]|([\'\"])(.*?)\\4)?/sim", $val, $matches)
+            $len = preg_match_all("/(\w+)=?([\[\{](.*?)[\]\}]|([\'\"])(.*?)\\4)?/sim", $matches[2], $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $name_attr = $matches[1][$i];
-                $value = empty($matches[2][$i]) ? true : $matches[2][$i] ;
-                if (is_string($value)) $value = json_decode($value);
-                
+                $value = $matches[2][$i] ?? true;
                 $this->attrs($name_attr, $value);
             }
         }
-
-        $this->id = (!empty($this->attrs['id']) && $this->attrs['id'] != '--id') ? $this->attrs['id'] :  uniqid($this->prefix);
+        $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
     }
     /**
      * Obtiene los valiores de los atributos
@@ -180,7 +168,7 @@ class Tag
          * 3 -> contenido
          */
         if (
-            $len = preg_match_all("/\<($tag) ([^>]*?)>(.*?)<\/\\1>/sim", $this->body(), $matches)
+            $len = preg_match_all("/\<($tag) ([^>]*?)>(.*?)<\/\\1>/si", $this->body(), $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $a[$i] = new Tag($matches[0][$i]);
@@ -241,16 +229,23 @@ class Tag
     {
         if (!is_null($arg)) {
             if (!is_null($val)) {
-                // Si es un string comprobamos si es un array o objeto json
-                if (is_string($val)) {
-                    $json_val = json_decode($val);
-                    if (!is_null($json_val)) $val = $json_val;
+                // Tratamos los strings por si se pasan objetos json
+                if(is_string($val)){
+                    // Quitar las comillas en los arrays y objetos json
+                    $json_val = str_replace("'", '"', $val);
+                    $json_val = str_replace('"[', '[', $json_val);
+                    $json_val = str_replace(']"', ']', $json_val);
+                    $json_val = str_replace('}"', '}', $json_val);
+                    $json_val = str_replace('"{', '{', $json_val);
+                    $val = json_decode($json_val) ?? $json_val;  
                 }
                 $this->attrs = array_merge($this->attrs, [$arg => ($val)]);
+
             }
             return $this->attrs[$arg] ?? null;
         }
         return $this->attrs ?? null;
+
     }
     /**
      * Comprime y formatea el codigo
@@ -271,7 +266,7 @@ class Tag
      */
     public function clear(): self
     {
-        $this->preg('/((<!--(.|\s)*?-->)|(?<!:)\/\/.*?\n|\/\*\*(.*?)\*\/)/s', '');
+        $this->preg('/<\!--.*?-->|(?<!:)\/\/.*?\n|\/\*\*(.*?)\*\//s', '');
         //$this->preg("/[\r\n|\n|\r|\s]+/", " ");
         return $this;
     }
