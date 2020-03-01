@@ -65,9 +65,14 @@
     <script>
         class MyTable {
             constructor(id) {
-                this.el = document.getElementById(id).querySelector('table')
-                this.body = this.el.getElementsByTagName('tbody')[0]
-                this.template = document.getElementById(id).querySelector('template')
+                this.cont = (typeof id == 'string') 
+                    ? document.getElementById(id)
+                    : id;
+                  
+                this.el = this.cont.querySelector('table');
+
+                this.body = this.el.getElementsByTagName('tbody')[0];
+                this.template = this.cont.querySelector('template')
                 this.$table = $('#' + id).find('table')
                 this.$template = $(`#${id}`).find('template')
                 this.data = []

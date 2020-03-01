@@ -1,159 +1,159 @@
 <section id="services">
-<m-table id="--id_table1" columns="['id', 'Código', 'Descripcion', 'Precio']" class="hoverable" onclick="app.services.show(window.event)" />
-    <m-list ref="--id_table1"/>
+    <m-table id="--id_table1" columns="['id', 'Código', 'Descripcion', 'Precio']" class="hoverable" onclick="app.services.show(window.event)" />
+    <m-list ref="--id_table1" />
     <m-window id="--id_win1">
         <form controller="items" action="save" callback="app.services.save(data)">
-            <m-input-text label="id" name="id" onlyread="true"/>
-            <m-input-text label="codigo" name="codigo" tabindex="1" title="Introduzca el código" onlyread="true"
-            onchange="app.services.valCode(window.event)" required="true" pattern="\S{4,10}" />
-            <m-input-text label="Descrición" name="descripcion" tabindex="2"/>
-            <m-input-text label="Precio" name="precio" tabindex="3" required="true"/>
+            <m-input-text label="id" name="id" onlyread="true" />
+            <m-input-text label="codigo" name="codigo" tabindex="1" title="Introduzca el código" onlyread="true" onchange="app.services.valCode(window.event)" required="true" pattern="\S{4,10}" />
+            <m-input-text label="Descrición" name="descripcion" tabindex="2" />
+            <m-input-text label="Precio" name="precio" tabindex="3" required="true" />
             <m-input-text label="Coste" name="coste" tabindex="4" />
-            <m-input-text label="Tiempo" name="tiempo" tabindex="5" required="true"/>
+            <m-input-text label="Tiempo" name="tiempo" tabindex="5" required="true" />
             <m-select id="--id_sel1" label="Tipo producto" name="tipo" class="valid" tabindex="6" options="{'1':'Servicio', '2':'Producto'}" selected="1" required="true" />
             <m-select id="--id_sel2" label="Familia" name="id_familia" class="valid" tabindex="7" selected="1" required="true" />
 
-            <m-btn-success tabindex="8" caption="Guardar"/>
-            <m-btn-cancel class="fnDelete" tabindex="9" caption="Eliminar"/>
+            <m-btn-success tabindex="8" caption="Guardar" />
+            <m-btn-cancel class="fnDelete" tabindex="9" caption="Eliminar" />
 
         </form>
     </m-window>
-</section>
-<style lang="less" scoped>
 
-    height: 100%;
-    display: grid;
-    grid-template-rows: auto 1fr;
+    <style lang="less" scoped>
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr;
 
-    #--id_table1{
-        max-height: 100% ;
-        grid-row: 2;
-    }
-    
-</style>
-<script>
-'use strict'
-app.services = {
-    name        : 'Servicios',
-    table       : 'servicios',
-    buttons     : ['add', 'search'],
-    currentId   : null, 
-    Table       : new MyTable('--id_table1'),
-    Form        : new MyWindow('--id_win1'),
-    // Validacion del campo codigo
-    async valCode(e){
-        const   el = e.target, 
-                value = el.value,
-                ser = await DB.get('servicios', 'codigo', value).then( d => d[0])
-        if(this.Form.state() == 'new'){
-            // Validamos si creamos un codigo nuevo
-            if(ser != undefined) el.setCustomValidity("Codigo existente")
-            else el.setCustomValidity('')  
-        } else {
-            // Valida si editamos el codigo
-            if(ser && this.Form.data.id != ser.id) el.setCustomValidity("Codigo existente")
-            else el.setCustomValidity('')
+        #--id_table1 {
+            max-height: 100%;
+            grid-row: 2;
         }
-    },
-    load(){
-        this.selFam = new MySelect(this.Form.el.querySelector('[name="id_familia"]').parentNode)
-        DB.get(this.table)
-            .then( data => {
-                for( let i in data.reverse() ){
-                    var d = data[i]
-                    // Listamos los servicios activos solamente
-                    if(d.estado == 1){
-                        this.Table.addLine(
-                            d.id, 
-                            [d.id, d.codigo, d.descripcion, d.precio]
-                        )
-                        .addClass(d.codigo[0].toLowerCase())
-                        
-                    }
+    </style>
+    <script>
+        'use strict'
+        app.services = {
+            name: 'Servicios',
+            table: 'servicios',
+            buttons: ['add', 'search'],
+            currentId: null,
+            Table: new MyTable('--id_table1'),
+            Form: new MyWindow('--id_win1'),
+            // Validacion del campo codigo
+            async valCode(e) {
+                const el = e.target,
+                    value = el.value,
+                    ser = await DB.get('servicios', 'codigo', value).then(d => d[0])
+                if (this.Form.state() == 'new') {
+                    // Validamos si creamos un codigo nuevo
+                    if (ser != undefined) el.setCustomValidity("Codigo existente")
+                    else el.setCustomValidity('')
+                } else {
+                    // Valida si editamos el codigo
+                    if (ser && this.Form.data.id != ser.id) el.setCustomValidity("Codigo existente")
+                    else el.setCustomValidity('')
                 }
-            })
-    },
-    async open(){
-    
-        const families = await DB.get('familias', 'estado', 1)
+            },
+            load() {
+                this.selFam = new MySelect(this.Form.el.querySelector('[name="id_familia"]').parentNode)
+                DB.get(this.table)
+                    .then(data => {
+                        for (let i in data.reverse()) {
+                            var d = data[i]
+                            // Listamos los servicios activos solamente
+                            if (d.estado == 1) {
+                                this.Table.addLine(
+                                        d.id,
+                                        [d.id, d.codigo, d.descripcion, d.precio]
+                                    )
+                                    .addClass(d.codigo[0].toLowerCase())
 
-        this.selFam.clear().addClass('valid')
+                            }
+                        }
+                    })
+            },
+            async open() {
 
-        for(let f of families){
-            if(f) this.selFam.addOption(f.id, f.nombre)
-        }
-    },
-    del(){
-        // Eliminamos de la bd local
-        DB.get(this.table,'id', this.currentId)
-            .then(d => d[0])
-            .then(d => {
-                d.estado = 0 
-                DB.set(this.table, d, 'id', d.id)
-                // Eliminamos de la tabla 
-                this.Table.delLine(this.currentId)
-                // Cerramos formulario
+                const families = await DB.get('familias', 'estado', 1)
+
+                this.selFam.clear().addClass('valid')
+
+                for (let f of families) {
+                    if (f) this.selFam.addOption(f.id, f.nombre)
+                }
+            },
+            del() {
+                // Eliminamos de la bd local
+                DB.get(this.table, 'id', this.currentId)
+                    .then(d => d[0])
+                    .then(d => {
+                        d.estado = 0
+                        DB.set(this.table, d, 'id', d.id)
+                        // Eliminamos de la tabla 
+                        this.Table.delLine(this.currentId)
+                        // Cerramos formulario
+                        this.Form.close()
+
+                        app.tpv.loadServ()
+                    })
+            },
+            add() {
+                const data = {
+                    id: -1,
+                    estado: 1
+                }
+                this.Form
+                    .state('new')
+                    .clear()
+                    .open(data)
+                    .setTile('Nuevo servicio')
+            },
+            addLine(data) {
+                this.Table.addLine(data.id, [data.id, data.codigo, data.descripcion, data.precio])
+                    .addClass(data.codigo[0].toLowerCase())
+                return this
+            },
+            updateLine(data) {
+                this.Table.updateLine(data.id, [data.id, data.codigo, data.descripcion, data.precio])
+                    .addClass(data.codigo[0].toLowerCase())
+                return this
+            },
+            async save(rsp) {
+                let data = await this.Form.getData(rsp)
+
+                data.estado = 1
+                data = {
+                    ...data,
+                    ...rsp
+                }
+
+                // Guardamos en la base de datos local
+                DB.set(this.table, data, 'id', data.id)
+
+                if (this.currentId == -1) this.addLine(data)
+                else this.updateLine(data)
                 this.Form.close()
-                
+
                 app.tpv.loadServ()
-            })
-    },
-    add(){
-        const data = {    
-            id: -1,
-            estado: 1
+            },
+            show(e) {
+                let path = e.path || (e.composedPath && e.composedPath());
+                this.currentId = path[1].attributes.idline.value
+                DB.get(this.table, 'id', this.currentId)
+                    .then(data => this.Form.state('edit').open(data).setTile('Edición A/S'))
+            },
+            async search(value) {
+                this.Table.hiddenRows()
+                await this.searchBy('codigo', value) ||
+                    await this.searchBy('nombre', value) ||
+                    await this.searchBy('descripcion', value)
+            },
+            searchBy(field, value) {
+                DB.get(this.table, field, value, 'estado==1').then(d => {
+                    if (d) {
+                        for (let i in d) this.Table.showLine(`[idline='${d[i].id}'`)
+                        return true
+                    } else return false
+                })
+            },
         }
-        this.Form
-            .state('new')
-            .clear()
-            .open(data)
-            .setTile('Nuevo servicio')
-    },
-    addLine(data){
-        this.Table.addLine(data.id, [data.id, data.codigo, data.descripcion, data.precio])
-            .addClass(data.codigo[0].toLowerCase())
-        return this
-    },
-    updateLine(data){
-        this.Table.updateLine(data.id, [data.id, data.codigo, data.descripcion, data.precio])
-            .addClass(data.codigo[0].toLowerCase())
-        return this
-    },
-    async save(rsp){
-        let data = await this.Form.getData(rsp)
-        
-        data.estado = 1
-        data = {...data, ...rsp} 
-
-        // Guardamos en la base de datos local
-        DB.set(this.table, data , 'id', data.id)
-
-        if (this.currentId == -1 ) this.addLine(data)
-        else this.updateLine(data)
-        this.Form.close()
-
-        app.tpv.loadServ()
-    },
-    show(e){
-        let path = e.path || (e.composedPath && e.composedPath());
-        this.currentId = path[1].attributes.idline.value
-        DB.get(this.table, 'id', this.currentId)
-            .then( data => this.Form.state('edit').open(data).setTile('Edición A/S'))
-    },
-    async search(value){
-        this.Table.hiddenRows()
-        await this.searchBy('codigo', value) || 
-        await this.searchBy('nombre', value) || 
-        await this.searchBy('descripcion', value)
-    },
-    searchBy(field, value){
-        DB.get(this.table, field, value, 'estado==1').then( d => {
-            if (d){
-                for(let i in d) this.Table.showLine(`[idline='${d[i].id}'`)
-                return true
-            }
-            else return false
-        })
-    },
-}
-</script>
+    </script>
+</section>
