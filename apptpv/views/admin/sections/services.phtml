@@ -1,7 +1,7 @@
 <section id="services">
     <m-table id="--id_table1" columns="['id', 'Código', 'Descripcion', 'Precio']" class="hoverable" onclick="app.services.show(window.event)" />
     <m-list ref="--id_table1" />
-    <m-window id="--id_win1">
+    <m-modal id="--id_win1">
         <form controller="items" action="save" callback="app.services.save(data)">
             <m-input-text label="id" name="id" onlyread="true" />
             <m-input-text label="codigo" name="codigo" tabindex="1" title="Introduzca el código" onlyread="true" onchange="app.services.valCode(window.event)" required="true" pattern="\S{4,10}" />
@@ -16,7 +16,7 @@
             <m-btn-cancel class="fnDelete" tabindex="9" caption="Eliminar" />
 
         </form>
-    </m-window>
+    </m-modal>
 
     <style lang="less" scoped>
         height: 100%;
@@ -36,7 +36,7 @@
             buttons: ['add', 'search'],
             currentId: null,
             Table: new MyTable('--id_table1'),
-            Form: new MyWindow('--id_win1'),
+            Form: new MyModal('--id_win1'),
             // Validacion del campo codigo
             async valCode(e) {
                 const el = e.target,

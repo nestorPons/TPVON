@@ -59,6 +59,7 @@ class Tag
             }
         }
         $this->id = $this->attrs['id'] ?? uniqid($this->prefix);
+        if($this->id == '--id') $this->id = uniqid($this->prefix); 
 
     }
     /**

@@ -1,7 +1,7 @@
 <section id="users">
     <m-list ref="--id_table1" />
     <m-table id="--id_table1" columns="['id', 'Nombre', 'Obs', 'Tel', 'Email']" class="hoverable" onclick="app.users.show(window.event)" />
-    <m-window id="--id_win1">
+    <m-modal id="--id_win1">
         <form controller="user" action="save" validation="app.users.validation(callback)" callback="app.users.save(data)">
             <fieldset>
                 <legend></legend>
@@ -38,7 +38,7 @@
             <m-btn-cancel caption="Eliminar" tabindex="12" class="fnDelete" />
 
         </form>
-    </m-window>
+    </m-modal>
     <style lang="less">
         #users {
             display: grid;
@@ -61,7 +61,7 @@
             buttons: ['add', 'search'],
             currentId: null,
             Table: new MyTable('--id_table1'),
-            Form: new MyWindow('--id_win1'),
+            Form: new MyModal('--id_win1'),
             validation(callback) {
                 let f = this.Form.getData()
                 DB.get(this.table)

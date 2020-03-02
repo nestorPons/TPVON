@@ -280,7 +280,6 @@ class Prepocessor
         $less = new \lessc;
 
         $content_less = $less->compile($content);
-
         // MINIMIFICAMOS
         $minifier = new Minify\CSS;
         $minifier->add($content_less);

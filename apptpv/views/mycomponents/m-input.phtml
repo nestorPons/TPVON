@@ -20,9 +20,14 @@
         label {
             z-index: 101;
         }
-        input[type="color"]{
-            width: 10ch;
-            margin-left: 13ch;
+        input{
+            /* Aplicamos el color y el tamaño del padre */
+            font-size : inherit; 
+            color: inherit;
+            width: 100%;
+            &[type="color"]{
+                margin-left: 13ch;
+            }
         }
     </style>
     <script>

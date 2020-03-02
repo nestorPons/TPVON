@@ -1,0 +1,110 @@
+<section id="ticket" class="hidden">
+    <img src="/tpv/companies/logo.png" alt="Logotipo">
+    <div class="data">
+        <div>TICKET DE VENTA</div>
+        <hr>
+        <div><span id="ticket_nombre_empresa"></span></div>
+        <div id="ticket_razon_social">
+            <div><span id="ticket_admin"></span></div>
+            <div>Dir: <span id="ticket_dir"></span></div>
+            <div><span id="ticket_cp"></span> <span id="ticket_poblacion"></span></div>
+            <div>Tel: <span id="ticket_tel"></span> NIF: <span id="ticket_nif"></span></div>
+            <br>
+            <div>Factura Simplificada Nº: <span id="idFra"></span></div>
+            <div>Fecha: <span id="dateTicket"></span></div>
+        </div>
+        <hr>
+    </div>
+    <m-table id="--id_table1" columns="['Unidad', 'Servicio', 'DTO%', 'Importe']" total="true"/>
+    <br>
+    <p>
+        <hr>
+        <div><span id="ticket_iva"></span>% de iva incluído</div>
+        <div>¡GRACIAS POR SU VISITA!</div>
+    </p>
+    <style id='ticketStyle'>
+        #ticket {
+            transform: scale(0.8);
+            overflow: auto;
+        }
+
+        #ticket * {
+            padding: 0;
+        }
+
+        #ticket_razon_social * {
+            text-align: left !important;
+        }
+
+        #buttonsTicket {
+            margin: 1rem 0;
+        }
+
+        #ticket .data {
+            margin: 5px auto;
+        }
+
+        #ticket img {
+            max-width: 200px;
+            height: 200px;
+            width: 200px;
+        }
+
+        table {
+            padding: 5px;
+        }
+
+        @media print {
+            * {
+                page-break-after: avoid;
+                text-align: center;
+            }
+
+            component {
+                margin: 0;
+                padding: 0;
+            }
+
+            button {
+                display: none !important;
+            }
+
+            img {
+                max-width: 160mm;
+                margin: 10px;
+            }
+
+            @page {
+                margin: 0;
+                size: 80mm 110mm;
+            }
+
+            table thead {
+                text-decoration: underline;
+                border-bottom: 1px solid black;
+            }
+
+            table td:first {
+                border-top: 1px solid black;
+            }
+
+            .break {
+                page-break-after: always;
+            }
+
+            table {
+                margin-bottom: 10px;
+            }
+
+            table tfoot tr {
+                position: absolute;
+                left: 170px;
+            }
+
+            table tfoot td {
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</section>

@@ -23,9 +23,6 @@
         </tr>
     </template>
     <style lang="less" scoped>
-        height : 100%;
-        width : 100%;
-
         tfoot {
             order: 3;
             width: 100%;
@@ -63,12 +60,9 @@
         }
     </style>
     <script>
-        class MyTable {
-            constructor(id) {
-                this.cont = (typeof id == 'string') 
-                    ? document.getElementById(id)
-                    : id;
-                  
+        class MyTable extends MyComponent{
+            constructor(id) {   
+                super(id);
                 this.el = this.cont.querySelector('table');
 
                 this.body = this.el.getElementsByTagName('tbody')[0];

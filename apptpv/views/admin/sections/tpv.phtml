@@ -1,7 +1,7 @@
 <section id="tpv">
     <m-search id="--id_sel1" label="Codigo" name="servicio" required="true" tabindex="4" onblur="app.tpv.loadLine()" />
     <m-search id="--id_sel2" label="Descripción" tabindex="6" onchange="app.tpv.searchDescription()" />
-    <m-select id="--id_sel3" label="Operador" name="servicio" required="true" tabindex="1" />
+    <m-select id="--id_sel3" label="Operador" name="servicio" required="true" tabindex="1" default/>
     <m-select id="--id_sel4" label="Cliente" name="servicio" required="true" tabindex="2" onchange="app.tpv.loadClient()" />
     <m-input id="--id_input1" type="text" label="id" readonly="true" />
     <m-input id="--id_input2" type="text" label="Fecha" readonly="true" />
@@ -15,7 +15,6 @@
     <m-btn-cancel id="--id_btn2" tabindex="10" onclick="app.tpv.clearLine()" />
     <m-btn id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()" class="primary" />
     <m-table id="--id_table1" columns="['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €']" class="hoverable" onclick="app.tpv.loadLineFromTable(window.event)" />
-
 
     <style lang="less" scoped>
         align-items: flex-start;
@@ -243,7 +242,6 @@
             lastId: $$tickets_new_id,
             Ticket: new Ticket(),
             Table: new MyTable('--id_table1'),
-            Modal: null,//new MyWindow('--id_win1'),
             txtId: new MyInput('--id_input1'),
             date: new MyInput('--id_input2'),
             hour: new MyInput('--id_input3'),
@@ -328,25 +326,21 @@
                     })
             },
             openTicket() {
-               // this.Modal.open()
                 app.ticket.open(this.Ticket)
-            },
-            close() {
-                // this.Modal.close()
             },
             async reset() {
                 DB.get('empresa').then(d => {
-                    this.Ticket = new Ticket()
-                    this.date.value(date.now('date'))
-                    this.hour.value(date.now('hour'))
-                    this.dto.value(0)
-                    this.selCli.value(0)
-                    this.clearLine()
-                    this.clearLines()
-                    this.clearUsers()
-                    this.printTotal()
-                    this.Table.hoverable(true)
-                    this.close()
+                    this.Ticket = new Ticket();
+                    this.date.value(date.now('date'));
+                    this.hour.value(date.now('hour'));
+                    this.dto.value(0);
+                    this.selCli.value(0);
+                    this.clearLine();
+                    this.clearLines();
+                    this.clearUsers();
+                    this.printTotal();
+                    this.Table.hoverable(true);
+                    app.ticket.close();
                 })
             },
             // Cargamos los datos al Ticket

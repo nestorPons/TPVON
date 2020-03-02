@@ -1,6 +1,6 @@
 <section id="families">
     <m-table id="--id_table1" columns="['id', 'Nombre']" class="hoverable" onclick="app.families.show(window.event)" />
-    <m-window id="--id_win1">
+    <m-modal id="--id_win1">
         <form controller="family" action="save" callback="app.families.save(data)">
             <m-input-text onlyread="true" label="ID" name="id" />
             <m-input-text label="Nombre" name="nombre" tabindex="1" />
@@ -8,7 +8,7 @@
             <m-btn-success caption="Guardar" tabindex="3" />
             <m-btn-cancel caption="Eliminar" tabindex="4" class="fnDelete" />
         </form>
-    </m-window>
+    </m-modal>
 </section>
 <style lang="less" scoped>
     display: grid;
@@ -25,7 +25,7 @@
         table: 'familias',
         buttons: ['add'],
         Table: new MyTable('--id_table1'),
-        Form: new MyWindow('--id_win1'),
+        Form: new MyModal('--id_win1'),
         // Método inializador
         open() {},
         async load() {
