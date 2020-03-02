@@ -1,11 +1,11 @@
 <section id="buttonsTicket">
     <m-modal id="--id_modal">
         <h1>Factura simplificada</h1>
+        <m-input id="--id_pay" label="INTRODUCIR EL PAGO EN EFECTIVO" value="0" onkeyup="app.ticket.change()" />
         <div class="info">
             <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)" />
             <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)" />
         </div>
-        <m-input id="--id_pay" label="INTRODUCIR EL PAGO EN EFECTIVO" value="0" onkeyup="app.ticket.change()" />
         <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onclick='app.ticket.toggle()' />
         <m-input id="--id_date" type="date" label="Fecha vencimiento" name="fecha_vencimiento" /><br>
         <m-btn caption="Imprimir" class="tertiary" onclick = "app.ticket.print()"/>
