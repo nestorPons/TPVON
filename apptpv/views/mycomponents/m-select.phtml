@@ -1,19 +1,19 @@
 /**
- * Componente select 
- * Para nombrar options mediante html hay que incluir en el componente padre la opción options
- * con un objeto JSON. Se puede añadir quitar opciones en tienpo de ejecución mediante la clase JS.  
- * autor   : Nestor Póns 
- * email   : nestorpons@gmail.com
- * licencia: MIT 2020
- */
-
+* Componente select
+* Para nombrar options mediante html hay que incluir en el componente padre la opción options
+* con un objeto JSON. Se puede añadir quitar opciones en tienpo de ejecución mediante la clase JS.
+* Extendemos la funcionalidad del componente MyCOmponent 
+* autor : Nestor Póns
+* email : nestorpons@gmail.com
+* licencia: MIT 2020
+*/
 <component id="--id" class="row col-sm-12 col-md-12">
     <select type="search" id="el--id" list="--id_datalist" class="$$class $$default" placeholder=" " style="$$style" name="$$name" tile="$$tile" pattern="$$pattern" list="$$list" tabindex="$$tabindex" onfocus="$$onfocus" onblur="$$onblur" onclick="$$onclick" onkeydown="$$onkeydown" onkeyup="$$onkeyup" onchange="$$onchange" onkeypress="$$onkeypress" $$required $$disabled $$readonly $$checked>
         @if($$default)
-            <option value=""></option>
+        <option value=""></option>
         @endif
         @for($$options)
-            <option value="$$key">$$value</option>
+        <option value="$$key">$$value</option>
         @endfor
     </select>
     <label for="el--id">$$label</label>
@@ -25,14 +25,10 @@
         }
     </style>
     <script>
-        class MySelect {
+        class MySelect extends MyComponent {
             // Id del componente general no del select
             constructor(id) {
-                
-                this.cont = (typeof id == 'string') 
-                    ? document.getElementById(id)
-                    : id;
-                  
+                super(id);
                 this.el = this.cont.getElementsByTagName('select')[0];
                 this.o = this.el.getElementsByTagName('option');
                 this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
