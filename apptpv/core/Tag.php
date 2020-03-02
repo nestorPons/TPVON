@@ -50,7 +50,7 @@ class Tag
         if (
             // Regex extrae atributos de una cadena como:
             // options1={"perro1":"de", "gato1":1} class="SOEL" REQUIRED 
-            $len = preg_match_all("/(\w+)=?(([\'\"]?)[\[\{](.*?)]\\3|([\'\"])(.*?)\\5)?/sim", $matches[2], $matches)
+            $len = preg_match_all("/(\w+)\s?=?\s?(([\'\"]?)[\[\{](.*?)]\\3|([\'\"])(.*?)\\5)?/sim", $matches[2], $matches)
         ) {
             for ($i = 0; $i < $len; $i++) {
                 $name_attr = $matches[1][$i];
