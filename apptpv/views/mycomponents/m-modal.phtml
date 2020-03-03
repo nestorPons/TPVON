@@ -47,9 +47,9 @@
       constructor(id) {
           super(id);
           this.el = this.cont.querySelector(`.card`);
+          this.cont.addEventListener('keyup', e => (e.key === 'Escape') && this.close());
           this.$el = $(this.cont).find('.card');
           this.$switch =  $(this.cont).find('input:first');
-          this.$el.keyup(e => (e.key === 'Escape') && this.close());
           // Variable de estado del formulario: nuevo, editanto
           this.attrState = false
           this.data = [];

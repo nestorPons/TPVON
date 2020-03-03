@@ -66,10 +66,10 @@
                 this.el = this.cont.querySelector('table');
 
                 this.body = this.el.getElementsByTagName('tbody')[0];
-                this.template = this.cont.querySelector('template')
-                this.$table = $('#' + id).find('table')
-                this.$template = $(`#${id}`).find('template')
-                this.data = []
+                this.template = this.cont.querySelector('template');
+                this.$table = $(this.cont).find('table');
+                this.$template = $(this.cont).find('template');
+                this.data = [];
             }
             line() {
                 return parseInt(this.el.rows.length)

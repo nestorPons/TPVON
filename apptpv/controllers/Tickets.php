@@ -35,4 +35,8 @@ class Tickets extends Controller{
         }
         return $all; 
     }
+    function unpaid(){
+        $u = new Query('vista_deudas');
+        return $u->getAll();
+    }
 }

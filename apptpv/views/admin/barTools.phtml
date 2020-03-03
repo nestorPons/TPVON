@@ -10,16 +10,16 @@
 
         <div id="search" onblur="menu.search.close()">
             <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' />
-            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' onblur='menu.search.close()' tabindex='-1' title='Pulse Enter para realizar la búsqueda.' />
+            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' onblur='menu.search.close()' tabindex="-1" title='Pulse Enter para realizar la búsqueda.' />
             <m-icon id='--id_search_icon_close' icon='cross' label='cerrar' />
         </div>
     </div>
     <div id="bartools-central">
     </div>
-    <div id="bartools-general">
-        <m-icon id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Acerca de' />
-        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank" />
-        <m-icon icon="power-switch" label="Salir" onclick="app.close()" />
+    <div id="bartools-general"> 
+        <m-icon id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Acerca de' tabindex="-1" />
+        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank" tabindex="-1"/>
+        <m-icon icon="power-switch" label="Salir" onclick="app.close()" tabindex="-1" />
     </div>
     <style lang="less">
         @color: var(--main-color);

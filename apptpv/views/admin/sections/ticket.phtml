@@ -1,14 +1,15 @@
 <section id="buttonsTicket">
     <m-modal id="--id_modal">
         <h1>Factura simplificada</h1>
-        <m-input id="--id_pay" label="INTRODUCIR EL PAGO EN EFECTIVO" value="0" onkeyup="app.ticket.change()" />
+        <m-input id="--id_pay" label="INTRODUCIR EL PAGO EN EFECTIVO" value="0" tabindex="1" onkeyup="app.ticket.change()" />
         <div class="info">
             <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)" />
             <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)" />
         </div>
         <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onclick='app.ticket.toggle()' />
         <m-input id="--id_date" type="date" label="Fecha vencimiento" name="fecha_vencimiento" /><br>
-        <m-btn caption="Imprimir" class="tertiary" onclick = "app.ticket.print()"/>
+        <m-btn caption="Imprimir" class="tertiary" onclick = "app.ticket.print(false)" tabindex="2"/>
+        <m-btn caption="A deber" class="primary" onclick = "app.ticket.print(true)" tabindex="3"/>
     </m-modal>
     <style lang="less" scoped>
         #--id_modal .card{ 
@@ -59,7 +60,9 @@
                 iva: document.getElementById('ticket_iva'),
                 change: document.getElementById('--id_lbl2_input'),
             },
-            print(callback) {
+            print(debt = false, callback) {
+                this.Ticket.fecha_cobro = debt ? false :  date.now('sql') ; 
+                
                 this.put(false, _ => {
                     imprimirElemento(
                         document.getElementById('ticket'),
@@ -128,7 +131,8 @@
                     this.Ticket.fecha = date.now('sql');
                     this.Ticket.estado = 1;
                     this.Ticket.regalo = this.present.checked() ? 1 : 0;
-                    this.Ticket.fecha_vencimiento = this.txtExpire.value;
+                    this.Ticket.fecha_vencimiento = this.txtExpire.value; 
+
                     // Guardamos los datos 
                     let data = await DB.post('tickets', 'new', this.Ticket.sendData());
                     this.lastId = this.Ticket.id = data.id;

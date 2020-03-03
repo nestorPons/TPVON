@@ -30,14 +30,21 @@ class Tickets extends Query{
             $lines = $Post->lines; 
             $end_date = $Post->fecha_vencimiento; 
             $isPresent = boolval($Post->regalo); 
-
+            $date_payment = $Post->fecha_cobro;
+        
             // Limpiamos post de datos indeseados
             $Post->filter(new Tickets);
             $DateTime = new \DateTime;
             $Post->fecha = $DateTime->format('Y-m-d H:i');
-            // Guardamos el id generado 
 
+            // Guardamos el id generado 
             $this->id = $this->add($Post->toArray(['lines']));
+            
+            // Si no es una deuda generanos un registro de factura simplificada
+            if($date_payment != 'false'){
+                new Invoice(['fecha' => $date_payment, 'id_ticket' => $this->id]);
+            }
+
             // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
             if($isPresent) {
                 $Present = new Present;

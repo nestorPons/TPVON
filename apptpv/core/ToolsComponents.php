@@ -111,6 +111,7 @@ trait ToolsComponents
         $json_val = str_replace(']"', ']', $json_val);
         $json_val = str_replace('}"', '}', $json_val);
         $json_val = str_replace('"{', '{', $json_val);
+
         return json_decode($json_val) ?? $json_val;
     }
 }

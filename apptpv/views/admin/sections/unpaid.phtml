@@ -1,0 +1,23 @@
+<section>
+    <m-table id="--id_table" columns="['fecha', 'ticket', 'cliente', 'total']" class="hoverable"/>
+    <script>
+        app.unpaid = {
+            buttons: [],
+            table : new MyTable(--id_table), 
+            load() {
+                this.table.clear();
+                // Petición de datos a la vista
+                app.post({
+                        controller: 'tickets',
+                        action: 'unpaid',
+                    }, (d, r) => {
+                        for( let i of d){
+                            echo(i);
+                            this.table.addLine(i.id, [i.id, i.id_ticket, );
+                        }
+                    })
+                // Cargamos los datos a la tabla
+            }
+        }
+    </script>
+</section>
