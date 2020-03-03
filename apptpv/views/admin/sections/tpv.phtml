@@ -20,9 +20,12 @@
         align-items: flex-start;
         display: grid;
         grid-template-rows: auto 53vh auto auto;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr auto 1fr 1fr 1fr 1fr 1fr;
         grid-row-gap: 5px;
 
+        #--id_input8{
+            font-size: 2rem;
+        }
 
         table:not(.horizontal) thead {
             height: 60px;
@@ -86,6 +89,7 @@
         #-id_input7 {
             grid-row: 3;
             grid-column: 7;
+            text-align: right;
         }
 
         #--id_sel3 {
@@ -124,24 +128,19 @@
         #--id_btn3 {
             grid-row: 4;
             grid-column: 7;
-        }
-
-        .Importe {
-            text-align: right;
+            align-self: flex-end;
         }
 
         #--id_btn1 {
             grid-row: 4;
             grid-column: 5;
+            align-self: flex-end;
         }
 
         #--id_btn2 {
             grid-row: 4;
             grid-column: 6;
-        }
-
-        #--id_win1 {
-            max-height: 80vh;
+            align-self: flex-end;
         }
     </style>
     <script>
