@@ -36,13 +36,14 @@ require_once ROOT . '/apptpv/config/app.php';
 require_once ROOT . '/vendor/autoload.php';  
 include \FOLDERS\CONFIG . 'files.php';
 
-// Desarrollo
-if( ENV ){
+// Desarrollo solo se ejecuta en la puerta principal en la primera petición
+if( ENV && empty($_REQUEST)){
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
     require_once \FOLDERS\HELPERS  . 'dev.php';
     Styles::load();
     require_once \FOLDERS\HELPERS  . 'minify.php';
+    
     new Prepocessor(false);
 }
 

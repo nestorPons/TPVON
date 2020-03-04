@@ -33,11 +33,16 @@ const app = {
                         return false;
                     }
             } catch (e) {
-
                 // la respuesta es HTML
                 html = $(respond);
-                app.sections.load(html.attr('id'), html);
+                this.sections.toggle(html.attr('id'), _=>{
 
+                    html.appendTo('body');
+                    html.find('section').each((i, el) =>{
+                        this.sections.loaded.push(el.id);
+                    })
+                    
+                })
             } finally {
                 let resp = d ? d.data : null,
                     state = d && d.mens ? false : true;
@@ -142,6 +147,7 @@ const app = {
     sections: {
         active: null,
         last: null,
+        loaded : [],
         toggle(section, callback) {
             if ($('section#' + section).is(':visible')) return false;
 
@@ -151,32 +157,16 @@ const app = {
                 $mainSection = $('section').find('section');
             };
 
-            $mainSection.fadeOut('fast', _ => {
-                $('section#' + section).fadeIn();
-                if(typeof callback === 'function') callback();
-                this.inicialize(section);
-            });
-        },
-        load(section = '', html = jQuery) {
-            try {
-                // Comprueba que  la seccion existe o no 
-                if ($('section#' + section).length) {
-                    // Si existe oculta todas menos la solicitada
-                    this.toggle(section);
-                } else {
-                    // Cargammos el codigo html
-                    this.toggle(section, function () {
-                        html.appendTo('body');
-                    })
-                }
-            } catch (error) {
-                console.warn(error);
-            }
+            $mainSection.fadeOut('fast');
+            $('section#' + section).fadeIn();
+            if(typeof callback === 'function') callback();
+            this.inicialize(section);
         },
         show(section, callback) {
             this.last = this.active;
             // Comprueba que  la seccion existe o no 
-            if ($('section#' + section).length) {
+
+            if (this.loaded.indexOf(section) != -1) {
                 // Si existe oculta todas menos la solicitada
                 app.sections.toggle(section);
                 typeof callback == 'function' && callback();
@@ -186,8 +176,11 @@ const app = {
                     controller: section,
                     action: 'view'
                 }, true, fn => {
+                    // Registramos la sección
+                    this.loaded.push(section);
                     // Activa el evento de inicialización de la sección
-                    this.inicialize(section);
+                    app.sections.toggle(section);
+
                     typeof callback == "function" && callback();
                 })
             }
@@ -195,6 +188,7 @@ const app = {
         },
         // Comportamiento de la sección activa al cargarse 
         inicialize(section) {
+
             if (section == 'appadmin') section = 'tpv';
             this.active = section;
             
@@ -205,7 +199,6 @@ const app = {
                 typeof activeZone.buttons != 'undefined' &&
                     typeof activeZone.buttons == 'object' &&
                     menu.show(activeZone.buttons);
-
                 // Se cargan 
                 typeof activeZone.open != 'undefined' &&
                     typeof activeZone.open == 'function' &&

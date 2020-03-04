@@ -44,8 +44,8 @@
         app.income = {
             name : 'Ingresos',
             buttons: ['print', 'filter'],
-            txtFrom: --id_txt1,
-            txtTo: --id_txt2,
+            txtFrom: new MyInput(--id_txt1),
+            txtTo: new MyInput(--id_txt2),
             txtTotal: --id_txt3.querySelector('input'),
             SelUser: new MySelect('--id_sel1'),
             Table: new MyTable('--id_table1'),
@@ -69,8 +69,8 @@
                     controller: 'tickets',
                     action: 'getBetween',
                     data: {
-                        f1: date.format(this.txtFrom.value, 'sql'),
-                        f2: date.format(this.txtTo.value, 'sql'),
+                        f1: date.format(this.txtFrom.value(), 'sql'),
+                        f2: date.format(this.txtTo.value(), 'sql'),
                         u: this.SelUser.value()
                     }
                 })
@@ -111,8 +111,8 @@
                 const printContents = {
                     innerHTML :
                         `<h1> Listado de ingresos </h1>
-                        <h3> Fecha inicio   : ${this.txtFrom.value}</h3>
-                        <h3> Fecha fin      : ${this.txtTo.value}</h3>
+                        <h3> Fecha inicio   : ${this.txtFrom.value())}</h3>
+                        <h3> Fecha fin      : ${this.txtTo.value()}</h3>
 
                         <table> ${this.Table.html()} </table>
                         <h4>Total: <b>${this.txtTotal.value}</b></h4>`

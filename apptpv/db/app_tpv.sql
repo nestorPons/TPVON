@@ -81,7 +81,8 @@ CREATE TABLE `tickets` (
   `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
   `id_cliente` int(11) UNSIGNED NOT NULL,
   `estado` tinyint(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '1 activo, 0 inactivo',
-  `iva` tinyint(3) DEFAULT '0'
+  `iva` tinyint(3) DEFAULT '0',
+  `total` FLOAT NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish2_ci;
 
 DROP TABLE IF EXISTS `tickets_regalo`;
@@ -388,10 +389,10 @@ WHERE
   t.estado = 1;
 
 CREATE VIEW vista_deudas AS
-SELECT t.fecha, t.id, t.id_cliente, u.nombre  
+SELECT t.fecha, t.id, t.id_cliente, u.nombre, t.total  
   FROM tickets t
   LEFT OUTER JOIN facturas f ON f.id_ticket = t.id
-  LEFT JOIN usuarios u ON t.id_cliente = u.id
+  INNER JOIN usuarios u ON t.id_cliente = u.id
   WHERE f.id_ticket IS NULL;
 
 INSERT INTO

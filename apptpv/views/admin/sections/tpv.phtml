@@ -224,7 +224,6 @@
             }
             sendData() {
                 let props = this
-                delete props.total
                 delete props.new
                 return props
             }
@@ -325,7 +324,7 @@
                     })
             },
             openTicket() {
-                app.ticket.open(this.Ticket)
+                app.ticket.open(this.Ticket);
             },
             async reset() {
                 DB.get('empresa').then(d => {

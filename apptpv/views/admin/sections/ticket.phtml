@@ -68,7 +68,7 @@
                         document.getElementById('ticket'),
                         document.getElementById('ticketStyle')
                     );
-
+                    app.tpv.add();
                     typeof callback === 'function' && callback();
                 })
             },
@@ -132,6 +132,7 @@
                     this.Ticket.estado = 1;
                     this.Ticket.regalo = this.present.checked() ? 1 : 0;
                     this.Ticket.fecha_vencimiento = this.txtExpire.value; 
+
 
                     // Guardamos los datos 
                     let data = await DB.post('tickets', 'new', this.Ticket.sendData());
