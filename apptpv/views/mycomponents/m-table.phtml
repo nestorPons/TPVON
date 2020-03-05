@@ -86,7 +86,7 @@
                 this.loadDataLine(arrData);
 
                 // Carga el tag para mostrarlo en la tabla
-                this.newLine(id, arrData);
+                return this.newLine(id, arrData);
             }
             /**
              * Carla una nueva linea en la tabla
@@ -137,8 +137,16 @@
             delLine(id) {
                 this.$table.find(`[idline="${id}"]`).remove();
             }
+            /**
+             * Actualiza una fila de la tabla
+             * @param id de la nueva fila 
+             * @parama array de datos de la nueva fila
+             * @return object en formato JQ 
+             */
             updateLine(id, data) {
+                // Elimina la fila
                 this.delLine(id);
+                // La volvemos a crear con los nuevos
                 return this.addLine(id, data);
             }
             total(arg) {

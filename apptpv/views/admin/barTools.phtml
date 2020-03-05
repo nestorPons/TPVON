@@ -8,10 +8,10 @@
         <m-icon id='--id_conf' class="menu-buttons" icon='cog' onclick='app.sections.conf()' label='Configurar' />
         <m-icon id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filter' />
 
-        <div id="search" onblur="menu.search.close()">
+        <div id="search">
             <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' />
-            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' onblur='menu.search.close()' tabindex="-1" title='Pulse Enter para realizar la búsqueda.' />
-            <m-icon id='--id_search_icon_close' icon='cross' label='cerrar' />
+            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' tabindex="-1" title='Pulse Enter para realizar la búsqueda.' />
+            <m-icon id='--id_search_icon_close' icon='cross' label='cerrar' onclick='menu.search.close()'/>
         </div>
     </div>
     <div id="bartools-central">
@@ -150,30 +150,30 @@
                 $txtSearch: $('#--id_txtSearch_input'),
                 $label: $('#--id_search').find('.label'),
                 $icon: $('#--id_search_icon'),
-                velocity: 500,
+                velocity: 1,
                 isOpen: false,
                 async open() {
+                    this.isOpen = true;
                     this.$txtSearch.val('');
                     this.$moveable.animate({
                         left: 0
                     }, this.velocity)
-                    await new Promise(r => setTimeout(r, this.velocity * 2));
+                    await new Promise(r => setTimeout(r,1000));
                     this.$txtSearch.focus();
 
-                    this.isOpen = true;
                     return this;
                 },
                 close() {
+                    this.isOpen = false;
                     // Cerrar inputtext
                     this.$moveable.animate({
                         left: window.innerWidth + 1000
                     }, this.velocity)
-                    this.isOpen = false;
                     return this;
                 },
                 toggle() {
                     event.stopPropagation();
-                    if (this.isOpen) this.close()
+                    if (this.isOpen) this.search()
                     else this.open();
                     return this;
                 },
