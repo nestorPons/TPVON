@@ -2,23 +2,36 @@
     <m-table id="--id_table" columns="['ticket', 'fecha', 'nombre cliente', 'total']" class="hoverable"/>
     <script>
         app.unpaid = {
-            buttons: [],
+            buttons: ['search'],
             table : new MyTable(--id_table), 
-            load(){
-
+            search(e){
+                this.table.search(el => {
+                    let r = el[2].toLowerCase().match(
+                        new RegExp(`.*${e.toLowerCase()}.*`, 'g')
+                    )
+                    return r != null; 
+                });
             },
             open() {
+                this.table.addEventClick(event=>{
+                    let path = event.path || (event.composedPath && event.composedPath()),
+                        row = path[1],
+                        id = row.getAttribute('idline');
+                    app.sections.show('tpv');
+                    app.tpv.search(id);              
+                });
+
                 this.table.clear();
                 // Petición de datos a la vista
                 app.post({
                     controller: 'tickets',
                     action: 'unpaid',
                 }, (d, r) => {
+                    // Cargamos los datos a la tabla
                     for( let i of d){
                         this.table.addLine(i.id, [i.id, i.fecha, i.nombre, i.total] );
                     }
                 })
-                // Cargamos los datos a la tabla
             }
         }
     </script>

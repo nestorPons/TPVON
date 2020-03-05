@@ -9,8 +9,8 @@
     <m-input id="--id_input4" type="number" label="Cantidad" tabindex="6" value="1" onblur="app.tpv.calculate()" />
     <m-input id="--id_input5" type="number" label="Precio" tabindex="8" value="0" onblur="app.tpv.calculate()" />
     <m-input id="--id_input6" type="number" label="Dto %" tabindex="9" value="0" onblur="app.tpv.calculate()" />
-    <m-input id="--id_input7" type="number" label="Importe" value="0" readonly="true" />
-    <m-input id="--id_input8" type="number" label="Total" value="0" readonly="true" />
+    <m-input id="--id_input7" type="number" label="Importe" value="0" readonly />
+    <m-input id="--id_input8" type="number" label="Total" value="0" readonly />
     <m-btn-success id="--id_btn1" tabindex="5" onclick="app.tpv.addLine()" />
     <m-btn id="--id_btn2" caption="Borrar" tabindex="10" onclick="app.tpv.clearLine()" class="secondary"/>
     <m-btn id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()" class="primary" />
@@ -256,7 +256,7 @@
                 client: 2,
                 user: 0
             },
-            open() {
+            open() {7
                 this.selEmp.el.focus()
             },
             loadClient() {

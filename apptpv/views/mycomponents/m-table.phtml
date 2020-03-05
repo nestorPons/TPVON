@@ -64,26 +64,35 @@
             constructor(id) {   
                 super(id);
                 this.el = this.cont.querySelector('table');
-
                 this.body = this.el.getElementsByTagName('tbody')[0];
+                this.rows = this.body.getElementsByTagName('tr');
                 this.template = this.cont.querySelector('template');
                 this.$table = $(this.cont).find('table');
                 this.$template = $(this.cont).find('template');
                 this.data = [];
             }
             line() {
-                return parseInt(this.el.rows.length)
+                return parseInt(this.el.rows.length);
+            }
+            addEventClick(fn){
+                this.body.addEventListener('click',fn);
             }
             /**
              * arrData = array de datos en orden de salida
              * retorna la dila en objeto jq
              */
             addLine(id, arrData) {
-
                 // Cargamos los datos en una variable para posteriores consultas (getData(){})
-                this.data.push(arrData)
+                this.loadDataLine(arrData);
 
-                const c = this.$template.clone().html()
+                // Carga el tag para mostrarlo en la tabla
+                this.newLine(id, arrData);
+            }
+            /**
+             * Carla una nueva linea en la tabla
+             */
+            newLine(id, arrData){
+                const c = this.$template.clone().html();
                 return $(c)
                     .attr('idline', id || this.$table.find('tr').length)
                     .find('td').each(function(i, el) {
@@ -92,20 +101,27 @@
                             .attr('data-label', arrData[i])
                     })
                     .end()
-                    .prependTo(this.$table.find('tbody'))
-
+                    .prependTo(this.$table.find('tbody'));
+            }
+            /**
+             * Carga los data.push(arrData);datos de una linea en la variable data
+             */
+            loadDataLine(arrData){
+                this.data.push(arrData);
             }
             endScroll() {
-                this.$table.animate({
-                    scrollTop: this.$table.height()
-                }, 100);
+                this.$table.animate({scrollTop: this.$table.height()}, 100);
             }
             clearLines() {
-                this.$table.find('tbody').find('tr').remove()
+                let rows  = this.body.getElementsByTagName('tr'); 
+                for(let i of rows){
+                    this.body.removeChild(i); 
+                }
+                return this;
             }
             clear() {
-                this.data = []
-                this.clearLines()
+                this.data = [];
+                this.clearLines();
             }
             showLine(exp) {
                 const e = this.el.querySelector(exp);
@@ -115,31 +131,45 @@
             hiddenRows() {
                 const trs = this.body.getElementsByTagName('tr');
                 for (const tr of trs) {
-                    tr.classList.add('hidden')
+                    tr.classList.add('hidden');
                 }
             }
             delLine(id) {
-                this.$table.find(`[idline="${id}"]`).remove()
+                this.$table.find(`[idline="${id}"]`).remove();
             }
             updateLine(id, data) {
-                this.delLine(id)
-                return this.addLine(id, data)
+                this.delLine(id);
+                return this.addLine(id, data);
             }
             total(arg) {
-                const total = this.el.getElementsByClassName('id_total')[0]
-                if (arg) total.innerHTML = arg
-                return total.innerHTML
+                const total = this.el.getElementsByClassName('id_total')[0];
+                if (arg) total.innerHTML = arg;
+                return total.innerHTML;
             }
             hoverable(value) {
                 if (value != undefined) {
-                    if (value) this.el.classList.add('hoverable')
-                    else this.el.classList.remove('hoverable')
+                    if (value) this.el.classList.add('hoverable');
+                    else this.el.classList.remove('hoverable');
                 }
-                return this.el.classList.contains('hoverable')
+                return this.el.classList.contains('hoverable');
             }
             html() {
-                return this.el.innerHTML
+                return this.el.innerHTML;
             }
+            /**
+             * Buscar en los datos según la función dada y los muestra
+             */
+            search(fn){
+                // Ocultamos las filas
+                this.hiddenRows();
+                // Obtenemos los elementos a mostrar
+                let r = this.data.filter(fn);
+                // Mostramos los elementos por su id que debe ser el primer elemento del array
+                for(let i of r){
+                    this.body.querySelector(`[idline="${i[0]}"]`).classList.remove('hidden');
+                }
+            }
+
         }
     </script>
 </component>
