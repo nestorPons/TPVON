@@ -4,7 +4,7 @@
     <m-modal id="--id_win1">
         <form controller="items" action="save" callback="app.services.save(data)">
             <m-input-text label="id" name="id" onlyread="true" />
-            <m-input-text label="codigo" name="codigo" tabindex="1" title="Introduzca el código" onlyread="true" onchange="app.services.valCode(window.event)" required="true" pattern="\S{4,10}" />
+            <m-input-text label="codigo" name="codigo" tabindex="1" title="Introduzca el código" onlyread="true" onchange="app.services.valCode(window.event)" required="true" pattern="[A-z0-9]{4,10}" />
             <m-input-text label="Descrición" name="descripcion" tabindex="2" />
             <m-input-text label="Precio" name="precio" tabindex="3" required="true" />
             <m-input-text label="Coste" name="coste" tabindex="4" />
