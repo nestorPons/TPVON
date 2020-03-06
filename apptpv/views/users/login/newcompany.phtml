@@ -1,0 +1,24 @@
+<section id="newcompany" style="
+    width: 420px; position=relative
+">
+    <form controller="company" action="new" autocomplete="off">
+        <fieldset  class="container">
+            <legend>Nueva aplicación</legend>
+            <m-input-text name="nombre_empresa" label="Nombre de la empresa" required="true"/>
+            <m-input-text name="nif" label="NIF" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1})" required="true"/>
+            <m-input-text name="nombre_usuario" label="Nombre del administrador" required="true"/>
+            <m-input-text name="email" label="Introduzca su email" required="true"/>
+            <m-input-text label="Repita el email" required="true"/>
+            <m-input-text name="password" label="Introduzca una contraseña" required="true"/>
+            <m-input-text label="Repita la contraseña" required="true"/>
+            
+        </fieldset>
+        <m-btn-success/>
+        <m-a href="main">Ir al inicio</m-a>
+    </form>
+    <style>
+        section{
+            margin: auto;
+        }
+    </style>
+</section>

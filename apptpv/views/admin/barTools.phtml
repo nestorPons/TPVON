@@ -9,16 +9,16 @@
         <m-icon id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filter' />
 
         <div id="search">
-            <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' />
-            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' tabindex="-1" title='Pulse Enter para realizar la búsqueda.' />
-            <m-icon id='--id_search_icon_close' icon='cross' label='cerrar' onclick='menu.search.close()'/>
+            <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' tabindex="0"/>
+            <m-input id='--id_txtSearch' placeholder='Escribe tu búsqueda' onkeyup='menu.search.keypress(event)' onblur='menu.search.blur(event)' tabindex="-1" title='Pulse Enter para realizar la búsqueda.' />
+            <m-icon id='--id_search_icon_close' icon='cross' label='cerrar' onclick='menu.search.close()' />
         </div>
     </div>
     <div id="bartools-central">
     </div>
-    <div id="bartools-general"> 
+    <div id="bartools-general">
         <m-icon id='--id_help' class="menu-buttons" icon='question-circle' onclick='app.help()' label='Acerca de' tabindex="-1" />
-        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank" tabindex="-1"/>
+        <m-icon icon="book" href="https://nestorpons.github.io/TPVON/manual/" label="Manual de usuario" target="_blank" tabindex="-1" />
         <m-icon icon="power-switch" label="Salir" onclick="app.close()" tabindex="-1" />
     </div>
     <style lang="less">
@@ -158,10 +158,13 @@
                     this.$moveable.animate({
                         left: 0
                     }, this.velocity)
-                    await new Promise(r => setTimeout(r,1000));
+                    await new Promise(r => setTimeout(r, 1000));
                     this.$txtSearch.focus();
-
                     return this;
+                },
+                blur(e) {
+                    e.relatedTarget != null && e.relatedTarget.id != 'bartools_search' && this.close();
+                    e.relatedTarget == null && this.close();
                 },
                 close() {
                     this.isOpen = false;
@@ -172,16 +175,21 @@
                     return this;
                 },
                 toggle() {
-                    event.stopPropagation();
-                    if (this.isOpen) this.search()
+                    if (this.isOpen) {
+                        this.$txtSearch.focus()
+                        this.search()
+                    }
                     else this.open();
+                    event.stopPropagation();
                     return this;
                 },
                 keypress(e) {
                     if (e.key == 'Enter') this.search();
                 },
                 search() {
-                    typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val());
+                    if (this.$txtSearch.val() != '') {
+                        typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val());
+                    }
                     return this;
                 },
                 placerholder(param = null) {
