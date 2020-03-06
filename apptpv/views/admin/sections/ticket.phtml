@@ -8,7 +8,7 @@
         </div>
         <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onchange='app.ticket.toggle()' />
         <m-input id="--id_date" type="date" label="Fecha vencimiento" name="fecha_vencimiento" /><br>
-        <m-input-switch />
+        <m-input-switch id="--id_sw" label="Es regalo" caption="Fecha de vencimiento"/>
         <m-btn caption="Imprimir" class="tertiary" onclick="app.ticket.print(false)" tabindex="2" />
         <m-btn caption="A deber" class="primary" onclick="app.ticket.print(true)" tabindex="3" />
     </m-modal>
@@ -47,6 +47,7 @@
             inputpay: new MyInput('--id_pay'),
             Table: new MyTable('ticket_table1'),
             modal: new MyModal(--id_modal),
+            expire : new MyInputSwitch(--id_sw),
             change() {
                 let a = parseFloat(this.inputpay.value()),
                     b = parseFloat(this.lbltotal.value()),
@@ -66,7 +67,6 @@
             },
             print(debt = false, callback) {
                 this.Ticket.fecha_cobro = debt ? false : date.now('sql');
-
                 this.put(false, _ => {
                     imprimirElemento(
                         document.getElementById('ticket'),

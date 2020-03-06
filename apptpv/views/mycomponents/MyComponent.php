@@ -12,6 +12,10 @@
                     console.warn(e);
                 }
             }
+            value(value){
+                if (value != undefined) this.el.value = value ; 
+                return this.el.value;
+            }
         }
     </script>
 </component>

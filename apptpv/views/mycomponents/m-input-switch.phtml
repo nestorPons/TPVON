@@ -1,4 +1,32 @@
-<component>
-    <m-checkbox id="--id_present" class='$$class' label="$$label" name='$$cb_name' value='$$value' onchange='$$onchange' />
+<component id="--id">
+    <m-checkbox id="--id_present" class='$$class' label="$$label" name='$$cb_name' value='$$value' />
     <m-input id="--id__input" type="date" label="$$caption" name="$$in_name" />
+    <script>
+        class MyInputSwitch extends MyComponent {
+            constructor(id) {
+                super(id);
+                this.el = this.cont.querySelector('input[type="date"]');
+                this.elch = this.el.parentNode;
+                this.elch.style.visibility = 'hidden';
+                
+                this.ch = this.cont.querySelector('input[type="checkbox"]');
+                this.cntch = this.ch.parentNode;
+                this.ch.addEventListener('change', _=>{
+                    if (this.ch.checked)
+                        this.elch.style.visibility = 'visible';
+                    else
+                        this.elch.style.visibility = 'hidden';
+                });
+            }
+            status() {
+                return this.ch.checked;
+            }
+            switch() {
+                if (this.status())
+                    this.elch.style.visibility = 'visible';
+                else
+                    this.elch.style.visibility = 'hidden';
+            }
+        }
+    </script>
 </component>
