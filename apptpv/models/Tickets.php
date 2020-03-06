@@ -65,7 +65,6 @@ class Tickets extends Query{
     }
     // Método genérico de captura de tickets con sus lineas
     // Data puede ser el id o un objeto con el id
-    // Se añade una propiedad total que se crea en tiempo de ejecución
     function get($data, bool $all = false){
         $id = is_object($data) ? $data->id : $data;
         $Data = new Data($this->getById($id));
@@ -79,12 +78,10 @@ class Tickets extends Query{
 
             // Se crea una linea
             $Line = new Lines($v); 
-            // Se añade el total de la linea al total del ticket
-            $this->total($Line->total());
         }
-
+        $Inv = new Invoice($id);
+        $Data->addItem($Inv->date(), 'fecha_factura');
         $Data->addItem($lines, 'lines');
-        $Data->addItem($this->total(), 'total');
         
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
@@ -121,7 +118,8 @@ class Tickets extends Query{
             $this->loadData(
                 $this->get($arr[0]['id'])
             );
-            return $this->toArray();
+            $Inv = new Invoice($id);
+             return array_merge($this->toArray(), ['fecha_factura' => $Inv->date()]);
         }
         else return false;
     }
@@ -129,10 +127,12 @@ class Tickets extends Query{
         $id = ($Data) ? $Data->id : $this->id; 
         $arr = $this->query("SELECT * FROM $this->table WHERE id > $id AND estado = 1 $filter ORDER BY id ASC  LIMIT 1;");
         if(!empty($arr)) {
+            $arr = 
             $this->loadData(
                 $this->get($arr[0]['id'])
             );
-            return $this->toArray();
+            $Inv = new Invoice($id);
+            return array_merge($this->toArray(), ['fecha_factura' => $Inv->date()]);
         }
         else return false;
     }

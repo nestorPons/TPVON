@@ -55,19 +55,19 @@
           this.data = [];
       }
       clear() {
-        this.el.getElementsByTagName('form')[0].reset()
-        return this
+        this.el.getElementsByTagName('form')[0].reset();
+        return this;
       }
       setTile(tile) {
-        this.el.getElementsByClassName('tile')[0].innerHTML = tile
-        return this
+        this.el.getElementsByClassName('tile')[0].innerHTML = tile;
+        return this;
       }
       open(data = null) {
-        if (data) this.load(data)
-        this.$switch.prop('checked', true)
-        let o = this.el.querySelector('[tabindex="1"]')
-        o != null && o.focus()
-        return this
+        if (data) this.load(data); 
+        this.$switch.prop('checked', true);
+        let o = this.el.querySelector('[tabindex="1"]');
+        o != null && o.focus();
+        return this;
       }
       close() {
         this.$switch.prop('checked', false)
@@ -79,7 +79,7 @@
           d = exist(data.id) ? data : data[0]
 
         // Cargamos la informacion en una variable para poder consultar
-        this.data = d
+        this.data = d;
 
         selects.each(function() {
           if (d.id != -1)
@@ -99,7 +99,7 @@
           } else $(this).val(d[$(this).attr('name')])
 
         })
-        return this
+        return this;
       }
       async getData(rsp) {
         const r = await app.formToObject(this.el);

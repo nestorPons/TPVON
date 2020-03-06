@@ -6,19 +6,22 @@
             <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)" />
             <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)" />
         </div>
-        <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onclick='app.ticket.toggle()' />
+        <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onchange='app.ticket.toggle()' />
         <m-input id="--id_date" type="date" label="Fecha vencimiento" name="fecha_vencimiento" /><br>
-        <m-btn caption="Imprimir" class="tertiary" onclick = "app.ticket.print(false)" tabindex="2"/>
-        <m-btn caption="A deber" class="primary" onclick = "app.ticket.print(true)" tabindex="3"/>
+        <m-input-switch />
+        <m-btn caption="Imprimir" class="tertiary" onclick="app.ticket.print(false)" tabindex="2" />
+        <m-btn caption="A deber" class="primary" onclick="app.ticket.print(true)" tabindex="3" />
     </m-modal>
     <style lang="less" scoped>
-        #--id_modal .card{ 
-            padding : 10px;
+        #--id_modal .card {
+            padding: 10px;
         }
-        #--id_pay{
+
+        #--id_pay {
             height: 5rem;
             font-size: 2rem;
         }
+
         .info {
             text-align: center;
             margin: 10px 0;
@@ -34,10 +37,11 @@
     </style>
     <script>
         app.ticket = {
+            section: document.getElementById('--id'),
             name: 'Tickets',
             Ticket: null,
             present: new MyCheckbox('--id_present'),
-            txtExpire: document.getElementById('--id_date'),
+            txtExpire: new MyInput('--id_date'),
             lbltotal: new MyLabel('--id_lbl1'),
             lblreturn: new MyLabel('--id_lbl2'),
             inputpay: new MyInput('--id_pay'),
@@ -61,8 +65,8 @@
                 change: document.getElementById('--id_lbl2_input'),
             },
             print(debt = false, callback) {
-                this.Ticket.fecha_cobro = debt ? false :  date.now('sql') ; 
-                
+                this.Ticket.fecha_cobro = debt ? false : date.now('sql');
+
                 this.put(false, _ => {
                     imprimirElemento(
                         document.getElementById('ticket'),
@@ -73,18 +77,19 @@
                 })
             },
             open(Ticket) {
-                this.modal.open()
+                this.section.removeAttribute('style');
+                this.modal.open();
                 // Añadimos el total a la casilla total
                 this.lbltotal.value(Ticket.total);
-
-                // Ocultamos campo fecha de vencimiento
                 this.toggle();
+
                 const
                     p1 = DB.get('empresa').then(d => d[0]),
                     p2 = DB.get('usuarios', 'nivel', 2).then(d => d[0]),
                     p3 = DB.get('config').then(d => d[0]);
 
                 Promise.all([p1, p2, p3]).then(d => {
+
                         const e = d[0],
                             u = d[1],
                             c = d[2];
@@ -102,14 +107,13 @@
                     })
                     .then(async dias => {
                         // Añadimos una fecha standar a la casilla
-                        this.txtExpire.value = date.add(app.tpv.date.value, dias, 'days', 'sql');
+                        this.txtExpire.value(date.add(app.tpv.date.value, dias, 'days', 'sql'));
 
                         // Reseteamos valor de la casilla regalo
                         this.present.checked(false);
                         this.Table.clear();
 
                         this.Ticket = Ticket;
-
                         let numFra = this.Ticket.fecha.getFullYear().toString().substr(2);
                         numFra += '/' + this.Ticket.id.toString().padStart(6, 0);
                         $('#ticket')
@@ -124,6 +128,8 @@
                             this.Table.addLine(line.id, [line.cantidad, nombre, line.dto, `${line.amo}€`]);
                         }
                         this.Table.total(this.Ticket.setTotal());
+                    }).catch(reason => {
+                        console.log(reason);
                     });
             },
             async put(sendMail = false, callback) {
@@ -131,7 +137,7 @@
                     this.Ticket.fecha = date.now('sql');
                     this.Ticket.estado = 1;
                     this.Ticket.regalo = this.present.checked() ? 1 : 0;
-                    this.Ticket.fecha_vencimiento = this.txtExpire.value; 
+                    this.Ticket.fecha_vencimiento = this.txtExpire.value();
 
 
                     // Guardamos los datos 
@@ -144,8 +150,14 @@
 
                 typeof callback === 'function' && callback();
             },
+            /** Muestra o oculta la casilla de fecha expiracion  */
             toggle(e) {
-                this.txtExpire.classList.toggle('hidden');
+
+                if (this.present.checked())
+                    this.txtExpire.cont.classList.remove('hidden');
+                else
+                    this.txtExpire.cont.classList.add('hidden');
+
             },
             close() {
                 this.modal.close();

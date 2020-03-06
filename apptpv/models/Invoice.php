@@ -15,5 +15,8 @@ class Invoice extends Query{
             // Si se pasa un id se busca el registro
             $this->loadData($this->getById($arg));
         }
-     }
+    }
+    function date(){
+        return $this->fecha; 
+    }
 }

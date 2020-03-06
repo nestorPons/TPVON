@@ -31,11 +31,10 @@
         }
     </style>
     <script>
-        class MyInput{
+        class MyInput extends MyComponent{
             constructor(id){
-                this.id = id;
-                this.component = document.getElementById(id);
-                this.el = this.component.getElementsByTagName('input')[0];
+                super(id);
+                this.el = this.cont.getElementsByTagName('input')[0];
             }
             value(value){
                 if (value != undefined) this.el.value = value ; 

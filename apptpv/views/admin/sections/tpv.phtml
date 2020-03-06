@@ -256,7 +256,7 @@
                 client: 2,
                 user: 0
             },
-            open() {7
+            open() {
                 this.selEmp.el.focus()
             },
             loadClient() {
@@ -528,7 +528,7 @@
                     this.Ticket = new Ticket(data)
 
                     // Si tiene lineas es antiguo y no se puede editar más
-                    if (data.lines.length > 0) this.Ticket.new = false
+                    if (data.fecha_factura == undefined) this.Ticket.new = false
 
                     if (data.estado != undefined) {
                         // Si es un antiguo ticket, las lineas no se pueden seleccionar
