@@ -8,10 +8,10 @@
                 this.el = this.cont.querySelector('input[type="date"]');
                 this.elch = this.el.parentNode;
                 this.elch.style.visibility = 'hidden';
-                
+
                 this.ch = this.cont.querySelector('input[type="checkbox"]');
                 this.cntch = this.ch.parentNode;
-                this.ch.addEventListener('change', _=>{
+                this.ch.addEventListener('change', _ => {
                     if (this.ch.checked)
                         this.elch.style.visibility = 'visible';
                     else
@@ -21,7 +21,7 @@
             status() {
                 return this.ch.checked;
             }
-            switch() {
+            switch () {
                 if (this.status())
                     this.elch.style.visibility = 'visible';
                 else
@@ -29,4 +29,21 @@
             }
         }
     </script>
+    <style>
+        #--id {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        #--id>component {
+            display: inline-block;
+            margin: 5px;
+        }
+        #--id>component>* {
+            -webkit-transition-duration: 0s;
+            -moz-transition-duration: 0s;
+            -o-transition-duration: 0s;
+            transition-duration: 0s;
+        }
+    </style>
 </component>
