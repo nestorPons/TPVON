@@ -51,6 +51,8 @@
             Table: new MyTable('--id_table1'),
             load() {
                 this.loadUsers()
+                this.txtFrom.value(date.now('sqldate'))
+                this.txtTo.value(date.now('sqldate'))
                 this.filter()
             },
             loadUsers() {
@@ -109,10 +111,11 @@
                 const printContents = {
                     innerHTML :
                         `<h1> Listado de ingresos </h1>
-                        <h3> Fecha inicio   : ${this.txtFrom.value())}</h3>
+                        <h3> Fecha inicio   : ${this.txtFrom.value()}</h3>
                         <h3> Fecha fin      : ${this.txtTo.value()}</h3>
                         <table> ${this.Table.html()} </table>
-                        <h4>Total: <b>${this.txtTotal.value}</b></h4>`};
+                        <h4>Total: <b>${this.txtTotal.value}</b></h4>`
+                }
                 imprimirElemento(printContents);
             },
         }

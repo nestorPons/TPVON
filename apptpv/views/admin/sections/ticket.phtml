@@ -6,10 +6,8 @@
             <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)" />
             <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)" />
         </div>
-        <m-checkbox id="--id_present" class='isPresent' label='Es regalo' name='control' value='1' onchange='app.ticket.toggle()' />
-        <m-input id="--id_date" type="date" label="Fecha vencimiento" name="fecha_vencimiento" /><br>
-        <m-input-switch id="--id_sw" label="Es regalo" caption="Fecha de vencimiento"/>
-        <m-btn caption="Imprimir" class="tertiary" onclick="app.ticket.print(false)" tabindex="2" />
+        <m-input-switch id="--id_sw" type="date" label="Es regalo" caption="Fecha de vencimiento" cb_name="control" in_name="fecha_vencimiento"/>
+        <m-btn id="--id_btn_success" caption="Imprimir" class="tertiary" onclick="app.ticket.print(false)" tabindex="2" />
         <m-btn caption="A deber" class="primary" onclick="app.ticket.print(true)" tabindex="3" />
     </m-modal>
     <style lang="less" scoped>
@@ -30,24 +28,19 @@
         .info>* {
             margin: 10px;
         }
-
-        .isPresent {
-            margin: 10px;
-        }
     </style>
     <script>
         app.ticket = {
             section: document.getElementById('--id'),
             name: 'Tickets',
             Ticket: null,
-            present: new MyCheckbox('--id_present'),
-            txtExpire: new MyInput('--id_date'),
             lbltotal: new MyLabel('--id_lbl1'),
             lblreturn: new MyLabel('--id_lbl2'),
             inputpay: new MyInput('--id_pay'),
             Table: new MyTable('ticket_table1'),
             modal: new MyModal(--id_modal),
             expire : new MyInputSwitch(--id_sw),
+            btnSuccess : new MyButton(--id_btn_success),
             change() {
                 let a = parseFloat(this.inputpay.value()),
                     b = parseFloat(this.lbltotal.value()),
@@ -66,7 +59,6 @@
                 change: document.getElementById('--id_lbl2_input'),
             },
             print(debt = false, callback) {
-                this.Ticket.fecha_cobro = debt ? false : date.now('sql');
                 this.put(false, _ => {
                     imprimirElemento(
                         document.getElementById('ticket'),
@@ -81,7 +73,6 @@
                 this.modal.open();
                 // Añadimos el total a la casilla total
                 this.lbltotal.value(Ticket.total);
-                this.toggle();
 
                 const
                     p1 = DB.get('empresa').then(d => d[0]),
@@ -106,11 +97,11 @@
                         return c.dias;
                     })
                     .then(async dias => {
-                        // Añadimos una fecha standar a la casilla
-                        this.txtExpire.value(date.add(app.tpv.date.value, dias, 'days', 'sql'));
-
                         // Reseteamos valor de la casilla regalo
-                        this.present.checked(false);
+                        this.expire.clear();
+                        // Añadimos una fecha standar a la casilla
+                        this.expire.value(date.add(app.tpv.date.value, dias, 'days', 'sql'));
+                        
                         this.Table.clear();
 
                         this.Ticket = Ticket;
@@ -133,12 +124,12 @@
                     });
             },
             async put(sendMail = false, callback) {
+
                 if (this.Ticket.new) {
                     this.Ticket.fecha = date.now('sql');
                     this.Ticket.estado = 1;
-                    this.Ticket.regalo = this.present.checked() ? 1 : 0;
-                    this.Ticket.fecha_vencimiento = this.txtExpire.value();
-
+                    this.Ticket.regalo = this.expire.checked() ? 1 : 0;
+                    this.Ticket.fecha_vencimiento = this.expire.value();
 
                     // Guardamos los datos 
                     let data = await DB.post('tickets', 'new', this.Ticket.sendData());
@@ -146,18 +137,11 @@
 
                     if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket);
                     app.tpv.add();
+                } else {
+                    this.
                 }
 
                 typeof callback === 'function' && callback();
-            },
-            /** Muestra o oculta la casilla de fecha expiracion  */
-            toggle(e) {
-
-                if (this.present.checked())
-                    this.txtExpire.cont.classList.remove('hidden');
-                else
-                    this.txtExpire.cont.classList.add('hidden');
-
             },
             close() {
                 this.modal.close();

@@ -24,11 +24,11 @@
         }
     </style>
     <script>
-        class MyCheckbox{
+        class MyCheckbox extends MyComponent{
             constructor(id){
-                this.id = id; 
-                this.component = document.getElementById(id);
-                this.el = this.component.getElementsByTagName('input')[0]
+                super(id);
+                this.cnt = document.getElementById(id);
+                this.el = this.cnt.getElementsByTagName('input')[0]
             }
             value(value){
                 if (value != undefined) this.el.value = value ; 

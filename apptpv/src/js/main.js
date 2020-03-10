@@ -87,10 +87,10 @@ $(document)
 })
 // FIN DE FORMULARIOS
 .on('change', 'input', function(e){
+    $parent  = $(this).parents('section');
     const 
         p = $(this).parents('section').attr('id');
-    
-    window[p].change = true;
+    if(window[p] != undefined) window[p].change = true;
 
 })
 // Comportamiento general de los links 

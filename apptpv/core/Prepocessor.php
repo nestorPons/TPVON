@@ -364,7 +364,7 @@ class Prepocessor
         ) {
             foreach ($tags as $tag) {
                 $class_js = $tag->body();
-                // Si contiene alguna clase la enviamos al archivo bundle.js
+                // Buscamos las clases
                 if (preg_match_all('/ class (\w*?).*{/i', $class_js, $matches)) {
                     if (
                         // Comprueba si la clase extiende de alguna otra
@@ -379,6 +379,7 @@ class Prepocessor
                                 1 => nombre de la clase padre 
                                 2 => todo el contenido
                                 */
+                              
                                 $this->queueJS[] = [$matches[1][$i], $matches[2][$i], $class_js];
                             }
                         }
@@ -402,6 +403,7 @@ class Prepocessor
                     unset($this->queueJS[$key]);
                 }
             }
+
             // Mensaje de error de clase extendida no encontrada
             if ($this->bc > 10) {
                 die("ERROR!! <br> La clase js {$value[0]}, no ha podido ser cargada!!");
@@ -415,6 +417,7 @@ class Prepocessor
     private function load_class_js($class_js)
     {
         if (preg_match('/class (\w*){1}/si', $class_js, $matches)) {
+
             if (!in_array($matches[1], $this->loadeds)) {
                 // MINIMIFICAMOS JS
                 $minifier = new Minify\JS;
@@ -422,6 +425,7 @@ class Prepocessor
                 file_put_contents(\FILE\BUNDLE_JS, $minifier->minify(), FILE_APPEND);
 
                 // Registramos la clase como cargada 
+ 
                 $this->loadeds[] = $matches[1];
             }
         }
@@ -439,6 +443,7 @@ class Prepocessor
                 $class_min = $minifier->minify();
                 file_put_contents(\FILE\BUNDLE_JS, $class_min, FILE_APPEND);
                 // Registramos la clase como cargada 
+            
                 $this->loadeds[] = $key;
                 unset($this->queueJS[$key]);
             }

@@ -24,12 +24,12 @@ class Tickets extends Query{
         return $data;
     }
     function new(Data $Post){
+
         //Comprobamos si existe
         if($Post->id == -1 || !$this->getById($Post->id)){
             $lines = $Post->lines; 
             $end_date = $Post->fecha_vencimiento; 
             $isPresent = boolval($Post->regalo); 
-            $date_payment = $Post->fecha_cobro;
         
             // Limpiamos post de datos indeseados
             $Post->filter(new Tickets);
@@ -38,11 +38,6 @@ class Tickets extends Query{
 
             // Guardamos el id generado 
             $this->id = $this->add($Post->toArray(['lines']));
-            
-            // Si no es una deuda generanos un registro de factura simplificada
-            if($date_payment != 'false'){
-                new Invoice(['fecha' => $date_payment, 'id_ticket' => $this->id]);
-            }
 
             // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
             if($isPresent) {
@@ -94,6 +89,7 @@ class Tickets extends Query{
     function between(Data $Data){
         $filterUser = (!empty($Data->u)) ? "AND id_cliente = {$Data->u}" : ''; 
         $arr_tickets =  $this->getBetween('fecha',$Data->f1 . ' 00:00:00.000', $Data->f2 . ' 23:59:59.999', $filterUser);
+
         foreach($arr_tickets as $key => $ticket){
             $total = 0; 
             $lines = new Lines; 

@@ -527,8 +527,8 @@
 
                     this.Ticket = new Ticket(data)
 
-                    // Si tiene lineas es antiguo y no se puede editar más
-                    if (data.fecha_factura == undefined) this.Ticket.new = false
+                    // NUEVO O EDITADO
+                    if (data.lines.length > 0) this.Ticket.new = false
 
                     if (data.estado != undefined) {
                         // Si es un antiguo ticket, las lineas no se pueden seleccionar

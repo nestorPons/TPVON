@@ -508,6 +508,8 @@ const date = {
             s = f.getSeconds().toString().padStart(2, '0');
 
         switch (arg) {
+            case 'sqldate':
+                return y + "-" + m + "-" + d;
             case 'date':
                 return d + "/" + m + "/" + y;
             case 'hour':
