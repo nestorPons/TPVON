@@ -96,6 +96,7 @@ trait ToolsComponents
     public static function prepare(string $str): string
     {
         $str = str_replace("'", '"', $str);
+        return $str;
     }
 
     /**
@@ -113,5 +114,25 @@ trait ToolsComponents
         $json_val = str_replace('"{', '{', $json_val);
 
         return json_decode($json_val) ?? $json_val;
+    }
+    /**
+     * Extrae el tag solo pattern por su singularidad. 
+     * @param string con los atributos html
+     * @return array bool si ha habido cambios, string con cambios con el atributo pattern y la cadena sin el atributo.  
+     */
+    public static function extract_pattern_attr(string $str_attrs): array
+    {
+        $attr[] = null;
+        $value = false; 
+        // Caso especial pattern se busca manualmente por su particularidad
+        if (preg_match("/\"pattern\"\s*:\s*([\'\"])(.*?)\\1,?/sim", $str_attrs, $match)) {
+            $value = true; 
+            // Guardamos el elemento
+            $attr = $match[2];
+            // Lo quitamos del estring de busqueda          
+            $str_attrs = str_replace($match[0], '', $str_attrs);
+        }
+
+        return [$value, $attr, $str_attrs];
     }
 }

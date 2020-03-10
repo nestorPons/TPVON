@@ -17,8 +17,15 @@ class Component extends Tag
             if (is_string($data)) {
                 // Tratamos el texto si lleva tags de php
                 $data = self::search_globals_vars($data);
+                $arr_pattern = self::extract_pattern_attr($data);
+
+                if($arr_pattern[0]) {
+                    $this->attrs('pattern',$arr_pattern[1]);
+                    $data = $arr_pattern[2]; 
+                }
                 $data = self::my_json_decode($data);
             }
+
             foreach ($data as $key => $val) {
                 $this->attrs($key, $val);
             }

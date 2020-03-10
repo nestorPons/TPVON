@@ -93,7 +93,7 @@ class Company extends Query{
         // Añadimos usuario cliente invitado por defecto 
         $Guest = new User;
         $Guest->new(new Data([
-            'nombre' => 'invitado',
+            'nombre' => 'Invitado',
             'nivel' => 0
         ]));
   
