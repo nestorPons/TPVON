@@ -25,11 +25,8 @@
         class MySearch extends MyComponent{
             // Id del componente general no del select
             constructor(id) {
+                super(id); 
                 try {
-                    this.cont = (typeof id == 'string') ?
-                        document.getElementById(id) :
-                        id;
-
                     this.CLASS_SELECTED = 'valid'; // Constante del estado seleccionado del select
 
                     this.el = (typeof id == 'string') ?

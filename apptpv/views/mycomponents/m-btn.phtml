@@ -11,6 +11,10 @@
                 super(id); 
                 this.el = this.cont.getElementsByTagName('button')[0]; 
             }
+            caption(value){
+                if (value != undefined) this.el.innerText = value ; 
+                return this.el.innerText;
+            }
         }
     </script>
 </component>

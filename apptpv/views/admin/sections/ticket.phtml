@@ -137,8 +137,9 @@
 
                     if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket);
                     app.tpv.add();
+                    this.btnSuccess.caption('Imprimir')
                 } else {
-                    this.
+                    this.btnSuccess.caption('Copia')
                 }
 
                 typeof callback === 'function' && callback();
