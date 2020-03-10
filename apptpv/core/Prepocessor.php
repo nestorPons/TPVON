@@ -379,7 +379,6 @@ class Prepocessor
                                 1 => nombre de la clase padre 
                                 2 => todo el contenido
                                 */
-                              
                                 $this->queueJS[] = [$matches[1][$i], $matches[2][$i], $class_js];
                             }
                         }
@@ -391,7 +390,6 @@ class Prepocessor
                 }
             }
         }
-        $this->load_queueJS();
     }
     private function load_queueJS()
     {
@@ -403,7 +401,6 @@ class Prepocessor
                     unset($this->queueJS[$key]);
                 }
             }
-
             // Mensaje de error de clase extendida no encontrada
             if ($this->bc > 10) {
                 die("ERROR!! <br> La clase js {$value[0]}, no ha podido ser cargada!!");
@@ -417,7 +414,6 @@ class Prepocessor
     private function load_class_js($class_js)
     {
         if (preg_match('/class (\w*){1}/si', $class_js, $matches)) {
-
             if (!in_array($matches[1], $this->loadeds)) {
                 // MINIMIFICAMOS JS
                 $minifier = new Minify\JS;
@@ -425,7 +421,6 @@ class Prepocessor
                 file_put_contents(\FILE\BUNDLE_JS, $minifier->minify(), FILE_APPEND);
 
                 // Registramos la clase como cargada 
- 
                 $this->loadeds[] = $matches[1];
             }
         }
@@ -436,16 +431,8 @@ class Prepocessor
     private function load_class_childrens()
     {
         foreach ($this->queueJS as $key => $value) {
-            if (in_array($key, $this->loadeds)) {
-                // MINIMIFICAMOS JS
-                $minifier = new Minify\JS;
-                $minifier->add($value);
-                $class_min = $minifier->minify();
-                file_put_contents(\FILE\BUNDLE_JS, $class_min, FILE_APPEND);
-                // Registramos la clase como cargada 
-            
-                $this->loadeds[] = $key;
-                unset($this->queueJS[$key]);
+            if (in_array($value[1], $this->loadeds)) {
+                $this->load_class_js($value[2]);
             }
         }
     }
