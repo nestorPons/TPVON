@@ -92,7 +92,7 @@ CREATE TABLE `tickets_regalo` (
   `fecha_vencimiento` date DEFAULT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish2_ci;
 
-CREATE TABLE `facturas` (
+CREATE TABLE `impagos` (
   `id` BIGINT(20) UNSIGNED NOT NULL,
   `fecha` DATETIME NULL DEFAULT NULL,
   `id_ticket` BIGINT(20) UNSIGNED NOT NULL
@@ -153,7 +153,7 @@ ADD
   KEY `id_user` (`id_gerente`);
 
 ALTER TABLE
-  `facturas`
+  `impagos`
 ADD
   PRIMARY KEY (`id`),
 ADD
@@ -252,6 +252,12 @@ ADD
   PRIMARY KEY (`id`);
 
 ALTER TABLE
+  `impagos`
+MODIFY
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE
   `articulos`
 MODIFY
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
@@ -317,7 +323,7 @@ ADD
   CONSTRAINT `lreg_ibfk_1` FOREIGN KEY (`id`) REFERENCES `lineas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE
-  `facturas`
+  `impagos`
 ADD
   CONSTRAINT `fac_ibfk_1` FOREIGN KEY (`id_ticket`) REFERENCES `tickets` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -391,9 +397,9 @@ WHERE
 CREATE VIEW vista_deudas AS
 SELECT t.fecha, t.id, t.id_cliente, u.nombre, t.total  
   FROM tickets t
-  LEFT OUTER JOIN facturas f ON f.id_ticket = t.id
+  INNER JOIN impagos f ON f.id_ticket = t.id
   INNER JOIN usuarios u ON t.id_cliente = u.id
-  WHERE f.id_ticket IS NULL;
+  WHERE f.fecha IS NULL;
 
 INSERT INTO
   `config`(`id`, `iva`, `dias`)

@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\models\Tickets as Model;
+use \app\models\{Tickets as Model, Debt};
 use \app\core\{Query, Data, Controller};
 
 /**
@@ -38,5 +38,14 @@ class Tickets extends Controller{
     function unpaid(){
         $u = new Query('vista_deudas');
         return $u->getAll();
+    }
+    function paydebt(){
+        $deb = new Debt; 
+        $d = $deb->getBy(['id_ticket' => $this->Data->id_ticket]);
+        $deb->loadData($d);
+        return $deb->saveById(['fecha'=>date('Y-m-d h:i:s')]);
+    }
+    function debt(){
+        return new Debt(['id_ticket'=>$this->Data->id_ticket]);
     }
 }

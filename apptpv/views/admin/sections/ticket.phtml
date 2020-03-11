@@ -6,9 +6,9 @@
             <m-label id="--id_lbl1" label="Total" value="0" color="var(--red-color)" />
             <m-label id="--id_lbl2" label="A devolver" value="0" color="var(--main-color)" />
         </div>
-        <m-input-switch id="--id_sw" type="date" label="Es regalo" caption="Fecha de vencimiento" cb_name="control" in_name="fecha_vencimiento"/>
-        <m-btn id="--id_btn_success" caption="Imprimir" class="tertiary" onclick="app.ticket.print(false)" tabindex="2" />
-        <m-btn caption="A deber" class="primary" onclick="app.ticket.print(true)" tabindex="3" />
+        <m-input-switch id="--id_sw" type="date" label="Es regalo" caption="Fecha de vencimiento" cb_name="control" in_name="fecha_vencimiento" />
+        <m-btn id="--id_btn_success" caption="Imprimir" class="tertiary" onclick="app.ticket.print()" tabindex="2" />
+        <m-btn id="--id_btn_debt" caption="A deber" class="primary" onclick="app.ticket.debt()" tabindex="3" />
     </m-modal>
     <style lang="less" scoped>
         #--id_modal .card {
@@ -39,8 +39,11 @@
             inputpay: new MyInput('--id_pay'),
             Table: new MyTable('ticket_table1'),
             modal: new MyModal(--id_modal),
-            expire : new MyInputSwitch(--id_sw),
-            btnSuccess : new MyButton(--id_btn_success),
+            expire: new MyInputSwitch(--id_sw),
+            btn: {
+                success: new MyButton(--id_btn_success),
+                debt: new MyButton(--id_btn_debt)
+            },
             change() {
                 let a = parseFloat(this.inputpay.value()),
                     b = parseFloat(this.lbltotal.value()),
@@ -58,7 +61,33 @@
                 iva: document.getElementById('ticket_iva'),
                 change: document.getElementById('--id_lbl2_input'),
             },
-            print(debt = false, callback) {
+            debt() {
+                if (this.Ticket.hasDebt()) {
+                    let data = {
+                        controller : 'tickets', 
+                        action : 'paydebt', 
+                        data : {
+                            id_ticket : this.Ticket.id
+                        }
+                    }
+// AKI :: la base de datos de deudas es incremental por lo que hay q quitarla de localhost
+                    app.post(data , async r =>{
+                        let d = await DB.get('impagos', 'id_ticket', this.Ticket.id);
+                        d[0].fecha = date.now(); 
+                        DB.set('impagos', d[0], 'id_ticket', this.Ticket.id);
+                    }); 
+
+                    this.close();
+                    app.tpv.add();
+                } else {
+                    this.print(_ => {
+                        DB.post('tickets', 'debt', {
+                            id_ticket: this.Ticket.id
+                        });
+                    });
+                }
+            },
+            print(callback) {
                 this.put(false, _ => {
                     imprimirElemento(
                         document.getElementById('ticket'),
@@ -69,6 +98,27 @@
                 })
             },
             open(Ticket) {
+                this.Ticket = Ticket;
+                if (this.Ticket.isNew()) {
+                    // NUEVO PUEDE SER IMPAGO
+                    this.btn.debt.on();
+                    this.btn.success.caption('Imprimir');
+                    this.btn.debt.caption('A deber');
+
+
+
+                } else {
+                    if (this.Ticket.hasDebt()) {
+                        // NO NUEVO CON IMPAGO (SACAR COPIAS Y ELIMINAR EL IMPAGO)
+                        this.btn.debt.on();
+                        this.btn.debt.caption('Eliminar deuda');
+                    } else {
+                        // NO NUEVO SIN IMPAGO (SOLO PUEDE SACAR COPIAS TICKET)
+                        this.btn.debt.off();
+                    }
+                    this.btn.success.caption('Copia');
+                }
+
                 this.section.removeAttribute('style');
                 this.modal.open();
                 // Añadimos el total a la casilla total
@@ -101,7 +151,7 @@
                         this.expire.clear();
                         // Añadimos una fecha standar a la casilla
                         this.expire.value(date.add(app.tpv.date.value, dias, 'days', 'sql'));
-                        
+
                         this.Table.clear();
 
                         this.Ticket = Ticket;
@@ -122,10 +172,10 @@
                     }).catch(reason => {
                         console.log(reason);
                     });
+
             },
             async put(sendMail = false, callback) {
-
-                if (this.Ticket.new) {
+                if (this.Ticket.isNew()) {
                     this.Ticket.fecha = date.now('sql');
                     this.Ticket.estado = 1;
                     this.Ticket.regalo = this.expire.checked() ? 1 : 0;
@@ -137,11 +187,7 @@
 
                     if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket);
                     app.tpv.add();
-                    this.btnSuccess.caption('Imprimir')
-                } else {
-                    this.btnSuccess.caption('Copia')
                 }
-
                 typeof callback === 'function' && callback();
             },
             close() {

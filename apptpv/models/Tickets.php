@@ -2,7 +2,7 @@
 use \app\core\{Query, Data, Error};
 
 class Tickets extends Query{
-    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines, $total = 0.0; 
+    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines, $total = 0.0, $isDebt; 
     protected $table = 'tickets';
 
     function __construct($args = null){
@@ -11,6 +11,7 @@ class Tickets extends Query{
             $this->loadData(
                 $this->get($args)
             );
+            
         }else if(is_object($args)){
             $this->loadData($args);
         }
@@ -24,7 +25,6 @@ class Tickets extends Query{
         return $data;
     }
     function new(Data $Post){
-
         //Comprobamos si existe
         if($Post->id == -1 || !$this->getById($Post->id)){
             $lines = $Post->lines; 
@@ -38,6 +38,7 @@ class Tickets extends Query{
 
             // Guardamos el id generado 
             $this->id = $this->add($Post->toArray(['lines']));
+        
 
             // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
             if($isPresent) {
@@ -74,8 +75,7 @@ class Tickets extends Query{
             // Se crea una linea
             $Line = new Lines($v); 
         }
-        $Inv = new Invoice($id);
-        $Data->addItem($Inv->date(), 'fecha_factura');
+
         $Data->addItem($lines, 'lines');
         
         if($all) return $Data;
@@ -89,7 +89,6 @@ class Tickets extends Query{
     function between(Data $Data){
         $filterUser = (!empty($Data->u)) ? "AND id_cliente = {$Data->u}" : ''; 
         $arr_tickets =  $this->getBetween('fecha',$Data->f1 . ' 00:00:00.000', $Data->f2 . ' 23:59:59.999', $filterUser);
-
         foreach($arr_tickets as $key => $ticket){
             $total = 0; 
             $lines = new Lines; 
@@ -108,18 +107,20 @@ class Tickets extends Query{
         return $arr_tickets; 
     }
     function prev(Data $Data = null, String $filter = ''){
+
         $id = ($Data) ? $Data->id : $this->id; 
         $arr = $this->query("SELECT * FROM $this->table WHERE id < $id AND estado = 1 $filter ORDER BY id DESC  LIMIT 1;");
         if(!empty($arr)) {
             $this->loadData(
                 $this->get($arr[0]['id'])
             );
-            $Inv = new Invoice($id);
-             return array_merge($this->toArray(), ['fecha_factura' => $Inv->date()]);
+  
+             return $this->toArray();
         }
         else return false;
     }
     function next(Data $Data = null, String $filter = ''){
+
         $id = ($Data) ? $Data->id : $this->id; 
         $arr = $this->query("SELECT * FROM $this->table WHERE id > $id AND estado = 1 $filter ORDER BY id ASC  LIMIT 1;");
         if(!empty($arr)) {
@@ -127,8 +128,7 @@ class Tickets extends Query{
             $this->loadData(
                 $this->get($arr[0]['id'])
             );
-            $Inv = new Invoice($id);
-            return array_merge($this->toArray(), ['fecha_factura' => $Inv->date()]);
+            return $this->toArray();
         }
         else return false;
     }

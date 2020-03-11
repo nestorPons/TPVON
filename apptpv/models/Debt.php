@@ -1,9 +1,9 @@
 <?php namespace app\models;
 use \app\core\{Query};
 
-class Invoice extends Query{
-    public $id_ticket, $fecha; 
-    protected $table = 'facturas';
+class Debt extends Query{
+    public $id, $id_ticket, $fecha; 
+    protected $table = 'impagos';
 
     function __construct($arg = null){
         parent::__construct();
@@ -14,7 +14,7 @@ class Invoice extends Query{
         } else if(is_int($arg)){
             // Si se pasa un id se busca el registro
             $this->loadData($this->getById($arg));
-        }
+        } 
     }
     function date(){
         return $this->fecha; 

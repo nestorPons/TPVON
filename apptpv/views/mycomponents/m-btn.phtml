@@ -5,15 +5,30 @@
 
         @if ($$caption) <span class="caption">$$caption</span> @endif
     </button>
+    <style>
+        #--id button:disabled{
+            color: grey !important;
+            border-color: grey !important;
+        }
+    </style>
     <script>
         class MyButton extends MyComponent {
             constructor (id) {
                 super(id); 
                 this.el = this.cont.getElementsByTagName('button')[0]; 
+                this.cap = this.el.getElementsByClassName('caption')[0]; 
             }
             caption(value){
-                if (value != undefined) this.el.innerText = value ; 
-                return this.el.innerText;
+                if (value != undefined) this.cap.innerText = value ; 
+                return this.cap.innerText;
+            }
+            on(){
+                this.el.removeAttribute('disabled');
+                return this; 
+            }
+            off(){
+                this.el.setAttribute('disabled', true); 
+                return this;
             }
         }
     </script>

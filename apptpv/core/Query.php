@@ -229,7 +229,7 @@ class Query
     // Guarda registro mediante su id
     public function saveById(array $args = null)
     {
-        $id = array_key_exists('id', $args) ? $args['id'] : $this->id();
+        $id = array_key_exists('id', $args) ? $args['id'] : $this->id;
         
         if(!$args) $args = $this->getVars();
         $sql = $this->getSQLUpdate($args, "id=" . $id);

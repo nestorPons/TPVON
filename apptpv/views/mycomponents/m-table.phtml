@@ -113,10 +113,7 @@
                 this.$table.animate({scrollTop: this.$table.height()}, 100);
             }
             clearLines() {
-                let rows  = this.body.getElementsByTagName('tr'); 
-                for(let i of rows){
-                    this.body.removeChild(i); 
-                }
+                this.body.innerHTML = '' ;
                 return this;
             }
             clear() {

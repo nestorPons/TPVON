@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\models\{Items, Tickets, User, Company, Control, Config, Family};
+use \app\models\{Items, Tickets, User, Company, Control, Config, Family, Debt};
 use \app\core\{Query, Data, Controller};
 
 /**
@@ -26,6 +26,7 @@ class Admin extends Controller{
         $Promos = new Query('promos'); 
         $Users  = new User;
         $Fam    = new Family;
+        $Debts  = new Debt;
         
         $data['jwt'] = $this->jwt;
 
@@ -45,6 +46,8 @@ class Admin extends Controller{
         $data['data_company'] = json_encode($Company->getAll());
         
         $data['promos'] = json_encode($Promos->getAll()); 
+
+        $data['debts'] = json_encode($Debts->getAll()); 
 
         $data['Users'] = $Users->all();
         $data['jsonUsers'] = json_encode($data['Users']); // para js

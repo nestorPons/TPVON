@@ -1,7 +1,7 @@
 <section id="tpv">
     <m-search id="--id_sel1" label="Codigo" name="servicio" required="true" tabindex="4" onblur="app.tpv.loadLine()" />
     <m-search id="--id_sel2" label="Descripción" tabindex="6" onchange="app.tpv.searchDescription()" />
-    <m-select id="--id_sel3" label="Operador" name="servicio" required="true" tabindex="1" default/>
+    <m-select id="--id_sel3" label="Operador" name="servicio" required="true" tabindex="1" default />
     <m-select id="--id_sel4" label="Cliente" name="servicio" required="true" tabindex="2" onchange="app.tpv.loadClient()" />
     <m-input id="--id_input1" type="text" label="id" readonly="true" />
     <m-input id="--id_input2" type="text" label="Fecha" readonly="true" />
@@ -12,7 +12,7 @@
     <m-input id="--id_input7" type="number" label="Importe" value="0" readonly />
     <m-input id="--id_input8" type="number" label="Total" value="0" readonly />
     <m-btn-success id="--id_btn1" tabindex="5" onclick="app.tpv.addLine()" />
-    <m-btn id="--id_btn2" caption="Borrar" tabindex="10" onclick="app.tpv.clearLine()" class="secondary"/>
+    <m-btn id="--id_btn2" caption="Borrar" tabindex="10" onclick="app.tpv.clearLine()" class="secondary" />
     <m-btn id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()" class="primary" />
     <m-table id="--id_table1" columns="['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €']" class="hoverable" onclick="app.tpv.loadLineFromTable(window.event)" />
 
@@ -23,7 +23,7 @@
         grid-template-columns: 1fr auto 1fr 1fr 1fr 1fr 1fr;
         grid-row-gap: 5px;
 
-        #--id_input8{
+        #--id_input8 {
             font-size: 2rem;
         }
 
@@ -164,6 +164,7 @@
                 this.id_usuario = null;
                 this.id_cliente = null;
                 this.fecha = null;
+                this.debt = false;
 
                 this.estado = 1;
                 this.iva = null;
@@ -179,7 +180,9 @@
                     this.iva = data.iva;
                     this.estado = (data.estado != undefined) ? data.estado : 1;
                     this.addLines(data.lines);
-                    this.setTotal()
+                    this.setTotal();
+                    DB.get('impagos', 'id_ticket', this.id).then(d => this.debt = d.length != 0);
+                
                 };
             };
             addLines(dataLines) {
@@ -227,7 +230,14 @@
                 delete props.new
                 return props
             }
-
+            isNew(value) {
+                if (value != undefined) this.new = value;
+                return this.new;
+            }
+            hasDebt(value){
+                if (value != undefined) this.debt = value;
+                return this.debt;
+            }
         }
     </script>
     <script>
@@ -240,27 +250,31 @@
             lastId: $$tickets_new_id,
             Ticket: new Ticket(),
             Table: new MyTable('--id_table1'),
-            txtId: new MyInput('--id_input1'),
-            date: new MyInput('--id_input2'),
-            hour: new MyInput('--id_input3'),
-            quantity: new MyInput('--id_input4'),
-            price: new MyInput('--id_input5'),
-            dto: new MyInput('--id_input6'),
-            amount: new MyInput('--id_input7'),
-            txtTotal: new MyInput('--id_input8'),
-            selCode: new MySearch('--id_sel1'),
-            selDes: new MySearch('--id_sel2'),
-            selEmp: new MySelect('--id_sel3'),
-            selCli: new MySelect('--id_sel4'),
+            txt: {
+                total: new MyInput('--id_input8'),
+                id: new MyInput('--id_input1'),
+                date: new MyInput('--id_input2'),
+                hour: new MyInput('--id_input3'),
+                price: new MyInput('--id_input5'),
+                dto: new MyInput('--id_input6'),
+                amount: new MyInput('--id_input7'),
+                quantity: new MyInput('--id_input4'),
+            },
+            sel: {
+                code: new MySearch('--id_sel1'),
+                des: new MySearch('--id_sel2'),
+                emp: new MySelect('--id_sel3'),
+                cli: new MySelect('--id_sel4')
+            },
             default: {
                 client: 2,
                 user: 0
             },
             open() {
-                this.selEmp.el.focus()
+                this.sel.emp.el.focus();
             },
             loadClient() {
-                this.client = new User(this.selCli.value())
+                this.client = new User(this.sel.cli.value())
             },
             load() {
                 this.add()
@@ -268,8 +282,8 @@
                 this.loadServ()
             },
             loadUsers() {
-                this.selEmp.clear()
-                this.selCli.clear()
+                this.sel.emp.clear()
+                this.sel.cli.clear()
 
                 DB
                     .get('usuarios', 'estado', 1)
@@ -291,14 +305,14 @@
                     })
                     .then(users => {
                         for (let u of users) {
-                            if (u.nivel > 0) this.selEmp.addOption(u.id, u.nombre)
-                            this.selCli.addOption(u.id, u.nombre)
-                            if (u.codigo) this.selCli.addOption(u.id, u.codigo)
+                            if (u.nivel > 0) this.sel.emp.addOption(u.id, u.nombre)
+                            this.sel.cli.addOption(u.id, u.nombre)
+                            if (u.codigo) this.sel.cli.addOption(u.id, u.codigo)
                         }
                     })
             },
             loadServ() {
-                this.selCode.clear()
+                this.sel.code.clear()
                 DB.get('servicios', 'estado', 1)
                     // Ordenamos los resultados 
                     .then(data => {
@@ -318,8 +332,8 @@
                     })
                     .then(serv => {
                         for (s of serv) {
-                            this.selCode.addOption(s.id, s.codigo)
-                            this.selDes.addOption(s.id, s.descripcion)
+                            this.sel.code.addOption(s.id, s.codigo)
+                            this.sel.des.addOption(s.id, s.descripcion)
                         }
                     })
             },
@@ -329,10 +343,10 @@
             async reset() {
                 DB.get('empresa').then(d => {
                     this.Ticket = new Ticket();
-                    this.date.value(date.now('date'));
-                    this.hour.value(date.now('hour'));
-                    this.dto.value(0);
-                    this.selCli.value(0);
+                    this.txt.date.value(date.now('date'));
+                    this.txt.hour.value(date.now('hour'));
+                    this.txt.dto.value(0);
+                    this.sel.cli.value(0);
                     this.clearLine();
                     this.clearLines();
                     this.clearUsers();
@@ -343,8 +357,8 @@
             },
             // Cargamos los datos al Ticket
             async create() {
-                this.Ticket.id_usuario = this.selEmp.value()
-                this.Ticket.id_cliente = this.selCli.value()
+                this.Ticket.id_usuario = this.sel.emp.value()
+                this.Ticket.id_cliente = this.sel.cli.value()
                 this.Ticket.fecha = new Date
                 this.Ticket.id = this.currentId
                 this.Ticket.iva = await DB.get('config').then(d => d[0].iva)
@@ -356,32 +370,32 @@
 
             },
             calculate() {
-                let amount = this.quantity.value() * this.price.value(),
-                    dto = this.dto.value() * amount / 100,
+                let amount = this.txt.quantity.value() * this.txt.price.value(),
+                    dto = this.txt.dto.value() * amount / 100,
                     total = amount - dto;
 
-                return this.amount.value(total.toFixed(2));
+                return this.txt.amount.value(total.toFixed(2));
 
             },
             clearLine() {
-                this.selCode.default();
-                this.selDes.default();
-                this.quantity.value(1);
-                this.price.value(0);
-                this.amount.value(0);
-                //this.selCode.el.focus()
+                this.sel.code.default();
+                this.sel.des.default();
+                this.txt.quantity.value(1);
+                this.txt.price.value(0);
+                this.txt.amount.value(0);
+                //this.sel.code.el.focus()
                 return this;
             },
             clearLines() {
-                this.Table.clearLines()
+                this.Table.clearLines();
             },
             clearUsers() {
-                this.selCli.reset()
-                this.selEmp.reset()
+                this.sel.cli.reset()
+                this.sel.emp.reset()
             },
             printTotal() {
                 this.total = this.Ticket.setTotal();
-                this.txtTotal.value(this.total);
+                this.txt.total.value(this.total);
             },
             addLine() {
                 this.calculate()
@@ -390,16 +404,16 @@
                 let line =
                     this.Ticket.addLine(
                         this.Table.line() + 1,
-                        this.selCode.value(),
-                        this.quantity.value(),
-                        this.price.value(),
-                        this.dto.value()
+                        this.sel.code.value(),
+                        this.txt.quantity.value(),
+                        this.txt.price.value(),
+                        this.txt.dto.value()
                     );
 
                 // Validamos los d  mos en la tabla
                 if (line.articulo)
                     this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto, line.amo)
-                else this.selCode.el.focus
+                else this.sel.code.el.focus
             },
             // Estrategia de promocion de filiacion clientes VIP por tiempo 
             addPromo(callback) {
@@ -410,7 +424,7 @@
                             // Aplicamos la promocion si el último ticket esta dentro del periodo establecido como valido
                             if (this.client.lastTicket &&
                                 promo &&
-                                date.diff(this.client.lastTicket, date.actual()) <= promo.valor) this.dto.value(promo.dto)
+                                date.diff(this.client.lastTicket, date.actual()) <= promo.valor) this.txt.dto.value(promo.dto)
                             callback()
                         })
                 } else {
@@ -430,24 +444,24 @@
             // Cargamos una linea de edición mediante el código del servicio con los datos predeterminados (descripción, precio ... )
             loadLine() {
                 // Comprobacion de que el codigo existe 
-                if (this.selCode.validate()) {
-                    this.selCode.removeClass('invalid').addClass('valid');
-                    const id = this.selCode.value()
+                if (this.sel.code.validate()) {
+                    this.sel.code.removeClass('invalid').addClass('valid');
+                    const id = this.sel.code.value()
                     this.addPromo(_ => {
                         if (id) {
                             DB.get('servicios', 'id', id)
                                 .then(d => d[0])
                                 .then(el => {
-                                    this.selDes.value(id);
-                                    this.price.value(el.precio);
-                                    this.quantity.value(1);
-                                    this.dto.value(0);
+                                    this.sel.des.value(id);
+                                    this.txt.price.value(el.precio);
+                                    this.txt.quantity.value(1);
+                                    this.txt.dto.value(0);
                                     this.calculate();
                                 })
                         }
                     })
                 } else {
-                    this.selCode.removeClass('valid').addClass('invalid');
+                    this.sel.code.removeClass('valid').addClass('invalid');
                 }
             },
             // Para editar las lineas de las tablas
@@ -463,12 +477,12 @@
                     DB.get('servicios', 'id', line.articulo)
                         .then(d => d[0])
                         .then(d => {
-                            this.selCode.value(line.articulo);
-                            this.selDes.value(line.articulo);
-                            this.quantity.value(line.cantidad);
-                            this.price.value(line.precio);
-                            this.dto.value(line.dto);
-                            this.amount.value(this.calculate());
+                            this.sel.code.value(line.articulo);
+                            this.sel.des.value(line.articulo);
+                            this.txt.quantity.value(line.cantidad);
+                            this.txt.price.value(line.precio);
+                            this.txt.dto.value(line.dto);
+                            this.txt.amount.value(this.calculate());
 
                             this.Table.delLine(path[1].attributes.idline.value);
 
@@ -519,27 +533,27 @@
             },
             // Cargamos los datos del ticket actual
             async loadDataTicket(data) {
+                await this.reset();
                 if (!data) {
                     this.add();
                 } else {
-                    let t = 0
-                    await this.reset()
+                    let t = 0;
 
-                    this.Ticket = new Ticket(data)
+                    this.Ticket = new Ticket(data);
 
                     // NUEVO O EDITADO
-                    if (data.lines.length > 0) this.Ticket.new = false
+                    if (data.lines.length > 0) this.Ticket.new = false;
 
                     if (data.estado != undefined) {
                         // Si es un antiguo ticket, las lineas no se pueden seleccionar
                         if (data.id_usuario) this.Table.hoverable(false)
-                        this.txtId.value(data.id)
-                        this.selEmp.option(data.id_usuario)
-                        this.selCli.option(data.id_cliente)
+                        this.txt.id.value(data.id)
+                        this.sel.emp.option(data.id_usuario)
+                        this.sel.cli.option(data.id_cliente)
 
                         this.total.value = this.Ticket.setTotal()
-                        this.date.value(date.format(data.fecha, 'short'))
-                        this.hour.value(date.format(data.fecha, 'hour'))
+                        this.txt.date.value(date.format(data.fecha, 'short'))
+                        this.txt.hour.value(date.format(data.fecha, 'hour'))
 
                         // Cargamos el id del ticket actual
                         this.currentId = data.id
@@ -549,7 +563,7 @@
                             this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto)
                         }
                     } else {
-                        this.txtId.value(this.currentId);
+                        this.txt.id.value(this.currentId);
                         return false;
                     }
                 }
@@ -561,10 +575,10 @@
             },
             // Busqueda por descripción
             searchDescription() {
-                const v = this.selDes.value();
+                const v = this.sel.des.value();
 
                 DB.get('servicios', 'descripcion', v.trim()).then(data => {
-                    this.selCode.value(data[0].id)
+                    this.sel.code.value(data[0].id)
                 })
 
             }
