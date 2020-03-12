@@ -2,8 +2,8 @@
 use \app\core\{Query, Data, Error};
 
 class Tickets extends Query{
-    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines, $total = 0.0, $isDebt; 
-    protected $table = 'tickets';
+    public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines, $total = 0.0, $debt; 
+    protected $table = 'vista_tickets';
 
     function __construct($args = null){
         parent::__construct();

@@ -179,9 +179,9 @@
                     this.fecha = data.fecha;
                     this.iva = data.iva;
                     this.estado = (data.estado != undefined) ? data.estado : 1;
+                    this.debt = data.debt != null;
                     this.addLines(data.lines);
                     this.setTotal();
-                    DB.get('impagos', 'id_ticket', this.id).then(d => this.debt = d.length != 0);
                 
                 };
             };

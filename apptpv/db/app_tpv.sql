@@ -401,6 +401,17 @@ SELECT t.fecha, t.id, t.id_cliente, u.nombre, t.total
   INNER JOIN usuarios u ON t.id_cliente = u.id
   WHERE f.fecha IS NULL;
 
+CREATE VIEW vista_tickets AS
+SELECT
+  t.*,
+  i.id as debt
+FROM
+  tickets as t
+  LEFT JOIN impagos as i ON t.id = i.id_ticket
+WHERE
+  t.estado = 1;
+
+
 INSERT INTO
   `config`(`id`, `iva`, `dias`)
 VALUES
