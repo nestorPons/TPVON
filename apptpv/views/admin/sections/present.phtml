@@ -1,4 +1,4 @@
-<component class="hidden">
+<component class="hidden" id="--id">
     <img src="/tpv/img/fondo_regalo.jpg" alt="Cheque regalo">
     <div id="contenedor_cheque_regalo">
         <h1>Cheque Regalo</h1>
@@ -51,13 +51,13 @@
     </style>
     <script>
         class Present {
-            constructor($id) {
-                this.el = document.getElementById($id)
-                this.style = this.el.getElementsByTagName('style')[0]
-                this.desc = this.el.querySelector('#descripcion')
-                this.day = this.el.querySelector('#dia')
-                this.month = this.el.querySelector('#mes')
-                this.year = this.el.querySelector('#anyo')
+            constructor(element) {
+                this.el = element; 
+                this.style = this.el.getElementsByTagName('style')[0];
+                this.desc = this.el.querySelector('#descripcion');
+                this.day = this.el.querySelector('#dia');
+                this.month = this.el.querySelector('#mes');
+                this.year = this.el.querySelector('#anyo');
 
             }
             description(arr = []) {

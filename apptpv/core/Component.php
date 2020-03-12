@@ -128,8 +128,8 @@ class Component extends Tag
             // Quitamos el comando scope
             $tagstyle = str_replace('scoped', '', $matches[0]);
             // Quitamos las reglas principales
-            $tagstyle = preg_replace('/@import.*?;/', '', $tagstyle);
-            $tagstyle = preg_replace('/@charser.*?;/', '', $tagstyle);
+            //$tagstyle = preg_replace('/@import.*?;/', '', $tagstyle);
+            //$tagstyle = preg_replace('/@charser.*?;/', '', $tagstyle);
 
             // Se coloca el id a los estilos 
             $less = new \lessc;

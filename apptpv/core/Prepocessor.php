@@ -227,8 +227,8 @@ class Prepocessor
 
             // Quitamos las reglas principales
             $content = $tag->body();
-            $content = preg_replace('/@import.*?;/', '', $content);
-            $content = preg_replace('/@charser.*?;/', '', $content);
+            //$content = preg_replace('/@import.*?;/', '', $content);
+            //$content = preg_replace('/@charser.*?;/', '', $content);
             // Se coloca el id a los estilos 
             $tag->body("#{$this->el->id()}{{$content}}");
 

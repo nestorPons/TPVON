@@ -52,7 +52,6 @@ En esta sección se listan los servicios y se pueden hacer tareas de mantenimien
 !!! Importante warning 
     Antes de crear los servicios es conveniente haber creado todas las familias.
 
-
 ### Familias
 ###### Nivel de acceso: usuario.
 
@@ -67,6 +66,12 @@ Listado y gestión de los tickets que se destinan para regalo. Como existe la po
     Desde la barra de tareas el acceso "imprimir" se pueden imprimir los Cheque Regalo. 
 
 Estos son una nota informativa para la persona a la que se le hace el regalo y así poder regalar un objeto tangible con el que poder dar valor al acto. 
+
+### Regalo
+###### Nivel de acceso: usuario.
+
+Listado de las deudas acumuladas por los servicios ya realizados.
+Seleccionando la deuda deseada se acederá directamente a la pantalla inicial tpv y se podrá eliminar la deuda accediendo al ticket y pulsando el boton eliminar deuda. 
 
 ### Config
 ###### Nivel de acceso: administrador. 

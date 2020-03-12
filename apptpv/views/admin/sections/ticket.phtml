@@ -101,8 +101,6 @@
                     this.btn.success.caption('Imprimir');
                     this.btn.debt.caption('A deber');
 
-
-
                 } else {
                     if (this.Ticket.hasDebt()) {
                         // NO NUEVO CON IMPAGO (SACAR COPIAS Y ELIMINAR EL IMPAGO)
@@ -142,11 +140,11 @@
                         this.frm.iva.innerHTML = c.iva;
                         return c.dias;
                     })
-                    .then(async dias => {
+                    .then(async days_present => {
                         // Reseteamos valor de la casilla regalo
                         this.expire.clear();
-                        // Añadimos una fecha standar a la casilla
-                        this.expire.value(date.add(app.tpv.date.value, dias, 'days', 'sql'));
+                        // Añadimos una fecha standar a la casilla de fecha regalo
+                        this.expire.value(date.add(date.now('sql'), days_present, 'days', 'sql'));
 
                         this.Table.clear();
 
@@ -183,8 +181,8 @@
 
                     if (this.Ticket.regalo && typeof app.control != 'undefined') app.control.add(this.Ticket);
                     app.tpv.add();
+                    typeof callback === 'function' && callback();
                 }
-                typeof callback === 'function' && callback();
             },
             close() {
                 this.modal.close();

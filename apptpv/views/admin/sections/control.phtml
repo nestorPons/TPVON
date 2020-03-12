@@ -3,7 +3,7 @@
     <m-input-text id="--id_txt2" label="Cliente" reandonly="true"/>
     <m-input-text id="--id_txt3" label="Fecha" reandonly="true"/>
     <m-input-text id="--id_txt4" label="Vencimiento" onchange="app.control.savedate(window.event.target)"/>
-    <m-table id="--id_table1" columns="['id_linea', 'Nombre', 'Descripcion', 'fecha']" class="hoverable" onclick="app.control.addDate(event.target)"/>
+    <m-table id="--id_table1" columns="['id_linea', 'Nombre', 'Descripcion', 'fecha']" class="hoverable"/>
 
     <style lang="less" scoped>
         display: grid;
@@ -58,8 +58,8 @@
             txtCli: --id_txt2.querySelector('input'),
             txtFecha: --id_txt3.querySelector('input'),
             txtFechaV: --id_txt4.querySelector('input'),
-            btnDel: ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event.target)"></span>',
-            btnAdd: ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event.target)"></span>',
+            btnDel: ' <span class="lnr lnr-cross-circle" onclick="app.control.delDate(event)"></span>',
+            btnAdd: ' <span class="lnr lnr-plus-circle" onclick="app.control.addDate(event)"></span>',
             load() {
                 app.post({
                     controller: this.table,
@@ -107,13 +107,17 @@
                         action: 'view',
                         data: {}
                     }, false, html => {
-                        // Obtenemos el id del elemento
-                        let h = document.createElement('div')
-                        h.innerHTML = html
-                        let el = h.getElementsByTagName('component')[0]
+                        let body = document.querySelector('body');
+                        let div = document.createElement('div');
+                        div.innerHTML = html;
+                        let component  = div.firstChild ; 
+                        
+                        body.appendChild(component);
+
+
                         // Cargamos la clase
-                        app.present = new Present(el.id)
-                        this.print()
+                        app.present = new Present(component);
+                        this.print();
                     })
                 }
             },
@@ -132,6 +136,8 @@
 
                 if (data == undefined) return console.warn('NO se han mandadod datos a loadTable');
                 this.Table.clear();
+
+//AKI :: Hay que actualizar los datos de la tabla local o cambiar el sistema 
 
                 // Cargamos los datos  en el objeto 
                 this.data = data
@@ -177,7 +183,7 @@
             },
             addDate(e) {
                 const 
-                    $el = $(e),
+                    $el = $(e.target),
                     $parent = $el.parents('tr'),
                     id = $parent.attr('idline'),
                     d = date.datetime()
@@ -194,9 +200,12 @@
                 })
             },
             delDate(e) {
-                let $el = $(e),
+                e.stopPropagation();
+                echo('DEL')
+                let $el = $(e.target),
                     $parent = $el.parents('tr'),
-                    id = $parent.attr('idline')
+                    id = $parent.attr('idline'); 
+
                 app.post({
                     controller: 'present',
                     action: 'delete',
@@ -223,6 +232,14 @@
                 } else {
                     app.mens.error('Tiene que haber una caducidad!!')
                 }
+            },
+            add(ticket){
+                DB.set(this.table, {ticket})
+                    .then(_ => DB.last(this.table))
+                    .then(lst => {
+                        echo(lst)
+                        this.loadTable(lst);
+                    });
             }
         }
     </script>

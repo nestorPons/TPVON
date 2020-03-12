@@ -1,4 +1,5 @@
 const app = {
+    ver : '2.2',
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     GET: $_GET,
     // Peticiones con datos 
@@ -602,7 +603,7 @@ const date = {
 
         return (diff / (1000 * 60 * 60 * 24));
     },
-    add(argdate, value, unity, format = null) {
+    add(argdate, value = 1, unity = 'days', format = null) {
 
         const date = (typeof argdate !== 'object') ? new Date(this.format(argdate, 'sql')) : argdate;
         const v = parseInt(value);
