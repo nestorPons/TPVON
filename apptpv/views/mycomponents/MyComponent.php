@@ -22,6 +22,10 @@
                 if (value != undefined) this.el.caption = value ; 
                 return this.el.caption;
             }
+            change(fn){
+                this.el.addEventListener('change', fn);
+                return this;
+            }
         }
     </script>
 </component>

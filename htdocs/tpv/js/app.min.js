@@ -565,8 +565,9 @@ const date = {
             } else return false;
             switch (format) {
                 case 'sql': return a + '-' + m + '-' + d;
-                case 'datetime': return a + '-' + m + '-' + d + ' ' + h + ':' + min;
+                case 'datetime': return a + '-' + m + '-' + d + ' ' + h + ':' + min + ':' + s;
                 case 'short': return d + '/' + m + '/' + a;
+                case 'print': return d + '/' + m + '/' + a + ' ' + h + ':' + min + ':' + s;
                 case 'md': return m + d;
                 case 'id': return a + m + d;
                 case 'day': return d;

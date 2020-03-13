@@ -137,16 +137,14 @@
                 if (data == undefined) return console.warn('NO se han mandadod datos a loadTable');
                 this.Table.clear();
 
-//AKI :: Hay que actualizar los datos de la tabla local o cambiar el sistema 
-
                 // Cargamos los datos  en el objeto 
                 this.data = data
 
                 // Cargamos datos vista id 
                 this.txtTicket.value = data.id;
 
-                this.txtFecha.value = date.format(data.fecha, 'short')
-                this.txtFechaV.value = date.format(data.fecha_vencimiento, 'short')
+                this.txtFecha.value = date.format(data.fecha, 'short');
+                this.txtFechaV.value = date.format(data.fecha_vencimiento, 'short');
 
                 DB.get('usuarios', 'id', data.id_cliente)
                     .then(d => d[0])
@@ -160,7 +158,7 @@
                         .then(d => d[0])
                         .then(ser => {
 
-                            let d = (line.fecha != null) ? date.format(line.fecha, 'datetime') + this.btnDel : this.btnAdd
+                            let d = (line.fecha != null) ? date.format(line.fecha, 'short') + this.btnDel : this.btnAdd
 
                             this.Table.addLine(
                                 line.id,
@@ -182,38 +180,48 @@
                 }
             },
             addDate(e) {
-                const 
+                const
                     $el = $(e.target),
-                    $parent = $el.parents('tr'),
-                    id = $parent.attr('idline'),
-                    d = date.datetime()
+                    $tr = $el.parents('tr'),
+                    id = $tr.attr('idline'),
+                    dateadd= date.now('sql'),
+                    idLine = $tr.attr('idline');
 
                 app.post({
                     controller: 'present',
                     action: 'addDate',
                     data: {
                         id: id,
-                        fecha: d
+                        fecha: dateadd
                     }
-                }, fn => {
-                    $el.parents('tr').find('.fecha').html(d + this.btnDel)
+                }, async fn => {
+                    let data = await DB.get(this.table, 'id', this.data.id);
+                    $tr.find('.fecha').html(date.format(dateadd, 'short') + this.btnDel); 
+                    for(let i of data[0].lines){
+                        if(i.id == idLine) i.fecha = dateadd;
+                    }
                 })
             },
             delDate(e) {
                 e.stopPropagation();
-                echo('DEL')
+
                 let $el = $(e.target),
-                    $parent = $el.parents('tr'),
-                    id = $parent.attr('idline'); 
+                    $td = $el.parent('td'),
+                    $tr = $el.parents('tr'),
+                    idLine = $tr.attr('idline');
 
                 app.post({
                     controller: 'present',
                     action: 'delete',
                     data: {
-                        id: id
+                        id: idLine
                     }
-                }, d => {
-                    $el.parent().html(this.btnAdd)
+                }, async d => {
+                    let data = await DB.get(this.table, 'id', this.data.id);
+                    $td.html(this.btnAdd)                    
+                    for(let i of data[0].lines){
+                        if(i.id == idLine) i.fecha = null;
+                    }
                 })
             },
             savedate(el) {
@@ -237,7 +245,6 @@
                 DB.set(this.table, {ticket})
                     .then(_ => DB.last(this.table))
                     .then(lst => {
-                        echo(lst)
                         this.loadTable(lst);
                     });
             }

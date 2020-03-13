@@ -1,7 +1,7 @@
 <section id="income">
     <m-input id="--id_txt1" type="date" label="De" tabindex="1"/>
     <m-input id="--id_txt2" type="date" label="Hasta" tabindex="2"/>
-    <m-select id="--id_sel1" label="Usuario" tabindex="3" onchange="app.income.filter()" default="Todos" class="valid"/>
+    <m-select id="--id_sel1" label="Usuario" tabindex="3" default="Todos" class="valid"/>
     <m-input id="--id_txt3" type="text" label="Total" readonly="true" class="text-right"/>
     <m-table id="--id_table1" columns="['Ticket', 'Fecha', 'Hora', 'Servicio', 'Precio', 'Cantidad', 'DTO', 'Importe']" />
 
@@ -44,19 +44,27 @@
         app.income = {
             name : 'Ingresos',
             buttons: ['print', 'filter'],
-            txtFrom: new MyInput(--id_txt1),
-            txtTo: new MyInput(--id_txt2),
-            txtTotal: --id_txt3.querySelector('input'),
-            SelUser: new MySelect('--id_sel1'),
+            txt : {
+                from: new MyInput(--id_txt1),
+                to: new MyInput(--id_txt2),
+                total: --id_txt3.querySelector('input'),
+            },
+            sel : {
+                user: new MySelect('--id_sel1'),
+            },
             Table: new MyTable('--id_table1'),
             load() {
                 this.loadUsers()
-                this.txtFrom.value(date.now('sqldate'))
-                this.txtTo.value(date.now('sqldate'))
-                this.filter()
+                this.txt.from.value(date.now('sqldate'))
+                this.txt.to.value(date.now('sqldate'))
+                this.filter(); 
+
+                this.txt.from.change(_=>this.filter());
+                this.txt.to.change(_=>this.filter());
+                this.sel.user.change(_=>this.filter());
             },
             loadUsers() {
-                let el = this.SelUser
+                let el = this.sel.user
                 DB.get('usuarios')
                     .then(users => {
                         for (let u of users) {
@@ -71,9 +79,9 @@
                     controller: 'tickets',
                     action: 'getBetween',
                     data: {
-                        f1: date.format(this.txtFrom.value(), 'sql'),
-                        f2: date.format(this.txtTo.value(), 'sql'),
-                        u: this.SelUser.value()
+                        f1: date.format(this.txt.from.value(), 'sql'),
+                        f2: date.format(this.txt.to.value(), 'sql'),
+                        u: this.sel.user.value()
                     }
                 })
             },
@@ -97,13 +105,13 @@
                         return parseFloat(d.total)
                     }
                     if (success && data && data.id) {
-                        this.txtTotal.value = _loadData(data[i]).toFixed(2)
+                        this.txt.total.value = _loadData(data[i]).toFixed(2)
                     } else {
                         let x = 0
                         for (let i in data) {
                             x += _loadData(data[i])
                         }
-                        this.txtTotal.value = x.toFixed(2)
+                        this.txt.total.value = x.toFixed(2)
                     }
                 })
             },
@@ -111,10 +119,10 @@
                 const printContents = {
                     innerHTML :
                         `<h1> Listado de ingresos </h1>
-                        <h3> Fecha inicio   : ${this.txtFrom.value()}</h3>
-                        <h3> Fecha fin      : ${this.txtTo.value()}</h3>
+                        <h3> Fecha inicio   : ${this.txt.from.value()}</h3>
+                        <h3> Fecha fin      : ${this.txt.to.value()}</h3>
                         <table> ${this.Table.html()} </table>
-                        <h4>Total: <b>${this.txtTotal.value}</b></h4>`
+                        <h4>Total: <b>${this.txt.total.value}</b></h4>`
                 }
                 imprimirElemento(printContents);
             },
