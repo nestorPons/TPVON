@@ -11,7 +11,7 @@
     <m-input id="--id_input6" type="number" label="Dto %" tabindex="9" value="0" onblur="app.tpv.calculate()" />
     <m-input id="--id_input7" type="number" label="Importe" value="0" readonly />
     <m-input id="--id_input8" type="number" label="Total" value="0" readonly />
-    <m-btn-success id="--id_btn1" tabindex="5" onclick="app.tpv.addLine()" />
+    <m-btn id="--id_btn1" tabindex="5" caption="Añadir" class="tertiary" onclick="app.tpv.addLine()" />
     <m-btn id="--id_btn2" caption="Borrar" tabindex="10" onclick="app.tpv.clearLine()" class="secondary" />
     <m-btn id="--id_btn3" caption="Ticket" tabindex="11" onclick="app.tpv.create()" class="primary" />
     <m-table id="--id_table1" columns="['Código', 'Descripción', 'Unidades', 'Precio €', 'Dto %', 'Importe €']" class="hoverable" onclick="app.tpv.loadLineFromTable(window.event)" />
@@ -182,7 +182,7 @@
                     this.debt = data.debt != null;
                     this.addLines(data.lines);
                     this.setTotal();
-                
+
                 };
             };
             addLines(dataLines) {
@@ -234,7 +234,7 @@
                 if (value != undefined) this.new = value;
                 return this.new;
             }
-            hasDebt(value){
+            hasDebt(value) {
                 if (value != undefined) this.debt = value;
                 return this.debt;
             }
@@ -398,22 +398,22 @@
                 this.txt.total.value(this.total);
             },
             addLine() {
-                this.calculate()
-
-                // Añadimos la linea al ticket
-                let line =
-                    this.Ticket.addLine(
-                        this.Table.line() + 1,
-                        this.sel.code.value(),
-                        this.txt.quantity.value(),
-                        this.txt.price.value(),
-                        this.txt.dto.value()
-                    );
-
-                // Validamos los d  mos en la tabla
-                if (line.articulo)
-                    this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto, line.amo)
-                else this.sel.code.el.focus
+                if (this.sel.code.value() != 'false') {
+                    this.calculate()
+                    // Añadimos la linea al ticket
+                    let line =
+                        this.Ticket.addLine(
+                            this.Table.line() + 1,
+                            this.sel.code.value(),
+                            this.txt.quantity.value(),
+                            this.txt.price.value(),
+                            this.txt.dto.value()
+                        );
+                    // Validamos los d  mos en la tabla
+                    if (line.articulo) this.addLineTable(line.id, line.articulo, line.cantidad, line.precio, line.dto, line.amo)
+                    else this.sel.code.el.focus
+                    this.sel.code.value(false)
+                }
             },
             // Estrategia de promocion de filiacion clientes VIP por tiempo 
             addPromo(callback) {

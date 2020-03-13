@@ -89,7 +89,10 @@
                 if (v != undefined) {
                     this.el.dataset.value = v;
                     this.el.seletedIndex = v;
-                    this.el.value = this.li.querySelector(`[data-value="${v}"]`).value;
+                    if(v)
+                        this.el.value = this.li.querySelector(`[data-value="${v}"]`).value;
+                    else 
+                        this.el.value = null;
                     this.addClass('valid');
                 }
                 return this.el.dataset.value;
