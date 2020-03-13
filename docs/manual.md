@@ -67,7 +67,7 @@ Listado y gestión de los tickets que se destinan para regalo. Como existe la po
 
 Estos son una nota informativa para la persona a la que se le hace el regalo y así poder regalar un objeto tangible con el que poder dar valor al acto. 
 
-### Regalo
+### Impagos
 ###### Nivel de acceso: usuario.
 
 Listado de las deudas acumuladas por los servicios ya realizados.
