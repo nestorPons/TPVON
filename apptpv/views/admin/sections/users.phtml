@@ -170,6 +170,7 @@
             // Formas de busqueda en usuarios
             search(value) {
                 let _search = (field, value) => {
+                    console.log('Buscando por : ' + field);
                     DB.get(this.table, field, value, 'estado>0')
                         .then(v => {
                             if (v) {
@@ -184,6 +185,7 @@
                 if (/([0-9]){9,13}/.test(value)) _search('tel', value)
                 else if (/[0-9]{8}[A-Za-z]{1}/.test(value)) _search('dni', value)
                 else if (value.indexOf('@') != -1) _search('email', value)
+                else if (/[0-9]{1,8}/.test(value)) _search('id', value)
                 else _search('nombre', value) || _search('codigo', value)
             }
         }
