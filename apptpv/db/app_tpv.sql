@@ -416,3 +416,5 @@ INSERT INTO
   `config`(`id`, `iva`, `dias`)
 VALUES
   (1, 21, 365);
+
+  INSERT INTO `promos`(`id`, `nombre`, `valor`, `dto`, `estado`) VALUES (1,'',0,0,1);
