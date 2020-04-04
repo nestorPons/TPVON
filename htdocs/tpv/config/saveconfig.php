@@ -50,7 +50,7 @@ function write_ini_file($assoc_arr, $path)
                 }
             }
         } else {
-            $content .= $key . '=' . $elem . "\n";
+            $content .= $key . '= "' . $elem . "\"\n";
         }
     }
     if (!$handle = fopen($path, 'w')) {
