@@ -1,5 +1,5 @@
 const app = {
-    ver : '2.2',
+    ver : '2.2.1',
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     GET: $_GET,
     // Peticiones con datos 
