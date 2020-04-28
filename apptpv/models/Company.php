@@ -35,7 +35,7 @@ class Company extends Query{
     public function new(Data $Data){  
         $Data->validate(['nombre_empresa', 'nif' ,'sector', 'nombre_usuario', 'email', 'password'], true);
 
-        $Data->set('nombre', $Data->nombre_empresa);
+        $Data->addItems(['nombre'=>$Data->nombre_empresa]);
         $this->loadData($Data->getAll());
   
         // Creamos carpeta con configuración y archivos
@@ -62,8 +62,8 @@ class Company extends Query{
         ]);
  
         //Añadimos el usuario administrador
-        $Data->set('nombre', $Data->nombre_usuario); 
-        $Data->set('nivel', 2);
+        $Data->addItems(['nombre'=>$Data->nombre_usuario]); 
+        $Data->addItems(['nivel'=>2]);
         
         $User = new User;
         $User->new($Data);

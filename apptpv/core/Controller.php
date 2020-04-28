@@ -1,5 +1,4 @@
 <?php namespace app\core;
-use \app\models\Company;
 
 /**
  * Clase para ser expansión de otras subclases o clases dedicadas 
@@ -50,7 +49,7 @@ class Controller{
      */
     protected function save(Data $Data){
         // Quitamos los datos inecesarios
-        $Data->delete('idadmin');
+        $Data->delete(['idadmin']);
         if($Data->id == -1 ) return $this->new($Data);
         else return $this->update($Data);
     }
@@ -78,8 +77,8 @@ class Controller{
     protected function printView(String $route, array $data = null){
         if($data){
             foreach($data as $key => $val){
-                $k = str_replace('-', '_', $key); 
-                $_FILES[$k] = $val; 
+                $k = str_replace('-', '_', $key);
+                $_FILES[$k] = $val;
             }
         }
         return require_once $route;

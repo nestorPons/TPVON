@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use \app\models\User;
-use\app\core\{Query, Data, Controller};
+use\app\core\{Data, Controller};
 
 class Users extends Controller
 {

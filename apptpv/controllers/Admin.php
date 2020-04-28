@@ -1,6 +1,6 @@
 <?php namespace app\controllers;
 use \app\models\{Items, Tickets, User, Company, Control, Config, Family, Debt};
-use \app\core\{Query, Data, Controller};
+use \app\core\{Query, Controller};
 
 /**
  * Controla la vista y la recepción de los datos del formulario de login

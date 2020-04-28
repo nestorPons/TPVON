@@ -1,0 +1,46 @@
+<component id="--id" class="row $$hidden" >  
+    <input 
+        id ="--id_input"
+        type = "password" 
+        class="$$class" placeholder="$$placeholder"
+        style = "$$style" name = "$$name" tile = "$$tile"
+        pattern = "$$pattern"
+        for = "$$for" 
+        maxlength = "$$maxlength" 
+        minlength = "$$minlength" 
+        default = "$$default" value = "$$value" 
+        list = "$$list" tabindex = "$$tabindex" 
+        onfocus = "$$onfocus" onblur = "$$onblur" onclick="$$onclick"
+        onkeypress = "$$onkeypress" onkeydown = "$$onkeydown" onkeyup = "$$onkeyup"
+        onchange = "$$onchange" $$required $$disabled $$readonly $$checked  
+    />
+    <label for="--id_input" class="$$classLabel">$$label</label>
+    @if ($$icon) <i id="icon$$id" class="lnr lnr-$$icon"></i> @endif
+    <i class="lnr lnr-eye" onclick="showPass(--id_input)"></i>
+    <style lang="less" scoped>
+        label {
+            z-index: 101;
+        }
+        input[type="color"]{
+            width: 10ch;
+            margin-left: 13ch;
+        }
+        .lnr-eye{
+            position: absolute;
+            right: 1ch;
+            top: 1ch;
+            color: var(--secondary-fore-color);
+            z-index: 100;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showPass(i){
+            if(i.type == 'password'){ 
+                i.type = 'text'; 
+            } else {
+                i.type = 'password';
+            }
+        }
+    </script>
+</component>

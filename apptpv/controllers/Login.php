@@ -66,7 +66,7 @@ class Login extends Controller{
      */
     protected function auth(Data $Data){
         if($Data->isEmail('email')) $this->email = $Data->email;
-        if($Data->isString('password', 250)) $this->password = $Data->password;
+        if($Data->isSmaller('password', 250)) $this->password = $Data->password;
 
         $this->User = new User($Data->email);
 

@@ -1,6 +1,5 @@
 <?php namespace app\models;
 use \Firebase\JWT\JWT;
-use \app\core\{ Query, Data, Error };
 
 class Tokens extends \app\core\Query{
     protected $id, $idUsuario, $token;

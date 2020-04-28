@@ -1,5 +1,5 @@
 <?php namespace app\models;
-use \app\core\{Query, Data, Error};
+use \app\core\{Query, Data};
 
 class Tickets extends Query{
     public $id, $iva, $id_usuario, $id_cliente, $estado, $fecha, $hora, $lines, $total = 0.0, $debt; 
@@ -40,8 +40,8 @@ class Tickets extends Query{
             $Post->fecha = $DateTime->format('Y-m-d H:i');
 
             // Guardamos el id generado 
-            $this->id = $this->add($Post->toArray(['lines']));
-        
+            $Post->delete(['lines']); 
+            $this->id = $this->add($Post->toArray());
 
             // Si es regalo guardamos la fecha de vencimiento en la tabla ticket_regalo
             if($isPresent) {
@@ -79,7 +79,7 @@ class Tickets extends Query{
             $Line = new Lines($v); 
         }
 
-        $Data->addItem($lines, 'lines');
+        $Data->addItems(['lines'=>$lines]);
         
         if($all) return $Data;
         else if(@$Data->estado == 1) return $Data;
@@ -139,7 +139,7 @@ class Tickets extends Query{
         if($d) {
             $Lines = new Lines; 
             $lines = $Lines->getBy(['id_ticket'=>$d->id]);
-            $d->addItem($lines, 'lines');
+            $d->addItems(['lines'=>$lines]);
         } 
         return $this->lines; 
     }

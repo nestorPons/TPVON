@@ -14,7 +14,7 @@ class Security extends Auth{
     }  
     static function getJWT() : string
     {
-        return $_SERVER['HTTP_JWT']??false;
+        return $_SERVER['HTTP_JWT']??'';
     }
     static function isRestrict(string $zone) : bool
     {

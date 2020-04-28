@@ -1,5 +1,5 @@
 <?php namespace app\controllers;
-use \app\core\{Query, Data, Controller};
+use \app\core\{Controller};
 
 /**
  * Controla la vista y la recepción de las gráficas 

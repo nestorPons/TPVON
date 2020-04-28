@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use\app\core\{Query, Data, Controller};
+use\app\core\{Controller};
 
 /**
  * Estilos visuales de la aplicación

@@ -10,7 +10,7 @@
     </m-square>
     <script>
         app.chart = {
-            name : 'Gráficas', 
+            name: 'Gráficas',
             color: {
                 current: {
                     body: 'rgba(40, 184, 53, 0.41)',
@@ -114,6 +114,7 @@
             },
             // Crea un gráfico
             async create(name, data, labelBar, color = null, borderColor = null) {
+
                 const
                     colorBars = [],
                     colorBorders = [],
@@ -154,14 +155,14 @@
                     X = []
 
                 date.setDate(date.getDate() + 1)
-                
-                for(let k of data[1].keys()) X.push(k)
-           
-                const
-                    pred =X[X.length - 1 ] + 1, 
-                    Y = data[1],
-                    prediction = await this.learnLinear([X, Y], pred);
 
+                for (let k of data[1].keys()) X.push(k)
+
+                const
+                    Y = data[1],
+                    prediction = await this.learnLinear([X, Y]);
+
+                // Añadimos los datos a la grafica
                 this.addData(chart, 'previsión', +prediction.toFixed(2));
                 return chart;
             },
@@ -191,12 +192,13 @@
                 return [a, b, c, d]
             },
             //Creamos una funcion asincrona (para que se active hasta que termine de cargar la pagina)
-            async learnLinear(data, newVal) {
+            async learnLinear(data) {
+
                 //Definimos el modelo que sera de regresion lineal
-                const batchSize = 32;
-                const epochs = 60;
+                const batchSize = 4;
+                const epochs = 500;
                 const model = tf.sequential();
-                const trainingsize = 70;
+                const trainingsize = 80;
 
                 //Agregamos una capa densa porque todos los nodos estan conectado entre si
                 model.add(tf.layers.dense({
@@ -210,21 +212,28 @@
                     loss: 'meanSquaredError'
                 });
 
-                let X = data[0].slice(0, Math.floor(trainingsize / 100 * data[0].length));
-                let Y = data[1].slice(0, Math.floor(trainingsize / 100 * data[1].length));
-
+                /*                 let X = data[0].slice(0, Math.floor(trainingsize / 100 * data[0].length));
+                                let Y = data[1].slice(0, Math.floor(trainingsize / 100 * data[1].length)); 
+                const X = data[0],
+                    Y = data[1];
+                echo(data[0], data[1])
                 const xs = tf.tensor2d(X, [X.length, 1], 'float32').div(tf.scalar(10));
                 const ys = tf.tensor2d(Y, [Y.length, 1], 'float32').reshape([Y.length, 1]).div(tf.scalar(10));
+                                */
 
-                // entrenamos 
-                await model.fit(ys, xs, {
-                    batchSize,
-                    epochs,
-                    shuffle: true,
-                });
-                
+                const xs = tf.tensor1d(data[0]);
+                const ys = tf.tensor1d(data[1]);
+
+                if (xs.size != 0)
+                    // entrenamos 
+                    await model.fit(ys, xs, {
+                        epochs
+                    });
+
                 // Predicción
-                return model.predict(tf.tensor2d([newVal], [1, 1])).dataSync()[0];
+                const prediction = model.predict(tf.tensor2d([data[0].length + 1], [1, 1])).dataSync()[0];
+                echo(prediction)
+                return prediction;
             },
             groupformonth(array) {
                 // Construcción del nuevo array:

@@ -1,5 +1,5 @@
 <?php namespace app\models;
-use \app\core\{Query, Data};
+use \app\core\{Query, Data, Error};
 
 class Items extends Query{
     public $id, $codigo, $descripcion, $precio, $coste, $tipo, $estado;

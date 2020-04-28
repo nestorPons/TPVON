@@ -86,8 +86,7 @@ class User extends Query
                 $Data->fecha_nacimiento = date("Y-m-d", strtotime($date));
             }
             if (property_exists($Data, 'password')) $Data->password = $this->password_hash($Data->password);
-
-            $noAuth = $Data->use('noAuth');
+            
             // Quitamos estos datos que no existen en la tabla usuarios para que no de error al guardar.
             $Data->delete(['promos', 'emails']);
 

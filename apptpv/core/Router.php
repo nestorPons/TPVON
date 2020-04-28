@@ -58,7 +58,7 @@ class Router{
             // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
 
             // Pasamos los datos de json a objeto Data
-            $this->data->addItems($params['data'] ?? null);
+            $this->data->addItems($params['data'] ?? []);
         
             $respond = $this->loadController(); 
     
@@ -96,7 +96,7 @@ class Router{
             if ($token = Security::getJWT()){
                 $dataToken = Security::GetData($token);
                 if(!$dataToken->access) return false;
-                $this->data->addItem($dataToken->id, 'idadmin');
+                $this->data->addItems(['idadmin' => $dataToken->id]);
             } else {
                 // Si no tiene permiso se devuelve al login
                 header("Refresh:0; url={$_SERVER['PHP_SELF']}");

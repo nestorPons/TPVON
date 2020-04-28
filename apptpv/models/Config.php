@@ -1,5 +1,5 @@
 <?php namespace app\models;
-use \app\core\{Error, Query, Data};
+use \app\core\{Query, Data};
 
 class Config extends Query{
     public $id = 1, $iva, $dias; 
