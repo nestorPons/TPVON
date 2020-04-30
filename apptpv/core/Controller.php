@@ -14,7 +14,7 @@ class Controller{
         $restrict = true;
 
     public $result = null;
-    private $Model, $db = CONN['db'];
+    private $db = CONN['db'];  
     
     function __construct(String $action, $controller = null, $Data = null){
 

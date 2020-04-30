@@ -6,6 +6,7 @@ use \app\core\{Query, Data, Controller};
  * Controla la vista y la recepción de los datos del formulario de login
  */
 class Tickets extends Controller{
+    private $Model;
 
     function __construct(String $action,  $Data = null){
         $this->Model = new Model;

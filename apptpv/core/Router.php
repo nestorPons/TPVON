@@ -21,57 +21,60 @@ class Router{
         $controller, 
         $action;
 
-    function __construct($params = []){
+    function __construct(array $REQUEST = [], string $db = null, array $SERVER = null){
         $this->data = new \app\core\Data;
         // Valores por defecto
-        $this->db = CONN['db'];
+        $this->db = $db;
 
-        $this->controller =  ucfirst($params['controller'] ?? null); 
-        $this->action =  strtolower($params['action'] ?? null); 
+        // Añadimos la mayúscula al controlador por ser una clase
+        $this->controller =  ucfirst($REQUEST['controller'] ?? null); 
+        $this->action =  strtolower($REQUEST['action'] ?? null); 
 
-        if      (strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') $this->isPost($params);
-        elseif  (strtoupper($_SERVER['REQUEST_METHOD']) === 'GET')  $this->isGet(); 
+        if      (strtoupper($SERVER['REQUEST_METHOD']) === 'POST') $this->isPost($REQUEST);
+        elseif  (strtoupper($SERVER['REQUEST_METHOD']) === 'GET')  $this->isGet(); 
             
     }
+    /**
+     * Devuelve una vista desde una peticion get
+     */
     private function isGet(){
         if(empty($this->db)){
             // Si no encontramos la base datos vamos a la pagina principal
-            if (empty($this->controller)) $this->controller = 'main';
-            $this->controller = $this->controller; 
+            if (empty($this->controller)) $this->controller = 'Main'; 
 
         } else {
             // Si esta vacio controlador nos envia al login
             if (empty($this->controller)) {
                 $this->action = 'view'; 
-                $this->controller = 'login';
+                $this->controller = 'Login';
             }
         } 
-        exit ($this->loadController($this->controller));        
+        exit ($this->loadController());        
     }
-    private function isPost($params){
+    /**
+     * Devuelve una petición ajax 
+     */
+    private function isPost($REQUEST){
+        
+        /**
+         * Método post recibe siempre 3 parametros
+         * controller => Controlador
+         * action => Acción a realizar
+         * data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
+         */
         try
         {
-
-            // Método post recibe siempre 3 parametros 
-            // controller => Controlador
-            // action => Acción a realizar
-            // data => Objeto con los datos a procesar (¡siempre tendrán que estar encapsulados en un objeto JS!)
-
             // Pasamos los datos de json a objeto Data
-            $this->data->addItems($params['data'] ?? []);
+            $this->data->addItems($REQUEST['data'] ?? []);
         
             $respond = $this->loadController(); 
-    
+           
             // Siempre se devuelve un objeto json con un success de respuesta
             if(!(is_array($respond) && isset($respond['success'])))
                 $respond = ($respond == true || $respond == 1) 
                     ? ['success'=> true, 'data' => $respond] 
                     : ['success'=> false]; 
-            /* ((is_array($respond) && isset($respond['success']) && $respond['success'] == 0)) ? $respond :
-            ['success' => 1, 'data' => $respond]); */
-
-            // SALIDA 
-        
+                        
             exit (json_encode($respond, true));
         }
         catch(\Exception $e)
@@ -87,10 +90,7 @@ class Router{
     }
     // Carga controlador
     // Si se le pasa argumentos cambia el controlador asignado
-    private function loadController(string $controller = null){
-
-        // Buscamos controlador
-        if(!empty($controller)) $this->controller = ucwords($controller); 
+    private function loadController(){
         // Antes de cargar el controlador se comprueba si tiene permsiso para la petición
         if(Security::isRestrict($this->controller)){          
             if ($token = Security::getJWT()){

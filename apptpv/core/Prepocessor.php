@@ -8,6 +8,7 @@ class Prepocessor
 {
     use ToolsComponents;
     const
+        /** Constantes del archivo de configuración de las rutas */
         BUILD = \FOLDERS\HTDOCS . 'build/',
         CACHE_FILE = \FOLDERS\CACHES  . 'cache_views.ini',
         FOLDERS_NATIVE_VIEWS = \FOLDERS\NATIVE_VIEWS,

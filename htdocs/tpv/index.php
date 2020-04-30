@@ -47,4 +47,4 @@ if( ENV && empty($_REQUEST)){
     new Prepocessor(false);
 }
 
-new Router($_REQUEST);
+new Router($_REQUEST, CONN['db'], $_SERVER);
