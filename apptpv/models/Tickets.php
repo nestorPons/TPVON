@@ -26,12 +26,12 @@ class Tickets extends Query{
     }
     function new(Data $Post){
         $this->table = 'tickets';
+
         //Comprobamos si existe
         if($Post->id == -1 || !$this->getById($Post->id)){
             $lines = $Post->lines; 
             $end_date = $Post->fecha_vencimiento; 
             $isPresent = boolval($Post->regalo); 
-
             unset($Post->debt);
         
             // Limpiamos post de datos indeseados

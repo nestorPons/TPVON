@@ -1,5 +1,5 @@
 const app = {
-    ver : '2.2.1',
+    ver: '2.2.1',
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     GET: $_GET,
     // Peticiones con datos 
@@ -27,8 +27,7 @@ const app = {
                     if ((isEmpty(d.success) ||
                         d.success == false ||
                         d.success == 0) &&
-                        exist(d.mens)) 
-                    {
+                        exist(d.mens)) {
                         console.log('Error en la respuesta!!');
                         this.mens.error(d.mens || 'No se ha podido rehalizar la petición!');
                         return false;
@@ -36,13 +35,13 @@ const app = {
             } catch (e) {
                 // la respuesta es HTML
                 html = $(respond);
-                this.sections.toggle(html.attr('id'), _=>{
+                this.sections.toggle(html.attr('id'), _ => {
 
                     html.appendTo('body');
-                    html.find('section').each((i, el) =>{
+                    html.find('section').each((i, el) => {
                         this.sections.loaded.push(el.id);
                     })
-                    
+
                 })
             } finally {
                 let resp = d ? d.data : null,
@@ -70,8 +69,7 @@ const app = {
                     .find('section').hide().end()
                     .append(html);
                 // Inicializamos el método inicializador del objeto
-                if (app[data.controller] != undefined)
-                {
+                if (app[data.controller] != undefined) {
                     if (exist(app[data.controller].load)) app[data.controller].load();
                 }
                 this.sections.inicialize(data.controller);
@@ -132,7 +130,6 @@ const app = {
     mens: {
         error(mens) {
             alert('ERROR!! \n' + mens);
-            return this;
         },
         confirm(mens) {
             return confirm(mens);
@@ -148,19 +145,19 @@ const app = {
     sections: {
         active: null,
         last: null,
-        loaded : [],
+        loaded: [],
         toggle(section, callback) {
             if ($('section#' + section).is(':visible')) return false;
 
             let $mainSection = $('section');
-            
+
             if ($('#appadmin').length || $('#appuser').length) {
                 $mainSection = $('section').find('section');
             };
 
             $mainSection.fadeOut('fast');
             $('section#' + section).fadeIn();
-            if(typeof callback === 'function') callback();
+            if (typeof callback === 'function') callback();
             this.inicialize(section);
         },
         show(section, callback) {
@@ -192,9 +189,9 @@ const app = {
 
             if (section == 'appadmin') section = 'tpv';
             this.active = section;
-            
+
             let activeZone = app[this.active];
-                 
+
             if (activeZone) {
                 // Cargamos los botones de herramientas
                 typeof activeZone.buttons != 'undefined' &&
@@ -206,7 +203,7 @@ const app = {
                     activeZone.open();
 
                 // Carga del título de la sección
-                if (menu.tile) menu.tile.textContent = activeZone.name; 
+                if (menu.tile) menu.tile.textContent = activeZone.name;
 
             }
         },
@@ -633,5 +630,5 @@ const date = {
     },
     datetime(param = this.date) {
         return this.format(param, 'datetime');
-    }   
+    }
 }

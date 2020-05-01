@@ -38,6 +38,7 @@ class Router{
      * Devuelve una vista desde una peticion get
      */
     private function isGet(){
+        
         if(empty($this->db)){
             // Si no encontramos la base datos vamos a la pagina principal
             if (empty($this->controller)) $this->controller = 'Main'; 
@@ -75,11 +76,11 @@ class Router{
                     ? ['success'=> true, 'data' => $respond] 
                     : ['success'=> false]; 
                         
-            exit (json_encode($respond, true));
+            exit  (json_encode($respond, true));
         }
         catch(\Exception $e)
         {
-             exit (json_encode(['success'=>'false', 'mens'=>'error: ' . $e->menssage], true));
+            return (json_encode(['success'=>'false', 'mens'=>'error: ' . $e->menssage], true));
         }
 
     }
