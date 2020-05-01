@@ -3,3 +3,4 @@ server/logs
 apptpv/config/conn.ini
 apptpv/caches/*.cache
 site/
+vendor/
