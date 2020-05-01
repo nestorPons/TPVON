@@ -27,10 +27,11 @@
                     controller: 'tickets',
                     action: 'unpaid',
                 }, (d, r) => {
-                    // Cargamos los datos a la tabla
-                    for( let i of d){
-                        this.table.addLine(i.id, [i.id, i.fecha, i.nombre, i.total] );
-                    }
+                    if(d)
+                        // Cargamos los datos a la tabla
+                        for( let i of d){
+                            this.table.addLine(i.id, [i.id, i.fecha, i.nombre, i.total] );
+                        }
                 })
             }
         }

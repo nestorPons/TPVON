@@ -105,7 +105,7 @@ class User extends Query
         }
     }
     // Nuevos registros
-    function new(Data $Data, bool $noauth = false)
+    function new(Data $Data)
     {
         if ($this->id = $this->loadData($Data->getAll())) {
 

@@ -44,7 +44,7 @@ git clone https://github.com/nestorPons/tpv.git
 _Entre en la carpeta del proyecto_ 
 
 ```
-cd tpvonline
+cd TPVON
 ```
 Instale las dependencias con composer 
 ``` 
