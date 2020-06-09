@@ -125,7 +125,7 @@ CREATE TABLE `usuarios` (
 CREATE TABLE `usuarios_config` (
   `id` int(11) UNSIGNED NOT NULL,
   `promos` tinyint(1) NOT NULL DEFAULT '1',
-  `enviar_emails` tinyint(1) NOT NULL DEFAULT '1'
+  `emails` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'enviar emails'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `familias`;
@@ -365,7 +365,7 @@ CREATE VIEW vista_usuarios AS
 SELECT
   u.*,
   uc.promos,
-  uc.enviar_emails
+  uc.emails
 FROM
   usuarios as u
   LEFT JOIN usuarios_config as uc ON u.id = uc.id
