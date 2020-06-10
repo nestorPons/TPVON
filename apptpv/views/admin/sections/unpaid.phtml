@@ -27,8 +27,8 @@
                     controller: 'tickets',
                     action: 'unpaid',
                 }, (d, r) => {
-                    if(d)
-                        // Cargamos los datos a la tabla
+                    // Cargamos los datos a la tabla
+                    if (d)
                         for( let i of d){
                             this.table.addLine(i.id, [i.id, i.fecha, i.nombre, i.total] );
                         }
