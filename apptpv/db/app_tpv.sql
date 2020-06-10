@@ -114,7 +114,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
   `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `fecha_alta` datetime DEFAULT NULL,
+  `fecha_alta` datetime DEFAULT CURRENT_TIMESTAMP,
   `fecha_baja` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0 desactivado, 1 activo, 2 bloqueado',
   `nivel` tinyint(1) NOT NULL DEFAULT '0' COMMENT '2 administrador, 1 usuario, 0 cliente',
@@ -126,7 +126,7 @@ CREATE TABLE `usuarios_config` (
   `id` int(11) UNSIGNED NOT NULL,
   `promos` tinyint(1) NOT NULL DEFAULT '1',
   `emails` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'enviar emails'
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish2_ci;
 
 DROP TABLE IF EXISTS `familias`;
 
@@ -135,7 +135,7 @@ CREATE TABLE `familias` (
   `nombre` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `mostrar` tinyint(1) NOT NULL DEFAULT '1',
   `estado` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE = InnoDB DEFAULT CHARSET = latin1;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_spanish2_ci;
 
 DROP TABLE IF EXISTS `config`;
 

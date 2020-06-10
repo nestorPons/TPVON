@@ -329,8 +329,7 @@ const app = {
     },
     help() {
         this.mens.info(`
-            TPVOnline 
-            v.${this.ver}
+            TPVOnline this.
             Autor : Néstor Pons Portolés
             Email : nestorpons@gmail.com
             Licencia : MIT 2019

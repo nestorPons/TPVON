@@ -62,11 +62,15 @@ class Company extends Query{
         ]);
  
         //Añadimos el usuario administrador
-        $Data->addItems(['nombre'=>$Data->nombre_usuario]); 
-        $Data->addItems(['nivel'=>2]);
-        
+        $DataUser = new Data();
+        $DataUser->addItems(['nombre'=>$Data->nombre_usuario]); 
+        $DataUser->addItems(['nivel'=>2]);
+        $DataUser->addItems(['password'=>$Data->password]);
+        $DataUser->addItems(['dni'=>$Data->nif]);
+        $DataUser->addItems(['email'=>$Data->email]);
+
         $User = new User;
-        $User->new($Data);
+        $User->new($DataUser);
         
         
         // Cargamos los datos de la empresa

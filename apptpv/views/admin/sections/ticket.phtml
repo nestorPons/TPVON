@@ -158,7 +158,7 @@
                         for (let i in Ticket.lines) {
                             const line = Ticket.lines[i],
                                 a = await DB.get('servicios', 'id', line.articulo),
-                                nombre = a ? a[0] : 'No encontrado';
+                                nombre = a ? a[0].nombre : 'No encontrado';
 
                             this.Table.addLine(line.id, [line.cantidad, nombre, line.dto, `${line.amo}€`]);
                         }
