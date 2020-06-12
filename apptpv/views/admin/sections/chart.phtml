@@ -160,7 +160,7 @@
 
                 const
                     Y = data[1],
-                    prediction = await this.learnLinear([X, Y]);
+                    prediction = await this.learnLinear([X.slice(), Y.slice()]);
 
                 // Añadimos los datos a la grafica
                 this.addData(chart, 'previsión', +prediction.toFixed(2));

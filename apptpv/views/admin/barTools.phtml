@@ -6,7 +6,7 @@
         <m-icon id='--id_next' class="menu-buttons" icon='chevron-right-circle' onclick='app.sections.next()' label='Siguiente' />
         <m-icon id='--id_print' class="menu-buttons" icon='printer' onclick='app.sections.print()' label='Imprimir' />
         <m-icon id='--id_conf' class="menu-buttons" icon='cog' onclick='app.sections.conf()' label='Configurar' />
-        <m-icon id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filter' />
+        <m-icon id='--id_filter' class="menu-buttons" icon='funnel' onclick='app.sections.filter()' label='Filtro' />
 
         <div id="search">
             <m-icon id='--id_search' class="menu-buttons" icon='magnifier' onclick='menu.search.toggle()' label='Buscar' tabindex="0"/>
@@ -37,7 +37,6 @@
             overflow-x: visible;
             overflow-y: visible;
             height: auto;
-
         }
 
         #bartools i:active {
@@ -188,7 +187,8 @@
                 },
                 search() {
                     if (this.$txtSearch.val() != '') {
-                        typeof app[app.sections.active].search == 'function' && app[app.sections.active].search(this.$txtSearch.val());
+                        if(typeof app[app.sections.active].search == 'function')
+                            app[app.sections.active].search(this.$txtSearch.val());
                     }
                     return this;
                 },
