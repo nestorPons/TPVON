@@ -1,5 +1,7 @@
 # VERSIONADO
 ###### _Control de versiones [Git](https://git-scm.com/)_.
+#### Versión 1.2.2 (28-01-20)
+* Bugs varios
 ___
 #### Versión 1.2.0 (28-01-20)
 * Añadida la sección estilos. 
