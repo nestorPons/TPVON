@@ -116,14 +116,14 @@ class Query
     public function query(string $sql, $params = null){
 
         $this->sql = trim(str_replace("\r", " ", $sql)); 
-        // pr($this->sql, $params); 
+        /* var_dump($this->sql, $params); 
+        die(); */
         // Prepara la sentencia con sus parametros y la inicia
         $respond = $this->init($params);
 
         $rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $this->sql));
         # Determina el tipo de SQL 
         $statement = strtolower($rawStatement[0]); 
-        
         if ($statement === 'select' || $statement === 'show') {
             return $this->sqlPrepare->fetchAll(\PDO::FETCH_ASSOC);
         } elseif ($statement === 'insert' || $statement === 'update' || $statement === 'delete') {

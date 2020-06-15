@@ -78,8 +78,12 @@
 
                 } else {
                     this.print(_ => {
-                        app.post('tickets', 'debt', {
-                            id_ticket: this.Ticket.id
+                        app.post({
+                            controller : 'tickets', 
+                            action : 'debt', 
+                            data : {
+                                id_ticket : this.Ticket.id
+                            }
                         });
                     });
                 }
