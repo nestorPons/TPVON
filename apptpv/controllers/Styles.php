@@ -1,8 +1,7 @@
 <?php
 
 namespace app\controllers;
-
-use\app\core\{Controller};
+use \app\core\{Controller};
 
 /**
  * Estilos visuales de la aplicación
@@ -11,9 +10,9 @@ class Styles extends Controller
 {
     private $file, $vars;
     const 
-        FILE = \FILE\CONFIG,
-        AMOUNT_FONTS = 'all';
-
+    FILE = \FILE\CONFIG,
+    AMOUNT_FONTS = 'all';
+    
     function __construct($action, $data)
     {
         // Abrimos archivo donde se guardan la configuración de los estilos
@@ -70,34 +69,32 @@ class Styles extends Controller
         // Volver a ejecutar less.php y recargar css con js
         $less = new \lessc;
         $less->setFormatter("compressed");
-
         // Carga de la configuración de cada empresa
         $arr_conf = (file_exists(\FILE\CONFIG_COMPANY))
-    ? array(parse_ini_file(\FILE\CONFIG_COMPANY))
-    : array(parse_ini_file(\FILE\TEMPLATE_CONFIG));
-
+        ? array(parse_ini_file(\FILE\CONFIG_COMPANY))
+        : array(parse_ini_file(\FILE\TEMPLATE_CONFIG));
+        
         if (defined('\FILE\CONFIG_COMPANY')) {
             $less->setVariables($arr_conf[0]);
         } else {
             $less->setVariables(array(parse_ini_file(\FILE\CONFIG_TEMPLATE))[0]);
         }
-
+        
         $inputDir = \FOLDERS\LESS;
         $outputDir = \PUBLICF\CSS;
-
+        
         $files = $files = glob($inputDir . '*.{less}', GLOB_BRACE);
-
+        
         foreach ($files as $file) {
             $filename = explode('/', $file);
             end($filename);
             $filename = explode('.', pos($filename));
             reset($filename);
             $filename = $filename[0];
-
+            
             $inputFile = $inputDir . $filename . ".less";
             $outputFile =  $outputDir . $filename . ".css";
             //$cacheFolder = \FOLDERS\CACHES;
-    
             $less->compileFile($inputFile, $outputFile);
         }
     }

@@ -4,7 +4,6 @@ require_once '../../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require_once '../../../vendor/phpmailer/phpmailer/src/Exception.php';
 require_once '../../../vendor/phpmailer/phpmailer/src/SMTP.php';
 $mail             = new PHPMailer\PHPMailer\PHPMailer();
-print_r($_GET);
 
 $mail->SMTPSecure = $_GET['secure_mail'];     
 $mail->Port       = $_GET['port_mail'];                   // set the SMTP port for the GMAIL server

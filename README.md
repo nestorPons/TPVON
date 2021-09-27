@@ -51,6 +51,12 @@ Instale las dependencias con composer
 composer install
 ``` 
 
+Instale las dependencias de npm 
+``` 
+cd htdocs/tpv
+
+npm install
+``` 
 Otorgue permisos a todas las subcarpetas y archivos
 
 ```

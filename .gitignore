@@ -6,3 +6,7 @@ site/
 htdocs/tpv/node_modules
 vendor
 composer.lock
+composer-extra-assets.lock
+.vscode
+htdocs/tpv/package-lock.json
+htdocs/tpv/node_modules
