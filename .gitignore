@@ -4,3 +4,4 @@ apptpv/config/conn.ini
 apptpv/caches/*.cache
 site/
 htdocs/tpv/node_modules
+vendor
