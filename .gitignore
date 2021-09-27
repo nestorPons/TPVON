@@ -5,3 +5,4 @@ apptpv/caches/*.cache
 site/
 htdocs/tpv/node_modules
 vendor
+composer.lock
